@@ -56,9 +56,12 @@ function initNavbar() {
 
   // Active link
   const links = document.querySelectorAll('.navbar__links a, .navbar__mobile a');
-  const currentPage = location.pathname.split('/').pop() || 'index.html';
+  const currentPath = location.pathname;
   links.forEach(link => {
-    if (link.getAttribute('href') === currentPage) link.classList.add('active');
+    const href = link.getAttribute('href');
+    if (href === currentPath || (href === '/' && (currentPath === '/' || currentPath === ''))) {
+      link.classList.add('active');
+    }
   });
 }
 
