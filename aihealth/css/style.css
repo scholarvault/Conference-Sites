@@ -64,10 +64,151 @@
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
   --shadow-btn: 0 4px 20px rgba(0, 102, 255, 0.4);
 
+  --sv-gold: #F4CE14;
+  --sv-gold-dim: rgba(244,206,20,0.15);
+  --sv-gold-border: rgba(244,206,20,0.3);
+  --sv-silver: #C0C0C0;
+  --sv-platinum: #00D1FF;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── ScholarVault Badge Pill ── */
+.sv-badge-pill {
+  display: inline-flex;
+  align-items: stretch;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
+  font-family: var(--font-head);
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sv-badge-pill:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.15);
+}
+
+/* ─── BALANCED HERO WIDGETS ─── */
+.hero-widgets-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Tops are aligned in a straight line */
+  justify-content: center;
+  gap: 24px;
+  margin-top: 2.5rem;
+}
+
+.hero-widget-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 280px; /* Fixed "same length" for both */
+}
+
+.hero-widget-box {
+  width: 100%;
+  height: 64px; /* Fixed height for "straight line" alignment */
+  display: flex;
+  align-items: center;
+  background: #121212;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+  overflow: hidden;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.hero-widget-box:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255,255,255,0.15);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.8);
+}
+
+.sv-badge-pill__left {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 18px;
+  background: #121212;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.sv-badge-pill__shield {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.sv-badge-pill__name {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  color: #fff;
+}
+
+.sv-badge-pill__name span {
+  color: var(--sv-gold);
+}
+
+.sv-badge-pill__right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  min-width: 90px;
+  gap: 2px;
+}
+
+.sv-badge-pill__right--platinum {
+  background: #001a1f;
+  border-top: 2px solid var(--sv-platinum);
+}
+
+.sv-badge-pill__tier {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.sv-badge-pill__tier--platinum {
+  color: var(--sv-platinum);
+}
+
+.sv-badge-pill__score {
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--white);
+}
+
+.sv-badge-pill__score sub {
+  font-size: 11px;
+  color: var(--white-40);
+  vertical-align: baseline;
+}
+
+.badge-label-link:hover {
+  color: var(--sv-platinum) !important;
+}
+
+.badge-label-link:hover span {
+  animation: badgeLabelPulse 1s ease-in-out infinite;
+}
   --transition-fast: all 0.15s ease;
 
   --navbar-h: 72px;
+}
+
+/* ─── BADGE SCORE LABEL PULSE ─── */
+@keyframes badgeLabelPulse {
+  0%, 100% { opacity: 0.7; transform: translateX(0); }
+  50%       { opacity: 1;   transform: translateX(3px); }
 }
 
 /* ─── PROCEEDINGS BOOK FLOAT ANIMATION ─── */
@@ -129,6 +270,51 @@ textarea,
 select,
 button {
   font-family: inherit;
+}
+
+/* ─── SCROLL PROGRESS BAR ─── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--cyan));
+  z-index: 2000;
+  width: 0%;
+  transition: width 0.1s ease;
+}
+
+/* ─── RECOGNITION PILLS ─── */
+.recog-scroll {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 0 1rem;
+}
+
+.recog-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: var(--transition);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.recog-pill:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+
+.recog-pill i {
+  flex-shrink: 0;
 }
 
 /* ─── SCROLLBAR ─── */
