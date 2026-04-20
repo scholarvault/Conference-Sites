@@ -43,11 +43,7 @@
 </head>
 <body>
 
-<!-- ─── EARLY BIRD BANNER ─── -->
-<div id="earlyBirdBanner" style="display:none;background:linear-gradient(90deg,var(--blue),var(--cyan));padding:10px 2rem;text-align:center;font-size:13px;font-weight:600;gap:8px;align-items:center;justify-content:center;">
-  <span>⚡ Early Bird Pricing ends in <span class="eb-days">—</span> — Save up to 20%!</span>
-  <a href="register.html" style="margin-left:16px;background:white;color:var(--navy);padding:4px 14px;border-radius:100px;font-size:12px;font-weight:700;">Register Now →</a>
-</div>
+<!-- ─── NAVBAR ─── -->
 
 <!-- ─── NAVBAR ─── -->
 <nav class="navbar" id="navbar">
@@ -179,32 +175,30 @@
       </button>
     </div>
 
-    <!-- Trust row — floats ABOVE the ECG via z-index:10 on parent -->
-    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;animation:fadeSlideUp .7s .6s both;">
-
-      <!-- SV Badge — matches screenshot 2 style -->
-      <div style="display:inline-flex;align-items:center;gap:0;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.12);background:#0d1b2e;">
-        <!-- Left: ScholarVault logo + name -->
-        <div style="display:flex;align-items:center;gap:8px;padding:10px 14px;border-right:1px solid rgba(255,255,255,0.1);">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/><path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span style="font-size:14px;font-weight:800;color:#fff;">ScholarVault</span>
-        </div>
-        <!-- Right: PLATINUM score -->
-        <div style="padding:10px 14px;text-align:center;">
-          <div style="font-size:9px;font-weight:700;color:#00d4ff;text-transform:uppercase;letter-spacing:.1em;line-height:1;">PLATINUM</div>
-          <div style="font-size:18px;font-weight:900;color:#00d4ff;line-height:1.2;">92<span style="font-size:11px;font-weight:500;color:rgba(0,212,255,0.6);">/100</span></div>
-        </div>
+    <!-- Trust row — Perfectly Balanced Layout -->
+    <div class="hero-widgets-row" style="position:relative; z-index:10;">
+      
+      <!-- Official Badge Column -->
+      <div class="hero-widget-container">
+        <a href="badge.html" class="sv-badge-pill hero-widget-box">
+          <div class="sv-badge-pill__left" style="flex: 1;">
+            <svg class="sv-badge-pill__shield" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/>
+              <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="sv-badge-pill__name">Scholar<span>Vault</span></span>
+          </div>
+          <div class="sv-badge-pill__right sv-badge-pill__right--platinum">
+            <span class="sv-badge-pill__tier sv-badge-pill__tier--platinum">PLATINUM</span>
+            <span class="sv-badge-pill__score">92<sub>/100</sub></span>
+          </div>
+        </a>
+        <a href="badge.html" class="badge-label-link" style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.12em; text-decoration:none; display:flex; align-items:center; gap:4px; transition: color 0.2s ease;">
+          What is this? <span style="font-size:12px;">→</span>
+        </a>
       </div>
 
-      <!-- Organized by -->
-      <div id="heroOrgBy" style="display:inline-flex;align-items:center;gap:9px;padding:10px 15px;border-radius:12px;background:rgba(212,175,55,0.06);border:1px solid rgba(212,175,55,0.25);">
-        <img src="assets/scholarvault-logo.png" alt="ScholarVault" style="width:26px;height:26px;border-radius:6px;object-fit:cover;" />
-        <div>
-          <div style="font-size:10px;color:rgba(255,255,255,.38);text-transform:uppercase;letter-spacing:.1em;">Organized by</div>
-          <a href="https://scholarvault.in" target="_blank" rel="noopener" style="font-size:13px;font-weight:800;color:#D4AF37;text-decoration:none;">ScholarVault</a>
-          <div id="heroOrgSub" style="font-size:10px;color:rgba(255,255,255,.3);">India's Academic Intelligence Platform</div>
-        </div>
-      </div>
+    </div>
     </div>
 
   </div><!-- /content -->
@@ -414,7 +408,7 @@
         <p class="card__body">AI-driven drug repurposing, precision medicine, CRISPR applications, and personalized genomic therapy.</p>
       </div>
       <div class="card">
-        <div class="card__icon">📡</div>
+        <div class="card__icon"><i data-lucide="radio"></i></div>
         <h3 class="card__title">Telemedicine & Digital Health</h3>
         <p class="card__body">Remote patient monitoring, IoT wearables, AI-enhanced telehealth platforms, and virtual care delivery.</p>
       </div>
@@ -429,7 +423,7 @@
         <p class="card__body">AI for patient recruitment, trial design optimization, regulatory compliance, and real-world evidence.</p>
       </div>
       <div class="card">
-        <div class="card__icon">🛡️</div>
+        <div class="card__icon"><i data-lucide="shield-check"></i></div>
         <h3 class="card__title">Health Data Privacy & Ethics</h3>
         <p class="card__body">Federated learning, health data governance, AI bias in medicine, and ethical frameworks for clinical AI.</p>
       </div>
@@ -555,7 +549,7 @@
         <span style="background:linear-gradient(135deg,var(--white),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Made in India. Built for the World of Research & Integrity.</span>
       </h2>
       <p style="color:var(--white-70);font-size:14.5px;max-width:640px;margin:0 auto 2rem;line-height:1.8;">
-        After years of research into the problem plaguing Indian academia — and firsthand experience inside high-risk conference networks — ScholarVault launched in March 2025. Already trusted by <strong style="color:var(--white);">50+ researchers and faculty</strong> in early access, and growing fast.
+        After years of research into the problem plaguing Indian academia — and firsthand experience inside high-risk conference networks — ScholarVault launched in 2026. Already trusted by <strong style="color:var(--white);">50+ researchers and faculty</strong> in early access, and growing fast.
       </p>
 
       <!-- Stats row — 2×2 grid on mobile, single row on desktop -->
@@ -583,7 +577,7 @@
         <div class="sv-stats-divider"></div>
         <div class="sv-stat-item"><div class="sv-stat-num">18</div><div class="sv-stat-label">Point Forensic Engine</div></div>
         <div class="sv-stats-divider"></div>
-        <div class="sv-stat-item"><div class="sv-stat-num">Mar '25</div><div class="sv-stat-label">Launched</div></div>
+        <div class="sv-stat-item"><div class="sv-stat-num">2026</div><div class="sv-stat-label">Launched</div></div>
       </div>
     </div>
 
@@ -592,11 +586,10 @@
       <p style="font-size:11px;font-weight:700;color:var(--white-40);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:1.25rem;">Recognised & Featured By</p>
       <div class="recog-scroll">
         <div class="recog-pill" style="background:rgba(255,153,0,0.1);border:1px solid rgba(255,153,0,0.3);color:#ff9900;">Startup India</div>
-        <div class="recog-pill" style="background:rgba(0,102,255,0.09);border:1px solid rgba(0,102,255,0.3);color:var(--blue-light);">🏛️ Startup Tamil Nadu</div>
-        <div class="recog-pill" style="background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.25);color:var(--cyan);">⚡ E2B for Startups</div>
-        <div class="recog-pill" style="background:rgba(218,87,28,0.09);border:1px solid rgba(218,87,28,0.3);color:#da571c;">🐱 Product Hunt</div>
-        <div class="recog-pill" style="background:rgba(168,85,247,0.09);border:1px solid rgba(168,85,247,0.25);color:#a855f7;">🌟 Startup Fame</div>
-        <div class="recog-pill" style="background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.25);color:var(--green);">📜 Udyam · Registered Entity</div>
+        <div class="recog-pill" style="background:rgba(0,102,255,0.09);border:1px solid rgba(0,102,255,0.3);color:var(--blue-light);"><i data-lucide="landmark" style="width:12px;height:12px;"></i> Startup Tamil Nadu</div>
+        <div class="recog-pill" style="background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.25);color:var(--cyan);"><i data-lucide="zap" style="width:12px;height:12px;"></i> E2B for Startups</div>
+        <div class="recog-pill" style="background:rgba(218,87,28,0.09);border:1px solid rgba(218,87,28,0.3);color:#da571c;">Product Hunt</div>
+        <div class="recog-pill" style="background:rgba(168,85,247,0.09);border:1px solid rgba(168,85,247,0.25);color:#a855f7;"><i data-lucide="star" style="width:12px;height:12px;"></i> Startup Fame</div>
       </div>
     </div>
 
