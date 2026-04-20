@@ -499,12 +499,17 @@ function initRipple() {
   });
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ──────────────────────────────────────────────────────────────────────────
    PAGE ENTRANCE
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ────────────────────────────────────────────────────────────────────────── */
 function initPageEnter() {
-  // Always guarantee body is visible â€” set a hard fallback first
+  // Always guarantee body is visible — set a hard fallback first
   document.body.style.opacity = '1';
+
+  // Fix bfcache: restore visibility when page is loaded from back/forward cache
+  window.addEventListener('pageshow', (e) => {
+    document.body.style.opacity = '1';
+  });
 
   // Page transition on internal links only
   document.addEventListener('click', (e) => {
