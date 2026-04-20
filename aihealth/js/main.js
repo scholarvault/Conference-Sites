@@ -1,12 +1,12 @@
-/* ═══════════════════════════════════
-   SCHOLAR VAULT CONFERENCE — main.js
+﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+   SCHOLAR VAULT CONFERENCE â€” main.js
    Shared JS for all conference pages
-   ═══════════════════════════════════ */
+   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 
-/* ── EMAIL FUNCTION ENDPOINT ── */
-const EMAIL_FN = 'https://ldoirjupetkmldibhygk.supabase.co/functions/v1/send-conf-email';
+/* â”€â”€ EMAIL FUNCTION ENDPOINT â”€â”€ */
+const EMAIL_FN = '/api/send-email';
 
-/* ── CONFIG ── */
+/* â”€â”€ CONFIG â”€â”€ */
 const SV_CONFIG = {
   supabaseUrl:  'https://ldoirjupetkmldibhygk.supabase.co',
   supabaseKey:  'sb_publishable__pTXUoNZpTtG73FwKktcSQ_13VNtkAt',
@@ -21,13 +21,13 @@ const SV_CONFIG = {
   clarityId:    'XXXXXXXXXX',    // Replace with real Clarity project ID
 };
 
-/* ── SUPABASE CLIENT (CDN) ── */
+/* â”€â”€ SUPABASE CLIENT (CDN) â”€â”€ */
 const { createClient } = supabase;
 const db = createClient(SV_CONFIG.supabaseUrl, SV_CONFIG.supabaseKey);
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    NAVBAR
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initNavbar() {
   const navbar = document.getElementById('navbar');
   const hamburger = document.getElementById('hamburger');
@@ -62,9 +62,9 @@ function initNavbar() {
   });
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    COUNTDOWN TIMER
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initCountdown() {
   const el = document.getElementById('countdown');
   if (!el) return;
@@ -90,9 +90,9 @@ function initCountdown() {
 }
 
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    PARTICLE BACKGROUND
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initParticles() {
   const canvas = document.getElementById('particleCanvas');
   if (!canvas) return;
@@ -158,9 +158,9 @@ function initParticles() {
   draw();
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    SCROLL REVEAL
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -174,9 +174,9 @@ function initReveal() {
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale, .stagger-children').forEach(el => observer.observe(el));
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    TOAST NOTIFICATIONS
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function showToast(message, type = 'info', duration = 4000) {
   let container = document.getElementById('toastContainer');
   if (!container) {
@@ -202,9 +202,9 @@ function showToast(message, type = 'info', duration = 4000) {
   }, duration);
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    MODAL
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function openModal(id) {
   const overlay = document.getElementById(id);
   if (overlay) overlay.classList.add('open');
@@ -223,9 +223,9 @@ document.addEventListener('click', (e) => {
   }
 });
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    CURRENCY DETECTION
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 let currentCurrency = 'INR';
 async function detectCurrency() {
   try {
@@ -259,9 +259,9 @@ function initCurrencyToggle() {
   detectCurrency();
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    FORM HELPERS
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function setFormLoading(form, loading) {
   const btn = form.querySelector('.form-submit');
   if (!btn) return;
@@ -284,9 +284,9 @@ function trackEvent(eventName, params = {}) {
   }
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    EMAIL HELPER
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 async function sendEmail(type, data) {
   try {
     await fetch(EMAIL_FN, {
@@ -295,22 +295,22 @@ async function sendEmail(type, data) {
       body: JSON.stringify({ type, data }),
     });
   } catch (err) {
-    // Non-blocking — don't prevent form submission if email fails
+    // Non-blocking â€” don't prevent form submission if email fails
     console.warn('Email send failed (non-blocking):', err.message);
   }
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    DATABASE HELPERS
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 async function insertRecord(table, data) {
   const { error } = await db.from(table).insert({ conf_id: SV_CONFIG.confId, ...data });
   if (error) throw error;
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    SUBSCRIBE FORM (popup + inline)
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 async function handleSubscribe(email, name, sourceEl) {
   if (!email || !email.includes('@')) {
     showToast('Please enter a valid email.', 'error'); return;
@@ -333,9 +333,9 @@ async function handleSubscribe(email, name, sourceEl) {
   }
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    DOWNLOAD POPUP
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initDownloadButtons() {
   document.querySelectorAll('[data-download]').forEach(btn => {
     btn.addEventListener('click', (e) => {
@@ -362,7 +362,7 @@ function initDownloadButtons() {
       // Send download email
       sendEmail('download', data);
       closeModal('downloadModal');
-      showToast('✅ Check your email! The document has been sent.', 'success');
+      showToast('âœ… Check your email! The document has been sent.', 'success');
       trackEvent('download', { type: data.type });
       downloadForm.reset();
     } catch (_) {
@@ -373,9 +373,9 @@ function initDownloadButtons() {
   });
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    ANALYTICS & HEATMAP
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function loadAnalytics() {
   // Google Analytics 4
   if (SV_CONFIG.gaId && SV_CONFIG.gaId !== 'G-XXXXXXXXXX') {
@@ -389,7 +389,7 @@ function loadAnalytics() {
     gtag('config', SV_CONFIG.gaId);
   }
 
-  // Microsoft Clarity (Heatmap — Free)
+  // Microsoft Clarity (Heatmap â€” Free)
   if (SV_CONFIG.clarityId && SV_CONFIG.clarityId !== 'XXXXXXXXXX') {
     (function(c,l,a,r,i,t,y){
       c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -407,9 +407,9 @@ function loadAnalytics() {
   });
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    EARLY BIRD BANNER
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initEarlyBirdBanner() {
   const banner = document.getElementById('earlyBirdBanner');
   if (!banner) return;
@@ -423,9 +423,9 @@ function initEarlyBirdBanner() {
   }
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    PAPER DEADLINE URGENCY
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initDeadlines() {
   const el = document.getElementById('paperDeadlineUrgency');
   if (!el) return;
@@ -434,7 +434,7 @@ function initDeadlines() {
   if (diff > 0) {
     const days = Math.floor(diff / 86400000);
     el.textContent = days <= 7
-      ? `⚡ Only ${days} day${days !== 1 ? 's' : ''} left to submit!`
+      ? `âš¡ Only ${days} day${days !== 1 ? 's' : ''} left to submit!`
       : `${days} days remaining`;
     if (days <= 7) el.style.color = 'var(--red)';
   } else {
@@ -443,9 +443,9 @@ function initDeadlines() {
   }
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    INIT ALL
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initCountdown();
@@ -468,18 +468,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    LUCIDE ICONS INIT
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initIcons() {
   if (typeof lucide !== 'undefined') {
     lucide.createIcons();
   }
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    SCROLL PROGRESS BAR
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initScrollProgress() {
   // Create bar
   const bar = document.createElement('div');
@@ -493,9 +493,9 @@ function initScrollProgress() {
   }, { passive: true });
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    RIPPLE EFFECT
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initRipple() {
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.btn-primary, .btn-register, .form-submit, .btn-outline');
@@ -512,11 +512,11 @@ function initRipple() {
   });
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    PAGE ENTRANCE
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initPageEnter() {
-  // Always guarantee body is visible — set a hard fallback first
+  // Always guarantee body is visible â€” set a hard fallback first
   document.body.style.opacity = '1';
 
   // Page transition on internal links only
@@ -531,10 +531,10 @@ function initPageEnter() {
   });
 }
 
-/* ─────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    SUCCESS ICON INJECTION
    (Injects Lucide check icon into all form-success divs)
-   ───────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 function initSuccessIcons() {
   document.querySelectorAll('.form-success').forEach(el => {
     if (el.querySelector('.form-success__icon-wrap')) return; // already injected
@@ -544,4 +544,5 @@ function initSuccessIcons() {
     el.insertAdjacentElement('afterbegin', wrap);
   });
 }
+
 
