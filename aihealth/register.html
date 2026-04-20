@@ -427,7 +427,12 @@
 
           <!-- SV Badge + Gold status in payment -->
           <div id="payBadgeRow" style="background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(0,102,255,0.06));border:1px solid rgba(0,212,255,0.2);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:1rem;">
-            <div style="font-size:2.5rem;animation:rotateSlow 6s linear infinite;display:inline-block;" id="payHexIcon">⬡</div>
+            <div id="payHexIcon" style="flex-shrink:0;filter:drop-shadow(0 0 10px rgba(0,212,255,0.5));">
+              <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#00d4ff" stroke="#00d4ff" stroke-width="0.5"/>
+                <path d="M9 12l2 2 4-4" stroke="#040b1a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <div>
               <div style="font-size:12px;color:var(--cyan);text-transform:uppercase;letter-spacing:0.08em;font-weight:700;" id="payBadgeTitle">ScholarVault Verified Conference</div>
               <div style="font-size:16px;font-weight:900;font-family:var(--font-head);">Trust Score: 9.2 / 10</div>
@@ -754,7 +759,10 @@ function updateSidebar() {
     document.getElementById('payBadgeTitle').style.background = 'linear-gradient(135deg,#ffc107,#ff8f00)';
     document.getElementById('payBadgeTitle').style.webkitBackgroundClip = 'text';
     document.getElementById('payBadgeTitle').style.webkitTextFillColor = 'transparent';
-    document.getElementById('payHexIcon').style.filter = 'drop-shadow(0 0 10px rgba(255,193,7,0.8))';
+    const hexIcon = document.getElementById('payHexIcon');
+    hexIcon.style.filter = 'drop-shadow(0 0 10px rgba(255,193,7,0.8))';
+    const shieldPath = hexIcon.querySelector('path');
+    if (shieldPath) { shieldPath.setAttribute('fill', '#ffc107'); shieldPath.setAttribute('stroke', '#ffc107'); }
   }
 }
 
