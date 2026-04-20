@@ -1,4 +1,4 @@
-﻿/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    SCHOLAR VAULT CONFERENCE â€” main.js
    Shared JS for all conference pages
    â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
@@ -407,21 +407,6 @@ function loadAnalytics() {
   });
 }
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   EARLY BIRD BANNER
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-function initEarlyBirdBanner() {
-  const banner = document.getElementById('earlyBirdBanner');
-  if (!banner) return;
-  const now = new Date();
-  if (now < SV_CONFIG.earlyBirdDate) {
-    banner.style.display = 'flex';
-    const diff = SV_CONFIG.earlyBirdDate - now;
-    const days = Math.floor(diff / 86400000);
-    const el = banner.querySelector('.eb-days');
-    if (el) el.textContent = `${days} day${days !== 1 ? 's' : ''}`;
-  }
-}
 
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    PAPER DEADLINE URGENCY
@@ -453,7 +438,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initReveal();
   initCurrencyToggle();
   initDownloadButtons();
-  initEarlyBirdBanner();
   initDeadlines();
   loadAnalytics();
   initIcons();
