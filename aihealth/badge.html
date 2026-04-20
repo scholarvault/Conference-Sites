@@ -1,0 +1,752 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ScholarVault Verified Badge — ICAHCR 2026 Trust Score</title>
+  <meta name="description" content="ICAHCR 2026 holds a ScholarVault Verified Badge — earned through an 18-point forensic audit. Not purchased. Publicly verifiable. Score: 92/100 (Platinum)." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── ScholarVault Brand Tokens ── */
+    :root {
+      --sv-gold:     #F4CE14;
+      --sv-gold-dim: rgba(244,206,20,0.15);
+      --sv-gold-border: rgba(244,206,20,0.3);
+      --sv-silver:   #C0C0C0;
+      --sv-platinum: #00D1FF;
+      --sv-dark:     #0e0e0e;
+      --serif:       'Playfair Display', Georgia, serif;
+    }
+
+    /* ── ScholarVault BADGE PILL ── */
+    .sv-badge-pill {
+      display: inline-flex; align-items: stretch;
+      border-radius: 10px; overflow: hidden;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
+      font-family: var(--font-head);
+    }
+    .sv-badge-pill__left {
+      display: flex; align-items: center; gap: 9px;
+      padding: 12px 18px;
+      background: #121212;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .sv-badge-pill__shield {
+      width: 22px; height: 22px; flex-shrink: 0;
+    }
+    .sv-badge-pill__name {
+      font-size: 15px; font-weight: 700; letter-spacing: 0.01em;
+      line-height: 1;
+    }
+    .sv-badge-pill__name span { color: var(--sv-gold); }
+    .sv-badge-pill__right {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 10px 20px; min-width: 90px;
+      gap: 2px;
+    }
+    .sv-badge-pill__right--silver  { background: #2a2a2a; border-top: 2px solid var(--sv-silver); }
+    .sv-badge-pill__right--gold    { background: #2a2200; border-top: 2px solid var(--sv-gold); }
+    .sv-badge-pill__right--platinum{ background: #001a1f; border-top: 2px solid var(--sv-platinum); }
+    .sv-badge-pill__tier {
+      font-size: 11px; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+    .sv-badge-pill__tier--silver  { color: var(--sv-silver); }
+    .sv-badge-pill__tier--gold    { color: var(--sv-gold); }
+    .sv-badge-pill__tier--platinum{ color: var(--sv-platinum); }
+    .sv-badge-pill__score {
+      font-size: 20px; font-weight: 900; line-height: 1;
+      color: var(--white);
+    }
+    .sv-badge-pill__score sub { font-size: 11px; color: var(--white-40); vertical-align: baseline; }
+
+    /* ── Scorecard bars ── */
+    .scorecard {
+      background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg); overflow: hidden;
+    }
+    .scorecard-row {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 0.9rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.2s ease;
+    }
+    .scorecard-row:last-child { border-bottom: none; }
+    .scorecard-row:hover { background: rgba(244,206,20,0.04); }
+    .scorecard-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--sv-gold-dim); border: 1px solid var(--sv-gold-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; color: var(--sv-gold);
+      flex-shrink: 0; font-family: var(--font-mono);
+    }
+    .scorecard-name { font-size: 13.5px; font-weight: 600; flex: 1; }
+    .scorecard-bar-wrap {
+      width: 120px; height: 5px;
+      background: rgba(255,255,255,0.06); border-radius: 100px; overflow: hidden;
+      flex-shrink: 0;
+    }
+    .scorecard-bar {
+      height: 100%; border-radius: 100px; width: 0%;
+      background: linear-gradient(90deg, var(--sv-gold), rgba(244,206,20,0.6));
+      transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .scorecard-bar--platinum {
+      background: linear-gradient(90deg, var(--sv-platinum), rgba(0,209,255,0.5));
+    }
+    .scorecard-val {
+      font-size: 12px; font-weight: 700; font-family: var(--font-mono);
+      color: var(--sv-gold); min-width: 36px; text-align: right;
+    }
+    .scorecard-val--platinum { color: var(--sv-platinum); }
+    .scorecard-total {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 1.25rem;
+      background: linear-gradient(135deg, rgba(244,206,20,0.08), rgba(244,206,20,0.03));
+      border-top: 1px solid var(--sv-gold-border);
+    }
+
+    /* ── Tier cards ── */
+    .tier-badge-card {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-lg); padding: 2rem; text-align: center;
+      transition: var(--transition); position: relative; overflow: hidden;
+    }
+    .tier-badge-card:hover { transform: translateY(-4px); }
+    .tier-badge-card--silver  { border-top: 3px solid var(--sv-silver); }
+    .tier-badge-card--gold    { border-top: 3px solid var(--sv-gold); }
+    .tier-badge-card--platinum{ border-top: 3px solid var(--sv-platinum); box-shadow: 0 8px 32px rgba(0,209,255,0.12); }
+    .tier-badge-card--platinum::before {
+      content: 'ICAHCR 2026';
+      position: absolute; top: 12px; right: 12px;
+      font-size: 9px; font-weight: 800; color: var(--sv-platinum);
+      background: rgba(0,209,255,0.1); border: 1px solid rgba(0,209,255,0.35);
+      padding: 3px 8px; border-radius: 100px; letter-spacing: 0.1em;
+    }
+
+    /* ── SV Wordmark inline ── */
+    .sv-wordmark {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-head); font-size: 14px; font-weight: 700;
+    }
+    .sv-wordmark__shield {
+      width: 18px; height: 18px; flex-shrink: 0;
+    }
+    .sv-wordmark .scholar { color: var(--white); }
+    .sv-wordmark .vault   { color: var(--sv-gold); }
+
+    /* ── Hero badge glow ── */
+    .badge-glow {
+      position: absolute; width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,206,20,0.12), transparent 70%);
+      pointer-events: none;
+      top: 50%; left: 50%; transform: translate(-50%, -50%);
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%,100% { opacity: 0.6; transform: translate(-50%,-50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%,-50%) scale(1.15); }
+    }
+
+    /* ── Live badge demo ── */
+    .badge-demo-wrap {
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius-xl); padding: 2.5rem; text-align: center;
+      position: sticky; top: 88px;
+    }
+    .badge-demo-label {
+      font-size: 10px; font-weight: 700; color: var(--white-40);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1.25rem;
+    }
+
+    /* ── Verified ribbon ── */
+    .verified-ribbon {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px; border-radius: 100px;
+      background: var(--sv-gold-dim); border: 1px solid var(--sv-gold-border);
+      font-size: 12px; font-weight: 700; color: var(--sv-gold);
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .verified-ribbon::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%; background: var(--sv-gold);
+      animation: pulse 2s infinite;
+    }
+
+    /* ── 18pt list ── */
+    .checkpoint-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+    .checkpoint-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius-sm);
+      font-size: 13px; color: var(--white-70);
+      transition: var(--transition);
+    }
+    .checkpoint-item:hover { border-color: rgba(244,206,20,0.25); background: rgba(244,206,20,0.04); color: var(--white); }
+    .checkpoint-check {
+      width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(244,206,20,0.15); border: 1px solid rgba(244,206,20,0.4);
+      display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .checkpoint-check svg { width: 10px; height: 10px; stroke: var(--sv-gold); }
+
+    @media (max-width: 768px) {
+      .checkpoint-grid { grid-template-columns: 1fr; }
+      .scorecard-bar-wrap { width: 70px; }
+      .badge-demo-wrap { position: static; }
+      /* Main content: collapse 2-col to 1-col */
+      .badge-main-grid { grid-template-columns: 1fr !important; }
+      /* Reduce hero padding on mobile */
+      .badge-hero { padding: 100px 1.25rem 60px !important; }
+      /* Badge pill: show at normal scale on mobile, don't overflow */
+      .badge-pill-scaled { transform: none !important; }
+      /* Buttons: stack vertically */
+      .badge-hero-btns { flex-direction: column; align-items: center; }
+      .badge-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+      /* 3-col grids → 1 col on mobile */
+      .badge-3col { grid-template-columns: 1fr !important; }
+      /* Force any inline grid 3-col to 1-col on mobile */
+      [style*="grid-template-columns:1fr 1fr 1fr"],
+      [style*="grid-template-columns: 1fr 1fr 1fr"],
+      [style*="grid-template-columns:repeat(3,1fr)"],
+      [style*="grid-template-columns: repeat(3, 1fr)"] {
+        grid-template-columns: 1fr !important;
+      }
+      .tier-grid { grid-template-columns: 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .badge-hero { padding: 88px 1rem 48px !important; }
+      .scorecard-row { gap: 0.6rem; padding: 0.75rem 1rem; }
+      .scorecard-num { width: 18px; height: 18px; font-size: 9px; }
+      .scorecard-name { font-size: 12.5px; }
+      .scorecard-bar-wrap { width: 50px; }
+    }
+
+    /* badge-3col desktop */
+    .badge-3col {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23F4CE14'/><text y='24' x='5' font-size='20'>🛡</text></svg>" />
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__logo"><img src="assets/icahcr-logo.png" alt="ICAHCR 2026" class="navbar__logo-img" /><div class="navbar__logo-text"><span class="navbar__logo-conf">ICAHCR 2026</span><span class="navbar__logo-year">AI in Healthcare</span></div></a>
+    <div class="navbar__links"><a href="index.html">Home</a><a href="about.html">About</a><a href="scholarvault.html">ScholarVault</a><a href="register.html">Register</a></div>
+    <div class="navbar__cta"><a href="register.html" class="btn-register">Register →</a></div>
+    <button class="navbar__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<nav class="navbar__mobile" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About Conference</a>
+  <a href="why.html">Why Attend</a>
+  <a href="call-for-papers.html">Call for Papers</a>
+  <a href="submit-paper.html">Submit Paper</a>
+  <a href="speakers.html">Speakers</a>
+  <a href="speaker-form.html">Become a Speaker</a>
+  <a href="committee.html">Committee</a>
+  <a href="awards.html">Awards</a>
+  <a href="sdg.html">SDG Impact</a>
+  <a href="blog.html">Blog</a>
+  <a href="media.html">Media</a>
+  <a href="downloads.html">Downloads</a>
+  <a href="scholarvault.html">About ScholarVault</a>
+  <a href="badge.html">SV Premium Badge</a>
+  <a href="register.html" style="color:var(--cyan);font-weight:700;">Register Now →</a>
+</nav>
+
+
+
+<!-- HERO -->
+<section class="badge-hero" style="padding:120px 2rem 80px;background:var(--navy-2);border-bottom:1px solid var(--glass-border);text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(244,206,20,0.08),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+  <div class="container" style="position:relative;z-index:1;">
+    <div style="display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:1.25rem;">
+      <span class="verified-ribbon">ScholarVault Verified &middot; 2026</span>
+    </div>
+    <h1 class="section-title" style="font-family:var(--serif);font-style:italic;font-size:clamp(1.8rem,4.5vw,3.2rem);margin-bottom:1rem;">
+      This Conference Is <span style="-webkit-text-fill-color:transparent;background:linear-gradient(135deg,#F4CE14,#ffe066);-webkit-background-clip:text;background-clip:text;">Trusted.</span>
+    </h1>
+    <p style="color:var(--white-70);max-width:560px;margin:0 auto 2.5rem;font-size:1.05rem;line-height:1.8;">
+      ICAHCR 2026 holds a <strong style="color:var(--white);">ScholarVault Verified Badge</strong> &mdash; earned through an independent 18-point forensic audit. Not purchased. Not self-declared. Publicly verifiable by any researcher in seconds.
+    </p>
+    <!-- Live badge display -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:16px;margin-bottom:2.5rem;">
+      <div class="sv-badge-pill badge-pill-scaled" style="transform:scale(1.25);transform-origin:center;">
+        <div class="sv-badge-pill__left">
+          <svg class="sv-badge-pill__shield" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/>
+            <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="sv-badge-pill__name">Scholar<span>Vault</span></span>
+        </div>
+        <div class="sv-badge-pill__right sv-badge-pill__right--platinum">
+          <span class="sv-badge-pill__tier sv-badge-pill__tier--platinum">PLATINUM</span>
+          <span class="sv-badge-pill__score">92<sub>/100</sub></span>
+        </div>
+      </div>
+    </div>
+    <div class="badge-hero-btns" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="https://app.scholarvault.in" target="_blank" class="btn-primary" style="background:linear-gradient(135deg,#F4CE14,#e6bc00);color:#000;font-weight:800;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z"/></svg>
+        Verify on ScholarVault &rarr;
+      </a>
+      <a href="register.html" class="btn-outline">Register with Confidence &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section section--dark">
+  <div class="container">
+
+    <!-- ── ScholarVault Trust Strip (compact) ── -->
+    <div class="reveal" style="text-align:center;padding:2.5rem 0 3rem;border-bottom:1px solid var(--glass-border);margin-bottom:3rem;">
+      <p style="font-size:11px;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.75rem;">India's Only Automated Conference Verification Platform</p>
+      <h3 style="font-family:var(--font-head);font-size:clamp(1.1rem,2.5vw,1.6rem);font-weight:900;line-height:1.35;max-width:660px;margin:0 auto 0.75rem;">
+        After years of understanding researcher pain points — <span style="background:linear-gradient(135deg,var(--white),var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;">Made in India. Built for the World of Research.</span>
+      </h3>
+      <p style="color:var(--white-70);font-size:13.5px;max-width:560px;margin:0 auto 2rem;line-height:1.75;">
+        Launched March 2025. Trusted by <strong style="color:var(--white);">50+ researchers & faculty</strong> in early access. Growing fast across India's academic community.
+      </p>
+
+      <!-- Recognition strip — horizontal scroll on mobile -->
+      <style>
+        .recog-scroll { display:flex; align-items:center; gap:0.75rem; overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:4px; justify-content:center; flex-wrap:wrap; }
+        .recog-scroll::-webkit-scrollbar { display:none; }
+        .recog-pill { display:flex; align-items:center; gap:8px; padding:7px 14px; border-radius:var(--radius-md); font-size:11px; font-weight:800; letter-spacing:0.04em; white-space:nowrap; flex-shrink:0; }
+        @media(max-width:768px) { .recog-scroll { justify-content:flex-start; flex-wrap:nowrap; padding:0 1rem 8px; margin:0 -1rem; } }
+      </style>
+      <div class="recog-scroll">
+        <div class="recog-pill" style="background:rgba(255,153,0,0.1);border:1px solid rgba(255,153,0,0.3);color:#ff9900;">🇮🇳 Startup India</div>
+        <div class="recog-pill" style="background:rgba(0,102,255,0.09);border:1px solid rgba(0,102,255,0.3);color:var(--blue-light);">🏛️ Startup Tamil Nadu</div>
+        <div class="recog-pill" style="background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.25);color:var(--cyan);">⚡ E2B for Startups</div>
+        <div class="recog-pill" style="background:rgba(218,87,28,0.09);border:1px solid rgba(218,87,28,0.3);color:#da571c;">🐱 Product Hunt</div>
+        <div class="recog-pill" style="background:rgba(168,85,247,0.09);border:1px solid rgba(168,85,247,0.25);color:#a855f7;">🌟 Startup Fame</div>
+        <div class="recog-pill" style="background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.25);color:var(--green);">📜 Udyam · Registered Entity</div>
+      </div>
+    </div>
+    <!-- ── end Trust Strip ── -->
+
+    <div class="badge-main-grid" style="display:grid;grid-template-columns:1fr 340px;gap:3rem;align-items:start;">
+
+      <!-- LEFT: Scorecard + Info -->
+      <div>
+
+        <!-- What is the badge -->
+        <div class="reveal" style="margin-bottom:3rem;">
+          <div class="section-tag">What Is This Badge?</div>
+          <h2 class="section-title">Earned Through India's Most <span class="grad">Rigorous Audit</span></h2>
+          <p style="color:var(--white-70);line-height:1.85;font-size:14.5px;margin-bottom:1rem;">
+            India has thousands of conferences — many predatory. They collect fees, promise Scopus indexing, deliver nothing. Researchers now check before they submit. The <strong style="color:var(--white);">ScholarVault Verified Badge</strong> is an independent answer to this crisis.
+          </p>
+          <p style="color:var(--white-70);line-height:1.85;font-size:14.5px;">
+            The badge is awarded only after a conference scores <strong style="color:#F4CE14;">80+</strong> on ScholarVault's 18-point forensic engine — no human override, no pay-to-badge. ICAHCR 2026 scored <strong style="color:#00D1FF;">92 / 100 (Platinum)</strong> — placing it among the top-tier verified academic events in South Asia.
+          </p>
+
+          <!-- Transparency note: self-organized conference -->
+          <div style="margin-top:1.75rem;padding:1.25rem 1.5rem;border-radius:var(--radius-md);background:rgba(244,206,20,0.05);border:1px solid rgba(244,206,20,0.25);border-left:3px solid var(--sv-gold);">
+            <div style="font-size:11px;font-weight:800;color:var(--sv-gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.5rem;">A Note on Transparency</div>
+            <p style="font-size:13.5px;color:var(--white-70);line-height:1.8;margin:0;">
+              Yes — ICAHCR 2026 is organised by ScholarVault, the same team that built the verification platform. We believe this makes it <em>more</em> accountable, not less. Every single checkpoint in this scorecard is technically verifiable by any researcher in seconds at <a href="https://app.scholarvault.in" target="_blank" style="color:var(--sv-gold);">app.scholarvault.in</a>. We hold ourselves to this standard publicly because our entire platform's reputation depends on every point being real. If anything here is wrong, any researcher can flag it — and we will correct it openly.
+            </p>
+          </div>
+        </div>
+
+        <!-- 18-point scorecard -->
+        <div class="reveal" style="margin-bottom:3rem;">
+          <div class="section-tag">ICAHCR 2026 Scorecard</div>
+          <h2 class="section-title">18-Point Forensic <span class="grad">Audit Result</span></h2>
+          <div class="scorecard" style="margin-top:1.5rem;">
+
+            <div class="scorecard-row reveal">
+              <div class="scorecard-num">1</div>
+              <div class="scorecard-name">SSL Certificate & Security</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="100"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">100</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">2</div>
+              <div class="scorecard-name">Domain Legitimacy & Age</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="95"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">95</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">3</div>
+              <div class="scorecard-name">Indexing Transparency</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="90"></div></div>
+              <div class="scorecard-val">90</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">4</div>
+              <div class="scorecard-name">Refund Policy Clarity</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="100"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">100</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">5</div>
+              <div class="scorecard-name">Operator Network Check</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="95"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">95</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">6</div>
+              <div class="scorecard-name">Payment Infrastructure</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="100"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">100</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">7</div>
+              <div class="scorecard-name">Fee Transparency & No Hidden Charges</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="100"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">100</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">8</div>
+              <div class="scorecard-name">Peer Review Quality</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="90"></div></div>
+              <div class="scorecard-val">90</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">9</div>
+              <div class="scorecard-name">Committee Authenticity</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="88"></div></div>
+              <div class="scorecard-val">88</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">10</div>
+              <div class="scorecard-name">Publication Standards (DOI/ISSN)</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="95"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">95</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">11</div>
+              <div class="scorecard-name">Contact & Grievance Mechanism</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="100"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">100</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">12</div>
+              <div class="scorecard-name">Ethical Compliance (Anti-Plagiarism)</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="85"></div></div>
+              <div class="scorecard-val">85</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">13</div>
+              <div class="scorecard-name">Website Information Quality</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="90"></div></div>
+              <div class="scorecard-val">90</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">14</div>
+              <div class="scorecard-name">Scope & Track Validity</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="92"></div></div>
+              <div class="scorecard-val">92</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">15</div>
+              <div class="scorecard-name">Archiving & Proceedings Plan</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="85"></div></div>
+              <div class="scorecard-val">85</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">16</div>
+              <div class="scorecard-name">WHOIS & Registrant Transparency</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="95"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">95</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">17</div>
+              <div class="scorecard-name">Social Proof & Community Signals</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar" data-width="80"></div></div>
+              <div class="scorecard-val">80</div>
+            </div>
+            <div class="scorecard-row">
+              <div class="scorecard-num">18</div>
+              <div class="scorecard-name">SDG Alignment & Impact Statement</div>
+              <div class="scorecard-bar-wrap"><div class="scorecard-bar scorecard-bar--platinum" data-width="95"></div></div>
+              <div class="scorecard-val scorecard-val--platinum">95</div>
+            </div>
+
+            <div class="scorecard-total">
+              <div>
+                <div style="font-size:15px;font-weight:800;">Overall ScholarVault Trust Score</div>
+                <div style="font-size:12px;color:var(--white-40);margin-top:2px;">18-point forensic audit · Verified April 2026</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-size:2rem;font-weight:900;font-family:var(--font-head);color:#00D1FF;line-height:1;">92</div>
+                <div style="font-size:12px;color:var(--white-40);">/100 · PLATINUM</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 18-point checkpoint list -->
+        <div class="reveal" style="margin-bottom:3rem;">
+          <div class="section-tag">What Gets Checked</div>
+          <h2 class="section-title">The <span class="grad">18 Checkpoints</span></h2>
+          <div class="checkpoint-grid" style="margin-top:1.5rem;">
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>SSL & Security headers</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Domain age & legitimacy</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Indexing transparency</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Refund policy & clarity</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Operator network forensics</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Payment infrastructure</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Fee transparency</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Peer review quality signals</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Committee identity check</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Publication & DOI standards</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Grievance mechanism</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Anti-plagiarism compliance</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Website information quality</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Scope & track validity</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Proceedings & archiving plan</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>WHOIS registrant transparency</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>Social proof & community signals</div>
+            <div class="checkpoint-item"><div class="checkpoint-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>SDG alignment & impact statement</div>
+          </div>
+        </div>
+
+        <!-- Why it matters -->
+        <div class="badge-3col stagger-children">
+          <div class="card" style="text-align:center;">
+            <div class="card__icon"><i data-lucide="user"></i></div>
+            <h3 class="card__title">For Researchers</h3>
+            <p class="card__body">Know your paper goes through real peer review before paying fees. No rubber-stamping.</p>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div class="card__icon"><i data-lucide="building-2"></i></div>
+            <h3 class="card__title">For Institutions</h3>
+            <p class="card__body">University appraisal & funding bodies recognize ScholarVault-verified conferences for faculty promotion criteria.</p>
+          </div>
+          <div class="card" style="text-align:center;">
+            <div class="card__icon"><i data-lucide="landmark"></i></div>
+            <h3 class="card__title">For Funding Bodies</h3>
+            <p class="card__body">ICSSR, DBT, DST, SERB grant holders — the SV Trust Score is an accepted verification of conference quality.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Sticky badge panel -->
+      <div>
+        <div class="badge-demo-wrap">
+          <div class="badge-demo-label">ICAHCR 2026 · Official Badge</div>
+
+          <!-- Badge pill — Platinum -->
+          <div style="display:flex;justify-content:center;margin-bottom:1.5rem;position:relative;">
+            <div class="badge-glow"></div>
+            <div class="sv-badge-pill" style="position:relative;z-index:1;">
+              <div class="sv-badge-pill__left">
+                <svg class="sv-badge-pill__shield" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/>
+                  <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span class="sv-badge-pill__name">Scholar<span>Vault</span></span>
+              </div>
+              <div class="sv-badge-pill__right sv-badge-pill__right--platinum">
+                <span class="sv-badge-pill__tier sv-badge-pill__tier--platinum">PLATINUM</span>
+                <span class="sv-badge-pill__score">92<sub>/100</sub></span>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size:12px;color:var(--white-40);margin-bottom:1.5rem;line-height:1.6;">
+            Verified April 2026 · 18-point forensic audit<br/>Any researcher can <a href="https://app.scholarvault.in" target="_blank" style="color:#F4CE14;">verify this score live →</a>
+          </div>
+
+          <!-- Tier info -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:1.5rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(192,192,192,0.06);border:1px solid rgba(192,192,192,0.2);">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:var(--sv-silver);"></div>
+                <span style="font-size:13px;font-weight:700;color:var(--sv-silver);">Silver</span>
+              </div>
+              <span style="font-size:12px;color:var(--white-40);">Score 80–84</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(244,206,20,0.06);border:1px solid rgba(244,206,20,0.2);">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:var(--sv-gold);"></div>
+                <span style="font-size:13px;font-weight:700;color:var(--sv-gold);">Gold</span>
+              </div>
+              <span style="font-size:12px;color:var(--white-40);">Score 85–89</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(0,209,255,0.06);border:1px solid rgba(0,209,255,0.25);border-left:3px solid var(--sv-platinum);">
+              <div style="display:flex;align-items:center;gap:8px;">
+                <div style="width:10px;height:10px;border-radius:50%;background:var(--sv-platinum);"></div>
+                <span style="font-size:13px;font-weight:700;color:var(--sv-platinum);">Platinum ← ICAHCR</span>
+              </div>
+              <span style="font-size:12px;color:var(--white-40);">Score 90+</span>
+            </div>
+          </div>
+
+          <div style="height:1px;background:var(--glass-border);margin-bottom:1.25rem;"></div>
+
+          <!-- Key facts -->
+          <div style="display:flex;flex-direction:column;gap:8px;text-align:left;margin-bottom:1.5rem;">
+            <div style="display:flex;gap:8px;font-size:13px;color:var(--white-70);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F4CE14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              Badge cannot be purchased — earned only
+            </div>
+            <div style="display:flex;gap:8px;font-size:13px;color:var(--white-70);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F4CE14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              Score is public and researcher-verifiable
+            </div>
+            <div style="display:flex;gap:8px;font-size:13px;color:var(--white-70);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F4CE14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              No human override — automated engine
+            </div>
+            <div style="display:flex;gap:8px;font-size:13px;color:var(--white-70);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#F4CE14" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"/></svg>
+              Accepted by ICSSR, DST, SERB grantees
+            </div>
+          </div>
+
+          <a href="https://app.scholarvault.in" target="_blank" class="btn-primary" style="width:100%;justify-content:center;background:linear-gradient(135deg,#F4CE14,#e6bc00);color:#000;font-weight:800;">
+            Verify Live on ScholarVault →
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TIER GALLERY ══════════════ -->
+<section class="section section--alt section--border-top">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;margin-bottom:0.5rem;">Badge Tiers</div>
+    <h2 class="section-title" style="text-align:center;margin-bottom:0.5rem;">Silver, Gold & <span class="grad">Platinum</span></h2>
+    <p style="text-align:center;color:var(--white-70);margin-bottom:2.5rem;font-size:14px;">ICAHCR 2026 holds Platinum — the highest tier, reserved for conferences with exceptional transparency.</p>
+
+    <div class="badge-3col stagger-children">
+
+      <!-- Silver -->
+      <div class="tier-badge-card tier-badge-card--silver">
+        <div style="display:flex;justify-content:center;margin-bottom:1.5rem;">
+          <div class="sv-badge-pill">
+            <div class="sv-badge-pill__left">
+              <svg class="sv-badge-pill__shield" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/><path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="sv-badge-pill__name">Scholar<span>Vault</span></span>
+            </div>
+            <div class="sv-badge-pill__right sv-badge-pill__right--silver">
+              <span class="sv-badge-pill__tier sv-badge-pill__tier--silver">SILVER</span>
+              <span class="sv-badge-pill__score">82<sub>/100</sub></span>
+            </div>
+          </div>
+        </div>
+        <h3 style="font-weight:800;font-size:1rem;color:var(--sv-silver);margin-bottom:0.5rem;">Silver Tier</h3>
+        <div style="font-family:var(--font-mono);font-size:1.4rem;font-weight:900;margin-bottom:0.5rem;">80–84</div>
+        <p style="font-size:13px;color:var(--white-70);line-height:1.7;">Good standing. Meets minimum bar for verified status. Suitable for participation with standard due diligence.</p>
+      </div>
+
+      <!-- Gold -->
+      <div class="tier-badge-card tier-badge-card--gold">
+        <div style="display:flex;justify-content:center;margin-bottom:1.5rem;">
+          <div class="sv-badge-pill">
+            <div class="sv-badge-pill__left">
+              <svg class="sv-badge-pill__shield" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/><path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="sv-badge-pill__name">Scholar<span>Vault</span></span>
+            </div>
+            <div class="sv-badge-pill__right sv-badge-pill__right--gold">
+              <span class="sv-badge-pill__tier sv-badge-pill__tier--gold">GOLD</span>
+              <span class="sv-badge-pill__score">87<sub>/100</sub></span>
+            </div>
+          </div>
+        </div>
+        <h3 style="font-weight:800;font-size:1rem;color:var(--sv-gold);margin-bottom:0.5rem;">Gold Tier</h3>
+        <div style="font-family:var(--font-mono);font-size:1.4rem;font-weight:900;color:var(--sv-gold);margin-bottom:0.5rem;">85–89</div>
+        <p style="font-size:13px;color:var(--white-70);line-height:1.7;">Strong academic integrity. Meets all core verification standards. Researchers can participate with full confidence.</p>
+      </div>
+
+      <!-- Platinum -->
+      <div class="tier-badge-card tier-badge-card--platinum">
+        <div style="display:flex;justify-content:center;margin-bottom:1.5rem;position:relative;">
+          <div style="position:absolute;width:120px;height:40px;background:radial-gradient(ellipse,rgba(0,209,255,0.25),transparent);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;filter:blur(8px);"></div>
+          <div class="sv-badge-pill" style="position:relative;z-index:1;">
+            <div class="sv-badge-pill__left">
+              <svg class="sv-badge-pill__shield" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/><path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="sv-badge-pill__name">Scholar<span>Vault</span></span>
+            </div>
+            <div class="sv-badge-pill__right sv-badge-pill__right--platinum">
+              <span class="sv-badge-pill__tier sv-badge-pill__tier--platinum">PLATINUM</span>
+              <span class="sv-badge-pill__score">92<sub>/100</sub></span>
+            </div>
+          </div>
+        </div>
+        <h3 style="font-weight:800;font-size:1rem;color:var(--sv-platinum);margin-bottom:0.5rem;">Platinum Tier ★</h3>
+        <div style="font-family:var(--font-mono);font-size:1.4rem;font-weight:900;color:var(--sv-platinum);margin-bottom:0.5rem;">90–100</div>
+        <p style="font-size:13px;color:var(--white-70);line-height:1.7;">Highest tier. Exceptional transparency, verifiable indexing, clear refund policies, zero forensic red flags. ICAHCR 2026.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ CTA ══════════════ -->
+<section class="section section--dark" style="text-align:center;border-top:1px solid var(--glass-border);">
+  <div class="container">
+    <div class="reveal">
+      <div class="sv-wordmark" style="justify-content:center;font-size:1rem;margin-bottom:1rem;">
+        <svg class="sv-wordmark__shield" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/><path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="scholar">Scholar</span><span class="vault">Vault</span>
+      </div>
+      <h2 class="section-title">Ready to Participate with <span class="grad">Full Confidence?</span></h2>
+      <p style="color:var(--white-70);max-width:520px;margin:0 auto 2rem;font-size:15px;line-height:1.8;">
+        ICAHCR 2026 is Platinum-verified. Your registration fee is protected. Your paper gets real peer review. Your attendance is career-credible.
+      </p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="register.html" class="btn-primary">Register Now →</a>
+        <a href="submit-paper.html" class="btn-outline">Submit a Paper →</a>
+        <a href="https://app.scholarvault.in" target="_blank" class="btn-outline" style="border-color:rgba(244,206,20,0.4);color:var(--sv-gold);">Verify Score on ScholarVault →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding:1.5rem 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;">
+    <span style="font-size:12.5px;color:var(--white-40);">© 2026 ICAHCR — Organized by ScholarVault</span>
+    <div class="sv-wordmark" style="font-size:12px;">
+      <svg class="sv-wordmark__shield" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/><path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="scholar">Scholar</span><span class="vault">Vault</span>&nbsp;Platinum Verified · 92/100
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+// Animate scorecard bars when scrolled into view
+const bars = document.querySelectorAll('.scorecard-bar[data-width]');
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      setTimeout(() => {
+        e.target.style.width = e.target.dataset.width + '%';
+      }, 100);
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+bars.forEach(b => {
+  b.style.width = '0%';
+  barObs.observe(b);
+});
+</script>
+</body>
+</html>
