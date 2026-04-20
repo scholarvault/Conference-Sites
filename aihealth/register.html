@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -809,8 +809,15 @@ async function initiatePayment() {
       country: formData.country, status: 'pending'
     });
 
-    // Redirect to Dodo checkout
-    const DODO_PRODUCT = 'pdt_CONFERENCE_PRODUCT_ID_HERE'; // ← Replace with your Dodo product ID
+    // Redirect to Dodo checkout — each tier has its own product
+    const DODO_PRODUCTS = {
+      student:   'pdt_0Nd5kUGj8inKqSbyRdiVK',   // Student / Scholar — ₹1,999
+      faculty:   'pdt_0Nd5kYgKTGfwBr2VCG9Y9',   // Faculty / Researcher — ₹2,999
+      listener:  'pdt_0Nd5khVR6xzYWKMn2CiPn',   // Listener — ₹999
+      coauthor:  'pdt_0Nd5kme4fOVnzmFhWGdfD',   // Co-Author — ₹1,999
+    };
+    const DODO_PRODUCT = DODO_PRODUCTS[selectedTier.id];
+    if (!DODO_PRODUCT) { throw new Error('Unknown tier: ' + selectedTier.id); }
     const returnUrl = encodeURIComponent('https://aihealth.scholarvault.in/register.html?payment=success');
     const email = encodeURIComponent(formData.email);
     window.location.href = `https://checkout.dodopayments.com/buy/${DODO_PRODUCT}?customer_email=${email}&return_url=${returnUrl}`;
