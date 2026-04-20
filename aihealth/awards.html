@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -159,6 +159,11 @@ document.getElementById('awardsForm').addEventListener('submit', async (e) => {
     form.style.display = 'none';
     document.getElementById('awardsSuccess').classList.add('show');
     trackEvent('award_nominated', { category: data.award_category });
+    sendEmail('award_nomination', {
+      name: data.name, email: data.email,
+      award_category: data.award_category, institution: data.institution,
+      nom_type: data.nom_type
+    });
   } catch(err) {
     showToast('Submission failed. Please try again.', 'error');
   } finally {

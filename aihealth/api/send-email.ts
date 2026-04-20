@@ -99,7 +99,7 @@ function tplRegistration(d: Record<string, string>) {
       <p>ICAHCR 2026 · August 22–23, 2026</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
       <p class="lead">
         Your registration for <strong>ICAHCR 2026 — International Conference on AI and Healthcare Research</strong>
         has been received and confirmed. We look forward to welcoming you!
@@ -137,7 +137,7 @@ function tplPaperSubmission(d: Record<string, string>) {
       <p>ICAHCR 2026 · Peer Review in Progress</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
       <p class="lead">
         Thank you for submitting your research paper to <strong>ICAHCR 2026</strong>.
         Your submission has been logged and will enter the double-blind peer review process.
@@ -175,7 +175,7 @@ function tplSpeakerApplication(d: Record<string, string>) {
       <p>ICAHCR 2026 · Under Review</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
       <p class="lead">
         Your speaker application for <strong>ICAHCR 2026</strong> has been received.
         The program committee will review your profile and proposed talk within 14 business days.
@@ -208,7 +208,7 @@ function tplCommitteeApplication(d: Record<string, string>) {
       <p>ICAHCR 2026 · Under Review</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
       <p class="lead">
         Thank you for applying to join the <strong>ICAHCR 2026 Organizing Committee</strong>.
         The conference chair will review your application within 14 business days.
@@ -241,7 +241,7 @@ function tplInterest(d: Record<string, string>) {
       <p>ICAHCR 2026 · We'll Keep You Updated</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
       <p class="lead">
         Thank you for expressing interest in <strong>ICAHCR 2026 — International Conference on AI and Healthcare Research</strong>.
         We have noted your interest and will keep you updated on all conference announcements.
@@ -263,6 +263,37 @@ function tplInterest(d: Record<string, string>) {
   `);
 }
 
+function tplAwardNomination(d: Record<string, string>) {
+  return layout(`
+    <div class="header">
+      <div class="header-icon">🏆</div>
+      <h1>Nomination Received</h1>
+      <p>ICAHCR 2026 · Awards Committee</p>
+    </div>
+    <div class="body">
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
+      <p class="lead">
+        Your nomination for the <strong>${d.award_category}</strong> has been successfully received by the ICAHCR 2026 Organizing Committee.
+      </p>
+      <div class="info-box">
+        <h3>📋 Nomination Details</h3>
+        <div class="info-row"><span class="info-label">Category</span><span class="info-value">${d.award_category}</span></div>
+        <div class="info-row"><span class="info-label">Nominee</span><span class="info-value">${d.name}</span></div>
+        <div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>
+        <div class="info-row"><span class="info-label">Type</span><span class="info-value">${d.nom_type}</span></div>
+      </div>
+      <p class="lead">
+        The awards committee will review all nominations carefully. Results will be announced live at the conference on August 22–23, 2026.
+      </p>
+      <a class="cta" href="https://aihealth.scholarvault.in/awards.html">View Award Categories →</a>
+      <hr class="divider"/>
+      <p class="note">
+        Questions? Reply to this email or write to <a href="mailto:conferences@scholarvault.in" style="color:#00d4ff;">conferences@scholarvault.in</a>
+      </p>
+    </div>
+  `);
+}
+
 function tplSubscribe(d: Record<string, string>) {
   return layout(`
     <div class="header">
@@ -271,7 +302,7 @@ function tplSubscribe(d: Record<string, string>) {
       <p>ICAHCR 2026 Conference Updates</p>
     </div>
     <div class="body">
-      <div class="greeting">Hi ${d.name || "there"},</div>
+      <div class="greeting" style="color: #ffffff;">Hi ${d.name || "there"},</div>
       <p class="lead">
         You're now subscribed to <strong>ICAHCR 2026</strong> updates.
         You'll be the first to know about early bird registration, speaker announcements,
@@ -307,7 +338,7 @@ function tplDownload(d: Record<string, string>) {
       <p>ICAHCR 2026 · ${resourceName}</p>
     </div>
     <div class="body">
-      <div class="greeting">Hi ${d.name || "there"},</div>
+      <div class="greeting" style="color: #ffffff;">Hi ${d.name || "there"},</div>
       <p class="lead">
         Thank you for downloading the <strong>${resourceName}</strong> for ICAHCR 2026.
       </p>
@@ -357,6 +388,10 @@ const emailMap: Record<string, { subject: string; tpl: (d: Record<string,string>
   download: {
     subject: "📄 Your ICAHCR 2026 Download — Scholar Vault",
     tpl: tplDownload,
+  },
+  award_nomination: {
+    subject: "🏆 Award Nomination Received — ICAHCR 2026",
+    tpl: tplAwardNomination,
   },
 };
 
