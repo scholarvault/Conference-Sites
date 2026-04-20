@@ -1,11 +1,11 @@
-﻿export const config = { runtime: 'edge' };
+export const config = { runtime: 'edge' };
 
-const RESEND_API_KEY = process.env.RESEND_API_KEY ? "" : process.env.RESEND_API_KEY #("RESEND_API_KEY") ?? "";
+const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
 const FROM_NAME      = "ICAHCR 2026";
 const FROM_EMAIL     = "conferences@scholarvault.in";
 const REPLY_TO       = "conferences@scholarvault.in";
 
-// â”€â”€â”€ helpers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── helpers ────────────────────────────────────────────────
 async function send(to: string, subject: string, html: string) {
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -28,7 +28,7 @@ async function send(to: string, subject: string, html: string) {
   return res.json();
 }
 
-// â”€â”€â”€ base layout â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── base layout ────────────────────────────────────────────
 function layout(body: string) {
   return `<!DOCTYPE html>
 <html lang="en">
@@ -66,17 +66,17 @@ function layout(body: string) {
   <div class="card">
     ${body}
     <div class="footer">
-      <p>ICAHCR 2026 Â· International Conference on AI and Healthcare Research</p>
-      <p>Organized by <a href="https://scholarvault.in">Scholar Vault</a> Â· <a href="https://aihealth.scholarvault.in">Conference Website</a></p>
-      <p>Â© 2026 Scholar Vault Â· <a href="https://aihealth.scholarvault.in/privacy.html">Privacy Policy</a></p>
+      <p>ICAHCR 2026 · International Conference on AI and Healthcare Research</p>
+      <p>Organized by <a href="https://scholarvault.in">Scholar Vault</a> · <a href="https://aihealth.scholarvault.in">Conference Website</a></p>
+      <p>© 2026 Scholar Vault · <a href="https://aihealth.scholarvault.in/privacy.html">Privacy Policy</a></p>
     </div>
   </div>
 </div>
 </body>
-</html>`;
+</html>\`;
 }
 
-// â”€â”€â”€ email templates â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── email templates ─────────────────────────────────────────
 
 function tplRegistration(d: Record<string, string>) {
   const tierMap: Record<string, string> = {
@@ -87,206 +87,206 @@ function tplRegistration(d: Record<string, string>) {
   };
   const tierLabel = tierMap[d.tier] || d.tier;
   const goldBlock = d.sv_gold === "true"
-    ? `<div class="badge">â­ Scholar Vault Gold Member â€” 15% discount applied</div><br/>`
+    ? \`<div class="badge">⭐ Scholar Vault Gold Member — 15% discount applied</div><br/>\`
     : "";
 
-  return layout(`
+  return layout(\`
     <div class="header">
-      <div class="header-icon">ðŸŽ‰</div>
+      <div class="header-icon">🎉</div>
       <h1>Registration Confirmed!</h1>
-      <p>ICAHCR 2026 Â· August 22â€“23, 2026</p>
+      <p>ICAHCR 2026 · August 22–23, 2026</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting">Dear \${d.name},</div>
       <p class="lead">
-        Your registration for <strong>ICAHCR 2026 â€” International Conference on AI and Healthcare Research</strong>
+        Your registration for <strong>ICAHCR 2026 — International Conference on AI and Healthcare Research</strong>
         has been received and confirmed. We look forward to welcoming you!
       </p>
-      ${goldBlock}
+      \${goldBlock}
       <div class="info-box">
-        <h3>ðŸ“‹ Registration Details</h3>
-        <div class="info-row"><span class="info-label">Name</span><span class="info-value">${d.name}</span></div>
-        <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
-        <div class="info-row"><span class="info-label">Registration Tier</span><span class="info-value">${tierLabel}</span></div>
-        ${d.institution ? `<div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>` : ""}
-        ${d.country     ? `<div class="info-row"><span class="info-label">Country</span><span class="info-value">${d.country}</span></div>` : ""}
-        <div class="info-row"><span class="info-label">Conference Date</span><span class="info-value">August 22â€“23, 2026</span></div>
+        <h3>📋 Registration Details</h3>
+        <div class="info-row"><span class="info-label">Name</span><span class="info-value">\${d.name}</span></div>
+        <div class="info-row"><span class="info-label">Email</span><span class="info-value">\${d.email}</span></div>
+        <div class="info-row"><span class="info-label">Registration Tier</span><span class="info-value">\${tierLabel}</span></div>
+        \${d.institution ? \`<div class="info-row"><span class="info-label">Institution</span><span class="info-value">\${d.institution}</span></div>\` : ""}
+        \${d.country     ? \`<div class="info-row"><span class="info-label">Country</span><span class="info-value">\${d.country}</span></div>\` : ""}
+        <div class="info-row"><span class="info-label">Conference Date</span><span class="info-value">August 22–23, 2026</span></div>
         <div class="info-row"><span class="info-label">Format</span><span class="info-value">100% Virtual</span></div>
       </div>
       <p class="lead">
         Your <strong>virtual joining link</strong> will be sent 5 days before the conference (August 17, 2026).
         Your <strong>e-certificate</strong> will be emailed within 7 days after the conference.
       </p>
-      <a class="cta" href="https://aihealth.scholarvault.in">Visit Conference Website â†’</a>
+      <a class="cta" href="https://aihealth.scholarvault.in">Visit Conference Website →</a>
       <hr class="divider"/>
       <p class="note">
         If you submitted a paper, track its status at the conference portal.<br/>
         Questions? Reply to this email or write to <a href="mailto:conferences@scholarvault.in" style="color:#00d4ff;">conferences@scholarvault.in</a>
       </p>
     </div>
-  `);
+  \`);
 }
 
 function tplPaperSubmission(d: Record<string, string>) {
-  return layout(`
+  return layout(\`
     <div class="header">
-      <div class="header-icon">ðŸ“„</div>
+      <div class="header-icon">📄</div>
       <h1>Paper Submission Received</h1>
-      <p>ICAHCR 2026 Â· Peer Review in Progress</p>
+      <p>ICAHCR 2026 · Peer Review in Progress</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting">Dear \${d.name},</div>
       <p class="lead">
         Thank you for submitting your research paper to <strong>ICAHCR 2026</strong>.
         Your submission has been logged and will enter the double-blind peer review process.
       </p>
       <div class="info-box">
-        <h3>ðŸ“ Submission Details</h3>
-        <div class="info-row"><span class="info-label">Author</span><span class="info-value">${d.name}</span></div>
-        <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
-        <div class="info-row"><span class="info-label">Paper Title</span><span class="info-value">${d.title}</span></div>
-        ${d.track ? `<div class="info-row"><span class="info-label">Conference Track</span><span class="info-value">${d.track}</span></div>` : ""}
-        <div class="info-row"><span class="info-label">Review Process</span><span class="info-value">Double-blind (2â€“3 reviewers)</span></div>
+        <h3>📝 Submission Details</h3>
+        <div class="info-row"><span class="info-label">Author</span><span class="info-value">\${d.name}</span></div>
+        <div class="info-row"><span class="info-label">Email</span><span class="info-value">\${d.email}</span></div>
+        <div class="info-row"><span class="info-label">Paper Title</span><span class="info-value">\${d.title}</span></div>
+        \${d.track ? \`<div class="info-row"><span class="info-label">Conference Track</span><span class="info-value">\${d.track}</span></div>\` : ""}
+        <div class="info-row"><span class="info-label">Review Process</span><span class="info-value">Double-blind (2–3 reviewers)</span></div>
         <div class="info-row"><span class="info-label">Decision Expected</span><span class="info-value">By July 15, 2026</span></div>
       </div>
       <p class="lead">
         <strong>What happens next?</strong><br/>
-        Your paper will be assigned to 2â€“3 domain experts for independent review.
+        Your paper will be assigned to 2–3 domain experts for independent review.
         You will receive an acceptance / revision / rejection notice by <strong>July 15, 2026</strong>.
         If accepted, camera-ready upload is due <strong>July 25, 2026</strong>.
       </p>
-      <a class="cta" href="https://aihealth.scholarvault.in/call-for-papers.html">View CFP Guidelines â†’</a>
+      <a class="cta" href="https://aihealth.scholarvault.in/call-for-papers.html">View CFP Guidelines →</a>
       <hr class="divider"/>
       <p class="note">
         Do NOT resubmit unless you receive an error notice. Your paper file has been securely stored.<br/>
         Queries: <a href="mailto:papers@scholarvault.in" style="color:#00d4ff;">papers@scholarvault.in</a>
       </p>
     </div>
-  `);
+  \`);
 }
 
 function tplSpeakerApplication(d: Record<string, string>) {
-  return layout(`
+  return layout(\`
     <div class="header">
-      <div class="header-icon">ðŸŽ¤</div>
+      <div class="header-icon">🎤</div>
       <h1>Speaker Application Received</h1>
-      <p>ICAHCR 2026 Â· Under Review</p>
+      <p>ICAHCR 2026 · Under Review</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting">Dear \${d.name},</div>
       <p class="lead">
         Your speaker application for <strong>ICAHCR 2026</strong> has been received.
         The program committee will review your profile and proposed talk within 14 business days.
       </p>
       <div class="info-box">
-        <h3>ðŸŽ™ï¸ Application Details</h3>
-        <div class="info-row"><span class="info-label">Name</span><span class="info-value">${d.name}</span></div>
-        <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
-        ${d.designation  ? `<div class="info-row"><span class="info-label">Designation</span><span class="info-value">${d.designation}</span></div>` : ""}
-        ${d.institution  ? `<div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>` : ""}
-        ${d.talk_type    ? `<div class="info-row"><span class="info-label">Talk Type</span><span class="info-value">${d.talk_type}</span></div>` : ""}
+        <h3>🎙️ Application Details</h3>
+        <div class="info-row"><span class="info-label">Name</span><span class="info-value">\${d.name}</span></div>
+        <div class="info-row"><span class="info-label">Email</span><span class="info-value">\${d.email}</span></div>
+        \${d.designation  ? \`<div class="info-row"><span class="info-label">Designation</span><span class="info-value">\${d.designation}</span></div>\` : ""}
+        \${d.institution  ? \`<div class="info-row"><span class="info-label">Institution</span><span class="info-value">\${d.institution}</span></div>\` : ""}
+        \${d.talk_type    ? \`<div class="info-row"><span class="info-label">Talk Type</span><span class="info-value">\${d.talk_type}</span></div>\` : ""}
         <div class="info-row"><span class="info-label">Decision Timeline</span><span class="info-value">Within 14 business days</span></div>
       </div>
       <p class="lead">
         If selected, you will receive a formal invitation letter with session details, presentation format guidelines,
         and a complimentary conference registration link.
       </p>
-      <a class="cta" href="https://aihealth.scholarvault.in/speakers.html">View Current Speakers â†’</a>
+      <a class="cta" href="https://aihealth.scholarvault.in/speakers.html">View Current Speakers →</a>
       <hr class="divider"/>
       <p class="note">Queries: <a href="mailto:speakers@scholarvault.in" style="color:#00d4ff;">speakers@scholarvault.in</a></p>
     </div>
-  `);
+  \`);
 }
 
 function tplCommitteeApplication(d: Record<string, string>) {
-  return layout(`
+  return layout(\`
     <div class="header">
-      <div class="header-icon">ðŸ›ï¸</div>
+      <div class="header-icon">🏛️</div>
       <h1>Committee Application Received</h1>
-      <p>ICAHCR 2026 Â· Under Review</p>
+      <p>ICAHCR 2026 · Under Review</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting">Dear \${d.name},</div>
       <p class="lead">
         Thank you for applying to join the <strong>ICAHCR 2026 Organizing Committee</strong>.
         The conference chair will review your application within 14 business days.
       </p>
       <div class="info-box">
-        <h3>ðŸ›ï¸ Application Details</h3>
-        <div class="info-row"><span class="info-label">Name</span><span class="info-value">${d.name}</span></div>
-        <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
-        ${d.designation ? `<div class="info-row"><span class="info-label">Designation</span><span class="info-value">${d.designation}</span></div>` : ""}
-        ${d.institution ? `<div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>` : ""}
-        ${d.expertise   ? `<div class="info-row"><span class="info-label">Role Preference</span><span class="info-value">${d.expertise}</span></div>` : ""}
+        <h3>🏛️ Application Details</h3>
+        <div class="info-row"><span class="info-label">Name</span><span class="info-value">\${d.name}</span></div>
+        <div class="info-row"><span class="info-label">Email</span><span class="info-value">\${d.email}</span></div>
+        \${d.designation ? \`<div class="info-row"><span class="info-label">Designation</span><span class="info-value">\${d.designation}</span></div>\` : ""}
+        \${d.institution ? \`<div class="info-row"><span class="info-label">Institution</span><span class="info-value">\${d.institution}</span></div>\` : ""}
+        \${d.expertise   ? \`<div class="info-row"><span class="info-label">Role Preference</span><span class="info-value">\${d.expertise}</span></div>\` : ""}
         <div class="info-row"><span class="info-label">Status</span><span class="info-value">Pending Review</span></div>
       </div>
       <p class="lead">
         <strong>Benefits on acceptance:</strong> complimentary registration, official certificate,
         your name and photo on the conference website, credit in proceedings, and global networking.
       </p>
-      <a class="cta" href="https://aihealth.scholarvault.in/committee.html">View Committee â†’</a>
+      <a class="cta" href="https://aihealth.scholarvault.in/committee.html">View Committee →</a>
       <hr class="divider"/>
       <p class="note">Queries: <a href="mailto:conferences@scholarvault.in" style="color:#00d4ff;">conferences@scholarvault.in</a></p>
     </div>
-  `);
+  \`);
 }
 
 function tplInterest(d: Record<string, string>) {
-  return layout(`
+  return layout(\`
     <div class="header">
-      <div class="header-icon">ðŸ™‹</div>
+      <div class="header-icon">🙋</div>
       <h1>Interest Received!</h1>
-      <p>ICAHCR 2026 Â· We'll Keep You Updated</p>
+      <p>ICAHCR 2026 · We'll Keep You Updated</p>
     </div>
     <div class="body">
-      <div class="greeting">Dear ${d.name},</div>
+      <div class="greeting">Dear \${d.name},</div>
       <p class="lead">
-        Thank you for expressing interest in <strong>ICAHCR 2026 â€” International Conference on AI and Healthcare Research</strong>.
+        Thank you for expressing interest in <strong>ICAHCR 2026 — International Conference on AI and Healthcare Research</strong>.
         We have noted your interest and will keep you updated on all conference announcements.
       </p>
       <div class="info-box">
-        <h3>ðŸ“… Key Dates to Remember</h3>
+        <h3>📅 Key Dates to Remember</h3>
         <div class="info-row"><span class="info-label">Paper Submission</span><span class="info-value">June 30, 2026</span></div>
         <div class="info-row"><span class="info-label">Early Bird Ends</span><span class="info-value">July 15, 2026</span></div>
-        <div class="info-row"><span class="info-label">Conference</span><span class="info-value">August 22â€“23, 2026</span></div>
+        <div class="info-row"><span class="info-label">Conference</span><span class="info-value">August 22–23, 2026</span></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:24px 0;">
-        <a class="cta" style="margin:0;display:inline-block;" href="https://aihealth.scholarvault.in/register.html">Register Now â†’</a>
-        <a href="https://aihealth.scholarvault.in/submit-paper.html" style="display:inline-block;padding:14px 24px;border:1.5px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:100px;font-size:13.5px;font-weight:700;text-decoration:none;">Submit a Paper â†’</a>
+        <a class="cta" style="margin:0;display:inline-block;" href="https://aihealth.scholarvault.in/register.html">Register Now →</a>
+        <a href="https://aihealth.scholarvault.in/submit-paper.html" style="display:inline-block;padding:14px 24px;border:1.5px solid rgba(0,212,255,0.3);color:#00d4ff;border-radius:100px;font-size:13.5px;font-weight:700;text-decoration:none;">Submit a Paper →</a>
       </div>
       <hr class="divider"/>
       <p class="note">You're receiving this because you submitted your interest at aihealth.scholarvault.in.
       <a href="mailto:conferences@scholarvault.in?subject=Unsubscribe" style="color:#00d4ff;">Unsubscribe</a></p>
     </div>
-  `);
+  \`);
 }
 
 function tplSubscribe(d: Record<string, string>) {
-  return layout(`
+  return layout(\`
     <div class="header">
-      <div class="header-icon">ðŸ“¬</div>
+      <div class="header-icon">📬</div>
       <h1>You're Subscribed!</h1>
       <p>ICAHCR 2026 Conference Updates</p>
     </div>
     <div class="body">
-      <div class="greeting">Hi ${d.name || "there"},</div>
+      <div class="greeting">Hi \${d.name || "there"},</div>
       <p class="lead">
         You're now subscribed to <strong>ICAHCR 2026</strong> updates.
         You'll be the first to know about early bird registration, speaker announcements,
         and key deadline reminders.
       </p>
       <div class="info-box">
-        <h3>ðŸ“‹ What to Expect</h3>
+        <h3>📋 What to Expect</h3>
         <div class="info-row"><span class="info-label">Early Bird Alert</span><span class="info-value">~2 weeks before deadline</span></div>
-        <div class="info-row"><span class="info-label">Speaker Reveals</span><span class="info-value">May â€“ July 2026</span></div>
+        <div class="info-row"><span class="info-label">Speaker Reveals</span><span class="info-value">May – July 2026</span></div>
         <div class="info-row"><span class="info-label">Paper Deadline Reminder</span><span class="info-value">June 23, 2026</span></div>
         <div class="info-row"><span class="info-label">Agenda Announcement</span><span class="info-value">August 10, 2026</span></div>
       </div>
-      <a class="cta" href="https://aihealth.scholarvault.in">Visit Conference Website â†’</a>
+      <a class="cta" href="https://aihealth.scholarvault.in">Visit Conference Website →</a>
       <hr class="divider"/>
-      <p class="note">Don't want updates? <a href="mailto:conferences@scholarvault.in?subject=Unsubscribe&body=Please unsubscribe ${d.email}" style="color:#00d4ff;">Unsubscribe</a></p>
+      <p class="note">Don't want updates? <a href="mailto:conferences@scholarvault.in?subject=Unsubscribe&body=Please unsubscribe \${d.email}" style="color:#00d4ff;">Unsubscribe</a></p>
     </div>
-  `);
+  \`);
 }
 
 function tplDownload(d: Record<string, string>) {
@@ -298,67 +298,67 @@ function tplDownload(d: Record<string, string>) {
     "sv-badge-cert":    "SV Verification Certificate",
   };
   const resourceName = labels[d.type] || d.type;
-  return layout(`
+  return layout(\`
     <div class="header">
-      <div class="header-icon">ðŸ“„</div>
+      <div class="header-icon">📄</div>
       <h1>Your Download is Ready</h1>
-      <p>ICAHCR 2026 Â· ${resourceName}</p>
+      <p>ICAHCR 2026 · \${resourceName}</p>
     </div>
     <div class="body">
-      <div class="greeting">Hi ${d.name || "there"},</div>
+      <div class="greeting">Hi \${d.name || "there"},</div>
       <p class="lead">
-        Thank you for downloading the <strong>${resourceName}</strong> for ICAHCR 2026.
+        Thank you for downloading the <strong>\${resourceName}</strong> for ICAHCR 2026.
       </p>
       <div class="info-box">
-        <h3>ðŸ“¦ Resource Links</h3>
-        <div class="info-row"><span class="info-label">Resource</span><span class="info-value">${resourceName}</span></div>
+        <h3>📦 Resource Links</h3>
+        <div class="info-row"><span class="info-label">Resource</span><span class="info-value">\${resourceName}</span></div>
         <div class="info-row"><span class="info-label">Conference</span><span class="info-value">ICAHCR 2026</span></div>
         <div class="info-row"><span class="info-label">Organized by</span><span class="info-value">Scholar Vault</span></div>
       </div>
       <p class="lead" style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:12px;padding:14px;font-size:13.5px;">
-        ðŸ“Œ <strong>Note:</strong> The official downloadable file will be available here once the conference portal is live.
+        📌 <strong>Note:</strong> The official downloadable file will be available here once the conference portal is live.
         In the interim, email <a href="mailto:conferences@scholarvault.in" style="color:#00d4ff;">conferences@scholarvault.in</a> to receive the file directly.
       </p>
-      <a class="cta" href="https://aihealth.scholarvault.in/downloads.html">View All Downloads â†’</a>
+      <a class="cta" href="https://aihealth.scholarvault.in/downloads.html">View All Downloads →</a>
       <hr class="divider"/>
       <p class="note">Queries: <a href="mailto:conferences@scholarvault.in" style="color:#00d4ff;">conferences@scholarvault.in</a></p>
     </div>
-  `);
+  \`);
 }
 
-// â”€â”€â”€ router â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── router ───────────────────────────────────────────────────
 const emailMap: Record<string, { subject: string; tpl: (d: Record<string,string>) => string }> = {
   registration: {
-    subject: "âœ… Registration Confirmed â€” ICAHCR 2026 (Aug 22â€“23)",
+    subject: "✅ Registration Confirmed — ICAHCR 2026 (Aug 22–23)",
     tpl: tplRegistration,
   },
   paper_submission: {
-    subject: "ðŸ“„ Paper Submission Received â€” ICAHCR 2026",
+    subject: "📄 Paper Submission Received — ICAHCR 2026",
     tpl: tplPaperSubmission,
   },
   speaker_application: {
-    subject: "ðŸŽ¤ Speaker Application Received â€” ICAHCR 2026",
+    subject: "🎤 Speaker Application Received — ICAHCR 2026",
     tpl: tplSpeakerApplication,
   },
   committee_application: {
-    subject: "ðŸ›ï¸ Committee Application Received â€” ICAHCR 2026",
+    subject: "🏛️ Committee Application Received — ICAHCR 2026",
     tpl: tplCommitteeApplication,
   },
   interest: {
-    subject: "ðŸ™‹ Interest Noted â€” ICAHCR 2026 Updates on the Way",
+    subject: "🙋 Interest Noted — ICAHCR 2026 Updates on the Way",
     tpl: tplInterest,
   },
   subscribe: {
-    subject: "ðŸ“¬ You're Subscribed to ICAHCR 2026 Updates",
+    subject: "📬 You're Subscribed to ICAHCR 2026 Updates",
     tpl: tplSubscribe,
   },
   download: {
-    subject: "ðŸ“„ Your ICAHCR 2026 Download â€” Scholar Vault",
+    subject: "📄 Your ICAHCR 2026 Download — Scholar Vault",
     tpl: tplDownload,
   },
 };
 
-// â”€â”€â”€ handler â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ─── handler ──────────────────────────────────────────────────
 export default async function handler(req: Request) {
   // CORS preflight
   if (req.method === "OPTIONS") {
@@ -392,7 +392,7 @@ export default async function handler(req: Request) {
 
     const conf = emailMap[type];
     if (!conf) {
-      return new Response(JSON.stringify({ error: `Unknown email type: ${type}` }), {
+      return new Response(JSON.stringify({ error: \`Unknown email type: \${type}\` }), {
         status: 400,
         headers: { "Access-Control-Allow-Origin": "*" },
       });
