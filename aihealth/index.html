@@ -276,10 +276,24 @@
     ctx.fillRect(canvas.width - 200, 0, 200, canvas.height);
 
     x += 2;
-    requestAnimationFrame(drawECG);
+    if (isECGVisible) {
+      requestAnimationFrame(drawECG);
+    }
   }
 
-  drawECG();
+  // Pause animation when off-screen to save CPU
+  var isECGVisible = false;
+  var ecgObserver = new IntersectionObserver(function(entries) {
+    if (entries[0].isIntersecting) {
+      if (!isECGVisible) {
+        isECGVisible = true;
+        drawECG();
+      }
+    } else {
+      isECGVisible = false;
+    }
+  }, { threshold: 0 });
+  ecgObserver.observe(canvas);
 
   /* ── Spotlight follows mouse ── */
   var spot = document.getElementById('heroSpotlight');
@@ -711,15 +725,32 @@
   var glow=document.getElementById('procGlow');
   if(!card||!inner) return;
   var curRX=0,curRY=0,tgtRX=0,tgtRY=0,hovering=false;
+  var animationFrameId=null;
   function lerp(a,b,t){return a+(b-a)*t;}
-  (function loop(){
+  // Pause render loop when not interacting to save CPU
+  function loop(){
     curRX=lerp(curRX,tgtRX,.1); curRY=lerp(curRY,tgtRY,.1);
     inner.style.transform='rotateX('+curRX+'deg) rotateY('+curRY+'deg)';
     glow.style.transform='translateX(calc(-50% + '+(curRY*-1.5)+'px)) translateY('+(curRX*1.5)+'px)';
-    requestAnimationFrame(loop);
-  })();
-  card.addEventListener('mouseenter',function(){hovering=true;inner.style.transition='none';});
-  card.addEventListener('mouseleave',function(){hovering=false;tgtRX=0;tgtRY=0;inner.style.transition='transform .6s cubic-bezier(.25,.46,.45,.94)';});
+    if(hovering || Math.abs(curRX) > 0.1 || Math.abs(curRY) > 0.1) {
+      animationFrameId = requestAnimationFrame(loop);
+    } else {
+      animationFrameId = null;
+    }
+  }
+  card.addEventListener('mouseenter',function(){
+    hovering=true;
+    inner.style.transition='none';
+    if(!animationFrameId) {
+      animationFrameId = requestAnimationFrame(loop);
+    }
+  });
+  card.addEventListener('mouseleave',function(){
+    hovering=false;
+    tgtRX=0;
+    tgtRY=0;
+    inner.style.transition='transform .6s cubic-bezier(.25,.46,.45,.94)';
+  });
   card.addEventListener('mousemove',function(e){
     if(!hovering) return;
     var r=card.getBoundingClientRect();
@@ -995,7 +1026,7 @@
 <!-- ─── DOWNLOAD MODAL ─── -->
 <div class="modal-overlay" id="downloadModal">
   <div class="modal">
-    <button class="modal__close" onclick="closeModal('downloadModal')">✕</button>
+    <button class="modal__close" onclick="closeModal('downloadModal')" aria-label="Close modal">✕</button>
     <div style="font-size:2rem;margin-bottom:1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:inherit;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
     <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;">Get the Conference Document</h3>
     <p style="color:var(--white-70);font-size:13.5px;margin-bottom:1.5rem;">Enter your details and we'll send the document to your email instantly.</p>
