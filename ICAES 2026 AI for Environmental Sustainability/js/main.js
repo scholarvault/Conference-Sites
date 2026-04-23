@@ -5,7 +5,7 @@ const SV_CONFIG = {
   supabaseKey: "sb_publishable__pTXUoNZpTtG73FwKktcSQ_13VNtkAt",
   confId: "isiaisgs2026",
   confName: "ISIAI-SGS 2026",
-  confFullName: "International Summit on Interdisciplinary AI and Sustainable Global Systems",
+  confFullName: "International Conference on Interdisciplinary AI and Sustainable Global Systems",
   confDate: new Date("2026-10-15T09:00:00"),
   paperDeadline: new Date("2026-08-30T23:59:59"),
   earlyBirdDate: new Date("2026-09-15T23:59:59"),
