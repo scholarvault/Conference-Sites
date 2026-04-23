@@ -1,0 +1,332 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — GAIHBS 2026 | Global AI Health & Bioinformatics Summit</title>
+  <meta name="description" content="Contact the GAIHBS 2026 organizing team. Reach us for registration queries, paper submissions, sponsorship, and general enquiries." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .contact-info-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+    }
+    .contact-detail {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .contact-detail:last-child { border-bottom: none; }
+    .contact-detail__icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(0, 212, 255, 0.1);
+      border: 1px solid rgba(0, 212, 255, 0.2);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: var(--cyan);
+    }
+    .contact-detail__icon svg { width: 18px; height: 18px; }
+    .contact-detail__label { font-size: 11px; color: var(--white-40); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+    .contact-detail__value { font-size: 14px; font-weight: 600; color: var(--white); line-height: 1.5; }
+    .contact-detail__value a { color: var(--cyan); }
+
+    .social-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 1.5rem; }
+    .social-link {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 14px; border-radius: var(--radius-sm);
+      background: var(--glass); border: 1px solid var(--glass-border);
+      font-size: 13px; font-weight: 600; color: var(--white-70);
+      text-decoration: none; transition: var(--transition);
+    }
+    .social-link:hover { border-color: var(--cyan); color: var(--cyan); }
+    .social-link svg { width: 15px; height: 15px; }
+
+    @media (max-width: 768px) {
+      .contact-layout { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2716%27 fill=%27%230066FF%27/><text y=%2758%27 x=%2750%27 text-anchor=%27middle%27 font-family=%27system-ui,sans-serif%27 font-size=%2736%27 font-weight=%27900%27 fill=%27white%27>G</text></svg>" />
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="/" class="navbar__logo">
+      
+      <div class="navbar__logo-text">
+        <span class="navbar__logo-conf">GAIHBS 2026</span>
+        <span class="navbar__logo-year">Global AI Health & Bioinformatics Summit</span>
+      </div>
+    </a>
+    <div class="navbar__links">
+      <a href="/">Home</a>
+      <a href="/register">Register</a>
+      <a href="/submit-paper">Submit Paper</a>
+      <a href="/badge">SV Badge</a>
+    </div>
+    <div class="navbar__cta"><a href="/register" class="btn-register">Register →</a></div>
+    <button class="navbar__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<nav class="navbar__mobile" id="mobileMenu">
+  <a href="/">Home</a>
+  <a href="/about">About Conference</a>
+  <a href="/why">Why Attend</a>
+  <a href="/call-for-papers">Call for Papers</a>
+  <a href="/submit-paper">Submit Paper</a>
+  <a href="/speakers">Speakers</a>
+  <a href="/speaker-form">Become a Speaker</a>
+  <a href="/committee">Committee</a>
+  <a href="/awards">Awards</a>
+  <a href="/sdg">SDG Impact</a>
+  <a href="/blog">Blog</a>
+  <a href="/media">Media</a>
+  <a href="/downloads">Downloads</a>
+  <a href="/scholarvault">About ScholarVault</a>
+  <a href="/badge">SV Premium Badge</a>
+  <a href="/register" style="color:var(--cyan);font-weight:700;">Register Now →</a>
+</nav>
+
+
+
+<!-- HERO -->
+<section style="padding:120px 2rem 60px;background:var(--navy-2);border-bottom:1px solid var(--glass-border);text-align:center;">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;">We're here to help</div>
+    <h1 class="section-title">Contact <span class="grad">GAIHBS 2026</span></h1>
+    <p style="color:var(--white-70);max-width:560px;margin:0 auto;">Reach out for any queries — registration help, paper submission guidance, sponsorship, or general information. We respond within 24 hours.</p>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="contact-layout reveal">
+
+      <!-- LEFT: Contact Info -->
+      <div>
+        <div class="contact-info-card">
+          <h2 style="font-family:var(--font-head);font-size:1.2rem;font-weight:800;margin-bottom:1.5rem;">Conference Contact Details</h2>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Email</div>
+              <div class="contact-detail__value"><a href="mailto:conferences@scholarvault.in">conferences@scholarvault.in</a></div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 10.85a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 0h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 7.91a16 16 0 0 0 6 6l.72-.72a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Phone / WhatsApp</div>
+              <div class="contact-detail__value"><a href="tel:+918610100624">+91 86101 00624</a><br/><span style="font-size:12px;color:var(--white-40);">Mon–Fri, 10am–6pm IST</span></div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Response Time</div>
+              <div class="contact-detail__value">Within 24 hours<br/><span style="font-size:12px;color:var(--white-40);">Priority support for registered delegates</span></div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Venue</div>
+              <div class="contact-detail__value">100% Virtual / Online<br/><span style="font-size:12px;color:var(--white-40);">July 15-16, 2026 · All time zones welcome</span></div>
+            </div>
+          </div>
+
+          <div class="contact-detail">
+            <div class="contact-detail__icon" style="background:rgba(244,206,20,0.1);border-color:rgba(244,206,20,0.2);">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="color:#F4CE14;">
+                <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/>
+                <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="contact-detail__label">Organised Under</div>
+              <div class="contact-detail__value" style="color:#00D1FF;">ScholarVault Conference Series<br/><a href="https://scholarvault.in" target="_blank" style="font-size:12px;">scholarvault.in →</a></div>
+            </div>
+          </div>
+
+          <!-- Social links -->
+          <div style="margin-top:1.25rem;">
+            <div style="font-size:11px;color:var(--white-40);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.75rem;">Follow &amp; Connect</div>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/company/thescholarvault" target="_blank" class="social-link">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick topics -->
+        <div style="background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.5rem;margin-top:1.5rem;">
+          <div style="font-size:12px;font-weight:700;color:var(--white-40);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Common Query Topics</div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <div style="display:flex;gap:10px;font-size:13.5px;color:var(--white-70);align-items:center;"><i data-lucide="file-text" style="width:15px;height:15px;color:var(--cyan);flex-shrink:0;"></i> Paper submission &amp; review status</div>
+            <div style="display:flex;gap:10px;font-size:13.5px;color:var(--white-70);align-items:center;"><i data-lucide="credit-card" style="width:15px;height:15px;color:var(--cyan);flex-shrink:0;"></i> Registration &amp; payment issues</div>
+            <div style="display:flex;gap:10px;font-size:13.5px;color:var(--white-70);align-items:center;"><i data-lucide="award" style="width:15px;height:15px;color:var(--cyan);flex-shrink:0;"></i> Certificate &amp; proceedings</div>
+            <div style="display:flex;gap:10px;font-size:13.5px;color:var(--white-70);align-items:center;"><i data-lucide="mic" style="width:15px;height:15px;color:var(--cyan);flex-shrink:0;"></i> Speaker &amp; keynote opportunities</div>
+            <div style="display:flex;gap:10px;font-size:13.5px;color:var(--white-70);align-items:center;"><i data-lucide="briefcase" style="width:15px;height:15px;color:var(--cyan);flex-shrink:0;"></i> Sponsorship &amp; partnerships</div>
+            <div style="display:flex;gap:10px;font-size:13.5px;color:var(--white-70);align-items:center;"><i data-lucide="shield-check" style="width:15px;height:15px;color:#00D1FF;flex-shrink:0;"></i> ScholarVault badge verification</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Contact Form -->
+      <div class="form-container" id="contactFormWrap" style="max-width:none;">
+        <div class="form-title" style="display:flex;align-items:center;gap:10px;">
+          <i data-lucide="send" style="width:22px;height:22px;color:var(--cyan);"></i>
+          Send Us a Message
+        </div>
+        <p class="form-subtitle">Fill in the form and our team will get back to you within 24 hours.</p>
+
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label>Full Name <span class="req">*</span></label><input type="text" name="name" required placeholder="Dr. Rahul Verma" /></div>
+            <div class="form-group"><label>Email <span class="req">*</span></label><input type="email" name="email" required placeholder="rahul@hospital.in" /></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="+91 98765 43210" /></div>
+            <div class="form-group"><label>Institution</label><input type="text" name="institution" placeholder="AIIMS New Delhi" /></div>
+          </div>
+          <div class="form-group">
+            <label>Query Type <span class="req">*</span></label>
+            <select name="query_type" required>
+              <option value="">Select your topic...</option>
+              <option>Paper Submission / Review Status</option>
+              <option>Registration / Payment</option>
+              <option>Certificate / Proceedings</option>
+              <option>Speaker / Keynote Opportunity</option>
+              <option>Group / Institutional Registration</option>
+              <option>Sponsorship / Partnership</option>
+              <option>ScholarVault Badge Verification</option>
+              <option>Technical Issue</option>
+              <option>Other / General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message <span class="req">*</span></label>
+            <textarea name="message" rows="5" required placeholder="Describe your query in detail. Include your registration ID or paper submission ID if applicable..."></textarea>
+          </div>
+          <div class="form-group" style="display:flex;align-items:flex-start;gap:10px;">
+            <input type="checkbox" id="subscribeContact" name="subscribe" value="yes" style="width:auto;margin-top:3px;flex-shrink:0;" />
+            <label for="subscribeContact" style="text-transform:none;font-size:14px;font-weight:400;letter-spacing:0;">
+              Also subscribe me to GAIHBS 2026 conference updates
+            </label>
+          </div>
+          <button type="submit" class="form-submit" id="contactSubmitBtn">Send Message →</button>
+        </form>
+
+        <div class="form-success" id="contactSuccess">
+          <div class="form-success__icon">
+            <i data-lucide="check-circle" style="width:48px;height:48px;color:var(--green);"></i>
+          </div>
+          <div class="form-success__title">Message Sent!</div>
+          <p class="form-success__text">Thank you for reaching out. We have received your query and will respond to <strong id="contactSuccessEmail"></strong> within 24 hours.</p>
+          <br /><a href="/" class="btn-outline" style="display:inline-flex;">← Back to Conference</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ TEASER -->
+<section class="section section--alt section--border-top">
+  <div class="container reveal" style="text-align:center;">
+    <div class="section-tag" style="justify-content:center;">Quick Answers</div>
+    <h2 class="section-title">Frequently Asked <span class="grad">Questions</span></h2>
+    <p style="color:var(--white-70);max-width:540px;margin:0 auto 2.5rem;font-size:14px;">Find instant answers to common queries before reaching out.</p>
+    <div style="max-width:700px;margin:0 auto;display:flex;flex-direction:column;gap:0.75rem;">
+      <details class="faq-item">
+        <summary class="faq-q"><i data-lucide="chevron-right" class="faq-icon"></i>How long does it take to get a response?</summary>
+        <div class="faq-a">Our team responds within 24 business hours. For urgent matters related to registration payment or final submission deadlines, please mention "URGENT" in your message subject. Registered delegates with ScholarVault Gold membership get priority 2-hour support.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><i data-lucide="chevron-right" class="faq-icon"></i>I made a payment but haven't received confirmation — what should I do?</summary>
+        <div class="faq-a">First check your spam/junk folder. If not received within 2 hours of payment, email <a href="mailto:conferences@scholarvault.in">conferences@scholarvault.in</a> with your payment transaction ID and we'll manually send your confirmation immediately.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><i data-lucide="chevron-right" class="faq-icon"></i>Can I request a group discount for my institution?</summary>
+        <div class="faq-a">Yes. Institutions registering 5 or more delegates are eligible for a group discount. Contact us via the form above selecting "Group / Institutional Registration" and our team will arrange a customised pricing quote.</div>
+      </details>
+      <details class="faq-item">
+        <summary class="faq-q"><i data-lucide="chevron-right" class="faq-icon"></i>How do I request a refund?</summary>
+        <div class="faq-a">Email us with your registration ID and reason for cancellation. Refunds are processed per our <a href="/refund">Refund Policy</a>: 100% before July 1, 50% from July 1–31, none after August 1, 2026.</div>
+      </details>
+    </div>
+    <div style="margin-top:2rem;"><a href="/#faq" class="btn-outline">View All FAQs →</a></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer" style="margin-top:0;">
+  <div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding:1.5rem 0;">
+    <span>© 2026 GAIHBS — ScholarVault Conference Series. All rights reserved.</span>
+    <span><a href="/refund" style="color:var(--cyan);">Refund Policy</a> · <a href="/privacy" style="color:var(--cyan);">Privacy</a></span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('contactSubmitBtn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+  const fd = new FormData(e.target);
+  const data = Object.fromEntries(fd.entries());
+  try {
+    await insertRecord('conf_contact', {
+      name: data.name,
+      email: data.email,
+      phone: data.phone || '',
+      institution: data.institution || '',
+      query_type: data.query_type,
+      message: data.message,
+      subscribed: data.subscribe === 'yes'
+    });
+    if (data.subscribe === 'yes') {
+      await handleSubscribe(data.email, data.name, null);
+    }
+    // Send auto-reply
+    sendEmail('contact', { name: data.name, email: data.email, query_type: data.query_type });
+    e.target.style.display = 'none';
+    document.getElementById('contactSuccessEmail').textContent = data.email;
+    document.getElementById('contactSuccess').classList.add('show');
+    trackEvent('contact_submitted', { query_type: data.query_type });
+  } catch (err) {
+    showToast('Submission failed. Please try again or email us directly.', 'error');
+    btn.disabled = false; btn.textContent = 'Send Message →';
+  }
+});
+</script>
+</body>
+</html>

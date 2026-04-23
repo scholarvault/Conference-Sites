@@ -1447,7 +1447,7 @@ select:focus {
 /* ── Scroll Top Button ── */
 .scroll-top {
   position: fixed;
-  left: 28px;
+  right: 28px;
   bottom: 28px;
   width: 52px;
   height: 52px;
@@ -1984,7 +1984,7 @@ select:focus {
   }
 
   .scroll-top {
-    left: 20px;
+    right: 20px;
     bottom: 20px;
     width: 48px;
     height: 48px;

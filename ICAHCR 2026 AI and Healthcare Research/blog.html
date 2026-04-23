@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — GAIHBS 2026 | AI in Healthcare Research</title>
+  <meta name="description" content="Research insights, conference updates, and AI in healthcare news from the GAIHBS 2026 team." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+    .blog-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); overflow: hidden; transition: var(--transition); display: flex; flex-direction: column; }
+    .blog-card:hover { transform: translateY(-6px); border-color: rgba(0,212,255,0.3); }
+    .blog-thumb { width: 100%; aspect-ratio: 16/9; background: linear-gradient(135deg, rgba(0,102,255,0.3), rgba(0,212,255,0.2)); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .blog-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .blog-tag { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; background: rgba(0,102,255,0.15); color: var(--blue); border: 1px solid rgba(0,102,255,0.2); margin-bottom: 0.75rem; }
+    .blog-title { font-size: 1rem; font-weight: 800; line-height: 1.4; margin-bottom: 0.5rem; }
+    .blog-excerpt { font-size: 13px; color: var(--white-70); line-height: 1.65; flex: 1; }
+    .blog-meta { font-size: 12px; color: var(--white-40); margin-top: 1rem; display: flex; justify-content: space-between; }
+    @media(max-width:900px) { .blog-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:600px) { .blog-grid { grid-template-columns: 1fr; } }
+  </style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2716%27 fill=%27%230066FF%27/><text y=%2758%27 x=%2750%27 text-anchor=%27middle%27 font-family=%27system-ui,sans-serif%27 font-size=%2736%27 font-weight=%27900%27 fill=%27white%27>G</text></svg>" />
+</head>
+<body>
+<nav class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="index" class="navbar__logo"><div class="navbar__logo-text"><span class="navbar__logo-conf">GAIHBS 2026</span><span class="navbar__logo-year">AI in Healthcare</span></div></a>
+    <div class="navbar__links"><a href="index">Home</a><a href="call-for-papers">CFP</a><a href="register">Register</a></div>
+    <div class="navbar__cta"><a href="register" class="btn-register">Register →</a></div>
+    <button class="navbar__hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<nav class="navbar__mobile" id="mobileMenu">
+  <a href="index">Home</a>
+  <a href="about">About Conference</a>
+  <a href="why">Why Attend</a>
+  <a href="call-for-papers">Call for Papers</a>
+  <a href="submit-paper">Submit Paper</a>
+  <a href="speakers">Speakers</a>
+  <a href="speaker-form">Become a Speaker</a>
+  <a href="committee">Committee</a>
+  <a href="awards">Awards</a>
+  <a href="sdg">SDG Impact</a>
+  <a href="blog">Blog</a>
+  <a href="media">Media</a>
+  <a href="downloads">Downloads</a>
+  <a href="scholarvault">About ScholarVault</a>
+  <a href="badge">SV Premium Badge</a>
+  <a href="register" style="color:var(--cyan);font-weight:700;">Register Now →</a>
+</nav>
+
+<section style="padding:120px 2rem 60px;background:var(--navy-2);text-align:center;border-bottom:1px solid var(--glass-border);">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;">Research & Updates</div>
+    <h1 class="section-title"><span class="grad">Conference Blog</span></h1>
+    <p style="color:var(--white-70);max-width:540px;margin:0 auto;">Research insights, AI in healthcare news, conference updates, and author spotlights.</p>
+  </div>
+</section>
+<section class="section section--dark"><div class="container">
+  <div class="blog-grid reveal">
+
+    <div class="blog-card">
+      <div class="blog-thumb">🧠</div>
+      <div class="blog-body">
+        <span class="blog-tag">Research Insight</span>
+        <div class="blog-title">How AI is Transforming Early Cancer Detection in 2026</div>
+        <div class="blog-excerpt">Radiomics, deep learning models on CT scans, and AI-pathology integration are collectively pushing detection rates to historic highs. Here's a synthesis of the latest research and what it means for clinicians and researchers attending GAIHBS 2026.</div>
+        <div class="blog-meta"><span>GAIHBS Editorial</span><span>Apr 15, 2026</span></div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-thumb">💊</div>
+      <div class="blog-body">
+        <span class="blog-tag">Drug Discovery</span>
+        <div class="blog-title">AlphaFold & Beyond: AI in Drug Discovery — What Researchers Are Saying</div>
+        <div class="blog-excerpt">From protein structure prediction to generative chemistry, AI is compressing drug development timelines from decades to years. We spoke to researchers in Track 2 of GAIHBS about how this is reshaping their work.</div>
+        <div class="blog-meta"><span>GAIHBS Editorial</span><span>Apr 10, 2026</span></div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-thumb">📡</div>
+      <div class="blog-body">
+        <span class="blog-tag">Telemedicine</span>
+        <div class="blog-title">Telemedicine in Rural India: 5 Papers You Should Know from GAIHBS 2026</div>
+        <div class="blog-excerpt">Research from Track 3 of this year's conference highlights the extraordinary impact telemedicine AI is having in Tier 2/3 cities and rural healthcare delivery. Here are five abstracts we're watching closely.</div>
+        <div class="blog-meta"><span>GAIHBS Editorial</span><span>Apr 5, 2026</span></div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-thumb">⬡</div>
+      <div class="blog-body">
+        <span class="blog-tag">ScholarVault</span>
+        <div class="blog-title">What Does a 92/100 Trust Score Actually Mean for Your Research?</div>
+        <div class="blog-excerpt">The ScholarVault Premium Badge isn't just a logo. It's a 12-point evaluation system that tells you exactly what you're getting when you submit. Here's a plain-English breakdown of every criterion and why GAIHBS scored 9.2.</div>
+        <div class="blog-meta"><span>ScholarVault Team</span><span>Mar 28, 2026</span></div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-thumb">🏥</div>
+      <div class="blog-body">
+        <span class="blog-tag">Hospital AI</span>
+        <div class="blog-title">Predictive Patient Flow AI: Reducing Wait Times by 40% — A Case Study</div>
+        <div class="blog-excerpt">A hospital network in Maharashtra deployed an ML-based bed allocation system and saw measurable improvements within 90 days. This case study from an GAIHBS 2026 paper submission shows the real-world potential.</div>
+        <div class="blog-meta"><span>GAIHBS TPC</span><span>Mar 20, 2026</span></div>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-thumb"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:inherit;"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/><path d="M2 12h20"/></svg></div>
+      <div class="blog-body">
+        <span class="blog-tag">SDG Impact</span>
+        <div class="blog-title">How Conference Research Advances SDG 3 — Good Health &amp; Well-Being</div>
+        <div class="blog-excerpt">Every paper published with a DOI contributes to the global knowledge base. We examine how the research tracks at GAIHBS 2026 directly map to the UN's 2030 health targets — and what that means for grant applications.</div>
+        <div class="blog-meta"><span>GAIHBS Editorial</span><span>Mar 15, 2026</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="reveal" style="text-align:center;margin-top:3rem;">
+    <div class="form-container" style="max-width:480px;margin:0 auto;">
+      <div class="form-title" style="font-size:1.1rem;">📬 Subscribe for Blog Updates</div>
+      <form id="blogSubForm" style="display:flex;gap:10px;margin-top:1rem;">
+        <input type="email" name="email" required placeholder="your@email.com" style="flex:1;" />
+        <button type="submit" class="form-submit" style="padding:12px 20px;width:auto;flex-shrink:0;">Subscribe</button>
+      </form>
+      <p style="font-size:12px;color:var(--white-40);margin-top:0.75rem;">No spam. Conference news and research highlights only.</p>
+    </div>
+  </div>
+</div></section>
+<footer class="footer"><div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding:1.5rem 0;"><span>© 2026 GAIHBS — ScholarVault</span><span><a href="privacy" style="color:var(--cyan);">Privacy</a></span></div></footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+document.getElementById('blogSubForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const email = e.target.email.value;
+  try {
+    await handleSubscribe(email, '', null);
+    showToast('Subscribed! You\'ll get blog updates at ' + email, 'success');
+    e.target.reset();
+    trackEvent('blog_subscribed');
+  } catch { showToast('Subscription failed. Please try again.', 'error'); }
+});
+</script>
+</body>
+</html>
