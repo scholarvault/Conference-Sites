@@ -95,9 +95,9 @@ function tplRegistration(d: Record<string, string>) {
   return shell(
     "Registration",
     "Registration received",
-    "ICAES 2026 - virtual conference - Q4 2026",
+    "ISIAI-SGS 2026 - virtual conference - October 15-16, 2026",
     `
-      <p class="lead">Thank you for registering your interest in ICAES 2026. Your submission has been recorded in our delegate system and the team will share conference access details, payment confirmations, and next steps by email.</p>
+      <p class="lead">Thank you for registering your interest in ISIAI-SGS 2026. Your submission has been recorded in our delegate system and the team will share conference access details, payment confirmations, and next steps by email.</p>
       <div class="info">${rows([
         ["Name", d.name],
         ["Email", d.email],
@@ -106,7 +106,7 @@ function tplRegistration(d: Record<string, string>) {
         ["Category", d.category],
       ])}</div>
       <a class="cta" href="${ROOT_URL}/register">Review registration page</a>
-      <p class="note">All programme dates are currently marked TBA within Q4 2026. A formal update email will be sent as soon as the schedule is locked.</p>
+      <p class="note">All programme dates are currently marked TBA within October 15-16, 2026. A formal update email will be sent as soon as the schedule is locked.</p>
     `,
   );
 }
@@ -117,7 +117,7 @@ function tplPaperSubmission(d: Record<string, string>) {
     "Your paper is in the review queue",
     "Double-blind review - 8 research tracks",
     `
-      <p class="lead">Your paper has been submitted to ICAES 2026 and will enter our peer-review workflow. We will email you once the editorial screening and reviewer assignment are complete.</p>
+      <p class="lead">Your paper has been submitted to ISIAI-SGS 2026 and will enter our peer-review workflow. We will email you once the editorial screening and reviewer assignment are complete.</p>
       <div class="info">${rows([
         ["Author", d.name],
         ["Email", d.email],
@@ -137,7 +137,7 @@ function tplSpeakerApplication(d: Record<string, string>) {
     "Your speaker application is received",
     "Climate AI - policy - sustainability technology",
     `
-      <p class="lead">Thank you for proposing a talk for ICAES 2026. Our programme team will review your profile, abstract, and relevance to the summit agenda before sending the next update.</p>
+      <p class="lead">Thank you for proposing a talk for ISIAI-SGS 2026. Our programme team will review your profile, abstract, and relevance to the summit agenda before sending the next update.</p>
       <div class="info">${rows([
         ["Name", d.name],
         ["Email", d.email],
@@ -158,7 +158,7 @@ function tplCommitteeApplication(d: Record<string, string>) {
     "Committee application submitted",
     "Reviewers - track leads - outreach support",
     `
-      <p class="lead">We have received your committee application for ICAES 2026. The organising team will review your domain expertise and determine the best fit across track, review, and programme support roles.</p>
+      <p class="lead">We have received your committee application for ISIAI-SGS 2026. The organising team will review your domain expertise and determine the best fit across track, review, and programme support roles.</p>
       <div class="info">${rows([
         ["Name", d.name],
         ["Email", d.email],
@@ -175,10 +175,10 @@ function tplCommitteeApplication(d: Record<string, string>) {
 function tplInterest(d: Record<string, string>) {
   return shell(
     "Express Interest",
-    "You're on the ICAES update list",
+    "You're on the ISIAI-SGS update list",
     "Dates, CFP alerts, keynote announcements",
     `
-      <p class="lead">Thank you for expressing interest in ICAES 2026. We'll use this address to share the conference brochure, deadline announcements, and milestone updates as they are published.</p>
+      <p class="lead">Thank you for expressing interest in ISIAI-SGS 2026. We'll use this address to share the conference brochure, deadline announcements, and milestone updates as they are published.</p>
       <div class="info">${rows([
         ["Name", d.name],
         ["Email", d.email],
@@ -195,14 +195,14 @@ function tplSubscribe(d: Record<string, string>) {
   return shell(
     "Newsletter",
     "Subscription confirmed",
-    "ICAES 2026 conference updates",
+    "ISIAI-SGS 2026 conference updates",
     `
-      <p class="lead">You're now subscribed to ICAES 2026 updates. Expect a concise stream of milestone emails including call-for-papers alerts, keynote announcements, and final date releases.</p>
+      <p class="lead">You're now subscribed to ISIAI-SGS 2026 updates. Expect a concise stream of milestone emails including call-for-papers alerts, keynote announcements, and final date releases.</p>
       <div class="info">${rows([
         ["Subscriber", d.name || "Subscriber"],
         ["Email", d.email],
       ])}</div>
-      <a class="cta" href="${ROOT_URL}">Visit ICAES 2026</a>
+      <a class="cta" href="${ROOT_URL}">Visit ISIAI-SGS 2026</a>
       <p class="note">If you ever want to stop receiving updates, reply with the word unsubscribe and we will remove you from the list.</p>
     `,
   );
@@ -220,7 +220,7 @@ function tplDownload(d: Record<string, string>) {
   return shell(
     "Download Request",
     `${resource} requested`,
-    "ICAES 2026 document delivery",
+    "ISIAI-SGS 2026 document delivery",
     `
       <p class="lead">Thank you for requesting the <strong>${resource}</strong>. Your request has been logged and the conference team will share the latest version to this address.</p>
       <div class="info">${rows([
@@ -238,9 +238,9 @@ function tplAwardNomination(d: Record<string, string>) {
   return shell(
     "Awards",
     "Award nomination received",
-    "ICAES 2026 recognition programme",
+    "ISIAI-SGS 2026 recognition programme",
     `
-      <p class="lead">Thank you for submitting an award nomination for ICAES 2026. The awards committee will review all nominations after the final paper and speaker lists are consolidated.</p>
+      <p class="lead">Thank you for submitting an award nomination for ISIAI-SGS 2026. The awards committee will review all nominations after the final paper and speaker lists are consolidated.</p>
       <div class="info">${rows([
         ["Nominee", d.nominee_name],
         ["Email", d.email],
@@ -257,9 +257,9 @@ function tplContact(d: Record<string, string>) {
   return shell(
     "Contact",
     "We've received your message",
-    "ICAES 2026 organising desk",
+    "ISIAI-SGS 2026 organising desk",
     `
-      <p class="lead">Thanks for reaching out. Your query has been logged and a member of the ICAES support team will reply soon.</p>
+      <p class="lead">Thanks for reaching out. Your query has been logged and a member of the ISIAI-SGS support team will reply soon.</p>
       <div class="info">${rows([
         ["Name", d.name],
         ["Email", d.email],
@@ -273,39 +273,39 @@ function tplContact(d: Record<string, string>) {
 
 const emailMap: Record<string, { subject: string; tpl: (d: Record<string, string>) => string }> = {
   registration: {
-    subject: "Registration received - ICAES 2026",
+    subject: "Registration received - ISIAI-SGS 2026",
     tpl: tplRegistration,
   },
   paper_submission: {
-    subject: "Paper submission received - ICAES 2026",
+    subject: "Paper submission received - ISIAI-SGS 2026",
     tpl: tplPaperSubmission,
   },
   speaker_application: {
-    subject: "Speaker application received - ICAES 2026",
+    subject: "Speaker application received - ISIAI-SGS 2026",
     tpl: tplSpeakerApplication,
   },
   committee_application: {
-    subject: "Committee application received - ICAES 2026",
+    subject: "Committee application received - ISIAI-SGS 2026",
     tpl: tplCommitteeApplication,
   },
   interest: {
-    subject: "Interest noted - ICAES 2026",
+    subject: "Interest noted - ISIAI-SGS 2026",
     tpl: tplInterest,
   },
   subscribe: {
-    subject: "You are subscribed to ICAES 2026 updates",
+    subject: "You are subscribed to ISIAI-SGS 2026 updates",
     tpl: tplSubscribe,
   },
   download: {
-    subject: "Your ICAES 2026 resource request",
+    subject: "Your ISIAI-SGS 2026 resource request",
     tpl: tplDownload,
   },
   award_nomination: {
-    subject: "Award nomination received - ICAES 2026",
+    subject: "Award nomination received - ISIAI-SGS 2026",
     tpl: tplAwardNomination,
   },
   contact: {
-    subject: "ICAES 2026 contact request received",
+    subject: "ISIAI-SGS 2026 contact request received",
     tpl: tplContact,
   },
 };

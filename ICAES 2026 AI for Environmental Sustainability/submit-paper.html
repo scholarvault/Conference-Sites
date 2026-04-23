@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 
@@ -170,31 +170,31 @@
       const paperWrap = document.getElementById("paperWrap");
       const paperForm = document.getElementById("paperForm");
       if (paperForm) {
-paperForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  const data = Object.fromEntries(new FormData(paperForm).entries());
-  const file = document.getElementById("paperFile").files[0];
-  try {
-    window.SVSite.setFormLoading(paperWrap, true, "Uploading paper...");
-    let paperUrl = "";
-    if (file) {
-      paperUrl = await window.SVSite.uploadFile("conf-papers", file, "greentech");
-    }
-    await window.SVSite.insertRecord("conf_paper_submissions", {
-      name: data.name, email: data.email, institution: data.institution, country: data.country,
-      title: data.title, track: data.track, keywords: data.keywords, abstract: data.abstract,
-      paper_url: paperUrl, status: "submitted"
-    });
-    await window.SVSite.sendEmail("paper_submission", {
-      name: data.name, email: data.email, institution: data.institution, title: data.title, track: data.track
-    });
-    window.SVSite.showFormSuccess(paperWrap);
-  } catch (error) {
-    window.SVSite.showToast("Paper submission failed. Please try again.", "error");
-  } finally {
-    window.SVSite.setFormLoading(paperWrap, false);
-  }
-});
+        paperForm.addEventListener("submit", async (event) => {
+          event.preventDefault();
+          const data = Object.fromEntries(new FormData(paperForm).entries());
+          const file = document.getElementById("paperFile").files[0];
+          try {
+            window.SVSite.setFormLoading(paperWrap, true, "Uploading paper...");
+            let paperUrl = "";
+            if (file) {
+              paperUrl = await window.SVSite.uploadFile("conf-papers", file, window.SVSite.config.confId);
+            }
+            await window.SVSite.insertRecord("conf_paper_submissions", {
+              name: data.name, email: data.email, institution: data.institution, country: data.country,
+              title: data.title, track: data.track, keywords: data.keywords, abstract: data.abstract,
+              paper_url: paperUrl, status: "submitted"
+            });
+            await window.SVSite.sendEmail("paper_submission", {
+              name: data.name, email: data.email, institution: data.institution, title: data.title, track: data.track
+            });
+            window.SVSite.showFormSuccess(paperWrap);
+          } catch (error) {
+            window.SVSite.showToast("Paper submission failed. Please try again.", "error");
+          } finally {
+            window.SVSite.setFormLoading(paperWrap, false);
+          }
+        });
       }
     </script>
   
@@ -213,6 +213,3 @@ paperForm.addEventListener("submit", async (event) => {
   </script>
 </body>
 </html>
-
-
-
