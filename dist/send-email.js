@@ -1,36 +1,26 @@
-export const config = { runtime: 'edge' };
-
-declare const process: any;
-
-const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
-const FROM_NAME      = "ICAHCR 2026";
-const FROM_EMAIL     = "conferences@scholarvault.in";
-const REPLY_TO       = "conferences@scholarvault.in";
-
-// ─── helpers ────────────────────────────────────────────────
-function escapeHtml(unsafe: string): string {
-  return unsafe
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+// aihealth/api/send-email.ts
+var config = { runtime: "edge" };
+var RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
+var FROM_NAME = "ICAHCR 2026";
+var FROM_EMAIL = "conferences@scholarvault.in";
+var REPLY_TO = "conferences@scholarvault.in";
+function escapeHtml(unsafe) {
+  return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
-
-async function send(to: string, subject: string, html: string) {
+async function send(to, subject, html) {
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${RESEND_API_KEY}`,
-      "Content-Type": "application/json",
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       from: `${FROM_NAME} <${FROM_EMAIL}>`,
       reply_to: REPLY_TO,
       to: [to],
       subject,
-      html,
-    }),
+      html
+    })
   });
   if (!res.ok) {
     const err = await res.text();
@@ -38,9 +28,7 @@ async function send(to: string, subject: string, html: string) {
   }
   return res.json();
 }
-
-// ─── base layout ────────────────────────────────────────────
-function layout(body: string) {
+function layout(body) {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,21 +74,15 @@ function layout(body: string) {
 </body>
 </html>`;
 }
-
-// ─── email templates ─────────────────────────────────────────
-
-function tplRegistration(d: Record<string, string>) {
-  const tierMap: Record<string, string> = {
-    student:   "Student / PhD Scholar",
-    faculty:   "Faculty / Postdoc",
+function tplRegistration(d) {
+  const tierMap = {
+    student: "Student / PhD Scholar",
+    faculty: "Faculty / Postdoc",
     presenter: "Presenter",
-    listener:  "Listener",
+    listener: "Listener"
   };
   const tierLabel = tierMap[d.tier] || d.tier;
-  const goldBlock = d.sv_gold === "true"
-    ? `<div class="badge">Scholar Vault Gold Member — 15% discount applied</div><br/>`
-    : "";
-
+  const goldBlock = d.sv_gold === "true" ? `<div class="badge">Scholar Vault Gold Member — 15% discount applied</div><br/>` : "";
   return layout(`
     <div class="header">
             <h1>Registration Confirmed!</h1>
@@ -119,7 +101,7 @@ function tplRegistration(d: Record<string, string>) {
         <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
         <div class="info-row"><span class="info-label">Registration Tier</span><span class="info-value">${tierLabel}</span></div>
         ${d.institution ? `<div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>` : ""}
-        ${d.country     ? `<div class="info-row"><span class="info-label">Country</span><span class="info-value">${d.country}</span></div>` : ""}
+        ${d.country ? `<div class="info-row"><span class="info-label">Country</span><span class="info-value">${d.country}</span></div>` : ""}
         <div class="info-row"><span class="info-label">Conference Date</span><span class="info-value">August 22–23, 2026</span></div>
         <div class="info-row"><span class="info-label">Format</span><span class="info-value">100% Virtual</span></div>
       </div>
@@ -136,8 +118,7 @@ function tplRegistration(d: Record<string, string>) {
     </div>
   `);
 }
-
-function tplPaperSubmission(d: Record<string, string>) {
+function tplPaperSubmission(d) {
   return layout(`
     <div class="header">
             <h1>Paper Submission Received</h1>
@@ -173,8 +154,7 @@ function tplPaperSubmission(d: Record<string, string>) {
     </div>
   `);
 }
-
-function tplSpeakerApplication(d: Record<string, string>) {
+function tplSpeakerApplication(d) {
   return layout(`
     <div class="header">
             <h1>Speaker Application Received</h1>
@@ -190,9 +170,9 @@ function tplSpeakerApplication(d: Record<string, string>) {
         <h3>Application Details</h3>
         <div class="info-row"><span class="info-label">Name</span><span class="info-value">${d.name}</span></div>
         <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
-        ${d.designation  ? `<div class="info-row"><span class="info-label">Designation</span><span class="info-value">${d.designation}</span></div>` : ""}
-        ${d.institution  ? `<div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>` : ""}
-        ${d.talk_type    ? `<div class="info-row"><span class="info-label">Talk Type</span><span class="info-value">${d.talk_type}</span></div>` : ""}
+        ${d.designation ? `<div class="info-row"><span class="info-label">Designation</span><span class="info-value">${d.designation}</span></div>` : ""}
+        ${d.institution ? `<div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>` : ""}
+        ${d.talk_type ? `<div class="info-row"><span class="info-label">Talk Type</span><span class="info-value">${d.talk_type}</span></div>` : ""}
         <div class="info-row"><span class="info-label">Decision Timeline</span><span class="info-value">Within 14 business days</span></div>
       </div>
       <p class="lead">
@@ -205,8 +185,7 @@ function tplSpeakerApplication(d: Record<string, string>) {
     </div>
   `);
 }
-
-function tplCommitteeApplication(d: Record<string, string>) {
+function tplCommitteeApplication(d) {
   return layout(`
     <div class="header">
             <h1>Committee Application Received</h1>
@@ -224,7 +203,7 @@ function tplCommitteeApplication(d: Record<string, string>) {
         <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
         ${d.designation ? `<div class="info-row"><span class="info-label">Designation</span><span class="info-value">${d.designation}</span></div>` : ""}
         ${d.institution ? `<div class="info-row"><span class="info-label">Institution</span><span class="info-value">${d.institution}</span></div>` : ""}
-        ${d.expertise   ? `<div class="info-row"><span class="info-label">Role Preference</span><span class="info-value">${d.expertise}</span></div>` : ""}
+        ${d.expertise ? `<div class="info-row"><span class="info-label">Role Preference</span><span class="info-value">${d.expertise}</span></div>` : ""}
         <div class="info-row"><span class="info-label">Status</span><span class="info-value">Pending Review</span></div>
       </div>
       <p class="lead">
@@ -237,8 +216,7 @@ function tplCommitteeApplication(d: Record<string, string>) {
     </div>
   `);
 }
-
-function tplInterest(d: Record<string, string>) {
+function tplInterest(d) {
   return layout(`
     <div class="header">
             <h1>Interest Received!</h1>
@@ -266,8 +244,7 @@ function tplInterest(d: Record<string, string>) {
     </div>
   `);
 }
-
-function tplAwardNomination(d: Record<string, string>) {
+function tplAwardNomination(d) {
   return layout(`
     <div class="header">
             <h1>Nomination Received</h1>
@@ -296,8 +273,7 @@ function tplAwardNomination(d: Record<string, string>) {
     </div>
   `);
 }
-
-function tplSubscribe(d: Record<string, string>) {
+function tplSubscribe(d) {
   return layout(`
     <div class="header">
             <h1>You're Subscribed!</h1>
@@ -323,14 +299,13 @@ function tplSubscribe(d: Record<string, string>) {
     </div>
   `);
 }
-
-function tplDownload(d: Record<string, string>) {
-  const labels: Record<string, string> = {
-    "cfp-flyer":        "Call for Papers Flyer",
-    "brochure":         "Conference Brochure",
-    "paper-template":   "Paper Submission Template",
+function tplDownload(d) {
+  const labels = {
+    "cfp-flyer": "Call for Papers Flyer",
+    brochure: "Conference Brochure",
+    "paper-template": "Paper Submission Template",
     "sponsorship-deck": "Sponsorship Deck",
-    "sv-badge-cert":    "SV Verification Certificate",
+    "sv-badge-cert": "SV Verification Certificate"
   };
   const resourceName = labels[d.type] || d.type;
   return layout(`
@@ -359,78 +334,64 @@ function tplDownload(d: Record<string, string>) {
     </div>
   `);
 }
-
-// ─── router ───────────────────────────────────────────────────
-const emailMap: Record<string, { subject: string; tpl: (d: Record<string,string>) => string }> = {
+var emailMap = {
   registration: {
     subject: "Registration Confirmed — ICAHCR 2026 (Aug 22–23)",
-    tpl: tplRegistration,
+    tpl: tplRegistration
   },
   paper_submission: {
     subject: "Paper Submission Received — ICAHCR 2026",
-    tpl: tplPaperSubmission,
+    tpl: tplPaperSubmission
   },
   speaker_application: {
     subject: "Speaker Application Received — ICAHCR 2026",
-    tpl: tplSpeakerApplication,
+    tpl: tplSpeakerApplication
   },
   committee_application: {
     subject: "Committee Application Received — ICAHCR 2026",
-    tpl: tplCommitteeApplication,
+    tpl: tplCommitteeApplication
   },
   interest: {
     subject: "Interest Noted — ICAHCR 2026 Updates on the Way",
-    tpl: tplInterest,
+    tpl: tplInterest
   },
   subscribe: {
     subject: "You're Subscribed to ICAHCR 2026 Updates",
-    tpl: tplSubscribe,
+    tpl: tplSubscribe
   },
   download: {
     subject: "Your ICAHCR 2026 Download — Scholar Vault",
-    tpl: tplDownload,
+    tpl: tplDownload
   },
   award_nomination: {
     subject: "Award Nomination Received — ICAHCR 2026",
-    tpl: tplAwardNomination,
-  },
+    tpl: tplAwardNomination
+  }
 };
-
-// ─── handler ──────────────────────────────────────────────────
-export default async function handler(req: Request) {
-  // CORS preflight
+async function handler(req) {
   if (req.method === "OPTIONS") {
     return new Response(null, {
       headers: {
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
+        "Access-Control-Allow-Methods": "POST, OPTIONS"
       },
       status: 204
     });
   }
-
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
   }
-
   try {
-    const body = await req.json() as {
-      type: string;
-      data: Record<string, string>;
-    };
-
+    const body = await req.json();
     const { type, data } = body;
-
     if (!type || !data?.email) {
       return new Response(JSON.stringify({ error: "type and data.email required" }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" },
+        headers: { "Access-Control-Allow-Origin": "*" }
       });
     }
-
-    // Sanitize input data to prevent HTML injection in emails
-    const sanitizedData: Record<string, string> = {};
+    const sanitizedData = {};
     for (const key in data) {
       if (typeof data[key] === "string") {
         sanitizedData[key] = escapeHtml(data[key]);
@@ -438,30 +399,31 @@ export default async function handler(req: Request) {
         sanitizedData[key] = data[key];
       }
     }
-
     const conf = emailMap[type];
     if (!conf) {
       return new Response(JSON.stringify({ error: `Unknown email type: ${type}` }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" },
+        headers: { "Access-Control-Allow-Origin": "*" }
       });
     }
-
     await send(data.email, conf.subject, conf.tpl(sanitizedData));
-
     return new Response(JSON.stringify({ success: true, type, to: data.email }), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+        "Access-Control-Allow-Origin": "*"
+      }
     });
-  } catch (err: unknown) {
+  } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error("Email function error:", message);
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { "Access-Control-Allow-Origin": "*" },
+      headers: { "Access-Control-Allow-Origin": "*" }
     });
   }
 }
+export {
+  handler as default,
+  config
+};
