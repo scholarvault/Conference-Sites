@@ -125,7 +125,12 @@ function initParticles() {
   }
   initParticleSet();
 
+  let isVisible = false;
+  let animationFrameId = null;
+
   function draw() {
+    if (!isVisible) return;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     particles.forEach(p => {
       p.x += p.vx; p.y += p.vy;
@@ -156,9 +161,24 @@ function initParticles() {
         }
       }
     }
-    requestAnimationFrame(draw);
+    animationFrameId = requestAnimationFrame(draw);
   }
-  draw();
+
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      if (!isVisible) {
+        isVisible = true;
+        draw();
+      }
+    } else {
+      isVisible = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    }
+  }, { threshold: 0 });
+  observer.observe(canvas);
 }
 
 /* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
