@@ -35,9 +35,16 @@ function initNavbar() {
 
   if (!navbar) return;
 
-  // Scroll effect
+  // Scroll effect (throttled with rAF for performance)
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    navbar.classList.toggle('scrolled', window.scrollY > 20);
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        navbar.classList.toggle('scrolled', window.scrollY > 20);
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
 
   // Mobile menu
@@ -493,10 +500,18 @@ function initScrollProgress() {
   bar.className = 'scroll-progress';
   document.body.appendChild(bar);
 
+  // Throttle scroll events with rAF to prevent layout thrashing
+  let ticking = false;
   window.addEventListener('scroll', () => {
-    const scrollTop = document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    bar.style.width = (scrollTop / height * 100) + '%';
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const scrollTop = document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        bar.style.width = (scrollTop / height * 100) + '%';
+        ticking = false;
+      });
+      ticking = true;
+    }
   }, { passive: true });
 }
 
