@@ -2305,3 +2305,138 @@ select:focus {
     transform: none !important;
   }
 }
+
+/* ScholarVault Gold Card */
+.sv-gold-card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #071411, #0c1d19, #07100e);
+  border: 1.5px solid rgba(255, 193, 7, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  margin-bottom: 2.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.sv-gold-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,193,7,0.06), transparent 70%);
+  pointer-events: none;
+}
+.sv-gold-card:hover {
+  border-color: rgba(255,193,7,0.6);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(255,193,7,0.12);
+}
+.sv-gold-card.activated {
+  border-color: #ffc107;
+  background: linear-gradient(135deg, #091a16, #0e241f, #091814);
+  box-shadow: 0 0 32px rgba(255,193,7,0.15), inset 0 0 20px rgba(255,193,7,0.04);
+}
+.sv-gold-hex {
+  font-size: 2.5rem;
+  display: inline-block;
+  animation: goldPulse 2.5s ease-in-out infinite;
+}
+@keyframes goldPulse {
+  0%, 100% { filter: drop-shadow(0 0 4px rgba(255,193,7,0.4)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 12px rgba(255,193,7,0.8)); transform: scale(1.06); }
+}
+.sv-gold-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 1rem;
+}
+.sv-gold-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  background: linear-gradient(135deg, #ffc107, #ffe082, #ff8f00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sv-gold-subtitle {
+  font-size: 13px;
+  color: rgba(255,193,7,0.6);
+  font-weight: 600;
+  margin-top: 2px;
+}
+.sv-gold-perks {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 10px;
+  margin: 1.25rem 0;
+}
+.sv-gold-perk {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: rgba(255,220,100,0.85);
+}
+.sv-gold-perk::before {
+  content: '✦';
+  color: #ffc107;
+  font-size: 10px;
+  flex-shrink: 0;
+}
+.sv-gold-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 1.25rem;
+  background: rgba(255,193,7,0.04);
+  padding: 6px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,193,7,0.1);
+}
+.sv-gold-toggle input[type="text"] {
+  flex: 1;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  background: rgba(255,193,7,0.06);
+  border: 1.5px solid rgba(255,193,7,0.2);
+  color: var(--white);
+  font-size: 14px;
+  transition: var(--transition);
+}
+.sv-gold-toggle input:focus {
+  border-color: #ffc107;
+  background: rgba(255,193,7,0.1);
+  outline: none;
+}
+.sv-gold-toggle button {
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+  background: linear-gradient(135deg, #ff8f00, #ffc107);
+  color: #071411;
+  border: none;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 13px;
+  transition: var(--transition);
+}
+.sv-gold-toggle button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(255,193,7,0.3);
+}
+.sv-gold-toggle button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.sv-gold-not-member {
+  font-size: 12px;
+  color: rgba(255,193,7,0.4);
+  margin-top: 1rem;
+  text-align: center;
+}
+.sv-gold-not-member a {
+  color: #ffc107;
+  text-decoration: underline;
+  font-weight: 600;
+}
