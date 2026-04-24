@@ -8,6 +8,14 @@ const FROM_EMAIL     = "conferences@scholarvault.in";
 const REPLY_TO       = "conferences@scholarvault.in";
 
 // ─── helpers ────────────────────────────────────────────────
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 async function send(to: string, subject: string, html: string) {
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -420,6 +428,16 @@ export default async function handler(req: Request) {
       });
     }
 
+    // Sanitize input data to prevent HTML injection in emails
+    const sanitizedData: Record<string, string> = {};
+    for (const key in data) {
+      if (typeof data[key] === "string") {
+        sanitizedData[key] = escapeHtml(data[key]);
+      } else {
+        sanitizedData[key] = data[key];
+      }
+    }
+
     const conf = emailMap[type];
     if (!conf) {
       return new Response(JSON.stringify({ error: `Unknown email type: ${type}` }), {
@@ -428,7 +446,7 @@ export default async function handler(req: Request) {
       });
     }
 
-    await send(data.email, conf.subject, conf.tpl(data));
+    await send(data.email, conf.subject, conf.tpl(sanitizedData));
 
     return new Response(JSON.stringify({ success: true, type, to: data.email }), {
       status: 200,

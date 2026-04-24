@@ -3,6 +3,15 @@ export const config = { runtime: 'edge' };
 declare const process: any;
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
+
+function escapeHtml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
 const FROM_NAME      = "ICAES 2026";
 const FROM_EMAIL     = "conferences@scholarvault.in";
 const REPLY_TO       = "conferences@scholarvault.in";
@@ -195,9 +204,19 @@ export default async function handler(req: Request) {
     const body = await req.json() as { type: string; data: Record<string,string> };
     const { type, data } = body;
     if (!type || !data?.email) return new Response(JSON.stringify({ error: 'type and data.email required' }), { status: 400, headers: { 'Access-Control-Allow-Origin': '*' } });
+    // Sanitize input data to prevent HTML injection in emails
+    const sanitizedData: Record<string, string> = {};
+    for (const key in data) {
+      if (typeof data[key] === "string") {
+        sanitizedData[key] = escapeHtml(data[key]);
+      } else {
+        sanitizedData[key] = data[key];
+      }
+    }
+
     const conf = emailMap[type];
     if (!conf) return new Response(JSON.stringify({ error: `Unknown type: ${type}` }), { status: 400, headers: { 'Access-Control-Allow-Origin': '*' } });
-    await send(data.email, conf.subject, conf.tpl(data));
+    await send(data.email, conf.subject, conf.tpl(sanitizedData));
     return new Response(JSON.stringify({ success: true, type, to: data.email }), { status: 200, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
