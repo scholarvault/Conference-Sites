@@ -231,11 +231,11 @@
           <!-- 4 TIERS -->
           <div class="tier-grid" id="tierGrid">
 
-            <div class="tier-card" data-tier="student" data-inr="3499" data-usd="159" data-eb-inr="2499" data-eb-usd="129" onclick="selectTier(this)">
+            <div class="tier-card" data-tier="student" data-inr="3499" data-usd="159" data-eb-inr="2496" data-eb-usd="129" onclick="selectTier(this)">
               <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Student / Scholar</div>
               <div class="price-inr">
                 <div class="tier-price">₹3,499</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹2,499</div>
+                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹2,496</div>
               </div>
               <div class="price-usd" style="display:none;">
                 <div class="tier-price">$159</div>
@@ -836,25 +836,31 @@ async function initiatePayment() {
 
     // Redirect to Dodo checkout — separate product IDs per tier per currency
     const DODO_PRODUCTS_INR = {
-      student:   'pdt_0Nd5kUGj8inKqSbyRdiVK',   // Student / Scholar — ₹2,499 (EB)
-      faculty:   'pdt_0Nd5kYgKTGfwBr2VCG9Y9',   // Faculty / Researcher — ₹4,999 (EB)
-      listener:  'pdt_0Nd5khVR6xzYWKMn2CiPn',   // Listener — ₹1,999 (EB)
-      coauthor:  'pdt_0Nd5kme4fOVnzmFhWGdfD',   // Co-Author — ₹2,499 (EB)
-      industry:  'pdt_0Nd5kme4fOVnzmFhWGdfD',   // Industry — ₹9,999 (Placeholder)
+      student:   'pdt_0Nd5kUGj8inKqSbyRdiVK',   // Student / Scholar
+      faculty:   'pdt_0Nd5kYgKTGfwBr2VCG9Y9',   // Faculty / Researcher
+      listener:  'pdt_0Nd5khVR6xzYWKMn2CiPn',   // Listener
+      coauthor:  'pdt_0Nd5kme4fOVnzmFhWGdfD',   // Co-Author
+      industry:  'pdt_0NdOa8jMzPhic3qfAjnhK',   // Professional Delegate (Industry)
     };
     const DODO_PRODUCTS_USD = {
-      student:   'pdt_0Nd5mroA8YckMQG8DFVpq',   // Student / Scholar — $129 (EB)
-      faculty:   'pdt_0Nd5mvbsjDzSK9eeKrn95',   // Faculty / Researcher — $199 (EB)
-      listener:  'pdt_0Nd5oPQ5Pg5BpH35V79ry',   // Listener — $99 (EB)
-      coauthor:  'pdt_0Nd5oUQJh9bYUQYMFtlaL',   // Co-Author — $79 (EB)
-      industry:  'pdt_0Nd5oUQJh9bYUQYMFtlaL',   // Industry — $399 (Placeholder)
+      student:   'pdt_0Nd5mroA8YckMQG8DFVpq',   // Student / Scholar
+      faculty:   'pdt_0Nd5mvbsjDzSK9eeKrn95',   // Faculty / Researcher
+      listener:  'pdt_0Nd5oPQ5Pg5BpH35V79ry',   // Listener
+      coauthor:  'pdt_0Nd5oUQJh9bYUQYMFtlaL',   // Co-Author
+      industry:  'pdt_0NdOaDcqj1rebfVwnjkEE',   // Professional Delegate (Industry)
     };
-    const DODO_PRODUCT = (isINR ? DODO_PRODUCTS_INR : DODO_PRODUCTS_USD)[selectedTier.id];
-    if (!DODO_PRODUCT) { throw new Error('Unknown tier: ' + selectedTier.id); }
+    const product = (isINR ? DODO_PRODUCTS_INR : DODO_PRODUCTS_USD)[selectedTier.id];
+    if (!product) { throw new Error('Unknown tier: ' + selectedTier.id); }
     const returnUrl = encodeURIComponent('https://aihealth.scholarvault.in/register?payment=success');
-    const email = encodeURIComponent(formData.email);
-    window.location.href = `https://checkout.dodopayments.com/buy/${DODO_PRODUCT}?customer_email=${email}&return_url=${returnUrl}`;
+    
+    let checkoutUrl = `https://checkout.dodopayments.com/buy/${product}?customer_email=${encodeURIComponent(formData.email)}&return_url=${returnUrl}`;
+    
+    // Auto-apply GOLD15 discount if member is verified
+    if (svGoldApplied) {
+      checkoutUrl += `&discount_code=GOLD15`;
+    }
 
+    location.href = checkoutUrl;
   } catch(e) {
     btn.disabled = false;
     btn.textContent = 'Pay Securely & Register';
