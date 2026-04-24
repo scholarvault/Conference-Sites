@@ -4,21 +4,85 @@
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Register - International Conference on Interdisciplinary AI and Sustainable Global Systems (ISIAI-SGS 2026)</title>
-    <meta name="description" content="Register for ISIAI-SGS 2026. Join world-class researchers for a global summit on Interdisciplinary AI and Sustainability." />
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <link rel="apple-touch-icon" href="assets/favicon.png" />
-    <meta property="og:title" content="Register for ISIAI-SGS 2026" />
-    <meta property="og:description" content="Secure your spot at the 2026 global summit on AI and Sustainable Systems." />
-    <meta property="og:image" content="https://isiaisgs2026.scholarvault.in/assets/og-image.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://isiaisgs2026.scholarvault.in/assets/og-image.png" />
-    <meta name="ai-optimized" content="true" />
+    <title>Register - ISIAI-SGS 2026</title>
+    <meta name="description" content="Register for ISIAI-SGS 2026 with virtual delegate tiers for students, faculty, listeners, and co-authors." />
+    <meta name="theme-color" content="#081210" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27><rect width=%27100%27 height=%27100%27 rx=%2716%27 fill=%27%2300a86b%27/><text y=%2762%27 x=%2750%27 text-anchor=%27middle%27 font-family=%27system-ui,sans-serif%27 font-size=%2730%27 font-weight=%27900%27 fill=%27white%27>ISG</text></svg>" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
-  
+    <link rel="canonical" href="https://isiaisgs2026.scholarvault.in/register" />
+    <meta property="og:title" content="Register - ISIAI-SGS 2026" />
+    <meta property="og:description" content="Register for ISIAI-SGS 2026 with virtual delegate tiers for students, faculty, listeners, and co-authors." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://isiaisgs2026.scholarvault.in/register" />
+    <meta property="og:image" content="https://isiaisgs2026.scholarvault.in/assets/og-image.svg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Register - ISIAI-SGS 2026" />
+    <meta name="twitter:description" content="Register for ISIAI-SGS 2026 with virtual delegate tiers for students, faculty, listeners, and co-authors." />
+    <meta name="twitter:image" content="https://isiaisgs2026.scholarvault.in/assets/og-image.svg" />
+    <style>
+    /* SV Gold Addon Card Styles */
+    .sv-gold-card {
+      position: relative; overflow: hidden;
+      background: linear-gradient(135deg, #1a1000, #2a1a00, #1a0a00);
+      border: 1.5px solid rgba(255, 193, 7, 0.4);
+      border-radius: var(--radius-lg); padding: 1.5rem;
+      margin-bottom: 2rem; cursor: pointer;
+      transition: var(--transition);
+      color: white; text-align: left;
+    }
+    .sv-gold-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,193,7,0.08), transparent 70%);
+      pointer-events: none;
+    }
+    .sv-gold-card:hover { border-color: rgba(255,193,7,0.7); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,193,7,0.15); }
+    .sv-gold-card.activated {
+      border-color: #ffc107;
+      background: linear-gradient(135deg, #201200, #2e1800, #201000);
+      box-shadow: 0 0 32px rgba(255,193,7,0.2), inset 0 0 20px rgba(255,193,7,0.05);
+    }
+    .sv-gold-hex {
+      font-size: 2.5rem; display: inline-block;
+      animation: goldPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes goldPulse {
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(255,193,7,0.6)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 14px rgba(255,193,7,1)); transform: scale(1.08); }
+    }
+    .sv-gold-badge-row {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 0.75rem;
+    }
+    .sv-gold-title {
+      font-size: 1.1rem; font-weight: 900; font-family: var(--font-display);
+      background: linear-gradient(135deg, #ffc107, #ffe082, #ff8f00);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .sv-gold-subtitle { font-size: 12px; color: rgba(255,193,7,0.7); font-weight:600; margin-top:2px; }
+    .sv-gold-perks { display: flex; flex-direction: column; gap: 7px; margin: 1rem 0; }
+    .sv-gold-perk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,220,100,0.9); }
+    .sv-gold-perk::before { content: '✦'; color: #ffc107; font-size: 10px; flex-shrink: 0; }
+    .sv-gold-toggle { display: flex; align-items: center; gap: 10px; margin-top: 1rem; }
+    .sv-gold-toggle input[type="text"] {
+      flex: 1; padding: 10px 14px; border-radius: var(--radius-sm);
+      background: rgba(255,193,7,0.08); border: 1.5px solid rgba(255,193,7,0.3);
+      color: var(--white); font-size: 14px;
+    }
+    .sv-gold-toggle input:focus { border-color: #ffc107; box-shadow: 0 0 0 3px rgba(255,193,7,0.12); outline:none; }
+    .sv-gold-toggle button {
+      padding: 10px 16px; border-radius: var(--radius-sm); white-space: nowrap;
+      background: linear-gradient(135deg, #ff8f00, #ffc107); color: #071411;
+      border: none; cursor: pointer; font-weight: 700; font-size: 13px;
+      transition: var(--transition);
+    }
+    .sv-gold-toggle button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,193,7,0.4); }
+    .sv-gold-not-member {
+      font-size: 12px; color: rgba(255,193,7,0.5); margin-top: 0.75rem; text-align: center;
+    }
+    .sv-gold-not-member a { color: #ffc107; text-decoration: underline; }
+    </style>
 
 </head>
 <body>
@@ -51,26 +115,6 @@
       <div class="page-hero__lightcone"></div>
       <div class="page-hero__inner reveal">
 <div class="breadcrumbs"><span>ISIAI-SGS 2026</span><span>/</span><span>Register</span></div>
-    <span style="font-size: 0.7rem; color: var(--white-40); font-weight: 600; letter-spacing: 0.02em; margin-top: 2px;">AI for Environmental Sustainability</span></div>
-</a>
-<nav class="navbar__links"><a href="index.html" class="navbar__link">Home</a><a href="about.html" class="navbar__link">About</a><a href="call-for-papers.html" class="navbar__link">Call for Papers</a><a href="speakers.html" class="navbar__link">Speakers</a><a href="committee.html" class="navbar__link">Committee</a><a href="awards.html" class="navbar__link">Awards</a><a href="blog.html" class="navbar__link">Blog</a><a href="media.html" class="navbar__link">Media</a></nav>
-<div class="navbar__cta">
-  <a class="btn-outline" href="interest-form.html">Express Interest</a>
-  <a class="btn-primary" href="register.html">Register Now</a>
-</div>
-<button class="navbar__hamburger" id="hamburger" aria-label="Open menu">
-  <span></span><span></span><span></span>
-</button>
-      </div>
-    </header>
-    <nav class="navbar__mobile" id="mobileMenu"><a href="index.html" class="">Home</a><a href="about.html" class="">About</a><a href="call-for-papers.html" class="">Call for Papers</a><a href="speakers.html" class="">Speakers</a><a href="committee.html" class="">Committee</a><a href="awards.html" class="">Awards</a><a href="blog.html" class="">Blog</a><a href="media.html" class="">Media</a><a href="interest-form.html">Express Interest</a><a href="register.html">Register</a></nav>
-  
-
-      
-    <section class="page-hero">
-      <div class="page-hero__lightcone"></div>
-      <div class="page-hero__inner reveal">
-<div class="breadcrumbs"><span>ISIAI-SGS 2026</span><span>/</span><span>Register</span></div>
 <div class="eyebrow">Register</div>
 <h1 class="page-hero__title">Register for <span>ISIAI-SGS 2026</span></h1>
 <p class="page-hero__desc">Choose a delegate category, complete your information, and proceed to secure checkout for the virtual conference.</p>
@@ -78,6 +122,7 @@
     </section>
   
       <section class="section section--mist"><div class="site-shell"><div class="section__top reveal"><div class="eyebrow eyebrow--light">Delegate categories</div><h2 class="section-title">Flexible virtual <span>registration tiers</span></h2></div><div class="pricing-toggle reveal"><button type="button" class="currency-btn active" data-currency="INR">INR</button><button type="button" class="currency-btn" data-currency="USD">USD</button></div><div class="price-grid stagger"><article class="price-card"><div class="card-tag">Student / PhD</div><h3>Student Delegate</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹3,499</small>₹2,496</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$159</small>$129</span></strong><p>For students and doctoral scholars presenting or attending.</p></article><article class="price-card price-card--featured"><div class="card-tag">Faculty / Postdoc</div><h3>Research Delegate</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹6,499</small>₹4,999</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$249</small>$199</span></strong><p>For faculty, postdocs, labs, and research professionals.</p></article><article class="price-card"><div class="card-tag">Listener</div><h3>Attendee Pass</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹2,499</small>₹1,999</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$149</small>$99</span></strong><p>For participants joining sessions without a paper or formal speaking role.</p></article><article class="price-card"><div class="card-tag">Co-author</div><h3>Additional Presenter</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹2,999</small>₹2,499</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$99</small>$79</span></strong><p>For additional named authors or presenters within accepted work.</p></article><article class="price-card" style="grid-column:1/-1;border:1.5px solid rgba(255,193,7,0.5);background:linear-gradient(135deg,rgba(26,16,0,0.85),rgba(42,26,0,0.85));"><div class="card-tag" style="background:linear-gradient(135deg,#ff8f00,#ffc107);color:#000;font-weight:800;">Professional Delegate</div><h3 style="color:#ffc107;">Industry Professional</h3><strong><span class="price-inr" style="color:#ffc107;"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹14,999</small>₹9,999</span><span class="price-usd" style="color:#ffc107;"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$499</small>$399</span></strong><p>Designed for corporate leaders and industry specialists. Includes priority networking, executive certificate, and exclusive post-conference resources.</p></article></div></div></section>
+  
       <section class="section section--light"><div class="site-shell"><div class="form-shell reveal">
           <!-- ScholarVault GOLD ADDON -->
           <div class="sv-gold-card" id="svGoldCard">
@@ -103,7 +148,7 @@
               <input type="text" id="svGoldInput" placeholder="Enter your SV Gold Member ID" />
               <button type="button" onclick="applySVGold()">Verify & Apply</button>
             </div>
-            <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
+            <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;color:rgba(255,255,255,0.4);">Enter your SV Member ID</div>
             <div class="sv-gold-not-member">
               Not a Gold member?
               <a href="https://scholarvault.in/gold" target="_blank">Join ScholarVault Gold →</a>
@@ -353,5 +398,3 @@
   </script>
 </body>
 </html>
-
-
