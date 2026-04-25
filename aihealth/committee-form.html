@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -141,51 +141,34 @@
 <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-const committeeForm = document.getElementById('committeeForm');
-if (committeeForm) {
-  committeeForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    try {
-      window.SVSite.setFormLoading(committeeForm, true, 'Submitting...');
-      const fd = new FormData(committeeForm);
-      const data = Object.fromEntries(fd.entries());
-      
-      await window.SVSite.insertRecord('conf_committee', {
-        name: data.name,
-        email: data.email,
-        phone: data.phone,
-        designation: data.designation,
-        institution: data.institution,
-        expertise: data.expertise + (data.role_preference ? ' — ' + data.role_preference : ''),
-        years_exp: parseInt(data.years_exp) || null,
-        country: data.country,
-        status: 'pending'
-      });
-
-      committeeForm.style.display = 'none';
-      const successBlock = document.getElementById('committeeSuccess');
-      if (successBlock) {
-        successBlock.classList.add('show');
-        window.SVSite.showFormSuccess(successBlock);
-      }
-
-      window.SVSite.trackEvent('committee_applied');
-      
-      await window.SVSite.sendEmail('committee_application', {
-        name: data.name,
-        email: data.email,
-        designation: data.designation,
-        institution: data.institution,
-        expertise: data.role_preference
-      });
-    } catch (err) {
-      window.SVSite.showToast('Submission failed. Please try again.', 'error');
-      console.error(err);
-    } finally {
-      window.SVSite.setFormLoading(committeeForm, false);
-    }
-  });
-}
+document.getElementById('committeeForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('committeeSubmitBtn');
+  btn.disabled = true; btn.textContent = '⏳ Submitting...';
+  const fd = new FormData(e.target);
+  const data = Object.fromEntries(fd.entries());
+  try {
+    await insertRecord('conf_committee', {
+      name: data.name, email: data.email, phone: data.phone,
+      designation: data.designation, institution: data.institution,
+      expertise: data.expertise + (data.role_preference ? ' — ' + data.role_preference : ''),
+      years_exp: parseInt(data.years_exp) || null,
+      country: data.country, status: 'pending'
+    });
+    e.target.style.display = 'none';
+    document.getElementById('committeeSuccess').classList.add('show');
+    trackEvent('committee_applied');
+    // Send confirmation email
+    sendEmail('committee_application', {
+      name: data.name, email: data.email,
+      designation: data.designation, institution: data.institution,
+      expertise: data.role_preference
+    });
+  } catch(err) {
+    showToast('Submission failed. Please try again.', 'error');
+    btn.disabled = false; btn.textContent = 'Submit Application →';
+  }
+});
 </script>
 </body>
 </html>

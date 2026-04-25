@@ -57,7 +57,7 @@
       </div>
     </section>
   
-      <section class="section section--mist"><div class="site-shell"><div class="form-shell reveal" id="paperWrap"><form id="paperForm" class="form-grid form-grid--single"><div class="field"><label>Author name</label><input name="name" required /></div><div class="field"><label>Email</label><input name="email" type="email" required /></div><div class="field"><label>Institution</label><input name="institution" required /></div><div class="field"><label>Country</label><input name="country" /></div><div class="field"><label>Paper title</label><input name="paper_title" required /></div><div class="field"><label>Track</label><select name="track" required><option value="">Select track</option><option>Climate AI & Modelling</option><option>Precision Agriculture</option><option>Smart Energy Grids</option><option>Biodiversity Monitoring</option><option>Pollution Control & Sensing</option><option>Ocean & Water Systems</option><option>Carbon Accounting & LCA</option><option>Green Computing & AI Ethics</option></select></div><div class="field"><label>Keywords</label><input name="keywords" required placeholder="Climate AI, biodiversity, forecasting..." /></div><div class="field"><label>Abstract</label><textarea name="abstract" required></textarea></div><div class="field"><label>Paper file</label><input id="paperFile" type="file" accept=".pdf,.doc,.docx" required /></div><button class="btn-primary form-submit" type="submit">Upload and submit</button></form><div class="form-success"><div class="form-success__title">Paper submitted</div><p class="form-success__text">Your paper has entered the ISIAI-SGS 2026 review queue. A confirmation email is on the way.</p></div></div></div></section>
+      <section class="section section--mist"><div class="site-shell"><div class="form-shell reveal" id="paperWrap"><form id="paperForm" class="form-grid form-grid--single"><div class="field"><label>Author name</label><input name="name" required /></div><div class="field"><label>Email</label><input name="email" type="email" required /></div><div class="field"><label>Institution</label><input name="institution" required /></div><div class="field"><label>Country</label><input name="country" /></div><div class="field"><label>Paper title</label><input name="title" required /></div><div class="field"><label>Track</label><select name="track" required><option value="">Select track</option><option>Climate AI & Modelling</option><option>Precision Agriculture</option><option>Smart Energy Grids</option><option>Biodiversity Monitoring</option><option>Pollution Control & Sensing</option><option>Ocean & Water Systems</option><option>Carbon Accounting & LCA</option><option>Green Computing & AI Ethics</option></select></div><div class="field"><label>Keywords</label><input name="keywords" required placeholder="Climate AI, biodiversity, forecasting..." /></div><div class="field"><label>Abstract</label><textarea name="abstract" required></textarea></div><div class="field"><label>Paper file</label><input id="paperFile" type="file" accept=".pdf,.doc,.docx" required /></div><button class="btn-primary form-submit" type="submit">Upload and submit</button></form><div class="form-success"><div class="form-success__title">Paper submitted</div><p class="form-success__text">Your paper has entered the ISIAI-SGS 2026 review queue. A confirmation email is on the way.</p></div></div></div></section>
     
 
         <footer class="footer">
@@ -172,19 +172,21 @@
           const file = document.getElementById("paperFile").files[0];
           try {
             window.SVSite.setFormLoading(paperWrap, true, "Uploading paper...");
-            let fileUrl = "";
+            let paperUrl = "";
             if (file) {
-              fileUrl = await window.SVSite.uploadFile("conf-papers", file, window.SVSite.config.confId);
+              paperUrl = await window.SVSite.uploadFile("conf-papers", file, window.SVSite.config.confId);
             }
             await window.SVSite.insertRecord("conf_paper_submissions", {
               name: data.name, email: data.email, institution: data.institution, country: data.country,
-              paper_title: data.paper_title, track: data.track, keywords: data.keywords, abstract: data.abstract,
-              file_url: fileUrl, status: "submitted"
-            });
-            await window.SVSite.sendEmail("paper_submission", {
-              name: data.name, email: data.email, institution: data.institution, title: data.paper_title, track: data.track
+              paper_title: data.title, track: data.track, keywords: data.keywords, abstract: data.abstract,
+              file_url: paperUrl, status: "pending"
             });
             window.SVSite.showFormSuccess(paperWrap);
+            window.SVSite.showToast("Paper submitted! Check your email for confirmation.", "success");
+            // Non-blocking email — does not affect form success
+            window.SVSite.sendEmail("paper_submission", {
+              name: data.name, email: data.email, institution: data.institution, title: data.title, track: data.track
+            });
           } catch (error) {
             window.SVSite.showToast("Paper submission failed. Please try again.", "error");
           } finally {

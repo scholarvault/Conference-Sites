@@ -371,7 +371,6 @@ export default async function handler(req: Request) {
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
-    console.error("API handler error:", message);
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
       headers: { "Access-Control-Allow-Origin": "*" },

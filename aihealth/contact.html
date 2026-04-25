@@ -297,49 +297,36 @@
 <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-const contactForm = document.getElementById('contactForm');
-const contactWrap = document.getElementById('contactFormWrap');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    try {
-      window.SVSite.setFormLoading(contactForm, true, 'Sending...');
-      const fd = new FormData(contactForm);
-      const data = Object.fromEntries(fd.entries());
-      
-      const isSubscribed = data.subscribe === 'yes' || data.subscribe === 'on';
-      
-      await window.SVSite.insertRecord('conf_contact', {
-        name: data.name,
-        email: data.email,
-        phone: data.phone || null,
-        institution: data.institution || null,
-        query_type: data.query_type,
-        message: data.message,
-        subscribed: isSubscribed
-      });
-
-      if (isSubscribed) {
-        await window.SVSite.handleSubscribe(data.email, data.name);
-      }
-
-      const successEmail = document.getElementById('contactSuccessEmail');
-      if (successEmail) successEmail.textContent = data.email;
-      
-      window.SVSite.showFormSuccess(contactWrap);
-      window.SVSite.trackEvent('contact_form_submitted', { query_type: data.query_type });
-      
-      await window.SVSite.sendEmail('contact', data);
-
-    } catch (err) {
-      window.SVSite.showToast('Failed to send message. Please try again.', 'error');
-      console.error(err);
-    } finally {
-      window.SVSite.setFormLoading(contactForm, false);
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('contactSubmitBtn');
+  btn.disabled = true; btn.textContent = 'Sending...';
+  const fd = new FormData(e.target);
+  const data = Object.fromEntries(fd.entries());
+  try {
+    await insertRecord('conf_contact', {
+      name: data.name,
+      email: data.email,
+      phone: data.phone || '',
+      institution: data.institution || '',
+      query_type: data.query_type,
+      message: data.message,
+      subscribed: data.subscribe === 'yes'
+    });
+    if (data.subscribe === 'yes') {
+      await handleSubscribe(data.email, data.name, null);
     }
-  });
-}
+    // Send auto-reply
+    sendEmail('contact', { name: data.name, email: data.email, query_type: data.query_type });
+    e.target.style.display = 'none';
+    document.getElementById('contactSuccessEmail').textContent = data.email;
+    document.getElementById('contactSuccess').classList.add('show');
+    trackEvent('contact_submitted', { query_type: data.query_type });
+  } catch (err) {
+    showToast('Submission failed. Please try again or email us directly.', 'error');
+    btn.disabled = false; btn.textContent = 'Send Message →';
+  }
+});
 </script>
 </body>
 </html>
