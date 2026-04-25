@@ -1,7 +1,7 @@
-﻿const EMAIL_FN = "/api/send-email";
+const EMAIL_FN = "/api/send-email";
 const SV_CONFIG = {
   supabaseUrl: "https://ldoirjupetkmldibhygk.supabase.co",
-  supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkb2lyanVwZXRrbWxkaWJoeWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDA0OTk2OTQsImV4cCI6MjA1NjA3NTY5NH0.YQDHBfHXRcI6wt5PlyRMMRuZFyUzYjRqMGS0DWYXtzQ",
+  supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkb2lyanVwZXRrbWxkaWJoeWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMzMyOTQsImV4cCI6MjA4NzYwOTI5NH0.i_ocMG3EVLDOycUHfe3Met2Bbg0UdqXzUBqrDY_LKd4",
   confId: "icaes2026",
   confName: "ISIAI-SGS 2026",
   confFullName: "International Conference on Interdisciplinary AI and Sustainable Global Systems",
