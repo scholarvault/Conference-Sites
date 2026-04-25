@@ -299,8 +299,9 @@
 <script>
 document.getElementById('contactForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('contactSubmitBtn');
-  btn.disabled = true; btn.textContent = 'Sending...';
+  // VANGUARD: Standardized form loading/success states using js/main.js helpers
+  const formWrap = document.getElementById('contactForm').parentElement;
+  setFormLoading(formWrap, true);
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
@@ -318,13 +319,13 @@ document.getElementById('contactForm').addEventListener('submit', async (e) => {
     }
     // Send auto-reply
     sendEmail('contact', { name: data.name, email: data.email, query_type: data.query_type });
-    e.target.style.display = 'none';
     document.getElementById('contactSuccessEmail').textContent = data.email;
-    document.getElementById('contactSuccess').classList.add('show');
+    showFormSuccess(formWrap);
     trackEvent('contact_submitted', { query_type: data.query_type });
   } catch (err) {
     showToast('Submission failed. Please try again or email us directly.', 'error');
-    btn.disabled = false; btn.textContent = 'Send Message →';
+  } finally {
+    setFormLoading(formWrap, false);
   }
 });
 </script>
