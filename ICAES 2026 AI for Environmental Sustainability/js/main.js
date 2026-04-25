@@ -191,6 +191,7 @@ function initHeroParticles() {
 
   let particles = [];
   let raf = 0;
+  let isVisible = false;
 
   function resize() {
     canvas.width = canvas.offsetWidth * window.devicePixelRatio;
@@ -208,6 +209,7 @@ function initHeroParticles() {
   }
 
   function draw() {
+    if (!isVisible) return;
     context.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
     particles.forEach((particle) => {
       particle.x += particle.vx;
@@ -242,8 +244,24 @@ function initHeroParticles() {
     raf = window.requestAnimationFrame(draw);
   }
 
+  // BOLT: Use IntersectionObserver to pause off-screen animations and save battery/CPU
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      if (!isVisible) {
+        isVisible = true;
+        draw();
+      }
+    } else {
+      isVisible = false;
+      if (raf) {
+        window.cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    }
+  }, { threshold: 0 });
+  observer.observe(canvas);
+
   resize();
-  draw();
   window.addEventListener("resize", resize, { passive: true });
   window.addEventListener("pagehide", () => window.cancelAnimationFrame(raf), { once: true });
 }
