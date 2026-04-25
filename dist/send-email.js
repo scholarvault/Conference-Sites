@@ -334,6 +334,31 @@ function tplDownload(d) {
     </div>
   `);
 }
+function tplContact(d) {
+  return layout(`
+    <div class="header">
+      <h1>Message Received</h1>
+      <p>ICAHCR 2026 · Organising Desk</p>
+    </div>
+    <div class="body">
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
+      <p class="lead">
+        Thanks for reaching out. We have received your query and a member of the ICAHCR 2026 support team will reply within 24 hours.
+      </p>
+      <div class="info-box">
+        <h3>Query Details</h3>
+        <div class="info-row"><span class="info-label">Name</span><span class="info-value">${d.name}</span></div>
+        <div class="info-row"><span class="info-label">Email</span><span class="info-value">${d.email}</span></div>
+        <div class="info-row"><span class="info-label">Topic</span><span class="info-value">${d.query_type}</span></div>
+      </div>
+      <a class="cta" href="https://aihealth.scholarvault.in/">Back to Conference Website →</a>
+      <hr class="divider"/>
+      <p class="note">
+        If your question is deadline-sensitive, please reply to this email with URGENT in the subject line.
+      </p>
+    </div>
+  `);
+}
 var emailMap = {
   registration: {
     subject: "Registration Confirmed — ICAHCR 2026 (Aug 22–23)",
@@ -366,6 +391,10 @@ var emailMap = {
   award_nomination: {
     subject: "Award Nomination Received — ICAHCR 2026",
     tpl: tplAwardNomination
+  },
+  contact: {
+    subject: "Contact Request Received — ICAHCR 2026",
+    tpl: tplContact
   }
 };
 async function handler(req) {
