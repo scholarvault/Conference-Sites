@@ -166,36 +166,55 @@
 
 <script src="js/main.js"></script>
 
-    <script>
-      const speakerWrap = document.getElementById("speakerWrap");
-      const speakerForm = document.getElementById("speakerForm");
-      if (speakerForm) {
-        speakerForm.addEventListener("submit", async (event) => {
-          event.preventDefault();
-          const data = Object.fromEntries(new FormData(speakerForm).entries());
-          const photo = document.getElementById("speakerPhoto").files[0];
-          try {
-            window.SVSite.setFormLoading(speakerWrap, true, "Sending application...");
-            let photoUrl = "";
-            if (photo) {
-              photoUrl = await window.SVSite.uploadFile("conf-speakers", photo, window.SVSite.config.confId);
-            }
-            await window.SVSite.insertRecord("conf_speakers", {
-              name: data.name, email: data.email, institution: data.institution, designation: data.designation,
-              topic: data.topic, talk_type: data.talk_type, speaker_bio: data.speaker_bio, photo_url: photoUrl, status: "pending"
-            });
-            await window.SVSite.sendEmail("speaker_application", {
-              name: data.name, email: data.email, institution: data.institution, designation: data.designation, topic: data.topic, talk_type: data.talk_type
-            });
-            window.SVSite.showFormSuccess(speakerWrap);
-          } catch (error) {
-            window.SVSite.showToast("Speaker application failed. Please try again.", "error");
-          } finally {
-            window.SVSite.setFormLoading(speakerWrap, false);
-          }
+<script>
+  const speakerWrap = document.getElementById("speakerWrap");
+  const speakerForm = document.getElementById("speakerForm");
+  if (speakerForm) {
+    speakerForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      try {
+        window.SVSite.setFormLoading(speakerForm, true, "Sending application...");
+        const fd = new FormData(speakerForm);
+        const data = Object.fromEntries(fd.entries());
+        const photo = document.getElementById("speakerPhoto").files[0];
+        
+        let photoUrl = "";
+        if (photo) {
+          photoUrl = await window.SVSite.uploadFile("conf-photos", photo, "speakers");
+        }
+        
+        await window.SVSite.insertRecord("conf_speakers", {
+          name: data.name, 
+          email: data.email, 
+          institution: data.institution, 
+          designation: data.designation,
+          topic: data.topic, 
+          talk_type: data.talk_type, 
+          speaker_bio: data.speaker_bio, 
+          photo_url: photoUrl, 
+          status: "pending"
         });
+
+        window.SVSite.showFormSuccess(speakerWrap);
+        window.SVSite.trackEvent('speaker_applied', { has_photo: !!photoUrl });
+        
+        await window.SVSite.sendEmail("speaker_application", {
+          name: data.name, 
+          email: data.email, 
+          institution: data.institution, 
+          designation: data.designation, 
+          topic: data.topic, 
+          talk_type: data.talk_type
+        });
+      } catch (error) {
+        window.SVSite.showToast("Speaker application failed. Please try again.", "error");
+        console.error(error);
+      } finally {
+        window.SVSite.setFormLoading(speakerForm, false);
       }
-    </script>
+    });
+  }
+</script>
   
 
   <!-- Crisp Chat -->
