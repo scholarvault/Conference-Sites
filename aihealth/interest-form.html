@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -156,31 +156,52 @@
 <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="js/main.js"></script>
 <script>
-document.getElementById('interestForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const btn = document.getElementById('interestSubmitBtn');
-  btn.disabled = true; btn.textContent = '⏳ Submitting...';
-  const fd = new FormData(e.target);
-  const data = Object.fromEntries(fd.entries());
-  try {
-    await insertRecord('conf_interest', {
-      name: data.name, email: data.email, phone: data.phone,
-      institution: data.institution, research_area: data.research_area,
-      message: (data.participation ? `Participation: ${data.participation}\n` : '') + (data.message || '')
-    });
-    if (data.subscribe === 'yes') {
-      await handleSubscribe(data.email, data.name, null);
+const interestForm = document.getElementById('interestForm');
+const interestWrap = document.getElementById('interestSuccess'); // In aihealth, the success block is separate
+
+if (interestForm) {
+  interestForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    try {
+      window.SVSite.setFormLoading(interestForm, true, 'Submitting...');
+      const fd = new FormData(interestForm);
+      const data = Object.fromEntries(fd.entries());
+      
+      const isSubscribed = data.subscribe === 'yes' || data.subscribe === 'on';
+      
+      await window.SVSite.insertRecord('conf_interest', {
+        name: data.name,
+        email: data.email,
+        phone: data.phone || null,
+        institution: data.institution || null,
+        research_area: data.research_area,
+        message: (data.participation ? `Participation: ${data.participation}\n` : '') + (data.message || '')
+      });
+
+      if (isSubscribed) {
+        await window.SVSite.handleSubscribe(data.email, data.name);
+      }
+
+      // In aihealth, the success block has ID 'interestSuccess'
+      // We hide the form manually and show the success block
+      interestForm.style.display = 'none';
+      const successBlock = document.getElementById('interestSuccess');
+      if (successBlock) {
+        successBlock.classList.add('show');
+        window.SVSite.showFormSuccess(successBlock); // This will add the premium icon
+      }
+
+      window.SVSite.trackEvent('interest_form_submitted', { research_area: data.research_area });
+      await window.SVSite.sendEmail('interest', data);
+
+    } catch (err) {
+      window.SVSite.showToast('Submission failed. Please try again.', 'error');
+      console.error(err);
+    } finally {
+      window.SVSite.setFormLoading(interestForm, false);
     }
-    e.target.style.display = 'none';
-    document.getElementById('interestSuccess').classList.add('show');
-    trackEvent('interest_submitted');
-    // Send confirmation email (interest type triggers key-dates email)
-    sendEmail('interest', { name: data.name, email: data.email });
-  } catch(err) {
-    showToast('Submission failed. Please try again.', 'error');
-    btn.disabled = false; btn.textContent = 'Submit My Interest →';
-  }
-});
+  });
+}
 </script>
 </body>
 </html>

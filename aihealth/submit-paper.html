@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -236,13 +236,12 @@
 <script src="js/main.js"></script>
 <script>
 /* ─── FILE DROP ZONE INTERACTIONS ─── */
-function initDropZone(zoneId, inputId, nameElId, accept) {
+function initDropZone(zoneId, inputId, nameElId) {
   const zone   = document.getElementById(zoneId);
   const input  = document.getElementById(inputId);
   const nameEl = document.getElementById(nameElId);
   if (!zone || !input) return;
 
-  // Drag and drop visual feedback
   zone.addEventListener('dragover', (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
   zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
   zone.addEventListener('drop', (e) => {
@@ -254,117 +253,72 @@ function initDropZone(zoneId, inputId, nameElId, accept) {
     }
   });
 
-  // Normal file picker
   input.addEventListener('change', () => {
     if (input.files.length) onFileChosen(input.files[0], zone, nameEl);
   });
 }
 
 function onFileChosen(file, zone, nameEl) {
-  const maxSize = 10 * 1024 * 1024; // 10 MB
-  const allowedTypes = ['application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document','image/jpeg','image/png','image/webp'];
-
+  const maxSize = 10 * 1024 * 1024;
   if (file.size > maxSize) {
-    showToast('File too large. Maximum size is 10 MB.', 'error');
+    window.SVSite.showToast('File too large. Maximum size is 10 MB.', 'error');
     return;
   }
-
   zone.classList.add('has-file');
   const sizeMB = (file.size / 1024 / 1024).toFixed(2);
   nameEl.textContent = `${file.name} (${sizeMB} MB)`;
   nameEl.classList.add('visible');
 }
 
-/* ─── UPLOAD FILE TO SUPABASE STORAGE ─── */
-async function uploadFile(bucket, file, folder) {
-  if (!file) return null;
-  const ext      = file.name.split('.').pop();
-  const fileName = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2,8)}.${ext}`;
-
-  const progressBar = document.getElementById('paperProgressBar') || document.getElementById('photoProgressBar');
-  const statusEl    = document.getElementById('paperUploadStatus') || document.getElementById('photoUploadStatus');
-  const progressWrap = document.getElementById('paperUploadProgress') || document.getElementById('photoUploadProgress');
-
-  if (progressWrap) progressWrap.classList.add('visible');
-  if (statusEl) statusEl.textContent = 'Uploading...';
-
-  // Simulate progress during upload
-  let pct = 0;
-  const ticker = setInterval(() => {
-    pct = Math.min(pct + 8, 90);
-    if (progressBar) progressBar.style.width = pct + '%';
-  }, 200);
-
-  const { data, error } = await db.storage.from(bucket).upload(fileName, file, {
-    cacheControl: '3600',
-    upsert: false
-  });
-
-  clearInterval(ticker);
-  if (progressBar) progressBar.style.width = '100%';
-  if (statusEl) statusEl.textContent = error ? 'Upload failed' : 'Uploaded';
-
-  if (error) throw error;
-
-  // Return public URL for photos, path for private papers
-  if (bucket === 'conf-photos') {
-    const { data: urlData } = db.storage.from(bucket).getPublicUrl(fileName);
-    return urlData.publicUrl;
-  }
-  return data.path;
-}
-
 /* ─── INIT DROP ZONES ─── */
 initDropZone('paperDropZone', 'paperFile', 'paperFileName');
 
 /* ─── FORM SUBMIT ─── */
-document.getElementById('paperForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const form    = e.target;
-  const consent = document.getElementById('original');
-  if (!consent.checked) { showToast('Please confirm the originality statement.', 'error'); return; }
+const paperWrap = document.getElementById('paperWrap') || document.querySelector('.form-shell');
+const paperForm = document.getElementById('paperForm');
 
-  const btn = document.getElementById('paperSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Uploading &amp; Submitting...';
+if (paperForm) {
+  paperForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const consent = document.getElementById('original');
+    if (!consent.checked) { window.SVSite.showToast('Please confirm the originality statement.', 'error'); return; }
 
-  const fd = new FormData(form);
-  const data = Object.fromEntries(fd.entries());
+    try {
+      window.SVSite.setFormLoading(paperForm, true, 'Uploading & Submitting...');
+      
+      const fd = new FormData(paperForm);
+      const data = Object.fromEntries(fd.entries());
+      const file = document.getElementById('paperFile').files[0];
+      
+      let fileUrl = null;
+      if (file) {
+        fileUrl = await window.SVSite.uploadFile('conf-papers', file, 'aihealth');
+      }
 
-  try {
-    // Upload paper file if selected
-    let fileUrl = null;
-    const paperFile = document.getElementById('paperFile').files[0];
-    if (paperFile) {
-      fileUrl = await uploadFile('conf-papers', paperFile, 'aihealth');
+      await window.SVSite.insertRecord('conf_paper_submissions', {
+        name: data.name, email: data.email, phone: data.phone,
+        institution: data.institution, department: data.department, country: data.country,
+        paper_title: data.paper_title, abstract: data.abstract,
+        keywords: data.keywords, coauthors: data.coauthors, track: data.track,
+        file_url: fileUrl, status: 'pending'
+      });
+
+      window.SVSite.showFormSuccess(paperWrap);
+      window.SVSite.trackEvent('paper_submitted', { has_file: !!fileUrl });
+      window.SVSite.showToast('Paper submitted successfully!', 'success');
+      
+      await window.SVSite.sendEmail('paper_submission', {
+        name: data.name, email: data.email, title: data.paper_title, track: data.track
+      });
+
+    } catch (err) {
+      window.SVSite.showToast('Submission failed. Please try again.', 'error');
+      console.error(err);
+    } finally {
+      window.SVSite.setFormLoading(paperForm, false);
     }
-
-    // Save to Supabase
-    await insertRecord('conf_paper_submissions', {
-      name: data.name, email: data.email, phone: data.phone,
-      institution: data.institution, department: data.department,
-      paper_title: data.paper_title, abstract: data.abstract,
-      keywords: data.keywords, coauthors: data.coauthors,
-      file_url: fileUrl, status: 'pending'
-    });
-
-    form.style.display = 'none';
-    document.getElementById('paperSuccess').classList.add('show');
-    trackEvent('paper_submitted', { has_file: !!fileUrl });
-    showToast('Paper submitted! Check your email for the confirmation.', 'success');
-    // Send confirmation email
-    sendEmail('paper_submission', {
-      name: data.name, email: data.email,
-      title: data.paper_title, track: data.track
-    });
-
-  } catch (err) {
-    showToast('Submission failed. Please try again.', 'error');
-    console.error(err);
-    btn.disabled = false;
-    btn.textContent = 'Submit Paper →';
-  }
-});
+  });
+}
 </script>
 
 <!-- ─── SUBMISSION FAQ ─── -->

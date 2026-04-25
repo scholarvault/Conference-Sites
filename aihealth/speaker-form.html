@@ -273,7 +273,7 @@ function onFileChosen(file, zone, nameEl, inputId) {
   const isPhoto = inputId === 'photoFile';
   const maxMB   = isPhoto ? 5 : 10;
   if (file.size > maxMB * 1024 * 1024) {
-    showToast(`File too large. Max ${maxMB} MB allowed.`, 'error'); return;
+    window.SVSite.showToast(`File too large. Max ${maxMB} MB allowed.`, 'error'); return;
   }
   zone.classList.add('has-file');
   const sizeMB = (file.size / 1024 / 1024).toFixed(2);
@@ -295,74 +295,34 @@ function onFileChosen(file, zone, nameEl, inputId) {
   }
 }
 
-/* ─── UPLOAD TO SUPABASE STORAGE ─── */
-async function uploadFile(bucket, file, folder, progressBarId, statusId, progressWrapId) {
-  if (!file) return null;
-
-  const ext      = file.name.split('.').pop();
-  const fileName = `${folder}/${Date.now()}_${Math.random().toString(36).slice(2, 8)}.${ext}`;
-
-  const bar  = document.getElementById(progressBarId);
-  const stat = document.getElementById(statusId);
-  const wrap = document.getElementById(progressWrapId);
-
-  if (wrap) wrap.classList.add('visible');
-  if (stat) stat.textContent = 'Uploading...';
-
-  // Animate progress bar
-  let pct = 0;
-  const ticker = setInterval(() => {
-    pct = Math.min(pct + 10, 90);
-    if (bar) bar.style.width = pct + '%';
-  }, 200);
-
-  const { data, error } = await db.storage.from(bucket).upload(fileName, file, {
-    cacheControl: '3600', upsert: false
-  });
-
-  clearInterval(ticker);
-  if (bar)  bar.style.width = '100%';
-
-  if (error) {
-    if (stat) stat.textContent = 'Upload failed. Please try again.';
-    throw error;
-  }
-
-  if (stat) stat.textContent = 'Uploaded successfully!';
-
-  if (bucket === 'conf-photos') {
-    const { data: urlData } = db.storage.from(bucket).getPublicUrl(fileName);
-    return urlData.publicUrl;
-  }
-  return data.path;
-}
-
 /* ─── INIT ─── */
 initDropZone('photoDropZone', 'photoFile', 'photoFileName');
 
 /* ─── FORM SUBMIT ─── */
 document.getElementById('speakerForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('speakerSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Uploading & Submitting...';
-
-  const fd   = new FormData(e.target);
-  const data = Object.fromEntries(fd.entries());
-
+  const form = e.target;
+  const wrap = document.getElementById('speakerFormWrap');
+  
   try {
+    window.SVSite.setFormLoading(form, true, 'Uploading & Submitting...');
+
+    const fd   = new FormData(form);
+    const data = Object.fromEntries(fd.entries());
+
     // Upload photo if selected
     let photoUrl = null;
     const photoFile = document.getElementById('photoFile').files[0];
     if (photoFile) {
-      photoUrl = await uploadFile(
-        'conf-photos', photoFile, 'speakers',
-        'photoProgressBar', 'photoUploadStatus', 'photoUploadProgress'
+      photoUrl = await window.SVSite.uploadFile(
+        'conf-photos', 
+        photoFile, 
+        'speakers'
       );
     }
 
     // Save to Supabase
-    await insertRecord('conf_speakers', {
+    await window.SVSite.insertRecord('conf_speakers', {
       name: data.name, email: data.email, phone: data.phone,
       designation: data.designation, institution: data.institution,
       country: data.country, linkedin: data.linkedin,
@@ -370,21 +330,27 @@ document.getElementById('speakerForm').addEventListener('submit', async (e) => {
       photo_url: photoUrl, status: 'pending'
     });
 
-    e.target.style.display = 'none';
-    document.getElementById('speakerSuccess').classList.add('show');
-    trackEvent('speaker_applied', { has_photo: !!photoUrl });
+    form.style.display = 'none';
+    const successBlock = document.getElementById('speakerSuccess');
+    if (successBlock) {
+      successBlock.classList.add('show');
+      window.SVSite.showFormSuccess(successBlock);
+    }
+
+    window.SVSite.trackEvent('speaker_applied', { has_photo: !!photoUrl });
+    
     // Send confirmation email
-    sendEmail('speaker_application', {
+    await window.SVSite.sendEmail('speaker_application', {
       name: data.name, email: data.email,
       designation: data.designation, institution: data.institution,
       talk_type: data.talk_type
     });
 
   } catch (err) {
-    showToast('Submission failed. Please try again.', 'error');
+    window.SVSite.showToast('Submission failed. Please try again.', 'error');
     console.error(err);
-    btn.disabled = false;
-    btn.textContent = 'Submit Speaker Application →';
+  } finally {
+    window.SVSite.setFormLoading(form, false);
   }
 });
 </script>
