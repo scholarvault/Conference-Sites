@@ -422,11 +422,8 @@ async function handler(req) {
     }
     const sanitizedData = {};
     for (const key in data) {
-      if (typeof data[key] === "string") {
-        sanitizedData[key] = escapeHtml(data[key]);
-      } else {
-        sanitizedData[key] = data[key];
-      }
+      const val = data[key] == null ? "" : String(data[key]);
+      sanitizedData[key] = escapeHtml(val);
     }
     const conf = emailMap[type];
     if (!conf) {
