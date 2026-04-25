@@ -43,6 +43,8 @@ function initNavbar() {
     hamburger.addEventListener("click", () => {
       hamburger.classList.toggle("open");
       mobileMenu.classList.toggle("open");
+      const isExpanded = hamburger.getAttribute("aria-expanded") === "true";
+      hamburger.setAttribute("aria-expanded", !isExpanded);
     });
 
     document.addEventListener("click", (event) => {
@@ -51,6 +53,7 @@ function initNavbar() {
       if (!navbar.contains(target)) {
         hamburger.classList.remove("open");
         mobileMenu.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", "false");
       }
     });
   }

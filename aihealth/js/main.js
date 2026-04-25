@@ -52,11 +52,14 @@ function initNavbar() {
     hamburger.addEventListener('click', () => {
       mobileMenu.classList.toggle('open');
       hamburger.classList.toggle('open');
+      const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+      hamburger.setAttribute('aria-expanded', !isExpanded);
     });
     document.addEventListener('click', (e) => {
       if (!navbar.contains(e.target)) {
         mobileMenu.classList.remove('open');
         hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
       }
     });
   }
