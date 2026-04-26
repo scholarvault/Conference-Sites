@@ -231,8 +231,10 @@ function initHeroParticles() {
       for (let j = i + 1; j < particles.length; j += 1) {
         const dx = particles[i].x - particles[j].x;
         const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 110) {
+        // BOLT: Optimize O(n^2) loop by avoiding expensive Math.sqrt for particles that are far apart
+        const distSq = dx * dx + dy * dy;
+        if (distSq < 12100) { // 110 * 110
+          const dist = Math.sqrt(distSq);
           context.beginPath();
           context.moveTo(particles[i].x, particles[i].y);
           context.lineTo(particles[j].x, particles[j].y);
