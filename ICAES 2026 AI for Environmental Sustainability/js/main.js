@@ -312,7 +312,8 @@ function showToast(message, type = "info", duration = 3600) {
   };
   const toast = document.createElement("div");
   toast.className = "toast";
-  toast.innerHTML = `<span class="toast__icon">${icons[type] || icons.info}</span><span>${message}</span>`;
+  toast.innerHTML = `<span class="toast__icon">${icons[type] || icons.info}</span><span class="toast__msg"></span>`;
+  toast.querySelector('.toast__msg').textContent = message;
   container.appendChild(toast);
   requestAnimationFrame(() => toast.classList.add("show"));
   window.setTimeout(() => {
