@@ -94,6 +94,87 @@
       font-size: 12px; color: rgba(255,193,7,0.5); margin-top: 0.75rem; text-align: center;
     }
     .sv-gold-not-member a { color: var(--amber); text-decoration: underline; }
+
+    /* ── Gold Purchase Modal ── */
+    .gold-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+      align-items: flex-end; justify-content: center;
+    }
+    .gold-modal-overlay.open { display: flex; }
+    .gold-modal {
+      width: 100%; max-width: 520px;
+      background: linear-gradient(160deg, #1a1000, #2a1800, #0d0800);
+      border: 1.5px solid rgba(255,193,7,0.35);
+      border-bottom: none;
+      border-radius: 24px 24px 0 0;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 -8px 48px rgba(255,193,7,0.15);
+      animation: slideUp 0.3s cubic-bezier(0.32,0.72,0,1);
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .gold-modal-handle {
+      width: 40px; height: 4px; border-radius: 2px;
+      background: rgba(255,193,7,0.3); margin: 0 auto 1.5rem;
+    }
+    .gold-modal-title {
+      font-family: var(--font-head); font-size: 1.2rem; font-weight: 900;
+      background: linear-gradient(135deg,#ffc107,#ffe082,#ff8f00);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.4rem;
+    }
+    .gold-modal-sub {
+      font-size: 13px; color: rgba(255,193,7,0.6); margin-bottom: 1.25rem; line-height: 1.5;
+    }
+    .gold-modal-perks {
+      display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem;
+    }
+    .gold-modal-perk {
+      font-size: 13px; color: rgba(255,220,100,0.85);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .gold-modal-perk::before { content: '✦'; color: var(--amber); font-size: 9px; flex-shrink: 0; }
+    .gold-modal-price-row {
+      display: flex; align-items: baseline; gap: 8px; margin-bottom: 1.25rem;
+    }
+    .gold-modal-price {
+      font-size: 2rem; font-weight: 900; font-family: var(--font-head);
+      background: linear-gradient(135deg,#ffc107,#ff8f00);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .gold-modal-price-note { font-size: 13px; color: rgba(255,193,7,0.5); }
+    .gold-modal-input-row { display: flex; gap: 10px; margin-bottom: 0.75rem; }
+    .gold-modal-input {
+      flex: 1; padding: 12px 14px; border-radius: var(--radius-sm);
+      background: rgba(255,193,7,0.07); border: 1.5px solid rgba(255,193,7,0.25);
+      color: var(--white); font-size: 14px;
+    }
+    .gold-modal-input::placeholder { color: rgba(255,255,255,0.3); }
+    .gold-modal-input:focus { border-color: var(--amber); outline: none; box-shadow: 0 0 0 3px rgba(255,193,7,0.1); }
+    .gold-modal-btn {
+      width: 100%; padding: 14px; border-radius: var(--radius-sm);
+      background: linear-gradient(135deg,#ff8f00,#ffc107); color: #000;
+      border: none; cursor: pointer; font-weight: 800; font-size: 15px;
+      transition: var(--transition); letter-spacing: 0.02em;
+    }
+    .gold-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255,193,7,0.4); }
+    .gold-modal-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .gold-modal-note {
+      font-size: 11px; color: rgba(255,193,7,0.4); text-align: center;
+      margin-top: 0.75rem; line-height: 1.6;
+    }
+    .gold-modal-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: var(--white-70); border-radius: 50%; width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 16px; transition: var(--transition);
+    }
+    .gold-modal-close:hover { background: rgba(255,255,255,0.12); }
+    .gold-modal-wrap { position: relative; }
     .tier-grid { grid-template-columns: repeat(2, 1fr); }
 
     @media(max-width:900px) {
@@ -355,7 +436,7 @@
             <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
             <div class="sv-gold-not-member">
               Not a Gold member?
-              <a href="https://scholarvault.in/gold" target="_blank">Join ScholarVault Gold from ₹399/mo →</a>
+              <a href="#" onclick="openGoldModal(event)">Join ScholarVault Gold from ₹399/mo →</a>
             </div>
           </div><!-- /sv-gold-card -->
 
@@ -881,5 +962,128 @@ if (urlParams.get('payment') === 'success') {
   showToast(svGoldApplied ? '⬡ Gold Delegate registration confirmed!' : 'Registration confirmed!', 'success');
 }
 </script>
+<!-- ─── GOLD PURCHASE MODAL ─── -->
+<div class="gold-modal-overlay" id="goldModalOverlay" onclick="handleOverlayClick(event)">
+  <div class="gold-modal gold-modal-wrap">
+    <button class="gold-modal-close" onclick="closeGoldModal()" aria-label="Close">✕</button>
+    <div class="gold-modal-handle"></div>
+
+    <div class="gold-modal-title">⬡ Get ScholarVault Gold</div>
+    <div class="gold-modal-sub">Pay once. Your Member ID arrives by email instantly.<br/>Come back, enter it above, and your 15% discount applies.</div>
+
+    <div class="gold-modal-perks">
+      <div class="gold-modal-perk">15% off your conference registration — right now</div>
+      <div class="gold-modal-perk">Certificate says "ScholarVault Gold Delegate"</div>
+      <div class="gold-modal-perk">Unlimited conference audits on app.scholarvault.in</div>
+      <div class="gold-modal-perk">Priority support — guaranteed 2hr response</div>
+    </div>
+
+    <div class="gold-modal-price-row">
+      <span class="gold-modal-price">₹399</span>
+      <span class="gold-modal-price-note">/ month &nbsp;·&nbsp; cancel anytime</span>
+    </div>
+
+    <div class="gold-modal-input-row">
+      <input
+        type="email"
+        id="goldModalEmail"
+        class="gold-modal-input"
+        placeholder="your@email.com — we'll send your Member ID here"
+        autocomplete="email"
+      />
+    </div>
+    <div id="goldModalMsg" style="font-size:12px;color:rgba(255,193,7,0.6);min-height:16px;margin-bottom:0.75rem;"></div>
+
+    <button class="gold-modal-btn" id="goldModalBtn" onclick="proceedToGoldCheckout()">
+      Get Gold &amp; Unlock 15% Off →
+    </button>
+
+    <div class="gold-modal-note">
+      You'll be taken to a secure Dodo Payments checkout.<br/>
+      Your Member ID is emailed within seconds of payment. Then come back and enter it above.
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Gold Modal ── */
+function openGoldModal(e) {
+  if (e) e.preventDefault();
+  document.getElementById('goldModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => document.getElementById('goldModalEmail').focus(), 350);
+}
+
+function closeGoldModal() {
+  document.getElementById('goldModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('goldModalMsg').textContent = '';
+  document.getElementById('goldModalEmail').value = '';
+  document.getElementById('goldModalBtn').disabled = false;
+  document.getElementById('goldModalBtn').textContent = 'Get Gold & Unlock 15% Off →';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('goldModalOverlay')) closeGoldModal();
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeGoldModal();
+});
+
+function proceedToGoldCheckout() {
+  const email = document.getElementById('goldModalEmail').value.trim();
+  const msg   = document.getElementById('goldModalMsg');
+  const btn   = document.getElementById('goldModalBtn');
+
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    msg.style.color = 'var(--red)';
+    msg.textContent = '✕ Please enter a valid email address.';
+    return;
+  }
+
+  msg.style.color = 'rgba(255,193,7,0.6)';
+  msg.textContent = '⏳ Opening secure checkout...';
+  btn.disabled = true;
+  btn.textContent = 'Opening Dodo Payments...';
+
+  // Dodo checkout for ScholarVault Gold Monthly
+  // metadata.source tells the webhook this came from the ICAHCR conference page
+  const GOLD_PRODUCT = 'pdt_0NZmRYTQZ0gA4wAsdjQNF';
+  const returnUrl    = encodeURIComponent('https://aihealth.scholarvault.in/register?gold_purchased=1');
+  const checkoutUrl  = `https://checkout.dodopayments.com/buy/${GOLD_PRODUCT}`
+    + `?customer_email=${encodeURIComponent(email)}`
+    + `&return_url=${returnUrl}`
+    + `&metadata[source]=conference_icahcr`;
+
+  // Open in new tab so user stays on the registration page
+  window.open(checkoutUrl, '_blank');
+
+  // Show instructions while tab is open
+  btn.textContent = 'Waiting for payment...';
+  msg.style.color = 'rgba(255,193,7,0.8)';
+  msg.textContent = '✦ Complete payment in the new tab. Your Member ID will arrive by email.';
+
+  // Re-enable after 8s so they can retry if needed
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.textContent = 'Get Gold & Unlock 15% Off →';
+  }, 8000);
+}
+
+/* ── Handle return from Gold payment ── */
+(function() {
+  const params = new URLSearchParams(location.search);
+  if (params.get('gold_purchased') === '1') {
+    // Pre-fill the Gold input with a prompt and show a toast
+    document.getElementById('svGoldInput').placeholder = 'Check your email for SCHOLAR-XXXXXXXX';
+    document.getElementById('svGoldInput').focus();
+    setTimeout(() => showToast('⬡ Gold payment received! Check your email for your Member ID, then enter it above.', 'success'), 800);
+    // Clean up URL
+    history.replaceState(null, '', location.pathname);
+  }
+})();
+</script>
+
 </body>
 </html>
