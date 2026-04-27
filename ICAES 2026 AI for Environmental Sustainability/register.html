@@ -23,14 +23,14 @@
     <meta name="twitter:description" content="Register for ISIAI-SGS 2026 with virtual delegate tiers for students, faculty, listeners, and co-authors." />
     <meta name="twitter:image" content="https://isiaisgs2026.scholarvault.in/assets/og-image.svg" />
     <style>
-    /* SV Gold Addon Card Styles */
+    /* ── SV Gold Addon Card Styles ── */
     .sv-gold-card {
       position: relative; overflow: hidden;
       background: linear-gradient(135deg, #1a1000, #2a1a00, #1a0a00);
       border: 1.5px solid rgba(255, 193, 7, 0.4);
-      border-radius: var(--radius-lg); padding: 1.5rem;
+      border-radius: 20px; padding: 1.5rem;
       margin-bottom: 2rem; cursor: pointer;
-      transition: var(--transition);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       color: white; text-align: left;
     }
     .sv-gold-card::before {
@@ -56,32 +56,117 @@
       display: flex; align-items: center; gap: 14px; margin-bottom: 0.75rem;
     }
     .sv-gold-title {
-      font-size: 1.1rem; font-weight: 900; font-family: var(--font-display);
+      font-size: 1.1rem; font-weight: 900; font-family: var(--font-display, 'Manrope', sans-serif);
       background: linear-gradient(135deg, #ffc107, #ffe082, #ff8f00);
       -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
     }
     .sv-gold-subtitle { font-size: 12px; color: rgba(255,193,7,0.7); font-weight:600; margin-top:2px; }
     .sv-gold-perks { display: flex; flex-direction: column; gap: 7px; margin: 1rem 0; }
-    .sv-gold-perk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,220,100,0.9); }
-    .sv-gold-perk::before { content: '✦'; color: #ffc107; font-size: 10px; flex-shrink: 0; }
+    .sv-gold-perk { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(255,220,100,0.9); line-height: 1.5; }
+    .sv-gold-perk::before { content: '✦'; color: #ffc107; font-size: 10px; flex-shrink: 0; margin-top: 3px; }
+    .sv-gold-perk em { color: inherit; font-style: normal; font-weight: 700; }
     .sv-gold-toggle { display: flex; align-items: center; gap: 10px; margin-top: 1rem; }
     .sv-gold-toggle input[type="text"] {
-      flex: 1; padding: 10px 14px; border-radius: var(--radius-sm);
+      flex: 1; padding: 10px 14px; border-radius: 6px;
       background: rgba(255,193,7,0.08); border: 1.5px solid rgba(255,193,7,0.3);
-      color: var(--white); font-size: 14px;
+      color: #fff; font-size: 14px;
     }
     .sv-gold-toggle input:focus { border-color: #ffc107; box-shadow: 0 0 0 3px rgba(255,193,7,0.12); outline:none; }
     .sv-gold-toggle button {
-      padding: 10px 16px; border-radius: var(--radius-sm); white-space: nowrap;
+      padding: 10px 16px; border-radius: 6px; white-space: nowrap;
       background: linear-gradient(135deg, #ff8f00, #ffc107); color: #071411;
       border: none; cursor: pointer; font-weight: 700; font-size: 13px;
-      transition: var(--transition);
+      transition: all 0.3s ease;
     }
     .sv-gold-toggle button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,193,7,0.4); }
     .sv-gold-not-member {
       font-size: 12px; color: rgba(255,193,7,0.5); margin-top: 0.75rem; text-align: center;
     }
     .sv-gold-not-member a { color: #ffc107; text-decoration: underline; }
+    .sv-gold-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    @media (max-width: 640px) { .sv-gold-grid { grid-template-columns: 1fr; } }
+    .sv-gold-toggle { display: flex; align-items: center; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
+    @media (max-width: 640px) { .sv-gold-toggle { flex-direction: column; } .sv-gold-toggle input[type="text"], .sv-gold-toggle button { width: 100%; } }
+
+    /* ── Gold Purchase Modal ── */
+    .gold-modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
+      align-items: flex-end; justify-content: center;
+    }
+    .gold-modal-overlay.open { display: flex; }
+    .gold-modal {
+      width: 100%; max-width: 520px;
+      background: linear-gradient(160deg, #1a1000, #2a1800, #0d0800);
+      border: 1.5px solid rgba(255,193,7,0.35);
+      border-bottom: none;
+      border-radius: 24px 24px 0 0;
+      padding: 2rem 2rem 2.5rem;
+      box-shadow: 0 -8px 48px rgba(255,193,7,0.15);
+      animation: slideUp 0.3s cubic-bezier(0.32,0.72,0,1);
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to   { transform: translateY(0);    opacity: 1; }
+    }
+    .gold-modal-handle {
+      width: 40px; height: 4px; border-radius: 2px;
+      background: rgba(255,193,7,0.3); margin: 0 auto 1.5rem;
+    }
+    .gold-modal-title {
+      font-family: var(--font-display, 'Manrope', sans-serif); font-size: 1.2rem; font-weight: 900;
+      background: linear-gradient(135deg,#ffc107,#ffe082,#ff8f00);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 0.4rem;
+    }
+    .gold-modal-sub {
+      font-size: 13px; color: rgba(255,193,7,0.6); margin-bottom: 1.25rem; line-height: 1.5;
+    }
+    .gold-modal-perks {
+      display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem;
+    }
+    .gold-modal-perk {
+      font-size: 13px; color: rgba(255,220,100,0.85);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .gold-modal-perk::before { content: '✦'; color: #ffc107; font-size: 9px; flex-shrink: 0; }
+    .gold-modal-price-row {
+      display: flex; align-items: baseline; gap: 8px; margin-bottom: 1.25rem;
+    }
+    .gold-modal-price {
+      font-size: 2rem; font-weight: 900; font-family: var(--font-display, 'Manrope', sans-serif);
+      background: linear-gradient(135deg,#ffc107,#ff8f00);
+      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .gold-modal-price-note { font-size: 13px; color: rgba(255,193,7,0.5); }
+    .gold-modal-input-row { display: flex; gap: 10px; margin-bottom: 0.75rem; }
+    .gold-modal-input {
+      flex: 1; padding: 12px 14px; border-radius: 6px;
+      background: rgba(255,193,7,0.07); border: 1.5px solid rgba(255,193,7,0.25);
+      color: #fff; font-size: 14px;
+    }
+    .gold-modal-input::placeholder { color: rgba(255,255,255,0.3); }
+    .gold-modal-input:focus { border-color: #ffc107; outline: none; box-shadow: 0 0 0 3px rgba(255,193,7,0.1); }
+    .gold-modal-btn {
+      width: 100%; padding: 14px; border-radius: 6px;
+      background: linear-gradient(135deg,#ff8f00,#ffc107); color: #000;
+      border: none; cursor: pointer; font-weight: 800; font-size: 15px;
+      transition: all 0.3s ease; letter-spacing: 0.02em;
+    }
+    .gold-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255,193,7,0.4); }
+    .gold-modal-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .gold-modal-note {
+      font-size: 11px; color: rgba(255,193,7,0.4); text-align: center;
+      margin-top: 0.75rem; line-height: 1.6;
+    }
+    .gold-modal-close {
+      position: absolute; top: 1.25rem; right: 1.25rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.7); border-radius: 50%; width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-size: 16px; transition: all 0.3s ease;
+    }
+    .gold-modal-close:hover { background: rgba(255,255,255,0.1); color: #fff; transform: rotate(90deg); }
     </style>
 
 </head>
@@ -124,7 +209,7 @@
       <section class="section section--mist"><div class="site-shell"><div class="section__top reveal"><div class="eyebrow eyebrow--light">Delegate categories</div><h2 class="section-title">Flexible virtual <span>registration tiers</span></h2></div><div class="pricing-toggle reveal"><button type="button" class="currency-btn active" data-currency="INR">INR</button><button type="button" class="currency-btn" data-currency="USD">USD</button></div><div class="price-grid stagger"><article class="price-card"><div class="card-tag">Student / PhD</div><h3>Student Delegate</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹3,499</small>₹2,496</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$159</small>$129</span></strong><p>For students and doctoral scholars presenting or attending.</p></article><article class="price-card price-card--featured"><div class="card-tag">Faculty / Postdoc</div><h3>Research Delegate</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹6,499</small>₹4,999</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$249</small>$199</span></strong><p>For faculty, postdocs, labs, and research professionals.</p></article><article class="price-card"><div class="card-tag">Listener</div><h3>Attendee Pass</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹2,499</small>₹1,999</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$149</small>$99</span></strong><p>For participants joining sessions without a paper or formal speaking role.</p></article><article class="price-card"><div class="card-tag">Co-author</div><h3>Additional Presenter</h3><strong><span class="price-inr"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹2,999</small>₹2,499</span><span class="price-usd"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$99</small>$79</span></strong><p>For additional named authors or presenters within accepted work.</p></article><article class="price-card" style="grid-column:1/-1;border:1.5px solid rgba(255,193,7,0.5);background:linear-gradient(135deg,rgba(26,16,0,0.85),rgba(42,26,0,0.85));"><div class="card-tag" style="background:linear-gradient(135deg,#ff8f00,#ffc107);color:#000;font-weight:800;">Professional Delegate</div><h3 style="color:#ffc107;">Industry Professional</h3><strong><span class="price-inr" style="color:#ffc107;"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">₹14,999</small>₹9,999</span><span class="price-usd" style="color:#ffc107;"><small style="text-decoration:line-through;opacity:0.5;margin-right:8px;font-size:0.8em;">$499</small>$399</span></strong><p>Designed for corporate leaders and industry specialists. Includes priority networking, executive certificate, and exclusive post-conference resources.</p></article></div></div></section>
   
       <section class="section section--light"><div class="site-shell"><div class="form-shell reveal">
-          <!-- ScholarVault GOLD ADDON -->
+          <!-- ─── ScholarVault GOLD ADDON ─── -->
           <div class="sv-gold-card" id="svGoldCard">
             <div class="sv-gold-badge-row">
               <div class="sv-gold-hex">
@@ -134,26 +219,53 @@
                 </svg>
               </div>
               <div>
-                <div class="sv-gold-title">ScholarVault Gold Member?</div>
-                <div class="sv-gold-subtitle">Unlock exclusive Gold Delegate benefits + 15% off</div>
+                <div class="sv-gold-title">ScholarVault Gold — ₹399/mo</div>
+                <div class="sv-gold-subtitle">You're spending ₹3,000–₹9,000 here. Gold pays for itself in the first 15 minutes.</div>
               </div>
             </div>
-            <div class="sv-gold-perks">
-              <div class="sv-gold-perk">15% instant discount on any registration tier</div>
-              <div class="sv-gold-perk">Certificate says "ScholarVault Gold Delegate"</div>
-              <div class="sv-gold-perk">Featured in Gold Delegates section</div>
-              <div class="sv-gold-perk">Priority support lane — 2 hr response</div>
+
+            <div class="sv-gold-grid">
+              <!-- At this conference -->
+              <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">At this conference</div>
+                <div class="sv-gold-perk">15% off your registration — saves ₹375 to ₹1,499 instantly</div>
+                <div class="sv-gold-perk">Certificate says "ScholarVault Gold Delegate" — a career credential</div>
+                <div class="sv-gold-perk">Priority 2hr support lane</div>
+              </div>
+              <!-- Beyond this conference -->
+              <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">Beyond this conference</div>
+                <div class="sv-gold-perk">Verify unlimited conferences — never lose ₹8,000–₹50,000 to a fake one</div>
+                <div class="sv-gold-perk">PDF Forensic Reports accepted by HODs &amp; NAAC committees</div>
+                <div class="sv-gold-perk">CFP deadline alerts — never miss a submission window</div>
+                <div class="sv-gold-perk">48hr early threat alerts on risky organisers</div>
+              </div>
             </div>
+
+            <div style="background:rgba(0,0,0,0.3);border-left:3px solid rgba(255,193,7,0.6);border-radius:4px;padding:10px 14px;margin-bottom:1rem;font-size:13px;color:rgba(255,220,100,0.85);font-style:italic;">
+              One fake conference costs you ₹10,000+. Gold costs ₹399.
+            </div>
+
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,193,7,0.5);margin-bottom:8px;">Already a Gold member? Enter your ID below</div>
             <div class="sv-gold-toggle">
-              <input type="text" id="svGoldInput" placeholder="Enter your SV Gold Member ID" />
-              <button type="button" onclick="applySVGold()">Verify & Apply</button>
+              <input type="text" id="svGoldInput" placeholder="Enter your SV Gold Member ID (e.g. SCHOLAR-AB12CD)" />
+              <button type="button" onclick="applySVGold()">Verify &amp; Apply</button>
             </div>
-            <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;color:rgba(255,255,255,0.4);">Enter your SV Member ID</div>
-            <div class="sv-gold-not-member">
-              Not a Gold member?
-              <a href="https://scholarvault.in/gold" target="_blank">Join ScholarVault Gold →</a>
+            <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
+            <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,193,7,0.15);">
+              <button type="button" onclick="openGoldModal(event)" style="
+                width: 100%; padding: 14px 20px;
+                background: linear-gradient(135deg, #ff8f00, #ffc107);
+                color: #0a0a0a; border: none; border-radius: 6px;
+                font-size: 15px; font-weight: 800; cursor: pointer;
+                letter-spacing: 0.02em; transition: all 0.3s ease;
+              " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(255,193,7,0.4)';"
+                onmouseout="this.style.transform='';this.style.boxShadow='';">
+                ⬡ Not a member? Get Gold — ₹399/mo &amp; save 15% →
+              </button>
+              <p style="font-size:11px;color:rgba(255,193,7,0.4);text-align:center;margin-top:8px;">Your Member ID arrives by email within seconds of payment.</p>
             </div>
-          </div>
+          </div><!-- /sv-gold-card -->
 
           <form id="registrationForm" class="form-grid form-grid--single"><div class="field"><label>Select category</label><select name="category" required><option value="">Choose category</option><option value="student">Student Delegate</option><option value="faculty">Research Delegate</option><option value="listener">Attendee Pass</option><option value="coauthor">Additional Presenter</option><option value="industry">Industry Professional</option></select></div><div class="field"><label>Full name</label><input name="name" required /></div><div class="field"><label>Email</label><input name="email" type="email" required /></div><div class="field"><label>Phone</label><input name="phone" required /></div><div class="field"><label>Institution</label><input name="institution" required /></div><div class="field"><label>Designation</label><input name="designation" /></div><div class="field"><label>Country</label><input name="country" required /></div><button class="btn-primary form-submit" type="submit">Proceed to secure checkout</button><p class="form-note">You will be redirected to secure checkout after we record your registration intent.</p></form><div class="form-success" id="registerSuccess"><div class="form-success__title">Payment completed</div><p class="form-success__text">Your registration has been marked as completed. A confirmation email and next steps will follow from the conference team.</p></div></div></div></section>
     
@@ -383,6 +495,110 @@
       }
     </script>
   
+
+  <!-- ─── GOLD PURCHASE MODAL ─── -->
+  <div class="gold-modal-overlay" id="goldModalOverlay" onclick="handleOverlayClick(event)">
+    <div class="gold-modal gold-modal-wrap">
+      <button class="gold-modal-close" onclick="closeGoldModal()" aria-label="Close">✕</button>
+      <div class="gold-modal-handle"></div>
+      
+      <h3 class="gold-modal-title">Upgrade to ScholarVault Gold</h3>
+      <p class="gold-modal-sub">Get absolute protection against fake conferences and save 15% immediately on your registration today.</p>
+  
+      <div class="gold-modal-perks">
+        <div class="gold-modal-perk">Protect your career from predatory publishers forever</div>
+        <div class="gold-modal-perk">Full PDF forensic reports on any conference</div>
+        <div class="gold-modal-perk">Instant 15% discount applies automatically to your cart</div>
+      </div>
+  
+      <div class="gold-modal-price-row">
+        <span class="gold-modal-price">₹399</span>
+        <span class="gold-modal-price-note">/ month &nbsp;·&nbsp; cancel anytime</span>
+      </div>
+  
+      <div class="gold-modal-input-row">
+        <input
+          type="email"
+          id="goldModalEmail"
+          class="gold-modal-input"
+          placeholder="your@email.com — we'll send your Member ID here"
+          autocomplete="email"
+        />
+      </div>
+      <div id="goldModalMsg" style="font-size:12px;color:rgba(255,193,7,0.6);min-height:16px;margin-bottom:0.75rem;"></div>
+  
+      <button class="gold-modal-btn" id="goldModalBtn" onclick="proceedToGoldCheckout()">
+        Get Gold &amp; Unlock 15% Off →
+      </button>
+  
+      <div class="gold-modal-note">
+        You'll be taken to a secure Dodo Payments checkout.<br/>
+        Your Member ID is emailed within seconds of payment. Then come back and enter it above.
+      </div>
+    </div>
+  </div>
+  
+  <script>
+  /* ── Gold Modal Logic ── */
+  function openGoldModal(e) {
+    if (e) e.preventDefault();
+    document.getElementById('goldModalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => document.getElementById('goldModalEmail').focus(), 350);
+  }
+  
+  function closeGoldModal() {
+    document.getElementById('goldModalOverlay').classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('goldModalMsg').textContent = '';
+  }
+  
+  function handleOverlayClick(e) {
+    if (e.target.id === 'goldModalOverlay') closeGoldModal();
+  }
+  
+  function proceedToGoldCheckout() {
+    const emailInput = document.getElementById('goldModalEmail');
+    const msg = document.getElementById('goldModalMsg');
+    const btn = document.getElementById('goldModalBtn');
+  
+    if (!emailInput.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
+      msg.textContent = '⚠️ Please enter a valid email address.';
+      msg.style.color = '#fb7185';
+      emailInput.focus();
+      return;
+    }
+  
+    msg.style.color = 'rgba(255,193,7,0.6)';
+    msg.textContent = '⏳ Opening secure checkout...';
+    btn.disabled = true;
+    btn.textContent = 'Opening Dodo Payments...';
+    
+    // Dodo checkout for ScholarVault Gold Monthly
+    const GOLD_PRODUCT = 'pdt_0NZmRYTQZ0gA4wAsdjQNF'; 
+    const returnUrl = encodeURIComponent(location.origin + location.pathname + '?gold_purchased=1');
+    const email = encodeURIComponent(emailInput.value);
+    
+    const checkoutUrl = `https://checkout.dodopayments.com/buy/${GOLD_PRODUCT}`
+      + `?customer_email=${email}`
+      + `&return_url=${returnUrl}`
+      + `&metadata[source]=conference_icaes`;
+      
+    // Open in new tab so user stays on the registration page
+    window.open(checkoutUrl, '_blank');
+
+    // Show instructions while tab is open
+    btn.textContent = 'Waiting for payment...';
+    msg.style.color = 'rgba(255,193,7,0.8)';
+    msg.textContent = '✦ Complete payment in the new tab. Your Member ID will arrive by email.';
+
+    // Re-enable after 8s so they can retry if needed
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.textContent = 'Get Gold & Unlock 15% Off →';
+    }, 8000);
+  }
+  </script>
 
   <!-- Crisp Chat -->
   <script type="text/javascript">
