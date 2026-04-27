@@ -74,8 +74,9 @@
     }
     .sv-gold-subtitle { font-size: 12px; color: rgba(255,193,7,0.7); font-weight:600; margin-top:2px; }
     .sv-gold-perks { display: flex; flex-direction: column; gap: 7px; margin: 1rem 0; }
-    .sv-gold-perk { display: flex; align-items: center; gap: 8px; font-size: 13px; color: rgba(255,220,100,0.9); }
-    .sv-gold-perk::before { content: '✦'; color: var(--amber); font-size: 10px; flex-shrink: 0; }
+    .sv-gold-perk { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(255,220,100,0.9); line-height: 1.5; }
+    .sv-gold-perk::before { content: '✦'; color: var(--amber); font-size: 10px; flex-shrink: 0; margin-top: 3px; }
+    .sv-gold-perk em { color: inherit; font-style: normal; font-weight: 700; }
     .sv-gold-toggle { display: flex; align-items: center; gap: 10px; margin-top: 1rem; }
     .sv-gold-toggle input[type="text"] {
       flex: 1; padding: 10px 14px; border-radius: var(--radius-sm);
@@ -94,6 +95,10 @@
       font-size: 12px; color: rgba(255,193,7,0.5); margin-top: 0.75rem; text-align: center;
     }
     .sv-gold-not-member a { color: var(--amber); text-decoration: underline; }
+    .sv-gold-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
+    @media (max-width: 640px) { .sv-gold-grid { grid-template-columns: 1fr; } }
+    .sv-gold-toggle { display: flex; align-items: center; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
+    @media (max-width: 640px) { .sv-gold-toggle { flex-direction: column; } .sv-gold-toggle input[type="text"], .sv-gold-toggle button { width: 100%; } }
 
     /* ── Gold Purchase Modal ── */
     .gold-modal-overlay {
@@ -418,25 +423,51 @@
                 </svg>
               </div>
               <div>
-                <div class="sv-gold-title">ScholarVault Gold Member?</div>
-                <div class="sv-gold-subtitle">Unlock exclusive Gold Delegate benefits + 15% off</div>
+                <div class="sv-gold-title">ScholarVault Gold — ₹399/mo</div>
+                <div class="sv-gold-subtitle">You're spending ₹3,000–₹9,000 here. Gold pays for itself in the first 15 minutes.</div>
               </div>
             </div>
-            <div class="sv-gold-perks">
-              <div class="sv-gold-perk">15% instant discount on any registration tier</div>
-              <div class="sv-gold-perk">Certificate says <em>"ScholarVault Gold Delegate"</em></div>
-              <div class="sv-gold-perk">Featured in Gold Delegates section on conference page</div>
-              <div class="sv-gold-perk">Priority support lane — guaranteed response in 2 hrs</div>
-              <div class="sv-gold-perk">Gold badge on your digital delegate card</div>
+
+            <div class="sv-gold-grid">
+              <!-- At this conference -->
+              <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">At this conference</div>
+                <div class="sv-gold-perk">15% off your registration — saves ₹375 to ₹1,499 instantly</div>
+                <div class="sv-gold-perk">Certificate says "ScholarVault Gold Delegate" — a career credential</div>
+                <div class="sv-gold-perk">Priority 2hr support lane</div>
+              </div>
+              <!-- Beyond this conference -->
+              <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">Beyond this conference</div>
+                <div class="sv-gold-perk">Verify unlimited conferences — never lose ₹8,000–₹50,000 to a fake one</div>
+                <div class="sv-gold-perk">PDF Forensic Reports accepted by HODs &amp; NAAC committees</div>
+                <div class="sv-gold-perk">CFP deadline alerts — never miss a submission window</div>
+                <div class="sv-gold-perk">48hr early threat alerts on risky organisers</div>
+              </div>
             </div>
+
+            <div style="background:rgba(0,0,0,0.3);border-left:3px solid rgba(255,193,7,0.6);border-radius:4px;padding:10px 14px;margin-bottom:1rem;font-size:13px;color:rgba(255,220,100,0.85);font-style:italic;">
+              One fake conference costs you ₹10,000+. Gold costs ₹399.
+            </div>
+
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,193,7,0.5);margin-bottom:8px;">Already a Gold member? Enter your ID below</div>
             <div class="sv-gold-toggle">
-              <input type="text" id="svGoldInput" placeholder="Enter your SV Gold Member ID (e.g. SVG-12345)" />
+              <input type="text" id="svGoldInput" placeholder="Enter your SV Gold Member ID (e.g. SCHOLAR-AB12CD)" />
               <button onclick="applySVGold()">Verify &amp; Apply</button>
             </div>
             <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
-            <div class="sv-gold-not-member">
-              Not a Gold member?
-              <a href="#" onclick="openGoldModal(event)">Join ScholarVault Gold from ₹399/mo →</a>
+            <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,193,7,0.15);">
+              <button onclick="openGoldModal(event)" style="
+                width: 100%; padding: 14px 20px;
+                background: linear-gradient(135deg, #ff8f00, #ffc107);
+                color: #0a0a0a; border: none; border-radius: var(--radius-sm);
+                font-size: 15px; font-weight: 800; cursor: pointer;
+                letter-spacing: 0.02em; transition: var(--transition);
+              " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(255,193,7,0.4)';"
+                onmouseout="this.style.transform='';this.style.boxShadow='';">
+                ⬡ Not a member? Get Gold — ₹399/mo &amp; save 15% →
+              </button>
+              <p style="font-size:11px;color:rgba(255,193,7,0.4);text-align:center;margin-top:8px;">Your Member ID arrives by email within seconds of payment.</p>
             </div>
           </div><!-- /sv-gold-card -->
 
