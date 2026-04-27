@@ -1,23 +1,23 @@
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   SCHOLAR VAULT CONFERENCE SYSTEM â€” GLOBAL DESIGN SYSTEM
+/* -
+   SCHOLAR VAULT CONFERENCE SYSTEM - GLOBAL DESIGN SYSTEM
    Conference: AI in Healthcare & Clinical Research (ICAHCR 2026)
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* â”€â”€â”€ RUPEE SYMBOL FONT OVERRIDE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   DM Sans (body font) renders â‚¹ with a curved/stylized glyph.
-   Inter renders â‚¹ with clean straight bars matching the design.
-   This @font-face rule hijacks ONLY U+20B9 (â‚¹) across ALL
+/* - RUPEE SYMBOL FONT OVERRIDE -
+   DM Sans (body font) renders - with a curved/stylized glyph.
+   Inter renders - with clean straight bars matching the design.
+   This @font-face rule hijacks ONLY U+20B9 (-) across ALL
    elements sitewide so it always renders consistently.
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   - */
 @font-face {
   font-family: 'DM Sans';
   src: local('Inter'), url('https://fonts.gstatic.com/s/inter/v19/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyeAZ9hiJ-Ek-_EeA.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   unicode-range: U+20B9;
-  /* Indian Rupee Sign â‚¹ only */
+  /* Indian Rupee Sign - only */
 }
 
 @font-face {
@@ -26,10 +26,10 @@
   font-weight: 100 900;
   font-style: italic;
   unicode-range: U+20B9;
-  /* Indian Rupee Sign â‚¹ only */
+  /* Indian Rupee Sign - only */
 }
 
-/* â”€â”€â”€ DESIGN TOKENS â”€â”€â”€ */
+/* - DESIGN TOKENS - */
 :root {
   --navy: #050d1f;
   --navy-2: #0a1628;
@@ -72,7 +72,7 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* â”€â”€ ScholarVault Badge Pill â”€â”€ */
+/* - ScholarVault Badge Pill - */
 .sv-badge-pill {
   display: inline-flex;
   align-items: stretch;
@@ -89,7 +89,7 @@
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
-/* â”€â”€â”€ BALANCED HERO WIDGETS â”€â”€â”€ */
+/* - BALANCED HERO WIDGETS - */
 .hero-widgets-row {
   display: flex;
   flex-wrap: wrap;
@@ -209,7 +209,7 @@
 --navbar-h: 72px;
 }
 
-/* â”€â”€â”€ BADGE SCORE LABEL PULSE â”€â”€â”€ */
+/* - BADGE SCORE LABEL PULSE - */
 @keyframes badgeLabelPulse {
 
   0%,
@@ -224,7 +224,7 @@
   }
 }
 
-/* â”€â”€â”€ PROCEEDINGS BOOK FLOAT ANIMATION â”€â”€â”€ */
+/* - PROCEEDINGS BOOK FLOAT ANIMATION - */
 @keyframes proceedingsFloat {
 
   0%,
@@ -237,7 +237,7 @@
   }
 }
 
-/* â”€â”€â”€ RESET â”€â”€â”€ */
+/* - RESET - */
 *,
 *::before,
 *::after {
@@ -285,7 +285,7 @@ button {
   font-family: inherit;
 }
 
-/* â”€â”€â”€ SCROLL PROGRESS BAR â”€â”€â”€ */
+/* - SCROLL PROGRESS BAR - */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -297,7 +297,7 @@ button {
   transition: width 0.1s ease;
 }
 
-/* â”€â”€â”€ RECOGNITION PILLS â”€â”€â”€ */
+/* - RECOGNITION PILLS - */
 .recog-scroll {
   display: flex;
   justify-content: center;
@@ -330,7 +330,7 @@ button {
   flex-shrink: 0;
 }
 
-/* â”€â”€â”€ SCROLLBAR â”€â”€â”€ */
+/* - SCROLLBAR - */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -344,15 +344,15 @@ button {
   border-radius: 3px;
 }
 
-/* â”€â”€â”€ SELECTION â”€â”€â”€ */
+/* - SELECTION - */
 ::selection {
   background: var(--cyan);
   color: var(--navy);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    NAVBAR
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .navbar {
   position: fixed;
   top: 0;
@@ -390,10 +390,10 @@ button {
   gap: 10px;
   min-width: 0;
   flex-shrink: 1;
-  /* overflow removed â€” was clipping logo image on mobile */
+  /* overflow removed - was clipping logo image on mobile */
 }
 
-/* â”€â”€â”€ ICAHCR Logo Image â”€â”€â”€ */
+/* - ICAHCR Logo Image - */
 .navbar__logo-img {
   width: 58px;
   height: 58px;
@@ -416,7 +416,7 @@ button {
   display: none;
 }
 
-/* â”€â”€ Restore navbar text alongside the logo icon â”€â”€ */
+/* - Restore navbar text alongside the logo icon - */
 .navbar__logo-text {
   display: flex;
   flex-direction: column;
@@ -436,7 +436,7 @@ button {
   font-size: 12px;
   font-weight: 600;
   color: #00e676;
-  /* Green â€” matches conference branding */
+  /* Green - matches conference branding */
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
@@ -514,7 +514,7 @@ button {
   transform-origin: center;
 }
 
-/* Hamburger â†’ X animation */
+/* Hamburger - X animation */
 .navbar__hamburger.open span:nth-child(1) {
   transform: translateY(7px) rotate(45deg);
 }
@@ -565,9 +565,9 @@ button {
   display: flex;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    HERO SECTION
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .hero {
   position: relative;
   min-height: 100vh;
@@ -661,7 +661,7 @@ button {
   }
 }
 
-/* â”€â”€ ANIMATION SAFETY â”€â”€ */
+/* - ANIMATION SAFETY - */
 .hero__title,
 .hero__desc,
 .hero__meta,
@@ -770,7 +770,7 @@ button {
   transform: translateY(-2px);
 }
 
-/* Hero Right â€” DNA Animation */
+/* Hero Right - DNA Animation */
 .hero__visual {
   position: relative;
   display: flex;
@@ -911,9 +911,9 @@ button {
   margin-top: 2px;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    COUNTDOWN
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .countdown-section {
   padding: 2rem;
   background: linear-gradient(90deg, rgba(0, 102, 255, 0.12), rgba(0, 212, 255, 0.12));
@@ -980,9 +980,9 @@ button {
   margin-top: 8px;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    SECTIONS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .section {
   padding: 80px 2rem;
 }
@@ -1049,9 +1049,9 @@ button {
   margin-bottom: 3rem;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    CARDS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .card {
   background: var(--glass);
   border: 1px solid var(--glass-border);
@@ -1079,7 +1079,7 @@ button {
   line-height: 1.7;
 }
 
-/* Lucide icon in card slots â€” replaces emoji */
+/* Lucide icon in card slots - replaces emoji */
 .card__icon {
   width: 48px;
   height: 48px;
@@ -1121,7 +1121,7 @@ button {
   stroke: var(--white);
 }
 
-/* Date card icon â€” show emoji, SVG when available */
+/* Date card icon - show emoji, SVG when available */
 .date-card__icon {
   width: 44px;
   height: 44px;
@@ -1166,9 +1166,9 @@ button {
   gap: 1.5rem;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    IMPORTANT DATES
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .dates-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -1241,9 +1241,9 @@ button {
   font-weight: 600;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    SV BADGE / TRUST SCORE
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .sv-badge {
   background: linear-gradient(135deg, var(--navy-3), var(--navy-2));
   border: 1px solid rgba(0, 212, 255, 0.3);
@@ -1328,7 +1328,7 @@ button {
 }
 
 .sv-badge__check::before {
-  content: 'âœ“';
+  content: '-';
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -1342,9 +1342,9 @@ button {
   flex-shrink: 0;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    FORMS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .form-container {
   background: var(--glass);
   border: 1px solid var(--glass-border);
@@ -1493,9 +1493,9 @@ textarea {
   font-size: 15px;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    REGISTRATION TIERS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .tier-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -1583,8 +1583,8 @@ textarea {
 }
 
 .tier-features li::before {
-  content: 'âœ“';
-  color: var(--green);
+  content: '\2713';
+  color: var(--cyan);
   font-weight: 700;
   flex-shrink: 0;
 }
@@ -1616,9 +1616,9 @@ textarea {
   color: white;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    MODAL / POPUP
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -1682,9 +1682,9 @@ textarea {
   position: relative;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    TOAST NOTIFICATIONS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .toast-container {
   position: fixed;
   top: 2rem;
@@ -1748,9 +1748,9 @@ textarea {
   flex-shrink: 0;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    FOOTER
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .footer {
   background: var(--navy-2);
   border-top: 1px solid var(--glass-border);
@@ -1831,9 +1831,9 @@ textarea {
   font-weight: 600;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    SDG PILLS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .sdg-grid {
   display: flex;
   flex-wrap: wrap;
@@ -1870,9 +1870,9 @@ textarea {
   color: white;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    SCROLL ANIMATIONS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 
 /* Safety: if JS never fires, show elements after 3s */
 @keyframes forceVisible {
@@ -1893,10 +1893,10 @@ textarea {
   opacity: 1;
   transform: translateY(0);
   animation: none;
-  /* JS took over â€” cancel the CSS fallback */
+  /* JS took over - cancel the CSS fallback */
 }
 
-/* â”€â”€ Hero cinematic animations â”€â”€ */
+/* - Hero cinematic animations - */
 @keyframes scanDown {
   0% {
     top: 0;
@@ -1967,9 +1967,9 @@ textarea {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    RESPONSIVE
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 @media (max-width: 1024px) {
   .hero__content {
     grid-template-columns: 1fr;
@@ -2002,7 +2002,7 @@ textarea {
   }
 }
 
-/* â”€â”€ Proceedings responsive â”€â”€ */
+/* - Proceedings responsive - */
 @media (max-width: 900px) {
   #proceedings .container>div {
     grid-template-columns: 1fr !important;
@@ -2047,7 +2047,7 @@ textarea {
     text-align: center;
   }
 
-  /* Countdown single row on mobile â€” scale down units */
+  /* Countdown single row on mobile - scale down units */
   .countdown-timer {
     flex-wrap: nowrap;
     gap: 6px;
@@ -2099,13 +2099,13 @@ textarea {
     font-size: 2.5rem !important;
   }
 
-  /* â”€â”€ Mobile viewport fit: compress hero element spacing â”€â”€ */
-  /* Badge: 1.8rem â†’ 1rem */
+  /* - Mobile viewport fit: compress hero element spacing - */
+  /* Badge: 1.8rem - 1rem */
   #heroBadge {
     margin-bottom: 1rem !important;
   }
 
-  /* Title: 1rem â†’ 0.6rem */
+  /* Title: 1rem - 0.6rem */
   .hero__title {
     margin-bottom: 0.6rem !important;
   }
@@ -2117,17 +2117,17 @@ textarea {
     margin-bottom: 1.25rem !important;
   }
 
-  /* Meta chips: 2.2rem â†’ 1.25rem */
+  /* Meta chips: 2.2rem - 1.25rem */
   .hero__meta {
     margin-bottom: 1.25rem !important;
   }
 
-  /* CTA buttons: 2.2rem â†’ 1rem */
+  /* CTA buttons: 2.2rem - 1rem */
   .hero__actions {
     margin-bottom: 1rem !important;
   }
 
-  /* Organized by â€” subtle adjustments for mobile */
+  /* Organized by - subtle adjustments for mobile */
   #heroOrgBy {
     padding: 8px 12px !important;
     gap: 8px !important;
@@ -2208,9 +2208,9 @@ textarea {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    UTILITY CLASSES
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .text-cyan {
   color: var(--cyan);
 }
@@ -2343,9 +2343,9 @@ textarea {
   color: var(--amber);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    LUCIDE ICON SYSTEM
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .icon {
   display: inline-flex;
   align-items: center;
@@ -2358,7 +2358,7 @@ textarea {
   display: block;
 }
 
-/* Icon in card slots â€” replaces emoji */
+/* Icon in card slots - replaces emoji */
 .card__icon {
   width: 48px;
   height: 48px;
@@ -2390,9 +2390,9 @@ textarea {
   color: var(--cyan);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    PAGE ENTRANCE ANIMATION
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .page-enter {
   animation: pageEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -2479,9 +2479,9 @@ textarea {
   transform: scale(1);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    PREMIUM FORM SUCCESS STATE
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .form-success {
   display: none;
   text-align: center;
@@ -2591,9 +2591,9 @@ textarea {
   justify-content: center;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    LOADING SPINNER
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .spinner {
   display: inline-block;
   width: 18px;
@@ -2611,9 +2611,9 @@ textarea {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    BUTTON MICRO ANIMATIONS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .btn-primary,
 .btn-outline,
 .btn-register,
@@ -2654,9 +2654,9 @@ textarea {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    HERO SECTION ENHANCEMENTS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .hero__badge {
   animation: badgeEntrance 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -2703,9 +2703,9 @@ textarea {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    CARD HOVER ENHANCEMENTS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .card {
   position: relative;
   overflow: hidden;
@@ -2727,9 +2727,9 @@ textarea {
   left: 140%;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    SECTION HEADER ANIMATION LINE
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .section-tag::before {
   transform-origin: left;
   animation: lineGrow 0.6s ease forwards;
@@ -2745,9 +2745,9 @@ textarea {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    INPUT FIELD ANIMATION ON FOCUS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -2764,9 +2764,9 @@ textarea:focus {
   transform: translateY(-1px);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    NAVBAR ENTRANCE
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .navbar {
   animation: navSlideDown 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
@@ -2797,9 +2797,9 @@ textarea:focus {
   transform: translateY(-7px) rotate(-45deg);
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    COUNTDOWN NUMBER FLIP
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .countdown-unit__num {
   transition: transform 0.2s ease;
 }
@@ -2820,9 +2820,9 @@ textarea:focus {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    TOAST ENHANCEMENTS
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .toast {
   display: flex;
   align-items: center;
@@ -2864,9 +2864,9 @@ textarea:focus {
   align-items: center;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   MOBILE â€” ADDITIONAL POLISH
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+/* -
+   MOBILE - ADDITIONAL POLISH
+   - */
 @media (max-width: 768px) {
   .form-container {
     padding: 1.5rem;
@@ -2964,9 +2964,9 @@ textarea:focus {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    PAGE TRANSITION OVERLAY
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .page-transition-overlay {
   position: fixed;
   inset: 0;
@@ -2987,9 +2987,9 @@ textarea:focus {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    SCROLL PROGRESS BAR
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .scroll-progress {
   position: fixed;
   top: 0;
@@ -3002,9 +3002,9 @@ textarea:focus {
   pointer-events: none;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* -
    FAQ ACCORDION
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 .faq-item {
   background: var(--glass);
   border: 1px solid var(--glass-border);
@@ -3079,10 +3079,10 @@ textarea:focus {
   }
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-   HERO MOBILE â€” REDUCE BOTTOM PADDING
+/* -
+   HERO MOBILE - REDUCE BOTTOM PADDING
    So trust badges don't crowd the ECG line
-   â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+   - */
 @media (max-width: 768px) {
   .hero--cinematic {
     padding-bottom: 120px !important;
