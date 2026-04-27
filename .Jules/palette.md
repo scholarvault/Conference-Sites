@@ -9,3 +9,7 @@
 ## 2026-04-26 - Missing `aria-hidden` and `aria-label` on floating action icon buttons
 **Learning:** Found floating action buttons (like scroll to top) missing `aria-label` and `aria-hidden="true"` on their inner SVGs. While they might have a `title` attribute, an explicit `aria-label` on the button and `aria-hidden="true"` on the SVG ensures screen readers provide clear context without verbose/confusing output about the SVG structure itself.
 **Action:** When working with floating action buttons or icon-only buttons in the UI, consistently apply `aria-hidden="true"` on their inner SVGs and ensure the button element has a clear, descriptive `aria-label`.
+
+## 2026-04-27 - [Standardized Async Loading States]
+**Learning:** Found that several async forms (like speaker or paper submissions) manually set button text to '⏳ Submitting...' which lacks the visual polish of a true loading spinner and can break layout or screen reader experience compared to a standard indicator.
+**Action:** Use the existing `setFormLoading(formWrap, true)` helper from `main.js` which provides a standardized, accessible CSS spinner and properly manages disabled states.
