@@ -117,10 +117,10 @@
 <script>
 function renderCard(m) {
   return `<div class="committee-card">
-    <div class="committee-placeholder">${m.name.charAt(0)}</div>
-    <div class="committee-name">${m.name}</div>
-    <div class="committee-role">${m.expertise || 'Committee Member'}</div>
-    <div class="committee-inst">${m.institution || ''}</div>
+    <div class="committee-placeholder">${escapeHtml(m.name).charAt(0)}</div>
+    <div class="committee-name">${escapeHtml(m.name)}</div>
+    <div class="committee-role">${escapeHtml(m.expertise) || 'Committee Member'}</div>
+    <div class="committee-inst">${escapeHtml(m.institution) || ''}</div>
   </div>`;
 }
 

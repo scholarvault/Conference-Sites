@@ -12,3 +12,8 @@
 **Vulnerability:** Unsanitized user input was being directly injected into the DOM via `innerHTML` within the shared `showToast` UI function. For example, subscribing with `<script>alert(1)</script>` or displaying an error message containing unsanitized input would execute malicious code.
 **Learning:** Using template literals with `innerHTML` to display dynamic user feedback exposes the client to DOM-based Cross-Site Scripting (XSS).
 **Prevention:** When creating UI elements dynamically, define the HTML structure safely and inject dynamic values using `textContent` (e.g., `element.querySelector('.toast-msg').textContent = message`) to ensure the input is treated strictly as text.
+
+## 2026-04-27 - DOM XSS in Content Rendering (innerHTML)
+**Vulnerability:** Unsanitized user data from Supabase was being directly mapped into HTML strings and injected into the DOM via `innerHTML` in `speakers.html` and `committee.html`.
+**Learning:** Even though the data is fetched securely from a database, it represents user-supplied content (applications). Rendering it dynamically using template literals inside `innerHTML` without escaping leads to Stored Cross-Site Scripting (XSS).
+**Prevention:** Always use a global `escapeHtml` utility when interpolating dynamic data into `innerHTML` strings, or use `textContent` where applicable to avoid HTML parsing.

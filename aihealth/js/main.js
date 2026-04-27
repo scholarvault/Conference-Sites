@@ -25,6 +25,17 @@ const SV_CONFIG = {
 const { createClient } = supabase;
 const db = createClient(SV_CONFIG.supabaseUrl, SV_CONFIG.supabaseKey);
 
+/* -- HELPERS -- */
+function escapeHtml(unsafe) {
+  if (!unsafe) return "";
+  return String(unsafe)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 /* --------------------------------------------------------------------------
    NAVBAR
    -------------------------------------------------------------------------- */

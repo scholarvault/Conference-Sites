@@ -159,14 +159,14 @@ async function loadSpeakers() {
     grid.innerHTML = data.map(s => `
       <div class="speaker-card">
         ${s.photo_url
-          ? `<img class="speaker-photo" src="${s.photo_url}" alt="${s.name}" loading="lazy" />`
-          : `<div class="speaker-placeholder">${s.name.charAt(0)}</div>`
+          ? `<img class="speaker-photo" src="${escapeHtml(s.photo_url)}" alt="${escapeHtml(s.name)}" loading="lazy" />`
+          : `<div class="speaker-placeholder">${escapeHtml(s.name).charAt(0)}</div>`
         }
-        <div class="speaker-badge ${s.talk_type && s.talk_type.includes('Keynote') ? 'keynote' : ''}">${s.talk_type || 'Invited Talk'}</div>
-        <div class="speaker-name">${s.name}</div>
-        <div class="speaker-designation">${s.designation || ''}</div>
-        <div class="speaker-institution">${s.institution || ''}</div>
-        ${s.topic ? `<div class="speaker-topic">"${s.topic}"</div>` : ''}
+        <div class="speaker-badge ${s.talk_type && s.talk_type.includes('Keynote') ? 'keynote' : ''}">${escapeHtml(s.talk_type) || 'Invited Talk'}</div>
+        <div class="speaker-name">${escapeHtml(s.name)}</div>
+        <div class="speaker-designation">${escapeHtml(s.designation) || ''}</div>
+        <div class="speaker-institution">${escapeHtml(s.institution) || ''}</div>
+        ${s.topic ? `<div class="speaker-topic">"${escapeHtml(s.topic)}"</div>` : ''}
       </div>
     `).join('');
   } catch(e) {
