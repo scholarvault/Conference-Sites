@@ -324,11 +324,10 @@ document.getElementById('paperForm').addEventListener('submit', async (e) => {
   const consent = document.getElementById('original');
   if (!consent.checked) { showToast('Please confirm the originality statement.', 'error'); return; }
 
-  const btn = document.getElementById('paperSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Uploading &amp; Submitting...';
-
   const fd = new FormData(form);
+
+  // VANGUARD: Use standard form loading and success helpers
+  setFormLoading(document.getElementById('paperFormWrap'), true);
   const data = Object.fromEntries(fd.entries());
 
   try {
@@ -348,8 +347,7 @@ document.getElementById('paperForm').addEventListener('submit', async (e) => {
       file_url: fileUrl, status: 'pending'
     });
 
-    form.style.display = 'none';
-    document.getElementById('paperSuccess').classList.add('show');
+    showFormSuccess(document.getElementById('paperFormWrap'));
     trackEvent('paper_submitted', { has_file: !!fileUrl });
     showToast('Paper submitted! Check your email for the confirmation.', 'success');
     // Send confirmation email
@@ -361,8 +359,7 @@ document.getElementById('paperForm').addEventListener('submit', async (e) => {
   } catch (err) {
     showToast('Submission failed. Please try again.', 'error');
     console.error(err);
-    btn.disabled = false;
-    btn.textContent = 'Submit Paper →';
+    setFormLoading(document.getElementById('paperFormWrap'), false);
   }
 });
 </script>
