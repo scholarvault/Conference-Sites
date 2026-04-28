@@ -1,3 +1,25 @@
+# Robots.txt for ICAES 2026 Conference
 User-agent: *
 Allow: /
+
+# Sitemap URL
 Sitemap: https://isiaisgs2026.scholarvault.in/sitemap.xml
+
+# AI bot permissions
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
