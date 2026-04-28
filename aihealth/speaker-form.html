@@ -189,7 +189,7 @@
             <textarea name="speaker_bio" rows="3" placeholder="Prof. Rajesh is a faculty member at IIT Madras with 15+ years of research in medical imaging AI..."></textarea>
           </div>
 
-          <button type="submit" class="form-submit" id="speakerSubmitBtn">Submit Speaker Application →</button>
+          <button type="submit" class="form-submit" id="speakerSubmitBtn" data-default-text="Submit Speaker Application →">Submit Speaker Application →</button>
         </form>
 
         <!-- Success State -->
@@ -343,9 +343,9 @@ initDropZone('photoDropZone', 'photoFile', 'photoFileName');
 /* ─── FORM SUBMIT ─── */
 document.getElementById('speakerForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('speakerSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Uploading & Submitting...';
+  // VANGUARD: Standardized form loading/success states using js/main.js helpers
+  const formWrap = document.getElementById('speakerForm').parentElement;
+  setFormLoading(formWrap, true);
 
   const fd   = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
@@ -370,8 +370,7 @@ document.getElementById('speakerForm').addEventListener('submit', async (e) => {
       photo_url: photoUrl, status: 'pending'
     });
 
-    e.target.style.display = 'none';
-    document.getElementById('speakerSuccess').classList.add('show');
+    showFormSuccess(formWrap);
     trackEvent('speaker_applied', { has_photo: !!photoUrl });
     // Send confirmation email
     sendEmail('speaker_application', {
@@ -383,8 +382,7 @@ document.getElementById('speakerForm').addEventListener('submit', async (e) => {
   } catch (err) {
     showToast('Submission failed. Please try again.', 'error');
     console.error(err);
-    btn.disabled = false;
-    btn.textContent = 'Submit Speaker Application →';
+    setFormLoading(formWrap, false);
   }
 });
 </script>
