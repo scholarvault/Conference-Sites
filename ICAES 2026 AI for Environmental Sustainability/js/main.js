@@ -35,8 +35,21 @@ function initNavbar() {
     }
   };
   onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
+
+  // ⚡ BOLT: Throttle scroll and resize events using rAF to prevent layout thrashing and high CPU usage.
+  let ticking = false;
+  const requestTick = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  window.addEventListener("scroll", requestTick, { passive: true });
+  window.addEventListener("resize", requestTick, { passive: true });
 
   if (hamburger && mobileMenu) {
     hamburger.addEventListener("click", () => {
@@ -69,7 +82,18 @@ function initScrollProgress() {
     bar.style.width = `${width}%`;
   };
   update();
-  window.addEventListener("scroll", update, { passive: true });
+
+  // ⚡ BOLT: Throttle scroll events using rAF to ensure smooth main thread performance.
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 }
 
 function initScrollTop() {
@@ -81,7 +105,18 @@ function initScrollTop() {
 
   const onScroll = () => btn.classList.toggle("visible", window.scrollY > 400);
   onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
+
+  // ⚡ BOLT: Prevent continuous scroll events from blocking the main thread during fast scrolling.
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        onScroll();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 
   btn.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -116,8 +151,21 @@ function initParallax() {
     });
   };
   update();
-  window.addEventListener("scroll", update, { passive: true });
-  window.addEventListener("resize", update, { passive: true });
+
+  // ⚡ BOLT: Throttle scroll and resize events to prevent parallax calculations from degrading scroll frame rate.
+  let ticking = false;
+  const requestTick = () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        update();
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
+  window.addEventListener("scroll", requestTick, { passive: true });
+  window.addEventListener("resize", requestTick, { passive: true });
 }
 
 function initFaq() {
