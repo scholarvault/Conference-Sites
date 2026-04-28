@@ -1,6 +1,25 @@
+# Robots.txt for AI Health Conference
 User-agent: *
 Allow: /
 
-Disallow: /api/
-
+# Sitemap URL
 Sitemap: https://aihealth.scholarvault.in/sitemap.xml
+
+# AI bot permissions
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
