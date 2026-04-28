@@ -116,11 +116,15 @@
 <script src="js/main.js"></script>
 <script>
 function renderCard(m) {
+  const name = m.name ? escapeHtml(m.name) : '';
+  const expertise = m.expertise ? escapeHtml(m.expertise) : '';
+  const institution = m.institution ? escapeHtml(m.institution) : '';
+
   return `<div class="committee-card">
-    <div class="committee-placeholder">${m.name.charAt(0)}</div>
-    <div class="committee-name">${m.name}</div>
-    <div class="committee-role">${m.expertise || 'Committee Member'}</div>
-    <div class="committee-inst">${m.institution || ''}</div>
+    <div class="committee-placeholder">${name.charAt(0)}</div>
+    <div class="committee-name">${name}</div>
+    <div class="committee-role">${expertise || 'Committee Member'}</div>
+    <div class="committee-inst">${institution}</div>
   </div>`;
 }
 

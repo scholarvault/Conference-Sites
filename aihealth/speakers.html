@@ -156,19 +156,27 @@ async function loadSpeakers() {
       return;
     }
 
-    grid.innerHTML = data.map(s => `
+    grid.innerHTML = data.map(s => {
+      const name = s.name ? escapeHtml(s.name) : '';
+      const photo_url = s.photo_url ? escapeHtml(s.photo_url) : '';
+      const talk_type = s.talk_type ? escapeHtml(s.talk_type) : '';
+      const designation = s.designation ? escapeHtml(s.designation) : '';
+      const institution = s.institution ? escapeHtml(s.institution) : '';
+      const topic = s.topic ? escapeHtml(s.topic) : '';
+
+      return `
       <div class="speaker-card">
-        ${s.photo_url
-          ? `<img class="speaker-photo" src="${s.photo_url}" alt="${s.name}" loading="lazy" />`
-          : `<div class="speaker-placeholder">${s.name.charAt(0)}</div>`
+        ${photo_url
+          ? `<img class="speaker-photo" src="${photo_url}" alt="${name}" loading="lazy" />`
+          : `<div class="speaker-placeholder">${name.charAt(0)}</div>`
         }
-        <div class="speaker-badge ${s.talk_type && s.talk_type.includes('Keynote') ? 'keynote' : ''}">${s.talk_type || 'Invited Talk'}</div>
-        <div class="speaker-name">${s.name}</div>
-        <div class="speaker-designation">${s.designation || ''}</div>
-        <div class="speaker-institution">${s.institution || ''}</div>
-        ${s.topic ? `<div class="speaker-topic">"${s.topic}"</div>` : ''}
+        <div class="speaker-badge ${talk_type && talk_type.includes('Keynote') ? 'keynote' : ''}">${talk_type || 'Invited Talk'}</div>
+        <div class="speaker-name">${name}</div>
+        <div class="speaker-designation">${designation}</div>
+        <div class="speaker-institution">${institution}</div>
+        ${topic ? `<div class="speaker-topic">"${topic}"</div>` : ''}
       </div>
-    `).join('');
+    `;}).join('');
   } catch(e) {
     grid.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--white-40);grid-column:1/-1;">Could not load speaker profiles.</div>';
   }
