@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -53,6 +53,14 @@
     .upload-status { font-size: 12px; color: var(--white-40); margin-top: 6px; text-align: center; }
   </style>
   <link rel="icon" href="assets/icahcr-logo.png" />
+    <!-- Microsoft Clarity Tracking -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "wh5ekajcop");
+    </script>
 </head>
 <body>
 <nav class="navbar" id="navbar">
@@ -196,7 +204,7 @@
             <div class="file-drop-text">
               <strong>Click to upload</strong> or drag &amp; drop your paper here
             </div>
-            <div class="file-drop-hint">Accepted formats: PDF, DOC, DOCX &nbsp;·&nbsp; Max size: 10 MB</div>
+            <div class="file-drop-hint">Accepted formats: PDF, DOC, DOCX &nbsp;·&nbsp; Max size: 10 MB<br><a href="assets/ICAHCR2026_Abstract_Template.docx" download style="color:var(--cyan);text-decoration:underline;">Download Official Abstract Template</a></div>
             <div class="file-selected-name" id="paperFileName"></div>
             <div class="upload-progress" id="paperUploadProgress">
               <div class="upload-progress-bar" id="paperProgressBar"></div>
@@ -342,7 +350,11 @@ document.getElementById('paperForm').addEventListener('submit', async (e) => {
     await insertRecord('conf_paper_submissions', {
       name: data.name, email: data.email, phone: data.phone,
       institution: data.institution, department: data.department,
-      paper_title: data.paper_title, abstract: data.abstract,
+      country: data.country,
+      paper_title: data.paper_title, 
+      track: data.track,
+      paper_type: data.paper_type,
+      abstract: data.abstract,
       keywords: data.keywords, coauthors: data.coauthors,
       file_url: fileUrl, status: 'pending'
     });

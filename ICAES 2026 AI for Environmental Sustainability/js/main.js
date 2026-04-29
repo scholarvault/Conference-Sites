@@ -509,6 +509,10 @@ function initDownloadButtons() {
       form.reset();
       closeModal("downloadModal");
       showToast("The requested resource is on its way to your email.", "success");
+      
+      if ((wrap.dataset.type || "brochure") === "brochure") {
+        window.open('brochure.html?print=true', '_blank');
+      }
     } catch {
       showToast("We could not process that request. Please try again.", "error");
     } finally {
@@ -587,7 +591,11 @@ function loadAnalytics() {
       t.async = 1;
       t.src = `https://www.clarity.ms/tag/${i}`;
       y = l.getElementsByTagName(r)[0];
-      y.parentNode.insertBefore(t, y);
+      if (y && y.parentNode) {
+        y.parentNode.insertBefore(t, y);
+      } else {
+        l.head.appendChild(t);
+      }
     }(window, document, "clarity", "script", SV_CONFIG.clarityId));
   }
 }

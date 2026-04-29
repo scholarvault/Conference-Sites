@@ -1,213 +1,485 @@
 <!doctype html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Submit Paper - International Conference on Interdisciplinary AI and Sustainable Global Systems (ISIAI-SGS 2026)</title>
+    <title>Submit Paper - ISIAI-SGS 2026</title>
     <meta name="description" content="Submit your research paper to ISIAI-SGS 2026. Peer-reviewed tracks on AI, sustainability, and environmental systems." />
     <link rel="icon" type="image/png" href="assets/favicon.png" />
     <link rel="apple-touch-icon" href="assets/favicon.png" />
-    <meta property="og:title" content="Submit Paper - ISIAI-SGS 2026" />
-    <meta property="og:description" content="Official portal for submitting research papers to the 2026 International Conference on Interdisciplinary AI." />
-    <meta property="og:image" content="https://isiaisgs2026.scholarvault.in/assets/og-image.png" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://isiaisgs2026.scholarvault.in/assets/og-image.png" />
-    <meta name="ai-optimized" content="true" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="css/style.css" />
-  
+    <style>
+        /* ─── PREMIUM FORM STYLES (WHITE THEME) ─── */
+        .premium-shell { 
+          max-width: 1000px; 
+          margin: 0 auto; 
+          background: #ffffff;
+          border: 1px solid rgba(0, 0, 0, 0.06);
+          border-radius: 32px;
+          padding: 4rem;
+          box-shadow: 0 40px 100px rgba(0, 0, 0, 0.08);
+          position: relative;
+          z-index: 10;
+        }
+        @media (max-width: 768px) { 
+          .premium-shell { padding: 2rem 1.5rem; border-radius: 20px; } 
+        }
 
+        .premium-form-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 32px;
+        }
+        @media (max-width: 768px) {
+          .premium-form-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        .field { 
+          display: flex; 
+          flex-direction: column; 
+          gap: 12px;
+          width: 100%;
+        }
+        .field.full { grid-column: span 2; }
+        @media (max-width: 768px) { .field.full { grid-column: span 1; } }
+
+        .field label { 
+          font-family: var(--font-display);
+          font-size: 14px; 
+          font-weight: 700; 
+          color: var(--ink-900);
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
+        }
+        
+        .field input, .field select, .field textarea {
+          width: 100% !important;
+          box-sizing: border-box;
+          background: #fcfcfc;
+          border: 1.5px solid #e2e8f0;
+          border-radius: 14px;
+          padding: 16px 20px;
+          color: var(--ink-950);
+          font-size: 16px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .field input:focus, .field select:focus, .field textarea:focus {
+          border-color: #7FE04B;
+          background: #ffffff;
+          outline: none;
+          box-shadow: 0 0 0 4px rgba(127, 224, 75, 0.1);
+          transform: translateY(-1px);
+        }
+
+        .req { color: #ff4d4d; margin-left: 3px; font-weight: 800; }
+
+        /* ─── FILE UPLOAD ZONE (LIGHT) ─── */
+        .file-drop-zone {
+          position: relative;
+          border: 2px dashed #cbd5e1;
+          border-radius: 20px;
+          padding: 4rem 2rem;
+          text-align: center;
+          cursor: pointer;
+          transition: all 0.4s ease;
+          background: #f8fafc;
+          overflow: hidden;
+        }
+        .file-drop-zone:hover, .file-drop-zone.drag-over {
+          border-color: #7FE04B;
+          background: rgba(127, 224, 75, 0.05);
+          box-shadow: 0 0 30px rgba(127, 224, 75, 0.05);
+        }
+        .file-drop-zone.has-file {
+          border-color: #7FE04B;
+          background: rgba(127, 224, 75, 0.08);
+        }
+        .file-drop-zone input[type="file"] {
+          position: absolute; inset: 0; width: 100%; height: 100%;
+          opacity: 0; cursor: pointer; z-index: 2;
+        }
+        .file-drop-icon { font-size: 3rem; margin-bottom: 16px; display: block; color: #7FE04B; opacity: 0.9; }
+        .file-drop-text { font-size: 16px; color: var(--ink-900); font-weight: 500; }
+        .file-drop-text strong { color: #5cb85c; text-decoration: underline; }
+        .file-drop-hint { font-size: 13px; color: var(--ink-40); margin-top: 10px; }
+        .file-selected-name {
+          display: none; margin-top: 1.5rem; font-size: 15px;
+          color: #ffffff; font-weight: 700;
+          align-items: center; justify-content: center; gap: 12px;
+          background: #7FE04B;
+          padding: 10px 20px;
+          border-radius: 10px;
+          animation: slideUp 0.4s ease;
+        }
+        .file-selected-name.visible { display: inline-flex; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-submit-premium {
+          background: #7FE04B;
+          color: #081210;
+          font-weight: 800;
+          font-size: 18px;
+          padding: 20px;
+          border-radius: 18px;
+          border: none;
+          margin-top: 10px;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+          cursor: pointer;
+          width: 100%;
+        }
+        .btn-submit-premium:hover {
+          transform: translateY(-4px) scale(1.01);
+          box-shadow: 0 20px 40px rgba(127, 224, 75, 0.25);
+        }
+
+        hr.premium-sep {
+          grid-column: span 2;
+          border: none;
+          border-top: 1px solid #e2e8f0;
+          margin: 10px 0;
+        }
+        @media (max-width: 768px) { hr.premium-sep { grid-column: span 1; } }
+
+        /* ─── DARK HERO SECTION OVERRIDE ─── */
+        .page-hero {
+          background: #081210;
+          background: radial-gradient(circle at 70% 30%, rgba(127, 224, 75, 0.1), transparent 40%), 
+                      linear-gradient(180deg, #081210 0%, #0c1d19 100%);
+          color: #ffffff;
+          padding-top: 160px;
+          padding-bottom: 80px; /* Tighten bottom padding */
+          position: relative;
+          overflow: hidden;
+        }
+        .page-hero__overlay, .page-hero__lightcone { display: none !important; }
+        .page-hero__title { color: #ffffff; font-weight: 800; }
+        .page-hero__title span { color: #7FE04B; }
+        .page-hero__desc { color: rgba(255, 255, 255, 0.7); max-width: 600px; }
+        .breadcrumbs span { color: rgba(255, 255, 255, 0.4); }
+        .eyebrow { 
+          background: rgba(127, 224, 75, 0.1); 
+          border: 1px solid rgba(127, 224, 75, 0.3); 
+          color: #7FE04B; 
+          font-weight: 700;
+        }
+        
+        /* Navbar on Dark Hero */
+        .navbar:not(.scrolled) .navbar__link { color: rgba(255, 255, 255, 0.8); }
+        .navbar:not(.scrolled) .navbar__logo-text strong { color: #ffffff; }
+        .navbar:not(.scrolled) .navbar__logo-text span { color: rgba(255, 255, 255, 0.4); }
+        .navbar:not(.scrolled) .btn-outline { 
+          background: transparent; 
+          border-color: rgba(255, 255, 255, 0.2); 
+          color: #ffffff; 
+        }
+
+        .navbar.scrolled { background: rgba(255, 255, 255, 0.95); }
+        .navbar.scrolled .navbar__link { color: var(--ink-80); }
+        .navbar.scrolled .navbar__logo-text strong { color: var(--ink-950); }
+        .btn-outline.scrolled { color: var(--ink-900); border-color: #e2e8f0; background: #ffffff; }
+
+        /* Sharp Section Transition */
+        .page-hero + .section { padding-top: 60px !important; }
+        .premium-shell { margin-top: -40px; position: relative; z-index: 10; }
+    </style>
+    <!-- Microsoft Clarity Tracking -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "wh5ekajcop");
+    </script>
 </head>
-<body>
+<body class="section--light">
 
-        <div class="navbar__banner" style="background: #A3E635; color: #081210; font-weight: 800; border: none; padding: 10px 0;">
+    <div class="navbar__banner" style="background: #7FE04B; color: #081210; font-weight: 800; border: none; padding: 10px 0;">
       <span>Conference Date &bull; October 15&ndash;16, 2026 &bull; Early Bird Available</span>
     </div>
+    
     <header class="navbar" id="navbar" style="top: 35px;">
       <div class="navbar__inner">
-<a class="navbar__logo" href="index.html">
-  
-  <div class="navbar__logo-text">    <strong style="font-size:1.25rem;letter-spacing:-0.02em;line-height:1;white-space:nowrap;">ISIAI-SGS 2026</strong>
-    <span style="font-size: 0.7rem; color: var(--white-40); font-weight: 600; letter-spacing: 0.02em; margin-top: 2px;">AI for Environmental Sustainability</span></div>
-</a>
-<nav class="navbar__links"><a href="index.html" class="navbar__link">Home</a><a href="about.html" class="navbar__link">About</a><a href="call-for-papers.html" class="navbar__link">Call for Papers</a><a href="speakers.html" class="navbar__link">Speakers</a><a href="committee.html" class="navbar__link">Committee</a><a href="awards.html" class="navbar__link">Awards</a><a href="blog.html" class="navbar__link">Blog</a><a href="media.html" class="navbar__link">Media</a></nav>
-<div class="navbar__cta">
-  <a class="btn-outline" href="interest-form.html">Express Interest</a>
-  <a class="btn-primary" href="register.html">Register Now</a>
-</div>
-<button class="navbar__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
-  <span></span><span></span><span></span>
-</button>
+        <a class="navbar__logo" href="index.html">
+          <div class="navbar__logo-text">
+            <strong style="font-size:1.25rem;letter-spacing:-0.02em;line-height:1;white-space:nowrap;">ISIAI-SGS 2026</strong>
+            <span style="font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em; margin-top: 2px;">AI for Environmental Sustainability</span>
+          </div>
+        </a>
+        <nav class="navbar__links">
+          <a href="index.html" class="navbar__link">Home</a>
+          <a href="about.html" class="navbar__link">About</a>
+          <a href="call-for-papers.html" class="navbar__link">Call for Papers</a>
+          <a href="speakers.html" class="navbar__link">Speakers</a>
+          <a href="committee.html" class="navbar__link">Committee</a>
+          <a href="awards.html" class="navbar__link">Awards</a>
+          <a href="blog.html" class="navbar__link">Blog</a>
+          <a href="media.html" class="navbar__link">Media</a>
+        </nav>
+        <div class="navbar__cta">
+          <a class="btn-outline" href="interest-form.html">Express Interest</a>
+          <a class="btn-primary" href="register.html">Register Now</a>
+        </div>
+        <button class="navbar__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </header>
-    <nav class="navbar__mobile" id="mobileMenu"><a href="index.html" class="">Home</a><a href="about.html" class="">About</a><a href="call-for-papers.html" class="">Call for Papers</a><a href="speakers.html" class="">Speakers</a><a href="committee.html" class="">Committee</a><a href="awards.html" class="">Awards</a><a href="blog.html" class="">Blog</a><a href="media.html" class="">Media</a><a href="interest-form.html">Express Interest</a><a href="register.html">Register</a></nav>
-  
 
-      
     <section class="page-hero">
       <div class="page-hero__lightcone"></div>
       <div class="page-hero__inner reveal">
-<div class="breadcrumbs"><span>ISIAI-SGS 2026</span><span>/</span><span>Submit Paper</span></div>
-<div class="eyebrow">Submit Paper</div>
-<h1 class="page-hero__title">Submit your <span>research paper</span></h1>
-<p class="page-hero__desc">Upload your paper, abstract, and track details for ISIAI-SGS 2026. The conference accepts interdisciplinary work across eight environmental AI tracks.</p>
+        <div class="breadcrumbs"><span>ISIAI-SGS 2026</span><span>/</span><span>Submit Paper</span></div>
+        <div class="eyebrow">SUBMIT PAPER</div>
+        <h1 class="page-hero__title">Submit your <span>research paper</span></h1>
+        <p class="page-hero__desc">Upload your paper, abstract, and track details for ISIAI-SGS 2026. The conference accepts interdisciplinary work across eight environmental AI tracks.</p>
       </div>
     </section>
-  
-      <section class="section section--mist"><div class="site-shell"><div class="form-shell reveal" id="paperWrap"><form id="paperForm" class="form-grid form-grid--single"><div class="field"><label>Author name</label><input name="name" required /></div><div class="field"><label>Email</label><input name="email" type="email" required /></div><div class="field"><label>Institution</label><input name="institution" required /></div><div class="field"><label>Country</label><input name="country" /></div><div class="field"><label>Paper title</label><input name="title" required /></div><div class="field"><label>Track</label><select name="track" required><option value="">Select track</option><option>Climate AI & Modelling</option><option>Precision Agriculture</option><option>Smart Energy Grids</option><option>Biodiversity Monitoring</option><option>Pollution Control & Sensing</option><option>Ocean & Water Systems</option><option>Carbon Accounting & LCA</option><option>Green Computing & AI Ethics</option></select></div><div class="field"><label>Keywords</label><input name="keywords" required placeholder="Climate AI, biodiversity, forecasting..." /></div><div class="field"><label>Abstract</label><textarea name="abstract" required></textarea></div><div class="field"><label>Paper file</label><input id="paperFile" type="file" accept=".pdf,.doc,.docx" required /></div><button class="btn-primary form-submit" type="submit">Upload and submit</button></form><div class="form-success"><div class="form-success__title">Paper submitted</div><p class="form-success__text">Your paper has entered the ISIAI-SGS 2026 review queue. A confirmation email is on the way.</p></div></div></div></section>
-    
 
-        <footer class="footer">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <div class="navbar__logo-text">    <strong style="font-size:1.25rem;letter-spacing:-0.02em;line-height:1;white-space:nowrap;">ISIAI-SGS 2026</strong>
-    <span style="font-size: 0.7rem; color: var(--white-40); font-weight: 600; letter-spacing: 0.02em; margin-top: 2px;">AI for Environmental Sustainability</span></div>
-          <p>The premier global forum for Artificial Intelligence in Environmental Sustainability. Exploring innovations in climate resilience, biodiversity intelligence, and sustainable systems.</p>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <img src="assets/icon-512.png" alt="ScholarVault" style="width:32px;height:32px;border-radius:8px;" />
-            <div style="display:flex;flex-direction:column;line-height:1.2;">
-              <span style="font-size: 0.8rem; color: var(--white-48);">Organised by</span>
-              <strong style="font-size: 1rem;">ScholarVault</strong>
+    <section class="section">
+      <div class="site-shell">
+        <div class="premium-shell reveal" id="paperWrap">
+          <form id="paperForm" class="premium-form-grid">
+            
+            <!-- Author Info -->
+            <div class="field">
+              <label>Author Name <span class="req">*</span></label>
+              <input name="name" required placeholder="e.g. Dr. Sarah Green" />
             </div>
-          </div>
-          <div style="margin-top:4px;">
-            <a href="badge.html" class="sv-badge-pill" style="transform:scale(0.8);transform-origin:left center;">
-              <div class="sv-badge-pill__left">
-                
-                <div class="sv-badge-pill__name">Scholar<span>Vault</span></div>
+            <div class="field">
+              <label>Email <span class="req">*</span></label>
+              <input name="email" type="email" required placeholder="sarah.g@university.edu" />
+            </div>
+            
+            <div class="field">
+              <label>Phone Number</label>
+              <input name="phone" type="tel" placeholder="+1 234 567 890" />
+            </div>
+            <div class="field">
+              <label>Institution <span class="req">*</span></label>
+              <input name="institution" required placeholder="University / Organisation" />
+            </div>
+
+            <div class="field">
+              <label>Department / Faculty</label>
+              <input name="department" placeholder="e.g. Environmental Science" />
+            </div>
+            <div class="field">
+              <label>Country <span class="req">*</span></label>
+              <input name="country" required placeholder="e.g. United Kingdom" />
+            </div>
+
+            <hr class="premium-sep" />
+
+            <!-- Paper Info -->
+            <div class="field full">
+              <label>Paper Title <span class="req">*</span></label>
+              <input name="title" required placeholder="Enter the full title of your research paper" />
+            </div>
+
+            <div class="field">
+              <label>Research Track <span class="req">*</span></label>
+              <select name="track" required>
+                <option value="">Select track</option>
+                <option>Climate AI & Modelling</option>
+                <option>Precision Agriculture</option>
+                <option>Smart Energy Grids</option>
+                <option>Biodiversity Monitoring</option>
+                <option>Pollution Control & Sensing</option>
+                <option>Ocean & Water Systems</option>
+                <option>Carbon Accounting & LCA</option>
+                <option>Green Computing & AI Ethics</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Paper Type <span class="req">*</span></label>
+              <select name="paper_type" required>
+                <option value="">Select type</option>
+                <option>Full Research Paper</option>
+                <option>Short Paper / Case Study</option>
+                <option>Review Article</option>
+                <option>Poster Presentation</option>
+              </select>
+            </div>
+
+            <div class="field full">
+              <label>Keywords <span class="req">*</span></label>
+              <input name="keywords" required placeholder="e.g. Climate AI, biodiversity, forecasting..." />
+            </div>
+
+            <div class="field full">
+              <label>Abstract (250-500 words) <span class="req">*</span></label>
+              <textarea name="abstract" required rows="6" placeholder="Summarise your research objectives, methodology, and findings..."></textarea>
+            </div>
+
+            <div class="field full">
+              <label>Co-Authors (comma separated, if any)</label>
+              <input name="coauthors" placeholder="e.g. Prof. Alan Turing, Dr. Ada Lovelace" />
+            </div>
+
+            <!-- Drag & Drop Upload -->
+            <div class="field full">
+              <label>Upload Full Paper (PDF/DOC) <span class="req">*</span></label>
+              <div class="file-drop-zone" id="paperDropZone">
+                <input id="paperFile" type="file" accept=".pdf,.doc,.docx" required />
+                <span class="file-drop-icon"><i data-lucide="upload-cloud"></i></span>
+                <div class="file-drop-text">
+                  <strong>Click to upload</strong> or drag &amp; drop your paper here
+                </div>
+                <div class="file-drop-hint">Accepted formats: PDF, DOC, DOCX (Max 10MB)</div>
+                <div class="file-selected-name" id="fileNameDisplay"></div>
               </div>
-              <div class="sv-badge-pill__right sv-badge-pill__right--platinum">
-                <span class="sv-badge-pill__tier sv-badge-pill__tier--platinum">Platinum</span>
-                <span class="sv-badge-pill__score">95<sub>/100</sub></span>
-              </div>
-            </a>
+            </div>
+
+            <!-- Consent & Submit -->
+            <div style="grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 12px; margin-top: 10px; padding: 0 4px;">
+              <input type="checkbox" required style="width: 20px; height: 20px; margin-top: 4px; flex-shrink: 0; cursor: pointer;" id="consent" />
+              <label for="consent" style="text-transform: none; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--ink-80); cursor: pointer;">
+                I confirm that this paper is original work, has not been published elsewhere, and all co-authors have consented to this submission. <span class="req">*</span>
+              </label>
+            </div>
+
+            <div style="grid-column: 1 / -1;">
+              <button class="btn-submit-premium" type="submit">
+                 Submit Research Paper <i data-lucide="arrow-right" style="width:20px;"></i>
+              </button>
+            </div>
+          </form>
+
+          <div class="form-success">
+             <div style="background: rgba(163, 230, 53, 0.1); width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; color: #A3E635;">
+                <i data-lucide="check-circle-2" style="width:48px; height:48px;"></i>
+             </div>
+            <div class="form-success__title" style="font-size:2rem; margin-bottom:1rem;">Submission Successful</div>
+            <p class="form-success__text" style="font-size:1.1rem; max-width:600px; margin:0 auto;">Your research paper has been received and is now in the review queue. A confirmation email has been sent to your inbox.</p>
+            <br /><br />
+            <a href="index.html" class="btn-outline">Return to Home</a>
           </div>
         </div>
+      </div>
+    </section>
 
+    <footer class="footer">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="navbar__logo-text">    
+            <strong style="font-size:1.25rem;letter-spacing:-0.02em;line-height:1;white-space:nowrap;">ISIAI-SGS 2026</strong>
+            <span style="font-size: 0.7rem; color: var(--white-40); font-weight: 600; letter-spacing: 0.02em; margin-top: 2px;">AI for Environmental Sustainability</span>
+          </div>
+          <p>The premier global forum for Artificial Intelligence in Environmental Sustainability.</p>
+        </div>
         <div class="footer__col">
           <strong>Conference</strong>
           <a href="about.html">About</a>
           <a href="call-for-papers.html">Call for Papers</a>
           <a href="speakers.html">Speakers</a>
           <a href="committee.html">Committee</a>
-          <a href="awards.html">Awards</a>
         </div>
-
         <div class="footer__col">
           <strong>Participate</strong>
           <a href="interest-form.html">Express Interest</a>
-          <a href="submit-paper.html">Submit Paper</a>
-          <a href="speaker-form.html">Become a Speaker</a>
-          <a href="committee-form.html">Join Committee</a>
+          <a href="submit-paper.html" style="color:#A3E635;">Submit Paper</a>
           <a href="register.html">Register</a>
         </div>
-
-        <div class="footer__col">
-          <strong>Information</strong>
-          <a href="downloads.html">Downloads</a>
-          <a href="media.html">Media</a>
-          <a href="badge.html">Verification</a>
-          <a href="sdg.html">SDG Impact</a>
-          <a href="contact.html">Contact Us</a>
-        </div>
       </div>
-
-      <div class="footer__trust">
-        <div class="footer__payment-methods">
-          <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" />
-          <img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" />
-          <img src="assets/idzRNcC9U5_logos.png" alt="BHIM" />
-          <img src="assets/gpay-logo.png" alt="GPay" />
-        </div>
-        <div class="footer__protection">
-          <img src="assets/idITJgioup_logos.png" alt="Website Protection" />
-          <img src="assets/idUAcNCLcQ_logos.png" alt="MSME Verified" style="height: 32px;" />
-          <img src="assets/App QR.png" alt="QR" style="height: 32px; border-radius: 4px;" />
-        </div>
-      </div>
-
       <div class="footer__bottom">
         <p>&copy; 2026 ISIAI-SGS. All rights reserved.</p>
-        <div class="footer__bottom-links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="refund.html">Refund Policy</a>
-          <a href="contact.html">Contact</a>
-        </div>
       </div>
     </footer>
-  
 
-    <div class="modal-overlay" id="downloadModal">
-      <div class="modal-panel">
-<div>
-  <div class="eyebrow eyebrow--light">Resource Delivery</div>
-  <h3 style="margin:14px 0 6px;font-family:var(--font-display);font-size:1.8rem;">Get the latest ISIAI-SGS file</h3>
-  <p class="section-lead" style="margin:0;">Share your details and we will send the requested conference resource to your inbox.</p>
-</div>
-<form id="downloadForm" class="form-grid form-grid--single">
-  <div class="field"><label>Name</label><input name="name" required placeholder="Your full name" /></div>
-  <div class="field"><label>Email</label><input name="email" type="email" required placeholder="name@institution.edu" /></div>
-  <div class="field"><label>Institution</label><input name="institution" placeholder="University / Organisation" /></div>
-  <div class="field"><label>Phone</label><input name="phone" placeholder="Optional phone number" /></div>
-  <button class="btn-primary form-submit" type="submit">Send the resource</button>
-</form>
-      </div>
-    </div>
-  
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="https://unpkg.com/lucide@latest"></script>
-
-<script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/main.js"></script>
 
     <script>
+      // File Drop Zone Functionality
+      const dropZone = document.getElementById("paperDropZone");
+      const fileInput = document.getElementById("paperFile");
+      const fileNameDisplay = document.getElementById("fileNameDisplay");
+
+      if (dropZone && fileInput) {
+        dropZone.addEventListener("dragover", (e) => {
+          e.preventDefault();
+          dropZone.classList.add("drag-over");
+        });
+
+        ["dragleave", "drop"].forEach(event => {
+          dropZone.addEventListener(event, () => dropZone.classList.remove("drag-over"));
+        });
+
+        fileInput.addEventListener("change", () => {
+          if (fileInput.files.length > 0) {
+            dropZone.classList.add("has-file");
+            fileNameDisplay.innerText = "Selected: " + fileInput.files[0].name;
+            fileNameDisplay.classList.add("visible");
+          }
+        });
+      }
+
       const paperWrap = document.getElementById("paperWrap");
       const paperForm = document.getElementById("paperForm");
+      
       if (paperForm) {
         paperForm.addEventListener("submit", async (event) => {
           event.preventDefault();
-          const data = Object.fromEntries(new FormData(paperForm).entries());
-          const file = document.getElementById("paperFile").files[0];
+          const formData = new FormData(paperForm);
+          const data = Object.fromEntries(formData.entries());
+          const file = fileInput.files[0];
+          
           try {
             window.SVSite.setFormLoading(paperWrap, true, "Uploading paper...");
+            
             let paperUrl = "";
             if (file) {
+              // Note: uploadFile returns the file path or URL
               paperUrl = await window.SVSite.uploadFile("conf-papers", file, window.SVSite.config.confId);
             }
+            
+            // Database Insertion
             await window.SVSite.insertRecord("conf_paper_submissions", {
-              name: data.name, email: data.email, institution: data.institution, country: data.country,
-              paper_title: data.title, track: data.track, keywords: data.keywords, abstract: data.abstract,
-              file_url: paperUrl, status: "pending"
+              name: data.name, 
+              email: data.email, 
+              phone: data.phone,
+              institution: data.institution, 
+              department: data.department,
+              country: data.country,
+              paper_title: data.title, 
+              track: data.track, 
+              paper_type: data.paper_type,
+              keywords: data.keywords, 
+              abstract: data.abstract,
+              coauthors: data.coauthors,
+              file_url: paperUrl, 
+              status: "pending"
             });
+
             window.SVSite.showFormSuccess(paperWrap);
-            window.SVSite.showToast("Paper submitted! Check your email for confirmation.", "success");
-            // Non-blocking email — does not affect form success
+            window.SVSite.showToast("Paper submitted successfully!", "success");
+            
+            // Email notifications (Vercel-only)
             window.SVSite.sendEmail("paper_submission", {
-              name: data.name, email: data.email, institution: data.institution, title: data.title, track: data.track
+              name: data.name, 
+              email: data.email, 
+              title: data.title, 
+              track: data.track,
+              institution: data.institution
             });
+
           } catch (error) {
-            window.SVSite.showToast("Paper submission failed. Please try again.", "error");
+            console.error("Submission error:", error);
+            window.SVSite.showToast("Submission failed: " + (error.message || "Unknown error"), "error");
           } finally {
             window.SVSite.setFormLoading(paperWrap, false);
           }
         });
       }
     </script>
-  
-
-  <!-- Crisp Chat -->
-  <script type="text/javascript">
-    window.$crisp = [];
-    window.CRISP_WEBSITE_ID = "6d6565b3-b95b-46ec-b9ad-08885301b082";
-    (function () {
-      d = document; s = d.createElement("script");
-      s.src = "https://client.crisp.chat/l.js";
-      s.async = 1;
-      d.getElementsByTagName("head")[0].appendChild(s);
-    })();
-    window.$crisp.push(["set", "chat:position", "left"]);
-  </script>
 </body>
 </html>

@@ -398,7 +398,13 @@ function initDownloadButtons() {
       // Send download email
       sendEmail('download', data);
       closeModal('downloadModal');
-      showToast('Check your email! The document has been sent.', 'success');
+      // Open brochure for PDF save
+      if (data.type === 'brochure') {
+        window.open('brochure.html?print=true', '_blank');
+        showToast('Brochure opened! Use "Save as PDF" in the print dialog.', 'success');
+      } else {
+        showToast('Check your email! The document has been sent.', 'success');
+      }
       trackEvent('download', { type: data.type });
       downloadForm.reset();
     } catch (_) {
@@ -430,7 +436,12 @@ function loadAnalytics() {
     (function (c, l, a, r, i, t, y) {
       c[a] = c[a] || function () { (c[a].q = c[a].q || []).push(arguments) };
       t = l.createElement(r); t.async = 1; t.src = "https://www.clarity.ms/tag/" + i;
-      y = l.getElementsByTagName(r)[0]; y.parentNode.insertBefore(t, y);
+      y = l.getElementsByTagName(r)[0];
+      if (y && y.parentNode) {
+        y.parentNode.insertBefore(t, y);
+      } else {
+        l.head.appendChild(t);
+      }
     })(window, document, "clarity", "script", SV_CONFIG.clarityId);
   }
 

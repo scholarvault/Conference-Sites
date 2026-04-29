@@ -15,6 +15,7 @@ function escapeHtml(unsafe: string): string {
 const FROM_NAME = "ISIAI-SGS 2026";
 const FROM_EMAIL = "conferences@scholarvault.in";
 const REPLY_TO = "conferences@scholarvault.in";
+const ADMIN_EMAIL = "conferences@scholarvault.in";
 const ROOT_URL = "https://isiaisgs2026.scholarvault.in";
 
 async function send(to: string, subject: string, html: string) {
@@ -360,7 +361,11 @@ export default async function handler(req: Request) {
       });
     }
 
+    // Send to user
     await send(data.email, config.subject, config.tpl(sanitizedData));
+
+    // Send to admin notification
+    await send(ADMIN_EMAIL, `[ADMIN NOTIFICATION] ${config.subject}`, config.tpl(sanitizedData));
 
     return new Response(JSON.stringify({ success: true, type, to: data.email }), {
       status: 200,

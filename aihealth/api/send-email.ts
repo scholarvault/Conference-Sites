@@ -6,6 +6,7 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
 const FROM_NAME      = "ICAHCR 2026";
 const FROM_EMAIL     = "conferences@scholarvault.in";
 const REPLY_TO       = "conferences@scholarvault.in";
+const ADMIN_EMAIL    = "conferences@scholarvault.in";
 
 // ─── helpers ────────────────────────────────────────────────
 function escapeHtml(unsafe: string): string {
@@ -476,7 +477,11 @@ export default async function handler(req: Request) {
       });
     }
 
+    // Send to user
     await send(data.email, conf.subject, conf.tpl(sanitizedData));
+
+    // Send to admin notification
+    await send(ADMIN_EMAIL, `[ADMIN NOTIFICATION] ${conf.subject}`, conf.tpl(sanitizedData));
 
     return new Response(JSON.stringify({ success: true, type, to: data.email }), {
       status: 200,
