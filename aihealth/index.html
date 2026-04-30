@@ -1118,15 +1118,23 @@
 <script>
   (function() {
     var btn = document.getElementById('scrollTopBtn');
+    // ⚡ Bolt: Throttle scroll event to prevent layout thrashing and main thread blocking
+    var ticking = false;
     window.addEventListener('scroll', function() {
-      if (window.scrollY > 300) {
-        btn.style.display = 'flex';
-        setTimeout(function() { btn.style.opacity = '1'; }, 10);
-      } else {
-        btn.style.opacity = '0';
-        setTimeout(function() { btn.style.display = 'none'; }, 300);
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          if (window.scrollY > 300) {
+            btn.style.display = 'flex';
+            setTimeout(function() { btn.style.opacity = '1'; }, 10);
+          } else {
+            btn.style.opacity = '0';
+            setTimeout(function() { btn.style.display = 'none'; }, 300);
+          }
+          ticking = false;
+        });
+        ticking = true;
       }
-    });
+    }, { passive: true });
     btn.addEventListener('mouseenter', function() {
       btn.style.transform = 'translateY(-3px)';
       btn.style.boxShadow = '0 8px 28px rgba(0,102,255,0.6)';
