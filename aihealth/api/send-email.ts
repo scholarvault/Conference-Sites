@@ -8,6 +8,28 @@ const FROM_EMAIL     = "conferences@scholarvault.in";
 const REPLY_TO       = "conferences@scholarvault.in";
 const ADMIN_EMAIL    = "conferences@scholarvault.in";
 
+
+const ALLOWED_ORIGINS = [
+  "https://aihealth.scholarvault.in",
+  "https://scholarvault.in",
+  "https://conf.scholarvault.in",
+  "https://bizai.scholarvault.in",
+  "https://greentech.scholarvault.in",
+  "https://edtech.scholarvault.in",
+  "https://isiaisgs2026.scholarvault.in"
+];
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get("Origin");
+  const isAllowed = origin && ALLOWED_ORIGINS.includes(origin);
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : "https://scholarvault.in",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Vary": "Origin"
+  };
+}
+
 // ─── helpers ────────────────────────────────────────────────
 function escapeHtml(unsafe: string): string {
   return unsafe
@@ -433,12 +455,8 @@ export default async function handler(req: Request) {
   // CORS preflight
   if (req.method === "OPTIONS") {
     return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-      },
-      status: 204
+      status: 204,
+      headers: getCorsHeaders(req)
     });
   }
 
@@ -457,7 +475,7 @@ export default async function handler(req: Request) {
     if (!type || !data?.email) {
       return new Response(JSON.stringify({ error: "type and data.email required" }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" },
+        headers: getCorsHeaders(req),
       });
     }
 
@@ -473,7 +491,7 @@ export default async function handler(req: Request) {
     if (!conf) {
       return new Response(JSON.stringify({ error: `Unknown email type: ${type}` }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" },
+        headers: getCorsHeaders(req),
       });
     }
 
@@ -485,17 +503,14 @@ export default async function handler(req: Request) {
 
     return new Response(JSON.stringify({ success: true, type, to: data.email }), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { "Content-Type": "application/json", ...getCorsHeaders(req) },
     });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : String(err);
     console.error("Email function error:", message);
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { "Access-Control-Allow-Origin": "*" },
+      headers: getCorsHeaders(req),
     });
   }
 }

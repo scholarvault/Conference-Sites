@@ -320,15 +320,33 @@ const emailMap: Record<string, { subject: string; tpl: (d: Record<string, string
   },
 };
 
+
+const ALLOWED_ORIGINS = [
+  "https://aihealth.scholarvault.in",
+  "https://scholarvault.in",
+  "https://conf.scholarvault.in",
+  "https://bizai.scholarvault.in",
+  "https://greentech.scholarvault.in",
+  "https://edtech.scholarvault.in",
+  "https://isiaisgs2026.scholarvault.in"
+];
+
+function getCorsHeaders(req: Request) {
+  const origin = req.headers.get("Origin");
+  const isAllowed = origin && ALLOWED_ORIGINS.includes(origin);
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : "https://scholarvault.in",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    "Vary": "Origin"
+  };
+}
+
 export default async function handler(req: Request) {
   if (req.method === "OPTIONS") {
     return new Response(null, {
       status: 204,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-      },
+      headers: getCorsHeaders(req)
     });
   }
 
@@ -341,7 +359,7 @@ export default async function handler(req: Request) {
     if (!type || !data?.email) {
       return new Response(JSON.stringify({ error: "type and data.email required" }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" },
+        headers: getCorsHeaders(req),
       });
     }
 
@@ -357,7 +375,7 @@ export default async function handler(req: Request) {
     if (!config) {
       return new Response(JSON.stringify({ error: `Unknown email type: ${type}` }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" },
+        headers: getCorsHeaders(req),
       });
     }
 
@@ -369,16 +387,13 @@ export default async function handler(req: Request) {
 
     return new Response(JSON.stringify({ success: true, type, to: data.email }), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
+      headers: { "Content-Type": "application/json", ...getCorsHeaders(req) },
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : String(error);
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { "Access-Control-Allow-Origin": "*" },
+      headers: getCorsHeaders(req),
     });
   }
 }
