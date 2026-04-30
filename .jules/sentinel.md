@@ -17,3 +17,8 @@
 **Vulnerability:** User-provided profiles (e.g., speakers and committee members) fetched from the database were being rendered onto the page by directly interpolating data properties into template literals assigned to `innerHTML`. This created a Stored DOM XSS vulnerability where malicious scripts saved in the database (e.g., via profile submission forms) could execute when the profile list was viewed.
 **Learning:** Even if data is safely inserted into a database without executing (e.g., via an ORM or parameterized queries), rendering it dynamically to the DOM using `innerHTML` and template literals without prior HTML encoding re-introduces XSS risks on the client-side.
 **Prevention:** When using `innerHTML` to construct UI elements from dynamic database content, always pass the string fields through an `escapeHtml()` utility function before interpolation to neutralize any HTML tags or event handlers.
+
+## 2026-04-29 - Overly Permissive CORS Headers in Edge Functions
+**Vulnerability:** The Edge Functions for handling emails were returning `Access-Control-Allow-Origin: "*"` on all responses, allowing any website to send requests to these endpoints, which bypasses intended cross-origin restrictions.
+**Learning:** Using `*` for the `Access-Control-Allow-Origin` header in production APIs is generally insecure because it disables browser-based CORS protections. Since these functions handle sensitive actions like emails, they should be restricted to trusted domains only.
+**Prevention:** Always implement a strict allowlist of trusted origins, use an origin checker helper, and include the `Vary: Origin` header to ensure intermediate caches handle responses properly for different origins.
