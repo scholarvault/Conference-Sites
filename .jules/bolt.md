@@ -10,3 +10,6 @@
 ## 2025-05-18 - Math.sqrt in Animation Loops
 **Learning:** Calculating `Math.sqrt` for Euclidean distance inside nested `O(n^2)` render loops (like particle connections) creates significant CPU overhead per frame.
 **Action:** When evaluating distance thresholds, compare squared distances (`dx*dx + dy*dy`) against the squared threshold first. Only invoke `Math.sqrt` if the threshold is met and the precise distance value is needed for visual rendering.
+## 2026-08-22 - Repeated DOM lookups inside setInterval
+**Learning:** Frequent DOM lookups like `document.getElementById` inside continuous loops (e.g., `setInterval` for a countdown timer) cause unnecessary layout/DOM tree traversals and micro-stutters, negatively impacting rendering performance and CPU usage.
+**Action:** Always cache DOM element references outside the loop using variables, and check for their existence inside the loop to ensure robust, performant continuous updates.

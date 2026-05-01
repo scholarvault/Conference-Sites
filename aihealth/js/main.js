@@ -82,6 +82,12 @@ function initCountdown() {
   const el = document.getElementById('countdown');
   if (!el) return;
 
+  // BOLT: Cache DOM elements outside the interval loop to eliminate repeated lookups and improve rendering performance
+  const cdDays = document.getElementById('cd-days');
+  const cdHours = document.getElementById('cd-hours');
+  const cdMinutes = document.getElementById('cd-minutes');
+  const cdSeconds = document.getElementById('cd-seconds');
+
   function update() {
     const now = new Date();
     const diff = SV_CONFIG.confDate - now;
@@ -93,10 +99,11 @@ function initCountdown() {
     const hours = Math.floor((diff % 86400000) / 3600000);
     const minutes = Math.floor((diff % 3600000) / 60000);
     const seconds = Math.floor((diff % 60000) / 1000);
-    document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
-    document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('cd-minutes').textContent = String(minutes).padStart(2, '0');
-    document.getElementById('cd-seconds').textContent = String(seconds).padStart(2, '0');
+
+    if (cdDays) cdDays.textContent = String(days).padStart(2, '0');
+    if (cdHours) cdHours.textContent = String(hours).padStart(2, '0');
+    if (cdMinutes) cdMinutes.textContent = String(minutes).padStart(2, '0');
+    if (cdSeconds) cdSeconds.textContent = String(seconds).padStart(2, '0');
   }
   update();
   setInterval(update, 1000);
