@@ -175,6 +175,7 @@ function initFaq() {
     if (!button || !body) return;
     button.addEventListener("click", () => {
       const open = item.classList.toggle("open");
+      button.setAttribute("aria-expanded", open.toString());
       body.style.maxHeight = open ? `${body.scrollHeight}px` : "0px";
     });
   });
