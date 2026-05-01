@@ -295,7 +295,7 @@ function sdgCards() {
 function faqMarkup(items) {
   return items.map(([q, a]) => `
     <div class="faq-item reveal-up">
-      <button type="button">
+      <button type="button" aria-expanded="false">
         <span>${q}</span>
         <span class="faq-item__icon"><i data-lucide="plus"></i></span>
       </button>
