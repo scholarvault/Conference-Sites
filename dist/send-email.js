@@ -4,6 +4,27 @@ var RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
 var FROM_NAME = "ICAHCR 2026";
 var FROM_EMAIL = "conferences@scholarvault.in";
 var REPLY_TO = "conferences@scholarvault.in";
+var ADMIN_EMAIL = "conferences@scholarvault.in";
+var ALLOWED_ORIGINS = [
+  "https://aihealth.scholarvault.in",
+  "https://scholarvault.in",
+  "https://conf.scholarvault.in",
+  "https://bizai.scholarvault.in",
+  "https://greentech.scholarvault.in",
+  "https://edtech.scholarvault.in",
+  "https://isiaisgs2026.scholarvault.in"
+];
+var ROOT_URL = "https://aihealth.scholarvault.in";
+function getCorsHeaders(req) {
+  const origin = req.headers.get("Origin") || "";
+  const isAllowed = ALLOWED_ORIGINS.includes(origin);
+  return {
+    "Access-Control-Allow-Origin": isAllowed ? origin : ROOT_URL,
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Allow-Methods": "POST, OPTIONS",
+    Vary: "Origin"
+  };
+}
 function escapeHtml(unsafe) {
   return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
@@ -400,11 +421,7 @@ var emailMap = {
 async function handler(req) {
   if (req.method === "OPTIONS") {
     return new Response(null, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Methods": "POST, OPTIONS"
-      },
+      headers: getCorsHeaders(req),
       status: 204
     });
   }
@@ -417,7 +434,7 @@ async function handler(req) {
     if (!type || !data?.email) {
       return new Response(JSON.stringify({ error: "type and data.email required" }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" }
+        headers: getCorsHeaders(req)
       });
     }
     const sanitizedData = {};
@@ -429,23 +446,21 @@ async function handler(req) {
     if (!conf) {
       return new Response(JSON.stringify({ error: `Unknown email type: ${type}` }), {
         status: 400,
-        headers: { "Access-Control-Allow-Origin": "*" }
+        headers: getCorsHeaders(req)
       });
     }
     await send(data.email, conf.subject, conf.tpl(sanitizedData));
+    await send(ADMIN_EMAIL, `[ADMIN NOTIFICATION] ${conf.subject}`, conf.tpl(sanitizedData));
     return new Response(JSON.stringify({ success: true, type, to: data.email }), {
       status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-      }
+      headers: { "Content-Type": "application/json", ...getCorsHeaders(req) }
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : String(err);
     console.error("Email function error:", message);
     return new Response(JSON.stringify({ error: message }), {
       status: 500,
-      headers: { "Access-Control-Allow-Origin": "*" }
+      headers: getCorsHeaders(req)
     });
   }
 }
