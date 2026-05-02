@@ -1050,6 +1050,35 @@ button {
 }
 
 /* -
+   LAYOUT GRIDS
+   - */
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.grid-cols-1-sidebar {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 3rem;
+}
+
+@media (max-width: 992px) {
+  .grid-cols-1-sidebar {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* -
    CARDS
    - */
 .card {
