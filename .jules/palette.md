@@ -1,0 +1,3 @@
+## 2024-05-02 - Proper State Restoration on Form Buttons
+**Learning:** The generic `setFormLoading` helper manages loading states by replacing button text with a spinner, but it requires the original text to be explicitly stored via a `data-default-text` attribute. Without it, buttons silently fall back to a generic "Submit", losing their original contextual CTA (e.g. "Send Message →" or "Submit Paper →").
+**Action:** When working with forms across these static pages, ensure all form submit buttons explicitly declare `data-default-text="Original CTA"` to maintain consistency during state transitions.
