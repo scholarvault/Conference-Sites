@@ -185,11 +185,26 @@ function initHeroSpotlight() {
   const hero = document.querySelector(".hero");
   const spotlight = document.querySelector(".hero__spotlight");
   if (!hero || !spotlight) return;
+
+  // ⚡ BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage
+  let ticking = false;
+  let lastX = 0;
+  let lastY = 0;
+
   hero.addEventListener("pointermove", (event) => {
-    const rect = hero.getBoundingClientRect();
-    const x = event.clientX - rect.left - spotlight.clientWidth / 2;
-    const y = event.clientY - rect.top - spotlight.clientHeight / 2;
-    spotlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+    lastX = event.clientX;
+    lastY = event.clientY;
+
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const rect = hero.getBoundingClientRect();
+        const x = lastX - rect.left - spotlight.clientWidth / 2;
+        const y = lastY - rect.top - spotlight.clientHeight / 2;
+        spotlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+        ticking = false;
+      });
+      ticking = true;
+    }
   });
 }
 
