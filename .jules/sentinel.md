@@ -17,3 +17,8 @@
 **Vulnerability:** User-provided profiles (e.g., speakers and committee members) fetched from the database were being rendered onto the page by directly interpolating data properties into template literals assigned to `innerHTML`. This created a Stored DOM XSS vulnerability where malicious scripts saved in the database (e.g., via profile submission forms) could execute when the profile list was viewed.
 **Learning:** Even if data is safely inserted into a database without executing (e.g., via an ORM or parameterized queries), rendering it dynamically to the DOM using `innerHTML` and template literals without prior HTML encoding re-introduces XSS risks on the client-side.
 **Prevention:** When using `innerHTML` to construct UI elements from dynamic database content, always pass the string fields through an `escapeHtml()` utility function before interpolation to neutralize any HTML tags or event handlers.
+
+## 2024-05-18 - Overly Permissive CORS Configuration in Edge Functions
+**Vulnerability:** The Vercel Edge API functions (`api/send-email.ts`) across multiple sub-projects were using wildcard (`*`) for `Access-Control-Allow-Origin`, allowing any domain to send emails via the endpoints.
+**Learning:** Developers often default to wildcard CORS for simplicity during initial setup or testing of serverless functions, leaving the endpoint open to abuse from unauthorized domains if it's not secured prior to production.
+**Prevention:** Implement a standardized `ALLOWED_ORIGINS` array containing trusted domains and dynamically validate the `Origin` header returning either the matched allowed origin or a safe fallback default. Always include the `Vary: Origin` header.
