@@ -305,14 +305,14 @@
 <!-- NOTIFY MODAL -->
 <div style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center;padding:2rem;" id="notifyModal">
   <div style="background:#071225;border:1px solid var(--glass-border);border-radius:var(--radius-xl);padding:2.5rem;max-width:460px;width:100%;position:relative;">
-    <button onclick="document.getElementById('notifyModal').classList.remove('active')" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--white-40);font-size:1.2rem;cursor:pointer;">✕</button>
+    <button aria-label="Close modal" onclick="document.getElementById('notifyModal').classList.remove('active')" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:var(--white-40);font-size:1.2rem;cursor:pointer;">✕</button>
     <div style="font-size:2rem;margin-bottom:1rem;">🔔</div>
     <h3 style="font-size:1.2rem;font-weight:800;margin-bottom:0.5rem;">Get Notified</h3>
     <p style="color:var(--white-70);font-size:13.5px;margin-bottom:1.5rem;">We'll email you when this conference opens for registration.</p>
     <form id="notifyForm" style="display:flex;flex-direction:column;gap:12px;">
       <input type="hidden" id="notifyConf" name="conference" />
-      <input type="text" name="name" required placeholder="Your Name" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);color:var(--white);font-size:14px;font-family:var(--font-head);" />
-      <input type="email" name="email" required placeholder="your@email.com" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);color:var(--white);font-size:14px;font-family:var(--font-head);" />
+      <input type="text" name="name" aria-label="Your Name" required placeholder="Your Name" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);color:var(--white);font-size:14px;font-family:var(--font-head);" />
+      <input type="email" name="email" aria-label="Your Email" required placeholder="your@email.com" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);color:var(--white);font-size:14px;font-family:var(--font-head);" />
       <button type="submit" style="padding:14px;border-radius:12px;background:linear-gradient(135deg,#0066ff,#00d4ff);color:white;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-head);">Notify Me →</button>
     </form>
   </div>
