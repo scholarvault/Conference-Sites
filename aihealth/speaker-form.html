@@ -345,6 +345,31 @@ function onFileChosen(file, zone, nameEl, inputId) {
   }
 }
 
+/* ─── SHARE FUNCTION ─── */
+async function shareNomination() {
+  const shareData = {
+    title: 'Nominate a Speaker for ICAHCR 2026',
+    text: 'I thought you might be interested in speaking at the ICAHCR 2026 conference on AI in Healthcare.',
+    url: window.location.href
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      if (typeof trackEvent === 'function') trackEvent('nominate_shared', { method: 'native' });
+    } catch (err) {
+      console.log('Share failed:', err);
+    }
+  } else {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      if (typeof showToast === 'function') showToast('Link copied to clipboard! Share it with your nominee.', 'info');
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  }
+}
+
 /* ─── UPLOAD TO SUPABASE STORAGE ─── */
 async function uploadFile(bucket, file, folder, progressBarId, statusId, progressWrapId) {
   if (!file) return null;
@@ -385,31 +410,6 @@ async function uploadFile(bucket, file, folder, progressBarId, statusId, progres
     return urlData.publicUrl;
   }
   return data.path;
-}
-
-/* ─── SHARE FUNCTION ─── */
-async function shareNomination() {
-  const shareData = {
-    title: 'Nominate a Speaker for ICAHCR 2026',
-    text: 'I thought you might be interested in speaking at the ICAHCR 2026 conference on AI in Healthcare.',
-    url: window.location.href
-  };
-
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-      if (typeof trackEvent === 'function') trackEvent('nominate_shared', { method: 'native' });
-    } catch (err) {
-      console.log('Share failed:', err);
-    }
-  } else {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      if (typeof showToast === 'function') showToast('Link copied to clipboard! Share it with your nominee.', 'info');
-    } catch (err) {
-      console.error('Failed to copy:', err);
-    }
-  }
 }
 
 /* ─── INIT ─── */
