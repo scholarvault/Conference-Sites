@@ -166,8 +166,9 @@
 <script>
 document.getElementById('interestForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const btn = document.getElementById('interestSubmitBtn');
-  btn.disabled = true; btn.textContent = '⏳ Submitting...';
+  const formWrap = document.getElementById('interestFormWrap');
+  // VANGUARD: Use standardized form loading state helper
+  setFormLoading(formWrap, true);
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
@@ -179,14 +180,15 @@ document.getElementById('interestForm').addEventListener('submit', async (e) => 
     if (data.subscribe === 'yes') {
       await handleSubscribe(data.email, data.name, null);
     }
-    e.target.style.display = 'none';
-    document.getElementById('interestSuccess').classList.add('show');
+    // VANGUARD: Use standardized form success state helper
+    showFormSuccess(formWrap);
     trackEvent('interest_submitted');
     // Send confirmation email (interest type triggers key-dates email)
     sendEmail('interest', { name: data.name, email: data.email });
   } catch(err) {
     showToast('Submission failed. Please try again.', 'error');
-    btn.disabled = false; btn.textContent = 'Submit My Interest →';
+  } finally {
+    setFormLoading(formWrap, false);
   }
 });
 </script>
