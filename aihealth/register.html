@@ -460,7 +460,7 @@
 
             <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,193,7,0.5);margin-bottom:8px;">Already a Gold member? Enter your ID below</div>
             <div class="sv-gold-toggle">
-              <input type="text" id="svGoldInput" placeholder="Enter your SV Gold Member ID (e.g. SCHOLAR-AB12CD)" />
+              <input type="text" id="svGoldInput" aria-label="Enter your SV Gold Member ID" placeholder="Enter your SV Gold Member ID (e.g. SCHOLAR-AB12CD)" />
               <button onclick="applySVGold()">Verify &amp; Apply</button>
             </div>
             <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
@@ -1026,6 +1026,7 @@ if (urlParams.get('payment') === 'success') {
       <input
         type="email"
         id="goldModalEmail"
+        aria-label="Email address to receive Member ID"
         class="gold-modal-input"
         placeholder="your@email.com — we'll send your Member ID here"
         autocomplete="email"
