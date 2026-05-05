@@ -5,33 +5,6 @@
   <title>Organizing Committee — ICAHCR 2026</title>
   <meta name="description" content="Meet the organizing committee of ICAHCR 2026 — AI in Healthcare Conference. Technical program, logistics, and advisory members." />
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    .committee-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; }
-    .committee-card {
-      background: var(--glass); border: 1px solid var(--glass-border);
-      border-radius: var(--radius-lg); padding: 1.25rem;
-      text-align: center; transition: var(--transition);
-    }
-    .committee-card:hover { transform: translateY(-4px); border-color: rgba(0,212,255,0.3); }
-    .committee-avatar {
-      width: 70px; height: 70px; border-radius: 50%;
-      object-fit: cover; margin: 0 auto 0.75rem;
-      border: 2px solid rgba(0,212,255,0.3);
-    }
-    .committee-placeholder {
-      width: 70px; height: 70px; border-radius: 50%;
-      background: linear-gradient(135deg, rgba(0,102,255,0.4), rgba(0,212,255,0.4));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem; margin: 0 auto 0.75rem;
-    }
-    .committee-name { font-size: 13.5px; font-weight: 700; margin-bottom: 0.2rem; }
-    .committee-role { font-size: 11.5px; color: var(--cyan); font-weight: 600; margin-bottom: 0.2rem; }
-    .committee-inst { font-size: 11px; color: var(--white-40); }
-    .committee-section { margin-bottom: 3rem; }
-    .committee-section-title { font-size: 14px; font-weight: 800; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1.25rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--glass-border); }
-    @media(max-width:900px) { .committee-grid { grid-template-columns: repeat(3,1fr); } }
-    @media(max-width:600px) { .committee-grid { grid-template-columns: repeat(2,1fr); } }
-  </style>
   <link rel="icon" href="assets/icahcr-logo.png" />
     <!-- Microsoft Clarity Tracking -->
     <script type="text/javascript">
@@ -85,27 +58,13 @@
 <section class="section section--dark">
   <div class="container">
 
-    <!-- Conference Chair -->
-    <div class="reveal committee-section">
-      <div class="committee-section-title">Conference Chair</div>
-      <div id="chairGrid" class="committee-grid">
-        <div style="text-align:center;padding:2rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">Loading...</div>
-      </div>
-    </div>
-
-    <!-- Technical Program Committee -->
-    <div class="reveal committee-section">
-      <div class="committee-section-title">Technical Program Committee (Paper Reviewers)</div>
-      <div id="tpcGrid" class="committee-grid">
-        <div style="text-align:center;padding:2rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">Loading...</div>
-      </div>
-    </div>
-
-    <!-- Organizing Committee -->
-    <div class="reveal committee-section">
-      <div class="committee-section-title">Organizing Committee</div>
-      <div id="orgGrid" class="committee-grid">
-        <div style="text-align:center;padding:2rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">Loading...</div>
+    <!-- All Committee Members — Dynamic -->
+    <div class="reveal" style="margin-bottom:4rem;">
+      <div class="section-tag">Committee Members</div>
+      <h2 class="section-title">Our <span class="grad">Team</span></h2>
+      <p style="color:var(--white-70);margin-bottom:2rem;">Conference chairs, technical program committee, and organizing committee members.</p>
+      <div class="people-grid" id="allCommitteeGrid">
+        <div style="text-align:center;padding:3rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">Loading committee...</div>
       </div>
     </div>
 
@@ -118,51 +77,6 @@
 
   </div>
 </section>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-function renderCard(m) {
-  const name = m.name ? escapeHtml(m.name) : '';
-  const expertise = m.expertise ? escapeHtml(m.expertise) : '';
-  const institution = m.institution ? escapeHtml(m.institution) : '';
-
-  return `<div class="committee-card">
-    <div class="committee-placeholder">${name.charAt(0)}</div>
-    <div class="committee-name">${name}</div>
-    <div class="committee-role">${expertise || 'Committee Member'}</div>
-    <div class="committee-inst">${institution}</div>
-  </div>`;
-}
-
-async function loadCommittee() {
-  try {
-    const { data } = await db.from('conf_committee')
-      .select('name,expertise,institution,status')
-      .eq('status', 'accepted')
-      .order('created_at', { ascending: true });
-
-    if (!data || data.length === 0) {
-      ['chairGrid','tpcGrid','orgGrid'].forEach(id => {
-        document.getElementById(id).innerHTML = '<div style="text-align:center;padding:2rem;color:var(--white-40);font-size:13px;grid-column:1/-1;">Committee members will appear here. <a href="committee-form" style="color:var(--cyan);">Apply to join →</a></div>';
-      });
-      return;
-    }
-    // Simple split — first 1 is chair, rest alternating between TPC and org
-    const chair = data.slice(0, 1);
-    const tpc   = data.slice(1).filter((_, i) => i % 2 === 0);
-    const org   = data.slice(1).filter((_, i) => i % 2 === 1);
-
-    document.getElementById('chairGrid').innerHTML = chair.length ? chair.map(renderCard).join('') : '<div style="grid-column:1/-1;color:var(--white-40);text-align:center;padding:1rem;font-size:13px;">Being finalized</div>';
-    document.getElementById('tpcGrid').innerHTML   = tpc.length   ? tpc.map(renderCard).join('')   : '<div style="grid-column:1/-1;color:var(--white-40);text-align:center;padding:1rem;font-size:13px;">Reviewers being finalized</div>';
-    document.getElementById('orgGrid').innerHTML   = org.length   ? org.map(renderCard).join('')   : '<div style="grid-column:1/-1;color:var(--white-40);text-align:center;padding:1rem;font-size:13px;">Organizers being finalized</div>';
-  } catch(e) {
-    console.error(e);
-  }
-}
-loadCommittee();
-</script>
 
 <!-- ─── COMMITTEE FAQ ─── -->
 <section class="section section--alt section--border-top">
@@ -205,5 +119,17 @@ loadCommittee();
     <span><a href="contact" style="color:var(--cyan);">Contact</a> · <a href="refund" style="color:var(--cyan);">Refund Policy</a> · <a href="privacy" style="color:var(--cyan);">Privacy</a></span>
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/people-loader.js"></script>
+<script>
+  // Load all accepted committee members
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.PeopleLoader) {
+      PeopleLoader.loadCommittee('allCommitteeGrid');
+    }
+  });
+</script>
 </body>
 </html>
