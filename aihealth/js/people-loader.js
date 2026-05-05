@@ -125,6 +125,7 @@
     var query = _db.from('conf_speakers')
       .select('*')
       .eq('status', 'accepted')
+      .order('sort_order', { ascending: true })
       .order('created_at', { ascending: true });
 
     query.then(function (result) {
@@ -174,6 +175,7 @@
     var query = _db.from('conf_committee')
       .select('*')
       .eq('status', 'accepted')
+      .order('sort_order', { ascending: true })
       .order('created_at', { ascending: true });
 
     query.then(function (result) {
