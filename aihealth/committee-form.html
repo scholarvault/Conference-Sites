@@ -102,6 +102,15 @@
           <div class="form-group"><label>Brief Statement of Interest</label>
             <textarea name="statement" rows="5" placeholder="Why do you want to be part of the ICAHCR 2026 organizing committee? Mention any prior conference experience..."></textarea>
           </div>
+          <div class="form-group"><label>Profile Photo</label>
+            <div style="border:2px dashed var(--glass-border);border-radius:var(--radius-md);padding:1.25rem;text-align:center;cursor:pointer;position:relative;transition:var(--transition);" id="committeePhotoArea">
+              <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;" id="committeePhotoInput" />
+              <div style="font-size:1.3rem;margin-bottom:0.4rem;">📷</div>
+              <div style="font-size:13px;color:var(--white-70);">Click to upload photo</div>
+              <div style="font-size:11px;color:var(--white-40);margin-top:4px;">JPG, PNG or WebP · Max 5 MB</div>
+            </div>
+            <img id="committeePhotoPreview" style="width:90px;height:90px;border-radius:50%;object-fit:cover;border:3px solid var(--cyan);margin:0.75rem auto 0;display:none;" />
+          </div>
           <div class="form-group"><label>LinkedIn / Google Scholar Profile (optional)</label>
             <input type="url" name="profile_url" placeholder="https://linkedin.com/in/..." />
           </div>
@@ -149,24 +158,42 @@
 <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="js/main.js"></script>
 <script>
+// Photo preview
+document.getElementById('committeePhotoInput').addEventListener('change', function() {
+  var file = this.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { showToast('Photo must be under 5 MB', 'error'); this.value = ''; return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var img = document.getElementById('committeePhotoPreview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+  };
+  reader.readAsDataURL(file);
+});
+
 document.getElementById('committeeForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  // VANGUARD: Standardized form loading/success states using js/main.js helpers
   const formWrap = document.getElementById('committeeFormWrap');
   setFormLoading(formWrap, true);
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
+    // Upload photo if provided
+    var photoUrl = '';
+    var photoFile = document.getElementById('committeePhotoInput').files[0];
+    if (photoFile) {
+      photoUrl = await SVSite.uploadFile('conf-photos', photoFile, 'aihealth/committee');
+    }
     await insertRecord('conf_committee', {
       name: data.name, email: data.email, phone: data.phone,
       designation: data.designation, institution: data.institution,
       expertise: data.expertise + (data.role_preference ? ' — ' + data.role_preference : ''),
       years_exp: parseInt(data.years_exp) || null,
-      country: data.country, status: 'pending'
+      country: data.country, photo_url: photoUrl || null, status: 'pending'
     });
     showFormSuccess(formWrap);
     trackEvent('committee_applied');
-    // Send confirmation email
     sendEmail('committee_application', {
       name: data.name, email: data.email,
       designation: data.designation, institution: data.institution,
