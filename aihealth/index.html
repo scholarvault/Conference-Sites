@@ -496,6 +496,46 @@
 </section>
 
 <!-- ─── ScholarVault BADGE ─── -->
+<!-- ─── KEYNOTE SPEAKERS ─── -->
+<section class="section section--dark section--border-top" id="speakers-section">
+  <div class="container">
+    <div class="reveal text-center" style="margin-bottom:3rem;">
+      <div class="section-tag" style="justify-content:center;">Our Speakers</div>
+      <h2 class="section-title">Featured <span class="grad">Speakers</span></h2>
+      <p class="section-desc" style="margin:0 auto;">World-class researchers and industry leaders shaping the future of AI in Healthcare.</p>
+    </div>
+    <div class="people-grid stagger-children" id="indexSpeakersGrid">
+      <div style="text-align:center;padding:3rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">Loading speakers...</div>
+    </div>
+    <div class="text-center mt-4 reveal" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="/speakers" class="btn-outline">View All Speakers →</a>
+      <a href="/speaker-form" class="btn-primary" style="padding:13px 26px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+        Apply to Speak
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ORGANIZING COMMITTEE ─── -->
+<section class="section section--alt section--border-top" id="committee-section">
+  <div class="container">
+    <div class="reveal text-center" style="margin-bottom:3rem;">
+      <div class="section-tag" style="justify-content:center;">Our Team</div>
+      <h2 class="section-title">Organizing <span class="grad">Committee</span></h2>
+      <p class="section-desc" style="margin:0 auto;">The researchers, faculty, and professionals driving ICAHCR 2026.</p>
+    </div>
+    <div class="people-grid stagger-children" id="indexCommitteeGrid">
+      <div style="text-align:center;padding:3rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">Loading committee...</div>
+    </div>
+    <div class="text-center mt-4 reveal" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="/committee" class="btn-outline">View Full Committee →</a>
+      <a href="/committee-form" class="btn-primary" style="padding:13px 26px;">🏛️ Join Committee</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ScholarVault BADGE ─── -->
 <section class="section section--dark section--border-top">
   <div class="container">
     <div class="sv-section-grid reveal">
@@ -1053,6 +1093,16 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="js/main.js"></script>
+<script src="js/people-loader.js"></script>
+<script>
+  // Load speakers & committee on index page
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.PeopleLoader) {
+      PeopleLoader.loadSpeakers('indexSpeakersGrid');
+      PeopleLoader.loadCommittee('indexCommitteeGrid');
+    }
+  });
+</script>
 <script>
   // Subscribe form
   document.getElementById('subscribeForm').addEventListener('submit', async (e) => {
