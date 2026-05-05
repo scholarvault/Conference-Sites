@@ -397,10 +397,9 @@ async function savePerson() {
     } else {
       var record = {
         name: name, email: email, expertise: designation, institution: document.getElementById('fInstitution').value.trim(),
-        designation: designation, status: document.getElementById('fStatus').value
+        designation: designation, status: document.getElementById('fStatus').value,
+        photo_url: photoUrl || null
       };
-      var linkedinVal = document.getElementById('fLinkedin').value.trim();
-      if (photoUrl) record.photo_url = photoUrl;
       var result;
       if (id) { result = await db.from('conf_committee').update(record).eq('id', id); }
       else { record.conf_id = 'aihealth'; result = await db.from('conf_committee').insert(record); }
