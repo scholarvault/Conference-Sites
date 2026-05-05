@@ -4,49 +4,16 @@
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Speakers — ICAHCR 2026 | AI in Healthcare Conference</title>
   <meta name="description" content="Meet the keynote speakers and invited speakers of ICAHCR 2026 — AI in Healthcare Conference." />
+  <meta property="og:title" content="Speakers — ICAHCR 2026 | AI in Healthcare Conference" />
+  <meta property="og:description" content="World-class researchers and industry leaders shaping the future of AI in Healthcare. August 2026." />
+  <meta property="og:image" content="https://aihealth.scholarvault.in/assets/og-image.jpg" />
+  <meta property="og:url" content="https://aihealth.scholarvault.in/speakers" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Speakers — ICAHCR 2026" />
+  <meta name="twitter:description" content="World-class researchers shaping the future of AI in Healthcare." />
+  <meta name="twitter:image" content="https://aihealth.scholarvault.in/assets/og-image.jpg" />
   <link rel="stylesheet" href="css/style.css" />
-  <style>
-    .speaker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .speaker-card {
-      background: var(--glass); border: 1px solid var(--glass-border);
-      border-radius: var(--radius-xl); padding: 2rem 1.5rem;
-      text-align: center; transition: var(--transition); position: relative; overflow: hidden;
-    }
-    .speaker-card::before {
-      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-      background: var(--grad); transform: scaleX(0); transform-origin: left;
-      transition: transform 0.4s ease;
-    }
-    .speaker-card:hover { transform: translateY(-6px); border-color: rgba(0,212,255,0.4); }
-    .speaker-card:hover::before { transform: scaleX(1); }
-    .speaker-photo {
-      width: 90px; height: 90px; border-radius: 50%;
-      object-fit: cover; margin: 0 auto 1rem;
-      border: 3px solid rgba(0,212,255,0.3);
-      box-shadow: 0 0 24px rgba(0,212,255,0.2);
-    }
-    .speaker-placeholder {
-      width: 90px; height: 90px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--cyan));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; margin: 0 auto 1rem;
-      border: 3px solid rgba(0,212,255,0.3);
-    }
-    .speaker-name { font-size: 1rem; font-weight: 800; margin-bottom: 0.25rem; }
-    .speaker-designation { font-size: 12.5px; color: var(--cyan); margin-bottom: 0.25rem; font-weight: 600; }
-    .speaker-institution { font-size: 12px; color: var(--white-40); margin-bottom: 1rem; }
-    .speaker-topic { font-size: 12.5px; color: var(--white-70); line-height: 1.5; font-style: italic; }
-    .speaker-badge { display: inline-flex; padding: 4px 10px; border-radius: 100px; font-size: 11px; font-weight: 700; background: rgba(0,102,255,0.15); color: var(--blue); border: 1px solid rgba(0,102,255,0.25); margin-bottom: 0.75rem; }
-    .speaker-badge.keynote { background: rgba(0,212,255,0.1); color: var(--cyan); border-color: rgba(0,212,255,0.25); }
-    @media(max-width:900px) { .speaker-grid { grid-template-columns: repeat(2,1fr); } }
-    @media(max-width:600px) { .speaker-grid { grid-template-columns: 1fr; } }
-    .coming-soon-card {
-      background: linear-gradient(135deg, rgba(0,102,255,0.04), rgba(0,212,255,0.04));
-      border: 2px dashed rgba(0,212,255,0.2);
-      border-radius: var(--radius-xl); padding: 2rem 1.5rem;
-      text-align: center; color: var(--white-40);
-    }
-  </style>
   <link rel="icon" href="assets/icahcr-logo.png" />
     <!-- Microsoft Clarity Tracking -->
     <script type="text/javascript">
@@ -91,7 +58,7 @@
 <section style="padding:120px 2rem 60px;background:var(--navy-2);text-align:center;border-bottom:1px solid var(--glass-border);">
   <div class="container">
     <div class="section-tag" style="justify-content:center;">ICAHCR 2026</div>
-    <h1 class="section-title">Keynote <span class="grad">Speakers</span></h1>
+    <h1 class="section-title">Featured <span class="grad">Speakers</span></h1>
     <p style="color:var(--white-70);max-width:560px;margin:0 auto 2rem;">World-class researchers shaping the future of AI in Healthcare. Speaker announcements rolling out from May 2026.</p>
     <a href="speaker-form" class="btn-outline"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:inherit;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>  Apply to Speak →</a>
   </div>
@@ -100,35 +67,12 @@
 <section class="section section--dark">
   <div class="container">
 
-    <!-- Keynotes placeholder -->
+    <!-- All Speakers — Dynamic from Supabase -->
     <div class="reveal" style="margin-bottom:4rem;">
-      <div class="section-tag">Keynote Speakers</div>
-      <h2 class="section-title">Featured <span class="grad">Keynotes</span></h2>
-      <div class="speaker-grid" id="keynoteGrid">
-        <div class="coming-soon-card">
-          <div style="font-size:3rem;margin-bottom:1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:inherit;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg></div>
-          <div style="font-size:14px;font-weight:600;">Keynote Speaker 1</div>
-          <div style="font-size:12px;margin-top:0.5rem;">Announcement: May 2026</div>
-        </div>
-        <div class="coming-soon-card">
-          <div style="font-size:3rem;margin-bottom:1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:inherit;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg></div>
-          <div style="font-size:14px;font-weight:600;">Keynote Speaker 2</div>
-          <div style="font-size:12px;margin-top:0.5rem;">Announcement: May 2026</div>
-        </div>
-        <div class="coming-soon-card">
-          <div style="font-size:3rem;margin-bottom:1rem;"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:inherit;"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg></div>
-          <div style="font-size:14px;font-weight:600;">Keynote Speaker 3</div>
-          <div style="font-size:12px;margin-top:0.5rem;">Announcement: June 2026</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Invited Speakers from DB -->
-    <div class="reveal" style="margin-bottom:4rem;">
-      <div class="section-tag">Accepted Speakers</div>
-      <h2 class="section-title">Invited <span class="grad">Speakers</span></h2>
-      <p style="color:var(--white-70);margin-bottom:2rem;">Confirmed invited speakers and panelists. Updated as applications are accepted.</p>
-      <div class="speaker-grid" id="speakersGrid">
+      <div class="section-tag">All Speakers</div>
+      <h2 class="section-title">Confirmed <span class="grad">Speakers</span></h2>
+      <p style="color:var(--white-70);margin-bottom:2rem;">Keynote speakers, invited talks, and panelists. Updated as applications are accepted.</p>
+      <div class="people-grid" id="allSpeakersGrid">
         <div style="display:flex;align-items:center;justify-content:center;padding:3rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">
           ⏳ Speaker profiles loading...
         </div>
@@ -144,53 +88,6 @@
 
   </div>
 </section>
-
-<footer class="footer"><div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding:1.5rem 0;"><span>© 2026 ICAHCR — ScholarVault</span><span><a href="contact" style="color:var(--cyan);">Contact</a> · <a href="refund" style="color:var(--cyan);">Refund Policy</a></span></div></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
-<script src="js/main.js"></script>
-<script>
-// Load accepted speakers from Supabase
-async function loadSpeakers() {
-  const grid = document.getElementById('speakersGrid');
-  try {
-    const { data } = await db.from('conf_speakers')
-      .select('name,designation,institution,topic,photo_url,talk_type')
-      .eq('status', 'accepted')
-      .order('created_at', { ascending: false });
-
-    if (!data || data.length === 0) {
-      grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">Speaker profiles will appear here as applications are accepted. <a href="speaker-form" style="color:var(--cyan);">Apply to speak →</a></div>';
-      return;
-    }
-
-    grid.innerHTML = data.map(s => {
-      const name = s.name ? escapeHtml(s.name) : '';
-      const photo_url = s.photo_url ? escapeHtml(s.photo_url) : '';
-      const talk_type = s.talk_type ? escapeHtml(s.talk_type) : '';
-      const designation = s.designation ? escapeHtml(s.designation) : '';
-      const institution = s.institution ? escapeHtml(s.institution) : '';
-      const topic = s.topic ? escapeHtml(s.topic) : '';
-
-      return `
-      <div class="speaker-card">
-        ${photo_url
-          ? `<img class="speaker-photo" src="${photo_url}" alt="${name}" loading="lazy" />`
-          : `<div class="speaker-placeholder">${name.charAt(0)}</div>`
-        }
-        <div class="speaker-badge ${talk_type && talk_type.includes('Keynote') ? 'keynote' : ''}">${talk_type || 'Invited Talk'}</div>
-        <div class="speaker-name">${name}</div>
-        <div class="speaker-designation">${designation}</div>
-        <div class="speaker-institution">${institution}</div>
-        ${topic ? `<div class="speaker-topic">"${topic}"</div>` : ''}
-      </div>
-    `;}).join('');
-  } catch(e) {
-    grid.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--white-40);grid-column:1/-1;">Could not load speaker profiles.</div>';
-  }
-}
-loadSpeakers();
-</script>
 
 <!-- ─── SPEAKERS FAQ ─── -->
 <section class="section section--alt section--border-top">
@@ -233,5 +130,17 @@ loadSpeakers();
     <span><a href="contact" style="color:var(--cyan);">Contact</a> · <a href="refund" style="color:var(--cyan);">Refund Policy</a> · <a href="privacy" style="color:var(--cyan);">Privacy</a></span>
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/people-loader.js"></script>
+<script>
+  // Load all accepted speakers
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.PeopleLoader) {
+      PeopleLoader.loadSpeakers('allSpeakersGrid');
+    }
+  });
+</script>
 </body>
 </html>
