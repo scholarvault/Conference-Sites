@@ -30,6 +30,13 @@
     .admin-card__status--accepted { background: rgba(0,230,118,0.15); color: var(--green); border: 1px solid rgba(0,230,118,0.3); }
     .admin-card__status--pending { background: rgba(255,193,7,0.15); color: var(--amber); border: 1px solid rgba(255,193,7,0.3); }
 
+    /* Drag Handle */
+    .drag-handle { position: absolute; top: 10px; left: 10px; color: var(--white-40); cursor: grab; font-size: 14px; line-height: 1; padding: 2px 4px; border-radius: 4px; transition: var(--transition); }
+    .drag-handle:hover { color: var(--cyan); background: rgba(0,212,255,0.1); }
+    .admin-card.sortable-drag { opacity: 0.4; }
+    .admin-card.sortable-ghost { border: 2px dashed var(--cyan); background: rgba(0,212,255,0.06); }
+    .admin-grid { cursor: default; }
+
     /* Login Gate */
     .login-gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem; }
     .login-box { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-xl); padding: 3rem 2.5rem; max-width: 400px; width: 100%; text-align: center; }
@@ -204,6 +211,7 @@
 <!-- ─── SCRIPTS ─── -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.2/Sortable.min.js"></script>
 <script src="js/main.js"></script>
 <script>
 /* ── AUTH ── */
@@ -242,23 +250,46 @@ function switchTab(tab) {
 async function loadAdminSpeakers() {
   var grid = document.getElementById('adminSpeakerGrid');
   try {
-    var { data, error } = await db.from('conf_speakers').select('*').order('created_at', { ascending: false });
+    var { data, error } = await db.from('conf_speakers').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true });
     if (error) { console.error('Speakers load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + error.message + '</div>'; return; }
     document.getElementById('speakerCount').textContent = (data ? data.length : 0) + ' speakers total';
     if (!data || data.length === 0) { grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);grid-column:1/-1;">No speakers yet. Click "+ Add Speaker" to get started.</div>'; return; }
     grid.innerHTML = data.map(function(s) { return renderAdminCard(s, 'speaker'); }).join('');
+    initSortable('adminSpeakerGrid', 'conf_speakers');
   } catch(e) { console.error('Speakers catch:', e); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error loading speakers</div>'; }
 }
 
 async function loadAdminCommittee() {
   var grid = document.getElementById('adminCommitteeGrid');
   try {
-    var { data, error } = await db.from('conf_committee').select('*').order('created_at', { ascending: false });
+    var { data, error } = await db.from('conf_committee').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true });
     if (error) { console.error('Committee load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + error.message + '</div>'; return; }
     document.getElementById('committeeCount').textContent = (data ? data.length : 0) + ' members total';
     if (!data || data.length === 0) { grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);grid-column:1/-1;">No committee members yet. Click "+ Add Member".</div>'; return; }
     grid.innerHTML = data.map(function(m) { return renderAdminCard(m, 'committee'); }).join('');
+    initSortable('adminCommitteeGrid', 'conf_committee');
   } catch(e) { console.error('Committee catch:', e); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error loading committee</div>'; }
+}
+
+/* ── DRAG & DROP ── */
+function initSortable(gridId, table) {
+  var el = document.getElementById(gridId);
+  if (!el || typeof Sortable === 'undefined') return;
+  Sortable.create(el, {
+    animation: 180,
+    handle: '.drag-handle',
+    ghostClass: 'sortable-ghost',
+    dragClass: 'sortable-drag',
+    onEnd: async function(evt) {
+      var cards = el.querySelectorAll('.admin-card[data-id]');
+      var updates = [];
+      cards.forEach(function(card, index) {
+        updates.push(db.from(table).update({ sort_order: index }).eq('id', card.dataset.id));
+      });
+      await Promise.all(updates);
+      showToast('Order saved!', 'success');
+    }
+  });
 }
 
 function renderAdminCard(p, type) {
@@ -270,7 +301,8 @@ function renderAdminCard(p, type) {
   var statusClass = status === 'accepted' ? 'admin-card__status--accepted' : 'admin-card__status--pending';
   var photoHTML = p.photo_url ? '<img class="admin-card__photo" src="'+escapeHtml(p.photo_url)+'" alt="'+name+'" />' : '<div class="admin-card__initials">'+initials+'</div>';
 
-  return '<div class="admin-card">'
+  return '<div class="admin-card" data-id="'+p.id+'">'
+    + '<span class="drag-handle" title="Drag to reorder">⠿⠿</span>'
     + '<div class="admin-card__status '+statusClass+'">'+escapeHtml(status)+'</div>'
     + photoHTML
     + '<div class="admin-card__name">'+name+'</div>'
