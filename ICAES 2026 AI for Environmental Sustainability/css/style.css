@@ -2949,3 +2949,14 @@ select:focus {
   text-decoration: underline;
   font-weight: 600;
 }
+/* Focus-visible styles for keyboard accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #3bc9a7;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
