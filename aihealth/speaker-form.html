@@ -431,7 +431,7 @@ document.getElementById('speakerForm').addEventListener('submit', async (e) => {
     const photoFile = document.getElementById('photoFile').files[0];
     if (photoFile) {
       photoUrl = await uploadFile(
-        'conf-photos', photoFile, 'speakers',
+        'conf-photos', photoFile, 'aihealth/speakers',
         'photoProgressBar', 'photoUploadStatus', 'photoUploadProgress'
       );
     }
