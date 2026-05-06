@@ -84,9 +84,10 @@
     /* Share button for speakers */
     var shareHTML = '';
     if (type === 'speaker') {
-      var rawName = (person.name || '').replace(/'/g, "\\'");
-      var rawType = (person.talk_type || '').replace(/'/g, "\\'");
-      var rawTopic = (person.topic || '').replace(/'/g, "\\'");
+      // SENTINEL: Escape backslashes and single quotes for JS literal, then escape for HTML attribute
+      var rawName = esc((person.name || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
+      var rawType = esc((person.talk_type || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
+      var rawTopic = esc((person.topic || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
       shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
     }
 
