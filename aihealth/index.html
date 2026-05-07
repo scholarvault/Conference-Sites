@@ -305,10 +305,22 @@
   /* ── Spotlight follows mouse ── */
   var spot = document.getElementById('heroSpotlight');
   if(spot){
+    // BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage
+    var spotTicking = false;
+    var spotClientX = 0;
+    var spotClientY = 0;
     document.addEventListener('mousemove',function(e){
-      var mx = (e.clientX/window.innerWidth - 0.5) * 50;
-      var my = (e.clientY/window.innerHeight - 0.5) * 25;
-      spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
+      spotClientX = e.clientX;
+      spotClientY = e.clientY;
+      if(!spotTicking) {
+        requestAnimationFrame(function() {
+          var mx = (spotClientX/window.innerWidth - 0.5) * 50;
+          var my = (spotClientY/window.innerHeight - 0.5) * 25;
+          spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
+          spotTicking = false;
+        });
+        spotTicking = true;
+      }
     });
   }
 
