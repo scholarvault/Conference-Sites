@@ -294,6 +294,7 @@ function initSortable(gridId, table) {
 
 function renderAdminCard(p, type) {
   var name = escapeHtml(p.name || '');
+  var jsName = escapeHtml((p.name || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
   var initials = name.split(' ').filter(Boolean).map(function(w){return w[0];}).join('').substring(0,2);
   var desg = escapeHtml(type === 'speaker' ? (p.designation || '') : (p.expertise || p.designation || ''));
   var inst = escapeHtml(p.institution || '');
@@ -310,7 +311,7 @@ function renderAdminCard(p, type) {
     + '<div class="admin-card__inst">'+inst+'</div>'
     + '<div class="admin-card__actions">'
     + '<button class="btn-edit" onclick="editPerson(\''+type+'\',\''+p.id+'\')">✏️ Edit</button>'
-    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+name+'\')">🗑️ Delete</button>'
+    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+jsName+'\')">🗑️ Delete</button>'
     + '</div></div>';
 }
 

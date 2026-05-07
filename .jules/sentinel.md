@@ -22,3 +22,8 @@
 **Vulnerability:** The Vercel Edge API functions (`api/send-email.ts`) across multiple sub-projects were using wildcard (`*`) for `Access-Control-Allow-Origin`, allowing any domain to send emails via the endpoints.
 **Learning:** Developers often default to wildcard CORS for simplicity during initial setup or testing of serverless functions, leaving the endpoint open to abuse from unauthorized domains if it's not secured prior to production.
 **Prevention:** Implement a standardized `ALLOWED_ORIGINS` array containing trusted domains and dynamically validate the `Origin` header returning either the matched allowed origin or a safe fallback default. Always include the `Vary: Origin` header.
+
+## 2024-05-20 - DOM XSS in Inline Event Handlers via Template Literals
+**Vulnerability:** Unsanitized dynamic user data (e.g. `person.name`) was being injected into inline JavaScript event handlers (like `onclick="func('...')"`). Although `escapeHtml()` or `.replace(/'/g, "\\'")` was sometimes used, it did not adequately escape backslashes before escaping quotes or encoding for HTML. An attacker could inject payload like `\'-alert(1)-\'` to execute arbitrary code.
+**Learning:** When injecting dynamic strings into JavaScript contexts inside HTML attributes, it is critical to escape backslashes first, then quotes, and then properly encode the resulting string as HTML to prevent execution context escapes.
+**Prevention:** Always use a multi-step escaping function when injecting strings into inline event handlers: escape backslashes (`\`) and single quotes (`'`) for JavaScript, and then apply HTML entity encoding to the final string.
