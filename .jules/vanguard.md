@@ -9,3 +9,9 @@
 **Finding:** Form submission handlers frequently hardcoded loading states (`btn.disabled = true; btn.textContent = '...'`) and success states (`form.style.display = 'none'; success.classList.add('show')`) instead of using the helper functions `setFormLoading` and `showFormSuccess` available in `js/main.js`.
 **Constraint:** There's a pattern of duplicated form handlers across the multiple static HTML pages.
 **Remember:** Look out for other `.html` files in `aihealth` and `ICAES...` directories that should be updated to use the standard helpers for a consistent UI state.
+
+## 2026-05-08 - Standardized Form Loading and Success
+**Element:** `aihealth/interest-form.html`
+**Finding:** The `interestForm` submit handler hardcoded DOM manipulation (`btn.disabled = true; btn.textContent = '...';`, `e.target.style.display = 'none';`) instead of utilizing the `js/main.js` helper functions (`setFormLoading`, `showFormSuccess`), causing inconsistent UI feedback loops.
+**Constraint:** None; easily refactored.
+**Remember:** Other forms in older sub-directories like `aihealth/admin.html` (which has `btn.disabled = true`) and `aihealth/register.html` might also need similar refactoring in future runs to standardise QA flows across the platform.
