@@ -84,10 +84,10 @@
     /* Share button for speakers */
     var shareHTML = '';
     if (type === 'speaker') {
-      var rawName = (person.name || '').replace(/'/g, "\\'");
-      var rawType = (person.talk_type || '').replace(/'/g, "\\'");
-      var rawTopic = (person.topic || '').replace(/'/g, "\\'");
-      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
+      var safeName = esc((person.name || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
+      var safeType = esc((person.talk_type || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
+      var safeTopic = esc((person.topic || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"));
+      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + safeName + '\',\'' + safeType + '\',\'' + safeTopic + '\')" title="Share">' + shareSVG + '</button>';
     }
 
     var actionsHTML = '';
