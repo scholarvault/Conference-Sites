@@ -397,11 +397,22 @@
   /* ── Spotlight follows mouse ── */
   var spot = document.getElementById('heroSpotlight');
   if(spot){
+    // ⚡ BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage
+    var spotlightTicking = false;
+    var lastX = 0, lastY = 0;
     document.addEventListener('mousemove',function(e){
-      var mx = (e.clientX/window.innerWidth - 0.5) * 50;
-      var my = (e.clientY/window.innerHeight - 0.5) * 25;
-      spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
-    });
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (!spotlightTicking) {
+        requestAnimationFrame(function() {
+          var mx = (lastX/window.innerWidth - 0.5) * 50;
+          var my = (lastY/window.innerHeight - 0.5) * 25;
+          spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
+          spotlightTicking = false;
+        });
+        spotlightTicking = true;
+      }
+    }, { passive: true });
   }
 
   /* ── Particles ── */
@@ -1260,15 +1271,23 @@
 <script>
   (function() {
     var btn = document.getElementById('scrollTopBtn');
+    // ⚡ BOLT: Throttle scroll event using rAF to prevent main thread blocking and layout thrashing
+    var scrollBtnTicking = false;
     window.addEventListener('scroll', function() {
-      if (window.scrollY > 300) {
-        btn.style.display = 'flex';
-        setTimeout(function() { btn.style.opacity = '1'; }, 10);
-      } else {
-        btn.style.opacity = '0';
-        setTimeout(function() { btn.style.display = 'none'; }, 300);
+      if (!scrollBtnTicking) {
+        requestAnimationFrame(function() {
+          if (window.scrollY > 300) {
+            btn.style.display = 'flex';
+            setTimeout(function() { btn.style.opacity = '1'; }, 10);
+          } else {
+            btn.style.opacity = '0';
+            setTimeout(function() { btn.style.display = 'none'; }, 300);
+          }
+          scrollBtnTicking = false;
+        });
+        scrollBtnTicking = true;
       }
-    });
+    }, { passive: true });
     btn.addEventListener('mouseenter', function() {
       btn.style.transform = 'translateY(-3px)';
       btn.style.boxShadow = '0 8px 28px rgba(0,102,255,0.6)';
