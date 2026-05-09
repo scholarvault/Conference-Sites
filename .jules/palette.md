@@ -4,3 +4,7 @@
 ## 2026-05-03 - Added ARIA labels to notify modal in conf-hub
 **Learning:** Found inputs in the `notifyForm` that lacked `label` elements and `aria-label` attributes, relying solely on `placeholder` attributes. This is a common accessibility issue for screen readers. The modal close button was also just an "X" character without an `aria-label`.
 **Action:** Always ensure that icon-only buttons and input fields (especially in modals or forms without explicit `<label>` tags) have descriptive `aria-label` attributes to ensure they are properly announced by screen readers.
+
+## 2025-02-23 - Dynamic ARIA Initialization for Accordions
+**Learning:** When working with FAQ accordions in the ScholarVault sub-projects (like ICAES 2026), manual HTML modifications for ARIA attributes (`aria-expanded`, `aria-controls`) risk being overwritten by static site generators.
+**Action:** Inject ARIA attributes dynamically within the components' initialization scripts (e.g., `initFaq()` in `js/main.js`) to ensure accessibility states are robust and avoid generator conflicts.

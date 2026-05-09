@@ -169,12 +169,20 @@ function initParallax() {
 }
 
 function initFaq() {
-  document.querySelectorAll(".faq-item").forEach((item) => {
+  document.querySelectorAll(".faq-item").forEach((item, index) => {
     const button = item.querySelector("button");
     const body = item.querySelector(".faq-item__body");
     if (!button || !body) return;
+
+    // Add accessibility attributes
+    const contentId = `faq-content-${index}`;
+    body.id = contentId;
+    button.setAttribute("aria-expanded", "false");
+    button.setAttribute("aria-controls", contentId);
+
     button.addEventListener("click", () => {
       const open = item.classList.toggle("open");
+      button.setAttribute("aria-expanded", open.toString());
       body.style.maxHeight = open ? `${body.scrollHeight}px` : "0px";
     });
   });
