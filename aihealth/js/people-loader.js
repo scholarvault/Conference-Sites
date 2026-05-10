@@ -78,7 +78,7 @@
 
     var linkedinHTML = '';
     if (linkedin) {
-      linkedinHTML = '<a href="' + esc(linkedin) + '" target="_blank" rel="noopener" class="person-card__linkedin" title="LinkedIn Profile">' + linkedinSVG + '</a>';
+      linkedinHTML = '<a href="' + esc(linkedin) + '" target="_blank" rel="noopener" class="person-card__linkedin" title="LinkedIn Profile" aria-label="LinkedIn Profile">' + linkedinSVG + '</a>';
     }
 
     /* Share button for speakers */
@@ -87,7 +87,7 @@
       var rawName = (person.name || '').replace(/'/g, "\\'");
       var rawType = (person.talk_type || '').replace(/'/g, "\\'");
       var rawTopic = (person.topic || '').replace(/'/g, "\\'");
-      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
+      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share" aria-label="Share">' + shareSVG + '</button>';
     }
 
     var actionsHTML = '';
