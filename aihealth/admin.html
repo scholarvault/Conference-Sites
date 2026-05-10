@@ -97,7 +97,7 @@
     <h2>Admin Access</h2>
     <p>Enter your credentials to manage speakers and committee.</p>
     <div id="loginError" class="login-error">Invalid username or password.</div>
-    <input type="text" id="loginUser" placeholder="Username" autocomplete="off" />
+    <input type="email" id="loginUser" placeholder="Email" autocomplete="email" />
     <input type="password" id="loginPass" placeholder="Password" />
     <button class="btn-primary" style="width:100%;justify-content:center;" onclick="attemptLogin()">Sign In →</button>
   </div>
@@ -215,17 +215,29 @@
 <script src="js/main.js"></script>
 <script>
 /* ── AUTH ── */
-var ADMIN_USER = 'Shyam';
-var ADMIN_PASS = '12345678';
-
-function attemptLogin() {
+async function attemptLogin() {
   var u = document.getElementById('loginUser').value.trim();
   var p = document.getElementById('loginPass').value;
-  if (u === ADMIN_USER && p === ADMIN_PASS) {
-    sessionStorage.setItem('icahcr_admin', '1');
+
+  var btn = document.querySelector('.login-box button');
+  var origText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Signing In...';
+
+  var result = await db.auth.signInWithPassword({
+    email: u,
+    password: p
+  });
+
+  btn.disabled = false;
+  btn.textContent = origText;
+
+  if (result.data && result.data.session) {
     showDashboard();
   } else {
-    document.getElementById('loginError').style.display = 'block';
+    var errEl = document.getElementById('loginError');
+    errEl.textContent = result.error ? result.error.message : 'Invalid email or password.';
+    errEl.style.display = 'block';
   }
 }
 document.getElementById('loginPass').addEventListener('keydown', function(e) { if (e.key === 'Enter') attemptLogin(); });
@@ -237,7 +249,13 @@ function showDashboard() {
   loadAdminCommittee();
 }
 
-if (sessionStorage.getItem('icahcr_admin') === '1') showDashboard();
+async function checkSession() {
+  var result = await db.auth.getSession();
+  if (result.data && result.data.session) {
+    showDashboard();
+  }
+}
+checkSession();
 
 /* ── TABS ── */
 function switchTab(tab) {
