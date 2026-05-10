@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /api
+Disallow: /admin
+Disallow: /account
 
 Sitemap: https://conf.scholarvault.in/sitemap.xml

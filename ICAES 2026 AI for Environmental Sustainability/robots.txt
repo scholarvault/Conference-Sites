@@ -1,6 +1,10 @@
 # Robots.txt for ICAES 2026 Conference
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /api
+Disallow: /admin
+Disallow: /account
 
 # Sitemap URL
 Sitemap: https://isiaisgs2026.scholarvault.in/sitemap.xml

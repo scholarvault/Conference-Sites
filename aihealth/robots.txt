@@ -1,6 +1,10 @@
 # Robots.txt for AI Health Conference
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /api
+Disallow: /admin
+Disallow: /account
 
 # Sitemap URL
 Sitemap: https://aihealth.scholarvault.in/sitemap.xml
