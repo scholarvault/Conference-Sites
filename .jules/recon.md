@@ -10,3 +10,9 @@
 **Pattern Found:** AllConferences.com is currently parked/for sale. World Research Library heavily features identical date/location clustering by specific organizers (IRAJ, ISER).
 **Reliability:** High
 **Watch For:** Other primary targets going offline or being parked. Recurring event clusters under the same organizer networks.
+
+## 2026-05-10 - Organizer Network Identifiers
+**Source:** Academic Research Library, World Research Library
+**Pattern Found:** Sub-networks (SFE, NIER on Academic Research Library; IRAJ, ISER on World Research Library) consistently schedule large numbers of conferences on identical dates with minimal variation.
+**Reliability:** High
+**Watch For:** Any new domains listing these exact organizer acronyms, as they are strong indicators of mass-generated events.
