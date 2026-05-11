@@ -1,5 +1,12 @@
-1. **Analyze:** There are several unthrottled `scroll` event listeners attached to the `window` object in `ICAES 2026 AI for Environmental Sustainability/js/main.js`. These are in `initNavbar`, `initScrollTop`, and `initParallax`.
-2. **Optimize:** I will update these functions to use a `requestAnimationFrame` (rAF) throttle tick variable to prevent layout thrashing and high CPU usage by only executing scroll handlers at most once per frame. This aligns with Bolt's "Throttled Scroll Events" guideline in `.jules/bolt.md`.
-3. **Verify:** Use `node -c` to verify the modified javascript file's syntax.
-4. **Pre-commit:** Run the `pre_commit_instructions` tool to run checking tools.
-5. **Submit:** Submit the PR as `⚡ Bolt: [performance improvement]`.
+1. Gather intelligence from primary and secondary targets:
+   - Primary: AllConferences.com (parked), Conference Alerts, Academic Research Library, World Research Library.
+   - Secondary: WikiCFP.
+2. Analyze the findings:
+   - Academic Research Library shows multiple "International Conference 2025" entries with vague details.
+   - World Research Library shows clustering by specific organizers (IRAJ, ISER) with same dates/locations.
+   - WikiCFP shows typical lists with a lot of AI/ML/IoT/Cybersecurity entries.
+3. Prepare the Recon intelligence briefing in `.jules/recon-report-2026-05-11.md`.
+4. Append/create the GitHub discussion in `.github/DISCUSSIONS/recon-2026-05-11.md`.
+5. Update `.jules/recon.md` with new intelligence patterns.
+6. Verify no code changes are made.
+7. Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.
