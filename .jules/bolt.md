@@ -13,3 +13,6 @@
 ## 2026-08-22 - Pointermove Throttling
 **Learning:** Continuous unthrottled `pointermove` or `mousemove` event listeners block the main thread by firing too often during mouse movement, potentially delaying the next frame calculation and causing layout thrashing when triggering reflows.
 **Action:** When implementing pointer listeners for visual updates like spotlight effects, use a `requestAnimationFrame` ticking pattern to ensure the DOM is updated synchronously with the browser's render cycle at most once per frame, just like with scroll events.
+## 2025-05-18 - requestAnimationFrame State Synchronization
+**Learning:** When throttling high-frequency event listeners (like `mousemove` or `scroll`) using `requestAnimationFrame`, closing over the initial event object (`e`) and reading its values inside the callback will result in stale data processing. The render frame will compute logic based on the state when the frame was *requested*, rather than the state when the frame *executes*.
+**Action:** When implementing an rAF throttle, always store the most recent event data (like `clientX`/`clientY`) in variables outside the `requestAnimationFrame` block, and read from those variables inside the callback to ensure the render uses the freshest data.

@@ -897,12 +897,23 @@
     tgtRY=0;
     inner.style.transition='transform .6s cubic-bezier(.25,.46,.45,.94)';
   });
+  // ⚡ BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage and layout thrashing
+  var tickingCardMove=false;
+  var latestX=0, latestY=0;
   card.addEventListener('mousemove',function(e){
     if(!hovering) return;
-    var r=card.getBoundingClientRect();
-    var dx=(e.clientX-(r.left+r.width/2))/(r.width/2);
-    var dy=(e.clientY-(r.top+r.height/2))/(r.height/2);
-    tgtRY=dx*16; tgtRX=-dy*12;
+    latestX = e.clientX;
+    latestY = e.clientY;
+    if(!tickingCardMove) {
+      window.requestAnimationFrame(function() {
+        var r=card.getBoundingClientRect();
+        var dx=(latestX-(r.left+r.width/2))/(r.width/2);
+        var dy=(latestY-(r.top+r.height/2))/(r.height/2);
+        tgtRY=dx*16; tgtRX=-dy*12;
+        tickingCardMove=false;
+      });
+      tickingCardMove=true;
+    }
   });
 
   /* Count-up when section scrolls in */
