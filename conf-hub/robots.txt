@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
+# PATHFINDER: Disallow crawling of private application routes to prevent indexing sensitive pages and preserve crawl budget
+Disallow: /dashboard
+Disallow: /api
+Disallow: /admin
+Disallow: /account
+
 Sitemap: https://conf.scholarvault.in/sitemap.xml
