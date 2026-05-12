@@ -110,6 +110,9 @@
     <div class="stag">Scientific Committee</div>
     <h2 class="stitle">Committee <span class="grad">Accepting</span></h2>
     <p class="sdesc">ICAHCR 2026 is building a world-class scientific committee. We invite established researchers, faculty members, and industry experts in AI &amp; Healthcare to join our advisory and review panels.</p>
+    
+    <!-- Committee: max 3 -->
+    <div class="speaker-grid" id="brochureCommitteeGrid" style="margin-top:16px;"></div>
 
     <div class="info-grid">
       <div class="info-card"><div class="info-card__title" style="color:var(--cyan)">Advisory Board</div><div class="info-card__body">Senior researchers and professors to guide conference direction, track structuring, and keynote selection.</div></div>
@@ -123,6 +126,9 @@
     <div class="stag">Speaker Invitations</div>
     <h2 class="stitle">Speakers <span class="grad">Accepting</span></h2>
     <p class="sdesc">Applications are open for keynote talks, invited presentations, and panel discussions. Speaker announcements begin May 2026.</p>
+    
+    <!-- All speakers, no limit -->
+    <div class="speaker-grid" id="brochureSpeakersGrid"></div>
 
     <div class="info-grid">
       <div class="info-card"><div class="info-card__title" style="color:var(--sv-gold)">Keynote Talks</div><div class="info-card__body">40 min + 10 min Q&amp;A. Complimentary registration for accepted keynote speakers.</div></div>
@@ -287,12 +293,39 @@
 </div>
 
 </body>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
-// Auto-trigger print dialog for PDF save when opened with ?print=true
-if (new URLSearchParams(window.location.search).get('print') === 'true') {
-  window.addEventListener('load', function() {
+  window.db = supabase.createClient(
+    'https://ldoirjupetkmldibhygk.supabase.co',
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkb2lyanVwZXRrbWxkaWJoeWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMzMyOTQsImV4cCI6MjA4NzYwOTI5NH0.i_ocMG3EVLDOycUHfe3Met2Bbg0UdqXzUBqrDY_LKd4'
+  );
+</script>
+<script src="js/people-loader.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var isPrintMode = new URLSearchParams(window.location.search).get('print') === 'true';
+  if (window.PeopleLoader) {
+    Promise.all([
+      PeopleLoader.loadSpeakers('brochureSpeakersGrid'),
+      PeopleLoader.loadCommittee('brochureCommitteeGrid', { limit: 3 })
+    ]).then(function() {
+      if (isPrintMode) {
+        var imgs = document.querySelectorAll('#brochureSpeakersGrid img, #brochureCommitteeGrid img');
+        var total = imgs.length;
+        if (total === 0) { setTimeout(function() { window.print(); }, 500); return; }
+        var loaded = 0;
+        function onLoad() { loaded++; if (loaded >= total) setTimeout(function() { window.print(); }, 400); }
+        imgs.forEach(function(img) {
+          if (img.complete) { onLoad(); }
+          else { img.addEventListener('load', onLoad); img.addEventListener('error', onLoad); }
+        });
+      }
+    }).catch(function() {
+      if (isPrintMode) { setTimeout(function() { window.print(); }, 1000); }
+    });
+  } else if (isPrintMode) {
     setTimeout(function() { window.print(); }, 800);
-  });
-}
+  }
+});
 </script>
 </html>
