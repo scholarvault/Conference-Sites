@@ -164,8 +164,8 @@ document.getElementById('awardsForm').addEventListener('submit', async (e) => {
   const data = Object.fromEntries(fd.entries());
   try {
     await insertRecord('conf_awards', data);
-    form.style.display = 'none';
-    document.getElementById('awardsSuccess').classList.add('show');
+    // VANGUARD: Standardized success state using showFormSuccess helper
+    showFormSuccess(document.getElementById('awardsFormWrap'));
     trackEvent('award_nominated', { category: data.award_category });
     sendEmail('award_nomination', {
       name: data.name, email: data.email,
