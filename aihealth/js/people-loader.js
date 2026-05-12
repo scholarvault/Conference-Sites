@@ -78,7 +78,7 @@
 
     var linkedinHTML = '';
     if (linkedin) {
-      linkedinHTML = '<a href="' + esc(linkedin) + '" target="_blank" rel="noopener" class="person-card__linkedin" title="LinkedIn Profile" aria-label="LinkedIn Profile">' + linkedinSVG + '</a>';
+      linkedinHTML = '<a href="' + esc(linkedin) + '" target="_blank" rel="noopener" class="person-card__linkedin" title="LinkedIn Profile">' + linkedinSVG + '</a>';
     }
 
     /* Share button for speakers */
@@ -87,7 +87,7 @@
       var rawName = (person.name || '').replace(/'/g, "\\'");
       var rawType = (person.talk_type || '').replace(/'/g, "\\'");
       var rawTopic = (person.topic || '').replace(/'/g, "\\'");
-      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share" aria-label="Share">' + shareSVG + '</button>';
+      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
     }
 
     var actionsHTML = '';
@@ -113,12 +113,12 @@
   /* ── Load speakers from Supabase ── */
   function loadSpeakers(containerId, options) {
     var container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container) return Promise.resolve();
 
     var _db = window.db || (window.SVSite && window.SVSite.db);
     if (!_db) {
       container.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--white-40);grid-column:1/-1;">Database not available</div>';
-      return;
+      return Promise.resolve();
     }
 
     options = options || {};
@@ -128,7 +128,7 @@
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: true });
 
-    query.then(function (result) {
+    return query.then(function (result) {
       var data = result.data;
       if (!data || data.length === 0) {
         container.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">'
@@ -163,12 +163,12 @@
   /* ── Load committee from Supabase ── */
   function loadCommittee(containerId, options) {
     var container = document.getElementById(containerId);
-    if (!container) return;
+    if (!container) return Promise.resolve();
 
     var _db = window.db || (window.SVSite && window.SVSite.db);
     if (!_db) {
       container.innerHTML = '<div style="text-align:center;padding:2rem;color:var(--white-40);grid-column:1/-1;">Database not available</div>';
-      return;
+      return Promise.resolve();
     }
 
     options = options || {};
@@ -178,7 +178,7 @@
       .order('sort_order', { ascending: true })
       .order('created_at', { ascending: true });
 
-    query.then(function (result) {
+    return query.then(function (result) {
       var data = result.data;
       if (!data || data.length === 0) {
         container.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);font-size:14px;grid-column:1/-1;">'
