@@ -1,6 +1,10 @@
 # Robots.txt for ICAES 2026 Conference
 User-agent: *
 Allow: /
+Disallow: /dashboard
+Disallow: /api
+Disallow: /admin
+Disallow: /account
 
 # PATHFINDER: Disallow crawling of private application routes to prevent indexing sensitive pages and preserve crawl budget
 Disallow: /dashboard
