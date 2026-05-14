@@ -49,6 +49,33 @@
   }
   window.shareSpeaker = shareSpeaker;
 
+  /* ── Generate JSON-LD Schema for a Person ── */
+  function generatePersonSchema(person, type) {
+    var schema = {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": person.name,
+      "jobTitle": person.designation || person.expertise,
+      "affiliation": {
+        "@type": "Organization",
+        "name": person.institution
+      }
+    };
+    if (person.linkedin || person.profile_url) {
+      schema.sameAs = [person.linkedin || person.profile_url];
+    }
+    if (person.photo_url) {
+      schema.image = person.photo_url;
+    }
+    if (type === 'speaker' && person.topic) {
+      schema.mainEntityOfPage = {
+        "@type": "CreativeWork",
+        "name": person.topic
+      };
+    }
+    return JSON.stringify(schema);
+  }
+
   /* ── Render a single person card ── */
   function renderCard(person, type) {
     var name = esc(person.name || '');
@@ -95,7 +122,11 @@
       actionsHTML = '<div class="person-card__actions">' + linkedinHTML + shareHTML + '</div>';
     }
 
+    /* Hidden Schema Block for AEO/SEO */
+    var schemaHTML = '<script type="application/ld+json">' + generatePersonSchema(person, type) + '</script>';
+
     return '<div class="person-card">'
+      + schemaHTML
       + '<div class="person-card__left">' + photoHTML + '</div>'
       + '<div class="person-card__right">'
         + '<div class="person-card__header">'
