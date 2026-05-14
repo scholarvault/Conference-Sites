@@ -322,7 +322,7 @@ const emailMap: Record<string, { subject: string; tpl: (d: Record<string, string
 
 
 // ─── CORS Helpers ─────────────────────────────────────────────
-const ALLOWED_ORIGINS = [
+export const ALLOWED_ORIGINS = [
   "https://aihealth.scholarvault.in",
   "https://scholarvault.in",
   "https://conf.scholarvault.in",
@@ -332,7 +332,7 @@ const ALLOWED_ORIGINS = [
   "https://isiaisgs2026.scholarvault.in"
 ];
 
-function getCorsHeaders(req: Request) {
+export function getCorsHeaders(req: Request) {
   const origin = req.headers.get("Origin");
   const isAllowed = origin && ALLOWED_ORIGINS.includes(origin);
   return {
