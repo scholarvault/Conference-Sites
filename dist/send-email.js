@@ -421,8 +421,8 @@ async function handler(req) {
       });
     }
     const sanitizedData = {};
-    for (const key in data) {
-      const val = data[key] == null ? "" : String(data[key]);
+    for (const [key, value] of Object.entries(data)) {
+      const val = value == null ? "" : String(value);
       sanitizedData[key] = escapeHtml(val);
     }
     const conf = emailMap[type];

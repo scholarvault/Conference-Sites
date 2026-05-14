@@ -16,3 +16,6 @@
 ## 2025-05-18 - requestAnimationFrame State Synchronization
 **Learning:** When throttling high-frequency event listeners (like `mousemove` or `scroll`) using `requestAnimationFrame`, closing over the initial event object (`e`) and reading its values inside the callback will result in stale data processing. The render frame will compute logic based on the state when the frame was *requested*, rather than the state when the frame *executes*.
 **Action:** When implementing an rAF throttle, always store the most recent event data (like `clientX`/`clientY`) in variables outside the `requestAnimationFrame` block, and read from those variables inside the callback to ensure the render uses the freshest data.
+## 2025-05-18 - Sanitization Loop Safety vs Performance
+**Learning:** Replacing `for...in` with `Object.entries` improves safety by avoiding prototype chain iteration and enhances readability. Although `Object.entries` can be slightly slower due to array allocation in some environments, the safety benefits outweigh the negligible performance difference for small objects like form inputs.
+**Action:** Prefer `Object.entries` or `Object.keys` over `for...in` for object iteration to avoid safety issues with inherited properties, especially in input sanitization logic.
