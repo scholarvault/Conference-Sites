@@ -482,9 +482,9 @@ export default async function handler(req: Request) {
 
     // Sanitize input data to prevent HTML injection in emails
     const sanitizedData: Record<string, string> = {};
-    for (const key in data) {
+    for (const [key, value] of Object.entries(data)) {
       // Sentinel: Ensure all inputs are strings before escaping to prevent array/object bypass
-      const val = data[key] == null ? "" : String(data[key]);
+      const val = value == null ? "" : String(value);
       sanitizedData[key] = escapeHtml(val);
     }
 
