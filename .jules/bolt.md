@@ -19,3 +19,6 @@
 ## 2025-05-18 - Sanitization Loop Safety vs Performance
 **Learning:** Replacing `for...in` with `Object.entries` improves safety by avoiding prototype chain iteration and enhances readability. Although `Object.entries` can be slightly slower due to array allocation in some environments, the safety benefits outweigh the negligible performance difference for small objects like form inputs.
 **Action:** Prefer `Object.entries` or `Object.keys` over `for...in` for object iteration to avoid safety issues with inherited properties, especially in input sanitization logic.
+## 2025-05-18 - Prevent Race Conditions in rAF Throttled Listeners
+**Learning:** When throttling `mousemove` or `pointermove` event handlers in vanilla JavaScript using `requestAnimationFrame`, a queued animation frame that hasn't executed yet when a resetting event fires (like `mouseleave`) can still run its callback *after* the reset logic completes. This results in the element getting stuck in an intermediate transformed state instead of correctly resetting.
+**Action:** When throttling continuous events with `requestAnimationFrame`, always store the returned rAF ID. In the corresponding cleanup or reset listener (e.g., `mouseleave`), immediately call `window.cancelAnimationFrame(id)` and reset the `ticking` boolean to `false` to ensure no stale rendering frames overwrite the reset state.
