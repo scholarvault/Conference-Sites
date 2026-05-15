@@ -1,21 +1,3 @@
-## 2025-05-18 - Lazy Loading Navbar Logo Anti-Pattern
-**Learning:** Adding `loading="lazy"` to above-the-fold elements (like the main navbar logo or hero images) can actually delay the Largest Contentful Paint (LCP) and cause a slight perceived performance regression for the initial viewport.
-**Action:** When implementing lazy loading for images across a codebase, ensure that it's only applied to elements that are below the fold (e.g. footers, payment logos, QR codes, lower-page content) and exclude main above-the-fold assets.
-## 2026-08-22 - Unoptimized Render Loops
-**Learning:** Continuous `requestAnimationFrame` loops on canvas elements and 3D UI elements run even when out of view or not interacting with them. This causes unnecessary continuous CPU/GPU usage, draining battery and affecting scroll performance on slower devices.
-**Action:** Always use `IntersectionObserver` to pause off-screen animations, and make sure that interaction-driven animations only render when interacting and settling to the final position.
-## 2026-08-22 - Throttled Scroll Events
-**Learning:** Continuous unthrottled `scroll` event listeners block the main thread by firing too often during smooth scrolling, potentially delaying the next frame calculation.
-**Action:** When implementing scroll listeners for visual updates like navbar styling or progress bars, use a `requestAnimationFrame` ticking pattern to ensure the DOM is updated synchronously with the browser's render cycle at most once per frame.
-## 2025-05-18 - Math.sqrt in Animation Loops
-**Learning:** Calculating `Math.sqrt` for Euclidean distance inside nested `O(n^2)` render loops (like particle connections) creates significant CPU overhead per frame.
-**Action:** When evaluating distance thresholds, compare squared distances (`dx*dx + dy*dy`) against the squared threshold first. Only invoke `Math.sqrt` if the threshold is met and the precise distance value is needed for visual rendering.
-## 2026-08-22 - Pointermove Throttling
-**Learning:** Continuous unthrottled `pointermove` or `mousemove` event listeners block the main thread by firing too often during mouse movement, potentially delaying the next frame calculation and causing layout thrashing when triggering reflows.
-**Action:** When implementing pointer listeners for visual updates like spotlight effects, use a `requestAnimationFrame` ticking pattern to ensure the DOM is updated synchronously with the browser's render cycle at most once per frame, just like with scroll events.
-## 2025-05-18 - requestAnimationFrame State Synchronization
-**Learning:** When throttling high-frequency event listeners (like `mousemove` or `scroll`) using `requestAnimationFrame`, closing over the initial event object (`e`) and reading its values inside the callback will result in stale data processing. The render frame will compute logic based on the state when the frame was *requested*, rather than the state when the frame *executes*.
-**Action:** When implementing an rAF throttle, always store the most recent event data (like `clientX`/`clientY`) in variables outside the `requestAnimationFrame` block, and read from those variables inside the callback to ensure the render uses the freshest data.
-## 2025-05-18 - Sanitization Loop Safety vs Performance
-**Learning:** Replacing `for...in` with `Object.entries` improves safety by avoiding prototype chain iteration and enhances readability. Although `Object.entries` can be slightly slower due to array allocation in some environments, the safety benefits outweigh the negligible performance difference for small objects like form inputs.
-**Action:** Prefer `Object.entries` or `Object.keys` over `for...in` for object iteration to avoid safety issues with inherited properties, especially in input sanitization logic.
+## 2025-02-18 - Throttling Continuous UI Events Properly
+**Learning:** When using `requestAnimationFrame` to throttle continuous events like `mousemove`, a naive implementation can introduce race conditions. If a `mouseleave` event fires while an animation frame is pending, the element will first reset, and then immediately update its style again when the frame executes, leaving it permanently "stuck" in a hovered state.
+**Action:** Always store the returned frame ID (`rafId = window.requestAnimationFrame(...)`) and explicitly call `window.cancelAnimationFrame(rafId)` inside the corresponding clearing event (like `mouseleave` or `mouseout`) to prevent queued animations from incorrectly overwriting reset states.
