@@ -398,11 +398,15 @@
   var spot = document.getElementById('heroSpotlight');
   if(spot){
     var tickingSpot = false;
+    var spotX = 0;
+    var spotY = 0;
     document.addEventListener('mousemove',function(e){
+      spotX = e.clientX;
+      spotY = e.clientY;
       if(!tickingSpot) {
         window.requestAnimationFrame(function() {
-          var mx = (e.clientX/window.innerWidth - 0.5) * 50;
-          var my = (e.clientY/window.innerHeight - 0.5) * 25;
+          var mx = (spotX/window.innerWidth - 0.5) * 50;
+          var my = (spotY/window.innerHeight - 0.5) * 25;
           spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
           tickingSpot = false;
         });
@@ -891,21 +895,29 @@
       animationFrameId = requestAnimationFrame(loop);
     }
   });
+  // ⚡ BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage and layout thrashing
+  var tickingCardMove=false;
+  var latestX=0, latestY=0;
+  var cardMoveRafId=null;
+
   card.addEventListener('mouseleave',function(){
     hovering=false;
+    if(cardMoveRafId) {
+      window.cancelAnimationFrame(cardMoveRafId);
+      cardMoveRafId = null;
+    }
+    tickingCardMove=false;
     tgtRX=0;
     tgtRY=0;
     inner.style.transition='transform .6s cubic-bezier(.25,.46,.45,.94)';
   });
-  // ⚡ BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage and layout thrashing
-  var tickingCardMove=false;
-  var latestX=0, latestY=0;
+
   card.addEventListener('mousemove',function(e){
     if(!hovering) return;
     latestX = e.clientX;
     latestY = e.clientY;
     if(!tickingCardMove) {
-      window.requestAnimationFrame(function() {
+      cardMoveRafId = window.requestAnimationFrame(function() {
         var r=card.getBoundingClientRect();
         var dx=(latestX-(r.left+r.width/2))/(r.width/2);
         var dy=(latestY-(r.top+r.height/2))/(r.height/2);
