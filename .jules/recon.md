@@ -28,3 +28,9 @@
 **Pattern Found:** Proceedings on Academic Research Library often use hyper-generic scopes covering unrelated disciplines (e.g., combining health, culture, and data systems). World Research Library lists proceedings named purely after organizers without specifying the academic topic (e.g., "Academics World International Conference").
 **Reliability:** High
 **Watch For:** Conference titles that are either overly broad/multi-disciplinary or match generic organizer entities, as these appear to be strategies to attract varied submissions without maintaining specific academic focus.
+
+## 2026-05-16 - Structural Redirect on Parked Domains
+**Source:** AllConferences.com
+**Pattern Found:** Domain serves a JS-based redirect directly to a lander (`window.location.href="/lander"`), rather than loading a parked page structure initially.
+**Reliability:** High
+**Watch For:** This redirect behavior can break automated tools relying on raw HTML parsing for parked domain detection.
