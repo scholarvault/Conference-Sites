@@ -537,7 +537,16 @@ function initDownloadButtons() {
 }
 
 async function handleSubscribe(email, name = "", sourceForm = null) {
+  // VANGUARD: Added missing loading/disabled state to prevent double submissions
+  const btn = sourceForm ? sourceForm.querySelector('button[type="submit"]') : null;
+  const originalText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>...';
+  }
+
   if (!email || !String(email).includes("@")) {
+    if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
     showToast("Please enter a valid email address.", "error");
     return;
   }
@@ -552,9 +561,14 @@ async function handleSubscribe(email, name = "", sourceForm = null) {
   } catch (error) {
     if (error?.code === "23505") {
       showToast("This email is already subscribed.", "info");
-      return;
+    } else {
+      showToast("Subscription failed. Please try again.", "error");
     }
-    showToast("Subscription failed. Please try again.", "error");
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
   }
 }
 
