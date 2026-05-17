@@ -39,30 +39,30 @@
     /* SV Gold Addon Card */
     .sv-gold-card {
       position: relative; overflow: hidden;
-      background: linear-gradient(135deg, #1a1000, #2a1a00, #1a0a00);
-      border: 1.5px solid rgba(255, 193, 7, 0.4);
+      background: linear-gradient(135deg, #0a0f1a, #0d1525, #0a0f1a);
+      border: 1.5px solid rgba(0,209,255,0.25);
       border-radius: var(--radius-lg); padding: 1.5rem;
       margin-top: 2rem; cursor: pointer;
       transition: var(--transition);
     }
     .sv-gold-card::before {
       content: ''; position: absolute; inset: 0;
-      background: linear-gradient(135deg, rgba(255,193,7,0.08), transparent 70%);
+      background: linear-gradient(135deg, rgba(0,102,255,0.06), transparent 70%);
       pointer-events: none;
     }
-    .sv-gold-card:hover { border-color: rgba(255,193,7,0.7); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,193,7,0.15); }
+    .sv-gold-card:hover { border-color: rgba(0,209,255,0.5); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,102,255,0.15); }
     .sv-gold-card.activated {
-      border-color: var(--amber);
-      background: linear-gradient(135deg, #201200, #2e1800, #201000);
-      box-shadow: 0 0 32px rgba(255,193,7,0.2), inset 0 0 20px rgba(255,193,7,0.05);
+      border-color: rgba(0,209,255,0.6);
+      background: linear-gradient(135deg, #0a1220, #0d1830, #0a1220);
+      box-shadow: 0 0 32px rgba(0,102,255,0.2), inset 0 0 20px rgba(0,102,255,0.04);
     }
     .sv-gold-hex {
       font-size: 2.5rem; display: inline-block;
       animation: goldPulse 2.5s ease-in-out infinite;
     }
     @keyframes goldPulse {
-      0%, 100% { filter: drop-shadow(0 0 6px rgba(255,193,7,0.6)); transform: scale(1); }
-      50% { filter: drop-shadow(0 0 14px rgba(255,193,7,1)); transform: scale(1.08); }
+      0%, 100% { filter: drop-shadow(0 0 6px rgba(0,209,255,0.5)); transform: scale(1); }
+      50% { filter: drop-shadow(0 0 14px rgba(0,209,255,0.9)); transform: scale(1.08); }
     }
     .sv-gold-badge-row {
       display: flex; align-items: center; gap: 14px; margin-bottom: 0.75rem;
@@ -400,18 +400,18 @@
             </div>
 
             <!-- New Industry Tier -->
-            <div class="tier-card" data-tier="industry" data-inr="14999" data-usd="499" data-eb-inr="9999" data-eb-usd="399" onclick="selectTier(this)" style="grid-column: 1 / -1; border: 1.5px solid rgba(255, 193, 7, 0.5); background: linear-gradient(135deg, rgba(26, 16, 0, 0.85), rgba(42, 26, 0, 0.85));">
-              <div class="tier-badge" style="background: linear-gradient(135deg, #ff8f00, #ffc107); color: #000;">Professional Delegate</div>
-              <div class="tier-name" style="color: #ffc107;">Industry Professional</div>
+            <div class="tier-card" data-tier="industry" data-inr="14999" data-usd="499" data-eb-inr="9999" data-eb-usd="399" onclick="selectTier(this)" style="grid-column: 1 / -1;">
+              <div class="tier-badge" style="background: linear-gradient(135deg, #0066ff, #00D1FF); color: #fff;">Professional Delegate</div>
+              <div class="tier-name">Industry Professional</div>
               <div class="price-inr">
-                <div class="tier-price" style="color: #ffc107; opacity: 0.7; text-decoration: line-through;">₹14,999</div>
-                <div class="tier-price-eb" style="color: #ffc107;"><span class="eb-tag" style="background: #ffc107; color: #000;">Early Bird</span> ₹9,999</div>
+                <div class="tier-price" style="opacity: 0.5; text-decoration: line-through;">₹14,999</div>
+                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹9,999</div>
               </div>
               <div class="price-usd" style="display:none;">
-                <div class="tier-price" style="color: #ffc107; opacity: 0.7; text-decoration: line-through;">$499</div>
-                <div class="tier-price-eb" style="color: #ffc107;"><span class="eb-tag" style="background: #ffc107; color: #000;">Early Bird</span> $399</div>
+                <div class="tier-price" style="opacity: 0.5; text-decoration: line-through;">$499</div>
+                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $399</div>
               </div>
-              <ul class="tier-features" style="color: rgba(255, 193, 7, 0.8);">
+              <ul class="tier-features">
                 <li>Priority networking access</li>
                 <li>Industry delegate certificate</li>
                 <li>Post-event recording access</li>
@@ -425,8 +425,8 @@
           <div class="sv-gold-card" id="svGoldCard">
             <div class="sv-gold-badge-row">
               <div class="sv-gold-hex">
-                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 8px rgba(255,193,7,0.8));">
-                  <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#ffc107" stroke="#ffc107" stroke-width="0.5"/>
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 8px rgba(0,209,255,0.6));">
+                  <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/>
                   <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
               </div>
@@ -438,15 +438,15 @@
 
             <div class="sv-gold-grid">
               <!-- At this conference -->
-              <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
-                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">At this conference</div>
+              <div style="background:rgba(0,102,255,0.06);border:1px solid rgba(0,209,255,0.15);border-radius:10px;padding:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(0,209,255,0.7);margin-bottom:10px;">At this conference</div>
                 <div class="sv-gold-perk">15% off your registration — saves ₹375 to ₹1,499 instantly</div>
                 <div class="sv-gold-perk">Certificate says "ScholarVault Gold Delegate" — a career credential</div>
                 <div class="sv-gold-perk">Priority 2hr support lane</div>
               </div>
               <!-- Beyond this conference -->
-              <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
-                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">Beyond this conference</div>
+              <div style="background:rgba(0,102,255,0.06);border:1px solid rgba(0,209,255,0.15);border-radius:10px;padding:14px;">
+                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(0,209,255,0.7);margin-bottom:10px;">Beyond this conference</div>
                 <div class="sv-gold-perk">Verify unlimited conferences — never lose ₹8,000–₹50,000 to a fake one</div>
                 <div class="sv-gold-perk">PDF Forensic Reports accepted by HODs &amp; NAAC committees</div>
                 <div class="sv-gold-perk">CFP deadline alerts — never miss a submission window</div>
@@ -454,28 +454,28 @@
               </div>
             </div>
 
-            <div style="background:rgba(0,0,0,0.3);border-left:3px solid rgba(255,193,7,0.6);border-radius:4px;padding:10px 14px;margin-bottom:1rem;font-size:13px;color:rgba(255,220,100,0.85);font-style:italic;">
+            <div style="background:rgba(0,0,0,0.3);border-left:3px solid rgba(0,209,255,0.4);border-radius:4px;padding:10px 14px;margin-bottom:1rem;font-size:13px;color:rgba(255,255,255,0.75);font-style:italic;">
               One fake conference costs you ₹10,000+. Gold costs ₹399.
             </div>
 
-            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,193,7,0.5);margin-bottom:8px;">Already a Gold member? Enter your ID below</div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.4);margin-bottom:8px;">Already a Gold member? Enter your ID below</div>
             <div class="sv-gold-toggle">
               <input type="text" id="svGoldInput" placeholder="Enter your SV Gold Member ID (e.g. SCHOLAR-AB12CD)" />
               <button onclick="applySVGold()">Verify &amp; Apply</button>
             </div>
             <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
-            <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,193,7,0.15);">
+            <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,209,255,0.15);">
               <button onclick="openGoldModal(event)" style="
                 width: 100%; padding: 14px 20px;
-                background: linear-gradient(135deg, #ff8f00, #ffc107);
-                color: #0a0a0a; border: none; border-radius: var(--radius-sm);
+                background: linear-gradient(135deg, #0066ff, #00D1FF);
+                color: #ffffff; border: none; border-radius: var(--radius-sm);
                 font-size: 15px; font-weight: 800; cursor: pointer;
                 letter-spacing: 0.02em; transition: var(--transition);
-              " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(255,193,7,0.4)';"
+              " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(0,102,255,0.4)';"
                 onmouseout="this.style.transform='';this.style.boxShadow='';">
                 ⬡ Not a member? Get Gold — ₹399/mo &amp; save 15% →
               </button>
-              <p style="font-size:11px;color:rgba(255,193,7,0.4);text-align:center;margin-top:8px;">Your Member ID arrives by email within seconds of payment.</p>
+              <p style="font-size:11px;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;">Your Member ID arrives by email within seconds of payment.</p>
             </div>
           </div><!-- /sv-gold-card -->
 
@@ -641,7 +641,7 @@
                 <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/>
                 <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
-              <span style="font-size:13px;font-weight:700;">Scholar<span style="color:#F4CE14;">Vault</span></span>
+              <span style="font-size:13px;font-weight:700;color:#ffffff;">Scholar<span style="color:#00D1FF;">Vault</span></span>
             </div>
             <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 16px;background:#001a1f;border-top:2px solid #00D1FF;min-width:78px;gap:1px;" id="sidebarPillRight">
               <span style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:#00D1FF;" id="sidebarBadgeLabel">PLATINUM</span>

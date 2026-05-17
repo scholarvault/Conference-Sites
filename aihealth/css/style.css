@@ -31,25 +31,25 @@
 
 /* - DESIGN TOKENS - */
 :root {
-  --navy: #050d1f;
-  --navy-2: #0a1628;
-  --navy-3: #0f1f3d;
+  --navy: #ffffff; /* Main Background */
+  --navy-2: #f8fafc; /* Secondary Background */
+  --navy-3: #f1f5f9; /* Tertiary Background */
   --blue: #0066ff;
-  --blue-light: #3d8bff;
-  --cyan: #00d4ff;
-  --cyan-soft: #00d4ff22;
-  --teal: #00b4d8;
-  --white: #ffffff;
-  --white-90: rgba(255, 255, 255, 0.9);
-  --white-70: rgba(255, 255, 255, 0.7);
-  --white-40: rgba(255, 255, 255, 0.4);
-  --white-10: rgba(255, 255, 255, 0.08);
-  --white-5: rgba(255, 255, 255, 0.04);
-  --glass: rgba(255, 255, 255, 0.06);
-  --glass-border: rgba(255, 255, 255, 0.12);
-  --green: #00e676;
-  --amber: #ffc107;
-  --red: #ff4757;
+  --blue-light: #0ea5e9;
+  --cyan: #00d1ff;
+  --cyan-soft: rgba(0, 209, 255, 0.1);
+  --teal: #0d9488;
+  --white: #0f172a; /* Main Text Color */
+  --white-90: rgba(15, 23, 42, 0.95);
+  --white-70: rgba(15, 23, 42, 0.85); /* Increased contrast for visibility */
+  --white-40: rgba(15, 23, 42, 0.6);  /* Increased contrast for visibility */
+  --white-10: rgba(15, 23, 42, 0.08);
+  --white-5: rgba(15, 23, 42, 0.04);
+  --glass: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(15, 23, 42, 0.1);
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
 
   --font-head: 'Inter', sans-serif;
   --font-body: 'DM Sans', sans-serif;
@@ -60,88 +60,49 @@
   --radius-lg: 20px;
   --radius-xl: 32px;
 
-  --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.15);
-  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
-  --shadow-btn: 0 4px 20px rgba(0, 102, 255, 0.4);
+  --shadow-glow: 0 0 40px rgba(0, 102, 255, 0.08);
+  --shadow-card: 0 10px 40px rgba(15, 23, 42, 0.08);
+  --shadow-btn: 0 4px 20px rgba(0, 102, 255, 0.3);
 
-  --sv-gold: #F4CE14;
-  --sv-gold-dim: rgba(244, 206, 20, 0.15);
-  --sv-gold-border: rgba(244, 206, 20, 0.3);
-  --sv-silver: #C0C0C0;
-  --sv-platinum: #00D1FF;
+  --sv-gold: #F4CE14; /* Authentic Gold */
+  --sv-gold-dim: rgba(244, 206, 20, 0.1);
+  --shadow-glow: 0 0 40px rgba(37, 99, 235, 0.08);
+  --shadow-card: 0 10px 40px rgba(15, 23, 42, 0.05);
+  --shadow-btn: 0 4px 20px rgba(37, 99, 235, 0.2);
+
+  --sv-gold: #D97706; /* Adjusted Gold for light mode */
+  --sv-gold-dim: rgba(217, 119, 6, 0.1);
+  --sv-gold-border: rgba(217, 119, 6, 0.3);
+  --sv-silver: #94a3b8;
+  --sv-platinum: #0ea5e9;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --white-60: rgba(15, 23, 42, 0.75);
 }
 
-/* - ScholarVault Badge Pill - */
+/* ─── ScholarVault Badge Pill — CANONICAL DARK STYLE ─── */
 .sv-badge-pill {
   display: inline-flex;
-  align-items: stretch;
+  align-items: center;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  font-family: var(--font-head);
-  text-decoration: none;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.sv-badge-pill:hover {
-  transform: translateY(-2px) scale(1.02);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.15);
-}
-
-/* - BALANCED HERO WIDGETS - */
-.hero-widgets-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  /* Tops are aligned in a straight line */
-  justify-content: center;
-  gap: 24px;
-  margin-top: 2.5rem;
-}
-
-.hero-widget-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  width: 280px;
-  /* Fixed "same length" for both */
-}
-
-.hero-widget-box {
-  width: 100%;
-  height: 64px;
-  /* Fixed height for "straight line" alignment */
-  display: flex;
-  align-items: center;
-  background: #121212;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
   text-decoration: none;
   transition: var(--transition);
 }
-
-.hero-widget-box:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
-}
+.sv-badge-pill:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.65); }
 
 .sv-badge-pill__left {
   display: flex;
   align-items: center;
-  gap: 9px;
-  padding: 12px 18px;
+  gap: 8px;
+  padding: 10px 14px;
   background: #121212;
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-right: 1px solid rgba(255,255,255,0.1);
 }
 
 .sv-badge-pill__shield {
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
@@ -150,11 +111,11 @@
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1;
-  color: #fff;
+  color: #ffffff;
 }
 
 .sv-badge-pill__name span {
-  color: var(--sv-gold);
+  color: #00D1FF;
 }
 
 .sv-badge-pill__right {
@@ -162,51 +123,61 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 20px;
-  min-width: 90px;
+  padding: 8px 18px;
+  min-width: 85px;
   gap: 2px;
+  background: #001a1f;
 }
 
 .sv-badge-pill__right--platinum {
-  background: #001a1f;
-  border-top: 2px solid var(--sv-platinum);
+  border-top: 2px solid #00D1FF;
 }
 
 .sv-badge-pill__tier {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
 
 .sv-badge-pill__tier--platinum {
-  color: var(--sv-platinum);
+  color: #00D1FF;
 }
 
 .sv-badge-pill__score {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
   line-height: 1;
-  color: var(--white);
+  color: #ffffff;
 }
 
 .sv-badge-pill__score sub {
-  font-size: 11px;
-  color: var(--white-40);
+  font-size: 10px;
+  color: rgba(255,255,255,0.4);
   vertical-align: baseline;
 }
 
-.badge-label-link:hover {
-  color: var(--sv-platinum) !important;
+.badge-label-link {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(15,23,42,0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+  margin-top: 6px;
 }
-
+.badge-label-link:hover { color: #00D1FF !important; }
 .badge-label-link:hover span {
   animation: badgeLabelPulse 1s ease-in-out infinite;
 }
 
---transition-fast: all 0.15s ease;
-
---navbar-h: 72px;
+:root {
+  --transition-fast: all 0.15s ease;
+  --navbar-h: 88px;
 }
 
 /* - BADGE SCORE LABEL PULSE - */
@@ -363,14 +334,14 @@ button {
   display: flex;
   align-items: center;
   padding: 0 2rem;
-  background: rgba(5, 13, 31, 0.85);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--glass-border);
   transition: var(--transition);
 }
 
 .navbar.scrolled {
-  background: rgba(5, 13, 31, 0.97);
+  background: rgba(255, 255, 255, 0.98);
 }
 
 .navbar__inner {
@@ -401,9 +372,10 @@ button {
   object-fit: contain;
   border-radius: 10px;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 8px rgba(0, 180, 255, 0.25));
+  filter: drop-shadow(0 4px 12px rgba(15, 23, 42, 0.08));
   transition: filter 0.3s ease;
   background: white;
+  border: 1px solid rgba(15, 23, 42, 0.05);
   padding: 3px;
 }
 
@@ -435,8 +407,8 @@ button {
 .navbar__logo-year {
   font-size: 12px;
   font-weight: 600;
-  color: #00e676;
-  /* Green - matches conference branding */
+  color: var(--blue);
+  /* Changed from Green to Blue */
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
@@ -534,7 +506,7 @@ button {
   top: var(--navbar-h);
   left: 0;
   right: 0;
-  background: rgba(8, 15, 35, 0.98);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(20px);
   padding: 1rem 2rem 2rem;
   border-bottom: 1px solid var(--glass-border);
@@ -588,9 +560,9 @@ button {
 .hero__gradient {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 102, 255, 0.15) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(0, 212, 255, 0.1) 0%, transparent 60%),
-    linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+  background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(0, 102, 255, 0.05) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(14, 165, 233, 0.05) 0%, transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
   z-index: 0;
 }
 
@@ -598,8 +570,8 @@ button {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+    linear-gradient(rgba(15, 23, 42, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(15, 23, 42, 0.03) 1px, transparent 1px);
   background-size: 60px 60px;
   z-index: 0;
 }
@@ -625,8 +597,8 @@ button {
   gap: 8px;
   padding: 6px 14px;
   border-radius: 100px;
-  background: rgba(0, 212, 255, 0.1);
-  border: 1px solid rgba(0, 212, 255, 0.25);
+  background: rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(14, 165, 233, 0.25);
   font-size: 12px;
   font-weight: 600;
   color: var(--cyan);
@@ -746,7 +718,7 @@ button {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 102, 255, 0.5);
+  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
 }
 
 .btn-outline {
@@ -916,9 +888,9 @@ button {
    - */
 .countdown-section {
   padding: 2rem;
-  background: linear-gradient(90deg, rgba(0, 102, 255, 0.12), rgba(0, 212, 255, 0.12));
-  border-top: 1px solid var(--glass-border);
-  border-bottom: 1px solid var(--glass-border);
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.05), rgba(14, 165, 233, 0.05));
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
 }
 
 .countdown-inner {
@@ -987,17 +959,11 @@ button {
   padding: 80px 2rem;
 }
 
-.section--dark {
-  background: var(--navy);
-}
+.section--dark { background: var(--navy); }
+.section--alt  { background: var(--navy-2); }
+.section--white { background: #ffffff; }
 
-.section--alt {
-  background: var(--navy-2);
-}
-
-.section--border-top {
-  border-top: 1px solid var(--glass-border);
-}
+.section--border-top { border-top: 1px solid var(--glass-border); }
 
 .container {
   max-width: 1280px;
@@ -1007,12 +973,12 @@ button {
 .section-tag {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  color: var(--cyan);
+  color: var(--blue);
   text-transform: uppercase;
   letter-spacing: 0.12em;
+  margin-top: 2px;
   margin-bottom: 1rem;
 }
 
@@ -1159,8 +1125,8 @@ button {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(15, 23, 42, 0.05);
+  border: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 .date-card__icon:has(svg) {
@@ -1274,13 +1240,14 @@ button {
    SV BADGE / TRUST SCORE
    - */
 .sv-badge {
-  background: linear-gradient(135deg, var(--navy-3), var(--navy-2));
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: #ffffff;
+  border: 1px solid rgba(14, 165, 233, 0.15);
   border-radius: var(--radius-xl);
   padding: 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 10px 40px rgba(15, 23, 42, 0.04);
 }
 
 .sv-badge::before {
@@ -1434,7 +1401,7 @@ select,
 textarea {
   width: 100%;
   padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.05);
+  background: #ffffff;
   border: 1.5px solid var(--glass-border);
   border-radius: var(--radius-sm);
   color: var(--white);
@@ -1457,7 +1424,7 @@ textarea:focus {
 }
 
 select option {
-  background: var(--navy-2);
+  background: #ffffff;
   color: var(--white);
 }
 
@@ -1533,7 +1500,7 @@ textarea {
 }
 
 .tier-card {
-  background: var(--glass);
+  background: #ffffff;
   border: 1.5px solid var(--glass-border);
   border-radius: var(--radius-lg);
   padding: 1.8rem;
@@ -1652,7 +1619,7 @@ textarea {
   position: fixed;
   inset: 0;
   z-index: 2000;
-  background: rgba(5, 13, 31, 0.9);
+  background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
@@ -1744,9 +1711,9 @@ textarea {
   gap: 14px;
   padding: 16px 24px;
   border-radius: var(--radius-md);
-  background: rgba(10, 25, 45, 0.92);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
   font-size: 14px;
   font-weight: 500;
   transform: translateX(120%);
@@ -2258,9 +2225,9 @@ textarea {
 
 /* Newsletter strip */
 .newsletter-strip {
-  background: linear-gradient(135deg, rgba(0, 102, 255, 0.15), rgba(0, 212, 255, 0.1));
-  border-top: 1px solid var(--glass-border);
-  border-bottom: 1px solid var(--glass-border);
+  background: #f8fafc;
+  border-top: 1px solid rgba(15, 23, 42, 0.05);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.05);
   padding: 3rem 2rem;
 }
 

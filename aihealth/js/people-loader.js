@@ -17,12 +17,6 @@
     return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
 
-  /* ── Escape JS String helper (for onclick inline handlers) ── */
-  function escapeJsStr(str) {
-    if (typeof str !== 'string') return '';
-    return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
-  }
-
   /* ── Get initials ── */
   function getInitials(name) {
     if (!name) return '?';
@@ -117,9 +111,9 @@
     /* Share button for speakers */
     var shareHTML = '';
     if (type === 'speaker') {
-      var rawName = esc(escapeJsStr(person.name || ''));
-      var rawType = esc(escapeJsStr(person.talk_type || ''));
-      var rawTopic = esc(escapeJsStr(person.topic || ''));
+      var rawName = (person.name || '').replace(/'/g, "\\'");
+      var rawType = (person.talk_type || '').replace(/'/g, "\\'");
+      var rawTopic = (person.topic || '').replace(/'/g, "\\'");
       shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
     }
 

@@ -354,16 +354,7 @@ async function insertRecord(table, data) {
    SUBSCRIBE FORM (popup + inline)
    -------------------------------------------------------------------------- */
 async function handleSubscribe(email, name, sourceEl) {
-  // VANGUARD: Added missing loading/disabled state to prevent double submissions
-  const btn = sourceEl ? sourceEl.querySelector('button[type="submit"]') : null;
-  const originalText = btn ? btn.innerHTML : '';
-  if (btn) {
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span>...';
-  }
-
   if (!email || !email.includes('@')) {
-    if (btn) { btn.disabled = false; btn.innerHTML = originalText; }
     showToast('Please enter a valid email.', 'error'); return;
   }
   try {
@@ -380,11 +371,6 @@ async function handleSubscribe(email, name, sourceEl) {
       sendEmail('subscribe', { email, name: name || '' });
     } else {
       showToast('Could not subscribe. Please try again.', 'error');
-    }
-  } finally {
-    if (btn) {
-      btn.disabled = false;
-      btn.innerHTML = originalText;
     }
   }
 }
