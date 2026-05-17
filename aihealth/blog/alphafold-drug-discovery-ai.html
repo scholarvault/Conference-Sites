@@ -15,18 +15,18 @@
   <link rel="icon" href="../assets/icahcr-logo.png" />
   <style>
     .article-body { max-width: 780px; margin: 0 auto; padding: 4rem 2rem; }
-    .article-body h2 { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; margin: 2.5rem 0 1rem; color: var(--white); letter-spacing: -0.01em; }
-    .article-body h3 { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; margin: 1.75rem 0 0.6rem; color: var(--cyan); }
-    .article-body p { font-size: 1.02rem; color: rgba(255,255,255,0.78); line-height: 1.85; margin-bottom: 1.4rem; }
+    .article-body h2 { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; margin: 2.5rem 0 1rem; color: #111827; letter-spacing: -0.01em; }
+    .article-body h3 { font-family: var(--font-head); font-size: 1.15rem; font-weight: 700; margin: 1.75rem 0 0.6rem; color: #0284c7; }
+    .article-body p { font-size: 1.02rem; color: #4b5563; line-height: 1.85; margin-bottom: 1.4rem; }
     .article-body ul { margin: 0 0 1.4rem 0; display: flex; flex-direction: column; gap: 10px; }
-    .article-body ul li { display: flex; gap: 10px; font-size: 0.97rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
-    .article-body ul li::before { content: "→"; color: var(--cyan); flex-shrink: 0; font-weight: 700; }
+    .article-body ul li { display: flex; gap: 10px; font-size: 0.97rem; color: #4b5563; line-height: 1.7; }
+    .article-body ul li::before { content: "→"; color: #0284c7; flex-shrink: 0; font-weight: 700; }
     .highlight-box { background: rgba(0,102,255,0.08); border: 1px solid rgba(0,102,255,0.2); border-left: 3px solid var(--cyan); border-radius: var(--radius-md); padding: 1.5rem 1.75rem; margin: 2rem 0; }
-    .highlight-box .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cyan); margin-bottom: 0.75rem; }
+    .highlight-box .label { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #0284c7; margin-bottom: 0.75rem; }
     .stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin: 2rem 0; }
     .stat-box { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 1.25rem; text-align: center; }
     .stat-box .num { font-family: var(--font-head); font-size: 1.8rem; font-weight: 900; background: linear-gradient(135deg, var(--cyan), var(--blue-light)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .stat-box .lbl { font-size: 12px; color: var(--white-40); margin-top: 4px; }
+    .stat-box .lbl { font-size: 12px; color: #6b7280; margin-top: 4px; }
     .takeaways { background: linear-gradient(135deg, rgba(0,212,255,0.06), rgba(0,102,255,0.08)); border: 1px solid rgba(0,212,255,0.18); border-radius: var(--radius-xl); padding: 2rem; margin: 2.5rem 0; }
     .related-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin-top: 1.5rem; }
     .related-card { background: var(--glass); border: 1px solid var(--glass-border); border-radius: var(--radius-md); padding: 1.25rem; transition: var(--transition); text-decoration: none; display: block; }
@@ -50,24 +50,24 @@
 <nav class="navbar__mobile" id="mobileMenu">
   <a href="/">Home</a><a href="/about">About</a><a href="/call-for-papers">Call for Papers</a>
   <a href="/submit-paper">Submit Paper</a><a href="/blog">Blog</a>
-  <a href="/register" style="color:var(--cyan);font-weight:700;">Register Now →</a>
+  <a href="/register" style="color:#0284c7;font-weight:700;">Register Now →</a>
 </nav>
 
 <section style="padding:120px 2rem 60px;background:var(--navy-2);border-bottom:1px solid var(--glass-border);position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 40% 60%,rgba(100,60,255,0.1),transparent);pointer-events:none;"></div>
   <div style="max-width:820px;margin:0 auto;position:relative;">
-    <nav style="display:flex;gap:8px;align-items:center;font-size:12px;color:var(--white-40);margin-bottom:1.5rem;flex-wrap:wrap;">
-      <a href="/" style="color:var(--white-40);">Home</a><span>›</span>
-      <a href="/blog" style="color:var(--white-40);">Blog</a><span>›</span>
-      <span style="color:var(--white-70);">AlphaFold & Drug Discovery</span>
+    <nav style="display:flex;gap:8px;align-items:center;font-size:12px;color:#6b7280;margin-bottom:1.5rem;flex-wrap:wrap;">
+      <a href="/" style="color:#6b7280;">Home</a><span>›</span>
+      <a href="/blog" style="color:#6b7280;">Blog</a><span>›</span>
+      <span style="color:#374151;">AlphaFold & Drug Discovery</span>
     </nav>
     <span style="display:inline-block;padding:4px 14px;border-radius:100px;font-size:11px;font-weight:700;background:rgba(168,85,247,0.12);color:#c084fc;border:1px solid rgba(168,85,247,0.25);margin-bottom:1.25rem;">Drug Discovery</span>
     <h1 style="font-family:var(--font-head);font-size:clamp(1.9rem,4vw,2.9rem);font-weight:900;line-height:1.12;letter-spacing:-0.02em;margin-bottom:1.25rem;">AlphaFold & Beyond: AI in Drug Discovery — What Researchers Are Saying</h1>
-    <p style="color:var(--white-70);font-size:1.05rem;line-height:1.8;margin-bottom:2rem;max-width:700px;">From protein structure prediction to generative chemistry, AI is compressing drug development timelines from decades to years. We explore how this is reshaping research in ICAHCR 2026's Track 2.</p>
+    <p style="color:#374151;font-size:1.05rem;line-height:1.8;margin-bottom:2rem;max-width:700px;">From protein structure prediction to generative chemistry, AI is compressing drug development timelines from decades to years. We explore how this is reshaping research in ICAHCR 2026's Track 2.</p>
     <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;padding:1rem 1.5rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-md);">
-      <span style="font-size:13px;color:var(--white-70);display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>ICAHCR Editorial</span>
-      <span style="font-size:13px;color:var(--white-70);display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>April 10, 2026</span>
-      <span style="font-size:13px;color:var(--white-70);display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
+      <span style="font-size:13px;color:#374151;display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>ICAHCR Editorial</span>
+      <span style="font-size:13px;color:#374151;display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>April 10, 2026</span>
+      <span style="font-size:13px;color:#374151;display:flex;align-items:center;gap:6px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>7 min read</span>
       <span style="padding:3px 10px;border-radius:100px;font-size:11px;font-weight:700;background:rgba(168,85,247,0.1);color:#c084fc;border:1px solid rgba(168,85,247,0.2);">Track 2 — Drug Discovery</span>
     </div>
   </div>
@@ -115,7 +115,7 @@
   <p>Drug discovery doesn't happen in isolation from genetics. The integration of large-scale genomic data — from biobanks, GWAS studies, and single-cell sequencing — with AI is enabling the identification of genetically-validated drug targets with much higher clinical success probability. Drugs targeting genetically-validated genes have approximately twice the clinical success rate of those that don't.</p>
 
   <div class="takeaways">
-    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--cyan);margin-bottom:1rem;">📌 Key Takeaways</div>
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:#0284c7;margin-bottom:1rem;">📌 Key Takeaways</div>
     <ul>
       <li>AlphaFold 3 makes structure-based drug design accessible at scale for the first time.</li>
       <li>Generative AI models can design novel drug candidates optimized for multiple pharmacological properties simultaneously.</li>
@@ -128,7 +128,7 @@
   <div style="text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,rgba(168,85,247,0.08),rgba(0,102,255,0.1));border-radius:var(--radius-xl);border:1px solid var(--glass-border);margin:3rem 0;">
     <p style="font-size:12px;font-weight:700;color:#c084fc;text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.75rem;">Researching drug discovery AI?</p>
     <h3 style="font-family:var(--font-head);font-size:1.5rem;font-weight:900;margin-bottom:1rem;">Submit to ICAHCR 2026 Track 2</h3>
-    <p style="color:var(--white-70);margin-bottom:1.75rem;font-size:0.95rem;">Paper deadline: <strong style="color:var(--white);">June 30, 2026</strong> · ISBN Proceedings + DOI per paper</p>
+    <p style="color:#374151;margin-bottom:1.75rem;font-size:0.95rem;">Paper deadline: <strong style="color:#111827;">June 30, 2026</strong> · ISBN Proceedings + DOI per paper</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
       <a href="/submit-paper" class="btn-primary">Submit Your Paper →</a>
       <a href="/call-for-papers" class="btn-outline">View All Tracks</a>
@@ -136,7 +136,7 @@
   </div>
 
   <div>
-    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:var(--white-40);margin-bottom:1.25rem;">Related Articles</div>
+    <div style="font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:0.12em;color:#6b7280;margin-bottom:1.25rem;">Related Articles</div>
     <div class="related-grid">
       <a href="/blog/ai-cancer-detection-2026" class="related-card"><span style="font-size:11px;font-weight:700;color:var(--blue-light);">Research Insight</span><div style="font-size:14px;font-weight:700;margin-top:0.5rem;line-height:1.4;">How AI is Transforming Early Cancer Detection in 2026</div></a>
       <a href="/blog/scholarvault-trust-score-explained" class="related-card"><span style="font-size:11px;font-weight:700;color:var(--blue-light);">ScholarVault</span><div style="font-size:14px;font-weight:700;margin-top:0.5rem;line-height:1.4;">What Does a 92/100 Trust Score Mean for Your Research?</div></a>
@@ -144,11 +144,11 @@
     </div>
   </div>
   <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid var(--glass-border);">
-    <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;color:var(--white-40);font-size:14px;transition:var(--transition);" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--white-40)'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>Back to Blog</a>
+    <a href="/blog" style="display:inline-flex;align-items:center;gap:8px;color:#6b7280;font-size:14px;transition:var(--transition);" onmouseover="this.style.color='var(--cyan)'" onmouseout="this.style.color='var(--white-40)'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>Back to Blog</a>
   </div>
 </article>
 
-<footer class="footer"><div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding:1.5rem 0;"><span>© 2026 ICAHCR — ScholarVault</span><span><a href="/privacy" style="color:var(--cyan);">Privacy</a></span></div></footer>
+<footer class="footer"><div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding:1.5rem 0;"><span>© 2026 ICAHCR — ScholarVault</span><span><a href="/privacy" style="color:#0284c7;">Privacy</a></span></div></footer>
 <script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
 <script src="../js/main.js"></script>
 <script>window.addEventListener('scroll',()=>{const p=document.getElementById('scrollProgress');if(p){const s=document.documentElement;p.style.width=(s.scrollTop/(s.scrollHeight-s.clientHeight)*100)+'%';}});</script>
