@@ -28,3 +28,9 @@
 **Pattern Found:** Proceedings on Academic Research Library often use hyper-generic scopes covering unrelated disciplines (e.g., combining health, culture, and data systems). World Research Library lists proceedings named purely after organizers without specifying the academic topic (e.g., "Academics World International Conference").
 **Reliability:** High
 **Watch For:** Conference titles that are either overly broad/multi-disciplinary or match generic organizer entities, as these appear to be strategies to attract varied submissions without maintaining specific academic focus.
+
+## 2026-05-18 - Redirects & Security Blocks
+**Source:** AllConferences.com, 10Times
+**Pattern Found:** AllConferences.com redirects to /lander. 10Times implemented Cloudflare blocking against automated scripts.
+**Reliability:** High
+**Watch For:** False positives in ScholarVault due to unexpected redirects or Cloudflare error pages.
