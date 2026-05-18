@@ -415,11 +415,16 @@
   var spot = document.getElementById('heroSpotlight');
   if(spot){
     var tickingSpot = false;
+    var spotX = 0;
+    var spotY = 0;
+    // ⚡ BOLT: Capture mouse state outside rAF to prevent stale data processing and ensure responsiveness
     document.addEventListener('mousemove',function(e){
+      spotX = e.clientX;
+      spotY = e.clientY;
       if(!tickingSpot) {
         window.requestAnimationFrame(function() {
-          var mx = (e.clientX/window.innerWidth - 0.5) * 50;
-          var my = (e.clientY/window.innerHeight - 0.5) * 25;
+          var mx = (spotX/window.innerWidth - 0.5) * 50;
+          var my = (spotY/window.innerHeight - 0.5) * 25;
           spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
           tickingSpot = false;
         });
