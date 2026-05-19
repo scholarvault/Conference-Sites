@@ -111,9 +111,10 @@
     /* Share button for speakers */
     var shareHTML = '';
     if (type === 'speaker') {
-      var rawName = (person.name || '').replace(/'/g, "\\'");
-      var rawType = (person.talk_type || '').replace(/'/g, "\\'");
-      var rawTopic = (person.topic || '').replace(/'/g, "\\'");
+      var jsEsc = function(str) { return str.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/"/g, '\\"').replace(/\n/g, '\\n').replace(/\r/g, '\\r'); };
+      var rawName = esc(jsEsc(person.name || ''));
+      var rawType = esc(jsEsc(person.talk_type || ''));
+      var rawTopic = esc(jsEsc(person.topic || ''));
       shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
     }
 

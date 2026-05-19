@@ -22,12 +22,6 @@
 **Vulnerability:** The Vercel Edge API functions (`api/send-email.ts`) across multiple sub-projects were using wildcard (`*`) for `Access-Control-Allow-Origin`, allowing any domain to send emails via the endpoints.
 **Learning:** Developers often default to wildcard CORS for simplicity during initial setup or testing of serverless functions, leaving the endpoint open to abuse from unauthorized domains if it's not secured prior to production.
 **Prevention:** Implement a standardized `ALLOWED_ORIGINS` array containing trusted domains and dynamically validate the `Origin` header returning either the matched allowed origin or a safe fallback default. Always include the `Vary: Origin` header.
-
-## 2026-05-10 - Hardcoded Admin Credentials in Frontend
-**Vulnerability:** A static HTML file (`aihealth/admin.html`) contained hardcoded plaintext credentials (`var ADMIN_USER = 'Shyam'; var ADMIN_PASS = '12345678';`) and implemented fake client-side authentication by setting a key in `sessionStorage`. Anyone inspecting the page source could bypass the login and access the admin dashboard to manage speakers and committee members.
-**Learning:** Client-side "authentication" utilizing hardcoded plaintext strings and browser storage flags is fundamentally insecure, effectively exposing the protected endpoints and underlying database functions to any unauthenticated visitor.
-**Prevention:** For authenticated sections within static HTML files (like admin dashboards), utilize the globally available Supabase client (`db` imported from `js/main.js`) via `db.auth.signInWithPassword` and `db.auth.getSession()` rather than using insecure client-side logic and `sessionStorage` bypasses.
-
 ## 2026-05-12 - DOM XSS via JS Event Handlers (onclick) Escaping Flaw
 **Vulnerability:** When dynamically constructing HTML buttons with `onclick` handlers in `aihealth/js/people-loader.js` and `aihealth/admin.html`, the user-supplied data (e.g., speaker names, talk types) was only having single quotes naively escaped (`replace(/'/g, "\\'")`). This allowed an attacker to inject backslashes (e.g., submitting `name = "test\\"`), which escaped the backslash itself (`\\\'`), breaking the string literal and allowing arbitrary JavaScript execution.
 **Learning:** To safely inject dynamic data into JavaScript string literals within HTML attributes, escaping only quotes is insufficient. Context-breaking characters like backslashes must be escaped first, and then the whole string should ideally be HTML-entity encoded to prevent both JS breakout and HTML markup injection.
