@@ -14,7 +14,18 @@
   function esc(str) {
     if (typeof str !== 'string') return '';
     if (typeof escapeHtml === 'function') return escapeHtml(str);
-    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
+  /* ── Escape JS string for inline event handlers ── */
+  function escJs(str) {
+    if (typeof str !== 'string') return '';
+    return str
+      .replace(/\\/g, '\\\\')
+      .replace(/'/g, "\\'")
+      .replace(/"/g, '\\"')
+      .replace(/\n/g, '\\n')
+      .replace(/\r/g, '\\r');
   }
 
   /* ── Get initials ── */
@@ -111,9 +122,9 @@
     /* Share button for speakers */
     var shareHTML = '';
     if (type === 'speaker') {
-      var rawName = (person.name || '').replace(/'/g, "\\'");
-      var rawType = (person.talk_type || '').replace(/'/g, "\\'");
-      var rawTopic = (person.topic || '').replace(/'/g, "\\'");
+      var rawName = esc(escJs(person.name || ''));
+      var rawType = esc(escJs(person.talk_type || ''));
+      var rawTopic = esc(escJs(person.topic || ''));
       shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
     }
 
