@@ -28,3 +28,9 @@
 **Pattern Found:** Proceedings on Academic Research Library often use hyper-generic scopes covering unrelated disciplines (e.g., combining health, culture, and data systems). World Research Library lists proceedings named purely after organizers without specifying the academic topic (e.g., "Academics World International Conference").
 **Reliability:** High
 **Watch For:** Conference titles that are either overly broad/multi-disciplinary or match generic organizer entities, as these appear to be strategies to attract varied submissions without maintaining specific academic focus.
+
+## 2026-05-20 - Duplicate CFP Listing Spam
+**Source:** WikiCFP
+**Pattern Found:** Submitting the exact same event multiple times with slightly altered short names (e.g., adding suffixes like "--EI" or "--ESCI") to increase visibility on listing platforms.
+**Reliability:** High
+**Watch For:** Need to ensure our engine groups or flags duplicates based on the full event title and dates rather than just the short name.
