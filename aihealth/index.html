@@ -415,11 +415,15 @@
   var spot = document.getElementById('heroSpotlight');
   if(spot){
     var tickingSpot = false;
+    // BOLT: Prevent stale data processing in rAF throttle by reading latest coordinates
+    var spotLatestX = 0, spotLatestY = 0;
     document.addEventListener('mousemove',function(e){
+      spotLatestX = e.clientX;
+      spotLatestY = e.clientY;
       if(!tickingSpot) {
         window.requestAnimationFrame(function() {
-          var mx = (e.clientX/window.innerWidth - 0.5) * 50;
-          var my = (e.clientY/window.innerHeight - 0.5) * 25;
+          var mx = (spotLatestX/window.innerWidth - 0.5) * 50;
+          var my = (spotLatestY/window.innerHeight - 0.5) * 25;
           spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
           tickingSpot = false;
         });
