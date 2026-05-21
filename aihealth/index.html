@@ -415,11 +415,14 @@
   var spot = document.getElementById('heroSpotlight');
   if(spot){
     var tickingSpot = false;
+    var spotX = 0, spotY = 0;
     document.addEventListener('mousemove',function(e){
+      spotX = e.clientX;
+      spotY = e.clientY;
       if(!tickingSpot) {
         window.requestAnimationFrame(function() {
-          var mx = (e.clientX/window.innerWidth - 0.5) * 50;
-          var my = (e.clientY/window.innerHeight - 0.5) * 25;
+          var mx = (spotX/window.innerWidth - 0.5) * 50;
+          var my = (spotY/window.innerHeight - 0.5) * 25;
           spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
           tickingSpot = false;
         });
@@ -921,7 +924,13 @@
       animationFrameId = requestAnimationFrame(loop);
     }
   });
+  var cardRafId = null;
   card.addEventListener('mouseleave',function(){
+    if (cardRafId) {
+      window.cancelAnimationFrame(cardRafId);
+      cardRafId = null;
+      tickingCardMove = false;
+    }
     hovering=false;
     tgtRX=0;
     tgtRY=0;
@@ -935,7 +944,7 @@
     latestX = e.clientX;
     latestY = e.clientY;
     if(!tickingCardMove) {
-      window.requestAnimationFrame(function() {
+      cardRafId = window.requestAnimationFrame(function() {
         var r=card.getBoundingClientRect();
         var dx=(latestX-(r.left+r.width/2))/(r.width/2);
         var dy=(latestY-(r.top+r.height/2))/(r.height/2);
