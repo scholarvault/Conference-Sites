@@ -28,3 +28,8 @@
 **Pattern Found:** Proceedings on Academic Research Library often use hyper-generic scopes covering unrelated disciplines (e.g., combining health, culture, and data systems). World Research Library lists proceedings named purely after organizers without specifying the academic topic (e.g., "Academics World International Conference").
 **Reliability:** High
 **Watch For:** Conference titles that are either overly broad/multi-disciplinary or match generic organizer entities, as these appear to be strategies to attract varied submissions without maintaining specific academic focus.
+## 2026-05-21 - Parked Domain
+**Source:** AllConferences.com
+**Pattern Found:** Domain parked, loading a GoDaddy/Afternic landing page instead of the expected site structure.
+**Reliability:** High
+**Watch For:** Target sites going offline or redirecting. May cause false positives in automated scans.
