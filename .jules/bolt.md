@@ -22,3 +22,6 @@
 ## 2025-05-18 - Prevent Race Conditions in rAF Throttled Listeners
 **Learning:** When throttling `mousemove` or `pointermove` event handlers in vanilla JavaScript using `requestAnimationFrame`, a queued animation frame that hasn't executed yet when a resetting event fires (like `mouseleave`) can still run its callback *after* the reset logic completes. This results in the element getting stuck in an intermediate transformed state instead of correctly resetting.
 **Action:** When throttling continuous events with `requestAnimationFrame`, always store the returned rAF ID. In the corresponding cleanup or reset listener (e.g., `mouseleave`), immediately call `window.cancelAnimationFrame(id)` and reset the `ticking` boolean to `false` to ensure no stale rendering frames overwrite the reset state.
+## 2026-08-22 - Throttled Resize Events for Canvas
+**Learning:** Continuous unthrottled `resize` event listeners for full-screen canvas redraw operations cause memory churn and high CPU overhead as the event fires at high frequencies while the user resizes the window.
+**Action:** When implementing `resize` listeners that trigger costly canvas or visual re-calculations, use a `requestAnimationFrame` ticking pattern (with a boolean `ticking` lock) to ensure the DOM and canvas are updated synchronously with the browser's render cycle at most once per frame.

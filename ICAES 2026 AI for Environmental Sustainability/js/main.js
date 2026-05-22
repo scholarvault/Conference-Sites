@@ -329,7 +329,18 @@ function initHeroParticles() {
   observer.observe(canvas);
 
   resize();
-  window.addEventListener("resize", resize, { passive: true });
+
+  // ⚡ BOLT: Throttle window resize with requestAnimationFrame to prevent high CPU usage and memory churn
+  let tickingResize = false;
+  window.addEventListener("resize", () => {
+    if (!tickingResize) {
+      window.requestAnimationFrame(() => {
+        resize();
+        tickingResize = false;
+      });
+      tickingResize = true;
+    }
+  }, { passive: true });
   window.addEventListener("pagehide", () => window.cancelAnimationFrame(raf), { once: true });
 }
 
