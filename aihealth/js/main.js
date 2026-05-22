@@ -123,7 +123,19 @@ function initParticles() {
     canvas.height = window.innerHeight;
   }
   resize();
-  window.addEventListener('resize', () => { resize(); initParticleSet(); }, { passive: true });
+
+  // ⚡ BOLT: Throttle window resize with requestAnimationFrame to prevent high CPU usage and memory churn
+  let tickingResize = false;
+  window.addEventListener('resize', () => {
+    if (!tickingResize) {
+      window.requestAnimationFrame(() => {
+        resize();
+        initParticleSet();
+        tickingResize = false;
+      });
+      tickingResize = true;
+    }
+  }, { passive: true });
 
   function initParticleSet() {
     particles = [];
