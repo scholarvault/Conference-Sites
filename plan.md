@@ -1,18 +1,19 @@
-1. **Add missing `areaServed: "IN"` to Organization schema in `aihealth/index.html`**
-   - The memory clearly states: "For India-specific SEO across ScholarVault sub-projects, the `Organization` structured data (JSON-LD) block must explicitly include `"areaServed": "IN"`."
-   - The `Organization Schema` script block in `aihealth/index.html` is currently missing `"areaServed": "IN"`. I will add it.
-   - This fits the Pathfinder criteria of "India/academic keyword optimization in existing meta tags" and "One-Fix-Per-Run".
+1. **Optimize Scroll Progress Bar Listeners in `aihealth/blog/*.html` files**
+   - The scroll event listener for the reading progress bar in all 6 blog articles (`aihealth/blog/*.html`) is currently unthrottled. This violates the `.jules/bolt.md` learning about Throttled Scroll Events ("Continuous unthrottled `scroll` event listeners block the main thread...").
+   - I will update these inline scripts to use the `requestAnimationFrame` ticking pattern, as outlined in the Bolt journal.
+   - The files to update are:
+     - `aihealth/blog/predictive-patient-flow-ai.html`
+     - `aihealth/blog/ai-cancer-detection-2026.html`
+     - `aihealth/blog/scholarvault-trust-score-explained.html`
+     - `aihealth/blog/conference-research-sdg3-health.html`
+     - `aihealth/blog/alphafold-drug-discovery-ai.html`
+     - `aihealth/blog/telemedicine-rural-india-icahcr.html`
 
-2. **Add a comment starting with `// PATHFINDER:` or HTML equivalent to document the fix.**
-   - I will add `<!-- PATHFINDER: Added areaServed: "IN" for India-specific SEO optimization -->` to the HTML right before the JSON-LD schema or inside the existing HTML comment.
-   - Actually, since this is JSON-LD, I should just modify the HTML comment directly above the script.
+2. **Test and Verify**
+   - Use `node -e "..."` to syntactically check the modified inline javascript.
 
-3. **Run testing step**
-   - Syntax validation: Check the HTML syntax using Python's `html.parser` and check the JSON-LD using a node.js one-liner to extract and parse the JSON block.
+3. **Complete pre commit steps**
+   - Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.
 
-4. **Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.**
-   - Call `pre_commit_instructions`
-
-5. **Submit the PR**
-   - Create PR with title `🧭 Pathfinder: [SEO fix] — aihealth/index.html`
-   - Create a description matching the template for Pathfinder.
+4. **Submit PR**
+   - Create a PR with title `⚡ Bolt: Optimize scroll progress event listeners in blog posts` and include the what/why/impact details.

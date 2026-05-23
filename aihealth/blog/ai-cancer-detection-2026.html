@@ -206,10 +206,17 @@
 <script src="../js/main.js"></script>
 <script>
   // Scroll progress
+  let tickingProgress = false;
   window.addEventListener('scroll', () => {
-    const p = document.getElementById('scrollProgress');
-    if (p) { const s = document.documentElement; p.style.width = (s.scrollTop / (s.scrollHeight - s.clientHeight) * 100) + '%'; }
-  });
+    if (!tickingProgress) {
+      window.requestAnimationFrame(() => {
+        const p = document.getElementById('scrollProgress');
+        if (p) { const s = document.documentElement; p.style.width = (s.scrollTop / (s.scrollHeight - s.clientHeight) * 100) + '%'; }
+        tickingProgress = false;
+      });
+      tickingProgress = true;
+    }
+  }, { passive: true });
 </script>
 </body>
 </html>
