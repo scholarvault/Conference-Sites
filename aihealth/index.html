@@ -115,7 +115,6 @@
   </script>
 
   <!-- Organization Schema -->
-  <!-- PATHFINDER: Added "areaServed": "IN" to Organization structured data for India-specific SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -124,7 +123,6 @@
     "url": "https://scholarvault.in",
     "logo": "https://aihealth.scholarvault.in/assets/icahcr-logo.png",
     "description": "India's premier anti-predatory academic conference verification and hosting platform.",
-    "areaServed": "IN",
     "sameAs": [
       "https://app.scholarvault.in",
       "https://aihealth.scholarvault.in"
@@ -168,6 +166,7 @@
 <nav class="navbar" id="navbar">
   <div class="navbar__inner">
     <a href="/" class="navbar__logo">
+      <img src="assets/icahcr-logo.png" alt="ICAHCR 2026" class="navbar__logo-img" />
       <div class="navbar__logo-text">
         <span class="navbar__logo-conf">ICAHCR 2026</span>
         <span class="navbar__logo-year">AI in Healthcare Conference</span>
@@ -339,18 +338,7 @@
     canvas.height = parseInt(canvas.style.height) || 260;
   }
   resizeECG();
-
-  // ⚡ BOLT: Throttle window resize with requestAnimationFrame to prevent high CPU usage and memory churn
-  var tickingResizeECG = false;
-  window.addEventListener('resize', function() {
-    if (!tickingResizeECG) {
-      window.requestAnimationFrame(function() {
-        resizeECG();
-        tickingResizeECG = false;
-      });
-      tickingResizeECG = true;
-    }
-  });
+  window.addEventListener('resize', resizeECG);
 
   var x = 0;
 
@@ -428,14 +416,11 @@
   var spot = document.getElementById('heroSpotlight');
   if(spot){
     var tickingSpot = false;
-    var spotX = 0, spotY = 0;
     document.addEventListener('mousemove',function(e){
-      spotX = e.clientX;
-      spotY = e.clientY;
       if(!tickingSpot) {
         window.requestAnimationFrame(function() {
-          var mx = (spotX/window.innerWidth - 0.5) * 50;
-          var my = (spotY/window.innerHeight - 0.5) * 25;
+          var mx = (e.clientX/window.innerWidth - 0.5) * 50;
+          var my = (e.clientY/window.innerHeight - 0.5) * 25;
           spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
           tickingSpot = false;
         });
@@ -937,13 +922,7 @@
       animationFrameId = requestAnimationFrame(loop);
     }
   });
-  var cardRafId = null;
   card.addEventListener('mouseleave',function(){
-    if (cardRafId) {
-      window.cancelAnimationFrame(cardRafId);
-      cardRafId = null;
-      tickingCardMove = false;
-    }
     hovering=false;
     tgtRX=0;
     tgtRY=0;
@@ -957,7 +936,7 @@
     latestX = e.clientX;
     latestY = e.clientY;
     if(!tickingCardMove) {
-      cardRafId = window.requestAnimationFrame(function() {
+      window.requestAnimationFrame(function() {
         var r=card.getBoundingClientRect();
         var dx=(latestX-(r.left+r.width/2))/(r.width/2);
         var dy=(latestY-(r.top+r.height/2))/(r.height/2);
@@ -1120,7 +1099,7 @@
       <p style="color:var(--white-70);font-size:14px;">Subscribe for conference announcements, CFP updates, and early bird reminders.</p>
     </div>
     <form id="subscribeForm" style="display:flex;gap:10px;flex-wrap:wrap;">
-      <input type="email" name="email" aria-label="Your email address" placeholder="Your email address" required style="flex:1;min-width:200px;" />
+      <input type="email" name="email" placeholder="Your email address" required style="flex:1;min-width:200px;" />
       <button type="submit" class="btn-primary" style="white-space:nowrap;padding:12px 22px;">Subscribe</button>
     </form>
   </div>
