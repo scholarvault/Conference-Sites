@@ -73,7 +73,8 @@
         "name": person.topic
       };
     }
-    return JSON.stringify(schema);
+    // SENTINEL: Escape `<` to prevent XSS breakout when injected into `<script type="application/ld+json">`
+    return JSON.stringify(schema).replace(/</g, '\\u003c');
   }
 
   /* ── Render a single person card ── */
