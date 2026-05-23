@@ -33,3 +33,8 @@
 **Pattern Found:** Domain parked, loading a GoDaddy/Afternic landing page instead of the expected site structure.
 **Reliability:** High
 **Watch For:** Target sites going offline or redirecting. May cause false positives in automated scans.
+## 2026-05-23 - AllConferences.com Root Redirect
+**Source:** AllConferences.com
+**Pattern Found:** The root URL (`/`) immediately redirects to `/lander` using inline JavaScript (`window.location.href="/lander"`).
+**Reliability:** High (verified via curl)
+**Watch For:** Future scans should request `/lander` directly to avoid missing content if JS execution is not supported by the scraper.
