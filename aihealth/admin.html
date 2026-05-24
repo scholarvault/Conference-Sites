@@ -162,10 +162,14 @@
     <div class="form-group" id="fTalkTypeWrap">
       <label>Talk Type</label>
       <select id="fTalkType">
-        <option value="Keynote Address (45 min)">Keynote Address (45 min)</option>
-        <option value="Invited Talk (30 min)">Invited Talk (30 min)</option>
-        <option value="Panel Discussion Participant">Panel Discussion</option>
-        <option value="Workshop Facilitator">Workshop Facilitator</option>
+        <option value="Keynote Speaker">Keynote Speaker</option>
+        <option value="Plenary Speaker">Plenary Speaker</option>
+        <option value="Featured Speaker">Featured Speaker</option>
+        <option value="Invited Talk">Invited Talk</option>
+        <option value="Panelist">Panelist</option>
+        <option value="Workshop Lead">Workshop Lead</option>
+        <option value="Lightning Talk">Lightning Talk</option>
+        <option value="Industry Speaker">Industry Speaker</option>
       </select>
     </div>
 
@@ -312,7 +316,6 @@ function initSortable(gridId, table) {
 
 function renderAdminCard(p, type) {
   var name = escapeHtml(p.name || '');
-  var nameJs = typeof escapeJs === 'function' ? escapeHtml(escapeJs(p.name || '')) : name;
   var initials = name.split(' ').filter(Boolean).map(function(w){return w[0];}).join('').substring(0,2);
   var desg = escapeHtml(type === 'speaker' ? (p.designation || '') : (p.expertise || p.designation || ''));
   var inst = escapeHtml(p.institution || '');
@@ -329,7 +332,7 @@ function renderAdminCard(p, type) {
     + '<div class="admin-card__inst">'+inst+'</div>'
     + '<div class="admin-card__actions">'
     + '<button class="btn-edit" onclick="editPerson(\''+type+'\',\''+p.id+'\')">✏️ Edit</button>'
-    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+nameJs+'\')">🗑️ Delete</button>'
+    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+name+'\')">🗑️ Delete</button>'
     + '</div></div>';
 }
 
