@@ -25,12 +25,17 @@
 
   /* ── Native Share ── */
   function shareSpeaker(name, talkType, topic) {
-    var cleanType = talkType.replace(/\s*\(.*?\)\s*/g, '').trim();
-    if (cleanType.toLowerCase().indexOf('keynote') !== -1) cleanType = 'Keynote Speaker';
-    else if (cleanType.toLowerCase().indexOf('invited') !== -1) cleanType = 'Invited Speaker';
-    else if (cleanType.toLowerCase().indexOf('panel') !== -1) cleanType = 'Panelist';
-    else if (cleanType.toLowerCase().indexOf('workshop') !== -1) cleanType = 'Workshop Speaker';
-    else cleanType = 'Speaker';
+    var t = talkType.toLowerCase();
+    var cleanType;
+    if (t.indexOf('keynote') !== -1)       cleanType = 'Keynote Speaker';
+    else if (t.indexOf('plenary') !== -1)  cleanType = 'Plenary Speaker';
+    else if (t.indexOf('featured') !== -1) cleanType = 'Featured Speaker';
+    else if (t.indexOf('invited') !== -1)  cleanType = 'Invited Speaker';
+    else if (t.indexOf('panel') !== -1)    cleanType = 'Panelist';
+    else if (t.indexOf('workshop') !== -1) cleanType = 'Workshop Lead';
+    else if (t.indexOf('lightning') !== -1)cleanType = 'Lightning Talk Speaker';
+    else if (t.indexOf('industry') !== -1) cleanType = 'Industry Speaker';
+    else                                   cleanType = 'Speaker';
 
     var text = '🎤 Excited to announce that ' + name + ' is joining ICAHCR 2026 — AI in Healthcare Conference as a ' + cleanType + '!';
     if (topic) text += '\n\n📌 Topic: "' + topic + '"';
@@ -94,13 +99,37 @@
     var badgeHTML = '';
     var cleanLabel = '';
     if (type === 'speaker' && talkType) {
-      var isKeynote = talkType.toLowerCase().indexOf('keynote') !== -1;
+      var talkLower = talkType.toLowerCase();
+      var badgeClass = 'person-card__badge';
       cleanLabel = talkType.replace(/\s*\(.*?\)\s*/g, '').trim();
-      if (isKeynote) cleanLabel = 'Keynote';
-      else if (cleanLabel.toLowerCase().indexOf('invited') !== -1) cleanLabel = 'Invited Talk';
-      else if (cleanLabel.toLowerCase().indexOf('panel') !== -1) cleanLabel = 'Panelist';
-      else if (cleanLabel.toLowerCase().indexOf('workshop') !== -1) cleanLabel = 'Workshop';
-      badgeHTML = '<div class="person-card__badge' + (isKeynote ? ' person-card__badge--keynote' : '') + '">' + cleanLabel + '</div>';
+
+      if (talkLower.indexOf('keynote') !== -1) {
+        cleanLabel = 'Keynote Speaker';
+        badgeClass += ' person-card__badge--keynote';
+      } else if (talkLower.indexOf('plenary') !== -1) {
+        cleanLabel = 'Plenary Speaker';
+        badgeClass += ' person-card__badge--plenary';
+      } else if (talkLower.indexOf('featured') !== -1) {
+        cleanLabel = 'Featured Speaker';
+        badgeClass += ' person-card__badge--featured';
+      } else if (talkLower.indexOf('invited') !== -1) {
+        cleanLabel = 'Invited Talk';
+        badgeClass += ' person-card__badge--invited';
+      } else if (talkLower.indexOf('panel') !== -1) {
+        cleanLabel = 'Panelist';
+        badgeClass += ' person-card__badge--panel';
+      } else if (talkLower.indexOf('workshop') !== -1) {
+        cleanLabel = 'Workshop Lead';
+        badgeClass += ' person-card__badge--workshop';
+      } else if (talkLower.indexOf('lightning') !== -1) {
+        cleanLabel = 'Lightning Talk';
+        badgeClass += ' person-card__badge--lightning';
+      } else if (talkLower.indexOf('industry') !== -1) {
+        cleanLabel = 'Industry Speaker';
+        badgeClass += ' person-card__badge--industry';
+      }
+
+      badgeHTML = '<div class="' + badgeClass + '">' + cleanLabel + '</div>';
     }
 
     var linkedinHTML = '';
@@ -111,9 +140,9 @@
     /* Share button for speakers */
     var shareHTML = '';
     if (type === 'speaker') {
-      var rawName = typeof escapeJs === 'function' ? esc(escapeJs(person.name || '')) : esc((person.name || '').replace(/'/g, "\\'"));
-      var rawType = typeof escapeJs === 'function' ? esc(escapeJs(person.talk_type || '')) : esc((person.talk_type || '').replace(/'/g, "\\'"));
-      var rawTopic = typeof escapeJs === 'function' ? esc(escapeJs(person.topic || '')) : esc((person.topic || '').replace(/'/g, "\\'"));
+      var rawName = (person.name || '').replace(/'/g, "\\'");
+      var rawType = (person.talk_type || '').replace(/'/g, "\\'");
+      var rawTopic = (person.topic || '').replace(/'/g, "\\'");
       shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + rawName + '\',\'' + rawType + '\',\'' + rawTopic + '\')" title="Share">' + shareSVG + '</button>';
     }
 
