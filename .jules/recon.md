@@ -33,3 +33,9 @@
 **Pattern Found:** Domain parked, loading a GoDaddy/Afternic landing page instead of the expected site structure.
 **Reliability:** High
 **Watch For:** Target sites going offline or redirecting. May cause false positives in automated scans.
+
+## 2026-05-24 - Cloudflare Blocking
+**Source:** 10times.com
+**Pattern Found:** Target returning Cloudflare block pages instead of conference content.
+**Reliability:** High
+**Watch For:** Anti-bot tools preventing automated intelligence gathering, potentially requiring more sophisticated scraping or reliance on secondary targets.
