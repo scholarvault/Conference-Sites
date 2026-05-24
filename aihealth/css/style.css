@@ -3260,6 +3260,48 @@ button:focus-visible {
   border-color: rgba(0, 212, 255, 0.3);
 }
 
+.person-card__badge--plenary {
+  background: rgba(127, 119, 221, 0.15);
+  color: #AFA9EC;
+  border-color: rgba(127, 119, 221, 0.35);
+}
+
+.person-card__badge--featured {
+  background: rgba(29, 158, 117, 0.15);
+  color: #5DCAA5;
+  border-color: rgba(29, 158, 117, 0.35);
+}
+
+.person-card__badge--invited {
+  background: rgba(0, 102, 255, 0.15);
+  color: var(--blue-light);
+  border-color: rgba(0, 102, 255, 0.25);
+}
+
+.person-card__badge--panel {
+  background: rgba(212, 83, 126, 0.15);
+  color: #ED93B1;
+  border-color: rgba(212, 83, 126, 0.35);
+}
+
+.person-card__badge--workshop {
+  background: rgba(99, 153, 34, 0.15);
+  color: #97C459;
+  border-color: rgba(99, 153, 34, 0.35);
+}
+
+.person-card__badge--lightning {
+  background: rgba(216, 90, 48, 0.15);
+  color: #F0997B;
+  border-color: rgba(216, 90, 48, 0.35);
+}
+
+.person-card__badge--industry {
+  background: rgba(136, 135, 128, 0.15);
+  color: #B4B2A9;
+  border-color: rgba(136, 135, 128, 0.35);
+}
+
 .person-card__name {
   font-size: 1rem;
   font-weight: 800;
