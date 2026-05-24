@@ -922,21 +922,28 @@
       animationFrameId = requestAnimationFrame(loop);
     }
   });
+  // ⚡ BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage and layout thrashing
+  var tickingCardMove=false;
+  var latestX=0, latestY=0;
+  var rAFCardMoveId = null;
+
   card.addEventListener('mouseleave',function(){
     hovering=false;
+    if(rAFCardMoveId) {
+      window.cancelAnimationFrame(rAFCardMoveId);
+      tickingCardMove=false;
+    }
     tgtRX=0;
     tgtRY=0;
     inner.style.transition='transform .6s cubic-bezier(.25,.46,.45,.94)';
   });
-  // ⚡ BOLT: Throttle pointermove with requestAnimationFrame to prevent high CPU usage and layout thrashing
-  var tickingCardMove=false;
-  var latestX=0, latestY=0;
+
   card.addEventListener('mousemove',function(e){
     if(!hovering) return;
     latestX = e.clientX;
     latestY = e.clientY;
     if(!tickingCardMove) {
-      window.requestAnimationFrame(function() {
+      rAFCardMoveId = window.requestAnimationFrame(function() {
         var r=card.getBoundingClientRect();
         var dx=(latestX-(r.left+r.width/2))/(r.width/2);
         var dy=(latestY-(r.top+r.height/2))/(r.height/2);
