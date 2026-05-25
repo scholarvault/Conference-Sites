@@ -33,3 +33,9 @@
 **Pattern Found:** Domain parked, loading a GoDaddy/Afternic landing page instead of the expected site structure.
 **Reliability:** High
 **Watch For:** Target sites going offline or redirecting. May cause false positives in automated scans.
+
+## 2026-05-25 - Academic Research Library generic categorization
+**Source:** Academic Research Library
+**Pattern Found:** Very broad categorization (Education, Health, Business, Environment, Medicine) without strict filtering or obvious vetting displayed upfront.
+**Reliability:** High
+**Watch For:** Investigate the domains and publishers listed within their specific sub-categories for potential overlap with existing blacklist entries.
