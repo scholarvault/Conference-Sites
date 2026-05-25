@@ -1099,8 +1099,8 @@
       <p style="color:var(--white-70);font-size:14px;">Subscribe for conference announcements, CFP updates, and early bird reminders.</p>
     </div>
     <form id="subscribeForm" style="display:flex;gap:10px;flex-wrap:wrap;">
-      <input type="email" name="email" placeholder="Your email address" required style="flex:1;min-width:200px;" />
-      <button type="submit" class="btn-primary" style="white-space:nowrap;padding:12px 22px;">Subscribe</button>
+      <input type="email" name="email" placeholder="Your email address" aria-label="Your email address" required style="flex:1;min-width:200px;" />
+      <button type="submit" class="btn-primary form-submit" style="white-space:nowrap;padding:12px 22px;">Subscribe</button>
     </form>
   </div>
 </section>
@@ -1248,8 +1248,14 @@
   // Subscribe form
   document.getElementById('subscribeForm').addEventListener('submit', async (e) => {
     e.preventDefault();
+    // VANGUARD: Added missing loading state to prevent double submissions
+    setFormLoading(e.target, true);
     const email = e.target.email.value.trim();
-    await handleSubscribe(email, '', e.target);
+    try {
+      await handleSubscribe(email, '', e.target);
+    } finally {
+      setFormLoading(e.target, false);
+    }
   });
 </script>
 
