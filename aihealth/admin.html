@@ -315,15 +315,20 @@ function initSortable(gridId, table) {
 }
 
 function renderAdminCard(p, type) {
-  var name = escapeHtml(p.name || '');
-  var initials = name.split(' ').filter(Boolean).map(function(w){return w[0];}).join('').substring(0,2);
+  var rawName = p.name || '';
+  var name = escapeHtml(rawName);
+  var initials = rawName.split(' ').filter(Boolean).map(function(w){return w[0];}).join('').substring(0,2);
   var desg = escapeHtml(type === 'speaker' ? (p.designation || '') : (p.expertise || p.designation || ''));
   var inst = escapeHtml(p.institution || '');
   var status = p.status || 'pending';
   var statusClass = status === 'accepted' ? 'admin-card__status--accepted' : 'admin-card__status--pending';
   var photoHTML = p.photo_url ? '<img class="admin-card__photo" src="'+escapeHtml(p.photo_url)+'" alt="'+name+'" />' : '<div class="admin-card__initials">'+initials+'</div>';
 
-  return '<div class="admin-card" data-id="'+p.id+'">'
+  var safeJsType = escapeHtml(escapeJs(type || ''));
+  var safeJsId = escapeHtml(escapeJs(p.id || ''));
+  var safeJsName = escapeHtml(escapeJs(rawName));
+
+  return '<div class="admin-card" data-id="'+escapeHtml(p.id)+'">'
     + '<span class="drag-handle" title="Drag to reorder">⠿⠿</span>'
     + '<div class="admin-card__status '+statusClass+'">'+escapeHtml(status)+'</div>'
     + photoHTML
@@ -331,8 +336,8 @@ function renderAdminCard(p, type) {
     + '<div class="admin-card__sub">'+desg+'</div>'
     + '<div class="admin-card__inst">'+inst+'</div>'
     + '<div class="admin-card__actions">'
-    + '<button class="btn-edit" onclick="editPerson(\''+type+'\',\''+p.id+'\')">✏️ Edit</button>'
-    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+name+'\')">🗑️ Delete</button>'
+    + '<button class="btn-edit" onclick="editPerson(\''+safeJsType+'\',\''+safeJsId+'\')">✏️ Edit</button>'
+    + '<button class="btn-del" onclick="deletePerson(\''+safeJsType+'\',\''+safeJsId+'\',\''+safeJsName+'\')">🗑️ Delete</button>'
     + '</div></div>';
 }
 
