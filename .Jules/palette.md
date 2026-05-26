@@ -9,3 +9,6 @@
 ## 2026-04-26 - Missing `aria-hidden` and `aria-label` on floating action icon buttons
 **Learning:** Found floating action buttons (like scroll to top) missing `aria-label` and `aria-hidden="true"` on their inner SVGs. While they might have a `title` attribute, an explicit `aria-label` on the button and `aria-hidden="true"` on the SVG ensures screen readers provide clear context without verbose/confusing output about the SVG structure itself.
 **Action:** When working with floating action buttons or icon-only buttons in the UI, consistently apply `aria-hidden="true"` on their inner SVGs and ensure the button element has a clear, descriptive `aria-label`.
+## 2026-05-26 - FAQ Accordion Accessibility
+**Learning:** FAQ accordions relying solely on CSS classes (`open`) for state changes omit critical context for screen readers. Screen readers need an explicit `aria-expanded` attribute on the trigger button to understand if the accordion panel is currently revealed or hidden.
+**Action:** Ensure all accordion toggles set `aria-expanded="false"` by default and dynamically toggle it to `"true"` via JavaScript when the corresponding content block is expanded.
