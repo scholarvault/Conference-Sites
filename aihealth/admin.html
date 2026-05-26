@@ -323,6 +323,11 @@ function renderAdminCard(p, type) {
   var statusClass = status === 'accepted' ? 'admin-card__status--accepted' : 'admin-card__status--pending';
   var photoHTML = p.photo_url ? '<img class="admin-card__photo" src="'+escapeHtml(p.photo_url)+'" alt="'+name+'" />' : '<div class="admin-card__initials">'+initials+'</div>';
 
+  // SENTINEL: Escape JS-context-breaking characters before HTML escaping to prevent DOM XSS in onclick handlers.
+  var safeType = escapeHtml(escapeJs(type || ''));
+  var safeId = escapeHtml(escapeJs(p.id || ''));
+  var safeNameJs = escapeHtml(escapeJs(p.name || ''));
+
   return '<div class="admin-card" data-id="'+p.id+'">'
     + '<span class="drag-handle" title="Drag to reorder">⠿⠿</span>'
     + '<div class="admin-card__status '+statusClass+'">'+escapeHtml(status)+'</div>'
@@ -331,8 +336,8 @@ function renderAdminCard(p, type) {
     + '<div class="admin-card__sub">'+desg+'</div>'
     + '<div class="admin-card__inst">'+inst+'</div>'
     + '<div class="admin-card__actions">'
-    + '<button class="btn-edit" onclick="editPerson(\''+type+'\',\''+p.id+'\')">✏️ Edit</button>'
-    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+name+'\')">🗑️ Delete</button>'
+    + '<button class="btn-edit" onclick="editPerson(\''+safeType+'\',\''+safeId+'\')">✏️ Edit</button>'
+    + '<button class="btn-del" onclick="deletePerson(\''+safeType+'\',\''+safeId+'\',\''+safeNameJs+'\')">🗑️ Delete</button>'
     + '</div></div>';
 }
 
