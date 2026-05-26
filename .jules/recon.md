@@ -22,3 +22,8 @@
 **Pattern Found:** "International Conference 2025" clusters showing up on specific dates without specifying a topic or discipline.
 **Reliability:** High
 **Watch For:** Need to potentially penalize overly generic conference titles that lack subject matter.
+## 2026-05-26 - Continued Domain Parking & Generic Naming
+**Source:** AllConferences.com, World Research Library
+**Pattern Found:** AllConferences.com remains parked (GoDaddy/Afternic). World Research Library continues pattern of hosting generically named conferences (e.g., 'Academics World International Conference') by specific organizers (IRAJ, GSRD, ISERD) on clustered dates in major cities.
+**Reliability:** High
+**Watch For:** Need to ensure ScholarVault verification gracefully handles domain parking landers. Monitor IRAJ/GSRD/ISERD networks for continued generic naming and date clustering.
