@@ -1253,34 +1253,19 @@
   });
 </script>
 
-<!-- ─── CRISP CHAT ─── -->
+<!--Start of Tawk.to Script-->
 <script type="text/javascript">
-  window.$crisp = [];
-  window.CRISP_WEBSITE_ID = "6d6565b3-b95b-46ec-b9ad-08885301b082";
-
-  (function() {
-    var d = document;
-    var s = d.createElement("script");
-    s.src = "https://client.crisp.chat/l.js";
-    s.async = 1;
-    d.getElementsByTagName("head")[0].appendChild(s);
-  })();
-
-  // Show proactive "Need Help?" message on first visit only
-  window.$crisp.push(["on", "session:loaded", function() {
-    // Only show once per visitor (stored in localStorage)
-    var shownKey = "icahcr_crisp_greeted";
-    if (!localStorage.getItem(shownKey)) {
-      setTimeout(function() {
-        // Send a proactive bot message in the chat
-        window.$crisp.push(["do", "message:show", ["text",
-          "Need help? Chat with our team!\n\nWe're here to answer any questions about ICAHCR 2026 — registration, paper submission, or anything else. Just type below!"
-        ]]);
-        localStorage.setItem(shownKey, "1");
-      }, 3000); // Show after 3 seconds
-    }
-  }]);
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/6a1556aba5cbd51c4556418c/1jphll3vl';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
 </script>
+<!--End of Tawk.to Script-->
 
 <!-- ─── SCROLL TO TOP BUTTON ─── -->
 <button id="scrollTopBtn" title="Back to top" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="

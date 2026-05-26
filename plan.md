@@ -1,18 +1,12 @@
-1. **Add missing `areaServed: "IN"` to Organization schema in `aihealth/index.html`**
-   - The memory clearly states: "For India-specific SEO across ScholarVault sub-projects, the `Organization` structured data (JSON-LD) block must explicitly include `"areaServed": "IN"`."
-   - The `Organization Schema` script block in `aihealth/index.html` is currently missing `"areaServed": "IN"`. I will add it.
-   - This fits the Pathfinder criteria of "India/academic keyword optimization in existing meta tags" and "One-Fix-Per-Run".
-
-2. **Add a comment starting with `// PATHFINDER:` or HTML equivalent to document the fix.**
-   - I will add `<!-- PATHFINDER: Added areaServed: "IN" for India-specific SEO optimization -->` to the HTML right before the JSON-LD schema or inside the existing HTML comment.
-   - Actually, since this is JSON-LD, I should just modify the HTML comment directly above the script.
-
-3. **Run testing step**
-   - Syntax validation: Check the HTML syntax using Python's `html.parser` and check the JSON-LD using a node.js one-liner to extract and parse the JSON block.
-
-4. **Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.**
-   - Call `pre_commit_instructions`
-
-5. **Submit the PR**
-   - Create PR with title `🧭 Pathfinder: [SEO fix] — aihealth/index.html`
-   - Create a description matching the template for Pathfinder.
+1. Gather intelligence from primary and secondary targets:
+   - Primary: AllConferences.com (parked), Conference Alerts, Academic Research Library, World Research Library.
+   - Secondary: WikiCFP.
+2. Analyze the findings:
+   - Academic Research Library shows multiple "International Conference 2025" entries with vague details.
+   - World Research Library shows clustering by specific organizers (IRAJ, ISER) with same dates/locations.
+   - WikiCFP shows typical lists with a lot of AI/ML/IoT/Cybersecurity entries.
+3. Prepare the Recon intelligence briefing in `.jules/recon-report-2026-05-11.md`.
+4. Append/create the GitHub discussion in `.github/DISCUSSIONS/recon-2026-05-11.md`.
+5. Update `.jules/recon.md` with new intelligence patterns.
+6. Verify no code changes are made.
+7. Complete pre-commit steps to ensure proper testing, verification, review, and reflection are done.
