@@ -175,6 +175,90 @@ function tplPaperSubmission(d: Record<string, string>) {
   `);
 }
 
+function tplPaperInReview(d: Record<string, string>) {
+  return layout(`
+    <div class="header">
+      <h1>Paper Under Review</h1>
+      <p>ICAHCR 2026 · Peer Review Commenced</p>
+    </div>
+    <div class="body">
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
+      <p class="lead">
+        Your research paper <strong>"${d.title}"</strong> has been successfully assigned to our peer review committee for ICAHCR 2026.
+      </p>
+      <div class="info-box">
+        <h3>Review Status</h3>
+        <div class="info-row"><span class="info-label">Paper Title</span><span class="info-value">${d.title}</span></div>
+        <div class="info-row"><span class="info-label">Status</span><span class="info-value">In Peer Review</span></div>
+      </div>
+      <p class="lead">
+        The review process typically takes 2–4 weeks. We will notify you via email as soon as a final decision is made by the review panel.
+      </p>
+      <hr class="divider"/>
+      <p class="note">
+        Queries: <a href="mailto:papers@scholarvault.in" style="color:#00d4ff;">papers@scholarvault.in</a>
+      </p>
+    </div>
+  `);
+}
+
+function tplPaperAccepted(d: Record<string, string>) {
+  return layout(`
+    <div class="header">
+      <h1>Paper Accepted!</h1>
+      <p>ICAHCR 2026 · Congratulations</p>
+    </div>
+    <div class="body">
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
+      <p class="lead">
+        We are thrilled to inform you that your research paper <strong>"${d.title}"</strong> has been <strong>ACCEPTED</strong> for presentation at ICAHCR 2026!
+      </p>
+      <div class="info-box">
+        <h3>Acceptance Details</h3>
+        <div class="info-row"><span class="info-label">Paper Title</span><span class="info-value">${d.title}</span></div>
+        <div class="info-row"><span class="info-label">Status</span><span class="info-value" style="color:#00e676;">Accepted</span></div>
+      </div>
+      <p class="lead">
+        <strong>Next Steps:</strong><br/>
+        1. Please prepare your final camera-ready paper format.<br/>
+        2. Ensure at least one author is registered for the conference to secure your presentation slot.
+      </p>
+      <a class="cta" href="https://aihealth.scholarvault.in/register.html">Register for Conference →</a>
+      <hr class="divider"/>
+      <p class="note">
+        Queries: <a href="mailto:papers@scholarvault.in" style="color:#00d4ff;">papers@scholarvault.in</a>
+      </p>
+    </div>
+  `);
+}
+
+function tplPaperCorrection(d: Record<string, string>) {
+  return layout(`
+    <div class="header">
+      <h1>Correction Needed</h1>
+      <p>ICAHCR 2026 · Action Required</p>
+    </div>
+    <div class="body">
+      <div class="greeting" style="color: #ffffff;">Dear ${d.name},</div>
+      <p class="lead">
+        The review committee has requested corrections for your research paper <strong>"${d.title}"</strong> prior to final acceptance.
+      </p>
+      <div class="info-box">
+        <h3>Submission Status</h3>
+        <div class="info-row"><span class="info-label">Paper Title</span><span class="info-value">${d.title}</span></div>
+        <div class="info-row"><span class="info-label">Status</span><span class="info-value" style="color:#ffc107;">Correction Needed / Resubmit</span></div>
+      </div>
+      <p class="lead">
+        Please reply directly to this email with your revised paper and address any specific feedback provided by the reviewers.
+      </p>
+      <hr class="divider"/>
+      <p class="note">
+        Queries & Resubmission: <a href="mailto:papers@scholarvault.in" style="color:#00d4ff;">papers@scholarvault.in</a>
+      </p>
+    </div>
+  `);
+}
+
 function tplSpeakerApplication(d: Record<string, string>) {
   return layout(`
     <div class="header">
