@@ -2893,6 +2893,7 @@ textarea:focus {
   border: 1px solid var(--glass-border);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 1px 0 rgba(255, 255, 255, 0.05) inset;
   font-size: 14px;
+  color: var(--white);
   font-weight: 500;
   transform: translateX(120%);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
