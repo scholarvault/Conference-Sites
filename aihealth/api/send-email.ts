@@ -398,6 +398,18 @@ const emailMap: Record<string, { subject: string; tpl: (d: Record<string,string>
     subject: "Paper Submission Received — ICAHCR 2026",
     tpl: tplPaperSubmission,
   },
+  paper_in_review: {
+    subject: "Paper Under Review — ICAHCR 2026",
+    tpl: tplPaperInReview,
+  },
+  paper_accepted: {
+    subject: "Congratulations! Your Paper has been Accepted — ICAHCR 2026",
+    tpl: tplPaperAccepted,
+  },
+  paper_correction: {
+    subject: "Correction Needed: Paper Submission — ICAHCR 2026",
+    tpl: tplPaperCorrection,
+  },
   speaker_application: {
     subject: "Speaker Application Received — ICAHCR 2026",
     tpl: tplSpeakerApplication,
