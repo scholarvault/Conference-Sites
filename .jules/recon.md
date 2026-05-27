@@ -22,3 +22,9 @@
 **Pattern Found:** "International Conference 2025" clusters showing up on specific dates without specifying a topic or discipline.
 **Reliability:** High
 **Watch For:** Need to potentially penalize overly generic conference titles that lack subject matter.
+
+## 2026-05-27 - Recurring IRAJ/ISER Conference Clusters
+**Source:** World Research Library
+**Pattern Found:** Prominent featuring of identical date/location clustering by specific organizers (IRAJ). E.g. Academics World, GSRD, Yanjiu, SCIENCEFORA, Research World, and ISERD International Conferences all occurring in mid-May 2026 with "PROCE-IRAJ" image sources.
+**Reliability:** High
+**Watch For:** Need to potentially flag or penalize conferences that are part of massive parallel event clusters run by the same organizing entity (IRAJ).
