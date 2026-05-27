@@ -29,6 +29,8 @@
     .admin-card__status { position: absolute; top: 10px; right: 10px; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; }
     .admin-card__status--accepted { background: rgba(0,230,118,0.15); color: var(--green); border: 1px solid rgba(0,230,118,0.3); }
     .admin-card__status--pending { background: rgba(255,193,7,0.15); color: var(--amber); border: 1px solid rgba(255,193,7,0.3); }
+    .admin-card__status--in_review { background: rgba(0,212,255,0.15); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
+    .admin-card__status--correction { background: rgba(255,71,87,0.15); color: var(--red); border: 1px solid rgba(255,71,87,0.3); }
 
     /* Drag Handle */
     .drag-handle { position: absolute; top: 10px; left: 10px; color: var(--white-40); cursor: grab; font-size: 14px; line-height: 1; padding: 2px 4px; border-radius: 4px; transition: var(--transition); }
@@ -114,6 +116,7 @@
   <div class="admin-tabs">
     <button class="admin-tab active" data-tab="speakers" onclick="switchTab('speakers')">🎤 Keynote Speakers</button>
     <button class="admin-tab" data-tab="committee" onclick="switchTab('committee')">🏛️ Organizing Committee</button>
+    <button class="admin-tab" data-tab="papers" onclick="switchTab('papers')">📄 Submitted Papers</button>
   </div>
 
   <!-- Speakers Panel -->
@@ -135,6 +138,17 @@
     </div>
     <div class="admin-grid" id="adminCommitteeGrid">
       <div style="text-align:center;padding:2rem;color:var(--white-40);grid-column:1/-1;">Loading committee...</div>
+    </div>
+  </div>
+
+  <!-- Papers Panel -->
+  <div id="panelPapers" class="admin-panel" style="display:none;">
+    <div class="admin-toolbar">
+      <div style="font-size:14px;color:var(--white-40);" id="paperCount">Loading...</div>
+      <button class="btn-primary" style="padding:10px 20px;font-size:14px;" onclick="loadAdminPapers()">↻ Refresh</button>
+    </div>
+    <div class="admin-grid" id="adminPaperGrid">
+      <div style="text-align:center;padding:2rem;color:var(--white-40);grid-column:1/-1;">Loading papers...</div>
     </div>
   </div>
 </div>
@@ -251,6 +265,7 @@ function showDashboard() {
   document.getElementById('adminDash').style.display = 'block';
   loadAdminSpeakers();
   loadAdminCommittee();
+  loadAdminPapers();
 }
 
 async function checkSession() {
@@ -266,6 +281,7 @@ function switchTab(tab) {
   document.querySelectorAll('.admin-tab').forEach(function(t) { t.classList.toggle('active', t.dataset.tab === tab); });
   document.getElementById('panelSpeakers').style.display = tab === 'speakers' ? 'block' : 'none';
   document.getElementById('panelCommittee').style.display = tab === 'committee' ? 'block' : 'none';
+  document.getElementById('panelPapers').style.display = tab === 'papers' ? 'block' : 'none';
 }
 
 /* ── LOAD DATA ── */
@@ -291,6 +307,80 @@ async function loadAdminCommittee() {
     grid.innerHTML = data.map(function(m) { return renderAdminCard(m, 'committee'); }).join('');
     initSortable('adminCommitteeGrid', 'conf_committee');
   } catch(e) { console.error('Committee catch:', e); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error loading committee</div>'; }
+}
+
+async function loadAdminPapers() {
+  var grid = document.getElementById('adminPaperGrid');
+  try {
+    var { data, error } = await db.from('conf_paper_submissions').select('*').order('created_at', { ascending: false });
+    if (error) { console.error('Papers load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + error.message + '</div>'; return; }
+    document.getElementById('paperCount').textContent = (data ? data.length : 0) + ' papers total';
+    if (!data || data.length === 0) { grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);grid-column:1/-1;">No paper submissions yet.</div>'; return; }
+    grid.innerHTML = data.map(function(p) { return renderPaperCard(p); }).join('');
+  } catch(e) { console.error('Papers catch:', e); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error loading papers</div>'; }
+}
+
+function renderPaperCard(p) {
+  var name = escapeHtml(p.name || '');
+  var email = escapeHtml(p.email || '');
+  var title = escapeHtml(p.paper_title || 'Untitled');
+  var track = escapeHtml(p.track || 'No Track');
+  var status = p.status || 'pending';
+  
+  var statusClass = 'admin-card__status--pending';
+  var statusDisplay = 'Pending';
+  if (status === 'accepted') { statusClass = 'admin-card__status--accepted'; statusDisplay = 'Accepted'; }
+  else if (status === 'in_review') { statusClass = 'admin-card__status--in_review'; statusDisplay = 'In Review'; }
+  else if (status === 'correction') { statusClass = 'admin-card__status--correction'; statusDisplay = 'Correction Needed'; }
+
+  var dlUrl = SVSite.config.supabaseUrl + '/storage/v1/object/public/conf-papers/' + p.file_url;
+  var dlButton = p.file_url 
+    ? '<a href="'+escapeHtml(dlUrl)+'" target="_blank" class="btn-edit" style="text-decoration:none;display:inline-block;margin-top:4px;padding:4px 8px;">📥 Download PDF</a>' 
+    : '<span style="font-size:11px;color:var(--white-40);display:block;margin-top:4px;">No File Attached</span>';
+
+  var actions = '<div class="admin-card__actions" style="margin-top:12px;flex-direction:column;gap:4px;">';
+  if (status !== 'accepted') {
+    actions += '<button class="btn-edit" style="background:rgba(0,230,118,0.1);color:var(--green);border-color:var(--green);" onclick="updatePaperStatus(\''+p.id+'\', \'accepted\', \''+escapeJs(email)+'\', \''+escapeJs(name)+'\', \''+escapeJs(title)+'\')">✅ Accept</button>';
+  }
+  if (status !== 'in_review') {
+    actions += '<button class="btn-edit" style="background:rgba(0,212,255,0.1);color:var(--cyan);border-color:var(--cyan);" onclick="updatePaperStatus(\''+p.id+'\', \'in_review\', \''+escapeJs(email)+'\', \''+escapeJs(name)+'\', \''+escapeJs(title)+'\')">🔍 Move to Review</button>';
+  }
+  if (status !== 'correction') {
+    actions += '<button class="btn-edit" style="background:rgba(255,193,7,0.1);color:var(--amber);border-color:var(--amber);" onclick="updatePaperStatus(\''+p.id+'\', \'correction\', \''+escapeJs(email)+'\', \''+escapeJs(name)+'\', \''+escapeJs(title)+'\')">⚠️ Request Correction</button>';
+  }
+  actions += '</div>';
+
+  return '<div class="admin-card" style="text-align:left;">'
+    + '<div class="admin-card__status '+statusClass+'">'+statusDisplay+'</div>'
+    + '<div class="admin-card__name" style="margin-top:10px;font-size:15px;">'+title+'</div>'
+    + '<div class="admin-card__sub" style="color:var(--white-70);">By: '+name+' ('+email+')</div>'
+    + '<div class="admin-card__inst">Track: '+track+'</div>'
+    + dlButton
+    + actions
+    + '</div>';
+}
+
+async function updatePaperStatus(id, newStatus, email, name, title) {
+  if (!confirm('Change status to "'+newStatus+'" and notify the author?')) return;
+  try {
+    var result = await db.from('conf_paper_submissions').update({ status: newStatus }).eq('id', id);
+    if (result.error) throw new Error(result.error.message);
+    
+    var emailType = '';
+    if (newStatus === 'accepted') emailType = 'paper_accepted';
+    else if (newStatus === 'in_review') emailType = 'paper_in_review';
+    else if (newStatus === 'correction') emailType = 'paper_correction';
+
+    if (emailType) {
+      await SVSite.sendEmail(emailType, { email: email, name: name, title: title });
+    }
+
+    showToast('Status updated & email sent!', 'success');
+    loadAdminPapers();
+  } catch(e) {
+    showToast('Failed to update status: ' + e.message, 'error');
+    console.error(e);
+  }
 }
 
 /* ── DRAG & DROP ── */
@@ -323,10 +413,6 @@ function renderAdminCard(p, type) {
   var statusClass = status === 'accepted' ? 'admin-card__status--accepted' : 'admin-card__status--pending';
   var photoHTML = p.photo_url ? '<img class="admin-card__photo" src="'+escapeHtml(p.photo_url)+'" alt="'+name+'" />' : '<div class="admin-card__initials">'+initials+'</div>';
 
-  var safeJsName = escapeHtml(escapeJs(p.name || ''));
-  var safeJsId = escapeHtml(escapeJs(String(p.id)));
-  var safeJsType = escapeHtml(escapeJs(type));
-
   return '<div class="admin-card" data-id="'+p.id+'">'
     + '<span class="drag-handle" title="Drag to reorder">⠿⠿</span>'
     + '<div class="admin-card__status '+statusClass+'">'+escapeHtml(status)+'</div>'
@@ -335,8 +421,8 @@ function renderAdminCard(p, type) {
     + '<div class="admin-card__sub">'+desg+'</div>'
     + '<div class="admin-card__inst">'+inst+'</div>'
     + '<div class="admin-card__actions">'
-    + '<button class="btn-edit" onclick="editPerson(\''+safeJsType+'\',\''+safeJsId+'\')">✏️ Edit</button>'
-    + '<button class="btn-del" onclick="deletePerson(\''+safeJsType+'\',\''+safeJsId+'\',\''+safeJsName+'\')">🗑️ Delete</button>'
+    + '<button class="btn-edit" onclick="editPerson(\''+type+'\',\''+p.id+'\')">✏️ Edit</button>'
+    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+name+'\')">🗑️ Delete</button>'
     + '</div></div>';
 }
 
