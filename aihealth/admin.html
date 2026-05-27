@@ -327,6 +327,9 @@ function renderPaperCard(p) {
   var track = escapeHtml(p.track || 'No Track');
   var status = p.status || 'pending';
   
+  var submittedDate = p.created_at ? new Date(p.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Unknown';
+  var updatedDate = p.updated_at ? new Date(p.updated_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Not updated';
+  
   var statusClass = 'admin-card__status--pending';
   var statusDisplay = 'Pending';
   if (status === 'accepted') { statusClass = 'admin-card__status--accepted'; statusDisplay = 'Accepted'; }
@@ -355,6 +358,10 @@ function renderPaperCard(p) {
     + '<div class="admin-card__name" style="margin-top:10px;font-size:15px;">'+title+'</div>'
     + '<div class="admin-card__sub" style="color:var(--white-70);">By: '+name+' ('+email+')</div>'
     + '<div class="admin-card__inst">Track: '+track+'</div>'
+    + '<div style="font-size:12px; color:var(--white-40); margin-top:8px;">'
+    + '<div style="margin-bottom:2px;"><strong>Submitted:</strong> ' + submittedDate + '</div>'
+    + '<div><strong>Status Date:</strong> ' + updatedDate + '</div>'
+    + '</div>'
     + dlButton
     + actions
     + '</div>';
@@ -363,7 +370,7 @@ function renderPaperCard(p) {
 async function updatePaperStatus(id, newStatus, email, name, title) {
   if (!confirm('Change status to "'+newStatus+'" and notify the author?')) return;
   try {
-    var result = await db.from('conf_paper_submissions').update({ status: newStatus }).eq('id', id);
+    var result = await db.from('conf_paper_submissions').update({ status: newStatus, updated_at: new Date().toISOString() }).eq('id', id);
     if (result.error) throw new Error(result.error.message);
     
     var emailType = '';
