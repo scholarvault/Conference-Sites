@@ -9,3 +9,9 @@
 **Finding:** Form submission handlers frequently hardcoded loading states (`btn.disabled = true; btn.textContent = '...'`) and success states (`form.style.display = 'none'; success.classList.add('show')`) instead of using the helper functions `setFormLoading` and `showFormSuccess` available in `js/main.js`.
 **Constraint:** There's a pattern of duplicated form handlers across the multiple static HTML pages.
 **Remember:** Look out for other `.html` files in `aihealth` and `ICAES...` directories that should be updated to use the standard helpers for a consistent UI state.
+
+## 2025-05-27 - Standardized Form Loading and Success
+**Element:** `aihealth/downloads.html`, `aihealth/call-for-papers.html`
+**Finding:** Form submission handlers frequently omitted loading states when using modal forms like `downloadModal`, allowing users to submit multiple times.
+**Constraint:** The original setup lacked finally blocks to revert the disabled state.
+**Remember:** Whenever using form handlers on modal popups, always wrap them in a `try/catch/finally` block and call `setFormLoading(e.target, true)` / `setFormLoading(e.target, false)`.

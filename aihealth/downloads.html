@@ -153,6 +153,8 @@ function openDownloadModal(type) {
 
 document.getElementById('dlForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  // VANGUARD: Added missing loading state to prevent double submissions
+  setFormLoading(e.target, true);
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
@@ -161,7 +163,11 @@ document.getElementById('dlForm').addEventListener('submit', async (e) => {
     showToast('File sent to your email!', 'success');
     if (typeof trackEvent === 'function') trackEvent('download', { type: data.type });
     e.target.reset();
-  } catch { showToast('Could not process. Please try again.', 'error'); }
+  } catch {
+    showToast('Could not process. Please try again.', 'error');
+  } finally {
+    setFormLoading(e.target, false);
+  }
 });
 </script>
 </body>

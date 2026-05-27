@@ -309,6 +309,8 @@
 <script>
 document.getElementById('downloadForm').addEventListener('submit', async (e) => {
   e.preventDefault();
+  // VANGUARD: Added missing loading state to prevent double submissions
+  setFormLoading(e.target, true);
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
@@ -317,7 +319,11 @@ document.getElementById('downloadForm').addEventListener('submit', async (e) => 
     showToast('CFP flyer sent to your email!', 'success');
     trackEvent('download', { type: 'cfp-flyer' });
     e.target.reset();
-  } catch { showToast('Could not process. Please try again.', 'error'); }
+  } catch {
+    showToast('Could not process. Please try again.', 'error');
+  } finally {
+    setFormLoading(e.target, false);
+  }
 });
 </script>
 </body>
