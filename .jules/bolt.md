@@ -16,3 +16,6 @@
 ## 2025-05-18 - requestAnimationFrame State Synchronization
 **Learning:** When throttling high-frequency event listeners (like `mousemove` or `scroll`) using `requestAnimationFrame`, closing over the initial event object (`e`) and reading its values inside the callback will result in stale data processing. The render frame will compute logic based on the state when the frame was *requested*, rather than the state when the frame *executes*.
 **Action:** When implementing an rAF throttle, always store the most recent event data (like `clientX`/`clientY`) in variables outside the `requestAnimationFrame` block, and read from those variables inside the callback to ensure the render uses the freshest data.
+## 2026-05-27 - requestAnimationFrame Reset Race Condition
+**Learning:** When using `requestAnimationFrame` to throttle mousemove events, queued frames can execute AFTER a `mouseleave` event has already reset the visual state (like rotation variables). This race condition causes the UI to incorrectly jump back to the hovered state instead of remaining reset.
+**Action:** Always store the returned request ID from `requestAnimationFrame` and explicitly call `cancelAnimationFrame` inside the corresponding `mouseleave` (or cancel) handler to ensure no queued renders overwrite the reset state.
