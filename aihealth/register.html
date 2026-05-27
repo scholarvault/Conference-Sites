@@ -591,18 +591,84 @@
             <div style="display:flex;justify-content:space-between;font-size:1.3rem;font-weight:900;"><span>Total</span><span id="pay-amount" style="color:var(--cyan);">—</span></div>
           </div>
 
-          <!-- Payment methods -->
-          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem;">
-            <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">💳 Card</span>
-            <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">📱 UPI</span>
-            <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">🏦 Net Banking</span>
-            <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">🌐 International</span>
+          <!-- Payment Method Selection -->
+          <div style="margin-bottom:1.5rem;">
+            <label style="display:block;font-weight:700;margin-bottom:0.75rem;font-size:14px;color:var(--white-70);">Choose Payment Method</label>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+              <div class="pay-method-option" id="opt-online" onclick="selectPaymentMethod('online')" style="background:rgba(0, 209, 255, 0.04);border:1.5px solid var(--cyan);border-radius:var(--radius-md);padding:1rem;cursor:pointer;transition:var(--transition);">
+                <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;">
+                  <input type="radio" name="payment_method_select" value="online" checked style="accent-color:var(--cyan);" />
+                  <span>Online Payment</span>
+                </div>
+                <p style="font-size:11px;color:var(--white-40);margin:0.5rem 0 0 20px;line-height:1.4;">Instant Confirmation (Card / UPI / Net Banking / International)</p>
+              </div>
+              <div class="pay-method-option" id="opt-bank" onclick="selectPaymentMethod('bank')" style="background:var(--glass);border:1.5px solid var(--glass-border);border-radius:var(--radius-md);padding:1rem;cursor:pointer;transition:var(--transition);">
+                <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px;">
+                  <input type="radio" name="payment_method_select" value="bank" style="accent-color:var(--cyan);" />
+                  <span>Direct Bank Transfer</span>
+                </div>
+                <p style="font-size:11px;color:var(--white-40);margin:0.5rem 0 0 20px;line-height:1.4;">Manual Verification by ScholarVault team</p>
+              </div>
+            </div>
           </div>
 
-          <button id="payNowBtn" class="btn-primary" style="width:100%;font-size:16px;padding:16px;" onclick="initiatePayment()">
-            Pay Securely &amp; Register
-          </button>
-          <p class="disclaimer">By registering you agree to our <a href="/refund" style="color:var(--cyan);">Refund Policy</a> and <a href="/privacy" style="color:var(--cyan);">Privacy Policy</a>. Payments via Dodo Payments.</p>
+          <!-- ONLINE PAYMENT SECTION -->
+          <div id="onlinePaymentSection">
+            <!-- Payment methods -->
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem;">
+              <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">💳 Card</span>
+              <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">📱 UPI</span>
+              <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">🏦 Net Banking</span>
+              <span style="padding:6px 12px;background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-sm);font-size:12px;font-weight:600;">🌐 International</span>
+            </div>
+
+            <button id="payNowBtn" class="btn-primary" style="width:100%;font-size:16px;padding:16px;" onclick="initiatePayment()">
+              Pay Securely &amp; Register
+            </button>
+            <p class="disclaimer">By registering you agree to our <a href="/refund" style="color:var(--cyan);">Refund Policy</a> and <a href="/privacy" style="color:var(--cyan);">Privacy Policy</a>. Payments via Dodo Payments.</p>
+          </div>
+
+          <!-- DIRECT BANK TRANSFER SECTION -->
+          <div id="bankTransferSection" style="display:none;">
+            <!-- Bank Details Box -->
+            <div style="background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.15);border-radius:var(--radius-lg);padding:1.25rem;margin-bottom:1.5rem;">
+              <div style="font-size:11px;font-weight:800;color:var(--cyan);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:0.75rem;">Bank Transfer Details</div>
+              <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;">
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--white-70);">Account Name</span><strong style="color:var(--white);">SCHOLARVAULT</strong></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--white-70);">Bank Name</span><strong style="color:var(--white);">Federal Bank</strong></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--white-70);">Account Number</span><strong style="color:var(--cyan);font-family:var(--font-mono);">24330200003542</strong></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--white-70);">IFSC Code</span><strong style="color:var(--white);font-family:var(--font-mono);">FDRL0002433</strong></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--white-70);">SWIFT Code</span><strong style="color:var(--white);font-family:var(--font-mono);">FDRLINBBIBD (For International)</strong></div>
+                <div style="display:flex;justify-content:space-between;"><span style="color:var(--white-70);">Branch</span><strong style="color:var(--white);">Chennai</strong></div>
+              </div>
+              <p style="font-size:11px;color:var(--white-40);margin-top:0.75rem;line-height:1.5;text-align:center;">* Please complete the transfer to the above account, then submit your transaction details below.</p>
+            </div>
+
+            <!-- Upload fields form -->
+            <form id="bankTransferForm" style="display:flex;flex-direction:column;gap:1.25rem;margin-bottom:1.5rem;">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">UTR / Transaction Reference Number <span class="req">*</span></label>
+                  <input type="text" id="bankUtr" required placeholder="Enter UTR Reference" style="width:100%;padding:10px 12px;border-radius:var(--radius-sm);background:var(--glass);border:1.5px solid var(--glass-border);color:var(--white);font-size:14px;" />
+                </div>
+                <div class="form-group" style="margin-bottom:0;">
+                  <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Payment Date <span class="req">*</span></label>
+                  <input type="date" id="bankDate" required style="width:100%;padding:10px 12px;border-radius:var(--radius-sm);background:var(--glass);border:1.5px solid var(--glass-border);color:var(--white);font-size:14px;" />
+                </div>
+              </div>
+              <div class="form-group" style="margin-bottom:0;">
+                <label style="display:block;font-size:13px;font-weight:600;margin-bottom:6px;">Screenshot / Receipt Upload <span class="req">*</span></label>
+                <input type="file" id="bankReceipt" required accept="image/*,application/pdf" style="width:100%;padding:8px 10px;border-radius:var(--radius-sm);background:var(--glass);border:1.5px solid var(--glass-border);color:var(--white);font-size:13px;" />
+                <small style="color:var(--white-40);font-size:11px;margin-top:4px;display:block;">Formats: JPG, PNG, PDF. Max size: 5MB.</small>
+              </div>
+            </form>
+
+            <button id="bankSubmitBtn" class="btn-primary" style="width:100%;font-size:16px;padding:16px;" onclick="submitBankTransfer()">
+              Submit Registration &amp; Receipt
+            </button>
+            <p class="disclaimer">Registration will be confirmed after manual verification of your transfer by ScholarVault team.</p>
+          </div>
+
           <div style="margin-top:1rem;"><button class="btn-outline" onclick="goToStep(2)">← Back</button></div>
         </div>
 
@@ -985,6 +1051,116 @@ async function initiatePayment() {
     btn.disabled = false;
     btn.textContent = 'Pay Securely & Register';
     showToast('Payment initiation failed. Please try again or email us.', 'error');
+  }
+}
+
+/* ─── Select Payment Method ─── */
+let paymentMethod = 'online';
+function selectPaymentMethod(method) {
+  paymentMethod = method;
+  const isOnline = method === 'online';
+  
+  document.getElementById('onlinePaymentSection').style.display = isOnline ? 'block' : 'none';
+  document.getElementById('bankTransferSection').style.display = isOnline ? 'none' : 'block';
+  
+  const optOnline = document.getElementById('opt-online');
+  const optBank = document.getElementById('opt-bank');
+  
+  if (isOnline) {
+    optOnline.style.borderColor = 'var(--cyan)';
+    optOnline.style.background = 'rgba(0, 209, 255, 0.04)';
+    optBank.style.borderColor = 'var(--glass-border)';
+    optBank.style.background = 'var(--glass)';
+    document.querySelector('input[name="payment_method_select"][value="online"]').checked = true;
+  } else {
+    optBank.style.borderColor = 'var(--cyan)';
+    optBank.style.background = 'rgba(0, 209, 255, 0.04)';
+    optOnline.style.borderColor = 'var(--glass-border)';
+    optOnline.style.background = 'var(--glass)';
+    document.querySelector('input[name="payment_method_select"][value="bank"]').checked = true;
+  }
+}
+
+/* ─── Submit Bank Transfer ─── */
+async function submitBankTransfer() {
+  if (!selectedTier || !formData.email) { showToast('Session expired. Please start again.', 'error'); return; }
+  
+  const utr = document.getElementById('bankUtr').value.trim();
+  const date = document.getElementById('bankDate').value.trim();
+  const fileInput = document.getElementById('bankReceipt');
+  const file = fileInput.files[0];
+  
+  if (!utr) { showToast('Please enter your UTR / Reference Number.', 'error'); return; }
+  if (!date) { showToast('Please select the payment date.', 'error'); return; }
+  if (!file) { showToast('Please upload a screenshot or receipt of your payment.', 'error'); return; }
+  
+  const btn = document.getElementById('bankSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Uploading receipt & submitting...';
+  
+  try {
+    const isINR = currentCurrency === 'INR';
+    let price = isINR ? selectedTier.priceINR : selectedTier.priceUSD;
+    if (svGoldApplied) price = Math.round(price * (1 - SV_GOLD_DISC / 100));
+
+    // Upload receipt to Supabase Storage
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${SV_CONFIG.confId}_${Date.now()}_${Math.random().toString(36).substring(2, 8)}.${fileExt}`;
+    const filePath = fileName;
+
+    const { data: uploadData, error: uploadError } = await db.storage
+      .from('conference-receipts')
+      .upload(filePath, file);
+
+    if (uploadError) throw uploadError;
+
+    // Get public URL
+    const { data: urlData } = db.storage
+      .from('conference-receipts')
+      .getPublicUrl(filePath);
+      
+    const receiptUrl = urlData?.publicUrl || '';
+
+    // Insert registration with Pending Payment Verification status
+    const { error: insertError } = await db.from('conf_registrations').insert({
+      conf_id: SV_CONFIG.confId,
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      institution: formData.institution,
+      designation: formData.designation,
+      category: selectedTier.id + (svGoldApplied ? '_gold' : ''),
+      tier: isEarlyBird ? 'earlybird' : 'standard',
+      amount: price,
+      currency: currentCurrency,
+      country: formData.country,
+      status: 'Pending Payment Verification',
+      payment_method: 'bank_transfer',
+      utr_number: utr,
+      payment_date: date,
+      receipt_url: receiptUrl
+    });
+
+    if (insertError) throw insertError;
+
+    trackEvent('bank_transfer_submitted', { tier: selectedTier.id, sv_gold: svGoldApplied });
+
+    // Show custom success message
+    document.getElementById('successEmoji').textContent = '⏳';
+    document.getElementById('successTitle').textContent = 'Verification Pending';
+    document.getElementById('successDesc').innerHTML = `
+      Your registration details have been submitted successfully. The ScholarVault team will verify your transfer of <strong>${currentCurrency === 'INR' ? '₹' : '$'}${price.toLocaleString()}</strong> (UTR: ${utr}) within 1-2 business days. 
+      Once verified, your status will be updated to <strong>Confirmed</strong> and you will receive a confirmation email.
+    `;
+    
+    goToStep(4);
+    showToast('Registration submitted for verification!', 'success');
+
+  } catch(e) {
+    console.error(e);
+    btn.disabled = false;
+    btn.textContent = 'Submit Registration & Receipt';
+    showToast(e.message || 'Submission failed. Please try again.', 'error');
   }
 }
 
