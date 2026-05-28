@@ -910,6 +910,13 @@ function selectTier(el) {
   document.getElementById('tierError').style.display = 'none';
   updateSidebar();
   trackEvent('tier_selected', { tier: selectedTier.id });
+
+  setTimeout(() => {
+    const continueBtn = document.querySelector('button[onclick="nextStep(1)"]');
+    if (continueBtn) {
+      continueBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, 100);
 }
 
 /* ─── Sidebar + Payment summary ─── */
@@ -977,7 +984,15 @@ function goToStep(n) {
     s.classList.toggle('done',   i + 1 < n);
   });
   document.querySelectorAll('.reg-step-line').forEach((l, i) => l.classList.toggle('done', i + 1 < n));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  setTimeout(() => {
+    const targetPanel = document.getElementById('step-' + n);
+    if (targetPanel) {
+      targetPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, 100);
 }
 
 function nextStep(cur) {
