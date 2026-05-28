@@ -467,6 +467,42 @@
                 height: 16px !important;
             }
         }
+
+        /* Brochure Button Highlight & Animation */
+        @keyframes pulse-highlight {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(244, 206, 20, 0.7);
+            }
+            70% {
+                transform: scale(1.03);
+                box-shadow: 0 0 0 12px rgba(244, 206, 20, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(244, 206, 20, 0);
+            }
+        }
+
+        .btn-brochure-highlight {
+            background: #F4CE14 !important;
+            color: #071411 !important;
+            border: none !important;
+            animation: pulse-highlight 2s infinite cubic-bezier(0.66, 0, 0, 1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .btn-brochure-highlight:hover {
+            transform: translateY(-2px);
+            background: #ffe347 !important;
+            animation-play-state: paused;
+        }
+
+        .btn-brochure-highlight i {
+            color: #071411 !important;
+        }
     </style>
 
     <!-- Microsoft Clarity Tracking -->
@@ -567,9 +603,9 @@
         <span style="font-weight: 700; font-size: 0.85rem;">Call for Papers</span>
         <i data-lucide="arrow-right" style="width: 16px; height: 16px; stroke-width: 2.5;"></i>
       </a>
-      <button data-download="brochure" class="btn-outline" style="padding: 14px 24px; border-radius: 100px; border: 1.5px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; gap: 8px; color: #fff; white-space: nowrap; cursor: pointer;">
-        <span style="font-weight: 700; font-size: 0.85rem;">Get Brochure</span>
-        <i data-lucide="download" style="width: 16px; height: 16px; stroke-width: 2.5;"></i>
+      <button data-download="brochure" class="btn-brochure-highlight" style="padding: 14px 24px; border-radius: 100px; display: flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap; cursor: pointer;">
+        <span style="font-weight: 800; font-size: 0.85rem;">Get Brochure</span>
+        <i data-lucide="download" style="width: 16px; height: 16px; stroke-width: 3;"></i>
       </button>
     </div>
   </div>
@@ -873,25 +909,25 @@
         <a class="btn-outline" href="scholarvault.html">About ScholarVault</a>
       </div>
     </div>
-    <aside class="panel sticky-card reveal-right" style="text-align:center;">
-      <div class="eyebrow eyebrow--light">ScholarVault Trust Score</div>
+    <aside class="panel sticky-card reveal-right" style="text-align:center; background: #071411; border-color: rgba(255, 255, 255, 0.1);">
+      <div class="eyebrow eyebrow--light" style="color: var(--white-60); border-color: var(--white-40);">ScholarVault Trust Score</div>
       <div style="margin:20px 0;">
         <a href="badge.html" class="sv-badge-pill" style="margin:0 auto;">
-          <div class="sv-badge-pill__left">
+          <div class="sv-badge-pill__left" style="background: #121212; border-right: 1px solid rgba(255,255,255,0.1);">
             
             <div class="sv-badge-pill__name">Scholar<span>Vault</span></div>
           </div>
-          <div class="sv-badge-pill__right sv-badge-pill__right--platinum">
+          <div class="sv-badge-pill__right sv-badge-pill__right--platinum" style="background: #001a1f; border-top: 2px solid #00D1FF;">
             <span class="sv-badge-pill__tier sv-badge-pill__tier--platinum">Platinum</span>
             <span class="sv-badge-pill__score">95<sub>/100</sub></span>
           </div>
         </a>
       </div>
-      <p>Platinum tier · Virtual-first delivery · ISBN proceedings · Strong transparency signals</p>
+      <p style="color: var(--white-64);">Platinum tier · Virtual-first delivery · ISBN proceedings · Strong transparency signals</p>
       <div class="download-list" style="margin-top:16px;">
-        <div class="card-tag">18-point audit</div>
-        <div class="card-tag">Peer reviewed</div>
-        <div class="card-tag">Global participation</div>
+        <div class="card-tag" style="background: rgba(255,255,255,0.05); color: var(--white-80); border-color: rgba(255,255,255,0.1);">18-point audit</div>
+        <div class="card-tag" style="background: rgba(255,255,255,0.05); color: var(--white-80); border-color: rgba(255,255,255,0.1);">Peer reviewed</div>
+        <div class="card-tag" style="background: rgba(255,255,255,0.05); color: var(--white-80); border-color: rgba(255,255,255,0.1);">Global participation</div>
       </div>
     </aside>
   </div>
