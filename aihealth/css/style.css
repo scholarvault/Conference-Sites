@@ -85,7 +85,7 @@
   align-items: center;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.08);
   text-decoration: none;
   transition: var(--transition);
 }
@@ -94,15 +94,15 @@
 .sv-badge-pill__left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  background: var(--navy);
-  border-right: 1px solid var(--white-10);
+  gap: 9px;
+  padding: 12px 18px;
+  background: #121212;
+  border-right: 1px solid rgba(255,255,255,0.1);
 }
 
 .sv-badge-pill__shield {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
 }
 
@@ -111,7 +111,7 @@
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1;
-  color: var(--white);
+  color: #ffffff;
 }
 
 .sv-badge-pill__name span {
@@ -123,10 +123,10 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 8px 18px;
-  min-width: 85px;
+  padding: 10px 20px;
+  min-width: 90px;
   gap: 2px;
-  background: var(--navy-2);
+  background: #001a1f;
 }
 
 .sv-badge-pill__right--platinum {
@@ -782,6 +782,40 @@ button {
 .btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(37, 99, 235, 0.5);
+}
+
+.btn-brochure-highlight {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: var(--radius-md);
+  background: #F4CE14;
+  color: #0f172a;
+  border: none;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 0 15px rgba(244, 206, 20, 0.4);
+  animation: pulse-brochure 2s infinite;
+}
+
+@keyframes pulse-brochure {
+  0% {
+    box-shadow: 0 0 0 0 rgba(244, 206, 20, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(244, 206, 20, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(244, 206, 20, 0);
+  }
+}
+
+.btn-brochure-highlight:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(244, 206, 20, 0.5);
 }
 
 .btn-outline {
