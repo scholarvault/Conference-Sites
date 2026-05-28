@@ -341,15 +341,20 @@ function renderPaperCard(p) {
     ? '<a href="'+escapeHtml(dlUrl)+'" target="_blank" class="btn-edit" style="text-decoration:none;display:inline-block;margin-top:4px;padding:4px 8px;">📥 Download PDF</a>' 
     : '<span style="font-size:11px;color:var(--white-40);display:block;margin-top:4px;">No File Attached</span>';
 
+  var safeId = escapeHtml(escapeJs(p.id || ''));
+  var safeEmail = escapeHtml(escapeJs(p.email || ''));
+  var safeName = escapeHtml(escapeJs(p.name || ''));
+  var safeTitle = escapeHtml(escapeJs(p.paper_title || 'Untitled'));
+
   var actions = '<div class="admin-card__actions" style="margin-top:12px;flex-direction:column;gap:4px;">';
   if (status !== 'accepted') {
-    actions += '<button class="btn-edit" style="background:rgba(0,230,118,0.1);color:var(--green);border-color:var(--green);" onclick="updatePaperStatus(\''+p.id+'\', \'accepted\', \''+escapeJs(email)+'\', \''+escapeJs(name)+'\', \''+escapeJs(title)+'\')">✅ Accept</button>';
+    actions += '<button class="btn-edit" style="background:rgba(0,230,118,0.1);color:var(--green);border-color:var(--green);" onclick="updatePaperStatus(\''+safeId+'\', \'accepted\', \''+safeEmail+'\', \''+safeName+'\', \''+safeTitle+'\')">✅ Accept</button>';
   }
   if (status !== 'in_review') {
-    actions += '<button class="btn-edit" style="background:rgba(0,212,255,0.1);color:var(--cyan);border-color:var(--cyan);" onclick="updatePaperStatus(\''+p.id+'\', \'in_review\', \''+escapeJs(email)+'\', \''+escapeJs(name)+'\', \''+escapeJs(title)+'\')">🔍 Move to Review</button>';
+    actions += '<button class="btn-edit" style="background:rgba(0,212,255,0.1);color:var(--cyan);border-color:var(--cyan);" onclick="updatePaperStatus(\''+safeId+'\', \'in_review\', \''+safeEmail+'\', \''+safeName+'\', \''+safeTitle+'\')">🔍 Move to Review</button>';
   }
   if (status !== 'correction') {
-    actions += '<button class="btn-edit" style="background:rgba(255,193,7,0.1);color:var(--amber);border-color:var(--amber);" onclick="updatePaperStatus(\''+p.id+'\', \'correction\', \''+escapeJs(email)+'\', \''+escapeJs(name)+'\', \''+escapeJs(title)+'\')">⚠️ Request Correction</button>';
+    actions += '<button class="btn-edit" style="background:rgba(255,193,7,0.1);color:var(--amber);border-color:var(--amber);" onclick="updatePaperStatus(\''+safeId+'\', \'correction\', \''+safeEmail+'\', \''+safeName+'\', \''+safeTitle+'\')">⚠️ Request Correction</button>';
   }
   actions += '</div>';
 
@@ -420,7 +425,11 @@ function renderAdminCard(p, type) {
   var statusClass = status === 'accepted' ? 'admin-card__status--accepted' : 'admin-card__status--pending';
   var photoHTML = p.photo_url ? '<img class="admin-card__photo" src="'+escapeHtml(p.photo_url)+'" alt="'+name+'" />' : '<div class="admin-card__initials">'+initials+'</div>';
 
-  return '<div class="admin-card" data-id="'+p.id+'">'
+  var safeId = escapeHtml(escapeJs(p.id || ''));
+  var safeType = escapeHtml(escapeJs(type || ''));
+  var safeName = escapeHtml(escapeJs(p.name || ''));
+
+  return '<div class="admin-card" data-id="'+escapeHtml(p.id || '')+'">'
     + '<span class="drag-handle" title="Drag to reorder">⠿⠿</span>'
     + '<div class="admin-card__status '+statusClass+'">'+escapeHtml(status)+'</div>'
     + photoHTML
@@ -428,8 +437,8 @@ function renderAdminCard(p, type) {
     + '<div class="admin-card__sub">'+desg+'</div>'
     + '<div class="admin-card__inst">'+inst+'</div>'
     + '<div class="admin-card__actions">'
-    + '<button class="btn-edit" onclick="editPerson(\''+type+'\',\''+p.id+'\')">✏️ Edit</button>'
-    + '<button class="btn-del" onclick="deletePerson(\''+type+'\',\''+p.id+'\',\''+name+'\')">🗑️ Delete</button>'
+    + '<button class="btn-edit" onclick="editPerson(\''+safeType+'\',\''+safeId+'\')">✏️ Edit</button>'
+    + '<button class="btn-del" onclick="deletePerson(\''+safeType+'\',\''+safeId+'\',\''+safeName+'\')">🗑️ Delete</button>'
     + '</div></div>';
 }
 
