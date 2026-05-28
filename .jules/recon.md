@@ -28,3 +28,8 @@
 **Pattern Found:** Prominent featuring of identical date/location clustering by specific organizers (IRAJ). E.g. Academics World, GSRD, Yanjiu, SCIENCEFORA, Research World, and ISERD International Conferences all occurring in mid-May 2026 with "PROCE-IRAJ" image sources.
 **Reliability:** High
 **Watch For:** Need to potentially flag or penalize conferences that are part of massive parallel event clusters run by the same organizing entity (IRAJ).
+## 2026-05-28 - Duplicate Indexing Claims & Proceeding Title Stuffing
+**Source:** Resurchify, Academic Research Library
+**Pattern Found:** Resurchify contains duplicate conference listings where one entry appends '--EI' (e.g., ICCAR--EI 2026 and ICCAR 2026 for the same location and dates). Academic Research Library features proceeding titles heavily stuffed with generic sustainability and health buzzwords (e.g., 'Sustainable Systems, Health Innovation, and Cultural Adaptation in a Data-Driven Society').
+**Reliability:** High
+**Watch For:** Need to potentially flag duplicate listings used to game indexing metrics and extremely long, generic, buzzword-heavy proceeding titles.
