@@ -82,7 +82,7 @@
 /* ─── ScholarVault Badge Pill — CANONICAL DARK STYLE ─── */
 .sv-badge-pill {
   display: inline-flex;
-  align-items: center;
+  align-items: stretch;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 4px 24px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
@@ -96,8 +96,8 @@
   align-items: center;
   gap: 8px;
   padding: 10px 14px;
-  background: var(--navy);
-  border-right: 1px solid var(--white-10);
+  background: #121212;
+  border-right: 1px solid rgba(255,255,255,0.1);
 }
 
 .sv-badge-pill__shield {
@@ -111,11 +111,11 @@
   font-weight: 700;
   letter-spacing: 0.01em;
   line-height: 1;
-  color: var(--white);
+  color: #ffffff;
 }
 
 .sv-badge-pill__name span {
-  color: #00D1FF;
+  color: #F4CE14;
 }
 
 .sv-badge-pill__right {
@@ -126,7 +126,7 @@
   padding: 8px 18px;
   min-width: 85px;
   gap: 2px;
-  background: var(--navy-2);
+  background: #001a1f;
 }
 
 .sv-badge-pill__right--platinum {
@@ -1660,7 +1660,6 @@ textarea {
 .currency-btn {
   padding: 8px 20px;
   border-radius: 100px;
-  font-family: var(--font-head);
   font-size: 14px;
   font-weight: 600;
   border: 1.5px solid var(--glass-border);
@@ -3512,3 +3511,4 @@ button:focus-visible {
     gap: 6px !important;
   }
 }
+
