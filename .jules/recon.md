@@ -28,3 +28,9 @@
 **Pattern Found:** Prominent featuring of identical date/location clustering by specific organizers (IRAJ). E.g. Academics World, GSRD, Yanjiu, SCIENCEFORA, Research World, and ISERD International Conferences all occurring in mid-May 2026 with "PROCE-IRAJ" image sources.
 **Reliability:** High
 **Watch For:** Need to potentially flag or penalize conferences that are part of massive parallel event clusters run by the same organizing entity (IRAJ).
+
+## 2026-05-29 - Programmatic Event Generation & SDG Co-opting
+**Source:** Conference Index, Academic Research Library
+**Pattern Found:** Conference Index is displaying massive tag clustering (e.g., thousands of events for very specific tags like "Osteoporosis") and identical event names scheduled globally in consecutive months, indicating likely programmatic generation. Academic Research Library is prominently using UN Sustainable Development Goals (SDGs) as a browsing category, potentially to falsely project legitimacy for clustered generic proceedings.
+**Reliability:** High
+**Watch For:** Other platforms adopting SDG categorization for generic events. Further evidence of automated/cloned event listings on Conference Index.
