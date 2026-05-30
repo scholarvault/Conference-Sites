@@ -1176,8 +1176,12 @@ async function submitBankTransfer() {
     // Show custom success message
     document.getElementById('successEmoji').textContent = '⏳';
     document.getElementById('successTitle').textContent = 'Verification Pending';
+
+    // Sentinel: Sanitize user input (utr) before injecting via innerHTML to prevent XSS
+    const safeUtr = escapeHtml(utr);
+
     document.getElementById('successDesc').innerHTML = `
-      Your registration details have been submitted successfully. The ScholarVault team will verify your transfer of <strong>${currentCurrency === 'INR' ? '₹' : '$'}${price.toLocaleString()}</strong> (UTR: ${utr}) within 1-2 business days. 
+      Your registration details have been submitted successfully. The ScholarVault team will verify your transfer of <strong>${currentCurrency === 'INR' ? '₹' : '$'}${price.toLocaleString()}</strong> (UTR: ${safeUtr}) within 1-2 business days.
       Once verified, your status will be updated to <strong>Confirmed</strong> and you will receive a confirmation email.
     `;
     
