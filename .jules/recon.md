@@ -33,3 +33,9 @@
 **Pattern Found:** Resurchify contains duplicate conference listings where one entry appends '--EI' (e.g., ICCAR--EI 2026 and ICCAR 2026 for the same location and dates). Academic Research Library features proceeding titles heavily stuffed with generic sustainability and health buzzwords (e.g., 'Sustainable Systems, Health Innovation, and Cultural Adaptation in a Data-Driven Society').
 **Reliability:** High
 **Watch For:** Need to potentially flag duplicate listings used to game indexing metrics and extremely long, generic, buzzword-heavy proceeding titles.
+
+## 2026-05-31 - Title Prefixing with Indexing Claims
+**Source:** WikiCFP
+**Pattern Found:** Popular CFPs are listing their acronyms with explicit indexing database claims prepended to the title (e.g., `Ei/Scopus-AI2A 2026 2026`).
+**Reliability:** High
+**Watch For:** Need to flag conference acronyms beginning with database names (Ei, Scopus, Web of Science).
