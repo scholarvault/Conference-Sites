@@ -19,3 +19,6 @@
 ## 2026-05-27 - requestAnimationFrame Reset Race Condition
 **Learning:** When using `requestAnimationFrame` to throttle mousemove events, queued frames can execute AFTER a `mouseleave` event has already reset the visual state (like rotation variables). This race condition causes the UI to incorrectly jump back to the hovered state instead of remaining reset.
 **Action:** Always store the returned request ID from `requestAnimationFrame` and explicitly call `cancelAnimationFrame` inside the corresponding `mouseleave` (or cancel) handler to ensure no queued renders overwrite the reset state.
+## 2026-08-22 - Layout Thrashing in Animation Loops
+**Learning:** Mixing DOM reads (like `getBoundingClientRect()`) and DOM writes (like `style.transform`) repeatedly inside a loop forces the browser into a synchronous layout/reflow cycle. This causes significant "layout thrashing" and stuttering, especially when run within `requestAnimationFrame` or high-frequency event handlers.
+**Action:** When calculating positions or styles for multiple elements, batch all DOM reads first into an array or object. Then iterate a second time to perform all DOM writes. This allows the browser to calculate the layout once per frame rather than continuously reflowing.
