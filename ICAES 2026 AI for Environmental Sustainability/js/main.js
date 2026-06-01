@@ -173,8 +173,13 @@ function initFaq() {
     const button = item.querySelector("button");
     const body = item.querySelector(".faq-item__body");
     if (!button || !body) return;
+
+    // PALETTE: Accessible FAQ accordions across the repository must have an explicit aria-expanded attribute
+    button.setAttribute("aria-expanded", "false");
+
     button.addEventListener("click", () => {
       const open = item.classList.toggle("open");
+      button.setAttribute("aria-expanded", open ? "true" : "false");
       body.style.maxHeight = open ? `${body.scrollHeight}px` : "0px";
     });
   });
