@@ -143,10 +143,14 @@ function initParallax() {
   if (!items.length) return;
   const update = () => {
     const vh = window.innerHeight;
-    items.forEach((item) => {
+    // Batch DOM reads to prevent layout thrashing
+    const transforms = items.map((item) => {
       const speed = Number(item.getAttribute("data-parallax")) || 0.08;
       const rect = item.getBoundingClientRect();
-      const offset = (rect.top + rect.height / 2 - vh / 2) * speed;
+      return { item, offset: (rect.top + rect.height / 2 - vh / 2) * speed };
+    });
+    // Batch DOM writes
+    transforms.forEach(({ item, offset }) => {
       item.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
     });
   };
