@@ -674,11 +674,11 @@
                 <input type="file" id="bankReceipt" required accept="image/*,application/pdf" style="width:100%;padding:8px 10px;border-radius:var(--radius-sm);background:var(--glass);border:1.5px solid var(--glass-border);color:var(--white);font-size:13px;" />
                 <small style="color:var(--white-40);font-size:11px;margin-top:4px;display:block;">Formats: JPG, PNG, PDF. Max size: 5MB.</small>
               </div>
-            </form>
 
-            <button id="bankSubmitBtn" class="btn-primary" style="width:100%;font-size:16px;padding:16px;" onclick="submitBankTransfer()">
-              Submit Registration &amp; Receipt
-            </button>
+              <button id="bankSubmitBtn" class="btn-primary form-submit" type="submit" style="width:100%;font-size:16px;padding:16px;" data-default-text="Submit Registration &amp; Receipt">
+                Submit Registration &amp; Receipt
+              </button>
+            </form>
             <p class="disclaimer">Registration will be confirmed after manual verification of your transfer by ScholarVault team.</p>
           </div>
 
@@ -1076,9 +1076,10 @@ async function initiatePayment() {
 
     location.href = checkoutUrl;
   } catch(e) {
+    showToast('Payment initiation failed. Please try again or email us.', 'error');
+  } finally {
     btn.disabled = false;
     btn.textContent = 'Pay Securely & Register';
-    showToast('Payment initiation failed. Please try again or email us.', 'error');
   }
 }
 
@@ -1110,7 +1111,8 @@ function selectPaymentMethod(method) {
 }
 
 /* ─── Submit Bank Transfer ─── */
-async function submitBankTransfer() {
+document.getElementById('bankTransferForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
   if (!selectedTier || !formData.email) { showToast('Session expired. Please start again.', 'error'); return; }
   
   const utr = document.getElementById('bankUtr').value.trim();
@@ -1122,9 +1124,7 @@ async function submitBankTransfer() {
   if (!date) { showToast('Please select the payment date.', 'error'); return; }
   if (!file) { showToast('Please upload a screenshot or receipt of your payment.', 'error'); return; }
   
-  const btn = document.getElementById('bankSubmitBtn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Uploading receipt & submitting...';
+  setFormLoading(e.target, true, 'Uploading receipt & submitting...');
   
   try {
     const isINR = currentCurrency === 'INR';
@@ -1190,11 +1190,11 @@ async function submitBankTransfer() {
 
   } catch(e) {
     console.error(e);
-    btn.disabled = false;
-    btn.textContent = 'Submit Registration & Receipt';
     showToast(e.message || 'Submission failed. Please try again.', 'error');
+  } finally {
+    setFormLoading(e.target, false);
   }
-}
+});
 
 /* ─── Handle successful payment return ─── */
 const urlParams = new URLSearchParams(location.search);
