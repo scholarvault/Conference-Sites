@@ -340,7 +340,18 @@
     canvas.height = parseInt(canvas.style.height) || 260;
   }
   resizeECG();
-  window.addEventListener('resize', resizeECG);
+
+  // ⚡ BOLT: Throttle window resize with requestAnimationFrame to prevent high CPU usage and memory churn
+  var tickingECGResize = false;
+  window.addEventListener('resize', function() {
+    if (!tickingECGResize) {
+      window.requestAnimationFrame(function() {
+        resizeECG();
+        tickingECGResize = false;
+      });
+      tickingECGResize = true;
+    }
+  }, { passive: true });
 
   var x = 0;
 
