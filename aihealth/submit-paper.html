@@ -383,6 +383,8 @@ document.getElementById('paperForm').addEventListener('submit', async (e) => {
   } catch (err) {
     showToast('Submission failed. Please try again.', 'error');
     console.error(err);
+  } finally {
+    // VANGUARD: Added finally block to ensure loading state resets on success
     setFormLoading(document.getElementById('paperFormWrap'), false);
   }
 });
