@@ -931,8 +931,16 @@
       animationFrameId = null;
     }
   }
+  var cachedRect = null;
   card.addEventListener('mouseenter',function(){
     hovering=true;
+    var rect=card.getBoundingClientRect();
+    cachedRect={
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY,
+      width: rect.width,
+      height: rect.height
+    };
     inner.style.transition='none';
     if(!animationFrameId) {
       animationFrameId = requestAnimationFrame(loop);
@@ -953,12 +961,12 @@
   var latestX=0, latestY=0;
   var rAFCardMoveId = null;
   card.addEventListener('mousemove',function(e){
-    if(!hovering) return;
-    latestX = e.clientX;
-    latestY = e.clientY;
+    if(!hovering || !cachedRect) return;
+    latestX = e.pageX;
+    latestY = e.pageY;
     if(!tickingCardMove) {
       rAFCardMoveId = window.requestAnimationFrame(function() {
-        var r=card.getBoundingClientRect();
+        var r=cachedRect;
         var dx=(latestX-(r.left+r.width/2))/(r.width/2);
         var dy=(latestY-(r.top+r.height/2))/(r.height/2);
         tgtRY=dx*16; tgtRX=-dy*12;

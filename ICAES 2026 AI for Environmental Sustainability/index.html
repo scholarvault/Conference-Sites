@@ -1175,14 +1175,26 @@
     let rAFId = null;
     let latestX = 0;
     let latestY = 0;
+    let cachedRect = null;
+
+    icon.addEventListener('mouseenter', () => {
+      const rect = icon.getBoundingClientRect();
+      cachedRect = {
+        left: rect.left + window.scrollX,
+        top: rect.top + window.scrollY,
+        width: rect.width,
+        height: rect.height
+      };
+    });
 
     icon.addEventListener('mousemove', e => {
-      latestX = e.clientX;
-      latestY = e.clientY;
+      if (!cachedRect) return;
+      latestX = e.pageX;
+      latestY = e.pageY;
 
       if (!ticking) {
         rAFId = window.requestAnimationFrame(() => {
-          const rect = icon.getBoundingClientRect();
+          const rect = cachedRect;
           const x = latestX - rect.left;
           const y = latestY - rect.top;
           const xPct = (x / rect.width) - 0.5;
