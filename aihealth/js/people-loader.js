@@ -85,7 +85,7 @@
         "name": person.topic
       };
     }
-    return JSON.stringify(schema);
+    return JSON.stringify(schema).replace(/</g, '\\u003c');
   }
 
   /* ── Render a single person card ── */
