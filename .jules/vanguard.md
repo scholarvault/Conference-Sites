@@ -20,3 +20,9 @@
 **Finding:** Form submission handlers (`initiatePayment` and `submitBankTransfer`) frequently omitted loading states or failed to use `finally` blocks to revert the disabled state when encountering errors. This caused forms to become permanently disabled upon failure.
 **Constraint:** `submitBankTransfer`'s submit button was outside the actual `<form>` tag, requiring moving it inside and using a standard `addEventListener('submit')` pattern to correctly trigger the `setFormLoading` helper.
 **Remember:** Ensure that submit buttons are nested inside their respective `<form>` elements and always utilize a `try/finally` block when standardizing loading states across custom handlers to guarantee proper UI state reversion.
+
+## 2025-06-03 - Added Subscribe Form Loading State
+**Element:** `aihealth/js/main.js` `handleSubscribe`
+**Finding:** The `handleSubscribe` function in `aihealth` lacked a loading state implementation and finally block to reset the button state, allowing users to potentially submit multiple times.
+**Constraint:** `sourceEl` is sometimes null if `handleSubscribe` is called without providing the form element, so checking if `sourceEl` is truthy and contains the submit button is needed to prevent errors.
+**Remember:** Whenever processing form submissions asynchronously, always add a visual loading indicator and disable the submit button until the request completes (success or failure).

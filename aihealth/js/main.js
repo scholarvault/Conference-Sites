@@ -369,6 +369,14 @@ async function handleSubscribe(email, name, sourceEl) {
   if (!email || !email.includes('@')) {
     showToast('Please enter a valid email.', 'error'); return;
   }
+
+  // VANGUARD: Added missing loading/disabled state to prevent double submissions
+  const btn = sourceEl ? sourceEl.querySelector('button[type="submit"], .btn-primary') : null;
+  const originalText = btn ? btn.innerHTML : '';
+  if (btn) {
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>...';
+  }
   try {
     await insertRecord('conf_subscribers', { email, name: name || 'Subscriber' });
     showToast('Subscribed! You will receive conference updates.', 'success');
@@ -383,6 +391,11 @@ async function handleSubscribe(email, name, sourceEl) {
       sendEmail('subscribe', { email, name: name || '' });
     } else {
       showToast('Could not subscribe. Please try again.', 'error');
+    }
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
     }
   }
 }
