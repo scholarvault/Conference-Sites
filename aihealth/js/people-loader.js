@@ -141,7 +141,7 @@
 
     var linkedinHTML = '';
     if (linkedin) {
-      linkedinHTML = '<a href="' + esc(linkedin) + '" target="_blank" rel="noopener" class="person-card__linkedin" title="LinkedIn Profile">' + linkedinSVG + '</a>';
+      linkedinHTML = '<a href="' + esc(linkedin) + '" target="_blank" rel="noopener" class="person-card__linkedin" aria-label="LinkedIn Profile" title="LinkedIn Profile">' + linkedinSVG + '</a>';
     }
 
     /* Share button for speakers */
@@ -150,7 +150,7 @@
       var safeName = esc(escJs(person.name || ''));
       var safeType = esc(escJs(person.talk_type || ''));
       var safeTopic = esc(escJs(person.topic || ''));
-      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + safeName + '\',\'' + safeType + '\',\'' + safeTopic + '\')" title="Share">' + shareSVG + '</button>';
+      shareHTML = '<button class="person-card__share" onclick="shareSpeaker(\'' + safeName + '\',\'' + safeType + '\',\'' + safeTopic + '\')" aria-label="Share speaker profile" title="Share">' + shareSVG + '</button>';
     }
 
     var actionsHTML = '';
