@@ -20,3 +20,8 @@
 **Finding:** Form submission handlers (`initiatePayment` and `submitBankTransfer`) frequently omitted loading states or failed to use `finally` blocks to revert the disabled state when encountering errors. This caused forms to become permanently disabled upon failure.
 **Constraint:** `submitBankTransfer`'s submit button was outside the actual `<form>` tag, requiring moving it inside and using a standard `addEventListener('submit')` pattern to correctly trigger the `setFormLoading` helper.
 **Remember:** Ensure that submit buttons are nested inside their respective `<form>` elements and always utilize a `try/finally` block when standardizing loading states across custom handlers to guarantee proper UI state reversion.
+## 2025-06-03 - Added finally block to ensure loading state resets on success
+**Element:** `aihealth/submit-paper.html`
+**Finding:** Form submission handlers had missing `finally` blocks in `try...catch` structures to execute the cleanup and reset the form loading state explicitly when submission succeeded (and `setFormLoading` to false was only located in the catch block).
+**Constraint:** No specific constraints, but this is a pattern across the codebase that needs fixing.
+**Remember:** Whenever standardizing form loading states, always wrap submission logic in `try/catch/finally` blocks and ensure `setFormLoading(..., false)` is in the `finally` block to prevent forms from becoming stuck in a hidden or disabled loading state.
