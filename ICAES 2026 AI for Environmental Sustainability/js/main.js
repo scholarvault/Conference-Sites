@@ -200,15 +200,28 @@ function initHeroSpotlight() {
   let lastX = 0;
   let lastY = 0;
 
+  // ⚡ BOLT: Cache dimensions to avoid layout thrashing
+  let cachedRect = null;
+  hero.addEventListener('pointerenter', () => {
+    const rect = hero.getBoundingClientRect();
+    cachedRect = {
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY,
+      width: rect.width,
+      height: rect.height
+    };
+  });
+
   hero.addEventListener("pointermove", (event) => {
-    lastX = event.clientX;
-    lastY = event.clientY;
+    if (!cachedRect) return; // Wait until pointerenter fires
+
+    lastX = event.pageX;
+    lastY = event.pageY;
 
     if (!ticking) {
       window.requestAnimationFrame(() => {
-        const rect = hero.getBoundingClientRect();
-        const x = lastX - rect.left - spotlight.clientWidth / 2;
-        const y = lastY - rect.top - spotlight.clientHeight / 2;
+        const x = lastX - cachedRect.left - spotlight.clientWidth / 2;
+        const y = lastY - cachedRect.top - spotlight.clientHeight / 2;
         spotlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         ticking = false;
       });
