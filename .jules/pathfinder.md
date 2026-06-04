@@ -4,3 +4,8 @@
 **Impact:** Search engines will not efficiently discover or crawl the conference hub, and canonical indexing may be diluted.
 **Remember:** Each new sub-domain directory requires its own `sitemap.xml`, `robots.txt`, and canonical tags.
 ## 2026-06-01 - Brochure Page SEO\n**Page/Component:** aihealth/brochure.html\n**Finding:** Missing meta description and Open Graph tags.\n**Impact:** Improved shareability and search engine discoverability.\n**Remember:** Always check for missing meta description and OG tags on shareable pages like brochures.
+## 2026-06-03 - ICAES Brochure Page SEO
+**Page/Component:** ICAES 2026 AI for Environmental Sustainability/brochure.html
+**Finding:** Missing meta description and Open Graph tags.
+**Impact:** Improved shareability and search engine discoverability.
+**Remember:** Always check for missing meta description and OG tags on shareable pages like brochures.
