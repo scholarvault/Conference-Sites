@@ -327,6 +327,7 @@
       <input type="hidden" id="notifyConf" name="conference" />
       <input type="text" name="name" aria-label="Your Name" required placeholder="Your Name" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);color:var(--white);font-size:14px;font-family:var(--font-head);" />
       <input type="email" name="email" aria-label="Your Email" required placeholder="your@email.com" style="padding:12px 16px;border-radius:12px;background:rgba(255,255,255,0.06);border:1px solid var(--glass-border);color:var(--white);font-size:14px;font-family:var(--font-head);" />
+      <div id="notifyError" style="display:none;padding:12px;border-radius:8px;background:rgba(255,59,48,0.1);color:#ff3b30;font-size:14px;border:1px solid rgba(255,59,48,0.2);"></div>
       <button type="submit" id="notifySubmit" style="padding:14px;border-radius:12px;background:linear-gradient(135deg,#0066ff,#00d4ff);color:white;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:var(--font-head);">Notify Me →</button>
     </form>
     <div id="notifySuccess" style="display:none;flex-direction:column;gap:12px;">
@@ -368,9 +369,11 @@ document.getElementById('notifyForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   // VANGUARD: Standardized form loading/success states
   const btn = document.getElementById('notifySubmit');
+  const errorEl = document.getElementById('notifyError');
   const originalText = btn.innerHTML;
   btn.disabled = true;
   btn.innerHTML = 'Submitting...';
+  errorEl.style.display = 'none';
 
   const fd   = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
@@ -382,7 +385,8 @@ document.getElementById('notifyForm').addEventListener('submit', async (e) => {
     document.getElementById('notifyForm').style.display = 'none';
     document.getElementById('notifySuccess').style.display = 'flex';
   } catch {
-    alert('Could not save. Please try again.');
+    errorEl.textContent = 'Submission failed. Please try again or contact support.';
+    errorEl.style.display = 'block';
   } finally {
     btn.disabled = false;
     btn.innerHTML = originalText;
