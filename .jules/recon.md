@@ -39,3 +39,15 @@
 **Pattern Found:** Popular CFPs are listing their acronyms with explicit indexing database claims prepended to the title (e.g., `Ei/Scopus-AI2A 2026 2026`).
 **Reliability:** High
 **Watch For:** Need to flag conference acronyms beginning with database names (Ei, Scopus, Web of Science).
+
+## 2026-06-06 - Appended Indexing Claims
+**Source:** Resurchify
+**Pattern Found:** Duplicate conference listings where one entry appends '--EI' to the acronym (e.g., ICCAR--EI 2026).
+**Reliability:** High
+**Watch For:** Duplicate listings to game indexing metrics.
+
+## 2026-06-06 - Prepended Indexing Claims
+**Source:** WikiCFP
+**Pattern Found:** Explicit indexing database claims prepended to the title of CFPs (e.g., `Ei/Scopus-AI2A 2026`).
+**Reliability:** High
+**Watch For:** Conference acronyms beginning with database names (Ei, Scopus, Web of Science).
