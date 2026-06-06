@@ -22,3 +22,6 @@
 ## 2026-08-22 - Layout Thrashing in Animation Loops
 **Learning:** Mixing DOM reads (like `getBoundingClientRect()`) and DOM writes (like `style.transform`) repeatedly inside a loop forces the browser into a synchronous layout/reflow cycle. This causes significant "layout thrashing" and stuttering, especially when run within `requestAnimationFrame` or high-frequency event handlers.
 **Action:** When calculating positions or styles for multiple elements, batch all DOM reads first into an array or object. Then iterate a second time to perform all DOM writes. This allows the browser to calculate the layout once per frame rather than continuously reflowing.
+## 2026-08-22 - Layout Thrashing in Pointer Loops
+**Learning:** Calling `getBoundingClientRect()` inside high-frequency pointer event handlers (like `mousemove`) forces synchronous layout calculations and can cause significant UI stuttering, especially if styles are also being modified.
+**Action:** When creating hover-based geometric transforms (like 3D tilt effects), cache the element's bounding rectangle on `mouseenter` (including `window.scrollX`/`window.scrollY`), and use `e.pageX`/`e.pageY` in the `mousemove` handler to compute relative position over scroll updates without querying the DOM.

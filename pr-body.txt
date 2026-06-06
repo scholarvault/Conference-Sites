@@ -1,0 +1,4 @@
+💡 What: Cached the `getBoundingClientRect()` result on `mouseenter` and switched to `pageX`/`pageY` calculations for hover effects in `aihealth/index.html` and `ICAES 2026 AI for Environmental Sustainability/index.html`.
+🎯 Why: Calling `getBoundingClientRect()` continuously inside `mousemove` handlers (even when throttled with `requestAnimationFrame`) forces synchronous layout calculations and causes stuttering layout thrashing.
+📊 Impact: Eliminates forced synchronous layouts during pointer tracking, significantly smoothing out 3D tilt effects and hover interactions.
+🔬 Measurement: Verify using Chrome DevTools Performance tab; "Recalculate Style" and "Layout" warnings during pointer hover are eliminated.

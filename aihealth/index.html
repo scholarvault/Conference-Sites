@@ -931,8 +931,16 @@
       animationFrameId = null;
     }
   }
+  var cachedCardRect = null;
   card.addEventListener('mouseenter',function(){
     hovering=true;
+    var rect = card.getBoundingClientRect();
+    cachedCardRect = {
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY,
+      width: rect.width,
+      height: rect.height
+    };
     inner.style.transition='none';
     if(!animationFrameId) {
       animationFrameId = requestAnimationFrame(loop);
@@ -940,6 +948,7 @@
   });
   card.addEventListener('mouseleave',function(){
     hovering=false;
+    cachedCardRect = null;
     if (rAFCardMoveId) {
       window.cancelAnimationFrame(rAFCardMoveId);
       tickingCardMove = false;
@@ -953,14 +962,13 @@
   var latestX=0, latestY=0;
   var rAFCardMoveId = null;
   card.addEventListener('mousemove',function(e){
-    if(!hovering) return;
-    latestX = e.clientX;
-    latestY = e.clientY;
+    if(!hovering || !cachedCardRect) return;
+    latestX = e.pageX;
+    latestY = e.pageY;
     if(!tickingCardMove) {
       rAFCardMoveId = window.requestAnimationFrame(function() {
-        var r=card.getBoundingClientRect();
-        var dx=(latestX-(r.left+r.width/2))/(r.width/2);
-        var dy=(latestY-(r.top+r.height/2))/(r.height/2);
+        var dx=(latestX-(cachedCardRect.left+cachedCardRect.width/2))/(cachedCardRect.width/2);
+        var dy=(latestY-(cachedCardRect.top+cachedCardRect.height/2))/(cachedCardRect.height/2);
         tgtRY=dx*16; tgtRX=-dy*12;
         tickingCardMove=false;
       });
