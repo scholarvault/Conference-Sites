@@ -7,3 +7,6 @@
 ## 2025-05-30 - Missing aria-expanded on script-initialized accordions
 **Learning:** FAQ accordions initialized via JavaScript often miss the critical `aria-expanded` attribute, leaving screen reader users unaware of the accordion's state (open vs. closed). While the visual state is updated via CSS classes, the accessibility state must be explicitly mirrored in the DOM.
 **Action:** Always verify that custom JavaScript-based accordions dynamically toggle `aria-expanded` on the trigger button, initializing it to `"false"` and updating it to `"true"` when opened.
+## 2025-06-06 - conf-hub inline styles
+**Learning:** The conf-hub sub-project does not use an external stylesheet (e.g., css/style.css); its styles are embedded directly within `<style>` tags inside `conf-hub/index.html`.
+**Action:** Always verify the location of CSS rules (inline vs external) before attempting to append rules via bash to prevent creating unused files.
