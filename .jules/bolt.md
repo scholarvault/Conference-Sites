@@ -22,3 +22,6 @@
 ## 2026-08-22 - Layout Thrashing with getBoundingClientRect
 **Learning:** Invoking `getBoundingClientRect()` repeatedly inside a `requestAnimationFrame` loop (like during high-frequency mouse moves) combined with style writes forces synchronous layout recalculation, leading to severe layout thrashing.
 **Action:** Cache the bounding rects on events like `mouseenter` using absolute coordinates (`rect.left + window.scrollX`), and use `e.pageX/e.pageY` against this cache during the render loop instead of calculating the layout live.
+## 2026-08-22 - Global Mousemove Tracking Anti-Pattern
+**Learning:** Attaching high-frequency event listeners like `mousemove` directly to `document` or `window` for a localized UI effect (like a hero spotlight) means the browser continuously fires events and processes callbacks even when the user is interacting with completely unrelated parts of the page, wasting CPU and battery.
+**Action:** Always scope high-frequency pointer/mouse event listeners to the specific container element where the effect is visible or active, and ensure proper cleanup (e.g., `cancelAnimationFrame` on `mouseleave`) when the cursor exits that container.

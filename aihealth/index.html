@@ -427,14 +427,17 @@
 
   /* ── Spotlight follows mouse ── */
   var spot = document.getElementById('heroSpotlight');
-  if(spot){
+  var heroSection = document.querySelector('.hero.hero--cinematic');
+  if(spot && heroSection){
+    // ⚡ BOLT: Scope mousemove tracking to the hero section instead of document to prevent continuous CPU usage
     var tickingSpot = false;
+    var rAFSpotId = null;
     var spotX = 0, spotY = 0;
-    document.addEventListener('mousemove',function(e){
+    heroSection.addEventListener('mousemove',function(e){
       spotX = e.clientX;
       spotY = e.clientY;
       if(!tickingSpot) {
-        window.requestAnimationFrame(function() {
+        rAFSpotId = window.requestAnimationFrame(function() {
           var mx = (spotX/window.innerWidth - 0.5) * 50;
           var my = (spotY/window.innerHeight - 0.5) * 25;
           spot.style.transform = 'translateX(calc(-50% + '+mx+'px)) translateY('+my+'px)';
@@ -442,6 +445,14 @@
         });
         tickingSpot = true;
       }
+    });
+
+    heroSection.addEventListener('mouseleave', function() {
+      if (rAFSpotId) {
+        window.cancelAnimationFrame(rAFSpotId);
+        tickingSpot = false;
+      }
+      spot.style.transform = 'translateX(-50%) translateY(0)';
     });
   }
 
