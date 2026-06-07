@@ -39,3 +39,9 @@
 **Pattern Found:** Popular CFPs are listing their acronyms with explicit indexing database claims prepended to the title (e.g., `Ei/Scopus-AI2A 2026 2026`).
 **Reliability:** High
 **Watch For:** Need to flag conference acronyms beginning with database names (Ei, Scopus, Web of Science).
+
+## 2026-06-07 - Domain Redirection Pattern
+**Source:** AllConferences.com
+**Pattern Found:** Domain no longer hosts content directly but redirects via inline JavaScript to a /lander path.
+**Reliability:** High
+**Watch For:** Need to update parsing scripts to detect inline JavaScript redirects instead of just relying on HTTP status codes when checking domain validity.
