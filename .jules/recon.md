@@ -39,3 +39,15 @@
 **Pattern Found:** Popular CFPs are listing their acronyms with explicit indexing database claims prepended to the title (e.g., `Ei/Scopus-AI2A 2026 2026`).
 **Reliability:** High
 **Watch For:** Need to flag conference acronyms beginning with database names (Ei, Scopus, Web of Science).
+
+## 2026-06-08 - Duplicate Indexing Claims & Acronym Stuffing
+**Source:** Resurchify
+**Pattern Found:** Bulk duplicate listings where one entry appends '--EI' (or similar database indexing claims) to the conference acronym. Examples: ICCAR 2026 and ICCAR--EI 2026.
+**Reliability:** High
+**Watch For:** Need to flag or penalize conference acronyms containing '--EI', '-Scopus', etc.
+
+## 2026-06-08 - Generic SDG-Themed Proceeding Titles
+**Source:** Academic Research Library
+**Pattern Found:** Highly generic proceeding titles that mash up buzzwords across different disciplines, appearing in quick succession (e.g., 'Inclusive Growth, AI-Driven Education, and Sustainable Economic Development').
+**Reliability:** High
+**Watch For:** Overuse of generic, multi-disciplinary buzzwords in titles.
