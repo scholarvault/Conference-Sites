@@ -420,7 +420,7 @@ document.getElementById('speakerForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   // VANGUARD: Standardized form loading/success states using js/main.js helpers
   const formWrap = document.getElementById('speakerForm').parentElement;
-  setFormLoading(formWrap, true);
+  setFormLoading(e.target, true);
 
   const fd   = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
@@ -457,7 +457,8 @@ document.getElementById('speakerForm').addEventListener('submit', async (e) => {
   } catch (err) {
     showToast('Submission failed. Please try again.', 'error');
     console.error(err);
-    setFormLoading(formWrap, false);
+  } finally {
+    setFormLoading(e.target, false);
   }
 });
 </script>

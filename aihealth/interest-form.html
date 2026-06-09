@@ -168,7 +168,7 @@ document.getElementById('interestForm').addEventListener('submit', async (e) => 
   e.preventDefault();
   // VANGUARD: Standardized form loading/success states using js/main.js helpers
   const formWrap = document.getElementById('interestForm').parentElement;
-  setFormLoading(formWrap, true);
+  setFormLoading(e.target, true);
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
@@ -186,7 +186,8 @@ document.getElementById('interestForm').addEventListener('submit', async (e) => 
     sendEmail('interest', { name: data.name, email: data.email });
   } catch(err) {
     showToast('Submission failed. Please try again.', 'error');
-    setFormLoading(formWrap, false);
+  } finally {
+    setFormLoading(e.target, false);
   }
 });
 </script>

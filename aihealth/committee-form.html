@@ -175,7 +175,7 @@ document.getElementById('committeePhotoInput').addEventListener('change', functi
 document.getElementById('committeeForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const formWrap = document.getElementById('committeeFormWrap');
-  setFormLoading(formWrap, true);
+  setFormLoading(e.target, true);
   const fd = new FormData(e.target);
   const data = Object.fromEntries(fd.entries());
   try {
@@ -201,7 +201,8 @@ document.getElementById('committeeForm').addEventListener('submit', async (e) =>
     });
   } catch(err) {
     showToast('Submission failed. Please try again.', 'error');
-    setFormLoading(formWrap, false);
+  } finally {
+    setFormLoading(e.target, false);
   }
 });
 </script>

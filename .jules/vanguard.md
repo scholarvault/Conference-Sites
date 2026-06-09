@@ -25,3 +25,8 @@
 **Finding:** Form submission handlers had missing `finally` blocks in `try...catch` structures to execute the cleanup and reset the form loading state explicitly when submission succeeded (and `setFormLoading` to false was only located in the catch block).
 **Constraint:** No specific constraints, but this is a pattern across the codebase that needs fixing.
 **Remember:** Whenever standardizing form loading states, always wrap submission logic in `try/catch/finally` blocks and ensure `setFormLoading(..., false)` is in the `finally` block to prevent forms from becoming stuck in a hidden or disabled loading state.
+## 2025-06-03 - Standardized Form Loading and Error Handling
+**Element:** `aihealth/speaker-form.html`, `aihealth/interest-form.html`, `aihealth/committee-form.html`
+**Finding:** Form submission handlers frequently omitted loading states or failed to use `finally` blocks to revert the disabled state when encountering errors. The `setFormLoading` helper target was incorrect causing bugs.
+**Constraint:** `setFormLoading` target must be `e.target` instead of `formWrap`.
+**Remember:** Ensure that submit buttons are nested inside their respective `<form>` elements and always utilize a `try/finally` block when standardizing loading states across custom handlers to guarantee proper UI state reversion.
