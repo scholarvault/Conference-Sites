@@ -141,20 +141,41 @@ function initParallax() {
   if (reduceMotion) return;
   const items = Array.from(document.querySelectorAll("[data-parallax]"));
   if (!items.length) return;
-  const update = () => {
+
+  // ⚡ BOLT: Cache dimensions to avoid calling getBoundingClientRect() during scroll loop
+  let cachedItems = [];
+  const cacheDimensions = () => {
     const vh = window.innerHeight;
-    // Batch DOM reads to prevent layout thrashing
-    const transforms = items.map((item) => {
-      const speed = Number(item.getAttribute("data-parallax")) || 0.08;
+    cachedItems = items.map((item) => {
+      // Reset transform temporarily to get accurate un-transformed positions
+      item.style.transform = '';
       const rect = item.getBoundingClientRect();
-      return { item, offset: (rect.top + rect.height / 2 - vh / 2) * speed };
+      const speed = Number(item.getAttribute("data-parallax")) || 0.08;
+      return {
+        item,
+        speed,
+        // Calculate the element's absolute Y center point relative to the document
+        absoluteCenterY: rect.top + window.scrollY + rect.height / 2,
+        vh
+      };
     });
-    // Batch DOM writes
-    transforms.forEach(({ item, offset }) => {
+    update();
+  };
+
+  const update = () => {
+    const scrollY = window.scrollY;
+    // Calculate new offsets purely mathematically based on cached layout
+    cachedItems.forEach(({ item, speed, absoluteCenterY, vh }) => {
+      // Current center of the viewport
+      const viewportCenterY = scrollY + vh / 2;
+      // Distance from element center to viewport center
+      const distance = absoluteCenterY - viewportCenterY;
+      const offset = distance * speed;
       item.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
     });
   };
-  update();
+
+  cacheDimensions();
 
   // ⚡ BOLT: Throttle scroll and resize events to prevent parallax calculations from degrading scroll frame rate.
   let ticking = false;
@@ -169,7 +190,17 @@ function initParallax() {
   };
 
   window.addEventListener("scroll", requestTick, { passive: true });
-  window.addEventListener("resize", requestTick, { passive: true });
+
+  let resizeTicking = false;
+  window.addEventListener("resize", () => {
+    if (!resizeTicking) {
+      window.requestAnimationFrame(() => {
+        cacheDimensions();
+        resizeTicking = false;
+      });
+      resizeTicking = true;
+    }
+  }, { passive: true });
 }
 
 function initFaq() {
