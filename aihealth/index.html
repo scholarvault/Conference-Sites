@@ -427,10 +427,11 @@
 
   /* ── Spotlight follows mouse ── */
   var spot = document.getElementById('heroSpotlight');
-  if(spot){
+  var heroSection = document.getElementById('home');
+  if(spot && heroSection){
     var tickingSpot = false;
     var spotX = 0, spotY = 0;
-    document.addEventListener('mousemove',function(e){
+    heroSection.addEventListener('mousemove',function(e){
       spotX = e.clientX;
       spotY = e.clientY;
       if(!tickingSpot) {
