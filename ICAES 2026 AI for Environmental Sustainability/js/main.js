@@ -212,6 +212,7 @@ function initHeroSpotlight() {
     };
   });
 
+  let rAFSpotlightId = null;
   hero.addEventListener("pointermove", (event) => {
     if (!cachedRect) return; // Wait until pointerenter fires
 
@@ -219,13 +220,21 @@ function initHeroSpotlight() {
     lastY = event.pageY;
 
     if (!ticking) {
-      window.requestAnimationFrame(() => {
+      rAFSpotlightId = window.requestAnimationFrame(() => {
         const x = lastX - cachedRect.left - spotlight.clientWidth / 2;
         const y = lastY - cachedRect.top - spotlight.clientHeight / 2;
         spotlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
         ticking = false;
       });
       ticking = true;
+    }
+  });
+
+  hero.addEventListener("pointerleave", () => {
+    // ⚡ BOLT: Cancel queued animation frames on pointerleave to prevent them from executing and overwriting the reset state.
+    if (rAFSpotlightId) {
+      window.cancelAnimationFrame(rAFSpotlightId);
+      ticking = false;
     }
   });
 }
