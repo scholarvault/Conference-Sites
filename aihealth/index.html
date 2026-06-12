@@ -1325,15 +1325,23 @@ s0.parentNode.insertBefore(s1,s0);
   (function() {
     var btn = document.getElementById('scrollTopBtn');
     var tickingScroll = false;
+    // ⚡ BOLT: Cache visibility state to avoid redundant DOM writes and mass setTimeouts on every scroll frame
+    var isVisible = false;
     window.addEventListener('scroll', function() {
       if (!tickingScroll) {
         window.requestAnimationFrame(function() {
           if (window.scrollY > 300) {
-            btn.style.display = 'flex';
-            setTimeout(function() { btn.style.opacity = '1'; }, 10);
+            if (!isVisible) {
+              btn.style.display = 'flex';
+              setTimeout(function() { btn.style.opacity = '1'; }, 10);
+              isVisible = true;
+            }
           } else {
-            btn.style.opacity = '0';
-            setTimeout(function() { btn.style.display = 'none'; }, 300);
+            if (isVisible) {
+              btn.style.opacity = '0';
+              setTimeout(function() { btn.style.display = 'none'; }, 300);
+              isVisible = false;
+            }
           }
           tickingScroll = false;
         });

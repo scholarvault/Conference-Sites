@@ -199,6 +199,7 @@ function initHeroSpotlight() {
   let ticking = false;
   let lastX = 0;
   let lastY = 0;
+  let rAFId = null;
 
   // ⚡ BOLT: Cache dimensions to avoid layout thrashing
   let cachedRect = null;
@@ -219,7 +220,7 @@ function initHeroSpotlight() {
     lastY = event.pageY;
 
     if (!ticking) {
-      window.requestAnimationFrame(() => {
+      rAFId = window.requestAnimationFrame(() => {
         const x = lastX - cachedRect.left - spotlight.clientWidth / 2;
         const y = lastY - cachedRect.top - spotlight.clientHeight / 2;
         spotlight.style.transform = `translate3d(${x}px, ${y}px, 0)`;
@@ -227,6 +228,16 @@ function initHeroSpotlight() {
       });
       ticking = true;
     }
+  });
+
+  hero.addEventListener("pointerleave", () => {
+    if (rAFId) {
+      window.cancelAnimationFrame(rAFId);
+      rAFId = null;
+      ticking = false;
+    }
+    // Optional: reset spotlight position when leaving
+    // spotlight.style.transform = '';
   });
 }
 
