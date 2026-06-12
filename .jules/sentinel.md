@@ -7,3 +7,8 @@
 **Vulnerability:** User-controlled data (e.g., `utr`) from a form input was directly injected into the DOM via `innerHTML` without sanitization.
 **Learning:** Even when interpolating variables into template literals that represent HTML blocks, all user input must be sanitized before assignment to `innerHTML`. The `escapeHtml` helper in this repository works well for this since it isn't an inline event attribute context.
 **Prevention:** Use `escapeHtml()` on all user input variables before inserting them into an HTML string assigned to `innerHTML` or use safer DOM manipulation methods (e.g., `textContent`).
+
+## 2026-06-03 - DOM XSS via Error Messages
+**Vulnerability:** Supabase error messages (`error.message`) were directly injected into the DOM via `innerHTML` without sanitization when database operations failed (e.g., loading speakers, committee, or papers).
+**Learning:** Even internal system errors or API responses can be a source of XSS if they reflect user input or are somehow manipulated to include HTML tags. Any data that is going to be assigned to `innerHTML` must be treated as untrusted and sanitized.
+**Prevention:** Always use `escapeHtml()` (or equivalent sanitization) when injecting error messages into HTML strings, or alternatively use `textContent` to safely display error text.

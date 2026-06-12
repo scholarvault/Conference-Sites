@@ -289,7 +289,7 @@ async function loadAdminSpeakers() {
   var grid = document.getElementById('adminSpeakerGrid');
   try {
     var { data, error } = await db.from('conf_speakers').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true });
-    if (error) { console.error('Speakers load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + error.message + '</div>'; return; }
+    if (error) { console.error('Speakers load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + escapeHtml(error.message) + '</div>'; return; }
     document.getElementById('speakerCount').textContent = (data ? data.length : 0) + ' speakers total';
     if (!data || data.length === 0) { grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);grid-column:1/-1;">No speakers yet. Click "+ Add Speaker" to get started.</div>'; return; }
     grid.innerHTML = data.map(function(s) { return renderAdminCard(s, 'speaker'); }).join('');
@@ -301,7 +301,7 @@ async function loadAdminCommittee() {
   var grid = document.getElementById('adminCommitteeGrid');
   try {
     var { data, error } = await db.from('conf_committee').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: true });
-    if (error) { console.error('Committee load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + error.message + '</div>'; return; }
+    if (error) { console.error('Committee load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + escapeHtml(error.message) + '</div>'; return; }
     document.getElementById('committeeCount').textContent = (data ? data.length : 0) + ' members total';
     if (!data || data.length === 0) { grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);grid-column:1/-1;">No committee members yet. Click "+ Add Member".</div>'; return; }
     grid.innerHTML = data.map(function(m) { return renderAdminCard(m, 'committee'); }).join('');
@@ -313,7 +313,7 @@ async function loadAdminPapers() {
   var grid = document.getElementById('adminPaperGrid');
   try {
     var { data, error } = await db.from('conf_paper_submissions').select('*').order('created_at', { ascending: false });
-    if (error) { console.error('Papers load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + error.message + '</div>'; return; }
+    if (error) { console.error('Papers load error:', error); grid.innerHTML = '<div style="grid-column:1/-1;color:var(--red);text-align:center;padding:2rem;">Error: ' + escapeHtml(error.message) + '</div>'; return; }
     document.getElementById('paperCount').textContent = (data ? data.length : 0) + ' papers total';
     if (!data || data.length === 0) { grid.innerHTML = '<div style="text-align:center;padding:3rem;color:var(--white-40);grid-column:1/-1;">No paper submissions yet.</div>'; return; }
     grid.innerHTML = data.map(function(p) { return renderPaperCard(p); }).join('');
