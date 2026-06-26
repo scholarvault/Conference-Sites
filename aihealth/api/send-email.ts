@@ -157,13 +157,13 @@ function tplPaperSubmission(d: Record<string, string>) {
         <div class="info-row"><span class="info-label">Paper Title</span><span class="info-value">${d.title}</span></div>
         ${d.track ? `<div class="info-row"><span class="info-label">Conference Track</span><span class="info-value">${d.track}</span></div>` : ""}
         <div class="info-row"><span class="info-label">Review Process</span><span class="info-value">Double-blind (2–3 reviewers)</span></div>
-        <div class="info-row"><span class="info-label">Decision Expected</span><span class="info-value">By July 15, 2026</span></div>
+        <div class="info-row"><span class="info-label">Decision Expected</span><span class="info-value">By August 8, 2026</span></div>
       </div>
       <p class="lead">
         <strong>What happens next?</strong><br/>
         Your paper will be assigned to 2–3 domain experts for independent review.
-        You will receive an acceptance / revision / rejection notice by <strong>July 15, 2026</strong>.
-        If accepted, camera-ready upload is due <strong>July 25, 2026</strong>.
+        You will receive an acceptance / revision / rejection notice by <strong>August 8, 2026</strong>.
+        If accepted, camera-ready upload is due <strong>August 18, 2026</strong>.
       </p>
       <a class="cta" href="https://aihealth.scholarvault.in/call-for-papers.html">View CFP Guidelines →</a>
       <hr class="divider"/>
@@ -337,8 +337,8 @@ function tplInterest(d: Record<string, string>) {
       </p>
       <div class="info-box">
         <h3>Key Dates to Remember</h3>
-        <div class="info-row"><span class="info-label">Paper Submission</span><span class="info-value">June 30, 2026</span></div>
-        <div class="info-row"><span class="info-label">Early Bird Ends</span><span class="info-value">July 15, 2026</span></div>
+        <div class="info-row"><span class="info-label">Paper Submission</span><span class="info-value">July 24, 2026</span></div>
+        <div class="info-row"><span class="info-label">Early Bird Ends</span><span class="info-value">August 8, 2026</span></div>
         <div class="info-row"><span class="info-label">Conference</span><span class="info-value">August 22–23, 2026</span></div>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:24px 0;">

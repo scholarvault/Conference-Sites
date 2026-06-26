@@ -15,7 +15,7 @@ const SV_CONFIG = {
   confFullName: 'International Conference on AI in Healthcare & Clinical Research',
   confDate: new Date('2026-08-22T09:00:00'),
   earlyBirdDate: new Date('2026-07-15T23:59:59'),
-  paperDeadline: new Date('2026-06-30T23:59:59'),
+  paperDeadline: new Date('2026-07-24T23:59:59'),
   adminEmail: 'conferences@scholarvault.in',
   gaId: 'G-NBGSGZV5D1',
   clarityId: 'wh5ekajcop',
