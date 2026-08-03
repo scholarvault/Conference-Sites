@@ -748,7 +748,7 @@
           <div style="font-size:12px;font-weight:700;color:var(--white-40);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Key Dates</div>
           <div style="display:flex;flex-direction:column;gap:12px;">
             <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--white-70);">Paper Deadline</span><span style="font-family:var(--font-mono);color:var(--cyan);">Jun 30</span></div>
-            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--white-70);">Early Bird Ends</span><span style="font-family:var(--font-mono);color:var(--amber);">Jul 15</span></div>
+            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--white-70);">Early Bird Ends</span><span style="font-family:var(--font-mono);color:var(--amber);">Aug 8</span></div>
             <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--white-70);">Conference</span><span style="font-family:var(--font-mono);color:var(--green);">Aug 22–23</span></div>
           </div>
         </div>
@@ -1067,7 +1067,7 @@ async function initiatePayment() {
     if (!product) { throw new Error('Unknown tier: ' + selectedTier.id); }
     const returnUrl = encodeURIComponent('https://aihealth.scholarvault.in/register?payment=success');
     
-    let checkoutUrl = `https://checkout.dodopayments.com/buy/${product}?customer_email=${encodeURIComponent(formData.email)}&return_url=${returnUrl}`;
+    let checkoutUrl = `https://checkout.dodopayments.com/buy/${product}?customer_email=${encodeURIComponent(formData.email)}&return_url=${returnUrl}&metadata[type]=conference&metadata[conf_id]=${encodeURIComponent(SV_CONFIG.confId)}`;
     
     // Auto-apply GOLD15 discount if member is verified
     if (svGoldApplied) {
