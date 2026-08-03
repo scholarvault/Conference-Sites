@@ -337,7 +337,7 @@ function tplInterest(d: Record<string, string>) {
       </p>
       <div class="info-box">
         <h3>Key Dates to Remember</h3>
-        <div class="info-row"><span class="info-label">Paper Submission</span><span class="info-value">July 24, 2026</span></div>
+        <div class="info-row"><span class="info-label">Paper Submission</span><span class="info-value">August 14, 2026</span></div>
         <div class="info-row"><span class="info-label">Early Bird Ends</span><span class="info-value">August 8, 2026</span></div>
         <div class="info-row"><span class="info-label">Conference</span><span class="info-value">August 22–23, 2026</span></div>
       </div>
@@ -399,7 +399,7 @@ function tplSubscribe(d: Record<string, string>) {
         <h3>What to Expect</h3>
         <div class="info-row"><span class="info-label">Early Bird Alert</span><span class="info-value">~2 weeks before deadline</span></div>
         <div class="info-row"><span class="info-label">Speaker Reveals</span><span class="info-value">May – July 2026</span></div>
-        <div class="info-row"><span class="info-label">Paper Deadline Reminder</span><span class="info-value">June 23, 2026</span></div>
+        <div class="info-row"><span class="info-label">Paper Deadline Reminder</span><span class="info-value">August 10, 2026</span></div>
         <div class="info-row"><span class="info-label">Agenda Announcement</span><span class="info-value">August 10, 2026</span></div>
       </div>
       <a class="cta" href="https://aihealth.scholarvault.in">Visit Conference Website →</a>
