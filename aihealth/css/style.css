@@ -1633,7 +1633,7 @@ textarea {
   background: #ffffff;
   border: 1.5px solid var(--glass-border);
   border-radius: var(--radius-lg);
-  padding: 1.8rem;
+  padding: 1.25rem;
   cursor: pointer;
   transition: var(--transition);
   position: relative;
@@ -1681,7 +1681,7 @@ textarea {
 }
 
 .tier-price {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: var(--cyan);
   font-family: var(--font-head);
@@ -1701,7 +1701,7 @@ textarea {
 }
 
 .tier-features {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   text-align: left;
 }
 
@@ -1709,9 +1709,9 @@ textarea {
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 12.5px;
+  font-size: 11.5px;
   color: var(--white-70);
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .tier-features li::before {

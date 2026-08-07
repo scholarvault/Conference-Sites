@@ -18,6 +18,16 @@
   <meta name="twitter:title" content="Register — ICAHCR 2026 | AI in Healthcare Conference" />
   <meta name="twitter:description" content="Register for ICAHCR 2026. Virtual conference on AI in Healthcare. Early bird pricing available. Multiple delegate categories." />
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NBGSGZV5D1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-NBGSGZV5D1');
+  </script>
+
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .reg-layout { display: grid; grid-template-columns: 1fr 380px; gap: 3rem; align-items: start; }
@@ -394,13 +404,136 @@
     .gold-modal-wrap { position: relative; }
     .tier-grid { grid-template-columns: repeat(2, 1fr); }
 
+    /* Tier Card Icon Bubbles */
+    .tier-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      flex-shrink: 0;
+    }
+    .tier-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .tier-icon--student {
+      background: linear-gradient(135deg, #e0f7f4, #b2ebf2);
+      color: #0d9488;
+    }
+    .tier-icon--faculty {
+      background: linear-gradient(135deg, #e0ecff, #b8d4fe);
+      color: #3b82f6;
+    }
+    .tier-icon--listener {
+      background: linear-gradient(135deg, #f0e6f6, #ddd6fe);
+      color: #7c3aed;
+    }
+    .tier-icon--coauthor {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      color: #d97706;
+    }
+    .tier-icon--industry {
+      background: linear-gradient(135deg, #e0ecff, #93c5fd);
+      color: #2563eb;
+    }
+
+    /* Key Dates calendar icon */
+    .key-date-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #e0ecff, #bfdbfe);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .key-date-icon svg {
+      width: 14px;
+      height: 14px;
+      color: #3b82f6;
+    }
+
     @media(max-width:900px) {
       .reg-layout { grid-template-columns: 1fr; }
       .reg-sidebar { position: static; }
-      .tier-grid { grid-template-columns: 1fr; }
+      .tier-grid { grid-template-columns: 1fr; gap: 10px; }
     }
     @media(max-width:600px) {
-      .tier-grid { grid-template-columns: 1fr; }
+      .tier-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .tier-card {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+        text-align: left;
+      }
+      .tier-card-header {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        width: 100%;
+      }
+      .tier-card .tier-icon {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 0;
+        flex-shrink: 0;
+      }
+      .tier-card .tier-icon svg {
+        width: 20px;
+        height: 20px;
+      }
+      .tier-card-title-wrap {
+        flex-grow: 1;
+      }
+      .tier-card .tier-name {
+        font-size: 0.95rem;
+        margin-bottom: 0;
+      }
+      .tier-card .tier-price {
+        font-size: 1.35rem !important;
+        line-height: 1.2;
+      }
+      .tier-card .tier-price-eb {
+        font-size: 11px;
+        margin-top: 2px;
+      }
+      .tier-card .tier-features {
+        display: block;
+        margin-top: 0;
+        border-top: 1px dashed rgba(255,255,255,0.1);
+        padding-top: 12px;
+        width: 100%;
+      }
+      .tier-card .tier-features li {
+        font-size: 11.5px !important;
+        margin-bottom: 5px !important;
+      }
+      .tier-card .tier-badge {
+        top: -8px;
+        font-size: 9px;
+        padding: 3px 10px;
+      }
+      .tier-card .selected-check {
+        top: auto;
+        bottom: 16px;
+        right: 16px;
+        transform: none;
+        width: 20px;
+        height: 20px;
+        font-size: 11px;
+      }
+      .tier-card .price-inr,
+      .tier-card .price-usd {
+        text-align: right;
+      }
     }
 
     /* Early Bird tag — replaces ⚡ emoji to prevent emoji font from contaminating ₹ symbol */
@@ -540,14 +673,19 @@
             <div class="tier-card popular" data-tier="student" data-inr="3499" data-usd="159" data-eb-inr="2496" data-eb-usd="129" onclick="selectTier(this)">
               <div class="selected-check">✓</div>
               <div class="tier-badge">Most Popular</div>
-              <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Student / Scholar</div>
-              <div class="price-inr">
-                <div class="tier-price">₹3,499</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹2,496</div>
-              </div>
-              <div class="price-usd" style="display:none;">
-                <div class="tier-price">$159</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $129</div>
+              <div class="tier-card-header">
+                <div class="tier-icon tier-icon--student"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+                <div class="tier-card-title-wrap">
+                  <div class="tier-name">Student / Scholar</div>
+                </div>
+                <div class="price-inr">
+                  <div class="tier-price">₹3,499</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹2,496</div>
+                </div>
+                <div class="price-usd" style="display:none;">
+                  <div class="tier-price">$159</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $129</div>
+                </div>
               </div>
               <ul class="tier-features">
                 <li>All virtual sessions access</li>
@@ -559,14 +697,19 @@
 
             <div class="tier-card" data-tier="faculty" data-inr="6499" data-usd="249" data-eb-inr="4999" data-eb-usd="199" onclick="selectTier(this)">
               <div class="selected-check">✓</div>
-              <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5m4 0h4m-4 0v7m0-7a2 2 0 0 0 2-2V3M5 7H3m2 0v10a2 2 0 0 0 2 2h4"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>Faculty / Researcher</div>
-              <div class="price-inr">
-                <div class="tier-price">₹6,499</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹4,999</div>
-              </div>
-              <div class="price-usd" style="display:none;">
-                <div class="tier-price">$249</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $199</div>
+              <div class="tier-card-header">
+                <div class="tier-icon tier-icon--faculty"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="4"/><path d="M5.5 21a8.38 8.38 0 0 1 13 0"/></svg></div>
+                <div class="tier-card-title-wrap">
+                  <div class="tier-name">Faculty / Researcher</div>
+                </div>
+                <div class="price-inr">
+                  <div class="tier-price">₹6,499</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹4,999</div>
+                </div>
+                <div class="price-usd" style="display:none;">
+                  <div class="tier-price">$249</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $199</div>
+                </div>
               </div>
               <ul class="tier-features">
                 <li>All sessions + keynote access</li>
@@ -579,14 +722,19 @@
 
             <div class="tier-card" data-tier="listener" data-inr="2499" data-usd="149" data-eb-inr="1999" data-eb-usd="99" onclick="selectTier(this)">
               <div class="selected-check">✓</div>
-              <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>Listener</div>
-              <div class="price-inr">
-                <div class="tier-price">₹2,499</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹1,999</div>
-              </div>
-              <div class="price-usd" style="display:none;">
-                <div class="tier-price">$149</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $99</div>
+              <div class="tier-card-header">
+                <div class="tier-icon tier-icon--listener"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+                <div class="tier-card-title-wrap">
+                  <div class="tier-name">Listener</div>
+                </div>
+                <div class="price-inr">
+                  <div class="tier-price">₹2,499</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹1,999</div>
+                </div>
+                <div class="price-usd" style="display:none;">
+                  <div class="tier-price">$149</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $99</div>
+                </div>
               </div>
               <ul class="tier-features">
                 <li>Attend all live sessions</li>
@@ -598,14 +746,19 @@
 
             <div class="tier-card" data-tier="coauthor" data-inr="2999" data-usd="99" data-eb-inr="2499" data-eb-usd="79" onclick="selectTier(this)">
               <div class="selected-check">✓</div>
-              <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>Co-Author</div>
-              <div class="price-inr">
-                <div class="tier-price">₹2,999</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹2,499</div>
-              </div>
-              <div class="price-usd" style="display:none;">
-                <div class="tier-price">$99</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $79</div>
+              <div class="tier-card-header">
+                <div class="tier-icon tier-icon--coauthor"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <div class="tier-card-title-wrap">
+                  <div class="tier-name">Co-Author</div>
+                </div>
+                <div class="price-inr">
+                  <div class="tier-price">₹2,999</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹2,499</div>
+                </div>
+                <div class="price-usd" style="display:none;">
+                  <div class="tier-price">$99</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $79</div>
+                </div>
               </div>
               <ul class="tier-features">
                 <li>Certificate for co-author</li>
@@ -619,14 +772,19 @@
             <div class="tier-card" data-tier="industry" data-inr="14999" data-usd="499" data-eb-inr="9999" data-eb-usd="399" onclick="selectTier(this)" style="grid-column: 1 / -1;">
               <div class="selected-check">✓</div>
               <div class="tier-badge" style="background: linear-gradient(135deg, #0066ff, #00D1FF); color: #fff;">Professional Delegate</div>
-              <div class="tier-name">Industry Professional</div>
-              <div class="price-inr">
-                <div class="tier-price" style="opacity: 0.5; text-decoration: line-through;">₹14,999</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹9,999</div>
-              </div>
-              <div class="price-usd" style="display:none;">
-                <div class="tier-price" style="opacity: 0.5; text-decoration: line-through;">$499</div>
-                <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $399</div>
+              <div class="tier-card-header">
+                <div class="tier-icon tier-icon--industry"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+                <div class="tier-card-title-wrap">
+                  <div class="tier-name">Industry Professional</div>
+                </div>
+                <div class="price-inr">
+                  <div class="tier-price" style="opacity: 0.5; text-decoration: line-through;">₹14,999</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> ₹9,999</div>
+                </div>
+                <div class="price-usd" style="display:none;">
+                  <div class="tier-price" style="opacity: 0.5; text-decoration: line-through;">$499</div>
+                  <div class="tier-price-eb"><span class="eb-tag">Early Bird</span> $399</div>
+                </div>
               </div>
               <ul class="tier-features">
                 <li>Priority networking access</li>
@@ -936,7 +1094,7 @@
           <!-- Premium Gold Upgrade Toggle -->
           <div id="goldToggleSection" class="premium-gold-box disabled">
             <div id="goldToggleHeader" class="gold-toggle-header" style="color: #d48806;">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              <span style="display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#fef3c7,#fde68a);"><svg width="12" height="12" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg></span>
               UPGRADE TO GOLD &amp; SAVE 15% DISCOUNT ON THIS REGISTRATION
             </div>
             <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin:0;">
@@ -958,10 +1116,23 @@
         <!-- Key Dates -->
         <div style="background:var(--glass);border:1px solid var(--glass-border);border-radius:var(--radius-lg);padding:1.5rem;margin-top:1.5rem;">
           <div style="font-size:12px;font-weight:700;color:var(--white-40);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;">Key Dates</div>
-          <div style="display:flex;flex-direction:column;gap:12px;">
-            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--white-70);">Paper Deadline</span><span style="font-family:var(--font-mono);color:var(--cyan);">Aug 14</span></div>
-            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--white-70);">Early Bird Ends</span><span style="font-family:var(--font-mono);color:var(--amber);">Aug 8</span></div>
-            <div style="display:flex;justify-content:space-between;font-size:13px;"><span style="color:var(--white-70);">Conference</span><span style="font-family:var(--font-mono);color:var(--green);">Aug 22–23</span></div>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="key-date-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div><div style="font-size:12px;color:var(--white-40);font-weight:600;">Paper Submission Deadline</div><div style="font-size:14px;font-weight:700;color:var(--white);">June 30, 2026</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="key-date-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div><div style="font-size:12px;color:var(--white-40);font-weight:600;">Acceptance Notification</div><div style="font-size:14px;font-weight:700;color:var(--white);">July 15, 2026</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="key-date-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div><div style="font-size:12px;color:var(--white-40);font-weight:600;">Early Bird Ends</div><div style="font-size:14px;font-weight:700;color:var(--amber);">August 8, 2026</div></div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div class="key-date-icon" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0);"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#059669;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+              <div><div style="font-size:12px;color:var(--white-40);font-weight:600;">Conference Dates</div><div style="font-size:14px;font-weight:700;color:var(--green);">August 22–23, 2026</div></div>
+            </div>
           </div>
         </div>
 
@@ -1544,15 +1715,47 @@ async function initiatePayment() {
       coauthor:  'pdt_0Nd5oUQJh9bYUQYMFtlaL',   // Co-Author
       industry:  'pdt_0NdOaDcqj1rebfVwnjkEE',   // Professional Delegate (Industry)
     };
-    const product = (isINR ? DODO_PRODUCTS_INR : DODO_PRODUCTS_USD)[selectedTier.id];
+    
+    // Dedicated Gold Products (Bundled with 15% discount + Gold membership fee)
+    const DODO_PRODUCTS_GOLD_INR = {
+      student:   'pdt_0NktzipPieGGhenWMfEbG',   // Student / Scholar + Gold
+      faculty:   null, // Add later
+      listener:  null, // Add later
+      coauthor:  null, // Add later
+      industry:  null, // Add later
+    };
+    const DODO_PRODUCTS_GOLD_USD = {
+      student:   'pdt_0Nku0BduIVjuNwudshlhg',   // Student / Scholar + Gold
+      faculty:   null, // Add later
+      listener:  null, // Add later
+      coauthor:  null, // Add later
+      industry:  null, // Add later
+    };
+
+    let product = null;
+    
+    // If Gold is applied, try to use the dedicated bundled Gold product ID first
+    if (svGoldApplied) {
+      product = (isINR ? DODO_PRODUCTS_GOLD_INR : DODO_PRODUCTS_GOLD_USD)[selectedTier.id];
+    }
+    
+    // If Gold is NOT applied, OR if the Gold product ID doesn't exist yet, fallback to standard product
+    if (!product) {
+      product = (isINR ? DODO_PRODUCTS_INR : DODO_PRODUCTS_USD)[selectedTier.id];
+    }
+    
     if (!product) { throw new Error('Unknown tier: ' + selectedTier.id); }
     const returnUrl = encodeURIComponent('https://aihealth.scholarvault.in/register?payment=success');
     
-    let checkoutUrl = `https://checkout.dodopayments.com/buy/${product}?customer_email=${encodeURIComponent(formData.email)}&return_url=${returnUrl}&metadata_type=conference&metadata_conf_id=${encodeURIComponent(SV_CONFIG.confId)}`;
+    let checkoutUrl = `https://checkout.dodopayments.com/buy/${product}?customer_email=${encodeURIComponent(formData.email)}&redirect_url=${returnUrl}&return_url=${returnUrl}&metadata_type=conference&metadata_conf_id=${encodeURIComponent(SV_CONFIG.confId)}`;
     
-    // Auto-apply GOLD15 discount if member is verified
-    if (svGoldApplied) {
+    // Only apply the GOLD15 discount code via URL parameter if we are using the FALLBACK method 
+    // (meaning Gold was selected but the dedicated Gold product ID was null)
+    if (svGoldApplied && !(isINR ? DODO_PRODUCTS_GOLD_INR : DODO_PRODUCTS_GOLD_USD)[selectedTier.id]) {
       checkoutUrl += `&discount_code=GOLD15&metadata_gold_bundle=true`;
+    } else if (svGoldApplied) {
+      // If we ARE using the dedicated Gold product ID, just add the metadata flag so backend provisions gold
+      checkoutUrl += `&metadata_gold_bundle=true`;
     }
 
     location.href = checkoutUrl;
