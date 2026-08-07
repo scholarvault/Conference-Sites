@@ -96,6 +96,8 @@ function tplRegistration(d: Record<string, string>) {
     faculty:   "Faculty / Postdoc",
     presenter: "Presenter",
     listener:  "Listener",
+    coauthor:  "Co-Author",
+    industry:  "Professional Delegate (Industry)",
   };
   const tierLabel = tierMap[d.tier] || d.tier;
   const goldBlock = d.sv_gold === "true"
