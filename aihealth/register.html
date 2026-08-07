@@ -21,7 +21,206 @@
   <link rel="stylesheet" href="css/style.css" />
   <style>
     .reg-layout { display: grid; grid-template-columns: 1fr 380px; gap: 3rem; align-items: start; }
-    .reg-sidebar { position: sticky; top: calc(var(--navbar-h) + 2rem); }
+    .reg-sidebar { position: sticky; top: calc(var(--navbar-h, 80px) + 20px); z-index: 10; align-self: start; height: max-content; }
+    
+    /* Card Selection Micro-Animation & Checkmark */
+    @keyframes cardSelectPop {
+      0% { transform: scale(0.97); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    .tier-card.selected {
+      animation: cardSelectPop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .tier-card .selected-check {
+      display: none;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #10b981;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.4);
+    }
+    .tier-card.selected .selected-check {
+      display: flex;
+    }
+
+    /* Pulse CTA Button Animation */
+    @keyframes pulseCta {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 14px rgba(0, 102, 255, 0.3); }
+      50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(0, 212, 255, 0.6); }
+    }
+    .btn-primary.pulse-cta {
+      animation: pulseCta 1.5s infinite;
+    }
+
+    /* Floating Guidance Toast */
+    .selection-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid #10b981;
+      box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25);
+      border-radius: 100px;
+      padding: 8px 12px 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      z-index: 9999;
+      color: #fff;
+      font-size: 13px;
+      animation: slideUpToast 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes slideUpToast {
+      from { transform: translate(-50%, 40px); opacity: 0; }
+      to { transform: translate(-50%, 0); opacity: 1; }
+    }
+    .toast-check {
+      background: #10b981;
+      color: #000;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+    .toast-btn {
+      background: linear-gradient(135deg, #0066ff, #00D1FF);
+      border: none;
+      color: #fff;
+      font-weight: 700;
+      padding: 7px 16px;
+      border-radius: 100px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: transform 0.2s;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .toast-btn:hover { transform: scale(1.04); }
+
+    /* Mobile Bottom Summary Bar & Expandable Drawer */
+    .mobile-bottom-bar {
+      display: none;
+    }
+    .mobile-bar-details-link {
+      font-size: 11px;
+      color: var(--cyan);
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+    .mobile-drawer-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 9998;
+    }
+    .mobile-drawer-overlay.open { display: block; }
+    .mobile-drawer {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      background: #ffffff;
+      color: #1f2937;
+      border-top: 1.5px solid rgba(0, 0, 0, 0.1);
+      border-radius: 20px 20px 0 0;
+      padding: 1.5rem 1.25rem 2rem;
+      z-index: 9999;
+      box-shadow: 0 -10px 40px rgba(0,0,0,0.25);
+      transform: translateY(100%);
+      transition: transform 0.3s cubic-bezier(0.32,0.72,0,1);
+    }
+    .mobile-drawer.open {
+      transform: translateY(0);
+    }
+    .mobile-drawer-handle {
+      width: 36px; height: 4px; border-radius: 2px;
+      background: rgba(0,0,0,0.15); margin: 0 auto 1.25rem;
+    }
+
+    @media (max-width: 900px) {
+      body { padding-bottom: 74px; }
+      .selection-toast { display: none !important; }
+      .mobile-bottom-bar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 64px;
+        background: rgba(11, 19, 41, 0.96);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(0, 212, 255, 0.25);
+        padding: 0 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 9997;
+        box-shadow: 0 -4px 25px rgba(0,0,0,0.6);
+      }
+      .mobile-bar-info { display: flex; flex-direction: column; justify-content: center; cursor: pointer; }
+      .mobile-bar-tier { font-size: 12px; color: #ffffff !important; font-weight: 700; max-width: 190px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0.95; margin-bottom: 2px; }
+      .mobile-bar-price { font-size: 17px; color: var(--cyan); font-weight: 900; line-height: 1.2; }
+      .mobile-bar-btn {
+        background: linear-gradient(135deg, #0066ff, #00D1FF);
+        color: #fff;
+        border: none;
+        padding: 9px 18px;
+        border-radius: 100px;
+        font-weight: 800;
+        font-size: 13px;
+        cursor: pointer;
+        box-shadow: 0 2px 10px rgba(0, 102, 255, 0.4);
+        transition: transform 0.15s;
+      }
+      .mobile-bar-btn:active { transform: scale(0.96); }
+    }
+    
+    /* Premium Gold Toggle Styling */
+    .premium-gold-box {
+      background: var(--glass);
+      border: 1px solid rgba(255,193,7,0.3);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      transition: var(--transition);
+      position: relative;
+    }
+    .premium-gold-box.disabled { opacity: 0.5; pointer-events: none; }
+    .premium-gold-box:not(.disabled):hover { border-color: var(--amber); }
+    .premium-gold-box.added {
+      background: rgba(239, 68, 68, 0.05);
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+    .gold-toggle-header {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #ffc107;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
     .reg-progress { display: flex; align-items: center; gap: 0; margin-bottom: 2.5rem; }
     .reg-step {
       display: flex; align-items: center; justify-content: center;
@@ -338,7 +537,9 @@
           <!-- 4 TIERS -->
           <div class="tier-grid" id="tierGrid">
 
-            <div class="tier-card" data-tier="student" data-inr="3499" data-usd="159" data-eb-inr="2496" data-eb-usd="129" onclick="selectTier(this)">
+            <div class="tier-card popular" data-tier="student" data-inr="3499" data-usd="159" data-eb-inr="2496" data-eb-usd="129" onclick="selectTier(this)">
+              <div class="selected-check">✓</div>
+              <div class="tier-badge">Most Popular</div>
               <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Student / Scholar</div>
               <div class="price-inr">
                 <div class="tier-price">₹3,499</div>
@@ -356,8 +557,8 @@
               </ul>
             </div>
 
-            <div class="tier-card popular" data-tier="faculty" data-inr="6499" data-usd="249" data-eb-inr="4999" data-eb-usd="199" onclick="selectTier(this)">
-              <div class="tier-badge">Most Popular</div>
+            <div class="tier-card" data-tier="faculty" data-inr="6499" data-usd="249" data-eb-inr="4999" data-eb-usd="199" onclick="selectTier(this)">
+              <div class="selected-check">✓</div>
               <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v11m0 0H5m4 0h4m-4 0v7m0-7a2 2 0 0 0 2-2V3M5 7H3m2 0v10a2 2 0 0 0 2 2h4"/><circle cx="17" cy="17" r="3"/><path d="m21 21-1.9-1.9"/></svg>Faculty / Researcher</div>
               <div class="price-inr">
                 <div class="tier-price">₹6,499</div>
@@ -377,6 +578,7 @@
             </div>
 
             <div class="tier-card" data-tier="listener" data-inr="2499" data-usd="149" data-eb-inr="1999" data-eb-usd="99" onclick="selectTier(this)">
+              <div class="selected-check">✓</div>
               <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>Listener</div>
               <div class="price-inr">
                 <div class="tier-price">₹2,499</div>
@@ -395,6 +597,7 @@
             </div>
 
             <div class="tier-card" data-tier="coauthor" data-inr="2999" data-usd="99" data-eb-inr="2499" data-eb-usd="79" onclick="selectTier(this)">
+              <div class="selected-check">✓</div>
               <div class="tier-name"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--cyan);vertical-align:-3px;margin-right:6px;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><polyline points="17 11 19 13 23 9"/></svg>Co-Author</div>
               <div class="price-inr">
                 <div class="tier-price">₹2,999</div>
@@ -414,6 +617,7 @@
 
             <!-- New Industry Tier -->
             <div class="tier-card" data-tier="industry" data-inr="14999" data-usd="499" data-eb-inr="9999" data-eb-usd="399" onclick="selectTier(this)" style="grid-column: 1 / -1;">
+              <div class="selected-check">✓</div>
               <div class="tier-badge" style="background: linear-gradient(135deg, #0066ff, #00D1FF); color: #fff;">Professional Delegate</div>
               <div class="tier-name">Industry Professional</div>
               <div class="price-inr">
@@ -434,66 +638,26 @@
 
           </div><!-- /tier-grid -->
 
-          <!-- ─── ScholarVault GOLD ADDON ─── -->
-          <div class="sv-gold-card" id="svGoldCard">
-            <div class="sv-gold-badge-row">
-              <div class="sv-gold-hex">
-                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 8px rgba(0,209,255,0.6));">
-                  <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#F4CE14" stroke="#F4CE14" stroke-width="0.5"/>
-                  <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+          <!-- ─── ScholarVault GOLD — Compact Verify Section ─── -->
+          <div id="svGoldCard" style="margin-top:1.5rem; background:rgba(255,193,7,0.04); border:1px solid rgba(255,193,7,0.15); border-radius:var(--radius-lg); padding:1rem 1.25rem;">
+            <div style="display:flex;align-items:center;justify-content:space-between;cursor:pointer;" onclick="document.getElementById('goldVerifyBody').style.display = document.getElementById('goldVerifyBody').style.display === 'none' ? 'block' : 'none';">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <span style="font-size:1.2rem;">⬡</span>
+                <span style="font-size:13px;font-weight:700;color:rgba(255,193,7,0.9);">Already a ScholarVault Gold member?</span>
               </div>
-              <div>
-                <div class="sv-gold-title">ScholarVault Gold — ₹399/mo</div>
-                <div class="sv-gold-subtitle">You're spending ₹3,000–₹9,000 here. Gold pays for itself in the first 15 minutes.</div>
+              <span style="font-size:11px;color:var(--white-40);">Click to verify ▾</span>
+            </div>
+            <div id="goldVerifyBody" style="display:none; margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,193,7,0.1);">
+              <div class="sv-gold-toggle">
+                <input type="text" id="svGoldInput" aria-label="SV Gold Member ID" placeholder="SCHOLAR-XXXXXXXX or SV-XXXX" />
+                <button onclick="applySVGold()">Verify &amp; Apply</button>
               </div>
-            </div>
-
-            <div class="sv-gold-grid">
-              <!-- At this conference -->
-              <div style="background:rgba(0,102,255,0.06);border:1px solid rgba(0,209,255,0.15);border-radius:10px;padding:14px;">
-                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(0,209,255,0.7);margin-bottom:10px;">At this conference</div>
-                <div class="sv-gold-perk">15% off your registration — saves ₹375 to ₹1,499 instantly</div>
-                <div class="sv-gold-perk">Certificate says "ScholarVault Gold Delegate" — a career credential</div>
-                <div class="sv-gold-perk">Priority 2hr support lane</div>
-              </div>
-              <!-- Beyond this conference -->
-              <div style="background:rgba(0,102,255,0.06);border:1px solid rgba(0,209,255,0.15);border-radius:10px;padding:14px;">
-                <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(0,209,255,0.7);margin-bottom:10px;">Beyond this conference</div>
-                <div class="sv-gold-perk">Verify unlimited conferences — never lose ₹8,000–₹50,000 to a fake one</div>
-                <div class="sv-gold-perk">PDF Forensic Reports accepted by HODs &amp; NAAC committees</div>
-                <div class="sv-gold-perk">CFP deadline alerts — never miss a submission window</div>
-                <div class="sv-gold-perk">48hr early threat alerts on risky organisers</div>
-              </div>
-            </div>
-
-            <div style="background:rgba(0,0,0,0.3);border-left:3px solid rgba(0,209,255,0.4);border-radius:4px;padding:10px 14px;margin-bottom:1rem;font-size:13px;color:rgba(255,255,255,0.75);font-style:italic;">
-              One fake conference costs you ₹10,000+. Gold costs ₹399.
-            </div>
-
-            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,255,255,0.4);margin-bottom:8px;">Already a Gold member? Enter your ID below</div>
-            <div class="sv-gold-toggle">
-              <input type="text" id="svGoldInput" aria-label="SV Gold Member ID" placeholder="Enter your SV Gold Member ID (e.g. SCHOLAR-AB12CD)" />
-              <button onclick="applySVGold()">Verify &amp; Apply</button>
-            </div>
-            <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
-            <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(0,209,255,0.15);">
-              <button onclick="openGoldModal(event)" style="
-                width: 100%; padding: 14px 20px;
-                background: linear-gradient(135deg, #0066ff, #00D1FF);
-                color: #ffffff; border: none; border-radius: var(--radius-sm);
-                font-size: 15px; font-weight: 800; cursor: pointer;
-                letter-spacing: 0.02em; transition: var(--transition);
-              " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(0,102,255,0.4)';"
-                onmouseout="this.style.transform='';this.style.boxShadow='';">
-                ⬡ Not a member? Get Gold — ₹399/mo &amp; save 15% →
-              </button>
-              <p style="font-size:11px;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;">Your Member ID arrives by email within seconds of payment.</p>
+              <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
             </div>
           </div><!-- /sv-gold-card -->
 
           <div id="tierError" style="display:none;color:var(--red);font-size:13px;margin-top:1.5rem;">⚠️ Please select a registration category to continue.</div>
-          <button class="btn-primary" style="margin-top:1.5rem;" onclick="nextStep(1)">Continue to Your Details →</button>
+          <button id="step1ContinueBtn" class="btn-primary" style="margin-top:1.5rem;" onclick="nextStep(1)">Continue to Your Details →</button>
         </div>
 
         <!-- ─── STEP 2: DETAILS FORM ─── -->
@@ -502,8 +666,23 @@
           <p style="color:var(--white-70);font-size:14px;margin-bottom:2rem;">This information will appear on your certificate and registration receipt.</p>
           <form id="registrationForm">
             <div class="form-row">
+              <div class="form-group" style="flex:0 0 120px;">
+                <label>Title <span class="req">*</span></label>
+                <select name="title" required>
+                  <option value="">Select</option>
+                  <option>Dr.</option>
+                  <option>Prof.</option>
+                  <option>Mr.</option>
+                  <option>Ms.</option>
+                  <option>Mrs.</option>
+                </select>
+              </div>
               <div class="form-group"><label>First Name <span class="req">*</span></label><input type="text" name="first_name" required placeholder="Aisha" /></div>
               <div class="form-group"><label>Last Name <span class="req">*</span></label><input type="text" name="last_name" required placeholder="Sharma" /></div>
+            </div>
+            <div class="form-group">
+              <label>Name for Certificate <small style="color:var(--white-40);font-weight:400;">(optional — leave blank to use your first + last name)</small></label>
+              <input type="text" name="certificate_name" placeholder="As it should appear on your certificate" />
             </div>
             <div class="form-group">
               <label>Email Address <span class="req">*</span></label>
@@ -553,6 +732,19 @@
               </div>
               <div class="form-group"><label>Department</label><input type="text" name="department" placeholder="Computer Science / Cardiology" /></div>
             </div>
+
+            <!-- Co-Author specific fields — shown only when coauthor category is selected -->
+            <div id="coauthor-fields" style="display:none; margin-top:0.5rem;">
+              <div style="background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15);border-radius:12px;padding:20px;margin-bottom:1rem;">
+                <h4 style="margin:0 0 12px;font-size:13px;font-weight:800;color:#00d4ff;text-transform:uppercase;letter-spacing:0.08em;">Co-Author Details</h4>
+                <div class="form-row">
+                  <div class="form-group"><label>Main Author Name <span class="req">*</span></label><input type="text" name="main_author_name" placeholder="Dr. Jignesh V. Smart" /></div>
+                  <div class="form-group"><label>Main Author Email <span class="req">*</span></label><input type="email" name="main_author_email" placeholder="main.author@university.edu" /></div>
+                </div>
+                <div class="form-group"><label>Paper Title <small style="color:var(--white-40);font-weight:400;">(optional)</small></label><input type="text" name="paper_title" placeholder="Title of the paper you are co-authoring" /></div>
+              </div>
+            </div>
+
             <div class="form-group">
               <label>How did you hear about ICAHCR 2026?</label>
               <select name="source">
@@ -599,7 +791,7 @@
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span style="color:var(--white-70);">Category</span><span id="pay-tier" style="font-weight:600;">—</span></div>
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span style="color:var(--white-70);">Delegate</span><span id="pay-name" style="font-weight:600;">—</span></div>
             <div style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span style="color:var(--white-70);">Pricing</span><span id="pay-pricing-tier" style="color:var(--amber);font-weight:600;">—</span></div>
-            <div id="pay-gold-row" style="display:none;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span style="color:rgba(255,193,7,0.8);">⬡ SV Gold Discount</span><span id="pay-gold-saving" style="color:var(--amber);font-weight:700;">—</span></div>
+            <div id="pay-gold-row" style="display:none;justify-content:space-between;margin-bottom:8px;font-size:14px;"><span style="color:rgba(255,193,7,0.8);"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> SV Gold Discount</span><span id="pay-gold-saving" style="color:var(--amber);font-weight:700;">—</span></div>
             <div style="height:1px;background:var(--glass-border);margin:12px 0;"></div>
             <div style="display:flex;justify-content:space-between;font-size:1.3rem;font-weight:900;"><span>Total</span><span id="pay-amount" style="color:var(--cyan);">—</span></div>
           </div>
@@ -738,7 +930,27 @@
           <div style="height:1px;background:var(--glass-border);margin:12px 0;"></div>
           <div class="order-row"><span class="label">Conference Fee</span><span class="value" id="sumFee">—</span></div>
           <div class="order-row" id="sumEBRow" style="display:none;"><span class="label">Early Bird Saving</span><span class="value" style="color:var(--green);" id="sumDiscount">—</span></div>
-          <div class="order-row" id="sumGoldRow" style="display:none;"><span class="label" style="color:var(--amber);">⬡ SV Gold (15% off)</span><span class="value" style="color:var(--amber);" id="sumGoldDisc">—</span></div>
+          <div class="order-row" id="sumGoldMemRow" style="display:none;"><span class="label" style="color:var(--white-70);">ScholarVault Gold Membership</span><span class="value" id="sumGoldMem">—</span></div>
+          <div class="order-row" id="sumGoldRow" style="display:none;"><span class="label" style="color:var(--white-70);">Registration Discount (15%)</span><span class="value" style="color:var(--red);font-weight:700;" id="sumGoldDisc">—</span></div>
+
+          <!-- Premium Gold Upgrade Toggle -->
+          <div id="goldToggleSection" class="premium-gold-box disabled">
+            <div id="goldToggleHeader" class="gold-toggle-header" style="color: #d48806;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+              UPGRADE TO GOLD &amp; SAVE 15% DISCOUNT ON THIS REGISTRATION
+            </div>
+            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin:0;">
+              <input type="checkbox" id="goldToggleCheckbox" disabled onchange="toggleGoldUpgrade(this.checked)" style="width:18px;height:18px;accent-color:#ffc107;cursor:pointer;margin-top:2px;" />
+              <div>
+                <div style="font-size:13px;font-weight:700;color:var(--white);line-height:1.4;" id="goldToggleTitle">ScholarVault Gold Membership</div>
+                <div style="font-size:11px;color:var(--white-70);margin-top:2px;line-height:1.4;" id="goldToggleDesc">Includes 15% registration discount and verified delegate certificate. Adds ₹399.</div>
+              </div>
+            </label>
+            <div id="goldToggleSaving" style="display:none; margin-top:10px; padding-top:10px; border-top:1px dashed rgba(239,68,68,0.2); font-size:12px; font-weight:700; text-align:center;">
+              <span id="goldNetSaving"></span>
+            </div>
+          </div>
+
           <div class="order-row total"><span>Total</span><span class="value" id="sumTotal">—</span></div>
           <p style="font-size:11px;color:var(--white-40);margin-top:1rem;line-height:1.6;">No hidden charges. Clear refund policy. *Plus 18% GST (calculated securely at checkout via Dodo Payments).</p>
         </div>
@@ -850,7 +1062,7 @@ async function applySVGold() {
 
   if (!id) {
     msg.style.color = 'var(--white-40)';
-    msg.textContent = 'Enter your SV Member ID (e.g. SCHOLAR-FDF229D6 or SV-3A2G)';
+    msg.textContent = 'Enter your SV Member ID (e.g. SCHOLAR-FDF229D6 or SV-XXXX)';
     return;
   }
 
@@ -883,6 +1095,11 @@ async function applySVGold() {
       msg.textContent = '✦ ScholarVault Gold verified! 15% discount + Gold Delegate benefits applied.';
       updateSidebar();
       trackEvent('sv_gold_applied', { id });
+      // Sync sidebar toggle — check it and hide the toggle since user is already verified
+      const goldCheckbox = document.getElementById('goldToggleCheckbox');
+      if (goldCheckbox) { goldCheckbox.checked = true; }
+      const goldToggleSection = document.getElementById('goldToggleSection');
+      if (goldToggleSection) { goldToggleSection.style.display = 'none'; }
       // Update sidebar badge to Gold
       document.getElementById('sidebarBadgeLabel').textContent = 'ScholarVault GOLD';
       document.getElementById('sidebarPillRight').style.borderTopColor = 'var(--amber)';
@@ -908,6 +1125,58 @@ async function applySVGold() {
   }
 }
 
+/* ─── Gold Sidebar Toggle ─── */
+function toggleGoldUpgrade(checked) {
+  svGoldApplied = checked;
+  const savingSection = document.getElementById('goldToggleSaving');
+
+  if (checked && selectedTier) {
+    const isINR = currentCurrency === 'INR';
+    const sym = isINR ? '₹' : '$';
+    const price = isINR ? selectedTier.priceINR : selectedTier.priceUSD;
+    const goldDiscount = Math.round(price * SV_GOLD_DISC / 100);
+    const goldMembershipCost = isINR ? 399 : 5;
+
+    // Change toggle box to "Added" state
+    document.getElementById('goldToggleSection').classList.add('added');
+    document.getElementById('goldToggleHeader').style.color = '#ef4444';
+    document.getElementById('goldToggleHeader').innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> PREMIUM ADDED';
+    document.getElementById('goldToggleCheckbox').style.accentColor = '#ef4444';
+
+    savingSection.style.display = 'block';
+    document.getElementById('goldNetSaving').innerHTML = `
+      Cost of Gold: <strong style="color:var(--white-70);">+${sym}${goldMembershipCost}</strong> &nbsp;|&nbsp; 
+      Discount: <strong style="color:var(--red);">-${sym}${goldDiscount.toLocaleString()}</strong>
+    `;
+
+    // Sync sidebar badge
+    document.getElementById('sidebarBadgeLabel').textContent = 'ScholarVault GOLD';
+    document.getElementById('sidebarScore').innerHTML = '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Gold';
+    document.getElementById('sidebarScore').style.background = 'linear-gradient(135deg,#ffc107,#ff8f00)';
+    document.getElementById('sidebarScore').style.webkitBackgroundClip = 'text';
+    document.getElementById('sidebarScore').style.webkitTextFillColor = 'transparent';
+    document.getElementById('sidebarBadgeDesc').textContent = 'Gold Delegate. 15% discount + Gold certificate applied.';
+  } else {
+    savingSection.style.display = 'none';
+    
+    // Reset toggle box state
+    document.getElementById('goldToggleSection').classList.remove('added');
+    document.getElementById('goldToggleHeader').style.color = '#d48806';
+    document.getElementById('goldToggleHeader').innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> UPGRADE TO GOLD &amp; SAVE 15% DISCOUNT ON THIS REGISTRATION';
+    document.getElementById('goldToggleCheckbox').style.accentColor = '#ffc107';
+
+    // Reset sidebar badge
+    document.getElementById('sidebarBadgeLabel').textContent = 'ScholarVault Verified';
+    document.getElementById('sidebarScore').innerHTML = '92<sub style="font-size:10px;color:rgba(255,255,255,0.4);">/100</sub>';
+    document.getElementById('sidebarScore').style.background = '';
+    document.getElementById('sidebarScore').style.webkitBackgroundClip = '';
+    document.getElementById('sidebarScore').style.webkitTextFillColor = '';
+    document.getElementById('sidebarBadgeDesc').textContent = 'Verified non-predatory conference. Transparent fees, real peer review, genuine organizing committee.';
+  }
+  updateSidebar();
+  trackEvent('gold_toggle', { checked });
+}
+
 /* ─── Tier Selection ─── */
 function selectTier(el) {
   document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
@@ -924,12 +1193,35 @@ function selectTier(el) {
   updateSidebar();
   trackEvent('tier_selected', { tier: selectedTier.id });
 
-  setTimeout(() => {
-    const continueBtn = document.querySelector('button[onclick="nextStep(1)"]');
-    if (continueBtn) {
-      continueBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
-  }, 100);
+  // Show/hide co-author fields based on category
+  const coauthorFields = document.getElementById('coauthor-fields');
+  if (coauthorFields) {
+    const isCoauthor = selectedTier.id === 'coauthor';
+    coauthorFields.style.display = isCoauthor ? 'block' : 'none';
+    // Toggle required attribute on co-author inputs
+    coauthorFields.querySelectorAll('input[name="main_author_name"], input[name="main_author_email"]').forEach(inp => {
+      if (isCoauthor) inp.setAttribute('required', '');
+      else inp.removeAttribute('required');
+    });
+  }
+
+  // Enable the Gold toggle now that a tier is selected
+  const goldToggleSection = document.getElementById('goldToggleSection');
+  const goldToggleCheckbox = document.getElementById('goldToggleCheckbox');
+  if (goldToggleSection && goldToggleCheckbox) {
+    goldToggleSection.classList.remove('disabled');
+    goldToggleCheckbox.disabled = false;
+  }
+
+  // Update Step 1 Button Pulsing
+  const step1Btn = document.getElementById('step1ContinueBtn');
+  if (step1Btn) step1Btn.classList.add('pulse-cta');
+
+  // Show Floating Guidance Toast
+  showSelectionToast(selectedTier.name);
+
+  // Show / Update Mobile Bottom Bar
+  updateMobileBar();
 }
 
 /* ─── Sidebar + Payment summary ─── */
@@ -939,12 +1231,13 @@ function updateSidebar() {
   const sym   = isINR ? '₹' : '$';
   const regular = isINR ? selectedTier.regularINR : selectedTier.regularUSD;
   let price     = isINR ? selectedTier.priceINR   : selectedTier.priceUSD;
+  const goldMembershipCost = isINR ? 399 : 5;
 
   // Apply SV Gold on top of early bird
   let goldSaving = 0;
   if (svGoldApplied) {
     goldSaving = Math.round(price * SV_GOLD_DISC / 100);
-    price = price - goldSaving;
+    price = (price - goldSaving) + goldMembershipCost;
   }
 
   // Sidebar
@@ -953,23 +1246,26 @@ function updateSidebar() {
   document.getElementById('sumTotal').textContent    = `${sym}${price.toLocaleString()}`;
 
   if (isEarlyBird) {
-    const ebSaving = regular - (isINR ? selectedTier.priceINR : selectedTier.priceUSD) - (svGoldApplied ? 0 : 0);
     const baseSaving = regular - (isINR ? selectedTier.priceINR : selectedTier.priceUSD);
     document.getElementById('sumEBRow').style.display = 'flex';
     document.getElementById('sumDiscount').textContent = `-${sym}${baseSaving.toLocaleString()} (EB)`;
   }
 
   if (svGoldApplied) {
+    document.getElementById('sumGoldMemRow').style.display = 'flex';
+    document.getElementById('sumGoldMem').textContent = `${sym}${goldMembershipCost}`;
+    
     document.getElementById('sumGoldRow').style.display = 'flex';
     document.getElementById('sumGoldDisc').textContent = `-${sym}${goldSaving.toLocaleString()}`;
   } else {
+    document.getElementById('sumGoldMemRow').style.display = 'none';
     document.getElementById('sumGoldRow').style.display = 'none';
   }
 
   // Step 3 summary
   document.getElementById('pay-tier').textContent = selectedTier.name;
   const pricingLabel = svGoldApplied
-    ? (isEarlyBird ? '⚡ Early Bird + ⬡ Gold (15%)' : '⬡ SV Gold (15% off)')
+    ? (isEarlyBird ? '⚡ Early Bird + Gold (15%)' : 'SV Gold (15% off)')
     : (isEarlyBird ? '⚡ Early Bird' : 'Standard');
   document.getElementById('pay-pricing-tier').textContent = pricingLabel;
   document.getElementById('pay-amount').textContent = `${sym}${price.toLocaleString()}`;
@@ -978,25 +1274,195 @@ function updateSidebar() {
     document.getElementById('pay-gold-row').style.display = 'flex';
     document.getElementById('pay-gold-saving').textContent = `-${sym}${goldSaving.toLocaleString()}`;
     // Make badge gold
-    document.getElementById('payBadgeTitle').textContent = '⬡ ScholarVault Gold Delegate';
+    document.getElementById('payBadgeTitle').innerHTML = '<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:4px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> ScholarVault Gold Delegate';
     document.getElementById('payBadgeTitle').style.background = 'linear-gradient(135deg,#ffc107,#ff8f00)';
     document.getElementById('payBadgeTitle').style.webkitBackgroundClip = 'text';
     document.getElementById('payBadgeTitle').style.webkitTextFillColor = 'transparent';
     const hexIcon = document.getElementById('payHexIcon');
-    hexIcon.style.filter = 'drop-shadow(0 0 10px rgba(255,193,7,0.8))';
+    if (hexIcon) hexIcon.style.filter = 'drop-shadow(0 0 10px rgba(255,193,7,0.8))';
     const shieldPath = hexIcon.querySelector('path');
     if (shieldPath) { shieldPath.setAttribute('fill', '#ffc107'); shieldPath.setAttribute('stroke', '#ffc107'); }
+  } else {
+    document.getElementById('pay-gold-row').style.display = 'none';
+    document.getElementById('payBadgeTitle').textContent = 'ScholarVault Verified Delegate';
+    document.getElementById('payBadgeTitle').style.background = '';
+    document.getElementById('payBadgeTitle').style.webkitBackgroundClip = '';
+    document.getElementById('payBadgeTitle').style.webkitTextFillColor = '';
+    const hexIcon = document.getElementById('payHexIcon');
+    if (hexIcon) hexIcon.style.filter = '';
+    const shieldPath = hexIcon ? hexIcon.querySelector('path') : null;
+    if (shieldPath) { shieldPath.setAttribute('fill', '#fff'); shieldPath.setAttribute('stroke', '#fff'); }
   }
+  if (typeof updateMobileBar === 'function') updateMobileBar();
+}
+
+/* ─── Floating Toast & Mobile Bottom Bar ─── */
+let currentStepNum = 1;
+
+function showSelectionToast(tierName) {
+  let toast = document.getElementById('selectionToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'selectionToast';
+    toast.className = 'selection-toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `
+    <div class="toast-info">
+      <span class="toast-check">✓</span>
+      <span class="toast-text">Selected: <strong>${tierName}</strong></span>
+    </div>
+    <button class="toast-btn" onclick="nextStep(1)">Continue ↓</button>
+  `;
+  toast.style.display = 'flex';
+}
+
+function hideSelectionToast() {
+  const toast = document.getElementById('selectionToast');
+  if (toast) toast.style.display = 'none';
+}
+
+function updateMobileBar() {
+  if (!selectedTier) return;
+  let bar = document.getElementById('mobileBottomSummary');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'mobileBottomSummary';
+    bar.className = 'mobile-bottom-bar';
+    document.body.appendChild(bar);
+  }
+  const isINR = currentCurrency === 'INR';
+  const sym = isINR ? '₹' : '$';
+  let price = isINR ? selectedTier.priceINR : selectedTier.priceUSD;
+  if (svGoldApplied) {
+    const goldSaving = Math.round(price * SV_GOLD_DISC / 100);
+    price = (price - goldSaving) + (isINR ? 399 : 5);
+  }
+  
+  bar.innerHTML = `
+    <div class="mobile-bar-info" onclick="toggleMobileDrawer()">
+      <span class="mobile-bar-tier">Selected: <strong>${selectedTier.name}</strong></span>
+      <div style="display:flex;align-items:center;gap:6px;">
+        <span class="mobile-bar-price">${sym}${price.toLocaleString()}</span>
+        <span class="mobile-bar-details-link">Details ▴</span>
+      </div>
+    </div>
+    <button class="mobile-bar-btn" onclick="mobileContinue()">Continue →</button>
+  `;
+  
+  // Display only on step 1 & 2
+  bar.style.display = (currentStepNum < 3) ? 'flex' : 'none';
+  
+  // Sync drawer breakdown if open
+  updateDrawerBreakdown();
+}
+
+function toggleMobileDrawer() {
+  let overlay = document.getElementById('mobileDrawerOverlay');
+  let drawer = document.getElementById('mobileDrawer');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'mobileDrawerOverlay';
+    overlay.className = 'mobile-drawer-overlay';
+    overlay.onclick = toggleMobileDrawer;
+    document.body.appendChild(overlay);
+
+    drawer = document.createElement('div');
+    drawer.id = 'mobileDrawer';
+    drawer.className = 'mobile-drawer';
+    document.body.appendChild(drawer);
+  }
+
+  const isOpen = drawer.classList.contains('open');
+  if (isOpen) {
+    drawer.classList.remove('open');
+    overlay.classList.remove('open');
+  } else {
+    updateDrawerBreakdown();
+    drawer.classList.add('open');
+    overlay.classList.add('open');
+  }
+}
+
+function updateDrawerBreakdown() {
+  const drawer = document.getElementById('mobileDrawer');
+  if (!drawer || !selectedTier) return;
+  const isINR = currentCurrency === 'INR';
+  const sym = isINR ? '₹' : '$';
+  const regular = isINR ? selectedTier.regularINR : selectedTier.regularUSD;
+  let price = isINR ? selectedTier.priceINR : selectedTier.priceUSD;
+  const goldMembershipCost = isINR ? 399 : 5;
+  let goldSaving = 0;
+  if (svGoldApplied) {
+    goldSaving = Math.round(price * SV_GOLD_DISC / 100);
+    price = (price - goldSaving) + goldMembershipCost;
+  }
+  const ebSaving = regular - (isINR ? selectedTier.priceINR : selectedTier.priceUSD);
+
+  drawer.innerHTML = `
+    <div class="mobile-drawer-handle"></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+      <div style="font-size:16px;font-weight:800;color:#111827;">Order Details &amp; Gold Upgrade</div>
+      <button style="background:none;border:none;color:#6b7280;font-size:20px;cursor:pointer;padding:0 4px;" onclick="toggleMobileDrawer()">✕</button>
+    </div>
+    <div style="font-size:13px;color:#4b5563;margin-bottom:12px;">Category: <strong style="color:#111827;">${selectedTier.name}</strong></div>
+    <div style="height:1px;background:#e5e7eb;margin:10px 0;"></div>
+    <div class="order-row" style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span style="color:#4b5563;">Conference Fee</span><span style="color:#1f2937;font-weight:600;">${sym}${regular.toLocaleString()}</span></div>
+    ${isEarlyBird ? `<div class="order-row" style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span style="color:#4b5563;">Early Bird Saving</span><span style="color:#10b981; font-weight:700;">-${sym}${ebSaving.toLocaleString()} (EB)</span></div>` : ''}
+    ${svGoldApplied ? `
+      <div class="order-row" style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span style="color:#4b5563;">ScholarVault Gold Membership</span><span style="color:#1f2937;font-weight:600;">${sym}${goldMembershipCost}</span></div>
+      <div class="order-row" style="display:flex;justify-content:space-between;margin-bottom:8px;font-size:13px;"><span style="color:#4b5563;">Registration Discount (15%)</span><span style="color:#ef4444; font-weight:700;">-${sym}${goldSaving.toLocaleString()}</span></div>
+    ` : ''}
+    <div style="height:1px;background:#e5e7eb;margin:10px 0;"></div>
+    <div style="display:flex;justify-content:space-between;font-size:1.25rem;font-weight:900;margin-bottom:1.25rem;"><span style="color:#111827;">Total</span><span style="color:#0066ff;">${sym}${price.toLocaleString()}</span></div>
+
+    <!-- Gold Toggle Inside Drawer (Exact Desktop Styling) -->
+    <div style="background:${svGoldApplied ? 'rgba(239, 68, 68, 0.05)' : 'linear-gradient(135deg, rgba(255,193,7,0.05), rgba(255,143,0,0.05))'};border:1.5px solid ${svGoldApplied ? 'rgba(239, 68, 68, 0.4)' : 'rgba(255,193,7,0.4)'};border-radius:12px;padding:14px;margin-bottom:1.25rem;">
+      <div style="font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:${svGoldApplied ? '#ef4444' : '#d48806'};margin-bottom:8px;display:flex;align-items:center;gap:6px;">
+        ${svGoldApplied 
+          ? '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg> PREMIUM ADDED'
+          : '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg> UPGRADE TO GOLD &amp; SAVE 15% DISCOUNT ON THIS REGISTRATION'
+        }
+      </div>
+      <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;margin:0;">
+        <input type="checkbox" ${svGoldApplied ? 'checked' : ''} onchange="toggleGoldUpgrade(this.checked)" style="width:18px;height:18px;accent-color:${svGoldApplied ? '#ef4444' : '#ffc107'};cursor:pointer;margin-top:2px;" />
+        <div>
+          <div style="font-size:13px;font-weight:700;color:#1f2937;line-height:1.4;">ScholarVault Gold Membership</div>
+          <div style="font-size:11px;color:#4b5563;margin-top:2px;line-height:1.4;">Includes 15% registration discount and verified delegate certificate. Adds ₹399.</div>
+        </div>
+      </label>
+    </div>
+    
+    <button class="mobile-bar-btn" style="width:100%;padding:12px;font-size:14px;border-radius:100px;" onclick="toggleMobileDrawer(); mobileContinue();">Continue →</button>
+  `;
+}
+
+function mobileContinue() {
+  if (currentStepNum === 1) nextStep(1);
+  else if (currentStepNum === 2) nextStep(2);
+  else if (currentStepNum === 3) initiatePayment();
 }
 
 /* ─── Step navigation ─── */
 function goToStep(n) {
+  currentStepNum = n;
   document.querySelectorAll('.step-panel').forEach((p, i) => p.classList.toggle('active', i + 1 === n));
   document.querySelectorAll('.reg-step').forEach((s, i) => {
     s.classList.toggle('active', i + 1 === n);
-    s.classList.toggle('done',   i + 1 < n);
+    const isDone = i + 1 < n;
+    s.classList.toggle('done', isDone);
+    if (isDone) s.innerHTML = '✓';
+    else s.innerHTML = (i + 1).toString();
   });
   document.querySelectorAll('.reg-step-line').forEach((l, i) => l.classList.toggle('done', i + 1 < n));
+
+  if (n > 1) hideSelectionToast();
+
+  // Hide mobile bottom bar on Step 3 (Payment) or Step 4 (Confirmed) to prevent UI overlap
+  const mobileBar = document.getElementById('mobileBottomSummary');
+  if (mobileBar) {
+    mobileBar.style.display = (n >= 3 || !selectedTier) ? 'none' : 'flex';
+  }
 
   setTimeout(() => {
     const targetPanel = document.getElementById('step-' + n);
@@ -1018,6 +1484,10 @@ function nextStep(cur) {
     const fd = new FormData(form);
     formData = Object.fromEntries(fd.entries());
     formData.name = `${formData.first_name} ${formData.last_name}`;
+    // Use certificate_name if provided, otherwise use full name
+    if (!formData.certificate_name || !formData.certificate_name.trim()) {
+      formData.certificate_name = formData.name;
+    }
     document.getElementById('pay-name').textContent = formData.name;
     updateSidebar();
     goToStep(3); trackEvent('reg_step3');
@@ -1037,7 +1507,7 @@ async function initiatePayment() {
     let price = isINR ? selectedTier.priceINR : selectedTier.priceUSD;
     if (svGoldApplied) price = Math.round(price * (1 - SV_GOLD_DISC / 100));
 
-    await db.from('conf_registrations').insert({
+    const insertData = {
       conf_id: SV_CONFIG.confId,
       name: formData.name, email: formData.email,
       phone: formData.phone, institution: formData.institution,
@@ -1045,8 +1515,19 @@ async function initiatePayment() {
       category: selectedTier.id + (svGoldApplied ? '_gold' : ''),
       tier: isEarlyBird ? 'earlybird' : 'standard',
       amount: price, currency: currentCurrency,
-      country: formData.country, status: 'pending'
-    });
+      country: formData.country, status: 'pending',
+      title: formData.title || null,
+      certificate_name: formData.certificate_name || null,
+      department: formData.department || null,
+      source: formData.source || null,
+    };
+    // Add co-author fields if applicable
+    if (selectedTier.id === 'coauthor') {
+      insertData.main_author_name = formData.main_author_name || null;
+      insertData.main_author_email = formData.main_author_email || null;
+      insertData.paper_title = formData.paper_title || null;
+    }
+    await db.from('conf_registrations').insert(insertData);
 
     // Redirect to Dodo checkout — separate product IDs per tier per currency
     const DODO_PRODUCTS_INR = {
@@ -1067,11 +1548,11 @@ async function initiatePayment() {
     if (!product) { throw new Error('Unknown tier: ' + selectedTier.id); }
     const returnUrl = encodeURIComponent('https://aihealth.scholarvault.in/register?payment=success');
     
-    let checkoutUrl = `https://checkout.dodopayments.com/buy/${product}?customer_email=${encodeURIComponent(formData.email)}&return_url=${returnUrl}&metadata[type]=conference&metadata[conf_id]=${encodeURIComponent(SV_CONFIG.confId)}`;
+    let checkoutUrl = `https://checkout.dodopayments.com/buy/${product}?customer_email=${encodeURIComponent(formData.email)}&return_url=${returnUrl}&metadata_type=conference&metadata_conf_id=${encodeURIComponent(SV_CONFIG.confId)}`;
     
     // Auto-apply GOLD15 discount if member is verified
     if (svGoldApplied) {
-      checkoutUrl += `&discount_code=GOLD15`;
+      checkoutUrl += `&discount_code=GOLD15&metadata_gold_bundle=true`;
     }
 
     location.href = checkoutUrl;
@@ -1150,7 +1631,7 @@ document.getElementById('bankTransferForm').addEventListener('submit', async fun
     const receiptUrl = urlData?.publicUrl || '';
 
     // Insert registration with Pending Payment Verification status
-    const { error: insertError } = await db.from('conf_registrations').insert({
+    const bankInsertData = {
       conf_id: SV_CONFIG.confId,
       name: formData.name,
       email: formData.email,
@@ -1166,8 +1647,18 @@ document.getElementById('bankTransferForm').addEventListener('submit', async fun
       payment_method: 'bank_transfer',
       utr_number: utr,
       payment_date: date,
-      receipt_url: receiptUrl
-    });
+      receipt_url: receiptUrl,
+      title: formData.title || null,
+      certificate_name: formData.certificate_name || null,
+      department: formData.department || null,
+      source: formData.source || null,
+    };
+    if (selectedTier.id === 'coauthor') {
+      bankInsertData.main_author_name = formData.main_author_name || null;
+      bankInsertData.main_author_email = formData.main_author_email || null;
+      bankInsertData.paper_title = formData.paper_title || null;
+    }
+    const { error: insertError } = await db.from('conf_registrations').insert(bankInsertData);
 
     if (insertError) throw insertError;
 
@@ -1215,7 +1706,7 @@ if (urlParams.get('payment') === 'success') {
     <button class="gold-modal-close" onclick="closeGoldModal()" aria-label="Close">✕</button>
     <div class="gold-modal-handle"></div>
 
-    <div class="gold-modal-title">⬡ Get ScholarVault Gold</div>
+    <div class="gold-modal-title"><svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg> Get ScholarVault Gold</div>
     <div class="gold-modal-sub">Pay once. Your Member ID arrives by email instantly.<br/>Come back, enter it above, and your 15% discount applies.</div>
 
     <div class="gold-modal-perks">
