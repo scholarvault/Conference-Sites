@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agenda — ICAHCR 2026 | AI in Healthcare Conference</title>
-  <meta name="description" content="Tentative program and schedule for ICAHCR 2026." />
+  <meta name="description" content="Programme schedule for ICAHCR 2026 — International Conference on AI in Healthcare." />
   <link rel="stylesheet" href="css/style.css" />
   <link rel="icon" href="assets/icahcr-logo.png" />
   <meta name="robots" content="index, follow" />
@@ -69,6 +69,11 @@
     .session:nth-child(6) { animation-delay: 0.6s; }
     .session:nth-child(7) { animation-delay: 0.7s; }
     .session:nth-child(8) { animation-delay: 0.8s; }
+    .session:nth-child(9) { animation-delay: 0.9s; }
+    .session:nth-child(10) { animation-delay: 1.0s; }
+    .session:nth-child(11) { animation-delay: 1.1s; }
+    .session:nth-child(12) { animation-delay: 1.2s; }
+    .session:nth-child(13) { animation-delay: 1.3s; }
     
     /* Left time block */
     .time-block-box {
@@ -153,6 +158,9 @@
     }
     .session-badge.opening { background: var(--teal); }
     .session-badge.technical { background: var(--blue); }
+    .session-badge.invited { background: #7c3aed; }
+    .session-badge.featured { background: #b45309; }
+    .session-badge.spotlight { background: #059669; }
 
     .card-body {
         display: flex;
@@ -179,6 +187,7 @@
         flex-shrink: 0;
     }
     .icon-wrap.opening-icon { background: rgba(13, 148, 136, 0.1); color: var(--teal); }
+    .icon-wrap.spotlight-icon { background: rgba(5, 150, 105, 0.1); color: #059669; }
     .icon-wrap svg { width: 32px; height: 32px; }
 
     .speaker-details { flex: 1; }
@@ -193,6 +202,8 @@
         font-size: 0.9rem;
         margin-bottom: 10px;
     }
+    .speaker-role-highlight.invited-role { color: #7c3aed; }
+    .speaker-role-highlight.featured-role { color: #b45309; }
     .speaker-institution {
         font-size: 0.9rem;
         color: var(--white-70);
@@ -277,12 +288,12 @@
   <div class="container">
     <div class="section-tag" style="justify-content:center;">ICAHCR 2026</div>
     <h1 class="section-title">Programme <span class="grad">Overview</span></h1>
-    <p style="color:var(--white-70);max-width:560px;margin:0 auto 2rem;">26 August 2026 · Virtual (Live on Zoom)</p>
+    <p style="color:var(--white-70);max-width:560px;margin:0 auto 2rem;">22 August 2026 · Virtual (Live on Zoom)</p>
     
     <div class="timezone-badge" id="timezone-badge">
         <div class="line">
             <i data-lucide="globe" class="badge-icon"></i>
-            <span>Conference time: <strong>Indian Standard Time (IST)</strong></span>
+            <span>Conference time: <strong>Indian Standard Time (IST, UTC +5:30)</strong></span>
         </div>
         <div class="line">
             <i data-lucide="map-pin" class="badge-icon"></i>
@@ -294,11 +305,12 @@
 
 <section class="section section--dark agenda-schedule">
   <div class="container">
-    <h2 class="day-title">Day 1: August 26, 2026</h2>
+    <h2 class="day-title">Friday, August 22, 2026</h2>
     
     <!-- Sessions Container -->
     <div id="schedule-container">
         
+        <!-- 1. Inauguration & Welcome — 9:00 – 9:15 -->
         <div class="session" data-start="09:00" data-end="09:15">
             <div class="time-block-box">
                 <div class="time-text">9:00 AM – 9:15 AM</div>
@@ -309,25 +321,26 @@
                     <div class="pill pill-time"><i data-lucide="clock"></i> 9:00 AM – 9:15 AM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
-                <div class="session-badge opening">OPENING</div>
+                <div class="session-badge opening">INAUGURATION</div>
                 <div class="card-body">
                     <div class="icon-wrap opening-icon"><i data-lucide="mic"></i></div>
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Introduction by Moderator</h3>
-                        <p class="speaker-institution"><i data-lucide="info"></i> Welcome to ICAHCR 2026. Overview of the conference theme, objectives, and program schedule.</p>
+                        <h3 class="speaker-name-el">Inauguration & Welcome Address</h3>
+                        <p class="speaker-institution"><i data-lucide="info"></i> Welcome to ICAHCR 2026. Overview of the conference theme, objectives, and programme schedule.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="session" data-start="09:15" data-end="10:00" data-speaker-name="Dr. Obioma Obikeze">
+        <!-- 2. Keynote 1 — Dr. Obioma Obikeze — 9:15 – 9:50 -->
+        <div class="session" data-start="09:15" data-end="09:50" data-speaker-name="Dr. Obioma Obikeze">
             <div class="time-block-box">
-                <div class="time-text">9:15 AM – 10:00 AM</div>
+                <div class="time-text">9:15 AM – 9:50 AM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 9:15 AM – 10:00 AM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 9:15 AM – 9:50 AM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
                 <div class="session-badge">KEYNOTE SPEAKER</div>
@@ -336,7 +349,7 @@
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Dr. Obioma Obikeze</h3>
                         <p class="speaker-role-highlight">Keynote Speaker</p>
-                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">CEO & World Bank Scholar, Healthnomics HMO Plc, Nigeria</span></p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">CEO &amp; World Bank Scholar, Healthnomics HMO Plc, Nigeria</span></p>
                         <p class="topic">"How Institutional Verification Protects African Researchers: A Policy Framework"</p>
                         <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
@@ -344,35 +357,15 @@
             </div>
         </div>
 
-
-        <div class="session" data-start="10:45" data-end="11:00">
+        <!-- 3. Keynote 2 — Dr. C.R. Rene Robin — 9:50 – 10:25 -->
+        <div class="session" data-start="09:50" data-end="10:25" data-speaker-name="Dr. C.R. Rene Robin">
             <div class="time-block-box">
-                <div class="time-text">10:45 AM – 11:00 AM</div>
+                <div class="time-text">9:50 AM – 10:25 AM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 10:45 AM – 11:00 AM</div>
-                    <div class="pill pill-local local-time"></div>
-                </div>
-                <div class="card-body">
-                    <div class="icon-wrap"><i data-lucide="coffee"></i></div>
-                    <div class="speaker-details">
-                        <h3 class="speaker-name-el">Short Break</h3>
-                        <p class="speaker-institution">Participants will have a brief break to relax, refresh, and prepare for the upcoming sessions.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="session" data-start="11:00" data-end="11:45" data-speaker-name="Dr. C.R. Rene Robin">
-            <div class="time-block-box">
-                <div class="time-text">11:00 AM – 11:45 AM</div>
-                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
-            </div>
-            <div class="session-card">
-                <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 11:00 AM – 11:45 AM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 9:50 AM – 10:25 AM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
                 <div class="session-badge">KEYNOTE SPEAKER</div>
@@ -381,7 +374,7 @@
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Dr. C.R. Rene Robin</h3>
                         <p class="speaker-role-highlight">Keynote Speaker</p>
-                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Professor & Dean (Innovation), Sri Sairam Engineering College, Chennai, India.</span></p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Professor &amp; Dean (Innovation), Sri Sairam Engineering College, Chennai, India</span></p>
                         <p class="topic">"Scaling SDG-Aligned AI Solutions in Healthcare"</p>
                         <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
@@ -389,14 +382,15 @@
             </div>
         </div>
 
-        <div class="session" data-start="11:45" data-end="12:30" data-speaker-name="Ts. Dr. Iman Farshchi">
+        <!-- 4. Keynote 3 — Ts. Dr. Iman Farshchi — 10:25 – 11:00 -->
+        <div class="session" data-start="10:25" data-end="11:00" data-speaker-name="Ts. Dr. Iman Farshchi">
             <div class="time-block-box">
-                <div class="time-text">11:45 AM – 12:30 PM</div>
+                <div class="time-text">10:25 AM – 11:00 AM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 11:45 AM – 12:30 PM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 10:25 AM – 11:00 AM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
                 <div class="session-badge">KEYNOTE SPEAKER</div>
@@ -405,70 +399,215 @@
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Ts. Dr. Iman Farshchi</h3>
                         <p class="speaker-role-highlight">Keynote Speaker</p>
-                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Dean, Faculty of Engineering & IT, MAHSA University, Malaysia</span></p>
-                        <p class="topic">"Engineering the Future: IoT & AI in Healthcare Infrastructure"</p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Dean, Faculty of Engineering &amp; IT, MAHSA University, Malaysia</span></p>
+                        <p class="topic">"Engineering the Future: IoT &amp; AI in Healthcare Infrastructure"</p>
                         <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="session" data-start="12:30" data-end="13:00">
+        <!-- 5. Short Break — 11:00 – 11:10 -->
+        <div class="session" data-start="11:00" data-end="11:10">
             <div class="time-block-box">
-                <div class="time-text">12:30 PM – 1:00 PM</div>
+                <div class="time-text">11:00 AM – 11:10 AM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 12:30 PM – 1:00 PM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 11:00 AM – 11:10 AM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
                 <div class="card-body">
-                    <div class="icon-wrap"><i data-lucide="utensils"></i></div>
+                    <div class="icon-wrap"><i data-lucide="coffee"></i></div>
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Lunch & Networking</h3>
-                        <p class="speaker-institution">Take a longer break to recharge for the afternoon technical sessions.</p>
+                        <h3 class="speaker-name-el">Short Break</h3>
+                        <p class="speaker-institution">A brief intermission before the invited talk sessions.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="session" data-start="13:00" data-end="14:50">
+        <!-- 6. Invited Talk 1 — Dr. Wu Yuan Seng — 11:10 – 11:45 -->
+        <div class="session" data-start="11:10" data-end="11:45" data-speaker-name="Dr. Wu Yuan Seng">
             <div class="time-block-box">
-                <div class="time-text">1:00 PM – 2:50 PM</div>
+                <div class="time-text">11:10 AM – 11:45 AM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 1:00 PM – 2:50 PM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 11:10 AM – 11:45 AM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
-                <div class="session-badge technical">TECHNICAL SESSION</div>
+                <div class="session-badge invited">INVITED TALK</div>
                 <div class="card-body">
-                    <div class="icon-wrap opening-icon"><i data-lucide="users"></i></div>
+                    <img class="speaker-photo" src="" alt="Speaker" />
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Technical Session — To Be Announced Soon</h3>
-                        <p class="speaker-institution"><i data-lucide="info"></i> Presenters will deliver their research presentations. Each presentation will be followed by a brief Q&A session. (Slots Available)</p>
+                        <h3 class="speaker-name-el">Assoc. Prof. Dr. Wu Yuan Seng</h3>
+                        <p class="speaker-role-highlight invited-role">Invited Talk</p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Associate Professor &amp; PhD Program Leader, Sunway University, Malaysia</span></p>
+                        <p class="topic">"AI &amp; Genomics in Novel Molecular Targets for Cancer Therapeutics"</p>
+                        <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="session" data-start="14:50" data-end="15:00">
+        <!-- 7. Invited Talk 2 — Dr. R. Aiyshwariya Devi — 11:45 – 12:20 -->
+        <div class="session" data-start="11:45" data-end="12:20" data-speaker-name="Dr. R. Aiyshwariya devi">
             <div class="time-block-box">
-                <div class="time-text">2:50 PM – 3:00 PM</div>
+                <div class="time-text">11:45 AM – 12:20 PM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 2:50 PM – 3:00 PM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 11:45 AM – 12:20 PM</div>
+                    <div class="pill pill-local local-time"></div>
+                </div>
+                <div class="session-badge invited">INVITED TALK</div>
+                <div class="card-body">
+                    <img class="speaker-photo" src="" alt="Speaker" />
+                    <div class="speaker-details">
+                        <h3 class="speaker-name-el">Dr. R. Aiyshwariya Devi</h3>
+                        <p class="speaker-role-highlight invited-role">Invited Talk</p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Associate Professor, RMK College of Engineering and Technology, Chennai, India</span></p>
+                        <p class="topic">"Next-Generation Artificial Intelligence: Foundations, Generative Models, and Research Innovations in Smart Systems"</p>
+                        <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8. Short Break — 12:20 – 12:30 -->
+        <div class="session" data-start="12:20" data-end="12:30">
+            <div class="time-block-box">
+                <div class="time-text">12:20 PM – 12:30 PM</div>
+                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
+            </div>
+            <div class="session-card">
+                <div class="card-header-pills">
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 12:20 PM – 12:30 PM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
                 <div class="card-body">
-                    <div class="icon-wrap opening-icon"><i data-lucide="check-circle"></i></div>
+                    <div class="icon-wrap"><i data-lucide="coffee"></i></div>
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Vote of Thanks</h3>
-                        <p class="speaker-institution"><i data-lucide="info"></i> Expressing gratitude to the speakers, guests, academic partners, and organizing committee.</p>
+                        <h3 class="speaker-name-el">Short Break</h3>
+                        <p class="speaker-institution">A brief intermission before the afternoon sessions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 9. Invited Talk 3 — Sangeetha S K B — 12:30 – 1:05 -->
+        <div class="session" data-start="12:30" data-end="13:05" data-speaker-name="Sangeetha S K B">
+            <div class="time-block-box">
+                <div class="time-text">12:30 PM – 1:05 PM</div>
+                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
+            </div>
+            <div class="session-card">
+                <div class="card-header-pills">
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 12:30 PM – 1:05 PM</div>
+                    <div class="pill pill-local local-time"></div>
+                </div>
+                <div class="session-badge invited">INVITED TALK</div>
+                <div class="card-body">
+                    <img class="speaker-photo" src="" alt="Speaker" />
+                    <div class="speaker-details">
+                        <h3 class="speaker-name-el">Sangeetha S K B</h3>
+                        <p class="speaker-role-highlight invited-role">Invited Talk</p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Associate Professor, Manipal Institute of Technology Bengaluru, Manipal Academy of Higher Education, Manipal, India</span></p>
+                        <p class="topic">"Explainable AI in Industry"</p>
+                        <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10. Featured Talk — Bhabesh Panigrahi — 1:05 – 1:40 -->
+        <div class="session" data-start="13:05" data-end="13:40" data-speaker-name="Bhabesh Panigrahi">
+            <div class="time-block-box">
+                <div class="time-text">1:05 PM – 1:40 PM</div>
+                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
+            </div>
+            <div class="session-card">
+                <div class="card-header-pills">
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 1:05 PM – 1:40 PM</div>
+                    <div class="pill pill-local local-time"></div>
+                </div>
+                <div class="session-badge featured">FEATURED SPEAKER</div>
+                <div class="card-body">
+                    <img class="speaker-photo" src="" alt="Speaker" />
+                    <div class="speaker-details">
+                        <h3 class="speaker-name-el">Bhabesh Panigrahi</h3>
+                        <p class="speaker-role-highlight featured-role">Featured Speaker</p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Life Sciences Strategy &amp; Commercialization Leader</span></p>
+                        <p class="topic">"From Molecule to Market: How AI is Reshaping Biopharma Strategy and Commercialization"</p>
+                        <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 11. Break — 1:40 – 1:50 -->
+        <div class="session" data-start="13:40" data-end="13:50">
+            <div class="time-block-box">
+                <div class="time-text">1:40 PM – 1:50 PM</div>
+                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
+            </div>
+            <div class="session-card">
+                <div class="card-header-pills">
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 1:40 PM – 1:50 PM</div>
+                    <div class="pill pill-local local-time"></div>
+                </div>
+                <div class="card-body">
+                    <div class="icon-wrap"><i data-lucide="coffee"></i></div>
+                    <div class="speaker-details">
+                        <h3 class="speaker-name-el">Short Break</h3>
+                        <p class="speaker-institution">A brief intermission before the research presentation session.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. Spotlight Research Presentation — 1:50 – 2:20 -->
+        <div class="session" data-start="13:50" data-end="14:20">
+            <div class="time-block-box">
+                <div class="time-text">1:50 PM – 2:20 PM</div>
+                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
+            </div>
+            <div class="session-card">
+                <div class="card-header-pills">
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 1:50 PM – 2:20 PM</div>
+                    <div class="pill pill-local local-time"></div>
+                </div>
+                <div class="session-badge spotlight">SPOTLIGHT RESEARCH PRESENTATION</div>
+                <div class="card-body">
+                    <div class="icon-wrap spotlight-icon"><i data-lucide="presentation"></i></div>
+                    <div class="speaker-details">
+                        <h3 class="speaker-name-el">Spotlight Research Presentation</h3>
+                        <p class="speaker-institution"><i data-lucide="info"></i> Selected research paper presentation followed by an interactive Q&amp;A with the keynote panel. Each presentation includes 15 minutes for delivery and 10 minutes for expert discussion.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 13. Valedictory & Vote of Thanks — 2:20 – 2:30 -->
+        <div class="session" data-start="14:20" data-end="14:30">
+            <div class="time-block-box">
+                <div class="time-text">2:20 PM – 2:30 PM</div>
+                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
+            </div>
+            <div class="session-card">
+                <div class="card-header-pills">
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 2:20 PM – 2:30 PM</div>
+                    <div class="pill pill-local local-time"></div>
+                </div>
+                <div class="card-body">
+                    <div class="icon-wrap opening-icon"><i data-lucide="award"></i></div>
+                    <div class="speaker-details">
+                        <h3 class="speaker-name-el">Valedictory, Awards & Vote of Thanks</h3>
+                        <p class="speaker-institution"><i data-lucide="info"></i> Closing remarks, Best Paper Award announcement, certificate acknowledgements, and expressing gratitude to the speakers, guests, academic partners, and organising committee.</p>
                     </div>
                 </div>
             </div>
@@ -476,26 +615,43 @@
 
     </div>
 
+    <!-- Virtual Background Download Section -->
+    <div style="margin-top:5rem;margin-bottom:2rem;text-align:center;" id="virtual-bg">
+      <div class="section-tag" style="justify-content:center;margin-bottom:15px;">Get Conference Ready</div>
+      <h2 class="section-title" style="text-align:center;">Virtual <span class="grad">Background</span></h2>
+      <p style="color:var(--white-70);max-width:560px;margin:0 auto 2rem;font-size:0.95rem;">Download the official ICAHCR 2026 virtual background and represent the conference during your Zoom session.</p>
+      <div class="session-card" style="padding:2rem;max-width:750px;margin:0 auto;animation: fadeInUp 0.5s ease backwards;animation-delay: 0.3s;">
+        <div style="border-radius:10px;overflow:hidden;margin-bottom:1.5rem;border:1px solid var(--glass-border);">
+          <img src="assets/icahcr-virtual-background.png" alt="ICAHCR 2026 Virtual Background" style="width:100%;display:block;" />
+        </div>
+        <p style="font-size:0.85rem;color:var(--white-70);margin-bottom:1.2rem;">Optimised for Zoom, Google Meet & Microsoft Teams · 1920×1080</p>
+        <a href="assets/icahcr-virtual-background.png" download="ICAHCR-2026-Virtual-Background.png" style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg, #004b87, #0074d9);color:#fff;padding:12px 30px;border-radius:50px;font-size:0.95rem;font-weight:700;text-decoration:none;transition:transform 0.2s,box-shadow 0.2s;box-shadow:0 4px 15px rgba(0,116,217,0.3);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 25px rgba(0,116,217,0.4)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(0,116,217,0.3)'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Virtual Background
+        </a>
+      </div>
+    </div>
+
     <!-- FAQ Section -->
     <div style="margin-top:6rem;margin-bottom:2rem;" id="faq">
       <div class="section-tag" style="justify-content:center;margin-bottom:15px;">Common Queries</div>
       <h2 class="section-title" style="text-align:center;">Agenda <span class="grad">FAQ</span></h2>
       <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:1.5rem;margin-top:2rem;">
-        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 0.9s;">
+        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.4s;">
           <h4 style="font-size:15px;font-weight:800;color:var(--white);margin-bottom:0.75rem;">When will I receive my certificate?</h4>
           <p style="font-size:14px;color:var(--white-70);line-height:1.6;">Digital certificates for participation and presentation will be emailed to all registered attendees within 7-10 business days after the conclusion of the conference.</p>
         </div>
-        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.0s;">
+        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.5s;">
           <h4 style="font-size:15px;font-weight:800;color:var(--white);margin-bottom:0.75rem;">Will the sessions be recorded?</h4>
           <p style="font-size:14px;color:var(--white-70);line-height:1.6;">Yes! All keynote and technical sessions are recorded. Registered participants will get exclusive access to the recordings via the app.scholarvault.in Dashboard within 7 working days.</p>
         </div>
-        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.1s;">
+        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.6s;">
           <h4 style="font-size:15px;font-weight:800;color:var(--white);margin-bottom:0.75rem;">How do I access the Zoom link?</h4>
           <p style="font-size:14px;color:var(--white-70);line-height:1.6;">A secure Zoom meeting link and password will be sent to your registered email 24 hours prior to the conference via a personal invite.</p>
         </div>
-        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.2s;">
-          <h4 style="font-size:15px;font-weight:800;color:var(--white);margin-bottom:0.75rem;">Can I change my presentation slot?</h4>
-          <p style="font-size:14px;color:var(--white-70);line-height:1.6;">Because the schedule is tightly coordinated across multiple time zones, time slots are strictly fixed. In case of absolute emergencies, please contact the committee.</p>
+        <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.7s;">
+          <h4 style="font-size:15px;font-weight:800;color:var(--white);margin-bottom:0.75rem;">What time zone is the schedule in?</h4>
+          <p style="font-size:14px;color:var(--white-70);line-height:1.6;">The conference runs on Indian Standard Time (IST, UTC +5:30). Your local time is automatically detected and displayed alongside each session for your convenience.</p>
         </div>
       </div>
     </div>
@@ -521,13 +677,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const tzEl = document.getElementById('user-timezone');
     if (tzEl) tzEl.textContent = userTimezone;
     
-    const confDateStr = "2026-08-26T";
+    const confDateStr = "2026-08-22T";
     const timeFormatter = new Intl.DateTimeFormat('en-US', {
         hour: 'numeric', minute: '2-digit', hour12: true, timeZone: userTimezone
     });
     
     function getIstDate(timeString) {
-        const [hours, minutes] = timeString.split(':').map(Number);
         return new Date(confDateStr + timeString + ":00+05:30"); 
     }
     function calculateDuration(start, end) {
@@ -570,7 +725,7 @@ document.addEventListener('DOMContentLoaded', () => {
                    sessions.forEach(session => {
                        const expectedName = session.getAttribute('data-speaker-name');
                        if (expectedName) {
-                           const speaker = data.find(s => s.name && s.name.toLowerCase().includes(expectedName.toLowerCase().replace(/dr\.?\s*|prof\.?\s*|ts\.?\s*/g, '').trim()));
+                           const speaker = data.find(s => s.name && s.name.toLowerCase().includes(expectedName.toLowerCase().replace(/dr\.?\s*|prof\.?\s*|ts\.?\s*|assoc\.?\s*/g, '').trim()));
                            if (speaker) {
                                const imgEl = session.querySelector('.speaker-photo');
                                if (imgEl && speaker.photo_url) {
