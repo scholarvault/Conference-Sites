@@ -92,7 +92,7 @@ function initCountdown() {
     const now = new Date();
     const diff = SV_CONFIG.confDate - now;
     if (diff <= 0) {
-      el.innerHTML = '<span style="color:var(--cyan);font-weight:700;">Conference is Live!</span>';
+      el.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;gap:10px;padding:12px 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg><span style="color:#10b981;font-weight:700;">Conference Successfully Completed \u00b7 August 22, 2026</span></div>';
       return;
     }
     const days = Math.floor(diff / 86400000);
