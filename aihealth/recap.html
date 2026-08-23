@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conference Recap — ICAHCR 2026</title>
+  <meta name="description" content="Conference Recap & Proceedings for ICAHCR 2026." />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="assets/icahcr-logo.png" />
+  <style>
+    .recap-hero {
+      padding: 120px 2rem 60px;
+      background: var(--navy-2);
+      text-align: center;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .success-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(5, 150, 105, 0.15);
+      border: 1px solid rgba(5, 150, 105, 0.3);
+      color: #10b981;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      margin-bottom: 2rem;
+    }
+    .info-pills {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .info-pill {
+      font-size: 14px;
+      color: var(--white-70);
+      padding: 8px 18px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .poster-container {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .poster-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .poster-caption {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: var(--white-70);
+      font-style: italic;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .stat-card {
+      background: var(--navy);
+      border: 1px solid var(--glass-border);
+      padding: 30px 20px;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .stat-card h3 {
+      font-size: 2.5rem;
+      color: var(--cyan);
+      margin-bottom: 10px;
+    }
+    .stat-card p {
+      color: var(--white-70);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .programme-table-wrap {
+      background: var(--navy);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      overflow-x: auto;
+      margin-top: 2rem;
+    }
+    .programme-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .programme-table th, .programme-table td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    .programme-table th {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--white);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+    .programme-table tr:last-child td {
+      border-bottom: none;
+    }
+    .programme-table td {
+      color: var(--white-70);
+      font-size: 0.95rem;
+    }
+    .programme-table td.time-col {
+      color: var(--white);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .programme-table td.speaker-col {
+      font-weight: 600;
+      color: var(--cyan);
+    }
+    .programme-table td.title-col {
+      font-style: italic;
+    }
+    
+    .type-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .type-keynote { background: rgba(0, 116, 217, 0.15); color: #0074d9; border: 1px solid rgba(0, 116, 217, 0.3); }
+    .type-invited { background: rgba(124, 58, 237, 0.15); color: #a78bfa; border: 1px solid rgba(124, 58, 237, 0.3); }
+    .type-featured { background: rgba(180, 83, 9, 0.15); color: #fbbf24; border: 1px solid rgba(180, 83, 9, 0.3); }
+    .type-spotlight { background: rgba(5, 150, 105, 0.15); color: #34d399; border: 1px solid rgba(5, 150, 105, 0.3); }
+    .type-break { background: rgba(255, 255, 255, 0.1); color: #9ca3af; border: 1px solid rgba(255, 255, 255, 0.2); }
+    .type-opening { background: rgba(13, 148, 136, 0.15); color: #2dd4bf; border: 1px solid rgba(13, 148, 136, 0.3); }
+
+    .appreciation-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .appreciation-card {
+      background: var(--navy);
+      border: 1px solid var(--glass-border);
+      padding: 30px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    .appreciation-card h4 {
+      color: var(--white);
+      font-size: 1.2rem;
+    }
+    .appreciation-card p {
+      color: var(--white-70);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .whats-next-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 2rem;
+    }
+    .next-card {
+      background: var(--navy);
+      border: 1px solid var(--glass-border);
+      padding: 30px 25px;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+    .next-card:hover {
+      transform: translateY(-5px);
+    }
+    .next-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      color: var(--cyan);
+    }
+    .next-card h4 {
+      color: var(--white);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+    .next-card p {
+      color: var(--white-70);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .quote-box {
+      background: var(--navy);
+      border: 1px solid var(--glass-border);
+      padding: 40px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .quote-box h3 {
+      font-size: 1.8rem;
+      color: var(--white);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .quote-box p {
+      color: var(--white-70);
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="navbar__inner">
+    <a href="index.html" class="navbar__logo"><img src="assets/icahcr-logo.png" alt="ICAHCR 2026" class="navbar__logo-img" /><div class="navbar__logo-text"><span class="navbar__logo-conf">ICAHCR 2026</span><span class="navbar__logo-year">AI in Healthcare</span></div></a>
+    <div class="navbar__links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="agenda.html">Agenda</a>
+      <a href="recap.html" style="display:inline-flex;align-items:center;">Recap <span style="background:rgba(5,150,105,0.15);color:#10b981;border:1px solid rgba(5,150,105,0.4);font-size:9px;font-weight:800;padding:2px 6px;border-radius:4px;margin-left:6px;">NEW</span></a>
+      <a href="speakers.html">Speakers</a>
+    </div>
+    <div class="navbar__cta"><a href="recap.html" class="btn-register">View Recap →</a></div>
+    <button class="navbar__hamburger" id="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<nav class="navbar__mobile" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="agenda.html">Agenda</a>
+  <a href="recap.html" style="color:var(--cyan);font-weight:700;">Conference Recap →</a>
+  <a href="speakers.html">Speakers</a>
+</nav>
+
+<!-- SECTION 1: Hero -->
+<section class="recap-hero">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;">ICAHCR 2026</div>
+    <h1 class="section-title">Conference Successfully <span class="grad">Completed</span></h1>
+    <p style="color:var(--white-70);max-width:560px;margin:0 auto 1.5rem;font-size:1.1rem;">22 August 2026 · Virtual · Indian Standard Time</p>
+    
+    <div class="success-badge">
+      <i data-lucide="check-circle"></i> Completed Successfully
+    </div>
+
+    <div class="info-pills">
+      <span class="info-pill">📜 Certificates within 48 hours</span>
+      <span class="info-pill">🎬 Recordings coming soon</span>
+      <span class="info-pill">📚 Proceedings with ISBN & DOI</span>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: Thank You Poster -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="poster-container">
+      <img src="assets/icahcr-thankyou-poster.png" alt="Thank You Poster" class="poster-img" />
+      <p class="poster-caption">Together, we are shaping the future of healthcare through AI & innovation.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: Conference at a Glance -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;">At a Glance</div>
+    <h2 class="section-title" style="text-align:center;">Conference <span class="grad">Impact</span></h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <h3>8</h3>
+        <p>Speakers</p>
+      </div>
+      <div class="stat-card">
+        <h3>5</h3>
+        <p>Hours of Sessions</p>
+      </div>
+      <div class="stat-card">
+        <h3>1</h3>
+        <p>Spotlight Paper</p>
+      </div>
+      <div class="stat-card">
+        <h3>5</h3>
+        <p>Countries Represented</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: Actual Programme -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="section-tag">What Happened</div>
+    <h2 class="section-title">Actual <span class="grad">Programme</span></h2>
+    <p style="color:var(--white-70);margin-bottom:2rem;">The official chronological timeline of events successfully concluded on August 22, 2026.</p>
+    
+    <div class="programme-table-wrap">
+      <table class="programme-table">
+        <thead>
+          <tr>
+            <th>Time (IST)</th>
+            <th>Type</th>
+            <th>Speaker</th>
+            <th>Title / Topic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="time-col">9:00–9:15</td>
+            <td><span class="type-badge type-opening">Inauguration</span></td>
+            <td class="speaker-col">—</td>
+            <td class="title-col">Welcome & Iman Farshchi welcome message</td>
+          </tr>
+          <tr>
+            <td class="time-col">9:15–9:20</td>
+            <td><span class="type-badge type-opening">Moderator Intro</span></td>
+            <td class="speaker-col">Aida Nabila Rahim</td>
+            <td class="title-col">PhD Candidate, CEBAR, Universiti Malaya, Malaysia</td>
+          </tr>
+          <tr>
+            <td class="time-col">9:20–9:45</td>
+            <td><span class="type-badge type-keynote">Keynote</span></td>
+            <td class="speaker-col">Assoc. Prof. Ts. Dr. Iman Farshchi</td>
+            <td class="title-col">"Technology, AI & IoT for Sustainable Healthcare"</td>
+          </tr>
+          <tr>
+            <td class="time-col">9:45–10:15</td>
+            <td><span class="type-badge type-invited">Invited Talk</span></td>
+            <td class="speaker-col">Assoc. Prof. Ts. Dr. Wu Yuan Seng</td>
+            <td class="title-col">"Integrating Genomics and AI for Precision Medicine in Oncology"</td>
+          </tr>
+          <tr>
+            <td class="time-col">10:15–10:25</td>
+            <td><span class="type-badge type-break">Break</span></td>
+            <td class="speaker-col">—</td>
+            <td class="title-col">—</td>
+          </tr>
+          <tr>
+            <td class="time-col">10:25–11:00</td>
+            <td><span class="type-badge type-invited">Invited Talk</span></td>
+            <td class="speaker-col">Dr. Sangeetha S. K. B.</td>
+            <td class="title-col">"Explainable AI in Industry"</td>
+          </tr>
+          <tr>
+            <td class="time-col">11:00–11:35</td>
+            <td><span class="type-badge type-featured">Featured Speaker</span></td>
+            <td class="speaker-col">Bhabesh Panigrahi, M.S., MBA</td>
+            <td class="title-col">"From Molecule to Market: How AI is Reshaping Biopharma Strategy and Commercialization"</td>
+          </tr>
+          <tr>
+            <td class="time-col">11:35–12:15</td>
+            <td><span class="type-badge type-invited">Invited Talk</span></td>
+            <td class="speaker-col">Dr. R. Aiyshwariya Devi</td>
+            <td class="title-col">"Next-Generation Artificial Intelligence: Foundations, Generative Models, and Research Innovations in Smart Systems"</td>
+          </tr>
+          <tr>
+            <td class="time-col">12:15–12:45</td>
+            <td><span class="type-badge type-spotlight">Spotlight Research</span></td>
+            <td class="speaker-col">Nikita Kanubhai Teli (Co-author: Dr. Jignesh V. Smart)</td>
+            <td class="title-col">"AI in ADHD" — Sardar Patel University</td>
+          </tr>
+          <tr>
+            <td class="time-col">12:45–1:15</td>
+            <td><span class="type-badge type-featured">Featured Speaker</span></td>
+            <td class="speaker-col">Ramdev Krishnan J</td>
+            <td class="title-col">"AI in Oncology, Clinical Research & Translational Healthcare" — Mazumdar Shaw Medical Foundation</td>
+          </tr>
+          <tr>
+            <td class="time-col">1:15–1:40</td>
+            <td><span class="type-badge type-spotlight">Forum</span></td>
+            <td class="speaker-col">Research Economy & Academic Trust</td>
+            <td class="title-col">Moderated discussion</td>
+          </tr>
+          <tr>
+            <td class="time-col">1:40–2:00</td>
+            <td><span class="type-badge type-opening">Valedictory</span></td>
+            <td class="speaker-col">Vote of Thanks & Closing</td>
+            <td class="title-col">Special appreciation to Dr. Wu Yuan Seng and Dr. Iman Farshchi</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: Special Appreciation -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;">Gratitude</div>
+    <h2 class="section-title" style="text-align:center;">Special <span class="grad">Appreciation</span></h2>
+    <div class="appreciation-grid">
+      <div class="appreciation-card">
+        <div style="display:flex;align-items:center;gap:15px;margin-bottom:10px;">
+          <div style="width:50px;height:50px;border-radius:50%;background:rgba(124,58,237,0.1);display:flex;align-items:center;justify-content:center;color:#a78bfa;">
+            <i data-lucide="award"></i>
+          </div>
+          <h4>Assoc. Prof. Ts. Dr. Iman Farshchi</h4>
+        </div>
+        <p>Recognised during the valedictory session for his keynote contribution and international academic leadership, setting a powerful precedent for cross-border research.</p>
+      </div>
+      <div class="appreciation-card">
+        <div style="display:flex;align-items:center;gap:15px;margin-bottom:10px;">
+          <div style="width:50px;height:50px;border-radius:50%;background:rgba(124,58,237,0.1);display:flex;align-items:center;justify-content:center;color:#a78bfa;">
+            <i data-lucide="award"></i>
+          </div>
+          <h4>Assoc. Prof. Ts. Dr. Wu Yuan Seng</h4>
+        </div>
+        <p>Acknowledged with special appreciation for his exceptional programme support and outstanding invited contribution bridging genomics and AI precision medicine.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 6: Conference Moderator -->
+<section class="section section--dark">
+  <div class="container" style="text-align:center;">
+    <div class="section-tag" style="justify-content:center;">The Voice of ICAHCR</div>
+    <h2 class="section-title">Conference <span class="grad">Moderator</span></h2>
+    <div class="poster-container" style="max-width:600px;background:var(--navy);border:1px solid var(--glass-border);padding:40px;border-radius:12px;margin-top:2rem;">
+      <h3 style="color:var(--white);font-size:1.5rem;margin-bottom:10px;">Aida Nabila Rahim</h3>
+      <p style="color:var(--cyan);font-weight:600;margin-bottom:15px;">PhD Candidate, CEBAR, Universiti Malaya, Malaysia</p>
+      <p style="color:var(--white-70);line-height:1.6;">Our sincere thanks for guiding the academic dialogue smoothly throughout the day and elevating the experience for all virtual attendees worldwide.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: What's Next -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;">Post-Event Steps</div>
+    <h2 class="section-title" style="text-align:center;">What's <span class="grad">Next?</span></h2>
+    <div class="whats-next-grid">
+      <div class="next-card">
+        <div class="next-icon"><i data-lucide="file-check-2"></i></div>
+        <h4>Certificates</h4>
+        <p>Digital certificates for participation and presentation will be emailed within 48 hours to all registered attendees.</p>
+      </div>
+      <div class="next-card">
+        <div class="next-icon"><i data-lucide="video"></i></div>
+        <h4>Recordings</h4>
+        <p>Conference recordings will be available on YouTube and the ScholarVault Dashboard. Work in progress.</p>
+      </div>
+      <div class="next-card">
+        <div class="next-icon"><i data-lucide="book-open"></i></div>
+        <h4>Proceedings</h4>
+        <p>All accepted papers will be published in the official proceedings with registered ISBN and DOI.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: Conference Moments -->
+<section class="section section--dark">
+  <div class="container">
+    <div class="section-tag" style="justify-content:center;">Memories</div>
+    <h2 class="section-title" style="text-align:center;">Conference <span class="grad">Moments</span></h2>
+    <div class="poster-container" style="margin-top:2rem;">
+      <img src="assets/icahcr-conference-moments.png" alt="Conference Moments" class="poster-img" />
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: See You Next Time -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="quote-box">
+      <h3>"ICAHCR 2026 is the foundation — not the finish line."</h3>
+      <p>As we conclude this virtual edition, we look forward to building a bigger, closer, and hybrid future for AI in Healthcare. Thank you for joining our community of innovators and researchers.</p>
+      <a href="index.html" class="btn-primary" style="display:inline-flex;align-items:center;gap:8px;">
+        Return to Home <i data-lucide="arrow-right" style="width:18px;height:18px;"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" style="margin-top:0;">
+  <div class="footer__bottom" style="max-width:1280px;margin:0 auto;padding:1.5rem 0;">
+    <span>© 2026 ICAHCR — ScholarVault Conference Series</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@latest/dist/umd/lucide.min.js"></script>
+<script src="js/main.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (window.lucide) { lucide.createIcons(); }
+  });
+</script>
+</body>
+</html>
