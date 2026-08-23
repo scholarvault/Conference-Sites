@@ -161,6 +161,8 @@
     .session-badge.invited { background: #7c3aed; }
     .session-badge.featured { background: #b45309; }
     .session-badge.spotlight { background: #059669; }
+    .session-badge.moderator { background: #0891b2; }
+    .session-badge.forum { background: #6366f1; }
 
     .card-body {
         display: flex;
@@ -188,6 +190,8 @@
     }
     .icon-wrap.opening-icon { background: rgba(13, 148, 136, 0.1); color: var(--teal); }
     .icon-wrap.spotlight-icon { background: rgba(5, 150, 105, 0.1); color: #059669; }
+    .icon-wrap.moderator-icon { background: rgba(8, 145, 178, 0.1); color: #0891b2; }
+    .icon-wrap.forum-icon { background: rgba(99, 102, 241, 0.1); color: #6366f1; }
     .icon-wrap svg { width: 32px; height: 32px; }
 
     .speaker-details { flex: 1; }
@@ -288,7 +292,7 @@
   <div class="container">
     <div class="section-tag" style="justify-content:center;">ICAHCR 2026</div>
     <h1 class="section-title">Programme <span class="grad">Overview</span></h1>
-    <p style="color:var(--white-70);max-width:560px;margin:0 auto 2rem;">22 August 2026 · Virtual (Live on Zoom)</p>
+    <p style="color:var(--white-70);max-width:560px;margin:0 auto 2rem;">22 August 2026 · Successfully Completed ✅</p>
     
     <div class="timezone-badge" id="timezone-badge">
         <div class="line">
@@ -303,9 +307,23 @@
   </div>
 </section>
 
+<!-- Conference Completed Notice -->
+<div style="background:linear-gradient(135deg, rgba(5,150,105,0.12), rgba(0,102,255,0.08));border-bottom:1px solid rgba(5,150,105,0.3);padding:20px 2rem;text-align:center;">
+  <div class="container" style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <span style="font-size:14px;font-weight:700;color:#10b981;">ICAHCR 2026 has been successfully completed</span>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <span style="font-size:12px;color:var(--white-70);padding:5px 14px;border-radius:50px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">📜 Certificates within 48 hours</span>
+      <span style="font-size:12px;color:var(--white-70);padding:5px 14px;border-radius:50px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);">🎬 Recordings coming soon</span>
+    </div>
+  </div>
+</div>
+
 <section class="section section--dark agenda-schedule">
   <div class="container">
-    <h2 class="day-title">Saturday, August 22, 2026</h2>
+    <h2 class="day-title">Friday, August 22, 2026 — Conference Completed ✅</h2>
     
     <!-- Sessions Container -->
     <div id="schedule-container">
@@ -325,14 +343,14 @@
                 <div class="card-body">
                     <div class="icon-wrap opening-icon"><i data-lucide="mic"></i></div>
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Inauguration & Welcome Address</h3>
-                        <p class="speaker-institution"><i data-lucide="info"></i> Welcome to ICAHCR 2026. Overview of the conference theme, objectives, and programme schedule.</p>
+                        <h3 class="speaker-name-el">Inauguration &amp; Welcome Address</h3>
+                        <p class="speaker-institution"><i data-lucide="info"></i> Welcome to ICAHCR 2026. Conference inauguration, overview of objectives, and welcome address featuring Assoc. Prof. Ts. Dr. Iman Farshchi welcome video.</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 2. Conference Moderator — 9:15 – 9:20 -->
+        <!-- 2. Moderator Introduction — 9:15 – 9:20 -->
         <div class="session" data-start="09:15" data-end="09:20">
             <div class="time-block-box">
                 <div class="time-text">9:15 AM – 9:20 AM</div>
@@ -343,9 +361,9 @@
                     <div class="pill pill-time"><i data-lucide="clock"></i> 9:15 AM – 9:20 AM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
-                <div class="session-badge opening">CONFERENCE MODERATOR</div>
+                <div class="session-badge moderator">CONFERENCE MODERATOR</div>
                 <div class="card-body">
-                    <img class="speaker-photo" src="assets/aida-nabila-rahim.png" alt="Aida Nabila Rahim" style="display:block" />
+                    <img class="speaker-photo" src="assets/aida-nabila-rahim.png" alt="Aida Nabila Rahim" style="display:block;" />
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Aida Nabila Rahim</h3>
                         <p class="speaker-role-highlight">Conference Moderator · PhD Candidate</p>
@@ -373,7 +391,7 @@
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Assoc. Prof. Ts. Dr. Iman Farshchi</h3>
                         <p class="speaker-role-highlight">Keynote Speaker</p>
-                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Dean, Faculty of Engineering, Built Environment &amp; Information Technology, MAHSA University, Malaysia</span></p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Dean, Faculty of Engineering, Built Environment &amp; IT, MAHSA University, Malaysia</span></p>
                         <p class="topic">"Technology, AI &amp; IoT for Sustainable Healthcare"</p>
                         <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
@@ -398,15 +416,15 @@
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Assoc. Prof. Ts. Dr. Wu Yuan Seng</h3>
                         <p class="speaker-role-highlight invited-role">Invited Talk</p>
-                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Associate Professor; Programme Leader, PhD in Biology &amp; PhD in Medical Science, Jeffrey Cheah Sunway Medical School, Sunway University, Malaysia</span></p>
-                        <p class="topic">"Integrating Genomics and Artificial Intelligence for Precision Medicine in Oncology"</p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Associate Professor &amp; Programme Leader PhD in Biology &amp; PhD in Medical Science, Jeffrey Cheah Sunway Medical School, Sunway University, Malaysia</span></p>
+                        <p class="topic">"Integrating Genomics and AI for Precision Medicine in Oncology"</p>
                         <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 5. Short Break — 10:15 – 10:25 -->
+        <!-- 5. Break — 10:15 – 10:25 -->
         <div class="session" data-start="10:15" data-end="10:25">
             <div class="time-block-box">
                 <div class="time-text">10:15 AM – 10:25 AM</div>
@@ -420,7 +438,7 @@
                 <div class="card-body">
                     <div class="icon-wrap"><i data-lucide="coffee"></i></div>
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Short Break</h3>
+                        <h3 class="speaker-name-el">Break (10 minutes)</h3>
                         <p class="speaker-institution">A ten-minute intermission before the next invited talks.</p>
                     </div>
                 </div>
@@ -469,7 +487,7 @@
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Bhabesh Panigrahi, M.S., MBA</h3>
                         <p class="speaker-role-highlight featured-role">Featured Speaker</p>
-                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Life Sciences Strategy &amp; Commercialization Leader; Co-Founder &amp; Chief Business Officer, Biolyt AI, Bengaluru, India</span></p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Life Sciences Strategy &amp; Commercialization Leader, Co-Founder &amp; CBO, Biolyt AI, Bengaluru, India</span></p>
                         <p class="topic">"From Molecule to Market: How AI is Reshaping Biopharma Strategy and Commercialization"</p>
                         <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
@@ -494,7 +512,7 @@
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Dr. R. Aiyshwariya Devi</h3>
                         <p class="speaker-role-highlight invited-role">Invited Talk</p>
-                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Associate Professor, Department of Artificial Intelligence &amp; Data Science, R.M.K. College of Engineering and Technology, Chennai, India</span></p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Associate Professor, Dept of AI &amp; Data Science, RMK College of Engineering and Technology, Chennai, India</span></p>
                         <p class="topic">"Next-Generation Artificial Intelligence: Foundations, Generative Models, and Research Innovations in Smart Systems"</p>
                         <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
@@ -502,7 +520,7 @@
             </div>
         </div>
 
-        <!-- 9. Spotlight Research Presentation — 12:15 – 12:45 -->
+        <!-- 9. Spotlight Research — Nikita Kanubhai Teli — 12:15 – 12:45 -->
         <div class="session" data-start="12:15" data-end="12:45">
             <div class="time-block-box">
                 <div class="time-text">12:15 PM – 12:45 PM</div>
@@ -513,48 +531,75 @@
                     <div class="pill pill-time"><i data-lucide="clock"></i> 12:15 PM – 12:45 PM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
-                <div class="session-badge spotlight">SPOTLIGHT RESEARCH PRESENTATION</div>
+                <div class="session-badge spotlight">SPOTLIGHT RESEARCH</div>
                 <div class="card-body">
                     <div class="icon-wrap spotlight-icon"><i data-lucide="presentation"></i></div>
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Spotlight Research Presentation</h3>
-                        <p class="speaker-institution"><i data-lucide="info"></i> Selected research paper presentation showcasing focused scholarly work.</p>
+                        <h3 class="speaker-name-el">Nikita Kanubhai Teli</h3>
+                        <p class="speaker-role-highlight">PhD Research Scholar · Spotlight Presenter</p>
+                        <p class="speaker-institution"><i data-lucide="building-2"></i> Dept of Computer Science &amp; Technology, Sardar Patel University · Co-author: Dr. Jignesh V. Smart</p>
+                        <p class="topic">"AI in ADHD"</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 10. Research Economy & Academic Trust Forum — 12:45 – 1:10 -->
-        <div class="session" data-start="12:45" data-end="13:10">
+        <!-- 10. Featured Speaker — Ramdev Krishnan J — 12:45 – 1:15 -->
+        <div class="session" data-start="12:45" data-end="13:15" data-speaker-name="Ramdev Krishnan J">
             <div class="time-block-box">
-                <div class="time-text">12:45 PM – 1:10 PM</div>
+                <div class="time-text">12:45 PM – 1:15 PM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 12:45 PM – 1:10 PM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 12:45 PM – 1:15 PM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
-                <div class="session-badge spotlight">RESEARCH ECOSYSTEM FORUM</div>
+                <div class="session-badge featured">FEATURED SPEAKER</div>
                 <div class="card-body">
-                    <div class="icon-wrap spotlight-icon"><i data-lucide="network"></i></div>
+                    <img class="speaker-photo" src="" alt="Ramdev Krishnan J" />
                     <div class="speaker-details">
-                        <h3 class="speaker-name-el">Research Economy &amp; Academic Trust Forum</h3>
-                        <p class="speaker-institution"><i data-lucide="info"></i> A focused discussion on verified identity, trustworthy research records, collaboration and responsible pathways from knowledge to impact.</p>
+                        <h3 class="speaker-name-el">Ramdev Krishnan J</h3>
+                        <p class="speaker-role-highlight featured-role">Featured Speaker</p>
+                        <p class="speaker-institution"><i data-lucide="map-pin"></i> <span class="speaker-role-el">Project Manager, Second Primary Tumor Trial (Head &amp; Neck Cancer), Mazumdar Shaw Medical Foundation, Narayana Health, Bengaluru, India</span></p>
+                        <p class="topic">"AI in Oncology, Clinical Research &amp; Translational Healthcare"</p>
+                        <a href="speakers.html" class="btn-view-details"><i data-lucide="user"></i> View Details</a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- 11. Valedictory & Vote of Thanks — 1:10 – 1:30 -->
-        <div class="session" data-start="13:10" data-end="13:30">
+        <!-- 11. Research Economy & Academic Trust Forum — 1:15 – 1:40 -->
+        <div class="session" data-start="13:15" data-end="13:40">
             <div class="time-block-box">
-                <div class="time-text">1:10 PM – 1:30 PM</div>
+                <div class="time-text">1:15 PM – 1:40 PM</div>
                 <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
             </div>
             <div class="session-card">
                 <div class="card-header-pills">
-                    <div class="pill pill-time"><i data-lucide="clock"></i> 1:10 PM – 1:30 PM</div>
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 1:15 PM – 1:40 PM</div>
+                    <div class="pill pill-local local-time"></div>
+                </div>
+                <div class="session-badge forum">RESEARCH ECONOMY &amp; ACADEMIC TRUST FORUM</div>
+                <div class="card-body">
+                    <div class="icon-wrap forum-icon"><i data-lucide="network"></i></div>
+                    <div class="speaker-details">
+                        <h3 class="speaker-name-el">Research Economy &amp; Academic Trust Forum (Moderated)</h3>
+                        <p class="speaker-institution"><i data-lucide="info"></i> A focused moderated discussion on verified identity, trustworthy research records, collaboration and responsible pathways from knowledge to impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12. Valedictory & Vote of Thanks — 1:40 – 2:00 -->
+        <div class="session" data-start="13:40" data-end="14:00">
+            <div class="time-block-box">
+                <div class="time-text">1:40 PM – 2:00 PM</div>
+                <div class="timezone-pill"><i data-lucide="clock"></i> IST</div>
+            </div>
+            <div class="session-card">
+                <div class="card-header-pills">
+                    <div class="pill pill-time"><i data-lucide="clock"></i> 1:40 PM – 2:00 PM</div>
                     <div class="pill pill-local local-time"></div>
                 </div>
                 <div class="session-badge opening">VALEDICTORY</div>
@@ -562,7 +607,7 @@
                     <div class="icon-wrap opening-icon"><i data-lucide="heart-handshake"></i></div>
                     <div class="speaker-details">
                         <h3 class="speaker-name-el">Valedictory &amp; Vote of Thanks</h3>
-                        <p class="speaker-role-highlight">Special Appreciation: Assoc. Prof. Ts. Dr. Wu Yuan Seng</p>
+                        <p class="speaker-role-highlight">Special Appreciation: Assoc. Prof. Ts. Dr. Wu Yuan Seng &amp; Assoc. Prof. Ts. Dr. Iman Farshchi</p>
                         <p class="speaker-institution"><i data-lucide="info"></i> Closing remarks, special appreciation and gratitude to the organizers, committee, speakers, moderator, volunteers and participants.</p>
                     </div>
                 </div>
@@ -588,6 +633,18 @@
       </div>
     </div>
 
+    <!-- Conference Moments -->
+    <div style="margin-top:5rem;margin-bottom:2rem;text-align:center;" id="conference-moments">
+      <div class="section-tag" style="justify-content:center;margin-bottom:15px;">Real Conference Moments</div>
+      <h2 class="section-title" style="text-align:center;">Conference <span class="grad">Highlights</span></h2>
+      <p style="color:var(--white-70);max-width:600px;margin:0 auto 2rem;font-size:0.95rem;">A visual record of the speakers, presentations, and international academic exchange at ICAHCR 2026.</p>
+      <div class="session-card" style="padding:2rem;max-width:900px;margin:0 auto;">
+        <div style="border-radius:12px;overflow:hidden;border:1px solid var(--glass-border);">
+          <img src="assets/icahcr-conference-moments.png" alt="ICAHCR 2026 Conference Moments" style="width:100%;display:block;" />
+        </div>
+      </div>
+    </div>
+
     <!-- FAQ Section -->
     <div style="margin-top:6rem;margin-bottom:2rem;" id="faq">
       <div class="section-tag" style="justify-content:center;margin-bottom:15px;">Common Queries</div>
@@ -608,6 +665,10 @@
         <div class="session-card" style="padding:1.5rem;animation: fadeInUp 0.5s ease backwards;animation-delay: 1.7s;">
           <h4 style="font-size:15px;font-weight:800;color:var(--white);margin-bottom:0.75rem;">What time zone is the schedule in?</h4>
           <p style="font-size:14px;color:var(--white-70);line-height:1.6;">The conference runs on Indian Standard Time (IST, UTC +5:30). Your local time is automatically detected and displayed alongside each session for your convenience.</p>
+        </div>
+        <div class="session-card" style="padding:1.5rem;grid-column:1/-1;background:linear-gradient(135deg, rgba(5,150,105,0.08), rgba(0,102,255,0.05));border:1px solid rgba(5,150,105,0.25);">
+          <h4 style="font-size:15px;font-weight:800;color:#10b981;margin-bottom:0.75rem;">🙏 Thank You to All Our Speakers</h4>
+          <p style="font-size:14px;color:var(--white-70);line-height:1.6;">ICAHCR 2026 was made possible by the incredible contributions of our keynote speakers, invited speakers, featured speaker, research presenters, and all attendees. Certificates will be distributed within 48 hours. Conference recordings will be made available on YouTube and the ScholarVault Dashboard — work is in progress.</p>
         </div>
       </div>
     </div>
