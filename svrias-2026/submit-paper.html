@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit Abstract | SVRIAS 2026</title>
+  <meta name="description" content="Submit your research abstract to SVRIAS 2026. 100% free abstract submission with a typical 2–4 working day academic review window." />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="canonical" href="https://researchintegrity2026.scholarvault.in/submit-paper.html" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/ui-polish.css">
+</head>
+<body data-site-page="submit-paper.html">
+  <!-- GENERATED: edit shared/site-config.json or tools/build-shared-shell.mjs -->
+  <div class="navbar__banner">
+    <span>Virtual Summit &bull; 14 November 2026 &bull; Call for Abstracts Open</span>
+  </div>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a class="navbar__logo" href="index.html" aria-label="SVRIAS 2026 home">
+        <img src="assets/icon-512.png" alt="ScholarVault" />
+        <div class="navbar__logo-text">
+          <strong>Responsible AI & Integrity</strong>
+          <span>AI Summit 2026</span>
+        </div>
+      </a>
+      <nav class="navbar__links" aria-label="Primary navigation">
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="about.html" class="navbar__link">About</a>
+        <a href="call-for-papers.html" class="navbar__link active">Call for Papers</a>
+        <a href="speakers.html" class="navbar__link">Speakers</a>
+        <a href="committee.html" class="navbar__link">Committee</a>
+        <a href="register.html" class="navbar__link">Register</a>
+        <a href="awards.html" class="navbar__link">Awards</a>
+        <a href="blog.html" class="navbar__link">Blog</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+      </nav>
+      <div class="navbar__cta">
+        <button class="btn btn-outline btn-sm" type="button" onclick="openInterestModal()">Express Interest</button>
+        <a class="btn btn-primary btn-sm" href="register.html" data-scholarvault-action="register">Register Now <i data-lucide="arrow-right"></i></a>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <nav class="navbar__mobile" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="index.html" class="">Home</a>
+    <a href="about.html" class="">About</a>
+    <a href="call-for-papers.html" class="active">Call for Papers</a>
+    <a href="speakers.html" class="">Speakers</a>
+    <a href="committee.html" class="">Committee</a>
+    <a href="register.html" class="">Register</a>
+    <a href="awards.html" class="">Awards</a>
+    <a href="blog.html" class="">Blog</a>
+    <a href="contact.html" class="">Contact</a>
+    <button type="button" onclick="openInterestModal()">Express Interest</button>
+    <a href="register.html" class="btn btn-primary" data-scholarvault-action="register">Register Now</a>
+  </nav>
+
+  <!-- Page Hero Header -->
+  <section class="page-hero">
+    <div class="site-shell">
+      <div class="page-hero__inner reveal">
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Submit Abstract</span>
+        </div>
+        <div class="eyebrow">Abstract Submission Portal</div>
+        <h1 class="page-hero__title">Submit Your <span>Research Contribution</span></h1>
+        <p class="page-hero__desc">
+          Submit your abstract for evaluation. 100% free submission with a typical 2–4 working day academic review window.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submission Portal Container -->
+  <section class="section section--mist">
+    <div class="site-shell">
+      <details class="info-disclosure reveal">
+        <summary><i data-lucide="info" aria-hidden="true"></i><span>Submission intake status</span></summary>
+        <div class="info-disclosure__body">You can start your abstract below and continue securely in ScholarVault. The abstract submission deadline is <strong>15 October 2026</strong>. <a href="interest-form.html">Get deadline reminders</a>.</div>
+      </details>
+
+      <!-- Submission Form Shell -->
+      <div class="form-shell reveal" id="paperWrap">
+        <div style="margin-bottom: 28px; text-align: center;">
+          <h2 style="font-size: 1.6rem; margin-bottom: 6px;">Start your abstract submission</h2>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin: 0;">
+            Enter the essential details once. ScholarVault will securely resume the draft for declarations, co-authors and file upload.
+          </p>
+        </div>
+
+        <form id="paperForm" class="form-grid">
+          <!-- Primary Author Information -->
+          <div class="field">
+            <label for="authorName">Primary Author Full Name <span class="req">*</span></label>
+            <input id="authorName" name="author_name" required placeholder="Dr. Jane Smith" />
+          </div>
+
+          <div class="field">
+            <label for="authorEmail">Author Email Address <span class="req">*</span></label>
+            <input id="authorEmail" name="author_email" type="email" required placeholder="jane.smith@institution.edu" />
+          </div>
+
+          <div class="field">
+            <label for="authorInst">Institutional Affiliation <span class="req">*</span></label>
+            <input id="authorInst" name="author_institution" required placeholder="University of Oxford / MIT" />
+          </div>
+
+          <div class="field">
+            <label for="authorCountry">Country <span class="req">*</span></label>
+            <input id="authorCountry" name="author_country" required placeholder="United Kingdom" />
+          </div>
+
+          <!-- Paper Metadata -->
+          <div class="field full">
+            <label for="paperTitle">Paper / Abstract Title <span class="req">*</span></label>
+            <input id="paperTitle" name="paper_title" required placeholder="e.g. Forensic Detection of Synthetic Scientific Figures Using Residual Spectral Analysis" />
+          </div>
+
+          <div class="field">
+            <label for="trackSelect">Conference Track <span class="req">*</span></label>
+            <select id="trackSelect" name="track" required>
+              <option value="">Select a Track...</option>
+              <option value="Track 1: AI Ethics & Governance">Track 1: AI Ethics &amp; Governance</option>
+              <option value="Track 2: Research Integrity in the AI Era">Track 2: Research Integrity in the AI Era</option>
+              <option value="Track 3: Responsible AI Frameworks">Track 3: Responsible AI Frameworks</option>
+              <option value="Track 4: Authorship, Attribution & AI-Generated Content">Track 4: Authorship, Attribution &amp; AI-Generated Content</option>
+              <option value="Track 5: Peer Review & Reproducibility">Track 5: Peer Review &amp; Reproducibility</option>
+              <option value="Track 6: Data Privacy & Algorithmic Accountability">Track 6: Data Privacy &amp; Algorithmic Accountability</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="paperAbstract">Structured Abstract (250 to 500 words) <span class="req">*</span></label>
+            <textarea id="paperAbstract" name="abstract" required rows="6" placeholder="Provide background context, methodology, key findings, and implications for research integrity or responsible AI..."></textarea>
+          </div>
+
+          <div class="field full">
+            <details class="info-disclosure"><summary><i data-lucide="info" aria-hidden="true"></i><span>Publication and indexing information</span></summary><div class="info-disclosure__body">Abstract submission and conference acceptance do not guarantee publication in a journal, proceedings series or indexed database. Any publisher, repository, DOI, indexing or APC arrangement depends on the final publication route and the independent policies of the relevant service.</div></details>
+            <p class="submission-critical-note"><strong>Important:</strong> Abstract acceptance does not guarantee full-paper publication, DOI assignment, Scopus or Web of Science indexing.</p>
+            <button class="btn btn-primary btn-lg form-submit" type="submit">
+              Continue to secure submission <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </form>
+
+        <div class="form-success">
+          <div class="form-success__icon"><i data-lucide="check-circle-2"></i></div>
+          <div class="form-success__title">Abstract Received Successfully!</div>
+          <p class="form-success__text">
+            Thank you for submitting to SVRIAS 2026. Your submission ID has been logged and our Technical Program Committee will review your abstract. Expect formal decision feedback within <strong>2 to 4 working days</strong> at your registered email address.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Submission Help & Guidance Callout -->
+  <section class="section section--light">
+    <div class="site-shell">
+      <div class="grid-3 stagger">
+        <div class="card reveal-up">
+          <div class="icon-badge"><i data-lucide="clock"></i></div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">2–4 Day Rapid Review</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+            Every abstract is assigned to two domain reviewers for rapid initial quality feedback, ensuring swift planning for authors.
+          </p>
+        </div>
+
+        <div class="card reveal-up">
+          <div class="icon-badge"><i data-lucide="badge-check"></i></div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Virtual Presentation</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+            All accepted contributions earn an official "Virtual Research Presentation" status with digital verification credentials.
+          </p>
+        </div>
+
+        <div class="card reveal-up">
+          <div class="icon-badge"><i data-lucide="help-circle"></i></div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Need Submission Help?</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
+            Contact our editorial desk directly at <a href="mailto:conferences@scholarvault.in" style="color: var(--accent-secondary); font-weight:700;">conferences@scholarvault.in</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
+<section class="section" aria-labelledby="faq-title"><div class="site-shell"><div class="section-heading"><div class="eyebrow">Frequently Asked Questions</div><h2 id="faq-title" class="section-title">Answers for <span>Researchers</span></h2></div><div class="faq-list"><details><summary>What is the abstract word limit?</summary><p>Submit a focused abstract of 250–500 words.</p></details><details><summary>How long does review take?</summary><p>The typical academic review window is 2–4 working days.</p></details><details><summary>Does acceptance guarantee publication?</summary><p>No. Publication, DOI and indexing depend on the final publication route and its policies.</p></details></div></div></section>
+  <footer class="footer">
+    <!-- GENERATED: edit shared/site-config.json or tools/build-shared-shell.mjs -->
+    <div class="site-shell">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="navbar__logo-text"><strong style="font-size:1.3rem">Responsible AI & Integrity</strong><span>AI Summit 2026</span></div>
+          <p>ScholarVault Research Integrity &amp; Responsible AI Summit 2026 is an international virtual forum advancing ethical governance, algorithmic accountability, and reproducible science.</p>
+          <div class="footer__organizer"><img class="organizer-mark" src="assets/icon-512.png" alt="ScholarVault" /><div><span>Organised by</span><strong>ScholarVault Conferences</strong></div></div>
+          <a class="footer__assessment" href="badge.html"><i data-lucide="shield-check"></i><span><strong>SCVS assessment</strong><small>Assessment pending &middot; verification is never self-declared</small></span></a>
+        </div>
+        <div class="footer__col"><strong>Conference</strong><a href="about.html">About Summit</a><a href="call-for-papers.html">Call for Papers</a><a href="speakers.html">Speakers</a><a href="committee.html">Committee</a><a href="awards.html">Summit Awards</a><a href="blog.html">Insights &amp; Blog</a></div>
+        <div class="footer__col"><strong>Participate</strong><button type="button" onclick="openInterestModal()">Express Interest</button><a href="submit-paper.html" data-scholarvault-action="submit">Submit Abstract</a><a href="speaker-form.html">Apply as Speaker</a><a href="committee-form.html">Join Committee</a><a href="register.html">Register Delegate</a></div>
+        <div class="footer__col"><strong>Information</strong><a href="downloads.html">Brochure &amp; Downloads</a><a href="media.html">Media &amp; Press</a><a href="privacy.html">Privacy Policy</a><a href="refund.html">Refund Policy</a><a href="contact.html">Contact Us</a></div>
+      </div>
+      <div class="footer__social-block">
+        <nav class="social-links" aria-label="ScholarVault social media">
+              <a href="https://www.instagram.com/scholarvault.in/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Instagram" title="Instagram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/instagram.png" alt="" /></span><span class="sr-only">Instagram</span></a>
+              <a href="https://www.facebook.com/scholarvault.in" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Facebook" title="Facebook"><span class="social-icon" aria-hidden="true"><img src="assets/Social/facebook (1).png" alt="" /></span><span class="sr-only">Facebook</span></a>
+              <a href="https://www.linkedin.com/company/thescholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on LinkedIn" title="LinkedIn"><span class="social-icon" aria-hidden="true"><img src="assets/Social/linkedin.png" alt="" /></span><span class="sr-only">LinkedIn</span></a>
+              <a href="https://www.reddit.com/r/ScholarVault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Reddit" title="Reddit"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-reddit-24.png" alt="" /></span><span class="sr-only">Reddit</span></a>
+              <a href="https://in.pinterest.com/scholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Pinterest" title="Pinterest"><span class="social-icon" aria-hidden="true"><img src="assets/Social/pinterest.svg" alt="" /></span><span class="sr-only">Pinterest</span></a>
+              <a href="https://x.com/scholarvaultin" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on X" title="X"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-x-48.png" alt="" /></span><span class="sr-only">X</span></a>
+              <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on WhatsApp" title="WhatsApp"><span class="social-icon" aria-hidden="true"><img src="assets/Social/social.png" alt="" /></span><span class="sr-only">WhatsApp</span></a>
+              <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Telegram" title="Telegram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/telegram.png" alt="" /></span><span class="sr-only">Telegram</span></a>
+        </nav>
+      </div>
+      <div class="footer__trust">
+        <div class="footer__payment-methods"><img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" /><img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" /><img src="assets/idzRNcC9U5_logos.png" alt="BHIM UPI" /><img class="payment-logo payment-logo--gpay" src="assets/gpay-logo.png" alt="Google Pay" /></div>
+        <div class="footer__protection"><img class="protection-logo protection-logo--website" src="assets/idITJgioup_logos.png" alt="Website Protection" /><img class="protection-logo protection-logo--msme" src="assets/idUAcNCLcQ_logos.png" alt="MSME registration" /><img src="assets/App QR.png" alt="ScholarVault QR code" /></div>
+      </div>
+      <div class="footer__bottom"><p>&copy; 2026 SVRIAS &bull; ScholarVault. All rights reserved.</p><div class="footer__bottom-links"><a href="privacy.html">Privacy Policy</a><a href="refund.html">Refund Policy</a><a href="contact.html">Contact Desk</a></div></div>
+    </div>
+  </footer>
+  <button class="social-dock-toggle" id="socialDockToggle" type="button" aria-label="Open contact and support" aria-expanded="false" aria-controls="socialDock"><i data-lucide="message-circle-question" aria-hidden="true"></i><span>Support</span></button>
+  <aside class="social-dock" id="socialDock" aria-label="Contact and support">
+    <div class="social-dock__head"><strong>Contact &amp; Support</strong><button type="button" id="socialDockClose" aria-label="Close contact and support"><i data-lucide="x"></i></button></div>
+    <a class="support-email" href="mailto:conferences@scholarvault.in" aria-label="Email the ScholarVault Conference Desk" title="Conference Desk email"><i data-lucide="mail" aria-hidden="true"></i><span>Conference Desk</span></a>
+    <div class="social-links social-links--dock"><a href="https://www.instagram.com/scholarvault.in/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Instagram" title="Instagram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/instagram.png" alt="" /></span><span class="sr-only">Instagram</span></a>
+              <a href="https://www.facebook.com/scholarvault.in" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Facebook" title="Facebook"><span class="social-icon" aria-hidden="true"><img src="assets/Social/facebook (1).png" alt="" /></span><span class="sr-only">Facebook</span></a>
+              <a href="https://www.linkedin.com/company/thescholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on LinkedIn" title="LinkedIn"><span class="social-icon" aria-hidden="true"><img src="assets/Social/linkedin.png" alt="" /></span><span class="sr-only">LinkedIn</span></a>
+              <a href="https://www.reddit.com/r/ScholarVault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Reddit" title="Reddit"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-reddit-24.png" alt="" /></span><span class="sr-only">Reddit</span></a>
+              <a href="https://in.pinterest.com/scholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Pinterest" title="Pinterest"><span class="social-icon" aria-hidden="true"><img src="assets/Social/pinterest.svg" alt="" /></span><span class="sr-only">Pinterest</span></a>
+              <a href="https://x.com/scholarvaultin" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on X" title="X"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-x-48.png" alt="" /></span><span class="sr-only">X</span></a>
+              <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on WhatsApp" title="WhatsApp"><span class="social-icon" aria-hidden="true"><img src="assets/Social/social.png" alt="" /></span><span class="sr-only">WhatsApp</span></a>
+              <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Telegram" title="Telegram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/telegram.png" alt="" /></span><span class="sr-only">Telegram</span></a></div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://app.scholarvault.in/conference-embed.js" data-conference="research-integrity-responsible-ai-summit-2026" data-origin="https://app.scholarvault.in"></script>
+  <script src="js/main.js"></script>
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6a1556cb3f29381c3623f33e/1jphlm3mo';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+

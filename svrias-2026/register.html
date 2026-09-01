@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration &amp; Delegate Pricing | SVRIAS 2026</title>
+  <meta name="description" content="Registration rates and delegate pricing for the ScholarVault Research Integrity & Responsible AI Summit 2026. Interactive currency toggle between INR and USD." />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="canonical" href="https://researchintegrity2026.scholarvault.in/register.html" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/ui-polish.css">
+</head>
+<body data-site-page="register.html">
+  <!-- GENERATED: edit shared/site-config.json or tools/build-shared-shell.mjs -->
+  <div class="navbar__banner">
+    <span>Virtual Summit &bull; 14 November 2026 &bull; Call for Abstracts Open</span>
+  </div>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a class="navbar__logo" href="index.html" aria-label="SVRIAS 2026 home">
+        <img src="assets/icon-512.png" alt="ScholarVault" />
+        <div class="navbar__logo-text">
+          <strong>Responsible AI & Integrity</strong>
+          <span>AI Summit 2026</span>
+        </div>
+      </a>
+      <nav class="navbar__links" aria-label="Primary navigation">
+        <a href="index.html" class="navbar__link">Home</a>
+        <a href="about.html" class="navbar__link">About</a>
+        <a href="call-for-papers.html" class="navbar__link">Call for Papers</a>
+        <a href="speakers.html" class="navbar__link">Speakers</a>
+        <a href="committee.html" class="navbar__link">Committee</a>
+        <a href="register.html" class="navbar__link active">Register</a>
+        <a href="awards.html" class="navbar__link">Awards</a>
+        <a href="blog.html" class="navbar__link">Blog</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+      </nav>
+      <div class="navbar__cta">
+        <button class="btn btn-outline btn-sm" type="button" onclick="openInterestModal()">Express Interest</button>
+        <a class="btn btn-primary btn-sm" href="register.html" data-scholarvault-action="register">Register Now <i data-lucide="arrow-right"></i></a>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <nav class="navbar__mobile" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="index.html" class="">Home</a>
+    <a href="about.html" class="">About</a>
+    <a href="call-for-papers.html" class="">Call for Papers</a>
+    <a href="speakers.html" class="">Speakers</a>
+    <a href="committee.html" class="">Committee</a>
+    <a href="register.html" class="active">Register</a>
+    <a href="awards.html" class="">Awards</a>
+    <a href="blog.html" class="">Blog</a>
+    <a href="contact.html" class="">Contact</a>
+    <button type="button" onclick="openInterestModal()">Express Interest</button>
+    <a href="register.html" class="btn btn-primary" data-scholarvault-action="register">Register Now</a>
+  </nav>
+
+  <!-- Page Hero Header -->
+  <section class="page-hero">
+    <div class="site-shell">
+      <div class="page-hero__inner reveal">
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Register</span>
+        </div>
+        <div class="eyebrow">Delegate Registration</div>
+        <h1 class="page-hero__title">Conference <span>Registration &amp; Pricing</span></h1>
+        <p class="page-hero__desc">
+          Transparent, all-inclusive registration tiers for authors, faculty, research scholars, and industry professionals. Switch between INR (₹) and USD ($).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Table Section -->
+  <section class="section section--mist">
+    <div class="site-shell">
+      <div class="pricing-header reveal">
+        <div class="eyebrow">Transparent Category Pricing</div>
+        <h2 class="section-title">Select Your <span>Delegate Category</span></h2>
+        <p class="section-lead">Choose the category that matches your role. Availability, eligibility and the final payable amount are rechecked in the secure ScholarVault registration flow.</p>
+        
+        <!-- Currency Switcher Toggle -->
+        <div class="pricing-toggle">
+          <button type="button" class="currency-btn active" data-currency="INR">INR (₹)</button>
+          <button type="button" class="currency-btn" data-currency="USD">USD ($)</button>
+        </div>
+      </div>
+
+      <div class="registration-steps" aria-label="Registration steps">
+        <span><b>1</b>Choose category</span><span><b>2</b>Basic details</span><span><b>3</b>Secure review</span><span><b>4</b>Payment</span>
+      </div>
+
+      <!-- Price Cards Grid -->
+      <div class="price-grid stagger">
+        <!-- Listener Pass -->
+        <article class="price-card reveal-up registration-step-card" tabindex="0" role="radio" aria-checked="false" data-registration-category data-category-name="Listener Delegate Pass" data-category-code="listener" data-price-inr="₹1,999" data-price-usd="$99">
+          <div class="card-tag">Attendee Pass</div>
+          <h3 class="price-card__title">Listener Delegate</h3>
+          <p class="price-card__desc">For scholars and observers attending keynote plenaries and parallel tracks without presenting.</p>
+          
+          <div class="price-card__amount">
+            <span class="price-inr">₹1,999</span>
+            <span class="price-usd" style="display: none;">$99</span>
+          </div>
+          <div class="price-card__tier-tag">Standard virtual delegate fee</div>
+
+          <ul class="price-card__features">
+            <li><i data-lucide="check"></i> 100% Virtual live access to all 6 tracks</li>
+            <li><i data-lucide="check"></i> Digital Certificate of Attendance</li>
+            <li><i data-lucide="check"></i> Access to finalized conference resources where available</li>
+            <li><i data-lucide="check"></i> Interactive Q&amp;A &amp; Networking Breakouts</li>
+          </ul>
+
+          <a class="btn btn-outline" href="#registerFormWrap">Select Listener Pass</a>
+        </article>
+
+        <!-- Faculty / Researcher Pass (Featured) -->
+        <article class="price-card price-card--featured reveal-up registration-step-card" tabindex="0" role="radio" aria-checked="false" data-registration-category data-category-name="Faculty / Researcher" data-category-code="faculty_researcher" data-price-inr="₹4,999" data-price-usd="$199">
+          <div class="card-tag">Academic Delegate</div>
+          <h3 class="price-card__title">Faculty / Researcher</h3>
+          <p class="price-card__desc">For faculty members and researchers participating in summit sessions and academic networking.</p>
+          
+          <div class="price-card__amount">
+            <span class="price-inr">₹4,999</span>
+            <span class="price-usd" style="display: none;">$199</span>
+          </div>
+          <div class="price-card__tier-tag">Standard faculty / researcher fee</div>
+
+          <ul class="price-card__features">
+            <li><i data-lucide="check"></i> Virtual access to summit sessions</li>
+            <li><i data-lucide="check"></i> Participation record subject to attendance</li>
+            <li><i data-lucide="check"></i> Academic networking and Q&amp;A access</li>
+            <li><i data-lucide="check"></i> Presenter eligibility remains tied to an accepted abstract</li>
+          </ul>
+
+          <a class="btn btn-primary" href="#registerFormWrap">Select Faculty / Researcher <i data-lucide="arrow-right"></i></a>
+        </article>
+
+        <!-- Co-Author / Additional Presenter -->
+        <article class="price-card reveal-up registration-step-card" tabindex="0" role="radio" aria-checked="false" data-registration-category data-category-name="Co-Author Delegate" data-category-code="co_author" data-price-inr="₹2,200" data-price-usd="$79">
+          <div class="card-tag">Co-Author</div>
+          <h3 class="price-card__title">Co-Author Delegate</h3>
+          <p class="price-card__desc">For contributing co-authors linked to an accepted presentation record.</p>
+          
+          <div class="price-card__amount">
+            <span class="price-inr">₹2,200</span>
+            <span class="price-usd" style="display: none;">$79</span>
+          </div>
+          <div class="price-card__tier-tag">Standard co-author fee</div>
+
+          <ul class="price-card__features">
+            <li><i data-lucide="check"></i> Co-author participation record subject to eligibility and attendance</li>
+            <li><i data-lucide="check"></i> Full access to all live tracks and panels</li>
+            <li><i data-lucide="check"></i> Archival details disclosed after the final publication route is confirmed</li>
+            <li><i data-lucide="check"></i> Virtual delegate networking lounge access</li>
+          </ul>
+
+          <a class="btn btn-outline" href="#registerFormWrap">Select Co-Author Pass</a>
+        </article>
+      </div>
+
+      <!-- Additional Tiers: Student & Corporate -->
+      <div class="grid-2 stagger" style="margin-top: 28px;">
+        <div class="card reveal-up registration-step-card" tabindex="0" role="radio" aria-checked="false" data-registration-category data-category-name="Student / Scholar" data-category-code="student_scholar" data-price-inr="₹2,500" data-price-usd="$129" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+          <div>
+            <div class="card-tag">Student / PhD</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 4px;">Student Researcher Delegate</h3>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">For full-time undergraduate, master's, or PhD students.</p>
+          </div>
+          <div style="text-align: right; flex-shrink: 0;">
+            <div style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--accent-secondary);">
+              <span class="price-inr">₹2,500</span>
+              <span class="price-usd" style="display: none;">$129</span>
+            </div>
+            <span style="font-size: 0.76rem; color: var(--text-muted);">Standard category</span>
+          </div>
+        </div>
+
+        <div class="card reveal-up registration-step-card" tabindex="0" role="radio" aria-checked="false" data-registration-category data-category-name="Industry Professional" data-category-code="industry_professional" data-price-inr="₹9,999" data-price-usd="$397" style="display: flex; justify-content: space-between; align-items: center; gap: 20px;">
+          <div>
+            <div class="card-tag">Industry / Executive</div>
+            <h3 style="font-size: 1.2rem; margin-bottom: 4px;">Industry Professional</h3>
+            <p style="color: var(--text-secondary); font-size: 0.88rem; margin: 0;">For industry professionals, compliance leads, and consultants.</p>
+          </div>
+          <div style="text-align: right; flex-shrink: 0;">
+            <div style="font-family: var(--font-display); font-size: 1.8rem; font-weight: 800; color: var(--accent-secondary);">
+              <span class="price-inr">₹9,999</span>
+              <span class="price-usd" style="display: none;">$397</span>
+            </div>
+            <span style="font-size: 0.76rem; color: var(--text-muted);">Standard category</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="submission-critical-note"><strong>ScholarVault Gold:</strong> Existing Gold benefits are applied automatically after sign-in. If a configured Gold bundle is available for the selected category, it will appear as an optional line item during secure review.</p>
+    </div>
+  </section>
+
+  <!-- Registration Intake Form Section -->
+  <section class="section section--light" id="registerFormWrap">
+    <div class="site-shell">
+      <div class="form-shell reveal" id="registerWrap">
+        <div style="margin-bottom: 28px; text-align: center;">
+          <div class="eyebrow">Delegate Intake</div>
+          <h2 style="font-size: 1.6rem; margin-bottom: 6px;">Start your SVRIAS 2026 registration</h2>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin: 0;">
+            Enter your basic details once. ScholarVault will securely resume your selected category, confirm Gold benefits and show the final amount before payment.
+          </p>
+        </div>
+
+        <form id="registrationForm" class="form-grid">
+          <div class="field">
+            <label for="regName">Full Legal Name <span class="req">*</span></label>
+            <input id="regName" name="name" required placeholder="Dr. Jane Smith" />
+          </div>
+
+          <div class="field">
+            <label for="regEmail">Email Address <span class="req">*</span></label>
+            <input id="regEmail" name="email" type="email" required placeholder="jane.smith@institution.edu" />
+          </div>
+
+          <input type="hidden" name="query_type" required />
+          <input type="hidden" name="category_id" />
+          <input type="hidden" name="category_code" />
+          <input type="hidden" name="currency" value="INR" />
+
+          <div class="field">
+            <label for="regPhone">Phone / WhatsApp <span class="req">*</span></label>
+            <input id="regPhone" name="phone" type="tel" required placeholder="+91 98765 43210" />
+          </div>
+
+          <div class="field">
+            <label for="regInst">Institution / Organisation <span class="req">*</span></label>
+            <input id="regInst" name="institution" required placeholder="University / Corporation" />
+          </div>
+
+          <div class="field">
+            <label for="regCountry">Country of Residence <span class="req">*</span></label>
+            <input id="regCountry" name="country" required placeholder="e.g. United States, India, Germany" />
+          </div>
+
+          <div class="field">
+            <label for="regPaperId">Accepted Abstract ID (if applicable)</label>
+            <input id="regPaperId" name="paper_id" placeholder="e.g. SVRIAS-2026-084" />
+          </div>
+
+          <div class="field full">
+            <p class="submission-critical-note"><strong>Pricing note:</strong> INR and USD are configured category rates, not live currency conversions. Taxes or payment charges are disclosed before checkout.</p>
+            <div class="registration-sticky-summary" aria-live="polite">
+              <div><small>Selected registration</small><strong id="registrationSummaryName">Select a category above</strong><span id="registrationSummaryPrice">—</span></div>
+              <button id="registrationContinue" class="btn btn-primary form-submit" type="submit" disabled>Continue securely <i data-lucide="arrow-right"></i></button>
+            </div>
+          </div>
+        </form>
+
+        <div class="form-success">
+          <div class="form-success__icon"><i data-lucide="check-circle-2"></i></div>
+          <div class="form-success__title">Continue in ScholarVault</div>
+          <p class="form-success__text">
+            Your starter details have been saved. Continue securely in ScholarVault to verify eligibility, review the final price and complete registration.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
+<section class="section" aria-labelledby="registration-faq-title"><div class="site-shell"><div class="section-heading"><div class="eyebrow">Registration Questions</div><h2 id="registration-faq-title" class="section-title">Registration <span>Answers</span></h2></div><div class="faq-list"><details><summary>Who can register without submitting an abstract?</summary><p>Listener and general delegate registrations may be completed directly without abstract acceptance.</p></details><details><summary>Are taxes and payment charges disclosed?</summary><p>Applicable taxes and payment-processing charges, if any, will be disclosed before payment.</p></details><details><summary>Can international delegates pay in USD?</summary><p>USD category rates are available for international delegates and are not live foreign-exchange conversions.</p></details></div></div></section>
+  <footer class="footer">
+    <!-- GENERATED: edit shared/site-config.json or tools/build-shared-shell.mjs -->
+    <div class="site-shell">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="navbar__logo-text"><strong style="font-size:1.3rem">Responsible AI & Integrity</strong><span>AI Summit 2026</span></div>
+          <p>ScholarVault Research Integrity &amp; Responsible AI Summit 2026 is an international virtual forum advancing ethical governance, algorithmic accountability, and reproducible science.</p>
+          <div class="footer__organizer"><img class="organizer-mark" src="assets/icon-512.png" alt="ScholarVault" /><div><span>Organised by</span><strong>ScholarVault Conferences</strong></div></div>
+          <a class="footer__assessment" href="badge.html"><i data-lucide="shield-check"></i><span><strong>SCVS assessment</strong><small>Assessment pending &middot; verification is never self-declared</small></span></a>
+        </div>
+        <div class="footer__col"><strong>Conference</strong><a href="about.html">About Summit</a><a href="call-for-papers.html">Call for Papers</a><a href="speakers.html">Speakers</a><a href="committee.html">Committee</a><a href="awards.html">Summit Awards</a><a href="blog.html">Insights &amp; Blog</a></div>
+        <div class="footer__col"><strong>Participate</strong><button type="button" onclick="openInterestModal()">Express Interest</button><a href="submit-paper.html" data-scholarvault-action="submit">Submit Abstract</a><a href="speaker-form.html">Apply as Speaker</a><a href="committee-form.html">Join Committee</a><a href="register.html">Register Delegate</a></div>
+        <div class="footer__col"><strong>Information</strong><a href="downloads.html">Brochure &amp; Downloads</a><a href="media.html">Media &amp; Press</a><a href="privacy.html">Privacy Policy</a><a href="refund.html">Refund Policy</a><a href="contact.html">Contact Us</a></div>
+      </div>
+      <div class="footer__social-block">
+        <nav class="social-links" aria-label="ScholarVault social media">
+              <a href="https://www.instagram.com/scholarvault.in/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Instagram" title="Instagram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/instagram.png" alt="" /></span><span class="sr-only">Instagram</span></a>
+              <a href="https://www.facebook.com/scholarvault.in" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Facebook" title="Facebook"><span class="social-icon" aria-hidden="true"><img src="assets/Social/facebook (1).png" alt="" /></span><span class="sr-only">Facebook</span></a>
+              <a href="https://www.linkedin.com/company/thescholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on LinkedIn" title="LinkedIn"><span class="social-icon" aria-hidden="true"><img src="assets/Social/linkedin.png" alt="" /></span><span class="sr-only">LinkedIn</span></a>
+              <a href="https://www.reddit.com/r/ScholarVault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Reddit" title="Reddit"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-reddit-24.png" alt="" /></span><span class="sr-only">Reddit</span></a>
+              <a href="https://in.pinterest.com/scholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Pinterest" title="Pinterest"><span class="social-icon" aria-hidden="true"><img src="assets/Social/pinterest.svg" alt="" /></span><span class="sr-only">Pinterest</span></a>
+              <a href="https://x.com/scholarvaultin" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on X" title="X"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-x-48.png" alt="" /></span><span class="sr-only">X</span></a>
+              <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on WhatsApp" title="WhatsApp"><span class="social-icon" aria-hidden="true"><img src="assets/Social/social.png" alt="" /></span><span class="sr-only">WhatsApp</span></a>
+              <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Telegram" title="Telegram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/telegram.png" alt="" /></span><span class="sr-only">Telegram</span></a>
+        </nav>
+      </div>
+      <div class="footer__trust">
+        <div class="footer__payment-methods"><img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" /><img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" /><img src="assets/idzRNcC9U5_logos.png" alt="BHIM UPI" /><img class="payment-logo payment-logo--gpay" src="assets/gpay-logo.png" alt="Google Pay" /></div>
+        <div class="footer__protection"><img class="protection-logo protection-logo--website" src="assets/idITJgioup_logos.png" alt="Website Protection" /><img class="protection-logo protection-logo--msme" src="assets/idUAcNCLcQ_logos.png" alt="MSME registration" /><img src="assets/App QR.png" alt="ScholarVault QR code" /></div>
+      </div>
+      <div class="footer__bottom"><p>&copy; 2026 SVRIAS &bull; ScholarVault. All rights reserved.</p><div class="footer__bottom-links"><a href="privacy.html">Privacy Policy</a><a href="refund.html">Refund Policy</a><a href="contact.html">Contact Desk</a></div></div>
+    </div>
+  </footer>
+  <button class="social-dock-toggle" id="socialDockToggle" type="button" aria-label="Open contact and support" aria-expanded="false" aria-controls="socialDock"><i data-lucide="message-circle-question" aria-hidden="true"></i><span>Support</span></button>
+  <aside class="social-dock" id="socialDock" aria-label="Contact and support">
+    <div class="social-dock__head"><strong>Contact &amp; Support</strong><button type="button" id="socialDockClose" aria-label="Close contact and support"><i data-lucide="x"></i></button></div>
+    <a class="support-email" href="mailto:conferences@scholarvault.in" aria-label="Email the ScholarVault Conference Desk" title="Conference Desk email"><i data-lucide="mail" aria-hidden="true"></i><span>Conference Desk</span></a>
+    <div class="social-links social-links--dock"><a href="https://www.instagram.com/scholarvault.in/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Instagram" title="Instagram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/instagram.png" alt="" /></span><span class="sr-only">Instagram</span></a>
+              <a href="https://www.facebook.com/scholarvault.in" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Facebook" title="Facebook"><span class="social-icon" aria-hidden="true"><img src="assets/Social/facebook (1).png" alt="" /></span><span class="sr-only">Facebook</span></a>
+              <a href="https://www.linkedin.com/company/thescholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on LinkedIn" title="LinkedIn"><span class="social-icon" aria-hidden="true"><img src="assets/Social/linkedin.png" alt="" /></span><span class="sr-only">LinkedIn</span></a>
+              <a href="https://www.reddit.com/r/ScholarVault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Reddit" title="Reddit"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-reddit-24.png" alt="" /></span><span class="sr-only">Reddit</span></a>
+              <a href="https://in.pinterest.com/scholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Pinterest" title="Pinterest"><span class="social-icon" aria-hidden="true"><img src="assets/Social/pinterest.svg" alt="" /></span><span class="sr-only">Pinterest</span></a>
+              <a href="https://x.com/scholarvaultin" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on X" title="X"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-x-48.png" alt="" /></span><span class="sr-only">X</span></a>
+              <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on WhatsApp" title="WhatsApp"><span class="social-icon" aria-hidden="true"><img src="assets/Social/social.png" alt="" /></span><span class="sr-only">WhatsApp</span></a>
+              <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Telegram" title="Telegram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/telegram.png" alt="" /></span><span class="sr-only">Telegram</span></a></div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://app.scholarvault.in/conference-embed.js" data-conference="research-integrity-responsible-ai-summit-2026" data-origin="https://app.scholarvault.in"></script>
+  <script src="js/main.js"></script>
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6a1556cb3f29381c3623f33e/1jphlm3mo';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+

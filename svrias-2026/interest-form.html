@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Express Interest | SVRIAS 2026</title>
+  <meta name="description" content="Express your interest in attending, presenting, or reviewing at the ScholarVault Research Integrity & Responsible AI Summit 2026." />
+  <meta name="theme-color" content="#ffffff" />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+  <link rel="canonical" href="https://researchintegrity2026.scholarvault.in/interest-form.html" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/ui-polish.css">
+<meta name="robots" content="noindex,follow" />
+</head>
+<body data-site-page="interest-form.html">
+  <!-- GENERATED: edit shared/site-config.json or tools/build-shared-shell.mjs -->
+  <div class="navbar__banner">
+    <span>Virtual Summit &bull; 14 November 2026 &bull; Call for Abstracts Open</span>
+  </div>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a class="navbar__logo" href="index.html" aria-label="SVRIAS 2026 home">
+        <img src="assets/icon-512.png" alt="ScholarVault" />
+        <div class="navbar__logo-text">
+          <strong>Responsible AI & Integrity</strong>
+          <span>AI Summit 2026</span>
+        </div>
+      </a>
+      <nav class="navbar__links" aria-label="Primary navigation">
+        <a href="index.html" class="navbar__link active">Home</a>
+        <a href="about.html" class="navbar__link">About</a>
+        <a href="call-for-papers.html" class="navbar__link">Call for Papers</a>
+        <a href="speakers.html" class="navbar__link">Speakers</a>
+        <a href="committee.html" class="navbar__link">Committee</a>
+        <a href="register.html" class="navbar__link">Register</a>
+        <a href="awards.html" class="navbar__link">Awards</a>
+        <a href="blog.html" class="navbar__link">Blog</a>
+        <a href="contact.html" class="navbar__link">Contact</a>
+      </nav>
+      <div class="navbar__cta">
+        <button class="btn btn-outline btn-sm" type="button" onclick="openInterestModal()">Express Interest</button>
+        <a class="btn btn-primary btn-sm" href="register.html" data-scholarvault-action="register">Register Now <i data-lucide="arrow-right"></i></a>
+      </div>
+      <button class="navbar__hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <nav class="navbar__mobile" id="mobileMenu" aria-label="Mobile navigation">
+    <a href="index.html" class="active">Home</a>
+    <a href="about.html" class="">About</a>
+    <a href="call-for-papers.html" class="">Call for Papers</a>
+    <a href="speakers.html" class="">Speakers</a>
+    <a href="committee.html" class="">Committee</a>
+    <a href="register.html" class="">Register</a>
+    <a href="awards.html" class="">Awards</a>
+    <a href="blog.html" class="">Blog</a>
+    <a href="contact.html" class="">Contact</a>
+    <button type="button" onclick="openInterestModal()">Express Interest</button>
+    <a href="register.html" class="btn btn-primary" data-scholarvault-action="register">Register Now</a>
+  </nav>
+
+  <!-- Page Hero Header -->
+  <section class="page-hero">
+    <div class="site-shell">
+      <div class="page-hero__inner reveal">
+        <div class="breadcrumbs">
+          <a href="index.html">Home</a>
+          <span>/</span>
+          <span>Express Interest</span>
+        </div>
+        <div class="eyebrow">Stay Connected</div>
+        <h1 class="page-hero__title">Express Your <span>Interest in SVRIAS 2026</span></h1>
+        <p class="page-hero__desc">
+          Sign up to receive early notifications, call-for-papers reminders, keynote schedule alerts, and exclusive early bird registration discount codes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interest Form Section -->
+  <section class="section section--mist">
+    <div class="site-shell">
+      <div class="form-shell reveal" id="interestWrap">
+        <div style="margin-bottom: 28px; text-align: center;">
+          <h2 style="font-size: 1.6rem; margin-bottom: 6px;">Express Interest Form</h2>
+          <p style="color: var(--text-secondary); font-size: 0.92rem; margin: 0;">
+            Share your research profile to receive priority notifications for SVRIAS 2026.
+          </p>
+        </div>
+
+        <form id="interestForm" class="form-grid">
+          <div class="field">
+            <label for="intName">Full Name <span class="req">*</span></label>
+            <input id="intName" name="name" required placeholder="Dr. Jane Smith" />
+          </div>
+
+          <div class="field">
+            <label for="intEmail">Email Address <span class="req">*</span></label>
+            <input id="intEmail" name="email" type="email" required placeholder="jane.smith@institution.edu" />
+          </div>
+
+          <div class="field">
+            <label for="intInst">Institution / Organisation <span class="req">*</span></label>
+            <input id="intInst" name="institution" required placeholder="University or Research Lab" />
+          </div>
+
+          <div class="field">
+            <label for="intCountry">Country <span class="req">*</span></label>
+            <input id="intCountry" name="country" required placeholder="e.g. United Kingdom, India, USA" />
+          </div>
+
+          <div class="field">
+            <label for="intRole">Your Primary Academic Role <span class="req">*</span></label>
+            <select id="intRole" name="role" required>
+              <option value="">Select your role...</option>
+              <option value="Author / Presenting Researcher">Author / Presenting Researcher</option>
+              <option value="PhD Candidate / Student Scholar">PhD Candidate / Student Scholar</option>
+              <option value="Faculty / Professor">Faculty / Professor</option>
+              <option value="Keynote Speaker / Panelist Candidate">Keynote Speaker / Panelist Candidate</option>
+              <option value="Peer Reviewer / Committee Candidate">Peer Reviewer / Committee Candidate</option>
+              <option value="Industry & Ethics Officer">Industry &amp; Ethics Officer</option>
+              <option value="General Delegate / Listener">General Delegate / Listener</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="intTrack">Track of Primary Interest <span class="req">*</span></label>
+            <select id="intTrack" name="track" required>
+              <option value="">Select primary track...</option>
+              <option value="Track 1: AI Ethics & Governance">Track 1: AI Ethics &amp; Governance</option>
+              <option value="Track 2: Research Integrity in AI Era">Track 2: Research Integrity in AI Era</option>
+              <option value="Track 3: Responsible AI Frameworks">Track 3: Responsible AI Frameworks</option>
+              <option value="Track 4: Authorship, Attribution & AI Content">Track 4: Authorship, Attribution &amp; AI Content</option>
+              <option value="Track 5: Peer Review & Reproducibility">Track 5: Peer Review &amp; Reproducibility</option>
+              <option value="Track 6: Data Privacy & Accountability">Track 6: Data Privacy &amp; Accountability</option>
+              <option value="All Tracks / General Interest">All Tracks / General Interest</option>
+            </select>
+          </div>
+
+          <div class="field full">
+            <label for="intNotes">Optional Notes or Research Topic Summary</label>
+            <textarea id="intNotes" name="message" rows="3" placeholder="Tell us briefly what research you plan to submit or what topics you'd like to see covered..."></textarea>
+          </div>
+
+          <div class="field full">
+            <label class="check-row">
+              <input type="checkbox" name="newsletter" />
+              <span>I would like to receive official SVRIAS announcements and conference updates. I can unsubscribe at any time. See our Privacy Policy.</span>
+            </label>
+          </div>
+
+          <div class="field full">
+            <button class="btn btn-primary btn-lg form-submit" type="submit">
+              Submit Express Interest <i data-lucide="arrow-right"></i>
+            </button>
+          </div>
+        </form>
+
+        <div class="form-success">
+          <div class="form-success__icon"><i data-lucide="check-circle-2"></i></div>
+          <div class="form-success__title">Interest Logged!</div>
+          <p class="form-success__text">
+            Thank you for connecting with SVRIAS 2026. We will keep you updated on upcoming deadlines, keynote confirmations, and early bird registration codes.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Footer -->
+  <footer class="footer">
+    <!-- GENERATED: edit shared/site-config.json or tools/build-shared-shell.mjs -->
+    <div class="site-shell">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <div class="navbar__logo-text"><strong style="font-size:1.3rem">Responsible AI & Integrity</strong><span>AI Summit 2026</span></div>
+          <p>ScholarVault Research Integrity &amp; Responsible AI Summit 2026 is an international virtual forum advancing ethical governance, algorithmic accountability, and reproducible science.</p>
+          <div class="footer__organizer"><img class="organizer-mark" src="assets/icon-512.png" alt="ScholarVault" /><div><span>Organised by</span><strong>ScholarVault Conferences</strong></div></div>
+          <a class="footer__assessment" href="badge.html"><i data-lucide="shield-check"></i><span><strong>SCVS assessment</strong><small>Assessment pending &middot; verification is never self-declared</small></span></a>
+        </div>
+        <div class="footer__col"><strong>Conference</strong><a href="about.html">About Summit</a><a href="call-for-papers.html">Call for Papers</a><a href="speakers.html">Speakers</a><a href="committee.html">Committee</a><a href="awards.html">Summit Awards</a><a href="blog.html">Insights &amp; Blog</a></div>
+        <div class="footer__col"><strong>Participate</strong><button type="button" onclick="openInterestModal()">Express Interest</button><a href="submit-paper.html" data-scholarvault-action="submit">Submit Abstract</a><a href="speaker-form.html">Apply as Speaker</a><a href="committee-form.html">Join Committee</a><a href="register.html">Register Delegate</a></div>
+        <div class="footer__col"><strong>Information</strong><a href="downloads.html">Brochure &amp; Downloads</a><a href="media.html">Media &amp; Press</a><a href="privacy.html">Privacy Policy</a><a href="refund.html">Refund Policy</a><a href="contact.html">Contact Us</a></div>
+      </div>
+      <div class="footer__social-block">
+        <nav class="social-links" aria-label="ScholarVault social media">
+              <a href="https://www.instagram.com/scholarvault.in/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Instagram" title="Instagram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/instagram.png" alt="" /></span><span class="sr-only">Instagram</span></a>
+              <a href="https://www.facebook.com/scholarvault.in" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Facebook" title="Facebook"><span class="social-icon" aria-hidden="true"><img src="assets/Social/facebook (1).png" alt="" /></span><span class="sr-only">Facebook</span></a>
+              <a href="https://www.linkedin.com/company/thescholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on LinkedIn" title="LinkedIn"><span class="social-icon" aria-hidden="true"><img src="assets/Social/linkedin.png" alt="" /></span><span class="sr-only">LinkedIn</span></a>
+              <a href="https://www.reddit.com/r/ScholarVault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Reddit" title="Reddit"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-reddit-24.png" alt="" /></span><span class="sr-only">Reddit</span></a>
+              <a href="https://in.pinterest.com/scholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Pinterest" title="Pinterest"><span class="social-icon" aria-hidden="true"><img src="assets/Social/pinterest.svg" alt="" /></span><span class="sr-only">Pinterest</span></a>
+              <a href="https://x.com/scholarvaultin" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on X" title="X"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-x-48.png" alt="" /></span><span class="sr-only">X</span></a>
+              <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on WhatsApp" title="WhatsApp"><span class="social-icon" aria-hidden="true"><img src="assets/Social/social.png" alt="" /></span><span class="sr-only">WhatsApp</span></a>
+              <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Telegram" title="Telegram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/telegram.png" alt="" /></span><span class="sr-only">Telegram</span></a>
+        </nav>
+      </div>
+      <div class="footer__trust">
+        <div class="footer__payment-methods"><img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" /><img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" /><img src="assets/idzRNcC9U5_logos.png" alt="BHIM UPI" /><img class="payment-logo payment-logo--gpay" src="assets/gpay-logo.png" alt="Google Pay" /></div>
+        <div class="footer__protection"><img class="protection-logo protection-logo--website" src="assets/idITJgioup_logos.png" alt="Website Protection" /><img class="protection-logo protection-logo--msme" src="assets/idUAcNCLcQ_logos.png" alt="MSME registration" /><img src="assets/App QR.png" alt="ScholarVault QR code" /></div>
+      </div>
+      <div class="footer__bottom"><p>&copy; 2026 SVRIAS &bull; ScholarVault. All rights reserved.</p><div class="footer__bottom-links"><a href="privacy.html">Privacy Policy</a><a href="refund.html">Refund Policy</a><a href="contact.html">Contact Desk</a></div></div>
+    </div>
+  </footer>
+  <button class="social-dock-toggle" id="socialDockToggle" type="button" aria-label="Open contact and support" aria-expanded="false" aria-controls="socialDock"><i data-lucide="message-circle-question" aria-hidden="true"></i><span>Support</span></button>
+  <aside class="social-dock" id="socialDock" aria-label="Contact and support">
+    <div class="social-dock__head"><strong>Contact &amp; Support</strong><button type="button" id="socialDockClose" aria-label="Close contact and support"><i data-lucide="x"></i></button></div>
+    <a class="support-email" href="mailto:conferences@scholarvault.in" aria-label="Email the ScholarVault Conference Desk" title="Conference Desk email"><i data-lucide="mail" aria-hidden="true"></i><span>Conference Desk</span></a>
+    <div class="social-links social-links--dock"><a href="https://www.instagram.com/scholarvault.in/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Instagram" title="Instagram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/instagram.png" alt="" /></span><span class="sr-only">Instagram</span></a>
+              <a href="https://www.facebook.com/scholarvault.in" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Facebook" title="Facebook"><span class="social-icon" aria-hidden="true"><img src="assets/Social/facebook (1).png" alt="" /></span><span class="sr-only">Facebook</span></a>
+              <a href="https://www.linkedin.com/company/thescholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on LinkedIn" title="LinkedIn"><span class="social-icon" aria-hidden="true"><img src="assets/Social/linkedin.png" alt="" /></span><span class="sr-only">LinkedIn</span></a>
+              <a href="https://www.reddit.com/r/ScholarVault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Reddit" title="Reddit"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-reddit-24.png" alt="" /></span><span class="sr-only">Reddit</span></a>
+              <a href="https://in.pinterest.com/scholarvault/" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Pinterest" title="Pinterest"><span class="social-icon" aria-hidden="true"><img src="assets/Social/pinterest.svg" alt="" /></span><span class="sr-only">Pinterest</span></a>
+              <a href="https://x.com/scholarvaultin" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on X" title="X"><span class="social-icon" aria-hidden="true"><img src="assets/Social/icons8-x-48.png" alt="" /></span><span class="sr-only">X</span></a>
+              <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on WhatsApp" title="WhatsApp"><span class="social-icon" aria-hidden="true"><img src="assets/Social/social.png" alt="" /></span><span class="sr-only">WhatsApp</span></a>
+              <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" aria-label="ScholarVault on Telegram" title="Telegram"><span class="social-icon" aria-hidden="true"><img src="assets/Social/telegram.png" alt="" /></span><span class="sr-only">Telegram</span></a></div>
+  </aside>
+
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://app.scholarvault.in/conference-embed.js" data-conference="research-integrity-responsible-ai-summit-2026" data-origin="https://app.scholarvault.in"></script>
+  <script src="js/main.js"></script>
+  <script type="text/javascript">
+  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+  (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6a1556cb3f29381c3623f33e/1jphlm3mo';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+  })();
+  </script>
+</body>
+</html>
+
+
+
+
+
