@@ -1,6 +1,17 @@
 {
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/about", "destination": "/#record", "permanent": true },
+    { "source": "/agenda", "destination": "/recap", "permanent": true },
+    { "source": "/register", "destination": "/#record", "permanent": true },
+    { "source": "/submit-paper", "destination": "/#record", "permanent": true },
+    { "source": "/speaker-form", "destination": "/#record", "permanent": true },
+    { "source": "/committee-form", "destination": "/#record", "permanent": true },
+    { "source": "/awards", "destination": "/#record", "permanent": true },
+    { "source": "/badge", "destination": "/#record", "permanent": true },
+    { "source": "/admin", "destination": "/#record", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

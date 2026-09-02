@@ -123,6 +123,132 @@ function footer() {
   </aside>`;
 }
 
+/* ── Centralised tracking snippets (read from config.tracking) ── */
+function headTracking() {
+  const snippets = [];
+  if (config.tracking?.ga4) {
+    snippets.push(`  <!-- GA4 -->\n  <script async src="https://www.googletagmanager.com/gtag/js?id=${config.tracking.ga4}"></script>\n  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','${config.tracking.ga4}');</script>`);
+  }
+  if (config.tracking?.clarity) {
+    snippets.push(`  <!-- Clarity -->\n  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","${config.tracking.clarity}")</script>`);
+  }
+  return snippets.join("\n");
+}
+
+function bodyTracking() {
+  if (!config.tracking?.tawkto) return "";
+  return `  <!--Start of Tawk.to Script-->\n  <script type="text/javascript">\n  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();\n  (function(){\n    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];\n    s1.async=true;\n    s1.src='https://embed.tawk.to/${config.tracking.tawkto}';\n    s1.charset='UTF-8';\n    s1.setAttribute('crossorigin','*');\n    s0.parentNode.insertBefore(s1,s0);\n  })();\n  </script>\n  <!--End of Tawk.to Script-->`;
+}
+
+/* ── OG / Twitter / JSON-LD (auto-extracted from page title & description) ── */
+const ogImage = `${config.canonicalOrigin}/assets/og-image.png`;
+
+function generateOgTwitter(file, html) {
+  // Extract existing title and description
+  const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
+  const descMatch = html.match(/<meta\s+name="description"\s+content="([^"]+)"/i);
+  if (!titleMatch || !descMatch) return "";
+  const title = titleMatch[1].replace(/&amp;/g, "&");
+  const desc = descMatch[1].replace(/&amp;/g, "&");
+  const url = file === "index.html" ? `${config.canonicalOrigin}/` : `${config.canonicalOrigin}/${file}`;
+  return `  <!-- Open Graph -->
+  <meta property="og:title" content="${title}" />
+  <meta property="og:description" content="${desc}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="ScholarVault" />
+  <meta property="og:locale" content="en_IN" />
+  <meta property="og:url" content="${url}" />
+  <meta property="og:image" content="${ogImage}" />
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="${title}" />
+  <meta name="twitter:description" content="${desc}" />
+  <meta name="twitter:image" content="${ogImage}" />`;
+}
+
+/* Pages that get OG/Twitter tags */
+const ogPages = new Set([
+  "index.html", "call-for-papers.html", "register.html",
+  "submit-paper.html", "speakers.html", "about.html",
+  "committee.html", "awards.html", "blog.html",
+  "contact.html", "downloads.html", "media.html"
+]);
+
+/* JSON-LD schemas per page */
+function generateJsonLd(file) {
+  const schemas = [];
+  const org = {
+    "@type": "Organization",
+    "name": "ScholarVault Conferences",
+    "url": "https://www.scholarvault.in",
+    "logo": `${config.canonicalOrigin}/assets/icon-512.png`,
+    "sameAs": Object.values(config.social)
+  };
+
+  if (file === "index.html") {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "Event",
+      "name": "Research Integrity & Responsible AI Summit 2026 (SVRIAS)",
+      "description": "International virtual summit on AI ethics, research integrity, algorithmic accountability, and reproducible science.",
+      "startDate": "2026-11-14",
+      "endDate": "2026-11-14",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "location": { "@type": "VirtualLocation", "url": config.canonicalOrigin },
+      "image": ogImage,
+      "organizer": org,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "url": `${config.canonicalOrigin}/register.html`,
+        "description": "Free abstract submission with rolling review"
+      },
+      "isAccessibleForFree": true
+    });
+  }
+
+  if (file === "register.html") {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Conference Registration & Pricing — SVRIAS 2026",
+      "description": "Register for the Research Integrity & Responsible AI Summit 2026. Multiple pricing tiers for students, faculty, and industry.",
+      "url": `${config.canonicalOrigin}/register.html`,
+      "isPartOf": { "@type": "WebSite", "name": "SVRIAS 2026", "url": config.canonicalOrigin }
+    });
+  }
+
+  if (file === "call-for-papers.html" || file === "submit-paper.html") {
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": file === "call-for-papers.html" ? "Call for Papers & Abstracts" : "Submit Your Research Abstract",
+      "url": `${config.canonicalOrigin}/${file}`,
+      "isPartOf": { "@type": "WebSite", "name": "SVRIAS 2026", "url": config.canonicalOrigin }
+    });
+  }
+
+  // BreadcrumbList for all non-index pages
+  if (file !== "index.html") {
+    const pageName = file.replace(".html", "").split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+    schemas.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": config.canonicalOrigin },
+        { "@type": "ListItem", "position": 2, "name": pageName, "item": `${config.canonicalOrigin}/${file}` }
+      ]
+    });
+  }
+
+  if (!schemas.length) return "";
+  return schemas.map(s => `  <script type="application/ld+json">${JSON.stringify(s)}</script>`).join("\n");
+}
+
+
 const htmlFiles = fs.readdirSync(root).filter((name) => name.endsWith(".html") && !["brochure.html", "poster.html"].includes(name));
 for (const file of htmlFiles) {
   const target = path.join(root, file);
@@ -142,6 +268,52 @@ for (const file of htmlFiles) {
     '<script src="js/main.js"></script>',
     `<script src="${config.appOrigin}/conference-embed.js" data-conference="${config.slug}" data-origin="${config.appOrigin}"></script>\n  <script src="js/main.js"></script>`
   );
+
+  /* ── Inject OG / Twitter / JSON-LD ── */
+  // Strip existing OG, Twitter, and JSON-LD tags (for idempotent re-runs)
+  html = html.replace(/\s*<!-- Open Graph -->[\s\S]*?<!-- Twitter Card -->[\s\S]*?twitter:image[^>]*\/>/gi, "");
+  html = html.replace(/\s*<meta\s+property="og:[^"]*"\s+content="[^"]*"\s*\/?>/gi, "");
+  html = html.replace(/\s*<meta\s+name="twitter:[^"]*"\s+content="[^"]*"\s*\/?>/gi, "");
+  html = html.replace(/\s*<script\s+type="application\/ld\+json">[^<]*<\/script>/gi, "");
+
+  if (ogPages.has(file)) {
+    const ogTags = generateOgTwitter(file, html);
+    if (ogTags) {
+      html = html.replace("</head>", `${ogTags}\n</head>`);
+    }
+  }
+
+  const jsonLd = generateJsonLd(file);
+  if (jsonLd) {
+    html = html.replace("</head>", `${jsonLd}\n</head>`);
+  }
+
+  /* ── Inject centralised tracking ── */
+  // Strip GA4: matches the async loader script tag + the inline config script tag
+  html = html.replace(/\s*<!-- GA4 -->\s*<script[^>]*googletagmanager[^>]*><\/script>\s*<script>[^<]*<\/script>/gi, "");
+  // Strip Clarity: comment-wrapped
+  html = html.replace(/\s*<!-- (?:Microsoft )?Clarity -->\s*<script[^>]*>[^<]*clarity\.ms[^<]*<\/script>/gi, "");
+  // Strip Clarity: bare (no comment)
+  html = html.replace(/\s*<script[^>]*>[^<]*clarity\.ms[^<]*<\/script>/gi, "");
+  // Strip Tawk.to: comment-wrapped (Start/End markers)
+  html = html.replace(/\s*<!--\s*Start of Tawk\.to[^>]*-->\s*<script[^>]*>[^<]*tawk\.to[^<]*<\/script>\s*<!--\s*End of Tawk\.to[^>]*-->/gi, "");
+  // Strip Tawk.to: "Live Chat Widget" comment variant
+  html = html.replace(/\s*<!-- Live Chat Widget -->\s*<script[^>]*>[^<]*tawk\.to[^<]*<\/script>/gi, "");
+  // Strip Tawk.to: bare script (no comment)
+  html = html.replace(/\s*<script[^>]*>[^<]*tawk\.to[^<]*<\/script>/gi, "");
+
+  // Inject head tracking (GA4 + Clarity) before </head>
+  const headScripts = headTracking();
+  if (headScripts) {
+    html = html.replace("</head>", `${headScripts}\n</head>`);
+  }
+
+  // Inject body tracking (Tawk.to) before </body>
+  const bodyScripts = bodyTracking();
+  if (bodyScripts) {
+    html = html.replace("</body>", `${bodyScripts}\n</body>`);
+  }
+
   fs.writeFileSync(target, html, "utf8");
 }
 
