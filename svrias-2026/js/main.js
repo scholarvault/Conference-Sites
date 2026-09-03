@@ -806,15 +806,7 @@ function initSecureConferenceJourneys() {
     const shell = paperForm.closest(".form-shell");
     if (shell) shell.innerHTML = `<div class="eyebrow">Secure ScholarVault submission</div><h2 style="font-size:1.7rem;margin:8px 0">Submit securely through ScholarVault</h2><p style="color:var(--text-secondary);line-height:1.7">Sign in or create an account before entering author details or selecting a PDF. ScholarVault saves your abstract, co-authors, declarations and review decision in one protected workspace.</p><div class="grid-2" style="margin:24px 0;text-align:left"><div class="card"><strong>What to prepare</strong><ul class="price-card__features"><li>250–500 word abstract and contribution type</li><li>3–8 comma-separated keywords</li><li>Author and co-author affiliations</li><li>Student mentor details where applicable</li></ul></div><div class="card"><strong>Submission requirements</strong><ul class="price-card__features"><li>AI-use disclosure</li><li>Ethics and originality declaration</li><li>PDF only, maximum 20 MB</li><li>Submission deadline: 30 September 2026</li></ul></div></div><p class="submission-critical-note"><strong>Abstract submission is free.</strong> Acceptance does not guarantee publication, DOI assignment or indexing.</p><div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:24px"><a class="btn btn-primary btn-lg" href="${loginUrl("submit")}">Sign in to Submit Abstract <i data-lucide="arrow-right"></i></a><a class="btn btn-outline btn-lg" href="${loginUrl("submit")}">Create ScholarVault Account</a></div>`;
   }
-  const registrationForm = document.getElementById("registrationForm");
-  if (registrationForm) {
-    const shell = registrationForm.closest(".form-shell");
-    if (shell) {
-      const registrationOpen = Date.now() >= new Date("2026-09-10T00:00:00+05:30").getTime();
-      shell.id = "registration-reminder";
-      shell.innerHTML = registrationOpen ? `<div class="eyebrow">Secure registration</div><h2 style="font-size:1.7rem;margin:8px 0">Continue in ScholarVault</h2><p style="color:var(--text-secondary)">Sign in first to confirm eligibility, see the production price and open the secure Dodo checkout.</p><a class="btn btn-primary btn-lg" href="${loginUrl("register")}" style="margin-top:22px">Sign in to Register <i data-lucide="arrow-right"></i></a>` : `<div class="eyebrow">Registration schedule</div><h2 style="font-size:1.7rem;margin:8px 0">Registration Opens 10 September</h2><p style="color:var(--text-secondary)">Registration and payment are not available yet. Ask us to remind you when the secure ScholarVault registration journey opens.</p><button class="btn btn-primary btn-lg" type="button" onclick="openInterestModal()" style="margin-top:22px">Get Registration Reminder <i data-lucide="bell"></i></button>`;
-    }
-  }
+
 }
 
 // Initialize Everything on DOMContentLoaded
