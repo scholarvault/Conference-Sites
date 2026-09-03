@@ -60,7 +60,7 @@ ${desktop}
       </nav>
       <div class="navbar__cta">
         <button class="btn btn-outline btn-sm" type="button" onclick="openInterestModal()">Express Interest</button>
-        <a class="btn btn-primary btn-sm" href="register.html" data-scholarvault-action="register">Register Now <i data-lucide="arrow-right"></i></a>
+        <a class="btn btn-primary btn-sm" href="register.html">Register Now <i data-lucide="arrow-right"></i></a>
       </div>
       <button class="navbar__hamburger" id="hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -69,7 +69,7 @@ ${desktop}
   <nav class="navbar__mobile" id="mobileMenu" aria-label="Mobile navigation">
 ${mobile}
     <button type="button" onclick="openInterestModal()">Express Interest</button>
-    <a href="register.html" class="btn btn-primary" data-scholarvault-action="register">Register Now</a>
+    <a href="register.html" class="btn btn-primary">Register Now</a>
   </nav>`;
 }
 
