@@ -834,7 +834,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupPlatformForm("committeeForm", "/conferences/research-integrity-responsible-ai-summit-2026/apply/committee", { applicationType: "committee", buttonLabel: "Submit committee application" });
   setupInboundLeadForm("interestForm", "interestWrap", "interest", "Thank you for expressing interest!");
   setupPlatformForm("paperForm", "/dashboard/conferences/research-integrity-responsible-ai-summit-2026/submit", { action: "submit", buttonLabel: "Continue to secure submission" });
-  setupPlatformForm("registrationForm", "/dashboard/conferences/research-integrity-responsible-ai-summit-2026/register", { action: "register", leadSource: "registration_intent", buttonLabel: "Continue to registration" });
+  setupPlatformForm("registrationForm", "/dashboard/conferences/research-integrity-responsible-ai-summit-2026/register", { leadSource: "registration_intent", buttonLabel: "Continue to registration" });
   setupInboundLeadForm("awardForm", "awardWrap", "award_nomination", "Award nomination submitted!");
   setupInboundLeadForm("newsletterForm", "newsletterWrap", "newsletter", "Subscribed to conference updates!");
   initRegistrationStarter();
