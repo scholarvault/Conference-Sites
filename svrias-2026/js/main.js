@@ -590,7 +590,11 @@ function setupPlatformForm(formId, destination, options = {}) {
         if (submitButton) { submitButton.disabled = false; submitButton.innerHTML = options.buttonLabel || "Submit application"; }
         return;
       }
-      window.location.assign(`${getScholarVaultAppOrigin()}${destination}`);
+      if (destination.startsWith("/dashboard")) {
+        window.location.assign(`${getScholarVaultAppOrigin()}/login?next=${encodeURIComponent(destination)}`);
+      } else {
+        window.location.assign(`${getScholarVaultAppOrigin()}${destination}`);
+      }
     } catch (error) {
       showToast(error.message || "We could not connect this form. Please try again.", "error");
       if (submitButton) { submitButton.disabled = false; submitButton.innerHTML = options.buttonLabel || "Try again"; }
