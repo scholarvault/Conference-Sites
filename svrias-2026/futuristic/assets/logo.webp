@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="30%" stop-color="#F59E0B"/>
+      <stop offset="70%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FDE68A" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="bgPlate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181B"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect x="36" y="36" width="440" height="440" rx="88" fill="url(#bgPlate)" stroke="#27272A" stroke-width="3"/>
+  <g filter="url(#softGlow)" stroke="url(#goldGrad)" fill="none" stroke-width="9" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M96 172 V390 L240 406 V140 Z"/>
+    <path d="M124 160 V394"/>
+    <path d="M152 150 V398"/>
+    <path d="M180 144 V402"/>
+    <path d="M416 172 V390 L272 406 V140 Z"/>
+    <path d="M388 160 V394"/>
+    <path d="M360 150 V398"/>
+    <path d="M332 144 V402"/>
+    <circle cx="256" cy="190" r="76" stroke-width="12"/>
+    <circle cx="256" cy="190" r="54" stroke-width="8"/>
+  </g>
+  <path d="M256 148 C232 148 214 166 214 190 C214 205 222 218 234 226 L216 384 C216 388 220 392 225 392 L287 392 C292 392 296 388 296 384 L278 226 C290 218 298 205 298 190 C298 166 280 148 256 148 Z" fill="url(#glowGrad)" filter="url(#softGlow)"/>
+  <path d="M60 60 L240 60 Q260 60 270 75 L380 230 Q390 245 375 255 L60 255 Z" fill="#FFFFFF" opacity="0.04"/>
+</svg>

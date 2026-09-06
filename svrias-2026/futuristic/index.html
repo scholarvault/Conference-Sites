@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research Integrity &amp; Responsible AI Summit 2026 | SVRIAS 2026</title>
+  <meta name="description" content="SVRIAS 2026 is an international virtual summit on 14 November 2026 advancing ethical AI governance, scientific reproducibility, algorithmic accountability, and authorship integrity." />
+
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/favicon.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@700;800&display=swap" rel="stylesheet" />
+  <link href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos" rel="stylesheet" />
+
+  <!-- Font Awesome Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="scrollable">
+
+  <!-- Background Video & Dark Frosted Overlay -->
+  <div class="bg">
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
+        type="video/mp4"
+      />
+    </video>
+    <div class="bg-overlay"></div>
+  </div>
+
+
+  <!-- Centralized Header -->
+  <header class="futuristic-header">
+    <div class="header-container">
+      <a href="index.html" class="brand-link" aria-label="SVRIAS 2026 Home">
+        <div class="brand-logo-wrap">
+          <img src="assets/icon-512.png" alt="ScholarVault" width="40" height="40" onerror="this.src='assets/logo.svg'" />
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">Responsible AI &amp; Integrity</span>
+          <span class="brand-sub">AI Summit 2026 &bull; SVRIAS</span>
+        </div>
+      </a>
+
+      <!-- Complete Navigation Links Matching svrias-2026/index.html -->
+      <nav class="futuristic-nav" aria-label="Primary Navigation">
+        <a href="index.html" class="futuristic-nav-link active">Home</a>
+        <a href="about.html" class="futuristic-nav-link">About</a>
+        <a href="call-for-papers.html" class="futuristic-nav-link">Call for Papers</a>
+        <a href="speakers.html" class="futuristic-nav-link">Speakers</a>
+        <a href="committee.html" class="futuristic-nav-link">Committee</a>
+        <a href="register.html" class="futuristic-nav-link">Register</a>
+        <a href="awards.html" class="futuristic-nav-link">Awards</a>
+        <a href="blog.html" class="futuristic-nav-link">Blog</a>
+        <a href="contact.html" class="futuristic-nav-link">Contact</a>
+      </nav>
+
+      <div class="header-actions">
+        <button class="pill-btn frosted-pill" type="button" onclick="openBrochureModal()"><i class="fa-solid fa-download"></i> Brochure</button>
+        <a href="register.html" class="pill-btn glowing-pill">Register Now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <button class="burger-btn" id="burgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+        <span class="burger-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Sheet & Fullscreen Blur Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay" hidden></div>
+  <nav class="mobile-sheet" id="mobileSheet" aria-label="Mobile Navigation Drawer" hidden>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; padding:0 4px;">
+      <span style="font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:#71717a;">Summit Navigation</span>
+      <button type="button" id="mobileCloseBtn" style="background:none; border:none; color:#ffffff; font-size:18px; cursor:pointer; padding:4px;" aria-label="Close mobile menu"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <a href="index.html" class="sheet-link active"><span>Home</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="about.html" class="sheet-link"><span>About Summit</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="call-for-papers.html" class="sheet-link"><span>Call for Papers</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="speakers.html" class="sheet-link"><span>Speakers</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="committee.html" class="sheet-link"><span>Committee</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="register.html" class="sheet-link"><span>Register</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="awards.html" class="sheet-link"><span>Awards</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="blog.html" class="sheet-link"><span>Blog</span><i class="fa-solid fa-arrow-right"></i></a>
+    <a href="contact.html" class="sheet-link"><span>Contact</span><i class="fa-solid fa-arrow-right"></i></a>
+    <div style="margin-top:14px; display:flex; flex-direction:column; gap:8px;">
+      <button class="sheet-action" style="background:#f4f4f5; color:#000000; border:1px solid #e4e4e7;" type="button" onclick="openBrochureModal()"><i class="fa-solid fa-download"></i> Get Brochure</button>
+      <a href="register.html" class="sheet-action">Register Now <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </nav>
+
+  <!-- Complete Multi-Section Conference Body -->
+  <main class="conference-body">
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero" style="padding-top: clamp(16px, 2.5vh, 32px);">
+      <!-- Floating Cyber Announcement Pill (Option 3) -->
+      <div class="cyber-announcement-wrap">
+        <a href="call-for-papers.html" class="cyber-pill" aria-label="Summit Dates and Editorial Review Info">
+          <span class="cyber-pill-pulse"></span>
+          <span class="cyber-pill-item"><strong>Virtual Summit</strong> &bull; 14 November 2026</span>
+          <span class="cyber-pill-dot">&bull;</span>
+          <span class="cyber-pill-item">Call for Abstracts Open</span>
+          <span class="cyber-pill-dot">&bull;</span>
+          <span class="cyber-pill-badge"><i class="fa-solid fa-bolt"></i> 2–4 Day Review SLA</span>
+        </a>
+      </div>
+
+      <!-- Trust Indicator -->
+      <div class="trust-row anim" style="--d: 0.05s; margin-top: 14px;">
+        <div class="avatar-ring"><div class="avatar-inner"><i class="fa-solid fa-building-columns"></i></div></div>
+        <div class="avatar-ring"><div class="avatar-inner"><i class="fa-solid fa-microchip"></i></div></div>
+        <div class="avatar-ring"><div class="avatar-inner"><i class="fa-solid fa-atom"></i></div></div>
+        <div class="trust-pill"><span class="trust-text">ScholarVault Global Conference Series</span></div>
+      </div>
+
+      <!-- Conference Name Headline -->
+      <h1 class="headline anim">
+        <span class="headline-line line-1">Research Integrity &amp;</span>
+        <span class="headline-line line-2"><span class="headline-gradient">Responsible AI</span> Summit 2026</span>
+      </h1>
+
+      <!-- Subtitle Description -->
+      <p class="subhead anim" style="--d: 0.25s; max-width: 740px;">
+        Pioneering ethical AI governance, scientific reproducibility, algorithmic transparency, and authorship accountability in the generative intelligence era. Free abstract intake with rapid 2–4 day editorial peer-review decisions.
+      </p>
+
+      <!-- Key Summit Metadata Pills -->
+      <div class="hero-meta-grid anim" style="--d: 0.35s;">
+        <div class="hero-meta-card">
+          <div class="hero-meta-icon"><i class="fa-regular fa-calendar-check"></i></div>
+          <div class="hero-meta-text">
+            <strong>14 November 2026</strong>
+            <span>1-Day Virtual Summit</span>
+          </div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="hero-meta-icon"><i class="fa-solid fa-video"></i></div>
+          <div class="hero-meta-text">
+            <strong>100% Virtual Delivery</strong>
+            <span>Interactive Zoom Plenary</span>
+          </div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="hero-meta-icon"><i class="fa-solid fa-network-wired"></i></div>
+          <div class="hero-meta-text">
+            <strong>6 Research Tracks</strong>
+            <span>Ethics, Governance &amp; XAI</span>
+          </div>
+        </div>
+        <div class="hero-meta-card">
+          <div class="hero-meta-icon"><i class="fa-solid fa-book-bookmark"></i></div>
+          <div class="hero-meta-text">
+            <strong>Virtual Presentation</strong>
+            <span>Universal Format &amp; ISBN</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Virtual Summit Countdown Card -->
+      <div class="countdown-strip anim" style="--d: 0.42s; width: 100%;" data-countdown-target="summit">
+        <div class="countdown-title">
+          <span class="pulse-dot"></span>
+          <span>Live Virtual Summit Commences: 14 November 2026</span>
+        </div>
+        <div class="countdown-grid">
+          <div class="cd-box"><div class="cd-num cd-summit-days" id="cdDays" data-summit-days>00</div><div class="cd-label">Days</div></div>
+          <div class="cd-box"><div class="cd-num cd-summit-hours" id="cdHours" data-summit-hours>00</div><div class="cd-label">Hours</div></div>
+          <div class="cd-box"><div class="cd-num cd-summit-mins" id="cdMins" data-summit-mins>00</div><div class="cd-label">Minutes</div></div>
+          <div class="cd-box"><div class="cd-num cd-summit-secs" id="cdSecs" data-summit-secs>00</div><div class="cd-label">Seconds</div></div>
+        </div>
+      </div>
+
+      <!-- Hero Actions -->
+      <div class="cta-group anim" style="--d: 0.5s;">
+        <a href="submit-paper.html" class="cta-btn">
+          <span>Submit Abstract</span>
+          <i class="fa-solid fa-file-arrow-up"></i>
+        </a>
+        <a href="register.html" class="cta-secondary">
+          <span>Register Now</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <button type="button" class="cta-secondary" onclick="openBrochureModal()">
+          <i class="fa-solid fa-download"></i>
+          <span>Get Brochure</span>
+        </button>
+        <button type="button" class="cta-secondary" onclick="openInterestModal()">
+          <i class="fa-regular fa-bell"></i>
+          <span>Express Interest</span>
+        </button>
+      </div>
+
+      <!-- 4 Core Metric Stats -->
+      <div class="stats-grid" style="width: 100%; max-width: 900px; margin-top: clamp(32px, 5vh, 48px);">
+        <div class="stat-item" data-open-drawer title="View Summit Tracks & Scope">
+          <span class="stat-glyph">#</span>
+          <div class="stat-value">
+            <span class="stat-number" data-target="6" data-decimals="0">0</span>
+          </div>
+          <span class="stat-label">Core Research Tracks</span>
+        </div>
+
+        <div class="stat-item" data-open-drawer title="Rapid Editorial Decision Window">
+          <span class="stat-glyph">&lt;</span>
+          <div class="stat-value">
+            <span class="stat-number" data-target="4" data-decimals="0">0</span>
+            <span class="stat-suffix">Days</span>
+          </div>
+          <span class="stat-label">Review SLA Window</span>
+        </div>
+
+        <div class="stat-item" data-open-drawer title="Online Participation Worldwide">
+          <span class="stat-glyph">%</span>
+          <div class="stat-value">
+            <span class="stat-number" data-target="100" data-decimals="0">0</span>
+            <span class="stat-suffix">%</span>
+          </div>
+          <span class="stat-label">Virtual Global Access</span>
+        </div>
+
+        <div class="stat-item" data-open-drawer title="Zero Cost Submission Intake">
+          <span class="stat-glyph">*</span>
+          <div class="stat-value">
+            <span class="stat-suffix">FREE</span>
+          </div>
+          <span class="stat-label">Abstract Intake</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. ABOUT THE CONFERENCE & THEME -->
+    <section class="conf-section" id="about-theme">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-compass"></i> Summit Overview</span>
+        <h2 class="section-title">Setting the Benchmark for <span>Responsible AI</span></h2>
+        <p class="section-desc">
+          As generative AI transforms academic publication, peer review, scientific discovery, and automated decision-making, SVRIAS 2026 convenes global scholars and industry leaders to safeguard truth, transparency, and research integrity.
+        </p>
+      </div>
+
+      <div class="glass-grid">
+        <div class="glass-card">
+          <div class="card-num">01 / INTEGRITY CRISIS</div>
+          <h3 class="card-title">Safeguarding Science</h3>
+          <p class="card-desc">
+            Addressing synthetic paper-mills, hallucinatory citations, and automated image tampering through forensic detection algorithms and robust verification standards.
+          </p>
+          <ul class="card-list">
+            <li><i class="fa-solid fa-check"></i> Deepfake figure forensic detection</li>
+            <li><i class="fa-solid fa-check"></i> Paper-mill disruption methodologies</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-num">02 / GOVERNANCE FRAMEWORKS</div>
+          <h3 class="card-title">Regulatory &amp; Policy Alignment</h3>
+          <p class="card-desc">
+            Operationalizing the EU AI Act, international safety treaties, algorithmic auditing protocols, and institutional compliance standards for machine intelligence.
+          </p>
+          <ul class="card-list">
+            <li><i class="fa-solid fa-check"></i> Auditing autonomous decision systems</li>
+            <li><i class="fa-solid fa-check"></i> Human-in-the-loop governance</li>
+          </ul>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-num">03 / REPRODUCIBLE SCIENCE</div>
+          <h3 class="card-title">Artifacts &amp; Open Evidence</h3>
+          <p class="card-desc">
+            Transitioning academic publishing toward verifiable artifacts, containerized computational reproduction, and transparent author contribution taxonomies (CRediT).
+          </p>
+          <ul class="card-list">
+            <li><i class="fa-solid fa-check"></i> Verifiable computational benchmarks</li>
+            <li><i class="fa-solid fa-check"></i> AI co-authorship attribution norms</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SIX CORE RESEARCH TRACKS -->
+    <section class="conf-section" id="tracks">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-layer-group"></i> Research Scope</span>
+        <h2 class="section-title">Six Pillars of <span>AI Governance &amp; Integrity</span></h2>
+        <p class="section-desc">
+          Submit original theoretical, empirical, algorithmic, or policy contributions under our six thematic tracks.
+        </p>
+      </div>
+
+      <div class="tracks-grid">
+        <!-- Track 01 -->
+        <article class="track-box">
+          <div>
+            <div class="track-header">
+              <span class="track-tag">TRACK 01</span>
+              <div class="track-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+            </div>
+            <h3 class="track-name">AI Ethics &amp; Governance</h3>
+            <p class="track-details">
+              Algorithmic bias mitigation, safety benchmarks, international compliance treaties, and human-in-the-loop oversight frameworks.
+            </p>
+            <ul class="track-topics-list">
+              <li><i class="fa-solid fa-circle-check"></i> Algorithmic fairness &amp; debiasing</li>
+              <li><i class="fa-solid fa-circle-check"></i> Regulatory policy &amp; EU AI Act</li>
+              <li><i class="fa-solid fa-circle-check"></i> Autonomous decision accountability</li>
+            </ul>
+          </div>
+          <a href="call-for-papers.html" class="pill-btn frosted-pill" style="align-self: flex-start;">Track Guidelines <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <!-- Track 02 -->
+        <article class="track-box">
+          <div>
+            <div class="track-header">
+              <span class="track-tag">TRACK 02</span>
+              <div class="track-icon"><i class="fa-solid fa-shield-virus"></i></div>
+            </div>
+            <h3 class="track-name">Research Integrity in the AI Era</h3>
+            <p class="track-details">
+              Detecting synthetic data fabrication, automated image tampering, LLM hallucinations, and maintaining publication standards.
+            </p>
+            <ul class="track-topics-list">
+              <li><i class="fa-solid fa-circle-check"></i> Forensic synthetic image analysis</li>
+              <li><i class="fa-solid fa-circle-check"></i> Hallucination audits in literature</li>
+              <li><i class="fa-solid fa-circle-check"></i> Anti-predatory publishing defenses</li>
+            </ul>
+          </div>
+          <a href="call-for-papers.html" class="pill-btn frosted-pill" style="align-self: flex-start;">Track Guidelines <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <!-- Track 03 -->
+        <article class="track-box">
+          <div>
+            <div class="track-header">
+              <span class="track-tag">TRACK 03</span>
+              <div class="track-icon"><i class="fa-solid fa-diagram-project"></i></div>
+            </div>
+            <h3 class="track-name">Responsible AI Frameworks</h3>
+            <p class="track-details">
+              Explainable AI (XAI), model interpretability, robust adversarial red-teaming, and safety verification across critical domains.
+            </p>
+            <ul class="track-topics-list">
+              <li><i class="fa-solid fa-circle-check"></i> Explainable &amp; interpretable ML</li>
+              <li><i class="fa-solid fa-circle-check"></i> Adversarial robustness &amp; red-teaming</li>
+              <li><i class="fa-solid fa-circle-check"></i> Value alignment &amp; constitutional AI</li>
+            </ul>
+          </div>
+          <a href="call-for-papers.html" class="pill-btn frosted-pill" style="align-self: flex-start;">Track Guidelines <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <!-- Track 04 -->
+        <article class="track-box">
+          <div>
+            <div class="track-header">
+              <span class="track-tag">TRACK 04</span>
+              <div class="track-icon"><i class="fa-solid fa-pen-nib"></i></div>
+            </div>
+            <h3 class="track-name">Authorship, Attribution &amp; AI Content</h3>
+            <p class="track-details">
+              Establishing rigorous co-authorship boundaries, licensing generative outputs, cryptographic watermarking, and provenance norms.
+            </p>
+            <ul class="track-topics-list">
+              <li><i class="fa-solid fa-circle-check"></i> AI contributor taxonomies &amp; CRediT</li>
+              <li><i class="fa-solid fa-circle-check"></i> Watermarking &amp; provenance tracking</li>
+              <li><i class="fa-solid fa-circle-check"></i> Training data copyright and consent</li>
+            </ul>
+          </div>
+          <a href="call-for-papers.html" class="pill-btn frosted-pill" style="align-self: flex-start;">Track Guidelines <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <!-- Track 05 -->
+        <article class="track-box">
+          <div>
+            <div class="track-header">
+              <span class="track-tag">TRACK 05</span>
+              <div class="track-icon"><i class="fa-solid fa-flask-vial"></i></div>
+            </div>
+            <h3 class="track-name">Peer Review &amp; Reproducibility</h3>
+            <p class="track-details">
+              Open code and artifact sharing, algorithmic peer-review auditing, benchmark reproducibility, and verification standards.
+            </p>
+            <ul class="track-topics-list">
+              <li><i class="fa-solid fa-circle-check"></i> Artifact badges &amp; container verification</li>
+              <li><i class="fa-solid fa-circle-check"></i> AI-assisted peer-review integrity</li>
+              <li><i class="fa-solid fa-circle-check"></i> Reproducibility crisis interventions</li>
+            </ul>
+          </div>
+          <a href="call-for-papers.html" class="pill-btn frosted-pill" style="align-self: flex-start;">Track Guidelines <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+
+        <!-- Track 06 -->
+        <article class="track-box">
+          <div>
+            <div class="track-header">
+              <span class="track-tag">TRACK 06</span>
+              <div class="track-icon"><i class="fa-solid fa-user-shield"></i></div>
+            </div>
+            <h3 class="track-name">Data Privacy &amp; Accountability</h3>
+            <p class="track-details">
+              Differential privacy, secure federated learning, synthetic data ethics, model auditing, and machine unlearning boundaries.
+            </p>
+            <ul class="track-topics-list">
+              <li><i class="fa-solid fa-circle-check"></i> Differential privacy &amp; federated ML</li>
+              <li><i class="fa-solid fa-circle-check"></i> Synthetic data privacy boundaries</li>
+              <li><i class="fa-solid fa-circle-check"></i> Third-party algorithmic auditing</li>
+            </ul>
+          </div>
+          <a href="call-for-papers.html" class="pill-btn frosted-pill" style="align-self: flex-start;">Track Guidelines <i class="fa-solid fa-arrow-right"></i></a>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4. 5-STEP AUTHOR JOURNEY -->
+    <section class="conf-section" id="journey">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-route"></i> Conference Pathway</span>
+        <h2 class="section-title">Your <span>Conference Journey</span></h2>
+        <p class="section-desc">
+          A seamless, transparent pathway from abstract submission to virtual presentation and citable archival.
+        </p>
+      </div>
+
+      <div class="journey-timeline">
+        <div class="journey-node">
+          <div class="journey-num">01</div>
+          <div class="journey-icon"><i class="fa-solid fa-file-lines"></i></div>
+          <h3>Submit Abstract</h3>
+          <p>Submit your 250–500 word abstract online under your chosen track. 100% free intake.</p>
+        </div>
+
+        <div class="journey-node">
+          <div class="journey-num">02</div>
+          <div class="journey-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+          <h3>Quality Review</h3>
+          <p>Receive formal editorial peer-review decision letter within 2–4 working days.</p>
+        </div>
+
+        <div class="journey-node">
+          <div class="journey-num">03</div>
+          <div class="journey-icon"><i class="fa-solid fa-ticket"></i></div>
+          <h3>Register</h3>
+          <p>Confirm attendance with transparent Early Bird pricing in INR or USD.</p>
+        </div>
+
+        <div class="journey-node">
+          <div class="journey-num">04</div>
+          <div class="journey-icon"><i class="fa-solid fa-display"></i></div>
+          <h3>Virtual Presentation</h3>
+          <p>Present live online as an official SVRIAS 2026 Virtual Research Presenter.</p>
+        </div>
+
+        <div class="journey-node">
+          <div class="journey-num">05</div>
+          <div class="journey-icon"><i class="fa-solid fa-certificate"></i></div>
+          <h3>Archival &amp; Record</h3>
+          <p>Receive official digital certificate and permanent inclusion in conference proceedings.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. IMPORTANT DATES & TIMELINE -->
+    <section class="conf-section" id="dates">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-regular fa-calendar-days"></i> Milestone Schedule</span>
+        <h2 class="section-title">Key <span>Summit Dates</span></h2>
+        <p class="section-desc">
+          Mark your calendar to take advantage of rolling reviews and discounted early bird registration passes.
+        </p>
+      </div>
+
+      <div class="dates-grid-layout">
+        <div class="dates-card-list">
+          <div class="date-row">
+            <div class="date-badge-box">
+              <strong>IMMEDIATE</strong>
+              <small>ACTIVE</small>
+            </div>
+            <div class="date-content-box">
+              <h3>Abstract Submissions Open</h3>
+              <p>Submit anytime for rapid 2–4 day rolling editorial decisions and feedback.</p>
+            </div>
+          </div>
+
+          <div class="date-row">
+            <div class="date-badge-box">
+              <strong>15 OCT 2026</strong>
+              <small>FINAL CALL</small>
+            </div>
+            <div class="date-content-box">
+              <h3>Abstract Submission Deadline</h3>
+              <p>Final deadline for 250–500 word structured abstract submissions.</p>
+            </div>
+          </div>
+
+          <div class="date-row">
+            <div class="date-badge-box">
+              <strong>25 OCT 2026</strong>
+              <small>CLOSES</small>
+            </div>
+            <div class="date-content-box">
+              <h3>Early Bird Registration Deadline</h3>
+              <p>Last day to secure delegate passes at discounted early-bird tier.</p>
+            </div>
+          </div>
+
+          <div class="date-row">
+            <div class="date-badge-box">
+              <strong>14 NOV 2026</strong>
+              <small>SUMMIT DAY</small>
+            </div>
+            <div class="date-content-box">
+              <h3>Summit Day (Virtual on Zoom)</h3>
+              <p>Live plenary keynotes, track presentation sessions, and interactive Q&amp;A stages.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Countdown Card Widget -->
+        <div class="glass-card" style="text-align: center; padding: clamp(24px, 3.5vw, 36px);" data-countdown-target="abstract">
+          <span class="section-eyebrow" style="margin-bottom: 8px;"><i class="fa-regular fa-hourglass-half"></i> Time Remaining</span>
+          <h3 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff;">Abstract Deadline Countdown</h3>
+          <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 24px;">Submissions close 15 October 2026 at 23:59 UTC.</p>
+
+          <div class="countdown-grid" style="margin-bottom: 28px;">
+            <div class="cd-box"><div class="cd-num cd-abstract-days" data-abstract-days>00</div><div class="cd-label">Days</div></div>
+            <div class="cd-box"><div class="cd-num cd-abstract-hours" data-abstract-hours>00</div><div class="cd-label">Hours</div></div>
+            <div class="cd-box"><div class="cd-num cd-abstract-mins" data-abstract-mins>00</div><div class="cd-label">Mins</div></div>
+            <div class="cd-box"><div class="cd-num cd-abstract-secs" data-abstract-secs>00</div><div class="cd-label">Secs</div></div>
+          </div>
+
+          <a href="submit-paper.html" class="pill-btn glowing-pill" style="width: 100%; padding: 12px;">Submit Your Abstract Now <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. SPEAKERS & COMMITTEE LEADERSHIP -->
+    <section class="conf-section" id="people">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-users"></i> Academic Leadership</span>
+        <h2 class="section-title">Speakers &amp; Committee <span>To Be Announced</span></h2>
+        <p class="section-desc">
+          SVRIAS 2026 will publish confirmed profiles only after formal role acceptance and signed consent. We are actively inviting academic, policy, and research leaders worldwide.
+        </p>
+      </div>
+
+      <div class="glass-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+        <article class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-microphone-lines"></i> SPEAKER NETWORK</div>
+          <h3 class="card-title" style="font-size: 20px;">Keynotes, Panels &amp; Plenary Lectures</h3>
+          <p class="card-desc">
+            Are you leading research in AI ethics, governance, publication forensics, reproducibility, or data privacy? Propose a session delivering high-impact value to researchers.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="speaker-form.html" class="pill-btn glowing-pill">Apply as Speaker <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="speakers.html" class="pill-btn frosted-pill">Speaker Updates</a>
+          </div>
+        </article>
+
+        <article class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-building-columns"></i> ACADEMIC COMMITTEE</div>
+          <h3 class="card-title" style="font-size: 20px;">Program, Review &amp; Governance</h3>
+          <p class="card-desc">
+            Senior faculty, journal editors, and AI domain specialists may apply to join our Technical Program Committee (TPC), lead track reviews, and supervise integrity benchmarks.
+          </p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
+            <a href="committee-form.html" class="pill-btn glowing-pill">Join Committee <i class="fa-solid fa-arrow-right"></i></a>
+            <a href="committee.html" class="pill-btn frosted-pill">Committee Updates</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Committee Governance Highlights Strip -->
+      <div style="margin-top: 24px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 20px; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;">
+        <div style="display: flex; align-items: center; gap: 14px;">
+          <div style="width: 40px; height: 40px; border-radius: 10px; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); display: grid; place-items: center; color: var(--accent-cyan); font-size: 16px;"><i class="fa-solid fa-clipboard-check"></i></div>
+          <div>
+            <strong style="font-size: 14px; color: #ffffff; display: block;">TPC Review Standards &amp; Committee Governance</strong>
+            <span style="font-size: 12.5px; color: #a1a1aa;">Rigorous blind peer-review &bull; 2–4 working day editorial SLA &bull; Conflict of Interest (COI) transparency</span>
+          </div>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <a href="committee-form.html" class="pill-btn frosted-pill" style="font-size: 12px;"><i class="fa-solid fa-file-signature"></i> Apply to Review Board</a>
+          <a href="committee.html" class="pill-btn frosted-pill" style="font-size: 12px;">Full Committee Charter</a>
+        </div>
+      </div>
+
+      <p style="margin: 20px 0 0; text-align: center; color: #71717a; font-size: 12.5px;">
+        Applications are independently evaluated by ScholarVault Conferences. Submission does not confirm role acceptance.
+      </p>
+    </section>
+
+    <!-- 7. REGISTRATION PRICING TIERS -->
+    <section class="conf-section" id="pricing">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-tag"></i> Transparent Pricing</span>
+        <h2 class="section-title">Registration <span>Pricing Tiers</span></h2>
+        <p class="section-desc">
+          Choose the appropriate category. Early bird discount is automatically applied through 25 October 2026.
+        </p>
+      </div>
+
+      <!-- Currency Switcher Toggle -->
+      <div class="currency-toggle-wrap">
+        <div class="currency-toggle">
+          <button type="button" class="currency-btn active" data-currency="INR">INR (₹)</button>
+          <button type="button" class="currency-btn" data-currency="USD">USD ($)</button>
+        </div>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1: Student Presenter -->
+        <div class="pricing-card">
+          <div>
+            <span class="pricing-badge">Scholar Tier</span>
+            <h3 class="pricing-name">Student Presenter</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">For enrolled undergraduate, postgraduate &amp; PhD researchers.</p>
+            <div class="pricing-amount">
+              <span class="price-inr">₹1,999</span>
+              <span class="price-usd" style="display: none;">$49</span>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> Official Virtual Presentation slot</li>
+              <li><i class="fa-solid fa-check"></i> Digital Certificate of Presentation</li>
+              <li><i class="fa-solid fa-check"></i> Inclusion in archived proceedings</li>
+              <li><i class="fa-solid fa-check"></i> Full access to all 6 tracks</li>
+            </ul>
+          </div>
+          <a href="register.html" class="pill-btn frosted-pill" style="width: 100%;">Register Delegate</a>
+        </div>
+
+        <!-- Tier 2: Faculty Presenter (Featured) -->
+        <div class="pricing-card featured">
+          <div>
+            <span class="pricing-badge" style="color: var(--accent-cyan);">Most Popular</span>
+            <h3 class="pricing-name">Academic / Faculty</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">For university professors, postdocs, and institutional scientists.</p>
+            <div class="pricing-amount">
+              <span class="price-inr">₹2,999</span>
+              <span class="price-usd" style="display: none;">$79</span>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> Priority Virtual Presentation stage</li>
+              <li><i class="fa-solid fa-check"></i> Co-author recognition certificate</li>
+              <li><i class="fa-solid fa-check"></i> ISBN proceedings entry with archival record</li>
+              <li><i class="fa-solid fa-check"></i> Keynote Q&amp;A room access</li>
+            </ul>
+          </div>
+          <a href="register.html" class="pill-btn glowing-pill" style="width: 100%;">Register Delegate</a>
+        </div>
+
+        <!-- Tier 3: Industry / Corporate -->
+        <div class="pricing-card">
+          <div>
+            <span class="pricing-badge">Corporate Tier</span>
+            <h3 class="pricing-name">Industry Delegate</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">For enterprise AI engineers, policy advisors, and R&amp;D directors.</p>
+            <div class="pricing-amount">
+              <span class="price-inr">₹4,999</span>
+              <span class="price-usd" style="display: none;">$119</span>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> Industry track presentation pass</li>
+              <li><i class="fa-solid fa-check"></i> Executive networking breakout rooms</li>
+              <li><i class="fa-solid fa-check"></i> Full summit recorded video proceedings</li>
+              <li><i class="fa-solid fa-check"></i> Digital Certificate of Participation</li>
+            </ul>
+          </div>
+          <a href="register.html" class="pill-btn frosted-pill" style="width: 100%;">Register Delegate</a>
+        </div>
+
+        <!-- Tier 4: Listener -->
+        <div class="pricing-card">
+          <div>
+            <span class="pricing-badge">Observer Tier</span>
+            <h3 class="pricing-name">Listener Pass</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">For non-presenting attendees seeking research insights.</p>
+            <div class="pricing-amount">
+              <span class="price-inr">₹999</span>
+              <span class="price-usd" style="display: none;">$29</span>
+            </div>
+            <ul class="pricing-features">
+              <li><i class="fa-solid fa-check"></i> Complete virtual audience stage access</li>
+              <li><i class="fa-solid fa-check"></i> Interactive chat &amp; Q&amp;A participation</li>
+              <li><i class="fa-solid fa-check"></i> Official Digital Certificate of Attendance</li>
+              <li><i class="fa-solid fa-check"></i> Conference Brochure &amp; Program Guide</li>
+            </ul>
+          </div>
+          <a href="register.html" class="pill-btn frosted-pill" style="width: 100%;">Register Listener</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. SDG ALIGNMENT & GOALS (WITH REAL SDG ASSETS) -->
+    <section class="conf-section" id="sdg-alignment">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-earth-americas"></i> Research &amp; Societal Relevance</span>
+        <h2 class="section-title">Themes Informed by the <span>Sustainable Development Goals</span></h2>
+        <p class="section-desc">
+          SVRIAS is not an SDG certification agency. These United Nations goals provide a vital lens for ethical AI research, governance, and responsible scholarly practice.
+        </p>
+      </div>
+
+      <div class="sdg-grid-layout">
+        <!-- Goal 4 -->
+        <article class="sdg-card-item">
+          <img src="assets/SDG Icons/TheGlobalGoals_Icons_Color_Goal_4.png" alt="SDG 4 Quality Education" class="sdg-icon-img" />
+          <div class="sdg-info-wrap">
+            <strong>SDG 4: Quality Education</strong>
+            <p>Fostering academic literacy, fair attribution, AI ethics curriculum, and scientific reproducibility worldwide.</p>
+          </div>
+        </article>
+
+        <!-- Goal 9 -->
+        <article class="sdg-card-item">
+          <img src="assets/SDG Icons/TheGlobalGoals_Icons_Color_Goal_9.png" alt="SDG 9 Industry Innovation and Infrastructure" class="sdg-icon-img" />
+          <div class="sdg-info-wrap">
+            <strong>SDG 9: Industry &amp; Innovation</strong>
+            <p>Advancing responsible, accountable artificial intelligence infrastructure and open science computational frameworks.</p>
+          </div>
+        </article>
+
+        <!-- Goal 16 -->
+        <article class="sdg-card-item">
+          <img src="assets/SDG Icons/TheGlobalGoals_Icons_Color_Goal_16.png" alt="SDG 16 Peace Justice and Strong Institutions" class="sdg-icon-img" />
+          <div class="sdg-info-wrap">
+            <strong>SDG 16: Peace &amp; Strong Institutions</strong>
+            <p>Strengthening scientific integrity, anti-fabrication defenses, transparent algorithmic governance, and rule of law.</p>
+          </div>
+        </article>
+
+        <!-- Goal 17 -->
+        <article class="sdg-card-item">
+          <img src="assets/SDG Icons/TheGlobalGoals_Icons_Color_Goal_17.png" alt="SDG 17 Partnerships for the Goals" class="sdg-icon-img" />
+          <div class="sdg-info-wrap">
+            <strong>SDG 17: Partnerships for the Goals</strong>
+            <p>Encouraging cross-border collaboration among researchers, regulatory bodies, publishers, and machine learning labs.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 9. PAST CONFERENCE HIGHLIGHTS & INSTITUTIONAL RECORD -->
+    <section class="conf-section" id="past-record">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-clock-rotate-left"></i> ScholarVault Experience</span>
+        <h2 class="section-title">Built on a <span>Real Academic Record</span></h2>
+        <p class="section-desc">
+          SVRIAS 2026 is a new edition. The participants below took part in the completed ICAHCR 2026 programme and are showcased exclusively as evidence of ScholarVault's proven conference operations.
+        </p>
+      </div>
+
+      <div class="record-showcase-box">
+        <!-- Visual Photo of Previous Conference -->
+        <div class="record-image-panel">
+          <img src="assets/institutions/icahcr-conference-moments.png" alt="ScholarVault Past Conference Moments" loading="lazy" />
+          <div class="record-caption">
+            <i class="fa-solid fa-camera"></i>
+            <span>Visual record from previous ScholarVault International Conference</span>
+          </div>
+        </div>
+
+        <!-- Past Speakers Highlights -->
+        <div>
+          <h3 style="font-size: 20px; font-weight: 700; color: #ffffff; margin-bottom: 12px;">Former Program Participants</h3>
+          <p style="font-size: 13px; color: #a1a1aa; line-height: 1.55; margin-bottom: 16px;">
+            Scholars and industry leaders who contributed to ScholarVault's previous summit milestones:
+          </p>
+
+          <div class="past-speakers-wrap">
+            <div class="past-speaker-row">
+              <img src="assets/prior-people/ramdev-speaker.jpg" alt="Ramdev Krishnan J" class="past-speaker-avatar" onerror="this.src='https://ldoirjupetkmldibhygk.supabase.co/storage/v1/object/public/conf-photos/aihealth/speakers/1778579781806_51r0s2.jpg'" />
+              <div class="past-speaker-text">
+                <small>Former Program Speaker</small>
+                <strong>Ramdev Krishnan J</strong>
+                <span>Healthcare AI Research &bull; ScholarVault Series</span>
+              </div>
+            </div>
+
+            <div class="past-speaker-row">
+              <img src="assets/prior-people/bhabesh-committee.jpg" alt="Bhabesh Panigrahi" class="past-speaker-avatar" onerror="this.src='https://ldoirjupetkmldibhygk.supabase.co/storage/v1/object/public/conf-photos/aihealth/speakers/1779607439646_cxh65x.jpg'" />
+              <div class="past-speaker-text">
+                <small>Former Program Speaker</small>
+                <strong>Bhabesh Panigrahi, M.S., MBA</strong>
+                <span>Biolyt AI, Bengaluru</span>
+              </div>
+            </div>
+
+            <div class="past-speaker-row">
+              <img src="assets/prior-people/iman-committee.jpg" alt="Ts. Dr. Iman Farshchi" class="past-speaker-avatar" onerror="this.src='https://ldoirjupetkmldibhygk.supabase.co/storage/v1/object/public/conf-photos/aihealth/speakers/1778009422845_gz3glv.jpg'" />
+              <div class="past-speaker-text">
+                <small>Former Program Speaker</small>
+                <strong>Ts. Dr. Iman Farshchi</strong>
+                <span>MAHSA University, Malaysia</span>
+              </div>
+            </div>
+
+            <div class="past-speaker-row">
+              <img src="assets/prior-people/wu-speaker.jpg" alt="Assoc. Prof. Dr. Wu Yuan Seng" class="past-speaker-avatar" onerror="this.src='https://ldoirjupetkmldibhygk.supabase.co/storage/v1/object/public/conf-photos/aihealth/speakers/1778040044914_7grib9.jpg'" />
+              <div class="past-speaker-text">
+                <small>Former Program Speaker</small>
+                <strong>Assoc. Prof. Dr. Wu Yuan Seng</strong>
+                <span>Sunway University, Malaysia</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="speakers.html" class="pill-btn frosted-pill" style="margin-top: 8px;">Explore SVRIAS 2026 Speaker Call <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Institutional Voices Rail -->
+      <div style="margin-top: 36px; text-align: center;">
+        <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: #a1a1aa;">
+          Selected Institutions Represented at Prior ScholarVault Conferences:
+        </span>
+        <div class="institution-rail-wrap">
+          <div class="inst-logo-badge">MAHSA University</div>
+          <div class="inst-logo-badge"><img src="assets/institutions/sunway-university.png" alt="Sunway University" /></div>
+          <div class="inst-logo-badge"><img src="assets/institutions/mahe.png" alt="Manipal Academy of Higher Education" /></div>
+          <div class="inst-logo-badge">R.M.K. Engineering College</div>
+          <div class="inst-logo-badge">Sardar Patel University</div>
+          <div class="inst-logo-badge">Universiti Malaya</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. PUBLICATION & INDEXING PATHWAYS -->
+    <section class="conf-section" id="publication">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-book-open"></i> Scholarly Output</span>
+        <h2 class="section-title">Transparent <span>Publication &amp; Archival Pathways</span></h2>
+        <p class="section-desc">
+          We maintain strict academic transparency. Abstract acceptance guarantees conference presentation; publication opportunities follow rigorous partner editorial guidelines.
+        </p>
+      </div>
+
+      <div class="glass-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        <div class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-stamp"></i> PROCEEDINGS</div>
+          <h3 class="card-title">Archived Conference Record</h3>
+          <p class="card-desc">
+            All accepted and presented abstracts will be compiled into the official SVRIAS 2026 Conference Proceedings with an assigned ISBN and permanent digital archival repository link.
+          </p>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-fingerprint"></i> DOI &amp; METADATA</div>
+          <h3 class="card-title">Citable Research Artifacts</h3>
+          <p class="card-desc">
+            Eligible full-length papers routed through partner publishing repositories will receive Crossref DOIs, enabling persistent academic citations across international databases.
+          </p>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-shield-halved"></i> ETHICS CHARTER</div>
+          <h3 class="card-title">Zero Predatory Promises</h3>
+          <p class="card-desc">
+            We never promise automated Scopus or Web of Science indexing. Indexing outcomes depend entirely on publisher editorial reviews, independent post-publication audits, and journal criteria.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. PARTICIPANT RESOURCE KIT -->
+    <section class="conf-section" id="resources">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-toolbox"></i> Author Kit</span>
+        <h2 class="section-title">Participant <span>Resource Kit</span></h2>
+        <p class="section-desc">
+          Everything you need to prepare your submission, configure presentation slides, and navigate summit logistics.
+        </p>
+      </div>
+
+      <div class="resource-cards-grid">
+        <a href="call-for-papers.html" class="resource-box">
+          <div>
+            <div class="resource-box-icon"><i class="fa-solid fa-list-check"></i></div>
+            <strong>Abstract Checklist</strong>
+            <span>Track guidelines, eligibility rules, word counts, and declaration instructions.</span>
+          </div>
+          <div class="resource-box-link">Explore Call for Papers <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <div class="resource-box" onclick="openBrochureModal()" style="cursor: pointer;">
+          <div>
+            <div class="resource-box-icon"><i class="fa-solid fa-file-pdf"></i></div>
+            <strong>Conference Brochure</strong>
+            <span>Eight-page prospectus covering track scopes, schedule milestones, and verification status.</span>
+          </div>
+          <div class="resource-box-link">Download Brochure <i class="fa-solid fa-download"></i></div>
+        </div>
+
+        <a href="register.html" class="resource-box">
+          <div>
+            <div class="resource-box-icon"><i class="fa-solid fa-receipt"></i></div>
+            <strong>Registration Guide</strong>
+            <span>Review delegate categories, currency options, and invoice reimbursement policies.</span>
+          </div>
+          <div class="resource-box-link">View Registration <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+
+        <a href="contact.html" class="resource-box">
+          <div>
+            <div class="resource-box-icon"><i class="fa-regular fa-comment-dots"></i></div>
+            <strong>Need Assistance?</strong>
+            <span>Get fast support from the ScholarVault Conference Secretariat for questions or custom requests.</span>
+          </div>
+          <div class="resource-box-link">Contact Desk <i class="fa-solid fa-arrow-right"></i></div>
+        </a>
+      </div>
+    </section>
+
+    <!-- 12. EVIDENCE-LED TRUST & ETHICS CHARTER -->
+    <section class="conf-section" id="trust-charter">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-shield-halved"></i> Scientific Integrity</span>
+        <h2 class="section-title">Trust Built Through <span>Visible Operations</span></h2>
+        <p class="section-desc">
+          SVRIAS is a brand-new edition. We do not publish simulated endorsements or claim unconfirmed speaking confirmations.
+        </p>
+      </div>
+
+      <div class="glass-grid">
+        <div class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-database"></i> DATA ISOLATION</div>
+          <h3 class="card-title">Edition-Scoped Records</h3>
+          <p class="card-desc">
+            All abstract intake, peer reviews, committee appointments, and registrations are strictly bound to this canonical 2026 edition.
+          </p>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-certificate"></i> AUDIT STATUS</div>
+          <h3 class="card-title">SCVS Assessment Pending</h3>
+          <p class="card-desc">
+            ScholarVault Conference Verification Status (SCVS) remains in assessment pending status until technical evidence is audited. Verification is never self-declared.
+          </p>
+        </div>
+
+        <div class="glass-card">
+          <div class="card-num"><i class="fa-solid fa-user-check"></i> AUTHENTICITY</div>
+          <h3 class="card-title">Confirmed Before Display</h3>
+          <p class="card-desc">
+            All speaker and committee slots display "To Be Announced" until formal agreements and institutional affiliations are signed.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13. FREQUENTLY ASKED QUESTIONS -->
+    <section class="conf-section" id="faq">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-regular fa-circle-question"></i> Help &amp; Clarification</span>
+        <h2 class="section-title">Answers to <span>Common Questions</span></h2>
+        <p class="section-desc">
+          Learn more about the submission process, presentation formats, and delegate registration.
+        </p>
+      </div>
+
+      <div class="faq-wrap-box">
+        <div class="faq-card-item open">
+          <button type="button" class="faq-trigger">
+            <span>What is the review turnaround time for abstract submissions?</span>
+            <div class="faq-icon-toggle"><i class="fa-solid fa-plus"></i></div>
+          </button>
+          <div class="faq-drawer">
+            All abstract submissions undergo rapid editorial review by our technical committee within 2 to 4 working days of submission. You will receive an official decision letter via email.
+          </div>
+        </div>
+
+        <div class="faq-card-item">
+          <button type="button" class="faq-trigger">
+            <span>Is the summit 100% virtual, or is in-person attendance required?</span>
+            <div class="faq-icon-toggle"><i class="fa-solid fa-plus"></i></div>
+          </button>
+          <div class="faq-drawer">
+            SVRIAS 2026 is a 100% virtual conference conducted via Zoom. All presentation sessions, keynote addresses, and networking breakout rooms take place online, eliminating travel overhead.
+          </div>
+        </div>
+
+        <div class="faq-card-item">
+          <button type="button" class="faq-trigger">
+            <span>What is the designation for accepted presentations?</span>
+            <div class="faq-icon-toggle"><i class="fa-solid fa-plus"></i></div>
+          </button>
+          <div class="faq-drawer">
+            Every accepted contribution is designated as an official "Virtual Research Presentation". We do not differentiate between oral and poster tiers, ensuring equal scholarly recognition.
+          </div>
+        </div>
+
+        <div class="faq-card-item">
+          <button type="button" class="faq-trigger">
+            <span>Is full-paper publication mandatory with abstract acceptance?</span>
+            <div class="faq-icon-toggle"><i class="fa-solid fa-plus"></i></div>
+          </button>
+          <div class="faq-drawer">
+            No. Abstract acceptance confirms presentation eligibility at SVRIAS 2026. Full-paper publication opportunities through academic publishing partners remain optional and subject to partner peer review and APC policies.
+          </div>
+        </div>
+
+        <div class="faq-card-item">
+          <button type="button" class="faq-trigger">
+            <span>What payment currencies are supported for registration?</span>
+            <div class="faq-icon-toggle"><i class="fa-solid fa-plus"></i></div>
+          </button>
+          <div class="faq-drawer">
+            We support both INR (₹) and USD ($) payments via secure gateways including Visa, Mastercard, BHIM UPI, and Google Pay. You can toggle between currencies on the registration page.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14. CONTACT & VIRTUAL LOCATION -->
+    <section class="conf-section" id="contact-location">
+      <div class="section-head">
+        <span class="section-eyebrow"><i class="fa-solid fa-headset"></i> Secretariat &amp; Summit Access</span>
+        <h2 class="section-title">Contact Secretariat &amp; <span>Virtual Location</span></h2>
+        <p class="section-desc">
+          Have inquiries regarding abstract submission, delegate pass invoicing, speaker nominations, or virtual stage logistics? Our global organizing secretariat is available across international time zones.
+        </p>
+      </div>
+
+      <div class="contact-grid-box">
+        <!-- Card 1: Virtual Delivery & Venue -->
+        <article class="contact-card-box">
+          <div>
+            <div class="contact-card-icon"><i class="fa-solid fa-video"></i></div>
+            <h3>100% Virtual Plenary Stages</h3>
+            <p>Conducted via interactive Zoom stages with live speaker video, slide streaming, and moderated scholar Q&amp;A rooms. Secure access credentials dispatched 48 hours prior to summit opening on 14 November 2026.</p>
+          </div>
+          <span class="pill-btn frosted-pill" style="align-self: flex-start; font-size: 11.5px;"><i class="fa-solid fa-globe"></i> Worldwide Online Delivery</span>
+        </article>
+
+        <!-- Card 2: Official Secretariat Email -->
+        <article class="contact-card-box">
+          <div>
+            <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+            <h3>Conference Desk Email</h3>
+            <p>Direct academic secretariat channel for review inquiries, registration tax invoices, editorial decisions, and official verification letters. Typical response within 24–48 working hours.</p>
+          </div>
+          <a href="mailto:conferences@scholarvault.in" class="contact-card-link"><i class="fa-regular fa-envelope"></i> conferences@scholarvault.in</a>
+        </article>
+
+        <!-- Card 3: Instant Support & Social Desks -->
+        <article class="contact-card-box">
+          <div>
+            <div class="contact-card-icon"><i class="fa-solid fa-comments"></i></div>
+            <h3>Direct Messaging Channels</h3>
+            <p>Connect with the ScholarVault attendee support team for instant clarification on registration categories, payment methods, or submission status.</p>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" class="contact-card-link"><img src="assets/Social/social.png" alt="" width="16" height="16" /> WhatsApp Desk</a>
+            <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" class="contact-card-link"><img src="assets/Social/telegram.png" alt="" width="16" height="16" /> Telegram Desk</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- Quick Inquiry Dispatch Box -->
+      <div class="contact-dispatch-banner">
+        <div>
+          <h3 style="font-size: 19px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Need Dedicated Assistance with Your Abstract or Registration?</h3>
+          <p style="font-size: 13.5px; color: #a1a1aa; margin: 0;">Submit a support ticket to our secretariat or express early interest to receive rolling reminders.</p>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="contact.html" class="pill-btn glowing-pill">Contact Help Desk <i class="fa-solid fa-arrow-right"></i></a>
+          <button type="button" class="pill-btn frosted-pill" onclick="openInterestModal()"><i class="fa-regular fa-bell"></i> Express Interest</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15. NEWSLETTER SUBSCRIPTION STRIP -->
+    <section class="newsletter-strip-box" id="newsletter">
+      <div class="newsletter-glass-card">
+        <div class="newsletter-copy-side">
+          <h2>Stay Informed on Responsible AI</h2>
+          <p>Get high-signal notifications for call-for-papers milestones, keynote announcements, and summit proceedings.</p>
+        </div>
+        <div class="newsletter-form-side" id="newsletterWrap">
+          <form id="newsletterForm" class="newsletter-flex-form">
+            <input type="email" name="email" required placeholder="Enter academic or corporate email" />
+            <button class="pill-btn glowing-pill" type="submit">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Centralized Futuristic Footer -->
+  <footer class="futuristic-footer">
+    <div class="footer-container">
+      <div class="footer-grid">
+        <!-- Brand Col -->
+        <div class="footer-brand">
+          <div class="footer-brand-header">
+            <img src="assets/icon-512.png" alt="ScholarVault" class="footer-logo-img" />
+            <div class="footer-logo-text">
+              <strong>Responsible AI &amp; Integrity</strong>
+              <span>AI Summit 2026 &bull; SVRIAS</span>
+            </div>
+          </div>
+          <p class="footer-desc">
+            ScholarVault Research Integrity &amp; Responsible AI Summit 2026 is an international virtual forum advancing ethical governance, algorithmic accountability, scientific reproducibility, and academic authorship.
+          </p>
+          <div class="footer-organizer-badge">
+            <img src="assets/scholarvault-logo.png" alt="ScholarVault Logo" onerror="this.src='assets/icon-512.png'" />
+            <div>
+              <span>Organised by</span>
+              <strong>ScholarVault Conferences</strong>
+            </div>
+          </div>
+          <a href="badge.html" class="footer-scvs-badge">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div>
+              <strong>SCVS Assessment</strong>
+              <small>Assessment Pending &bull; Verified Evaluation</small>
+            </div>
+          </a>
+        </div>
+
+        <!-- Conference Links -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Conference</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Summit</a></li>
+            <li><a href="call-for-papers.html">Call for Papers</a></li>
+            <li><a href="speakers.html">Keynote Speakers</a></li>
+            <li><a href="committee.html">Academic Committee</a></li>
+            <li><a href="awards.html">Summit Awards</a></li>
+            <li><a href="blog.html">Insights &amp; Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Participate Links -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Participate</h4>
+          <ul class="footer-links">
+            <li><button type="button" class="footer-link-btn" onclick="openInterestModal()">Express Interest</button></li>
+            <li><a href="interest-form.html">Priority Intake Form</a></li>
+            <li><a href="submit-paper.html">Submit Abstract</a></li>
+            <li><a href="speaker-form.html">Apply as Speaker</a></li>
+            <li><a href="committee-form.html">Join Committee</a></li>
+            <li><a href="register.html">Register Delegate</a></li>
+          </ul>
+        </div>
+
+        <!-- Information Links -->
+        <div class="footer-col">
+          <h4 class="footer-col-title">Information</h4>
+          <ul class="footer-links">
+            <li><a href="downloads.html">Brochure &amp; Downloads</a></li>
+            <li><a href="poster.html">Conference Poster</a></li>
+            <li><a href="media.html">Media &amp; Press Kit</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="refund.html">Refund Policy</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Social Media Strip (With Real Social Media Assets) -->
+      <div class="footer-social-section">
+        <span class="social-section-title">Connect with ScholarVault Global Network:</span>
+        <div class="social-pills-row">
+          <a href="https://www.instagram.com/scholarvault.in/" target="_blank" rel="noopener noreferrer" class="social-pill" title="Instagram">
+            <img src="assets/Social/instagram.png" alt="Instagram" />
+            <span>Instagram</span>
+          </a>
+          <a href="https://www.facebook.com/scholarvault.in" target="_blank" rel="noopener noreferrer" class="social-pill" title="Facebook">
+            <img src="assets/Social/facebook (1).png" alt="Facebook" />
+            <span>Facebook</span>
+          </a>
+          <a href="https://www.linkedin.com/company/thescholarvault/" target="_blank" rel="noopener noreferrer" class="social-pill" title="LinkedIn">
+            <img src="assets/Social/linkedin.png" alt="LinkedIn" />
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://www.reddit.com/r/ScholarVault/" target="_blank" rel="noopener noreferrer" class="social-pill" title="Reddit">
+            <img src="assets/Social/icons8-reddit-24.png" alt="Reddit" />
+            <span>Reddit</span>
+          </a>
+          <a href="https://in.pinterest.com/scholarvault/" target="_blank" rel="noopener noreferrer" class="social-pill" title="Pinterest">
+            <img src="assets/Social/pinterest.svg" alt="Pinterest" />
+            <span>Pinterest</span>
+          </a>
+          <a href="https://x.com/scholarvaultin" target="_blank" rel="noopener noreferrer" class="social-pill" title="X (Twitter)">
+            <img src="assets/Social/icons8-x-48.png" alt="X" />
+            <span>X</span>
+          </a>
+          <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer" class="social-pill" title="WhatsApp">
+            <img src="assets/Social/social.png" alt="WhatsApp" />
+            <span>WhatsApp</span>
+          </a>
+          <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer" class="social-pill" title="Telegram">
+            <img src="assets/Social/telegram.png" alt="Telegram" />
+            <span>Telegram</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Payment & Trust Gateways Strip -->
+      <div class="footer-trust-section">
+        <div class="payment-badges-row">
+          <span class="trust-group-title">Accepted Payment Gateways:</span>
+          <div class="badges-flex">
+            <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" class="trust-badge-img" />
+            <img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" class="trust-badge-img" />
+            <img src="assets/idzRNcC9U5_logos.png" alt="BHIM UPI" class="trust-badge-img" />
+            <img src="assets/gpay-logo.png" alt="Google Pay" class="trust-badge-img" />
+          </div>
+        </div>
+        <div class="compliance-badges-row">
+          <span class="trust-group-title">Security &amp; Institutional Governance:</span>
+          <div class="badges-flex">
+            <img src="assets/idITJgioup_logos.png" alt="Website Protection" class="trust-badge-img" />
+            <img src="assets/idUAcNCLcQ_logos.png" alt="MSME Registration" class="trust-badge-img" />
+            <img src="assets/App QR.png" alt="ScholarVault App QR" class="trust-badge-img qr-thumb" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Copyright & Legal Links -->
+      <div class="footer-bottom-bar">
+        <p>&copy; 2026 Research Integrity &amp; Responsible AI Summit (SVRIAS) &bull; ScholarVault Conferences. All rights reserved.</p>
+        <div class="footer-legal-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="refund.html">Refund Policy</a>
+          <a href="contact.html">Contact Desk</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Support Dock Toggle & Panel -->
+  <button class="social-dock-toggle" id="socialDockToggle" type="button" aria-label="Open contact and support">
+    <i class="fa-solid fa-headset"></i>
+    <span>Support</span>
+  </button>
+  <aside class="social-dock" id="socialDock" hidden>
+    <div class="social-dock__head">
+      <strong>Contact &amp; Support</strong>
+      <button type="button" id="socialDockClose" aria-label="Close support"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <a class="support-email" href="mailto:conferences@scholarvault.in">
+      <i class="fa-regular fa-envelope"></i>
+      <span>conferences@scholarvault.in</span>
+    </a>
+    <div class="dock-links">
+      <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/social.png" alt="" /> WhatsApp Desk</a>
+      <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/telegram.png" alt="" /> Telegram Desk</a>
+      <a href="contact.html"><i class="fa-solid fa-message"></i> Submit Query Ticket</a>
+    </div>
+  </aside>
+
+  <!-- Universal Brochure Download Modal -->
+  <div class="modal-backdrop" id="brochureModal" hidden>
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeBrochureModal()" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-badge"><i class="fa-solid fa-file-pdf"></i> Official Resource</div>
+      <h3 class="modal-title">Get Conference Brochure</h3>
+      <p class="modal-subtitle">Download the comprehensive SVRIAS 2026 information prospectus, tracks breakdown, author guidelines, and schedule.</p>
+      
+      <form id="brochureModalForm" class="modal-form">
+        <div class="field-block">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="e.g. Dr. Jane Smith" />
+        </div>
+        <div class="field-block">
+          <label>Institutional / Corporate Email *</label>
+          <input type="email" name="email" required placeholder="jane.smith@institution.edu" />
+        </div>
+        <div class="field-block">
+          <label>Institution / University *</label>
+          <input type="text" name="institution" required placeholder="e.g. Stanford University / Max Planck" />
+        </div>
+        <button type="submit" class="modal-submit-btn">
+          <span>Download Official Brochure</span>
+          <i class="fa-solid fa-download"></i>
+        </button>
+      </form>
+      
+      <div class="modal-success" id="brochureModalSuccess" hidden>
+        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h4>Prospectus Ready!</h4>
+        <p>Your brochure download will begin automatically. We have also dispatched a permanent copy to your email.</p>
+        <a href="assets/SVRIAS-2026-Conference-Brochure.pdf" download class="modal-download-link">
+          <i class="fa-solid fa-file-arrow-down"></i> Click here if download doesn't start
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Express Interest Modal -->
+  <div class="modal-backdrop" id="interestModal" hidden>
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeInterestModal()" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-badge"><i class="fa-solid fa-bolt"></i> Priority Notification</div>
+      <h3 class="modal-title">Express Interest in SVRIAS 2026</h3>
+      <p class="modal-subtitle">Register early interest to receive keynote announcements, submission deadline reminders, and exclusive early bird alerts.</p>
+      
+      <form id="interestModalForm" class="modal-form">
+        <div class="field-block">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="e.g. Prof. Alan Turing" />
+        </div>
+        <div class="field-block">
+          <label>Email Address *</label>
+          <input type="email" name="email" required placeholder="alan.turing@cam.ac.uk" />
+        </div>
+        <div class="field-block">
+          <label>Role / Capacity *</label>
+          <select name="role" required>
+            <option value="">Select your participation intent...</option>
+            <option value="Research Presenter">Research Presenter (Call for Papers)</option>
+            <option value="Attendee / Delegate">Attendee / Industry Delegate</option>
+            <option value="Speaker Candidate">Prospective Keynote / Panelist</option>
+            <option value="Academic Committee">Reviewer / Technical Committee</option>
+          </select>
+        </div>
+        <button type="submit" class="modal-submit-btn">
+          <span>Submit Expression of Interest</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+      
+      <div class="modal-success" id="interestModalSuccess" hidden>
+        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h4>Interest Registered!</h4>
+        <p>Thank you for expressing interest. You will receive priority updates as the summit schedule unfolds.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summit Command Center Drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="summit-drawer" id="summitDrawer" role="dialog" aria-modal="true" aria-label="SVRIAS 2026 Summit Overview">
+    <div class="drawer-handle"></div>
+    <div class="drawer-header">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span class="pulse-dot"></span>
+        <h2 class="drawer-title">SVRIAS 2026 &bull; RESPONSIBLE AI SUMMIT</h2>
+      </div>
+      <button class="drawer-close" id="drawerClose" aria-label="Close Drawer">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="drawer-body">
+      <div style="display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; padding: 14px 20px; background: rgba(255,255,255,0.05); border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); justify-content: space-between; align-items: center;">
+        <div style="font-size: 13.5px; color: #e4e4e7;">
+          <i class="fa-regular fa-calendar" style="color: var(--accent-gold); margin-right: 6px;"></i>
+          <strong>14 November 2026</strong> &bull; Virtual Global Plenary
+        </div>
+        <div style="font-size: 13.5px; color: #e4e4e7;">
+          <i class="fa-solid fa-bolt" style="color: var(--accent-cyan); margin-right: 6px;"></i>
+          <strong>2–4 Days</strong> Rolling Review SLA &bull; FREE Abstract Intake
+        </div>
+        <div>
+          <a href="register.html" class="pill-btn glowing-pill" style="font-size: 12.5px;">Register Delegate</a>
+        </div>
+      </div>
+
+      <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 14px; color: #ffffff;">Six Core Pillars of AI Integrity</h3>
+      <div class="glass-grid">
+        <div class="glass-card">
+          <div class="card-num">TRACK 01</div>
+          <h4 class="card-title">AI Ethics &amp; Governance</h4>
+          <p class="card-desc">Societal impacts, EU AI Act compliance, algorithmic fairness, and liability in autonomous decision models.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-num">TRACK 02</div>
+          <h4 class="card-title">Research Integrity in AI Era</h4>
+          <p class="card-desc">Forensic figure tampering detection, paper-mill interception, and combating LLM hallucinations in scientific literature.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-num">TRACK 03</div>
+          <h4 class="card-title">Responsible AI Frameworks</h4>
+          <p class="card-desc">Interpretability, Mechanistic XAI, adversarial red-teaming, and safety alignment of foundation architectures.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-num">TRACK 04</div>
+          <h4 class="card-title">Authorship &amp; Attribution</h4>
+          <p class="card-desc">CRediT taxonomy adaptation, cryptographic model watermarking, copyright, and ethical human-AI co-creation.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-num">TRACK 05</div>
+          <h4 class="card-title">Peer Review &amp; Reproducibility</h4>
+          <p class="card-desc">Artifact verification, containerized reproduction protocols, bias mitigation in AI-assisted peer assessment.</p>
+        </div>
+        <div class="glass-card">
+          <div class="card-num">TRACK 06</div>
+          <h4 class="card-title">Data Privacy &amp; Accountability</h4>
+          <p class="card-desc">Differential privacy, secure federated learning, synthetic data fidelity, and machine unlearning boundaries.</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 28px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="submit-paper.html" class="pill-btn glowing-pill">Submit Paper Abstract</a>
+        <a href="call-for-papers.html" class="pill-btn frosted-pill">Full Track Guidelines</a>
+        <a href="register.html" class="pill-btn frosted-pill">Registration &amp; Pricing</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Universal Brochure Download Modal -->
+  <div class="modal-backdrop" id="brochureModal" hidden>
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeBrochureModal()" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-badge"><i class="fa-solid fa-file-pdf"></i> Official Resource</div>
+      <h3 class="modal-title">Get Conference Brochure</h3>
+      <p class="modal-subtitle">Download the comprehensive SVRIAS 2026 information prospectus, tracks breakdown, author guidelines, and schedule.</p>
+      
+      <form id="brochureModalForm" class="modal-form">
+        <div class="field-block">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="e.g. Dr. Jane Smith" />
+        </div>
+        <div class="field-block">
+          <label>Institutional / Corporate Email *</label>
+          <input type="email" name="email" required placeholder="jane.smith@institution.edu" />
+        </div>
+        <div class="field-block">
+          <label>Institution / University *</label>
+          <input type="text" name="institution" required placeholder="e.g. Stanford University / Max Planck" />
+        </div>
+        <button type="submit" class="modal-submit-btn">
+          <span>Download Official Brochure</span>
+          <i class="fa-solid fa-download"></i>
+        </button>
+      </form>
+      
+      <div class="modal-success" id="brochureModalSuccess" hidden>
+        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h4>Prospectus Ready!</h4>
+        <p>Your brochure download will begin automatically. We have also dispatched a permanent copy to your email.</p>
+        <a href="assets/SVRIAS-2026-Conference-Brochure.pdf" download class="modal-download-link">
+          <i class="fa-solid fa-file-arrow-down"></i> Click here if download doesn't start
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universal Express Interest Modal -->
+  <div class="modal-backdrop" id="interestModal" hidden>
+    <div class="modal-window">
+      <button class="modal-close" onclick="closeInterestModal()" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+      <div class="modal-badge"><i class="fa-solid fa-bolt"></i> Priority Notification</div>
+      <h3 class="modal-title">Express Interest in SVRIAS 2026</h3>
+      <p class="modal-subtitle">Register early interest to receive keynote announcements, submission deadline reminders, and exclusive early bird alerts.</p>
+      
+      <form id="interestModalForm" class="modal-form">
+        <div class="field-block">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="e.g. Prof. Alan Turing" />
+        </div>
+        <div class="field-block">
+          <label>Email Address *</label>
+          <input type="email" name="email" required placeholder="alan.turing@cam.ac.uk" />
+        </div>
+        <div class="field-block">
+          <label>Role / Capacity *</label>
+          <select name="role" required>
+            <option value="">Select your participation intent...</option>
+            <option value="Research Presenter">Research Presenter (Call for Papers)</option>
+            <option value="Attendee / Delegate">Attendee / Industry Delegate</option>
+            <option value="Speaker Candidate">Prospective Keynote / Panelist</option>
+            <option value="Academic Committee">Reviewer / Technical Committee</option>
+          </select>
+        </div>
+        <button type="submit" class="modal-submit-btn">
+          <span>Submit Expression of Interest</span>
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </form>
+      
+      <div class="modal-success" id="interestModalSuccess" hidden>
+        <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
+        <h4>Interest Registered!</h4>
+        <p>Thank you for expressing interest. You will receive priority updates as the summit schedule unfolds.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Script -->
+  <script src="main.js"></script>
+</body>
+</html>
