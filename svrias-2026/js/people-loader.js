@@ -200,6 +200,9 @@
     return fetchFromSupabase('conf_speakers', confIds)
       .then(function (data) {
         if (!data || data.length === 0) {
+          if (options.preserveInitialIfEmpty) {
+            return;
+          }
           container.innerHTML = renderPlaceholder('speaker');
           return;
         }
@@ -214,10 +217,17 @@
             return renderCard(s, 'speaker');
           })
           .join('');
+
+        var suffix = document.getElementById('peopleTitleSuffix');
+        if (suffix) suffix.textContent = 'Confirmed Keynotes';
+        var viewAll = document.getElementById('peopleViewAllWrap');
+        if (viewAll) viewAll.style.display = 'block';
       })
       .catch(function (err) {
         console.warn('Could not load speakers:', err);
-        container.innerHTML = renderPlaceholder('speaker');
+        if (!options.preserveInitialIfEmpty) {
+          container.innerHTML = renderPlaceholder('speaker');
+        }
       });
   }
 
@@ -259,7 +269,7 @@
       loadSpeakers('speakerGrid');
     }
     if (document.getElementById('keynoteGrid')) {
-      loadSpeakers('keynoteGrid', { limit: 4 });
+      loadSpeakers('keynoteGrid', { limit: 4, preserveInitialIfEmpty: true });
     }
     if (document.getElementById('committeeGrid')) {
       loadCommittee('committeeGrid');

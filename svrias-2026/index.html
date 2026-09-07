@@ -557,13 +557,13 @@
     <section class="conf-section" id="people">
       <div class="section-head">
         <span class="section-eyebrow"><i class="fa-solid fa-users"></i> Academic Leadership</span>
-        <h2 class="section-title">Speakers &amp; Committee <span>To Be Announced</span></h2>
+        <h2 class="section-title">Speakers &amp; Committee <span id="peopleTitleSuffix">To Be Announced</span></h2>
         <p class="section-desc">
           SVRIAS 2026 will publish confirmed profiles only after formal role acceptance and signed consent. We are actively inviting academic, policy, and research leaders worldwide.
         </p>
       </div>
 
-      <div class="glass-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
+      <div id="keynoteGrid" class="glass-grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));">
         <article class="glass-card">
           <div class="card-num"><i class="fa-solid fa-microphone-lines"></i> SPEAKER NETWORK</div>
           <h3 class="card-title" style="font-size: 20px;">Keynotes, Panels &amp; Plenary Lectures</h3>
@@ -587,6 +587,10 @@
             <a href="committee.html" class="pill-btn frosted-pill">Committee Updates</a>
           </div>
         </article>
+      </div>
+
+      <div id="peopleViewAllWrap" style="display: none; text-align: center; margin-top: 24px;">
+        <a href="speakers.html" class="pill-btn frosted-pill">View All Keynote Speakers &amp; Bios <i class="fa-solid fa-arrow-right"></i></a>
       </div>
 
       <!-- Committee Governance Highlights Strip -->
@@ -781,25 +785,6 @@
             <p>Encouraging cross-border collaboration among researchers, regulatory bodies, publishers, and machine learning labs.</p>
           </div>
         </article>
-      </div>
-    </section>
-
-    <!-- 8.5 KEYNOTE SPEAKERS (LIVE FROM ORGANIZER DASHBOARD) -->
-    <section class="conf-section" id="keynotes">
-      <div class="section-head">
-        <span class="section-eyebrow"><i class="fa-solid fa-microphone-lines"></i> Confirmed Leadership</span>
-        <h2 class="section-title">Keynote <span>Speakers</span></h2>
-        <p class="section-desc">
-          Distinguished plenary leaders and international scholars confirmed for the SVRIAS 2026 Summit.
-        </p>
-      </div>
-
-      <div id="keynoteGrid" class="glass-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 32px;">
-        <!-- Live Confirmed Keynote Speakers loaded dynamically by people-loader.js -->
-      </div>
-
-      <div style="text-align: center; margin-bottom: 24px;">
-        <a href="speakers.html" class="pill-btn frosted-pill">View All Keynote Speakers &amp; Bios <i class="fa-solid fa-arrow-right"></i></a>
       </div>
     </section>
 
