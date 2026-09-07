@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -151,6 +151,19 @@
             Presiding over live Zoom presentation stages on 14 November 2026, moderating rigorous scholar Q&amp;A, and nominating contributions for Conference Awards.
           </p>
         </div>
+      </div>
+
+      <!-- Confirmed SVRIAS Academic & Organizing Committee (Live from Organizer Dashboard) -->
+      <div class="section-head" id="confirmedCommitteeHead" style="margin-bottom: 28px;">
+        <span class="section-eyebrow"><i class="fa-solid fa-users-gear"></i> Academic Leadership</span>
+        <h2 class="section-title" style="font-size: 28px;">Organizing <span>&amp; Review Committee</span></h2>
+        <p class="section-desc" style="font-size: 14px;">
+          Distinguished researchers, track chairs, and peer-review panelists confirmed for SVRIAS 2026.
+        </p>
+      </div>
+
+      <div id="committeeGrid" class="glass-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-bottom: 48px;">
+        <!-- Live Confirmed Committee members loaded dynamically by people-loader.js -->
       </div>
 
       <!-- Prior Committee Experience Box -->
@@ -381,5 +394,6 @@
   </div>
 
   <script src="main.js"></script>
+  <script src="people-loader.js"></script>
 </body>
 </html>
