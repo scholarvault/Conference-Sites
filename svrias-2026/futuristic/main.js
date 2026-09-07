@@ -540,6 +540,11 @@ function initCurrencyToggle() {
         inrPrices.forEach((el) => (el.style.display = 'inline-block'));
         usdPrices.forEach((el) => (el.style.display = 'none'));
       }
+
+      const regCurrency = document.getElementById('regCurrency');
+      if (regCurrency && currency) {
+        regCurrency.value = currency;
+      }
     });
   });
 }
@@ -878,6 +883,9 @@ function initRegistrationOptions() {
       const isMatch = c.dataset.categoryCode === categoryCode;
       c.style.borderColor = isMatch ? '#38bdf8' : '';
       c.style.boxShadow = isMatch ? '0 0 25px rgba(56, 189, 248, 0.3)' : '';
+      if (isMatch && categoryIdInput && c.dataset.categoryId) {
+        categoryIdInput.value = c.dataset.categoryId;
+      }
     });
   };
 
@@ -893,7 +901,15 @@ function initRegistrationOptions() {
       const selOpt = regCategorySelect.options[regCategorySelect.selectedIndex];
       selectCategory(regCategorySelect.value, selOpt?.dataset?.name);
     });
-    if (regCategorySelect.value) {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let requestedCategory = urlParams.get('category') || urlParams.get('tier');
+    if (requestedCategory === 'corporate') {
+      requestedCategory = 'industry_professional';
+    }
+    if (requestedCategory) {
+      selectCategory(requestedCategory);
+    } else if (regCategorySelect.value) {
       const selOpt = regCategorySelect.options[regCategorySelect.selectedIndex];
       selectCategory(regCategorySelect.value, selOpt?.dataset?.name);
     }
@@ -910,7 +926,8 @@ function initRegistrationOptions() {
         );
         for (const option of matches) {
           card.dataset.categoryId = option.id;
-          if (categoryIdInput && card.dataset.categoryCode === regCategorySelect?.value) {
+          const currentCode = regCategorySelect?.value || categoryCodeInput?.value;
+          if (categoryIdInput && card.dataset.categoryCode === currentCode) {
             categoryIdInput.value = option.id;
           }
           const formatted = `${option.currency === 'INR' ? '₹' : '$'}${Number(option.amount).toLocaleString('en-IN')}`;
@@ -943,8 +960,7 @@ function initForms() {
         return;
       }
       const btn = regForm.querySelector('button[type="submit"]');
-      const originalText = btn ? btn.innerHTML : 'Proceed to Secure Registration';
-      const parentCard = regForm.closest('.glass-card') || regForm.parentElement;
+      const originalText = btn ? btn.innerHTML : 'Continue securely';
       if (btn) {
         btn.disabled = true;
         btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Securing Delegate Pass...';
@@ -954,38 +970,61 @@ function initForms() {
         const attemptKey = `sv:public-attempt:${SCHOLARVAULT_CONFERENCE_SLUG}:registration`;
         let attemptId = window.sessionStorage.getItem(attemptKey);
         if (!attemptId) {
-          attemptId = crypto.randomUUID();
+          attemptId = (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function')
+            ? crypto.randomUUID()
+            : ('sv_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9));
           window.sessionStorage.setItem(attemptKey, attemptId);
         }
 
         const values = formValues(regForm);
         values.attempt_id = attemptId;
 
+        // Ensure category fields are populated
+        if (!values.category_code && values.category) {
+          values.category_code = values.category;
+        }
+        if (!values.category_id && values.category_code) {
+          const matchingCard = document.querySelector(`[data-registration-category][data-category-code="${values.category_code}"]`);
+          if (matchingCard && matchingCard.dataset.categoryId) {
+            values.category_id = matchingCard.dataset.categoryId;
+            const catIdInput = document.getElementById('regCategoryId');
+            if (catIdInput) catIdInput.value = values.category_id;
+          }
+        }
+        if (!values.query_type && values.category) {
+          const regCatSelect = document.getElementById('regCategorySelect');
+          const selOpt = regCatSelect?.options?.[regCatSelect.selectedIndex];
+          values.query_type = selOpt?.dataset?.name || selOpt?.textContent || values.category;
+        }
+
         // Save registration draft to handoff bridge for seamless checkout resume
         window.sessionStorage.setItem('scholarvault:conference-handoff:registration', JSON.stringify(values));
 
-        await submitInboundLead('registration_intent', regForm, {
-          attempt_id: attemptId,
-          phone: values.phone || null,
-          category_id: values.category_id || null,
-          category_code: values.category_code || null,
-          query_type: values.query_type || values.category || null,
-          currency: values.currency || 'INR',
-          cta_source: 'registration_starter'
-        });
+        try {
+          await submitInboundLead('registration_intent', regForm, {
+            attempt_id: attemptId,
+            phone: values.phone || null,
+            country: values.country || null,
+            category_id: values.category_id || null,
+            category_code: values.category_code || null,
+            query_type: values.query_type || values.category || null,
+            currency: values.currency || 'INR',
+            cta_source: 'registration_starter'
+          });
+        } catch (leadError) {
+          console.warn('Registration lead submission notice:', leadError);
+        }
 
-        showToast('Registration details logged! Proceeding to invoice confirmation.', 'success');
+        if (window.ScholarVaultConferences) {
+          window.ScholarVaultConferences.open('register', values);
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+          }
+          return;
+        }
 
-        const checkoutUrl = `${getScholarVaultAppOrigin()}/login?next=${encodeURIComponent(`/dashboard/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/register`)}`;
-        const actionBtnHtml = `<a href="${checkoutUrl}" class="pill-btn glowing-pill"><i class="fa-solid fa-credit-card"></i> Complete Payment on ScholarVault Portal</a>`;
-
-        renderSuccessState(
-          parentCard,
-          'Delegate Slot Reserved!',
-          'Your registration details have been securely logged into the ScholarVault Conference Platform. An official invoice with verified UPI and international payment instructions has been dispatched to your email.',
-          'REGISTRATION CONFIRMED',
-          actionBtnHtml
-        );
+        window.location.href = `${getScholarVaultAppOrigin()}/login?next=${encodeURIComponent('/dashboard/conferences/research-integrity-responsible-ai-summit-2026/register')}`;
       } catch (err) {
         showToast(err.message || 'Registration could not be completed. Please try again.', 'error');
         if (btn) {
