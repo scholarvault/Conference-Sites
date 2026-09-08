@@ -3,6 +3,8 @@
  * 1. ROR (Research Organization Registry) University / Institution Autocomplete
  * 2. Geo-Timezone & Dual Deadline Countdown Synchronization
  * 3. Dynamic Localized Currency Converter (INR -> Visitor Currency via live exchange rates)
+ * 4. Academic Email Integrity & Anti-Burner Gate (Kickbox Open API + Whitelist)
+ * 5. 1-Click "Add to Calendar" (.ICS & Google Calendar Event Engine)
  */
 
 (function () {
@@ -11,6 +13,7 @@
   // --- Configuration ---
   const ROR_API_URL = 'https://api.ror.org/v2/organizations';
   const EXCHANGE_API_URL = 'https://open.er-api.com/v6/latest/INR';
+  const KICKBOX_DISPOSABLE_API = 'https://open.kickbox.com/v1/disposable';
   const CACHE_TTL_MS = 60 * 60 * 1000; // 1 hour
   const SUMMIT_TIMEZONE = 'Asia/Kolkata';
 
@@ -39,12 +42,60 @@
     INR: '₹'
   };
 
+  // Reputable domain whitelist (never flagged as burner)
+  const TRUSTED_EMAIL_DOMAINS = new Set([
+    'gmail.com', 'yahoo.com', 'outlook.com', 'hotmail.com', 'icloud.com',
+    'proton.me', 'protonmail.com', 'live.com', 'aol.com', 'zoho.com',
+    'scholarvault.in', 'cam.ac.uk', 'ox.ac.uk', 'stanford.edu', 'mit.edu',
+    'harvard.edu', 'berkeley.edu', 'iitm.ac.in', 'iitb.ac.in', 'iitd.ac.in',
+    'srmist.edu.in', 'vit.ac.in', 'up.edu.ph', 'dlsu.edu.ph'
+  ]);
+
+  // Known notorious disposable burner domains
+  const KNOWN_BURNER_DOMAINS = new Set([
+    'mailinator.com', 'tempmail.com', '10minutemail.com', 'guerrillamail.com',
+    'yopmail.com', 'trashmail.com', 'getairmail.com', 'sharklasers.com',
+    'dispostable.com', 'burnermail.io', 'generator.email', 'tempail.com',
+    'throwawaymail.com', 'fakeinbox.com', 'temp-mail.org', 'nada.ltd',
+    'mohmal.com', 'mytemp.email', 'crazymailing.com', 'dropmail.me'
+  ]);
+
+  // Conference Events for Calendar
+  const SUMMIT_EVENT = {
+    title: 'Research Integrity & Responsible AI Summit 2026 (SVRIAS 2026)',
+    startUtc: '20261114T033000Z', // 09:00 IST
+    endUtc: '20261114T123000Z',   // 18:00 IST
+    startIso: '2026-11-14T03:30:00Z',
+    endIso: '2026-11-14T12:30:00Z',
+    location: 'Virtual Summit on Zoom • ScholarVault Conferences',
+    details: 'ScholarVault Research Integrity & Responsible AI Summit 2026 (SVRIAS 2026).\n\nKeynote lectures, track presentation stages, and peer-review benchmarks.\nVirtual Platform: Zoom (Link issued by ScholarVault)\nOfficial Site: https://researchintegrity2026.scholarvault.in'
+  };
+
+  const DEADLINE_EVENT = {
+    title: 'SVRIAS 2026 - Abstract Submission Deadline',
+    startUtc: '20261015T182959Z', // 23:59:59 IST
+    endUtc: '20261015T182959Z',
+    startIso: '2026-10-15T18:29:59Z',
+    endIso: '2026-10-15T18:29:59Z',
+    location: 'https://researchintegrity2026.scholarvault.in/submit-paper.html',
+    details: 'Final deadline to submit 250-500 word abstracts to SVRIAS 2026 across 6 thematic tracks.\nSubmit online: https://researchintegrity2026.scholarvault.in/submit-paper.html'
+  };
+
   function ready(fn) {
     if (document.readyState !== 'loading') {
       fn();
     } else {
       document.addEventListener('DOMContentLoaded', fn);
     }
+  }
+
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
   }
 
   // =========================================================================
@@ -260,15 +311,6 @@
     });
   }
 
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
   // =========================================================================
   // 2. Visitor Timezone & Dual Deadline Synchronization
   // =========================================================================
@@ -449,6 +491,283 @@
   }
 
   // =========================================================================
+  // 4. Academic Email Integrity & Anti-Burner Gate
+  // =========================================================================
+
+  const domainIntegrityCache = new Map();
+
+  async function checkEmailDomainDisposable(domain) {
+    if (!domain) return false;
+    const cleanDomain = domain.toLowerCase().trim();
+
+    // Whitelist trusted consumer and university domains
+    if (TRUSTED_EMAIL_DOMAINS.has(cleanDomain)) return false;
+    if (/\.(edu|ac\.[a-z]{2}|edu\.[a-z]{2}|res\.in|gov)$/i.test(cleanDomain)) return false;
+
+    // Instant check against known burners
+    if (KNOWN_BURNER_DOMAINS.has(cleanDomain)) return true;
+
+    // Check cache
+    if (domainIntegrityCache.has(cleanDomain)) {
+      return domainIntegrityCache.get(cleanDomain);
+    }
+
+    // Query Kickbox Open API with 2.5s timeout
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 2500);
+
+      const res = await fetch(`${KICKBOX_DISPOSABLE_API}/${encodeURIComponent(cleanDomain)}`, {
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
+      if (res.ok) {
+        const data = await res.json();
+        const isDisposable = Boolean(data.disposable);
+        domainIntegrityCache.set(cleanDomain, isDisposable);
+        return isDisposable;
+      }
+    } catch {
+      // Fail open so legitimate users are never blocked
+    }
+
+    return false;
+  }
+
+  function initEmailIntegrity() {
+    const emailInputs = document.querySelectorAll('input[type="email"], input[name="author_email"], input[name="email"]');
+    if (!emailInputs.length) return;
+
+    emailInputs.forEach((input) => {
+      if (input.dataset.emailIntegrityInitialized) return;
+      input.dataset.emailIntegrityInitialized = 'true';
+
+      const form = input.closest('form');
+
+      const validateInput = async () => {
+        const val = input.value.trim();
+        const parts = val.split('@');
+
+        let warning = input.parentElement.querySelector('.email-integrity-warning');
+
+        if (parts.length !== 2 || !parts[1].includes('.')) {
+          if (warning) warning.remove();
+          input.classList.remove('input-warning-border');
+          input.dataset.isDisposable = 'false';
+          return true;
+        }
+
+        const domain = parts[1];
+        const isDisposable = await checkEmailDomainDisposable(domain);
+
+        if (isDisposable) {
+          input.dataset.isDisposable = 'true';
+          input.classList.add('input-warning-border');
+
+          if (!warning) {
+            warning = document.createElement('div');
+            warning.className = 'email-integrity-warning';
+            warning.innerHTML = `
+              <i class="fa-solid fa-triangle-exclamation"></i>
+              <span>Disposable email domain detected. Please provide a permanent university or personal address to receive review decisions and conference credentials.</span>
+            `;
+            input.parentElement.appendChild(warning);
+          }
+          return false;
+        } else {
+          input.dataset.isDisposable = 'false';
+          input.classList.remove('input-warning-border');
+          if (warning) warning.remove();
+          return true;
+        }
+      };
+
+      input.addEventListener('blur', validateInput);
+      input.addEventListener('change', validateInput);
+
+      // Block form submission if disposable
+      if (form) {
+        form.addEventListener('submit', async (e) => {
+          if (input.dataset.isDisposable === 'true') {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+            input.focus();
+            if (window.showToast) {
+              window.showToast('Please enter a permanent institutional or personal email address before proceeding.', 'error');
+            } else {
+              alert('Please enter a permanent institutional or personal email address before proceeding.');
+            }
+            return false;
+          }
+        }, true);
+      }
+    });
+  }
+
+  // =========================================================================
+  // 5. 1-Click "Add to Calendar" (.ICS & Google Calendar Engine)
+  // =========================================================================
+
+  function getGoogleCalendarUrl(event) {
+    return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startUtc}/${event.endUtc}&details=${encodeURIComponent(event.details)}&location=${encodeURIComponent(event.location)}`;
+  }
+
+  function getOutlookLiveUrl(event) {
+    return `https://outlook.live.com/calendar/0/action/compose?allday=false&subject=${encodeURIComponent(event.title)}&startdt=${encodeURIComponent(event.startIso)}&enddt=${encodeURIComponent(event.endIso)}&body=${encodeURIComponent(event.details)}&location=${encodeURIComponent(event.location)}`;
+  }
+
+  function downloadIcsFile(event, filename = 'SVRIAS-2026-Event.ics') {
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//ScholarVault Conferences//SVRIAS 2026//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      `UID:svrias-2026-${Date.now()}@scholarvault.in`,
+      `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+      `DTSTART:${event.startUtc}`,
+      `DTEND:${event.endUtc}`,
+      `SUMMARY:${event.title.replace(/\n/g, ' ')}`,
+      `DESCRIPTION:${event.details.replace(/\n/g, '\\n')}`,
+      `LOCATION:${event.location.replace(/\n/g, ' ')}`,
+      'STATUS:CONFIRMED',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(link.href);
+  }
+
+  function createCalendarDropdownWidget() {
+    const wrap = document.createElement('div');
+    wrap.className = 'calendar-dropdown-wrap';
+
+    wrap.innerHTML = `
+      <button class="pill-btn frosted-pill calendar-toggle-btn" type="button" aria-expanded="false">
+        <i class="fa-regular fa-calendar-plus" style="color: var(--accent-cyan);"></i>
+        <span>Add to Calendar</span>
+        <i class="fa-solid fa-chevron-down" style="font-size: 9px; margin-left: 4px;"></i>
+      </button>
+      <div class="calendar-dropdown-menu" role="menu">
+        <div class="calendar-menu-header">14 Nov 2026 • Summit Day</div>
+        <a href="${getGoogleCalendarUrl(SUMMIT_EVENT)}" target="_blank" rel="noopener noreferrer" class="calendar-menu-item">
+          <i class="fa-brands fa-google" style="color: #4285F4;"></i>
+          <span>Google Calendar (Summit)</span>
+        </a>
+        <button type="button" class="calendar-menu-item" data-cal-action="ics-summit">
+          <i class="fa-brands fa-apple" style="color: #ffffff;"></i>
+          <span>Apple / Outlook (.ICS)</span>
+        </button>
+        <a href="${getOutlookLiveUrl(SUMMIT_EVENT)}" target="_blank" rel="noopener noreferrer" class="calendar-menu-item">
+          <i class="fa-brands fa-microsoft" style="color: #0078D4;"></i>
+          <span>Outlook / Office 365</span>
+        </a>
+
+        <div class="calendar-menu-header" style="margin-top: 6px;">15 Oct 2026 • Abstract Deadline</div>
+        <a href="${getGoogleCalendarUrl(DEADLINE_EVENT)}" target="_blank" rel="noopener noreferrer" class="calendar-menu-item">
+          <i class="fa-solid fa-hourglass-half" style="color: var(--accent-gold);"></i>
+          <span>Add Deadline to Google</span>
+        </a>
+        <button type="button" class="calendar-menu-item" data-cal-action="ics-deadline">
+          <i class="fa-solid fa-file-arrow-down" style="color: var(--accent-gold);"></i>
+          <span>Deadline (.ICS File)</span>
+        </button>
+      </div>
+    `;
+
+    const toggleBtn = wrap.querySelector('.calendar-toggle-btn');
+    const menu = wrap.querySelector('.calendar-dropdown-menu');
+
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = menu.classList.contains('open');
+      document.querySelectorAll('.calendar-dropdown-menu.open').forEach((m) => m.classList.remove('open'));
+      if (!isOpen) {
+        menu.classList.add('open');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      } else {
+        menu.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    wrap.querySelectorAll('[data-cal-action]').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const action = btn.getAttribute('data-cal-action');
+        if (action === 'ics-summit') {
+          downloadIcsFile(SUMMIT_EVENT, 'SVRIAS-2026-Virtual-Summit.ics');
+        } else if (action === 'ics-deadline') {
+          downloadIcsFile(DEADLINE_EVENT, 'SVRIAS-2026-Abstract-Deadline.ics');
+        }
+        menu.classList.remove('open');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!wrap.contains(e.target)) {
+        menu.classList.remove('open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    return wrap;
+  }
+
+  function initCalendarSync() {
+    // 1. In index.html countdown card
+    const countdownCard = document.querySelector('[data-countdown-target="abstract"]');
+    if (countdownCard && !countdownCard.querySelector('.calendar-dropdown-wrap')) {
+      const widget = createCalendarDropdownWidget();
+      widget.style.marginTop = '14px';
+      widget.style.display = 'inline-block';
+      countdownCard.appendChild(widget);
+    }
+
+    // 2. In register.html hero / action strip
+    const registerCard = document.querySelector('#intakeForm');
+    if (registerCard && !registerCard.querySelector('.calendar-dropdown-wrap')) {
+      const header = registerCard.querySelector('h2');
+      if (header) {
+        const wrapRow = document.createElement('div');
+        wrapRow.style.display = 'flex';
+        wrapRow.style.justifyContent = 'space-between';
+        wrapRow.style.alignItems = 'center';
+        wrapRow.style.flexWrap = 'wrap';
+        wrapRow.style.gap = '10px';
+        wrapRow.style.marginBottom = '12px';
+
+        const titleSpan = document.createElement('span');
+        titleSpan.style.fontSize = '13px';
+        titleSpan.style.color = '#94a3b8';
+        titleSpan.innerHTML = '<i class="fa-regular fa-bell" style="color: var(--accent-gold);"></i> Save Summit Day to your calendar:';
+
+        const widget = createCalendarDropdownWidget();
+
+        wrapRow.appendChild(titleSpan);
+        wrapRow.appendChild(widget);
+        header.parentNode.insertBefore(wrapRow, header.nextSibling);
+      }
+    }
+
+    // 3. In submit-paper.html template download bar
+    const submitTemplatesBar = document.querySelector('.conf-section > div[style*="justify-content: center"]');
+    if (submitTemplatesBar && !submitTemplatesBar.querySelector('.calendar-dropdown-wrap')) {
+      const widget = createCalendarDropdownWidget();
+      submitTemplatesBar.appendChild(widget);
+    }
+  }
+
+  // =========================================================================
   // Initialization Bootstrap
   // =========================================================================
 
@@ -456,13 +775,21 @@
     initRorAutocomplete();
     initTimezoneLocalization();
     initCurrencyLocalization();
+    initEmailIntegrity();
+    initCalendarSync();
   });
 
   window.ScholarVaultAcademicEnrichment = {
     initRorAutocomplete,
     initTimezoneLocalization,
     initCurrencyLocalization,
+    initEmailIntegrity,
+    initCalendarSync,
     detectUserTimezone,
-    detectTargetCurrency
+    detectTargetCurrency,
+    checkEmailDomainDisposable,
+    downloadIcsFile,
+    SUMMIT_EVENT,
+    DEADLINE_EVENT
   };
 })();
