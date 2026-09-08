@@ -507,7 +507,10 @@
         const email = result?.data?.email || result?.email || authorEmail;
         card.innerHTML = `<div class="section-head"><span class="section-eyebrow">SUBMISSION RECEIVED</span><h2 class="section-title">CHECK YOUR EMAIL</h2><p class="section-desc">Your reference is <strong>${reference}</strong>. We sent a secure confirmation link to <strong>${email}</strong>. Confirm it before editorial screening begins.</p><a class="pill-btn glowing-pill" href="index.html">Return to summit home</a></div>`;
       } catch (error) {
-        window.showToast?.(error.message || 'Submission failed. Please try again.', 'error');
+        const errorMsg = error?.message === 'Failed to fetch'
+          ? 'Network or connection error. Please verify your connection and try again.'
+          : (error?.message || 'Submission failed. Please try again.');
+        window.showToast?.(errorMsg, 'error');
         button.disabled = false;
         button.innerHTML = original;
       }
