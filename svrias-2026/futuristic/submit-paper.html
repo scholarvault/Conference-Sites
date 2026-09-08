@@ -435,6 +435,7 @@
     </div>
   </div>
 
+  <script src="js/academic-enrichment.js"></script>
   <script src="main.js"></script>
   <script>
     // Pre-select track if query param ?track= is provided
@@ -474,6 +475,7 @@
         const authorEmail = (payload.get('author_email') || '').trim();
         const track = (payload.get('track') || '').trim();
         const coauthors = (payload.get('coauthors') || '').trim();
+        const rorId = (payload.get('ror_id') || form.dataset.rorId || '').trim();
 
         payload.set('title', title);
         payload.set('paper_title', title);
@@ -481,6 +483,7 @@
         payload.set('author_institution', institution);
         payload.set('country', country);
         payload.set('author_country', country);
+        if (rorId) payload.set('ror_id', rorId);
         payload.set('name', authorName);
         payload.set('author_name', authorName);
         payload.set('email', authorEmail);

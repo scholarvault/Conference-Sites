@@ -3137,4 +3137,148 @@ body.menu-open .burger-btn .burger-bar:nth-child(3) {
   box-shadow: 0 0 24px rgba(56, 189, 248, 0.25);
 }
 
+/* ==========================================================================
+   Academic Enrichment & Intelligence: ROR Autocomplete, Currency & Timezone
+   ========================================================================== */
+
+.ror-autocomplete-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.ror-autocomplete-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  max-height: 290px;
+  overflow-y: auto;
+  background: #090d16;
+  border: 1px solid rgba(245, 158, 11, 0.38);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 20px rgba(245, 158, 11, 0.15);
+  z-index: 1000;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  margin: 0;
+  padding: 6px 0;
+  list-style: none;
+  font-family: var(--font-sans);
+}
+
+.ror-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease;
+  border-left: 3px solid transparent;
+  color: #e2e8f0;
+}
+
+.ror-dropdown-item:hover,
+.ror-dropdown-item.selected {
+  background: rgba(245, 158, 11, 0.14);
+  border-left-color: var(--accent-gold);
+}
+
+.ror-item-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ror-item-name i {
+  color: var(--accent-gold);
+  font-size: 12px;
+}
+
+.ror-item-meta {
+  font-size: 11.5px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ror-item-meta .meta-dot {
+  font-size: 8px;
+  color: #64748b;
+}
+
+.ror-item-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: monospace;
+  font-size: 10px;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+.ror-loading-indicator {
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ror-no-results {
+  padding: 12px 14px;
+  font-size: 12.5px;
+  color: #94a3b8;
+  font-style: italic;
+}
+
+/* Localized Currency Badges */
+.local-currency-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.28);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  transition: all 0.2s ease;
+}
+
+.local-currency-badge i {
+  font-size: 11px;
+}
+
+/* Dual Timezone Deadlines */
+.dual-tz-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #a1a1aa;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 4px 10px;
+  margin-top: 6px;
+}
+
+.dual-tz-badge strong {
+  color: #fde68a;
+  font-weight: 600;
+}
+
+
 
