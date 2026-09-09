@@ -159,6 +159,16 @@
             </div>
 
             <div class="form-group">
+              <label>Phone / WhatsApp (with Country Code) *</label>
+              <input type="tel" name="phone" class="form-input" required placeholder="e.g. +91 98765 43210 or +1 415 555 2671" />
+            </div>
+
+            <div class="form-group">
+              <label>Country of Affiliation *</label>
+              <input type="text" name="country" class="form-input" required placeholder="e.g. Germany, India, United States" />
+            </div>
+
+            <div class="form-group">
               <label>Institution / Organisation *</label>
               <input type="text" name="institution" class="form-input" required placeholder="University / Research Institute" />
             </div>
@@ -168,9 +178,65 @@
               <input type="text" name="designation" class="form-input" required placeholder="Associate Professor / Senior Researcher" />
             </div>
 
-            <div class="form-group">
-              <label>Country of Affiliation *</label>
-              <input type="text" name="country" class="form-input" required placeholder="e.g. Germany, India, United States" />
+            <!-- Smart Auto-Fill from CV or Profile -->
+            <div class="form-group full" style="margin-top: 6px; margin-bottom: 8px;">
+              <div class="smart-autofill-banner" style="background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(16, 185, 129, 0.08)); border: 1px dashed rgba(56, 189, 248, 0.35); border-radius: 16px; padding: 20px;">
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 12px; flex-wrap: wrap;">
+                  <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 36px; height: 36px; border-radius: 10px; background: rgba(56, 189, 248, 0.2); display: flex; align-items: center; justify-content: center; color: #38bdf8; font-size: 16px;">
+                      <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <div>
+                      <strong style="color: #ffffff; font-size: 14.5px; display: block;">Smart Auto-Fill from CV / Academic Profile</strong>
+                      <span style="font-size: 12px; color: #94a3b8;">Drop your CV (PDF) or paste your OrcID to auto-fill review competencies &amp; experience</span>
+                    </div>
+                  </div>
+                  <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 11px; padding: 4px 10px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px;">
+                    <i class="fa-solid fa-bolt"></i> Instant Auto-Fill
+                  </span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; align-items: stretch;">
+                  <!-- CV Drop Zone -->
+                  <label id="cvDropZone" for="cvFile" onclick="document.getElementById('cvFile').click()" style="display: block; border: 2px dashed rgba(255, 255, 255, 0.18); border-radius: 12px; padding: 18px 14px; text-align: center; background: rgba(255, 255, 255, 0.02); cursor: pointer; transition: all 0.2s ease;">
+                    <input type="file" id="cvFile" accept=".pdf,application/pdf" style="display: none;" />
+                    <i class="fa-solid fa-file-pdf" style="font-size: 24px; color: #38bdf8; margin-bottom: 6px; display: inline-block;"></i>
+                    <div style="font-size: 13px; font-weight: 600; color: #e2e8f0;" id="cvDropPrompt">Click or Drop CV / Academic Bio (PDF)</div>
+                    <div style="font-size: 11.5px; color: #64748b;" id="cvDropHint">Extracts review experience, keywords &amp; publications</div>
+                  </label>
+
+                  <!-- OrcID / Scholar 1-click -->
+                  <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; justify-content: center; gap: 8px;">
+                    <div style="font-size: 12px; color: #cbd5e1; font-weight: 600; display: flex; align-items: center; gap: 6px;">
+                      <i class="fa-brands fa-orcid" style="color: #a6ce39;"></i> Quick Import via OrcID / Scholar:
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                      <input type="text" id="quickImportUrl" class="form-input" placeholder="e.g. 0000-0002-1825-0097 or profile link" style="font-size: 12px; padding: 8px 12px;" />
+                      <button type="button" id="quickImportBtn" class="pill-btn glowing-pill" style="padding: 8px 14px; font-size: 12px; white-space: nowrap;">
+                        <i class="fa-solid fa-bolt"></i> Auto-Fill
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div id="autofillSuccessNotice" style="display: none; margin-top: 12px; padding: 10px 14px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; color: #34d399; font-size: 12.5px; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-circle-check"></i>
+                  <span id="autofillSuccessMsg">Successfully parsed! Review competence statement and tracks have been auto-populated below.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Committee Photo Dropzone -->
+            <div class="form-group full">
+              <label>Committee Member Photo / Headshot (For Website Roster)</label>
+              <label id="committeePhotoDropZone" for="committeePhotoFile" onclick="document.getElementById('committeePhotoFile').click()" style="display: flex; border: 2px dashed rgba(255, 255, 255, 0.15); border-radius: 14px; padding: 14px 18px; align-items: center; gap: 16px; cursor: pointer; background: rgba(255, 255, 255, 0.02); transition: all 0.2s ease;">
+                <input type="file" id="committeePhotoFile" accept="image/jpeg,image/png,image/webp" style="display: none;" />
+                <img id="committeePhotoPreview" src="assets/icon-512.png" alt="Headshot preview" style="width: 58px; height: 58px; border-radius: 50%; object-fit: cover; border: 2px solid #38bdf8; flex-shrink: 0;" />
+                <div style="text-align: left;">
+                  <div style="font-size: 13.5px; font-weight: 600; color: #ffffff;" id="photoPromptText">Upload or Drag &amp; Drop Professional Headshot Photo</div>
+                  <div style="font-size: 12px; color: #94a3b8;">Square JPG, PNG, or WebP &bull; Max 5MB &bull; Optional</div>
+                </div>
+              </label>
             </div>
 
             <div class="form-group">
@@ -184,9 +250,9 @@
               </select>
             </div>
 
-            <div class="form-group full">
-              <label>Google Scholar Profile / OrcID / DBLP URL *</label>
-              <input type="url" name="scholar_url" class="form-input" required placeholder="https://scholar.google.com/citations?user=... or https://orcid.org/..." />
+            <div class="form-group">
+              <label>Google Scholar / OrcID / DBLP URL (Optional)</label>
+              <input type="url" name="scholar_url" class="form-input" placeholder="https://scholar.google.com/citations?user=... or https://orcid.org/..." />
             </div>
 
             <div class="form-group full">
@@ -457,6 +523,8 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>if (window.pdfjsLib) { pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'; }</script>
   <script src="js/academic-enrichment.js"></script>
   <script src="main.js"></script>
 

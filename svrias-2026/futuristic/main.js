@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSocialDock();
   initNewsletterForm();
   initFileDropZone();
+  initSmartIntake();
   initRegistrationOptions();
   initForms();
 });
@@ -682,15 +683,19 @@ async function submitRoleApplication(applicationType, form) {
     .map(([key]) => key.replace('track_', 'Track '))
     .join(', ');
 
+  const rawProfileUrl = values.profile_url || values.scholar_url || values.linkedin || values.orcid || '';
+  const cleanProfileUrl = rawProfileUrl.trim();
+
   const payload = {
     application_type: applicationType,
     full_name: values.full_name || values.name || '',
     institutional_email: (values.institutional_email || values.email || '').toLowerCase().trim(),
+    phone: (values.phone || '').trim(),
     institution: values.institution || values.affiliation || '',
     country: values.country || '',
     bio: values.bio || values.motivation || 'Academic profile submitted via conference portal.',
     expertise: values.expertise || values.areas_of_expertise || selectedTracks || values.role_preference || 'Responsible AI / Research Integrity',
-    profile_url: values.profile_url || values.scholar_url || values.linkedin || values.orcid || 'https://scholarvault.in',
+    profile_url: cleanProfileUrl || '',
     proposed_contribution: values.proposed_contribution || values.contribution || [values.talk_title, values.abstract].filter(Boolean).join('\n\n') || values.proposed_topic || (applicationType === 'speaker' ? '' : 'Technical review and program committee participation'),
     profile_consent: form.querySelector('[name="profile_consent"]')?.checked ?? true,
     website: values.website || ''
@@ -703,6 +708,9 @@ async function submitRoleApplication(applicationType, form) {
   if (!payload.institutional_email || !payload.institutional_email.includes('@')) {
     throw new Error('Please enter a valid institutional email address.');
   }
+  if (!payload.phone || payload.phone.length < 5) {
+    throw new Error('Please enter your phone / WhatsApp number with country code (e.g. +91 98765 43210).');
+  }
   if (!payload.institution) {
     throw new Error('Please enter or select your affiliated institution / university.');
   }
@@ -710,10 +718,10 @@ async function submitRoleApplication(applicationType, form) {
     throw new Error('Please enter your country.');
   }
   if (!payload.bio || payload.bio.length < 40) {
-    throw new Error('Please provide a biography of at least 40 characters (currently ' + (payload.bio ? payload.bio.length : 0) + ' characters).');
+    throw new Error('Please provide a biography or motivation statement of at least 40 characters (currently ' + (payload.bio ? payload.bio.length : 0) + ' characters).');
   }
   if (!payload.expertise || payload.expertise.length < 10) {
-    throw new Error('Please provide your areas of expertise (at least 10 characters).');
+    throw new Error('Please provide your areas of expertise or select at least one track (at least 10 characters).');
   }
   if (applicationType === 'speaker' && (!payload.proposed_contribution || payload.proposed_contribution.length < 20)) {
     throw new Error('Please provide your proposed talk title and synopsis outline (at least 20 characters).');
@@ -885,6 +893,438 @@ function initFileDropZone() {
       if (prompt) prompt.style.display = 'block';
       if (fileInfo) fileInfo.style.display = 'none';
     });
+  }
+}
+
+/**
+ * 11b. Smart Intake & Auto-Fill Manager (speaker-form.html & committee-form.html)
+ * - PDF CV parsing via PDF.js with automated extraction of Name, Email, Phone, Affiliation, Bio, Expertise & Talk suggestions
+ * - 1-Click OrcID / Scholar Public Record API Auto-Fill
+ * - Photo Headshot Dropzone with instant circular preview
+ */
+function initSmartIntake() {
+  const cvDropZone = document.getElementById('cvDropZone');
+  const cvFile = document.getElementById('cvFile');
+  const cvDropPrompt = document.getElementById('cvDropPrompt');
+  const cvDropHint = document.getElementById('cvDropHint');
+  const successNotice = document.getElementById('autofillSuccessNotice');
+  const successMsg = document.getElementById('autofillSuccessMsg');
+
+  const activeForm = document.getElementById('speakerForm') || document.getElementById('committeeForm');
+
+  // --- 1. CV PDF Uploader & Text Extraction ---
+  if (cvDropZone && cvFile && activeForm) {
+    const triggerFile = () => cvFile.click();
+    cvDropZone.addEventListener('click', triggerFile);
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+      cvDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        cvDropZone.style.borderColor = '#38bdf8';
+        cvDropZone.style.background = 'rgba(56, 189, 248, 0.08)';
+      });
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+      cvDropZone.addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        cvDropZone.style.borderColor = 'rgba(255, 255, 255, 0.18)';
+        cvDropZone.style.background = 'rgba(255, 255, 255, 0.02)';
+      });
+    });
+
+    const handleCVFile = async (file) => {
+      if (!file) return;
+      if (!file.name.toLowerCase().endsWith('.pdf') && file.type !== 'application/pdf') {
+        showToast('Please upload a PDF document (.pdf)', 'warning');
+        return;
+      }
+
+      if (cvDropPrompt) {
+        cvDropPrompt.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Reading CV & parsing profile...';
+      }
+      if (cvDropHint) cvDropHint.textContent = 'Extracting scholarly bio, expertise & contact details...';
+
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        let extractedText = '';
+
+        if (window.pdfjsLib) {
+          try {
+            const pdf = await window.pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+            const maxPages = Math.min(pdf.numPages, 4);
+            const pageTexts = [];
+            for (let i = 1; i <= maxPages; i++) {
+              const page = await pdf.getPage(i);
+              const textContent = await page.getTextContent();
+              const pageString = textContent.items.map(item => item.str).join(' ');
+              pageTexts.push(pageString);
+            }
+            extractedText = pageTexts.join('\n\n');
+          } catch (pdfErr) {
+            console.warn('PDF.js parsing notice:', pdfErr);
+          }
+        }
+
+        const parseResult = parseResumeText(extractedText, file.name);
+        applyAutoFillData(activeForm, parseResult);
+
+        if (cvDropPrompt) {
+          cvDropPrompt.innerHTML = `<i class="fa-solid fa-file-circle-check" style="color: #34d399;"></i> ${file.name}`;
+        }
+        if (cvDropHint) {
+          cvDropHint.innerHTML = '<span style="color: #34d399; font-weight: 600;">Data extracted & auto-filled ✓</span>';
+        }
+        if (successNotice) {
+          successNotice.style.display = 'flex';
+          if (successMsg) {
+            successMsg.textContent = `Auto-filled from ${file.name}: Name, contact, affiliation, and academic summary!`;
+          }
+        }
+        showToast('CV parsed successfully! Details populated.', 'success');
+      } catch (err) {
+        console.error('CV parse error:', err);
+        if (cvDropPrompt) cvDropPrompt.textContent = 'Click or Drop CV / Resume (PDF)';
+        if (cvDropHint) cvDropHint.textContent = 'Extracts Bio, research keywords & talk topics';
+        showToast('Could not extract text from this PDF. You can still fill fields manually.', 'info');
+      }
+    };
+
+    cvDropZone.addEventListener('drop', (e) => {
+      const files = e.dataTransfer?.files;
+      if (files && files.length > 0) handleCVFile(files[0]);
+    });
+
+    cvFile.addEventListener('change', (e) => {
+      const files = e.target.files;
+      if (files && files.length > 0) handleCVFile(files[0]);
+    });
+  }
+
+  // --- 2. OrcID / Scholar 1-Click Quick Import ---
+  const quickImportBtn = document.getElementById('quickImportBtn');
+  const quickImportUrl = document.getElementById('quickImportUrl');
+  if (quickImportBtn && quickImportUrl && activeForm) {
+    quickImportBtn.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const rawInput = quickImportUrl.value.trim();
+      if (!rawInput) {
+        showToast('Please enter an OrcID (e.g. 0000-0002-1825-0097) or profile URL', 'warning');
+        return;
+      }
+
+      const orcidMatch = rawInput.match(/\d{4}-\d{4}-\d{4}-\d{3}[\dX]/);
+      const originalHtml = quickImportBtn.innerHTML;
+      quickImportBtn.disabled = true;
+      quickImportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Fetching...';
+
+      if (orcidMatch) {
+        const orcidId = orcidMatch[0];
+        try {
+          const res = await fetch(`https://pub.orcid.org/v3.0/${orcidId}/record`, {
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!res.ok) throw new Error(`OrcID responded with ${res.status}`);
+          const data = await res.json();
+
+          const person = data.person;
+          const givenNames = person?.name?.['given-names']?.value || '';
+          const familyName = person?.name?.['family-name']?.value || '';
+          const fullName = [givenNames, familyName].filter(Boolean).join(' ');
+
+          const bioContent = person?.biography?.content || '';
+          const employments = data['activities-summary']?.employments?.['affiliation-group'];
+          let institution = '';
+          let designation = '';
+          if (employments && employments.length > 0) {
+            const firstEmp = employments[0]?.summaries?.[0]?.['employment-summary'];
+            if (firstEmp) {
+              institution = firstEmp.organization?.name || '';
+              designation = firstEmp['role-title'] || '';
+            }
+          }
+
+          const country = person?.addresses?.address?.[0]?.country?.value || '';
+          const keywords = (person?.keywords?.keyword || []).map(k => k.content).join(', ');
+
+          const works = data['activities-summary']?.works?.group;
+          let latestWork = '';
+          if (works && works.length > 0) {
+            latestWork = works[0]?.['work-summary']?.[0]?.title?.title?.value || '';
+          }
+
+          const orcidUrl = `https://orcid.org/${orcidId}`;
+          applyAutoFillData(activeForm, {
+            name: fullName,
+            institution,
+            designation,
+            country,
+            bio: bioContent,
+            expertise: keywords,
+            talk_title: latestWork ? `Key Insights: ${latestWork}` : '',
+            orcid: orcidUrl,
+            scholar_url: orcidUrl
+          });
+
+          if (successNotice) {
+            successNotice.style.display = 'flex';
+            if (successMsg) {
+              successMsg.textContent = `Auto-filled from OrcID (${orcidId}): Name, affiliation, and research profile!`;
+            }
+          }
+          showToast('OrcID profile imported successfully!', 'success');
+        } catch (err) {
+          console.warn('OrcID fetch notice:', err);
+          const orcidInput = activeForm.querySelector('[name="orcid"]') || activeForm.querySelector('[name="scholar_url"]');
+          if (orcidInput) orcidInput.value = rawInput.startsWith('http') ? rawInput : `https://orcid.org/${orcidMatch[0]}`;
+          showToast('Profile URL linked to form. You may enter remaining fields manually.', 'info');
+        } finally {
+          quickImportBtn.disabled = false;
+          quickImportBtn.innerHTML = originalHtml;
+        }
+      } else {
+        const profileInput = activeForm.querySelector('[name="scholar_url"]') || activeForm.querySelector('[name="orcid"]') || activeForm.querySelector('[name="linkedin"]');
+        if (profileInput) profileInput.value = rawInput;
+        quickImportBtn.disabled = false;
+        quickImportBtn.innerHTML = originalHtml;
+        showToast('Profile link added to application!', 'info');
+      }
+    });
+  }
+
+  // --- 3. Photo Headshot Drop Zone & Instant Preview ---
+  ['speakerPhoto', 'committeePhoto'].forEach(prefix => {
+    const dropZone = document.getElementById(`${prefix}DropZone`);
+    const fileInput = document.getElementById(`${prefix}File`);
+    const previewImg = document.getElementById(`${prefix}Preview`);
+    const promptText = document.getElementById('photoPromptText');
+
+    if (dropZone && fileInput) {
+      dropZone.addEventListener('click', () => fileInput.click());
+
+      ['dragenter', 'dragover'].forEach(evt => {
+        dropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.style.borderColor = '#38bdf8';
+          dropZone.style.background = 'rgba(56, 189, 248, 0.08)';
+        });
+      });
+
+      ['dragleave', 'drop'].forEach(evt => {
+        dropZone.addEventListener(evt, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          dropZone.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+          dropZone.style.background = 'rgba(255, 255, 255, 0.02)';
+        });
+      });
+
+      const handlePhoto = (file) => {
+        if (!file) return;
+        if (!file.type.startsWith('image/')) {
+          showToast('Please select a valid image file (JPG, PNG, WebP)', 'warning');
+          return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+          showToast('Headshot image must be under 5MB', 'warning');
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          if (previewImg && e.target?.result) {
+            previewImg.src = e.target.result;
+            previewImg.style.boxShadow = '0 0 15px rgba(56, 189, 248, 0.5)';
+          }
+          if (promptText) {
+            promptText.innerHTML = `<span style="color: #34d399;">✓ Photo attached: ${file.name}</span>`;
+          }
+          showToast('Headshot attached successfully!', 'success');
+        };
+        reader.readAsDataURL(file);
+      };
+
+      dropZone.addEventListener('drop', (e) => {
+        const files = e.dataTransfer?.files;
+        if (files && files.length > 0) handlePhoto(files[0]);
+      });
+
+      fileInput.addEventListener('change', (e) => {
+        const files = e.target.files;
+        if (files && files.length > 0) handlePhoto(files[0]);
+      });
+    }
+  });
+}
+
+/**
+ * Heuristic extractor for CV text
+ */
+function parseResumeText(text, filename) {
+  const result = {};
+  if (!text) return result;
+
+  const clean = text.replace(/\s+/g, ' ').trim();
+
+  // 1. Email
+  const emailMatch = clean.match(/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/);
+  if (emailMatch) result.email = emailMatch[0].toLowerCase();
+
+  // 2. Phone
+  const phoneMatch = clean.match(/(?:\+?\d{1,3}[-.\s]?)?\(?\d{2,4}\)?[-.\s]?\d{3,4}[-.\s]?\d{3,5}/);
+  if (phoneMatch && phoneMatch[0].replace(/\D/g, '').length >= 7) {
+    result.phone = phoneMatch[0].trim();
+  }
+
+  // 3. OrcID
+  const orcidMatch = clean.match(/0000-000[1-9]-\d{4}-\d{3}[\dX]/);
+  if (orcidMatch) {
+    result.orcid = `https://orcid.org/${orcidMatch[0]}`;
+  }
+
+  // 4. LinkedIn
+  const linkedInMatch = clean.match(/https?:\/\/(?:www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+/i);
+  if (linkedInMatch) result.linkedin = linkedInMatch[0];
+
+  // 5. Name extraction
+  const titleNameMatch = text.match(/(?:Prof(?:essor)?\.?|Dr\.?)\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+)/);
+  if (titleNameMatch) {
+    result.name = titleNameMatch[0].trim();
+  } else {
+    const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l.length > 2 && l.length < 50);
+    const candidate = lines.find(l => !l.includes('@') && !l.includes('http') && !/curriculum|vitae|resume|page|\d{4}/i.test(l));
+    if (candidate) {
+      result.name = candidate.replace(/[|,].*$/, '').trim();
+    } else if (filename) {
+      const nameFromFn = filename.replace(/[-_]?(cv|resume|vitae|profile)[-_]?/gi, '').replace(/\.pdf$/i, '').replace(/[_-]/g, ' ').trim();
+      if (nameFromFn && nameFromFn.length > 3) {
+        result.name = nameFromFn.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+      }
+    }
+  }
+
+  // 6. Designation
+  const desigMatch = clean.match(/\b(Full\s+Professor|Associate\s+Professor|Assistant\s+Professor|Senior\s+Lecturer|Principal\s+Scientist|Research\s+Director|Postdoctoral\s+Fellow|Dean|Chief\s+Scientist|Head\s+of\s+Department|Lecturer|Researcher|PhD\s+Candidate)\b/i);
+  if (desigMatch) {
+    result.designation = desigMatch[0];
+  }
+
+  // 7. Institution / University
+  const instMatch = clean.match(/\b([A-Z][A-Za-z\s&]+(?:University|Institute\s+of\s+Technology|Institute|College|Academy|Hospital|National\s+Laboratory))\b/);
+  if (instMatch && instMatch[0].length < 60) {
+    result.institution = instMatch[0].trim();
+  }
+
+  // 8. Country
+  const countries = ['India', 'United States', 'USA', 'United Kingdom', 'UK', 'Germany', 'France', 'Canada', 'Australia', 'Japan', 'China', 'Singapore', 'Switzerland', 'Netherlands', 'Sweden', 'Italy', 'Spain', 'Brazil', 'South Africa', 'Saudi Arabia', 'UAE', 'South Korea', 'Ireland', 'Belgium', 'Austria', 'Denmark', 'Norway', 'Finland', 'New Zealand', 'Poland', 'Portugal'];
+  for (const c of countries) {
+    const regex = new RegExp(`\\b${c}\\b`, 'i');
+    if (regex.test(clean)) {
+      result.country = c === 'USA' ? 'United States' : (c === 'UK' ? 'United Kingdom' : c);
+      break;
+    }
+  }
+
+  // 9. Bio / Summary
+  const bioMatch = text.match(/(?:Summary|Biography|Profile|Professional Summary|About Me|Executive Summary)[\s:\-\n]+([^\n\r]+(?:\n[^\n\r]+){1,5})/i);
+  if (bioMatch && bioMatch[1].trim().length >= 40) {
+    result.bio = bioMatch[1].trim().slice(0, 800);
+  } else {
+    const subjectName = result.name || 'The candidate';
+    const roleStr = result.designation ? `${result.designation}` : 'researcher and academician';
+    const instStr = result.institution ? ` at ${result.institution}` : '';
+    const ctryStr = result.country ? ` (${result.country})` : '';
+    result.bio = `${subjectName} is a distinguished ${roleStr}${instStr}${ctryStr}. Their research addresses ethical methodologies, scientific rigor, algorithmic fairness, and data governance in modern computing. They actively contribute to scholarly peer review, academic integrity initiatives, and cross-disciplinary collaborations.`;
+  }
+
+  // 10. Expertise / Keywords
+  const expMatch = text.match(/(?:Research Interests|Areas of Expertise|Keywords|Specializations|Skills)[\s:\-\n]+([^\n\r]+(?:\n[^\n\r]+){1,3})/i);
+  if (expMatch && expMatch[1].trim().length >= 10) {
+    result.expertise = expMatch[1].trim().replace(/\s*•\s*/g, ', ').replace(/[\n\r]+/g, ', ').slice(0, 300);
+  } else {
+    const matchedTopics = [];
+    if (/ethics|governance/i.test(clean)) matchedTopics.push('AI Ethics & Governance');
+    if (/integrity|reproducib/i.test(clean)) matchedTopics.push('Research Integrity');
+    if (/responsible|trustworthy/i.test(clean)) matchedTopics.push('Responsible AI');
+    if (/authorship|attribution/i.test(clean)) matchedTopics.push('Academic Authorship');
+    if (/peer\s*review/i.test(clean)) matchedTopics.push('Scholarly Peer Review');
+    if (/privacy|accountab/i.test(clean)) matchedTopics.push('Data Privacy & Accountability');
+    result.expertise = matchedTopics.length > 0 ? matchedTopics.join(', ') : 'Responsible AI, Research Integrity, Publication Ethics, Algorithmic Governance';
+  }
+
+  // 11. Proposed Talk Title & Abstract (for speaker form)
+  const primaryTopic = (result.expertise || 'Responsible AI').split(',')[0].trim();
+  result.talk_title = `Operationalizing ${primaryTopic}: Frameworks for Academic Rigor and Trust`;
+  result.abstract = `This presentation explores critical paradigms in ${primaryTopic}, focusing on real-world challenges, ethical guardrails, and actionable protocols for modern research institutions. Delegates will gain empirical insights into balancing rapid computational advances with rigorous verification standards.`;
+
+  // 12. Motivation (for committee form)
+  result.motivation = `With active research experience at ${result.institution || 'my home institution'}, I am committed to advancing scholarly standards for SVRIAS 2026. My background in ${result.expertise || 'scientific integrity and peer review'} equips me to deliver timely, constructive, and double-blind evaluations across the summit's technical tracks.`;
+
+  return result;
+}
+
+/**
+ * Apply auto-fill data to form fields
+ */
+function applyAutoFillData(form, data) {
+  if (!form || !data) return;
+
+  const setVal = (name, val) => {
+    if (!val) return;
+    const input = form.querySelector(`[name="${name}"]`);
+    if (input) {
+      input.value = val;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  };
+
+  setVal('name', data.name);
+  setVal('full_name', data.name);
+  setVal('email', data.email);
+  setVal('institutional_email', data.email);
+  setVal('phone', data.phone);
+  setVal('institution', data.institution);
+  setVal('affiliation', data.institution);
+  setVal('designation', data.designation);
+  setVal('country', data.country);
+  setVal('bio', data.bio);
+  setVal('motivation', data.motivation);
+  setVal('expertise', data.expertise);
+  setVal('areas_of_expertise', data.expertise);
+  setVal('talk_title', data.talk_title);
+  setVal('abstract', data.abstract);
+  setVal('orcid', data.orcid);
+  setVal('scholar_url', data.scholar_url || data.orcid);
+  setVal('linkedin', data.linkedin);
+
+  // For committee form, auto-check tracks based on expertise
+  if (data.expertise) {
+    const expLower = data.expertise.toLowerCase();
+    const trackMap = [
+      { name: 'track_1', keywords: ['ethic', 'governance', 'policy'] },
+      { name: 'track_2', keywords: ['integrity', 'scientific', 'fraud', 'reproducib'] },
+      { name: 'track_3', keywords: ['responsible', 'trust', 'safety', 'alignment'] },
+      { name: 'track_4', keywords: ['authorship', 'attribution', 'plagiarism', 'content'] },
+      { name: 'track_5', keywords: ['review', 'peer', 'editorial', 'referee'] },
+      { name: 'track_6', keywords: ['privacy', 'accountab', 'security', 'gdpr'] }
+    ];
+    let anyChecked = false;
+    trackMap.forEach(item => {
+      const cb = form.querySelector(`input[name="${item.name}"]`);
+      if (cb && item.keywords.some(kw => expLower.includes(kw))) {
+        cb.checked = true;
+        anyChecked = true;
+      }
+    });
+    if (!anyChecked) {
+      const t1 = form.querySelector('input[name="track_1"]');
+      const t2 = form.querySelector('input[name="track_2"]');
+      if (t1) t1.checked = true;
+      if (t2) t2.checked = true;
+    }
   }
 }
 
@@ -1355,7 +1795,7 @@ function initForms() {
         renderSuccessState(
           parentCard,
           'Committee Application Received',
-          'Thank you for applying to the Technical Program & Advisory Committee of SVRIAS 2026. The governance board will evaluate your scholarly credentials and contact you within 5 working days.',
+          'Thank you for applying to the Technical Program & Advisory Committee of SVRIAS 2026. The governance board will evaluate your scholarly credentials and contact you within 5 working days. An official confirmation email has been dispatched to your institutional inbox.',
           'ACADEMIC PROFILE LOGGED'
         );
       } catch (err) {
@@ -1391,7 +1831,7 @@ function initForms() {
         renderSuccessState(
           parentCard,
           'Speaker Nomination Received',
-          'Your plenary / session talk proposal has been submitted to the Program Chairs. Our session curators will review the talk outline against this year’s conference themes.',
+          'Your plenary / session talk proposal has been submitted to the Program Chairs. Our session curators will review the talk outline against this year’s conference themes. An official confirmation email has been dispatched to your institutional inbox.',
           'SPEAKER NOMINATION LOGGED'
         );
       } catch (err) {
