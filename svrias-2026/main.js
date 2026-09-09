@@ -684,23 +684,54 @@ async function submitRoleApplication(applicationType, form) {
 
   const payload = {
     application_type: applicationType,
-    full_name: values.full_name || values.name,
+    full_name: values.full_name || values.name || '',
     institutional_email: (values.institutional_email || values.email || '').toLowerCase().trim(),
-    institution: values.institution || values.affiliation,
-    country: values.country,
+    institution: values.institution || values.affiliation || '',
+    country: values.country || '',
     bio: values.bio || values.motivation || 'Academic profile submitted via conference portal.',
     expertise: values.expertise || values.areas_of_expertise || selectedTracks || values.role_preference || 'Responsible AI / Research Integrity',
     profile_url: values.profile_url || values.scholar_url || values.linkedin || values.orcid || 'https://scholarvault.in',
-    proposed_contribution: values.proposed_contribution || values.contribution || [values.talk_title, values.abstract].filter(Boolean).join('\n\n') || values.proposed_topic || 'Plenary session contribution',
+    proposed_contribution: values.proposed_contribution || values.contribution || [values.talk_title, values.abstract].filter(Boolean).join('\n\n') || values.proposed_topic || (applicationType === 'speaker' ? '' : 'Technical review and program committee participation'),
     profile_consent: form.querySelector('[name="profile_consent"]')?.checked ?? true,
     website: values.website || ''
   };
 
-  const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/applications`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
+  // Pre-flight client validation to prevent silent rejection
+  if (!payload.full_name || payload.full_name.length < 2) {
+    throw new Error('Please enter your full name (at least 2 characters).');
+  }
+  if (!payload.institutional_email || !payload.institutional_email.includes('@')) {
+    throw new Error('Please enter a valid institutional email address.');
+  }
+  if (!payload.institution) {
+    throw new Error('Please enter or select your affiliated institution / university.');
+  }
+  if (!payload.country) {
+    throw new Error('Please enter your country.');
+  }
+  if (!payload.bio || payload.bio.length < 40) {
+    throw new Error('Please provide a biography of at least 40 characters (currently ' + (payload.bio ? payload.bio.length : 0) + ' characters).');
+  }
+  if (!payload.expertise || payload.expertise.length < 10) {
+    throw new Error('Please provide your areas of expertise (at least 10 characters).');
+  }
+  if (applicationType === 'speaker' && (!payload.proposed_contribution || payload.proposed_contribution.length < 20)) {
+    throw new Error('Please provide your proposed talk title and synopsis outline (at least 20 characters).');
+  }
+  if (!payload.profile_consent) {
+    throw new Error('Please check the consent declaration before submitting.');
+  }
+
+  let response;
+  try {
+    response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/applications`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+  } catch (netErr) {
+    throw new Error('Could not connect to the conference submission server. Please check your network or try again.');
+  }
 
   const result = await response.json().catch(() => ({}));
   if (!response.ok) {
