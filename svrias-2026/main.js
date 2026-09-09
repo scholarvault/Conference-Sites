@@ -1508,7 +1508,7 @@ function initForms() {
 
   // Paper / Abstract Submission Form with 1-Click Social Sign-In Popup (submit-paper.html)
   const paperForm = document.getElementById('paperForm');
-  if (paperForm) {
+  if (paperForm && !document.getElementById('paperDropZone')) {
     paperForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!paperForm.checkValidity()) {
