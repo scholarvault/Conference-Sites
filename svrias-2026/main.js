@@ -690,8 +690,8 @@ async function submitRoleApplication(applicationType, form) {
     country: values.country,
     bio: values.bio || values.motivation || 'Academic profile submitted via conference portal.',
     expertise: values.expertise || values.areas_of_expertise || selectedTracks || values.role_preference || 'Responsible AI / Research Integrity',
-    profile_url: values.profile_url || values.linkedin || values.orcid || 'https://scholarvault.in',
-    proposed_contribution: values.proposed_contribution || values.talk_title || values.proposed_topic || values.abstract || 'Plenary session contribution',
+    profile_url: values.profile_url || values.scholar_url || values.linkedin || values.orcid || 'https://scholarvault.in',
+    proposed_contribution: values.proposed_contribution || values.contribution || [values.talk_title, values.abstract].filter(Boolean).join('\n\n') || values.proposed_topic || 'Plenary session contribution',
     profile_consent: form.querySelector('[name="profile_consent"]')?.checked ?? true,
     website: values.website || ''
   };

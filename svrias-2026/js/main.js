@@ -512,8 +512,8 @@ async function submitRoleApplication(form, applicationType) {
     country: values.country,
     bio: values.bio || values.motivation,
     expertise: values.expertise || values.areas_of_expertise || selectedTracks || values.role_preference,
-    profile_url: values.profile_url || values.linkedin || values.orcid || values.scholar_url,
-    proposed_contribution: values.proposed_contribution || values.proposed_topic || values.contribution || values.abstract || values.talk_title,
+    profile_url: values.profile_url || values.scholar_url || values.linkedin || values.orcid || 'https://scholarvault.in',
+    proposed_contribution: values.proposed_contribution || values.contribution || [values.talk_title, values.abstract].filter(Boolean).join('\n\n') || values.proposed_topic || 'Plenary session contribution',
     profile_consent: form.querySelector('[name="profile_consent"]')?.checked || false,
     website: values.website || ""
   };
