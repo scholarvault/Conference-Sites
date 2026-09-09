@@ -178,13 +178,13 @@
             </div>
 
             <div class="form-group full">
-              <label>Manuscript / Abstract PDF File (Max 20MB) *</label>
+              <label>Manuscript / Abstract PDF File (PDF up to 4MB) *</label>
               <div class="file-dropzone" id="paperDropZone" style="border: 2px dashed rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 28px 20px; text-align: center; background: rgba(56, 189, 248, 0.04); cursor: pointer; transition: all 0.3s ease;">
                 <input type="file" name="paper" id="paperFile" accept=".pdf,application/pdf" style="display: none;" required />
                 <div id="dropZonePrompt">
                   <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: #38bdf8; margin-bottom: 12px; display: inline-block;"></i>
                   <div style="font-weight: 700; color: #ffffff; font-size: 15px; margin-bottom: 4px;">Click or Drag &amp; Drop your Abstract PDF here</div>
-                  <div style="font-size: 12.5px; color: #94a3b8;">Only PDF documents up to 20MB are accepted</div>
+                  <div style="font-size: 12.5px; color: #94a3b8;">Only PDF documents up to 4MB are accepted for direct submission</div>
                 </div>
                 <div id="dropZoneFileInfo" style="display: none; align-items: center; justify-content: center; gap: 12px;">
                   <i class="fa-solid fa-file-pdf" style="font-size: 28px; color: #ef4444;"></i>
@@ -496,10 +496,13 @@
         if (!payload.get('abstract')) payload.set('abstract', 'Abstract included in attached manuscript PDF.');
         if (!payload.get('keywords')) payload.set('keywords', 'Research Integrity, Responsible AI');
 
-        // Dual-bind file parameter for compatibility with both 'paper' and 'file' endpoint handlers
+        // Single file attachment (prevent payload duplication exceeding Vercel 4.5MB limit)
         if (file) {
+          if (file.size > 4.2 * 1024 * 1024) {
+            throw new Error('Your abstract PDF is ' + (file.size / (1024 * 1024)).toFixed(2) + ' MB, which exceeds the direct upload limit of 4.2 MB. Please compress your PDF and try again.');
+          }
           payload.set('paper', file);
-          payload.set('file', file);
+          payload.delete('file');
         }
 
         const response = await fetch(`${window.SCHOLARVAULT_APP_ORIGIN || (location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://app.scholarvault.in')}/api/conferences/research-integrity-responsible-ai-summit-2026/guest/submissions`, { method: 'POST', body: payload });
@@ -510,8 +513,9 @@
         const email = result?.data?.email || result?.email || authorEmail;
         card.innerHTML = `<div class="section-head"><span class="section-eyebrow">SUBMISSION RECEIVED</span><h2 class="section-title">CHECK YOUR EMAIL</h2><p class="section-desc">Your reference is <strong>${reference}</strong>. We sent a secure confirmation link to <strong>${email}</strong>. Confirm it before editorial screening begins.</p><a class="pill-btn glowing-pill" href="index.html">Return to summit home</a></div>`;
       } catch (error) {
+        console.error('Submission error:', error);
         const errorMsg = error?.message === 'Failed to fetch'
-          ? 'Network or connection error. Please verify your connection and try again.'
+          ? 'Network or connection error. Please verify your connection or ensure your PDF is under 4.2MB.'
           : (error?.message || 'Submission failed. Please try again.');
         window.showToast?.(errorMsg, 'error');
         button.disabled = false;
