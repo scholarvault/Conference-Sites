@@ -1418,12 +1418,338 @@ function initRegistrationOptions() {
 }
 
 /**
+ * 12b. Registration Status & Interactive Checkout Controller
+ */
+function checkRegistrationUrlStatus() {
+  const params = new URLSearchParams(window.location.search);
+  const status = params.get('status');
+  const orderId = params.get('order_id') || params.get('orderId');
+  const regNumber = params.get('reg') || params.get('registration_number');
+  const txRef = params.get('tx') || params.get('transaction_id') || orderId;
+  const errorMessage = params.get('error') || params.get('message');
+
+  const successCard = document.getElementById('registrationSuccessCard');
+  const intakeForm = document.getElementById('intakeForm');
+  const pricingGrid = document.querySelector('.pricing-grid');
+
+  if (status === 'success') {
+    if (successCard) {
+      successCard.style.display = 'block';
+      const regEl = document.getElementById('successRegNumber');
+      const txEl = document.getElementById('successTxRef');
+      if (regEl) regEl.textContent = regNumber || orderId || 'SVRIAS26-CONFIRMED';
+      if (txEl) txEl.textContent = txRef || 'Verified via Federal Bank';
+      if (intakeForm) intakeForm.style.display = 'none';
+      if (pricingGrid) pricingGrid.style.display = 'none';
+      setTimeout(() => {
+        successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 200);
+      showToast('Registration Confirmed! Invoice and credentials dispatched via email.', 'success');
+    }
+  } else if (status === 'cancelled') {
+    showToast('Payment session was cancelled. You can complete your registration at any time.', 'info');
+  } else if (status === 'processing') {
+    showToast('Payment is being processed by the bank. Your registration will be confirmed shortly.', 'info');
+  } else if (status === 'failed' || status === 'error') {
+    showToast(errorMessage || 'Payment was not completed. Please try again or choose an alternative method.', 'error');
+  }
+}
+
+const CATEGORY_PRICES = {
+  student_scholar: { inr: 2500, inrGold: 2399, usd: 129, label: 'Student Presenter' },
+  faculty_researcher: { inr: 4999, inrGold: 4898, usd: 199, label: 'Academic / Faculty' },
+  co_author: { inr: 2200, inrGold: 2099, usd: 79, label: 'Co-Author Delegate' },
+  industry_professional: { inr: 9999, inrGold: 9898, usd: 397, label: 'Industry Delegate' },
+  listener: { inr: 1999, inrGold: 1898, usd: 99, label: 'Listener Pass' },
+};
+
+const CATEGORY_BENEFITS = {
+  student_scholar: [
+    'Official Virtual Presentation slot in scheduled track session',
+    'Inclusion of accepted abstract in archived ISBN proceedings',
+    'Digital Certificate of Presentation & Research Attribution',
+    'Full access to all 6 tracks, plenary keynotes & virtual stages'
+  ],
+  faculty_researcher: [
+    'Priority Virtual Presentation stage in designated track session',
+    'Inclusion of accepted abstract in archived ISBN proceedings book',
+    'Verifiable Digital Certificate of Presentation & Authorship',
+    'Keynote Q&A access, co-author credentials & session recordings'
+  ],
+  co_author: [
+    'Co-Author recognition & listing in conference proceedings',
+    'Digital Certificate of Co-Authorship & Research Attribution',
+    'Full audience access to presentation session & track Q&A',
+    'Official conference program guide & proceedings digital copy'
+  ],
+  industry_professional: [
+    'Industry Track Presentation pass & keynote spotlight session',
+    'Executive networking breakout rooms & industry roundtables',
+    'Full summit recorded video proceedings & archival access',
+    'Digital Certificate of Professional Participation & CPD credit'
+  ],
+  listener: [
+    'Complete virtual audience stage access to all 6 tracks',
+    'Interactive live Q&A participation with keynote speakers',
+    'Official Digital Certificate of Attendance',
+    'Conference Brochure, Program Guide & Abstract Book download'
+  ]
+};
+
+let appliedCouponCode = '';
+let appliedCouponDiscount = 0;
+
+function initRegistrationCheckoutInteractive() {
+  const regCatSelect = document.getElementById('regCategorySelect');
+  const goldOptInToggle = document.getElementById('goldOptInToggle');
+  const goldOptInCard = document.getElementById('goldOptInCard');
+  const goldSavingsBadge = document.getElementById('goldSavingsBadge');
+  const couponInput = document.getElementById('couponCodeInput');
+  const applyCouponBtn = document.getElementById('applyCouponBtn');
+  const couponStatusMsg = document.getElementById('couponStatusMsg');
+  const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+
+  function calculate() {
+    const categoryCode = regCatSelect?.value || 'faculty_researcher';
+    const catInfo = CATEGORY_PRICES[categoryCode] || CATEGORY_PRICES.faculty_researcher;
+    let selectedMethod = 'federal_omniware';
+    paymentRadios.forEach((r) => { if (r.checked) selectedMethod = r.value; });
+
+    const isUSD = selectedMethod === 'dodo';
+    const isGold = Boolean(goldOptInToggle?.checked);
+    const baseAmount = isUSD ? catInfo.usd : catInfo.inr;
+
+    // Dynamic Gold Savings Badge update based on selected tier
+    const goldSavings = Math.max(0, catInfo.inr - catInfo.inrGold);
+    if (goldSavingsBadge) {
+      if (goldSavings > 0) {
+        goldSavingsBadge.style.display = 'inline-block';
+        goldSavingsBadge.textContent = `Save ₹${goldSavings.toLocaleString('en-IN')} Instantly`;
+      } else {
+        goldSavingsBadge.style.display = 'none';
+      }
+    }
+
+    // Dynamic Switch & Card State on Toggle
+    const goldSwitchTrack = document.getElementById('goldSwitchTrack');
+    const goldSwitchKnob = document.getElementById('goldSwitchKnob');
+    const goldToggleLabel = document.getElementById('goldToggleLabel');
+
+    if (isGold) {
+      if (goldSwitchTrack) {
+        goldSwitchTrack.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+        goldSwitchTrack.style.borderColor = '#fbbf24';
+        goldSwitchTrack.style.boxShadow = '0 0 14px rgba(245, 158, 11, 0.5)';
+      }
+      if (goldSwitchKnob) {
+        goldSwitchKnob.style.transform = 'translateX(22px)';
+      }
+      if (goldToggleLabel) {
+        goldToggleLabel.textContent = 'Active ✓';
+        goldToggleLabel.style.color = '#34d399';
+      }
+      if (goldOptInCard) {
+        goldOptInCard.style.borderColor = '#f59e0b';
+        goldOptInCard.style.background = 'radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.22) 0%, rgba(180, 83, 9, 0.12) 50%, rgba(12, 14, 20, 0.85) 100%)';
+        goldOptInCard.style.boxShadow = '0 12px 36px -4px rgba(0, 0, 0, 0.6), 0 0 28px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(254, 240, 138, 0.35)';
+      }
+    } else {
+      if (goldSwitchTrack) {
+        goldSwitchTrack.style.background = 'rgba(255, 255, 255, 0.15)';
+        goldSwitchTrack.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+        goldSwitchTrack.style.boxShadow = 'none';
+      }
+      if (goldSwitchKnob) {
+        goldSwitchKnob.style.transform = 'translateX(0px)';
+      }
+      if (goldToggleLabel) {
+        goldToggleLabel.textContent = 'Add Perk';
+        goldToggleLabel.style.color = '#94a3b8';
+      }
+      if (goldOptInCard) {
+        goldOptInCard.style.borderColor = 'rgba(245, 158, 11, 0.4)';
+        goldOptInCard.style.background = 'radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.14) 0%, rgba(180, 83, 9, 0.06) 50%, rgba(12, 14, 20, 0.75) 100%)';
+        goldOptInCard.style.boxShadow = '0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.12), inset 0 1px 0 rgba(254, 240, 138, 0.2)';
+      }
+    }
+
+    // 1. Dynamic Benefits List Update
+    const benefitsList = document.getElementById('passBenefitsList');
+    if (benefitsList) {
+      const perks = CATEGORY_BENEFITS[categoryCode] || CATEGORY_BENEFITS.faculty_researcher;
+      benefitsList.innerHTML = perks.map((p) => `
+        <li style="display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i>
+          <span>${p}</span>
+        </li>
+      `).join('');
+    }
+
+    // 2. Pricing & Discount Calculation
+    let finalAmount = baseAmount;
+    let discountAmount = 0;
+    let discountLabelText = 'Discount:';
+
+    if (!isUSD && isGold) {
+      finalAmount = catInfo.inrGold;
+      if (appliedCouponDiscount > 0) {
+        finalAmount = Math.max(0, Math.round(catInfo.inrGold * (1 - appliedCouponDiscount / 100)));
+        discountLabelText = `👑 Gold + Promo (${appliedCouponCode} -${appliedCouponDiscount}%):`;
+      } else {
+        discountLabelText = '👑 ScholarVault Gold Discount:';
+      }
+      discountAmount = Math.max(0, baseAmount - finalAmount);
+    } else if (appliedCouponDiscount > 0) {
+      finalAmount = Math.max(0, Math.round(baseAmount * (1 - appliedCouponDiscount / 100)));
+      discountAmount = Math.max(0, baseAmount - finalAmount);
+      discountLabelText = `Discount (${appliedCouponCode} -${appliedCouponDiscount}%):`;
+    }
+
+    const summaryBadgeTier = document.getElementById('summaryBadgeTier');
+    const baseFeeDisplay = document.getElementById('baseFeeDisplay');
+    const discountLineItem = document.getElementById('discountLineItem');
+    const discountLabel = document.getElementById('discountLabel');
+    const discountAmountDisplay = document.getElementById('discountAmountDisplay');
+    const finalPriceDisplay = document.getElementById('finalPriceDisplay');
+    const btnSubmitText = document.getElementById('btnSubmitText');
+    const currencyInput = document.getElementById('regCurrency');
+
+    if (summaryBadgeTier) summaryBadgeTier.textContent = catInfo.label;
+
+    if (isUSD) {
+      if (currencyInput) currencyInput.value = 'USD';
+      if (baseFeeDisplay) baseFeeDisplay.textContent = `$${catInfo.usd}`;
+      if (finalPriceDisplay) finalPriceDisplay.textContent = `$${finalAmount}`;
+      if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to Card Checkout &bull; $${finalAmount}`;
+      if (discountLineItem) {
+        if (discountAmount > 0) {
+          discountLineItem.style.display = 'flex';
+          if (discountLabel) discountLabel.textContent = discountLabelText;
+          if (discountAmountDisplay) discountAmountDisplay.textContent = `-$${discountAmount}`;
+        } else {
+          discountLineItem.style.display = 'none';
+        }
+      }
+    } else {
+      if (currencyInput) currencyInput.value = 'INR';
+      if (baseFeeDisplay) baseFeeDisplay.textContent = `₹${catInfo.inr.toLocaleString('en-IN')}`;
+      if (finalPriceDisplay) finalPriceDisplay.textContent = `₹${finalAmount.toLocaleString('en-IN')}`;
+      if (discountLineItem) {
+        if (discountAmount > 0) {
+          discountLineItem.style.display = 'flex';
+          if (discountLabel) discountLabel.textContent = discountLabelText;
+          if (discountAmountDisplay) discountAmountDisplay.textContent = `-₹${discountAmount.toLocaleString('en-IN')}`;
+        } else {
+          discountLineItem.style.display = 'none';
+        }
+      }
+
+      if (selectedMethod === 'bank_transfer') {
+        if (btnSubmitText) btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+      } else {
+        if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to Federal Bank Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+      }
+    }
+
+    // Toggle Bank Transfer Details
+    const bankWrap = document.getElementById('bankTransferDetailsWrap');
+    if (bankWrap) {
+      bankWrap.style.display = selectedMethod === 'bank_transfer' ? 'block' : 'none';
+      const utrInput = document.getElementById('regUtr');
+      const senderBank = document.getElementById('regSenderBank');
+      if (utrInput) utrInput.required = selectedMethod === 'bank_transfer';
+      if (senderBank) senderBank.required = selectedMethod === 'bank_transfer';
+    }
+
+    // Border highlights
+    const optFederal = document.getElementById('optFederalLabel');
+    const optDodo = document.getElementById('optDodoLabel');
+    const optBank = document.getElementById('optBankLabel');
+    if (optFederal) optFederal.style.borderColor = selectedMethod === 'federal_omniware' ? '#38bdf8' : 'rgba(255,255,255,0.1)';
+    if (optDodo) optDodo.style.borderColor = selectedMethod === 'dodo' ? '#38bdf8' : 'rgba(255,255,255,0.1)';
+    if (optBank) optBank.style.borderColor = selectedMethod === 'bank_transfer' ? '#f59e0b' : 'rgba(255,255,255,0.1)';
+  }
+
+  if (regCatSelect) regCatSelect.addEventListener('change', calculate);
+  if (goldOptInToggle) goldOptInToggle.addEventListener('change', calculate);
+  if (goldOptInCard && goldOptInToggle) {
+    goldOptInCard.addEventListener('click', (e) => {
+      if (!e.target.closest('label') && !e.target.closest('input')) {
+        goldOptInToggle.checked = !goldOptInToggle.checked;
+        calculate();
+      }
+    });
+  }
+  paymentRadios.forEach((r) => r.addEventListener('change', calculate));
+
+  function handleCouponSubmit() {
+    const code = couponInput ? couponInput.value.trim().toUpperCase() : '';
+    if (!code) {
+      appliedCouponCode = '';
+      appliedCouponDiscount = 0;
+      if (couponStatusMsg) couponStatusMsg.style.display = 'none';
+      calculate();
+      return;
+    }
+
+    if (code === 'SVRIAS10' || code === 'WELCOME10') {
+      appliedCouponCode = code;
+      appliedCouponDiscount = 10;
+      if (couponStatusMsg) {
+        couponStatusMsg.style.display = 'block';
+        couponStatusMsg.style.color = '#34d399';
+        couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 10% Summit Discount Applied!';
+      }
+    } else if (code === 'EARLYBIRD') {
+      appliedCouponCode = code;
+      appliedCouponDiscount = 15;
+      if (couponStatusMsg) {
+        couponStatusMsg.style.display = 'block';
+        couponStatusMsg.style.color = '#34d399';
+        couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 15% Early Bird Discount Applied!';
+      }
+    } else if (code === 'GOLDMEMBER' || code === 'GOLD') {
+      if (goldOptInToggle) goldOptInToggle.checked = true;
+      if (couponStatusMsg) {
+        couponStatusMsg.style.display = 'block';
+        couponStatusMsg.style.color = '#fde68a';
+        couponStatusMsg.innerHTML = '👑 <strong>ScholarVault Gold Member Opt-in Activated!</strong>';
+      }
+    } else {
+      appliedCouponCode = '';
+      appliedCouponDiscount = 0;
+      if (couponStatusMsg) {
+        couponStatusMsg.style.display = 'block';
+        couponStatusMsg.style.color = '#f87171';
+        couponStatusMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid or expired promo code.';
+      }
+    }
+    calculate();
+  }
+
+  if (applyCouponBtn && couponInput) {
+    applyCouponBtn.addEventListener('click', handleCouponSubmit);
+    couponInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        handleCouponSubmit();
+      }
+    });
+  }
+
+  calculate();
+}
+
+/**
  * 13. Form Handlers (Registration, Abstract, Contact, Award, Committee, Speaker, Standalone Interest)
  */
 function initForms() {
   // Delegate / Registration Form (register.html)
   const regForm = document.getElementById('delegateForm') || document.getElementById('registrationForm');
   if (regForm) {
+    initRegistrationCheckoutInteractive();
+    checkRegistrationUrlStatus();
+
     regForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!regForm.checkValidity()) {
@@ -1431,71 +1757,105 @@ function initForms() {
         return;
       }
       const btn = regForm.querySelector('button[type="submit"]');
-      const originalText = btn ? btn.innerHTML : 'Continue securely';
+      const originalText = btn ? btn.innerHTML : 'Proceed to Payment';
       if (btn) {
         btn.disabled = true;
         btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Securing Delegate Pass...';
       }
 
       try {
-        const attemptKey = `sv:public-attempt:${SCHOLARVAULT_CONFERENCE_SLUG}:registration`;
-        let attemptId = window.sessionStorage.getItem(attemptKey);
-        if (!attemptId) {
-          attemptId = (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function')
-            ? crypto.randomUUID()
-            : ('sv_' + Date.now() + '_' + Math.random().toString(36).substring(2, 9));
-          window.sessionStorage.setItem(attemptKey, attemptId);
-        }
-
         const values = formValues(regForm);
-        values.attempt_id = attemptId;
+        if (!values.category_code && values.category) values.category_code = values.category;
 
-        // Ensure category fields are populated
-        if (!values.category_code && values.category) {
-          values.category_code = values.category;
+        const selectedMethodInput = regForm.querySelector('input[name="payment_method"]:checked');
+        const paymentMethod = selectedMethodInput ? selectedMethodInput.value : (values.payment_method || 'federal_omniware');
+        const isGold = Boolean(document.getElementById('goldOptInToggle')?.checked || document.getElementById('goldAddonCheck')?.checked);
+        const coupon = document.getElementById('couponCodeInput')?.value?.trim() || '';
+
+        const payload = {
+          name: values.name,
+          email: (values.email || '').toLowerCase().trim(),
+          phone: values.phone,
+          institution: values.institution,
+          country: values.country || 'India',
+          city: values.city || 'Bengaluru',
+          zip_code: values.zip_code || '560001',
+          category_code: values.category_code || values.category,
+          category_id: values.category_id || null,
+          paper_id: values.paper_id || null,
+          payment_method: paymentMethod,
+          gold_addon: isGold,
+          coupon_code: coupon,
+          utr_number: values.utr_number || '',
+          bank_name: values.bank_name || '',
+        };
+
+        const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result.error || 'Registration could not be initiated. Please try again.');
         }
-        if (!values.category_id && values.category_code) {
-          const matchingCard = document.querySelector(`[data-registration-category][data-category-code="${values.category_code}"]`);
-          if (matchingCard && matchingCard.dataset.categoryId) {
-            values.category_id = matchingCard.dataset.categoryId;
-            const catIdInput = document.getElementById('regCategoryId');
-            if (catIdInput) catIdInput.value = values.category_id;
+
+        // 1. Federal Omniware Two-Step URL
+        if (result.provider === 'federal_omniware' && result.payment_url) {
+          window.location.href = result.payment_url;
+          return;
+        }
+
+        // 2. Federal Omniware Form POST Fallback
+        if (result.provider === 'federal_omniware_form' && result.form_action) {
+          const autoForm = document.createElement('form');
+          autoForm.method = 'POST';
+          autoForm.action = result.form_action;
+          for (const [k, v] of Object.entries(result.form_fields)) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = k;
+            hiddenInput.value = v;
+            autoForm.appendChild(hiddenInput);
           }
-        }
-        if (!values.query_type && values.category) {
-          const regCatSelect = document.getElementById('regCategorySelect');
-          const selOpt = regCatSelect?.options?.[regCatSelect.selectedIndex];
-          values.query_type = selOpt?.dataset?.name || selOpt?.textContent || values.category;
+          document.body.appendChild(autoForm);
+          autoForm.submit();
+          return;
         }
 
-        // Save registration draft to handoff bridge for seamless checkout resume
-        window.sessionStorage.setItem('scholarvault:conference-handoff:registration', JSON.stringify(values));
-
-        try {
-          await submitInboundLead('registration_intent', regForm, {
-            attempt_id: attemptId,
-            phone: values.phone || null,
-            country: values.country || null,
-            category_id: values.category_id || null,
-            category_code: values.category_code || null,
-            query_type: values.query_type || values.category || null,
-            currency: values.currency || 'INR',
-            cta_source: 'registration_starter'
-          });
-        } catch (leadError) {
-          console.warn('Registration lead submission notice:', leadError);
+        // 3. Direct Bank Transfer Submission
+        if (result.provider === 'bank_transfer') {
+          const intakeForm = document.getElementById('intakeForm');
+          const btCard = document.getElementById('bankTransferPendingCard');
+          if (intakeForm) intakeForm.style.display = 'none';
+          if (btCard) {
+            btCard.style.display = 'block';
+            const regEl = document.getElementById('btRegNumber');
+            const utrEl = document.getElementById('btUtrNumber');
+            if (regEl) regEl.textContent = result.registration_number || result.order_id;
+            if (utrEl) utrEl.textContent = payload.utr_number || 'Under Review';
+            btCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          showToast('Bank transfer submitted for verification!', 'success');
+          return;
         }
 
-        if (window.ScholarVaultConferences) {
-          window.ScholarVaultConferences.open('register', values);
-          if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = originalText;
+        // 4. Dodo Checkout
+        if (result.provider === 'dodo') {
+          if (result.checkout_url) {
+            window.location.href = result.checkout_url;
+          } else {
+            showToast('International card checkout is ready. Directing to card portal...', 'info');
           }
           return;
         }
 
-        window.location.href = `${getScholarVaultAppOrigin()}/login?next=${encodeURIComponent('/dashboard/conferences/research-integrity-responsible-ai-summit-2026/register')}`;
+        showToast('Registration initiated. Please check your email.', 'info');
+        if (btn) {
+          btn.disabled = false;
+          btn.innerHTML = originalText;
+        }
       } catch (err) {
         showToast(err.message || 'Registration could not be completed. Please try again.', 'error');
         if (btn) {
@@ -1512,7 +1872,6 @@ function initForms() {
     paperForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!paperForm.checkValidity()) {
-        paperForm.reportValidity();
         return;
       }
 
