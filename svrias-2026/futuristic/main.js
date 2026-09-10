@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewsletterForm();
   initFileDropZone();
   initSmartIntake();
-  initRegistrationOptions();
   initForms();
+  initRegistrationOptions();
 });
 
 /**
@@ -1343,13 +1343,16 @@ function initRegistrationOptions() {
 
   const selectCategory = (categoryCode, categoryName) => {
     if (regCategorySelect) {
-      regCategorySelect.value = categoryCode;
+      if (regCategorySelect.value !== categoryCode) {
+        regCategorySelect.value = categoryCode;
+      }
       const option = regCategorySelect.querySelector(`option[value="${categoryCode}"]`);
       if (option && option.dataset.name) {
         if (queryTypeInput) queryTypeInput.value = option.dataset.name;
       } else if (categoryName && queryTypeInput) {
         queryTypeInput.value = categoryName;
       }
+      regCategorySelect.dispatchEvent(new Event('change', { bubbles: true }));
     }
     if (categoryCodeInput) categoryCodeInput.value = categoryCode;
     cards.forEach((c) => {
@@ -1431,6 +1434,7 @@ function checkRegistrationUrlStatus() {
   const errorMessage = params.get('error') || params.get('message');
 
   const successCard = document.getElementById('registrationSuccessCard');
+  const failedCard = document.getElementById('registrationFailedCard');
   const intakeForm = document.getElementById('intakeForm');
   const pricingGrid = document.querySelector('.pricing-grid');
   const currToggle = document.querySelector('.currency-toggle-wrap');
@@ -1463,19 +1467,87 @@ function checkRegistrationUrlStatus() {
       }, 100);
       showToast('Registration Confirmed! Invoice and credentials dispatched via email.', 'success');
     }
-  } else if (status === 'cancelled') {
-    showToast('Payment session was cancelled. You can complete your registration at any time.', 'info');
+  } else if (status === 'failed' || status === 'error' || status === 'cancelled') {
+    if (failedCard) {
+      failedCard.style.display = 'block';
+      const txEl = document.getElementById('failedTxRef');
+      const reasonEl = document.getElementById('failedCardReason');
+      if (txEl) txEl.textContent = txRef || orderId || 'Attempt Ref Pending';
+      if (reasonEl) {
+        if (status === 'cancelled') {
+          reasonEl.textContent = 'The checkout session was cancelled before completing payment. No funds were debited, and you can safely resume your registration below.';
+        } else if (errorMessage) {
+          reasonEl.textContent = `Bank / Gateway Response: ${errorMessage}. No duplicate charges have occurred. You can safely retry payment below.`;
+        } else {
+          reasonEl.textContent = 'The payment attempt was declined or timed out by the gateway. Don\'t worry—no duplicate charges have occurred, and you can safely complete your registration below.';
+        }
+      }
+
+      if (intakeForm) intakeForm.style.display = 'none';
+      if (pricingGrid) pricingGrid.style.display = 'none';
+      if (currToggle) currToggle.style.display = 'none';
+      if (goldBanner) goldBanner.style.display = 'none';
+
+      if (sectionHead) {
+        const titleEl = sectionHead.querySelector('.section-title');
+        const descEl = sectionHead.querySelector('.section-desc');
+        const eyebrowEl = sectionHead.querySelector('.section-eyebrow');
+        if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> PAYMENT ACTION REQUIRED';
+        if (titleEl) titleEl.innerHTML = 'PAYMENT <span>INCOMPLETE</span>';
+        if (descEl) descEl.textContent = 'Your payment session was not completed. Follow the guidance below to retry or choose an alternative payment method.';
+      }
+
+      const retryBtn = document.getElementById('btnRetryPayment');
+      if (retryBtn) {
+        retryBtn.onclick = () => {
+          failedCard.style.display = 'none';
+          if (intakeForm) intakeForm.style.display = 'block';
+          if (pricingGrid) pricingGrid.style.display = 'grid';
+          if (currToggle) currToggle.style.display = 'flex';
+          if (goldBanner) goldBanner.style.display = 'flex';
+          if (intakeForm) intakeForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+      }
+
+      const bankSwitchBtn = document.getElementById('btnSwitchBankTransfer');
+      if (bankSwitchBtn) {
+        bankSwitchBtn.onclick = () => {
+          failedCard.style.display = 'none';
+          if (intakeForm) intakeForm.style.display = 'block';
+          if (pricingGrid) pricingGrid.style.display = 'grid';
+          if (currToggle) currToggle.style.display = 'flex';
+          if (goldBanner) goldBanner.style.display = 'flex';
+          const optBank = document.querySelector('input[name="payment_method"][value="bank_transfer"]');
+          if (optBank) {
+            optBank.checked = true;
+            optBank.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+          const bankDetails = document.getElementById('bankTransferDetailsWrap');
+          if (bankDetails) {
+            bankDetails.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else if (intakeForm) {
+            intakeForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        };
+      }
+
+      setTimeout(() => {
+        failedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+
+      showToast(status === 'cancelled' ? 'Payment session was cancelled.' : (errorMessage || 'Payment was not completed. Follow guidance on screen to retry.'), 'error');
+    } else {
+      showToast(errorMessage || 'Payment was not completed. Please try again or choose an alternative method.', 'error');
+    }
   } else if (status === 'processing') {
     showToast('Payment is being processed by the bank. Your registration will be confirmed shortly.', 'info');
-  } else if (status === 'failed' || status === 'error') {
-    showToast(errorMessage || 'Payment was not completed. Please try again or choose an alternative method.', 'error');
   }
 }
 
 const CATEGORY_PRICES = {
   student_scholar: { inr: 2500, inrGold: 2399, usd: 129, label: 'Student Presenter' },
   faculty_researcher: { inr: 4999, inrGold: 4898, usd: 199, label: 'Academic / Faculty' },
-  co_author: { inr: 2200, inrGold: 2200, usd: 79, label: 'Co-Author Delegate' },
+  co_author: { inr: 2200, inrGold: 2099, usd: 79, label: 'Co-Author Delegate' },
   industry_professional: { inr: 9999, inrGold: 9898, usd: 397, label: 'Industry Delegate' },
   listener: { inr: 1999, inrGold: 1898, usd: 99, label: 'Listener Pass' },
 };
