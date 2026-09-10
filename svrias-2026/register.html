@@ -267,6 +267,83 @@
           Enter your basic details once. ScholarVault will securely resume your selected category, confirm Gold benefits and show the final amount before payment.
         </p>
 
+      <!-- Instant Success Confirmation Card -->
+      <div class="glass-card" id="registrationSuccessCard" style="display: none; padding: clamp(28px, 5vw, 44px); max-width: 760px; margin: 0 auto 36px; border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(6, 78, 59, 0.25); text-align: center;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; margin-bottom: 16px;">
+          <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 32px;"></i>
+        </div>
+        <div class="card-num" style="color: #34d399; margin-bottom: 8px;"><i class="fa-solid fa-shield-halved"></i> PASS VERIFIED &amp; CONFIRMED</div>
+        <h2 style="font-size: 26px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Registration Confirmed!</h2>
+        <p style="font-size: 15px; color: #d1fae5; margin-bottom: 24px; max-width: 580px; margin-left: auto; margin-right: auto;">
+          Welcome to the <strong>Research Integrity &amp; Responsible AI Summit (SVRIAS 2026)</strong>. Your delegate credentials have been successfully secured.
+        </p>
+
+        <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; max-width: 500px; margin: 0 auto 24px; text-align: left;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+            <span style="color: #94a3b8;">Registration ID:</span>
+            <strong id="successRegNumber" style="color: #38bdf8; font-family: monospace; font-size: 15px;">SVRIAS26-REG...</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+            <span style="color: #94a3b8;">Order / Transaction Ref:</span>
+            <span id="successTxRef" style="color: #ffffff; font-family: monospace; font-size: 13px;">...</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
+            <span style="color: #94a3b8;">Status:</span>
+            <span style="color: #34d399; font-weight: 700;"><i class="fa-solid fa-check"></i> PAID / CONFIRMED</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 14px;">
+            <span style="color: #94a3b8;">Format &amp; Delivery:</span>
+            <span style="color: #fde68a;">Virtual Pass &bull; Dispatched via Email</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 14px; max-width: 540px; margin: 0 auto 24px; font-size: 13.5px; color: #bae6fd; text-align: left; display: flex; gap: 12px; align-items: flex-start;">
+          <i class="fa-solid fa-envelope" style="color: #38bdf8; font-size: 18px; margin-top: 2px;"></i>
+          <div>
+            <strong>What happens next:</strong>
+            <p style="margin: 4px 0 0; color: #e0f2fe; font-size: 13px;">
+              An official booking confirmation, GST tax invoice, calendar invite (.ics), and virtual track access credentials have been emailed to your registered address. You can also sign in to your ScholarVault Portal anytime using your registration email to access track links and proceedings.
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+          <a href="index.html" class="pill-btn frosted-pill"><i class="fa-solid fa-house"></i> Summit Home</a>
+          <a href="https://app.scholarvault.in/sign-in" class="pill-btn glowing-pill"><i class="fa-solid fa-arrow-right-to-bracket"></i> Claim / Open ScholarVault Portal</a>
+        </div>
+      </div>
+
+      <!-- Bank Transfer Submitted Card -->
+      <div class="glass-card" id="bankTransferPendingCard" style="display: none; padding: clamp(28px, 5vw, 44px); max-width: 760px; margin: 0 auto 36px; border: 1px solid rgba(245, 158, 11, 0.4); background: rgba(120, 53, 15, 0.25); text-align: center;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(245, 158, 11, 0.2); border: 2px solid #f59e0b; margin-bottom: 16px;">
+          <i class="fa-solid fa-clock" style="color: #f59e0b; font-size: 32px;"></i>
+        </div>
+        <div class="card-num" style="color: #fbbf24; margin-bottom: 8px;"><i class="fa-solid fa-building-columns"></i> VERIFICATION PENDING</div>
+        <h2 style="font-size: 24px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Bank Transfer Submitted</h2>
+        <p style="font-size: 14.5px; color: #fef3c7; margin-bottom: 20px; max-width: 580px; margin-left: auto; margin-right: auto;">
+          Thank you! Your direct wire transfer details and UTR reference have been recorded. Our finance desk will verify the receipt and dispatch your confirmed pass within 24 hours.
+        </p>
+        <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 18px; max-width: 480px; margin: 0 auto 24px; text-align: left;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px;">
+            <span style="color: #94a3b8;">Registration Ref:</span>
+            <strong id="btRegNumber" style="color: #fbbf24; font-family: monospace;">SVRIAS26-REG...</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 14px;">
+            <span style="color: #94a3b8;">UTR Reference:</span>
+            <span id="btUtrNumber" style="color: #ffffff; font-family: monospace;">...</span>
+          </div>
+        </div>
+        <a href="index.html" class="pill-btn frosted-pill">Back to Summit Home</a>
+      </div>
+
+      <!-- Registration Form -->
+      <div class="glass-card" id="intakeForm" style="padding: clamp(24px, 4vw, 40px); max-width: 760px; margin: 0 auto 36px;">
+        <div class="card-num"><i class="fa-solid fa-lock"></i> SECURE DELEGATE INTAKE</div>
+        <h2 style="font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Register Delegate Pass</h2>
+        <p style="font-size: 13.5px; color: #a1a1aa; margin-bottom: 24px;">
+          Complete your registration below. Select your pass, choose your payment method, and complete your registration directly on the conference platform.
+        </p>
+
         <form id="delegateForm" class="glass-form" style="padding: 0; background: transparent; border: none;">
           <input type="hidden" name="category_id" id="regCategoryId" />
           <input type="hidden" name="category_code" id="regCategoryCode" />
@@ -296,7 +373,17 @@
 
             <div class="form-group">
               <label>Country of Residence *</label>
-              <input type="text" name="country" class="form-input" required placeholder="e.g. India / United Kingdom" />
+              <input type="text" name="country" id="regCountry" class="form-input" required placeholder="e.g. India / United Kingdom" />
+            </div>
+
+            <div class="form-group">
+              <label>City *</label>
+              <input type="text" name="city" id="regCity" class="form-input" required placeholder="e.g. Bengaluru / London" />
+            </div>
+
+            <div class="form-group">
+              <label>Postal / PIN Code *</label>
+              <input type="text" name="zip_code" id="regZip" class="form-input" required placeholder="e.g. 560001 / EC1A 1BB" />
             </div>
 
             <div class="form-group">
@@ -316,9 +403,203 @@
               <input type="text" name="paper_id" class="form-input" placeholder="e.g. SVRIAS-2026-TR1-042 (Leave blank if registering as Listener)" />
             </div>
 
-            <div class="form-group full" style="margin-top: 10px;">
-              <button type="submit" class="pill-btn glowing-pill" style="width: 100%; padding: 14px; font-size: 15px;">
-                <span>Continue securely</span>
+            <!-- In-Page Review & Benefits Section -->
+            <div class="form-group full" style="margin-top: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px;">
+              <!-- Header -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <span style="font-weight: 700; color: #ffffff; font-size: 15px;"><i class="fa-solid fa-ticket"></i> Pass Inclusions &amp; Benefits</span>
+                <span id="summaryBadgeTier" style="font-size: 12px; font-weight: 600; color: var(--accent-cyan); background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 999px; padding: 2px 10px;">Academic / Faculty</span>
+              </div>
+
+              <!-- Dynamic Inclusions Bullets -->
+              <div id="passBenefitsWrap" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px;">
+                <ul id="passBenefitsList" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 13px; color: #cbd5e1;">
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Official Virtual Presentation slot in scheduled track session</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Inclusion of accepted abstract in archived ISBN proceedings</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Verifiable Digital Certificate of Presentation &amp; Authorship</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Full access to all 6 tracks, plenary keynotes &amp; video archives</li>
+                </ul>
+              </div>
+
+              <!-- Promo / Voucher Code Block -->
+              <div style="margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <label for="couponCodeInput" style="font-size: 12.5px; font-weight: 600; color: #cbd5e1;">
+                    Have a Promo Code or Voucher?
+                  </label>
+                  <span style="font-size: 11.5px; color: #94a3b8;">Optional</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <input type="text" id="couponCodeInput" name="coupon_code" class="form-input" placeholder="e.g. EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
+                  <button type="button" id="applyCouponBtn" class="pill-btn frosted-pill" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
+                </div>
+                <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
+              </div>
+
+              <!-- Ultra-Premium VIP Gold Member Upgrade Section -->
+              <div id="goldOptInCard" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.16) 0%, rgba(180, 83, 9, 0.08) 50%, rgba(12, 14, 20, 0.75) 100%); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(254, 240, 138, 0.25);">
+                
+                <!-- Ambient Top Shimmer Line -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #f59e0b, #fef08a, #f59e0b, transparent); opacity: 0.85;"></div>
+
+                <!-- Top Row: Icon + Title + Savings Badge + Switch -->
+                <label for="goldOptInToggle" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; cursor: pointer; margin-bottom: 12px; user-select: none;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <!-- 3D Luxury Gold Crown Emblem -->
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #78350f 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6); flex-shrink: 0; border: 1px solid rgba(254, 240, 138, 0.5);">
+                      <i class="fa-solid fa-crown" style="color: #ffffff; font-size: 19px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));"></i>
+                    </div>
+                    <div>
+                      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span style="font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.01em;">
+                          ScholarVault Gold Privileges
+                        </span>
+                        <span id="goldSavingsBadge" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(16, 185, 129, 0.15) 100%); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);">
+                          Save ₹101 Instantly
+                        </span>
+                      </div>
+                      <div style="font-size: 12.5px; color: #cbd5e1; margin-top: 2px;">
+                        Opt in to unlock instant delegate pass discount + 1-month VIP perks
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Custom Interactive Toggle Switch -->
+                  <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+                    <span id="goldToggleLabel" style="font-size: 11.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s;">Add Perk</span>
+                    <div id="goldSwitchTrack" style="position: relative; width: 48px; height: 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); transition: all 0.25s ease;">
+                      <input type="checkbox" id="goldOptInToggle" name="gold_addon" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 2; margin: 0;" />
+                      <div id="goldSwitchKnob" style="position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;"></div>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Inset Perks Container (Matches the Pass Inclusions aesthetic!) -->
+                <div style="background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 10px; padding: 10px 14px;">
+                  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; font-size: 12.5px; color: #e2e8f0;">
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-bolt" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>Instant Pass Discount</strong> applied to total</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-file-pdf" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>SCVS Audit PDF Access</strong> downloadable evidence dossiers</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-file-lines" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>Document &amp; PDF OCR</strong> conference CFP extraction</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-crown" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>1-Month Gold Membership</strong> with Research Vault &amp; Credits</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Transparent Price Breakdown -->
+              <div style="border-top: 1px dashed rgba(255, 255, 255, 0.12); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: #94a3b8;">
+                  <span>Pass Base Fee:</span>
+                  <span id="baseFeeDisplay" style="color: #cbd5e1;">₹4,999</span>
+                </div>
+                <div id="discountLineItem" style="display: none; justify-content: space-between; font-size: 13px; color: #34d399;">
+                  <span id="discountLabel">Discount:</span>
+                  <span id="discountAmountDisplay">-₹0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 8px; margin-top: 2px;">
+                  <span style="font-size: 14px; font-weight: 700; color: #ffffff;">Total Payable:</span>
+                  <span id="finalPriceDisplay" style="font-size: 22px; font-weight: 800; color: #38bdf8;">₹4,999</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Payment Method Selector -->
+            <div class="form-group full" style="margin-top: 6px;">
+              <label style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; display: block;">
+                Select Payment Method *
+              </label>
+              
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <!-- Option 1: Federal Omniware (India) -->
+                <label id="optFederalLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <input type="radio" name="payment_method" value="federal_omniware" checked style="accent-color: #38bdf8;" />
+                    <div>
+                      <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                        Indian UPI &amp; Net Banking <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Recommended (INR)</span>
+                      </div>
+                      <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                        GPay, PhonePe, Paytm, BHIM UPI, Net Banking (Federal Bank &amp; All Indian Banks), RuPay/Cards
+                      </div>
+                    </div>
+                  </div>
+                  <img src="assets/idzRNcC9U5_logos.png" alt="UPI" style="height: 24px; filter: brightness(1.2);" />
+                </label>
+
+                <!-- Option 2: Dodo Payments (International) -->
+                <label id="optDodoLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <input type="radio" name="payment_method" value="dodo" style="accent-color: #38bdf8;" />
+                    <div>
+                      <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                        International Cards &amp; Apple Pay <span style="font-size: 11px; background: rgba(255, 255, 255, 0.15); color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">USD ($)</span>
+                      </div>
+                      <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                        International Credit &amp; Debit Cards (Visa, Mastercard, Amex, Apple Pay)
+                      </div>
+                    </div>
+                  </div>
+                  <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Cards" style="height: 18px;" />
+                </label>
+
+                <!-- Option 3: Direct Bank Transfer Accordion -->
+                <label id="optBankLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <input type="radio" name="payment_method" value="bank_transfer" style="accent-color: #38bdf8;" />
+                    <div>
+                      <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                        Direct Bank Transfer (NEFT / RTGS / IMPS)
+                      </div>
+                      <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                        Institutional sponsorship or direct wire transfer to ScholarVault Federal Bank account
+                      </div>
+                    </div>
+                  </div>
+                  <i class="fa-solid fa-building-columns" style="color: #94a3b8; font-size: 20px;"></i>
+                </label>
+              </div>
+
+              <!-- Unfolded Bank Transfer Details -->
+              <div id="bankTransferDetailsWrap" style="display: none; margin-top: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 16px;">
+                <div style="font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-info-circle"></i> Official Federal Bank Account Details for Wire Transfer:
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; margin-bottom: 14px;">
+                  <div><span style="color: #94a3b8;">Beneficiary Name:</span> <strong style="color: #ffffff;">ScholarVault Conferences</strong></div>
+                  <div><span style="color: #94a3b8;">Bank Name:</span> <strong style="color: #ffffff;">Federal Bank</strong></div>
+                  <div><span style="color: #94a3b8;">Account Number:</span> <strong style="color: #38bdf8; font-family: monospace;">29149900012345</strong></div>
+                  <div><span style="color: #94a3b8;">IFSC Code:</span> <strong style="color: #38bdf8; font-family: monospace;">FDRL0001234</strong></div>
+                  <div><span style="color: #94a3b8;">Account Type:</span> <strong style="color: #ffffff;">Current Account</strong></div>
+                  <div><span style="color: #94a3b8;">Branch:</span> <strong style="color: #ffffff;">Chennai Main</strong></div>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 200px;">
+                    <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
+                    <input type="text" name="utr_number" id="regUtr" class="form-input" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
+                  </div>
+                  <div style="flex: 1; min-width: 200px;">
+                    <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
+                    <input type="text" name="bank_name" id="regSenderBank" class="form-input" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group full" style="margin-top: 14px;">
+              <button type="submit" id="regSubmitBtn" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span id="btnSubmitText">Proceed to Federal Bank Payment &bull; ₹4,999</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
@@ -390,6 +671,8 @@
             <li><a href="media.html">Media &amp; Press Kit</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
             <li><a href="refund.html">Refund Policy</a></li>
+            <li><a href="terms.html">Terms &amp; Conditions</a></li>
+            <li><a href="shipping.html">Digital Delivery Policy</a></li>
             <li><a href="contact.html">Contact Us</a></li>
           </ul>
         </div>
@@ -434,6 +717,8 @@
         <div class="footer-legal-links">
           <a href="privacy.html">Privacy Policy</a>
           <a href="refund.html">Refund Policy</a>
+          <a href="terms.html">Terms &amp; Conditions</a>
+          <a href="shipping.html">Delivery Policy</a>
           <a href="contact.html">Contact Desk</a>
         </div>
       </div>
