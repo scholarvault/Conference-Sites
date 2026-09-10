@@ -1433,6 +1433,9 @@ function checkRegistrationUrlStatus() {
   const successCard = document.getElementById('registrationSuccessCard');
   const intakeForm = document.getElementById('intakeForm');
   const pricingGrid = document.querySelector('.pricing-grid');
+  const currToggle = document.querySelector('.currency-toggle-wrap');
+  const goldBanner = document.getElementById('goldPrivilegeBanner');
+  const sectionHead = document.querySelector('.section-head');
 
   if (status === 'success') {
     if (successCard) {
@@ -1443,9 +1446,21 @@ function checkRegistrationUrlStatus() {
       if (txEl) txEl.textContent = txRef || 'Verified via Federal Bank';
       if (intakeForm) intakeForm.style.display = 'none';
       if (pricingGrid) pricingGrid.style.display = 'none';
+      if (currToggle) currToggle.style.display = 'none';
+      if (goldBanner) goldBanner.style.display = 'none';
+
+      if (sectionHead) {
+        const titleEl = sectionHead.querySelector('.section-title');
+        const descEl = sectionHead.querySelector('.section-desc');
+        const eyebrowEl = sectionHead.querySelector('.section-eyebrow');
+        if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> PASS CONFIRMED';
+        if (titleEl) titleEl.innerHTML = 'REGISTRATION <span>SUCCESSFUL</span>';
+        if (descEl) descEl.textContent = 'Your payment has been verified and your delegate pass is officially registered for SVRIAS 2026.';
+      }
+
       setTimeout(() => {
         successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 200);
+      }, 100);
       showToast('Registration Confirmed! Invoice and credentials dispatched via email.', 'success');
     }
   } else if (status === 'cancelled') {
