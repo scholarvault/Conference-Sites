@@ -583,6 +583,8 @@ const SCHOLARVAULT_CONFERENCE_SLUG = 'research-integrity-responsible-ai-summit-2
 
 function getScholarVaultAppOrigin() {
   if (window.SCHOLARVAULT_APP_ORIGIN) return window.SCHOLARVAULT_APP_ORIGIN;
+  const urlParam = new URLSearchParams(window.location.search).get('app_origin');
+  if (urlParam) return urlParam.replace(/\/+$/, '');
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     return 'http://localhost:3000';
   }
