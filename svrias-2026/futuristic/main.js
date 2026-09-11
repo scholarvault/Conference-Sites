@@ -588,6 +588,9 @@ function getScholarVaultAppOrigin() {
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     return 'http://localhost:3000';
   }
+  if (window.location.hostname.includes('vercel.app')) {
+    return 'https://scholarvault-v2-bs3c4mlhf-scholarvault-5721s-projects.vercel.app';
+  }
   return 'https://app.scholarvault.in';
 }
 
