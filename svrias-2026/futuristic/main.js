@@ -1937,10 +1937,9 @@ function initForms() {
         if (result.provider === 'dodo') {
           if (result.checkout_url) {
             window.location.href = result.checkout_url;
-          } else {
-            showToast('International card checkout is ready. Directing to card portal...', 'info');
+            return;
           }
-          return;
+          throw new Error(result.error || 'International card checkout URL was not returned by gateway.');
         }
 
         showToast('Registration initiated. Please check your email.', 'info');
