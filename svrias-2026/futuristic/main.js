@@ -1848,7 +1848,8 @@ function openUpiQrModal(payload) {
   if (modalAmount) modalAmount.textContent = `₹${amount.toLocaleString('en-IN')}`;
 
   const upiParams = `pa=scholarvault@ybl&pn=SCHOLARVAULT&am=${amount}&cu=INR&tn=SVRIAS2026-REG`;
-  const genericUri = `upi://pay?${upiParams}`;
+  const upiUri = `upi://pay?${upiParams}`;
+  const genericUri = upiUri;
   const phonepeUri = `phonepe://pay?${upiParams}`;
   const gpayUri = `tez://upi/pay?${upiParams}`;
 
