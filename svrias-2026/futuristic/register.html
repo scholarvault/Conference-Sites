@@ -375,7 +375,7 @@
       </div>
 
       <!-- Registration Form -->
-      <div class="glass-card" id="intakeForm" style="padding: clamp(24px, 4vw, 40px); max-width: 760px; margin: 0 auto 36px;">
+      <div class="glass-card" id="intakeForm" style="padding: clamp(16px, 4vw, 36px); max-width: 760px; margin: 0 auto 36px;">
         <div class="card-num"><i class="fa-solid fa-lock"></i> SECURE DELEGATE INTAKE</div>
         <h2 style="font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Register Delegate Pass</h2>
         <p style="font-size: 13.5px; color: #a1a1aa; margin-bottom: 24px;">
@@ -559,16 +559,16 @@
               </label>
               
               <div style="display: flex; flex-direction: column; gap: 10px;">
-                <!-- Option 1: Federal Omniware (India) -->
+                <!-- Option 1: Indian UPI & QR (Intercepted via QR modal with scholarvault@ybl until Federal Bank live keys arrive ~Sep 20) -->
                 <label id="optFederalLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
                   <div style="display: flex; align-items: center; gap: 12px;">
                     <input type="radio" name="payment_method" value="federal_omniware" checked style="accent-color: #38bdf8;" />
                     <div>
                       <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                        Indian UPI &amp; Net Banking <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Recommended (INR)</span>
+                        Indian UPI &amp; QR Payment <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Instant QR (INR)</span>
                       </div>
                       <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                        GPay, PhonePe, Paytm, BHIM UPI, Net Banking (Federal Bank &amp; All Indian Banks), RuPay/Cards
+                        Scan QR with PhonePe, GPay, Paytm, BHIM or any UPI App &bull; Instant Confirmation
                       </div>
                     </div>
                   </div>
@@ -859,6 +859,66 @@
         <div class="success-icon"><i class="fa-solid fa-circle-check"></i></div>
         <h4>Interest Registered!</h4>
         <p>Thank you for expressing interest. You will receive priority updates as the summit schedule unfolds.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- UPI QR Instant Payment Modal -->
+  <div id="upiQrModal" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(5, 7, 15, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 16px; overflow-y: auto;">
+    <div style="background: linear-gradient(145deg, rgba(20, 24, 38, 0.98), rgba(12, 14, 22, 0.98)); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 20px; max-width: 440px; width: 100%; padding: clamp(20px, 4vw, 28px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.2); position: relative; margin: auto; text-align: center; box-sizing: border-box;">
+      <!-- Close Button -->
+      <button type="button" id="closeUpiQrModalBtn" style="position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #cbd5e1; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: all 0.2s ease;">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <!-- Header Badge -->
+      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 999px; padding: 4px 14px; font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
+        <i class="fa-solid fa-qrcode"></i> Instant UPI Payment
+      </div>
+
+      <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 4px;">
+        Scan to Pay &bull; <span id="modalUpiAmount" style="color: #38bdf8;">₹4,999</span>
+      </h3>
+      <p style="font-size: 12.5px; color: #94a3b8; margin-bottom: 14px;">
+        Scan using PhonePe, Google Pay, Paytm, BHIM, or any UPI app
+      </p>
+
+      <!-- QR Code Box -->
+      <div style="background: #ffffff; border-radius: 16px; padding: 12px; display: inline-block; margin-bottom: 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); border: 2px solid rgba(56, 189, 248, 0.4);">
+        <img id="modalQrCodeImg" src="assets/phonepe_upi_qr.png" alt="PhonePe UPI QR Code" style="width: 200px; height: 200px; display: block; object-fit: contain; margin: 0 auto;" />
+      </div>
+
+      <!-- UPI Deep Link Button for Mobile -->
+      <div style="margin-bottom: 12px;">
+        <a id="modalUpiDeepLink" href="upi://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn glowing-pill" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 11px 16px; font-size: 13.5px; text-decoration: none; font-weight: 700; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
+          <i class="fa-solid fa-mobile-screen-button"></i> Tap to Open UPI App Directly
+        </a>
+      </div>
+
+      <!-- UPI ID Copy Box -->
+      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; font-size: 13px;">
+        <div style="text-align: left;">
+          <span style="display: block; font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Verified UPI VPA:</span>
+          <span style="font-family: monospace; font-weight: 700; color: #ffffff;">scholarvault@ybl</span>
+        </div>
+        <button type="button" id="modalCopyUpiBtn" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; border-radius: 6px; padding: 5px 12px; font-size: 11.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
+          <i class="fa-regular fa-copy"></i> Copy
+        </button>
+      </div>
+
+      <!-- UTR Reference Verification Section -->
+      <div style="border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 14px; text-align: left;">
+        <label for="modalUtrInput" style="display: block; font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 4px;">
+          <i class="fa-solid fa-circle-check" style="color: #34d399;"></i> Step 2: Enter 12-Digit UPI / UTR Reference *
+        </label>
+        <p style="font-size: 11.5px; color: #94a3b8; margin-bottom: 8px;">
+          After completing payment in your UPI app, enter the 12-digit transaction ID / UTR number below:
+        </p>
+        <input type="text" id="modalUtrInput" placeholder="e.g. 425619284012 (12 digits)" maxlength="24" style="width: 100%; box-sizing: border-box; background: rgba(24, 24, 28, 0.9); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 10px; padding: 10px 14px; font-size: 14px; color: #ffffff; font-family: monospace; margin-bottom: 10px; outline: none;" />
+        <button type="button" id="modalConfirmUtrBtn" class="pill-btn glowing-pill" style="width: 100%; box-sizing: border-box; padding: 12px; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
+          <i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration
+        </button>
+        <div id="modalUtrError" style="display: none; color: #f87171; font-size: 12px; margin-top: 6px; text-align: center;"></div>
       </div>
     </div>
   </div>

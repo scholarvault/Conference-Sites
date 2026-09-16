@@ -1739,7 +1739,7 @@ function initRegistrationCheckoutInteractive() {
       if (selectedMethod === 'bank_transfer') {
         if (btnSubmitText) btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
       } else {
-        if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to Federal Bank Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+        if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to UPI Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
       }
     }
 
@@ -1832,6 +1832,129 @@ function initRegistrationCheckoutInteractive() {
   calculate();
 }
 
+function openUpiQrModal(payload) {
+  const modal = document.getElementById('upiQrModal');
+  if (!modal) return;
+
+  const categoryCode = payload.category_code || 'faculty_researcher';
+  const catInfo = CATEGORY_PRICES[categoryCode] || CATEGORY_PRICES.faculty_researcher;
+  let amount = payload.gold_addon ? catInfo.inrGold : catInfo.inr;
+
+  if (appliedCouponDiscount > 0) {
+    amount = Math.max(0, Math.round(amount * (1 - appliedCouponDiscount / 100)));
+  }
+
+  const modalAmount = document.getElementById('modalUpiAmount');
+  if (modalAmount) modalAmount.textContent = `₹${amount.toLocaleString('en-IN')}`;
+
+  const upiUri = `upi://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&am=${amount}&cu=INR&tn=SVRIAS2026-REG`;
+
+  const deepLink = document.getElementById('modalUpiDeepLink');
+  if (deepLink) deepLink.href = upiUri;
+
+  const qrImg = document.getElementById('modalQrCodeImg');
+  if (qrImg) {
+    const dynamicQr = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(upiUri)}`;
+    qrImg.onerror = () => { qrImg.src = 'assets/phonepe_upi_qr.png'; };
+    qrImg.src = dynamicQr;
+  }
+
+  const utrInput = document.getElementById('modalUtrInput');
+  const utrError = document.getElementById('modalUtrError');
+  const confirmBtn = document.getElementById('modalConfirmUtrBtn');
+  if (utrInput) utrInput.value = '';
+  if (utrError) { utrError.style.display = 'none'; utrError.textContent = ''; }
+  if (confirmBtn) {
+    confirmBtn.disabled = false;
+    confirmBtn.innerHTML = '<i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration';
+  }
+
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  const closeBtn = document.getElementById('closeUpiQrModalBtn');
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    };
+  }
+
+  const copyBtn = document.getElementById('modalCopyUpiBtn');
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText('scholarvault@ybl').then(() => {
+        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        copyBtn.style.color = '#34d399';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          copyBtn.style.color = '#38bdf8';
+        }, 2000);
+      });
+    };
+  }
+
+  if (confirmBtn) {
+    confirmBtn.onclick = async () => {
+      const utrVal = utrInput ? utrInput.value.trim().toUpperCase() : '';
+      if (!utrVal || utrVal.length < 6) {
+        if (utrError) {
+          utrError.style.display = 'block';
+          utrError.textContent = 'Please enter a valid 12-digit UPI reference / UTR number from your payment receipt.';
+        }
+        return;
+      }
+
+      if (utrError) utrError.style.display = 'none';
+      confirmBtn.disabled = true;
+      confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Confirming Registration...';
+
+      try {
+        const finalPayload = {
+          ...payload,
+          payment_method: 'bank_transfer',
+          utr_number: utrVal,
+          bank_name: 'PhonePe / UPI (scholarvault@ybl)'
+        };
+
+        const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(finalPayload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result.error || 'Registration submission failed. Please try again.');
+        }
+
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+
+        const intakeForm = document.getElementById('intakeForm');
+        const btCard = document.getElementById('bankTransferPendingCard');
+        if (intakeForm) intakeForm.style.display = 'none';
+        if (btCard) {
+          btCard.style.display = 'block';
+          const regNumEl = document.getElementById('btRegNumber');
+          const utrEl = document.getElementById('btUtrNumber');
+          if (regNumEl) regNumEl.textContent = result.registration_number || 'SVRIAS26-PENDING';
+          if (utrEl) utrEl.textContent = utrVal;
+          btCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        showToast('UPI payment reference recorded! Confirmation email dispatched.', 'success');
+      } catch (err) {
+        confirmBtn.disabled = false;
+        confirmBtn.innerHTML = '<i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration';
+        if (utrError) {
+          utrError.style.display = 'block';
+          utrError.textContent = err.message || 'Error recording registration. Please retry.';
+        }
+      }
+    };
+  }
+}
+
 /**
  * 13. Form Handlers (Registration, Abstract, Contact, Award, Committee, Speaker, Standalone Interest)
  */
@@ -1881,6 +2004,16 @@ function initForms() {
           utr_number: values.utr_number || '',
           bank_name: values.bank_name || '',
         };
+
+        // If Indian UPI (federal_omniware), intercept with instant QR payment popup (until live Federal keys arrive ~Sep 20)
+        if (paymentMethod === 'federal_omniware') {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+          }
+          openUpiQrModal(payload);
+          return;
+        }
 
         const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
           method: 'POST',
