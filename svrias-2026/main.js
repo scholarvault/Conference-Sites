@@ -25,8 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNewsletterForm();
   initFileDropZone();
   initSmartIntake();
-  initRegistrationOptions();
   initForms();
+  initRegistrationOptions();
 });
 
 /**
@@ -583,8 +583,13 @@ const SCHOLARVAULT_CONFERENCE_SLUG = 'research-integrity-responsible-ai-summit-2
 
 function getScholarVaultAppOrigin() {
   if (window.SCHOLARVAULT_APP_ORIGIN) return window.SCHOLARVAULT_APP_ORIGIN;
+  const urlParam = new URLSearchParams(window.location.search).get('app_origin');
+  if (urlParam) return urlParam.replace(/\/+$/, '');
   if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     return 'http://localhost:3000';
+  }
+  if (window.location.hostname.includes('vercel.app')) {
+    return 'https://scholarvault-v2-git-preview-scholarvault-5721s-projects.vercel.app';
   }
   return 'https://app.scholarvault.in';
 }
@@ -1341,13 +1346,16 @@ function initRegistrationOptions() {
 
   const selectCategory = (categoryCode, categoryName) => {
     if (regCategorySelect) {
-      regCategorySelect.value = categoryCode;
+      if (regCategorySelect.value !== categoryCode) {
+        regCategorySelect.value = categoryCode;
+      }
       const option = regCategorySelect.querySelector(`option[value="${categoryCode}"]`);
       if (option && option.dataset.name) {
         if (queryTypeInput) queryTypeInput.value = option.dataset.name;
       } else if (categoryName && queryTypeInput) {
         queryTypeInput.value = categoryName;
       }
+      regCategorySelect.dispatchEvent(new Event('change', { bubbles: true }));
     }
     if (categoryCodeInput) categoryCodeInput.value = categoryCode;
     cards.forEach((c) => {
@@ -1429,8 +1437,12 @@ function checkRegistrationUrlStatus() {
   const errorMessage = params.get('error') || params.get('message');
 
   const successCard = document.getElementById('registrationSuccessCard');
+  const failedCard = document.getElementById('registrationFailedCard');
   const intakeForm = document.getElementById('intakeForm');
   const pricingGrid = document.querySelector('.pricing-grid');
+  const currToggle = document.querySelector('.currency-toggle-wrap');
+  const goldBanner = document.getElementById('goldPrivilegeBanner');
+  const sectionHead = document.querySelector('.section-head');
 
   if (status === 'success') {
     if (successCard) {
@@ -1441,17 +1453,97 @@ function checkRegistrationUrlStatus() {
       if (txEl) txEl.textContent = txRef || 'Verified via Federal Bank';
       if (intakeForm) intakeForm.style.display = 'none';
       if (pricingGrid) pricingGrid.style.display = 'none';
+      if (currToggle) currToggle.style.display = 'none';
+      if (goldBanner) goldBanner.style.display = 'none';
+
+      if (sectionHead) {
+        const titleEl = sectionHead.querySelector('.section-title');
+        const descEl = sectionHead.querySelector('.section-desc');
+        const eyebrowEl = sectionHead.querySelector('.section-eyebrow');
+        if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> PASS CONFIRMED';
+        if (titleEl) titleEl.innerHTML = 'REGISTRATION <span>SUCCESSFUL</span>';
+        if (descEl) descEl.textContent = 'Your payment has been verified and your delegate pass is officially registered for SVRIAS 2026.';
+      }
+
       setTimeout(() => {
         successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 200);
+      }, 100);
       showToast('Registration Confirmed! Invoice and credentials dispatched via email.', 'success');
     }
-  } else if (status === 'cancelled') {
-    showToast('Payment session was cancelled. You can complete your registration at any time.', 'info');
+  } else if (status === 'failed' || status === 'error' || status === 'cancelled') {
+    if (failedCard) {
+      failedCard.style.display = 'block';
+      const txEl = document.getElementById('failedTxRef');
+      const reasonEl = document.getElementById('failedCardReason');
+      if (txEl) txEl.textContent = txRef || orderId || 'Attempt Ref Pending';
+      if (reasonEl) {
+        if (status === 'cancelled') {
+          reasonEl.textContent = 'The checkout session was cancelled before completing payment. No funds were debited, and you can safely resume your registration below.';
+        } else if (errorMessage) {
+          reasonEl.textContent = `Bank / Gateway Response: ${errorMessage}. No duplicate charges have occurred. You can safely retry payment below.`;
+        } else {
+          reasonEl.textContent = 'The payment attempt was declined or timed out by the gateway. Don\'t worry—no duplicate charges have occurred, and you can safely complete your registration below.';
+        }
+      }
+
+      if (intakeForm) intakeForm.style.display = 'none';
+      if (pricingGrid) pricingGrid.style.display = 'none';
+      if (currToggle) currToggle.style.display = 'none';
+      if (goldBanner) goldBanner.style.display = 'none';
+
+      if (sectionHead) {
+        const titleEl = sectionHead.querySelector('.section-title');
+        const descEl = sectionHead.querySelector('.section-desc');
+        const eyebrowEl = sectionHead.querySelector('.section-eyebrow');
+        if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i> PAYMENT ACTION REQUIRED';
+        if (titleEl) titleEl.innerHTML = 'PAYMENT <span>INCOMPLETE</span>';
+        if (descEl) descEl.textContent = 'Your payment session was not completed. Follow the guidance below to retry or choose an alternative payment method.';
+      }
+
+      const retryBtn = document.getElementById('btnRetryPayment');
+      if (retryBtn) {
+        retryBtn.onclick = () => {
+          failedCard.style.display = 'none';
+          if (intakeForm) intakeForm.style.display = 'block';
+          if (pricingGrid) pricingGrid.style.display = 'grid';
+          if (currToggle) currToggle.style.display = 'flex';
+          if (goldBanner) goldBanner.style.display = 'flex';
+          if (intakeForm) intakeForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        };
+      }
+
+      const bankSwitchBtn = document.getElementById('btnSwitchBankTransfer');
+      if (bankSwitchBtn) {
+        bankSwitchBtn.onclick = () => {
+          failedCard.style.display = 'none';
+          if (intakeForm) intakeForm.style.display = 'block';
+          if (pricingGrid) pricingGrid.style.display = 'grid';
+          if (currToggle) currToggle.style.display = 'flex';
+          if (goldBanner) goldBanner.style.display = 'flex';
+          const optBank = document.querySelector('input[name="payment_method"][value="bank_transfer"]');
+          if (optBank) {
+            optBank.checked = true;
+            optBank.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+          const bankDetails = document.getElementById('bankTransferDetailsWrap');
+          if (bankDetails) {
+            bankDetails.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          } else if (intakeForm) {
+            intakeForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        };
+      }
+
+      setTimeout(() => {
+        failedCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+
+      showToast(status === 'cancelled' ? 'Payment session was cancelled.' : (errorMessage || 'Payment was not completed. Follow guidance on screen to retry.'), 'error');
+    } else {
+      showToast(errorMessage || 'Payment was not completed. Please try again or choose an alternative method.', 'error');
+    }
   } else if (status === 'processing') {
     showToast('Payment is being processed by the bank. Your registration will be confirmed shortly.', 'info');
-  } else if (status === 'failed' || status === 'error') {
-    showToast(errorMessage || 'Payment was not completed. Please try again or choose an alternative method.', 'error');
   }
 }
 
@@ -1647,7 +1739,7 @@ function initRegistrationCheckoutInteractive() {
       if (selectedMethod === 'bank_transfer') {
         if (btnSubmitText) btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
       } else {
-        if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to Federal Bank Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+        if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to UPI Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
       }
     }
 
@@ -1740,6 +1832,129 @@ function initRegistrationCheckoutInteractive() {
   calculate();
 }
 
+function openUpiQrModal(payload) {
+  const modal = document.getElementById('upiQrModal');
+  if (!modal) return;
+
+  const categoryCode = payload.category_code || 'faculty_researcher';
+  const catInfo = CATEGORY_PRICES[categoryCode] || CATEGORY_PRICES.faculty_researcher;
+  let amount = payload.gold_addon ? catInfo.inrGold : catInfo.inr;
+
+  if (appliedCouponDiscount > 0) {
+    amount = Math.max(0, Math.round(amount * (1 - appliedCouponDiscount / 100)));
+  }
+
+  const modalAmount = document.getElementById('modalUpiAmount');
+  if (modalAmount) modalAmount.textContent = `₹${amount.toLocaleString('en-IN')}`;
+
+  const upiUri = `upi://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&am=${amount}&cu=INR&tn=SVRIAS2026-REG`;
+
+  const deepLink = document.getElementById('modalUpiDeepLink');
+  if (deepLink) deepLink.href = upiUri;
+
+  const qrImg = document.getElementById('modalQrCodeImg');
+  if (qrImg) {
+    const dynamicQr = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(upiUri)}`;
+    qrImg.onerror = () => { qrImg.src = 'assets/phonepe_upi_qr.png'; };
+    qrImg.src = dynamicQr;
+  }
+
+  const utrInput = document.getElementById('modalUtrInput');
+  const utrError = document.getElementById('modalUtrError');
+  const confirmBtn = document.getElementById('modalConfirmUtrBtn');
+  if (utrInput) utrInput.value = '';
+  if (utrError) { utrError.style.display = 'none'; utrError.textContent = ''; }
+  if (confirmBtn) {
+    confirmBtn.disabled = false;
+    confirmBtn.innerHTML = '<i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration';
+  }
+
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+
+  const closeBtn = document.getElementById('closeUpiQrModalBtn');
+  if (closeBtn) {
+    closeBtn.onclick = () => {
+      modal.style.display = 'none';
+      document.body.style.overflow = '';
+    };
+  }
+
+  const copyBtn = document.getElementById('modalCopyUpiBtn');
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText('scholarvault@ybl').then(() => {
+        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        copyBtn.style.color = '#34d399';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          copyBtn.style.color = '#38bdf8';
+        }, 2000);
+      });
+    };
+  }
+
+  if (confirmBtn) {
+    confirmBtn.onclick = async () => {
+      const utrVal = utrInput ? utrInput.value.trim().toUpperCase() : '';
+      if (!utrVal || utrVal.length < 6) {
+        if (utrError) {
+          utrError.style.display = 'block';
+          utrError.textContent = 'Please enter a valid 12-digit UPI reference / UTR number from your payment receipt.';
+        }
+        return;
+      }
+
+      if (utrError) utrError.style.display = 'none';
+      confirmBtn.disabled = true;
+      confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Confirming Registration...';
+
+      try {
+        const finalPayload = {
+          ...payload,
+          payment_method: 'bank_transfer',
+          utr_number: utrVal,
+          bank_name: 'PhonePe / UPI (scholarvault@ybl)'
+        };
+
+        const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(finalPayload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+        if (!response.ok) {
+          throw new Error(result.error || 'Registration submission failed. Please try again.');
+        }
+
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+
+        const intakeForm = document.getElementById('intakeForm');
+        const btCard = document.getElementById('bankTransferPendingCard');
+        if (intakeForm) intakeForm.style.display = 'none';
+        if (btCard) {
+          btCard.style.display = 'block';
+          const regNumEl = document.getElementById('btRegNumber');
+          const utrEl = document.getElementById('btUtrNumber');
+          if (regNumEl) regNumEl.textContent = result.registration_number || 'SVRIAS26-PENDING';
+          if (utrEl) utrEl.textContent = utrVal;
+          btCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+        showToast('UPI payment reference recorded! Confirmation email dispatched.', 'success');
+      } catch (err) {
+        confirmBtn.disabled = false;
+        confirmBtn.innerHTML = '<i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration';
+        if (utrError) {
+          utrError.style.display = 'block';
+          utrError.textContent = err.message || 'Error recording registration. Please retry.';
+        }
+      }
+    };
+  }
+}
+
 /**
  * 13. Form Handlers (Registration, Abstract, Contact, Award, Committee, Speaker, Standalone Interest)
  */
@@ -1789,6 +2004,16 @@ function initForms() {
           utr_number: values.utr_number || '',
           bank_name: values.bank_name || '',
         };
+
+        // If Indian UPI (federal_omniware), intercept with instant QR payment popup (until live Federal keys arrive ~Sep 20)
+        if (paymentMethod === 'federal_omniware') {
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+          }
+          openUpiQrModal(payload);
+          return;
+        }
 
         const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
           method: 'POST',
@@ -1845,10 +2070,9 @@ function initForms() {
         if (result.provider === 'dodo') {
           if (result.checkout_url) {
             window.location.href = result.checkout_url;
-          } else {
-            showToast('International card checkout is ready. Directing to card portal...', 'info');
+            return;
           }
-          return;
+          throw new Error(result.error || 'International card checkout URL was not returned by gateway.');
         }
 
         showToast('Registration initiated. Please check your email.', 'info');
