@@ -96,15 +96,13 @@
 
   <!-- Subpage Main Content -->
   <main class="conference-body" style="padding-top: 20px;">
-    <!-- Floating Cyber Announcement Pill (Option 3) -->
+    <!-- Floating Cyber Announcement Pill - 10 Competitive Student Research Grants -->
     <div class="cyber-announcement-wrap" style="padding-top: 0; margin-bottom: 20px;">
-      <a href="call-for-papers.html" class="cyber-pill" aria-label="Summit Dates and Editorial Review Info">
+      <a href="call-for-papers.html#student-grants" class="cyber-pill cyber-pill-gold" aria-label="10 Competitive Student Research Grants Open - 100% Registration Fee Waiver">
         <span class="cyber-pill-pulse"></span>
-        <span class="cyber-pill-item"><strong>Virtual Summit</strong> &bull; 14 November 2026</span>
+        <span class="cyber-pill-item">🎓 <strong>10 Competitive Student Research Grants Open</strong></span>
         <span class="cyber-pill-dot">&bull;</span>
-        <span class="cyber-pill-item">Call for Abstracts Open</span>
-        <span class="cyber-pill-dot">&bull;</span>
-        <span class="cyber-pill-badge"><i class="fa-solid fa-bolt"></i> 2–4 Day Review SLA</span>
+        <span class="cyber-pill-badge"><i class="fa-solid fa-award"></i> 100% Registration Fee Waiver</span>
       </a>
     </div>
     <div class="conf-section">
@@ -194,6 +192,17 @@
                   </div>
                   <button type="button" id="dropZoneRemoveFile" class="pill-btn frosted-pill" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
                 </div>
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
+                <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: #fef3c7; font-size: 13.5px; line-height: 1.5;">
+                  <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 3.5px; width: 16px; height: 16px; accent-color: #f59e0b; cursor: pointer;" />
+                  <span>
+                    <strong style="color: #fbbf24;">🎓 Apply for SVRIAS 2026 Student Research Grant</strong> (100% Registration Fee Waiver for Top 10 Student Abstracts)
+                  </span>
+                </label>
               </div>
             </div>
 
@@ -491,6 +500,13 @@
         payload.set('track', track);
         payload.set('coauthors', coauthors);
         payload.set('co_authors', coauthors);
+
+        const isStudentGrant = Boolean(document.getElementById('studentGrantCheckbox')?.checked);
+        payload.set('student_grant', isStudentGrant ? 'yes' : 'no');
+        payload.set('apply_student_grant', isStudentGrant ? 'yes' : 'no');
+        if (isStudentGrant) {
+          payload.set('grant_applicant', 'true');
+        }
 
         // Safe fallback text so backend validators pass smoothly without requiring inline user input
         if (!payload.get('abstract')) payload.set('abstract', 'Abstract included in attached manuscript PDF.');
