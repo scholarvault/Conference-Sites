@@ -1712,7 +1712,11 @@ function initRegistrationCheckoutInteractive() {
       if (currencyInput) currencyInput.value = 'USD';
       if (baseFeeDisplay) baseFeeDisplay.textContent = `$${catInfo.usd}`;
       if (finalPriceDisplay) finalPriceDisplay.textContent = `$${finalAmount}`;
-      if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to Card Checkout &bull; $${finalAmount}`;
+      if (btnSubmitText) {
+        btnSubmitText.innerHTML = finalAmount === 0
+          ? '<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; $0'
+          : `Proceed to Card Checkout &bull; $${finalAmount}`;
+      }
       if (discountLineItem) {
         if (discountAmount > 0) {
           discountLineItem.style.display = 'flex';
@@ -1736,10 +1740,14 @@ function initRegistrationCheckoutInteractive() {
         }
       }
 
-      if (selectedMethod === 'bank_transfer') {
-        if (btnSubmitText) btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
-      } else {
-        if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to UPI Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+      if (btnSubmitText) {
+        if (finalAmount === 0) {
+          btnSubmitText.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; ₹0';
+        } else if (selectedMethod === 'bank_transfer') {
+          btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+        } else {
+          btnSubmitText.innerHTML = `Proceed to UPI Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+        }
       }
     }
 
@@ -1799,6 +1807,14 @@ function initRegistrationCheckoutInteractive() {
         couponStatusMsg.style.display = 'block';
         couponStatusMsg.style.color = '#34d399';
         couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 15% Early Bird Discount Applied!';
+      }
+    } else if (code === 'GRANT100' || code === 'STUDENT100' || code === 'STUDENTGRANT' || code.startsWith('GRANT-')) {
+      appliedCouponCode = code;
+      appliedCouponDiscount = 100;
+      if (couponStatusMsg) {
+        couponStatusMsg.style.display = 'block';
+        couponStatusMsg.style.color = '#fbbf24';
+        couponStatusMsg.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Applied! (₹0 / $0)</strong>';
       }
     } else if (code === 'GOLDMEMBER' || code === 'GOLD') {
       if (goldOptInToggle) goldOptInToggle.checked = true;

@@ -1293,6 +1293,44 @@ body.menu-open .burger-bar:nth-child(3) {
   letter-spacing: 0.02em;
 }
 
+/* Gold / Amber Grant Announcement Pill */
+.cyber-pill-gold {
+  background: rgba(26, 19, 8, 0.88);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.55), 0 0 20px rgba(245, 158, 11, 0.22);
+  color: #fef3c7;
+}
+
+.cyber-pill-gold:hover {
+  transform: translateY(-2px);
+  border-color: rgba(251, 191, 36, 0.75);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), 0 0 30px rgba(245, 158, 11, 0.4);
+  color: #ffffff;
+}
+
+.cyber-pill-gold .cyber-pill-pulse {
+  background: #f59e0b;
+  box-shadow: 0 0 10px #f59e0b, 0 0 18px rgba(245, 158, 11, 0.8);
+}
+
+.cyber-pill-gold .cyber-pill-item strong {
+  color: #fbbf24;
+}
+
+.cyber-pill-gold .cyber-pill-dot {
+  color: rgba(245, 158, 11, 0.45);
+}
+
+.cyber-pill-gold .cyber-pill-badge {
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.5);
+  color: #fbbf24;
+}
+
+#student-grants {
+  scroll-margin-top: 90px;
+}
+
 @keyframes cyberPillIn {
   from {
     opacity: 0;

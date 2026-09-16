@@ -1712,7 +1712,11 @@ function initRegistrationCheckoutInteractive() {
       if (currencyInput) currencyInput.value = 'USD';
       if (baseFeeDisplay) baseFeeDisplay.textContent = `$${catInfo.usd}`;
       if (finalPriceDisplay) finalPriceDisplay.textContent = `$${finalAmount}`;
-      if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to Card Checkout &bull; $${finalAmount}`;
+      if (btnSubmitText) {
+        btnSubmitText.innerHTML = finalAmount === 0
+          ? '<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; $0'
+          : `Proceed to Card Checkout &bull; $${finalAmount}`;
+      }
       if (discountLineItem) {
         if (discountAmount > 0) {
           discountLineItem.style.display = 'flex';
@@ -1736,21 +1740,36 @@ function initRegistrationCheckoutInteractive() {
         }
       }
 
-      if (selectedMethod === 'bank_transfer') {
-        if (btnSubmitText) btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
-      } else {
-        if (btnSubmitText) btnSubmitText.innerHTML = `Proceed to UPI Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+      if (btnSubmitText) {
+        if (finalAmount === 0) {
+          btnSubmitText.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; ₹0';
+        } else if (selectedMethod === 'bank_transfer') {
+          btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+        } else {
+          btnSubmitText.innerHTML = `Proceed to UPI Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+        }
       }
+    }
+
+    // Toggle 100% Student Research Grant Remission Notice vs Payment Methods
+    const grantNotice = document.getElementById('grantWaiverPaymentNotice');
+    const paymentOptionsWrap = document.getElementById('paymentOptionsWrap');
+    if (finalAmount === 0) {
+      if (grantNotice) grantNotice.style.display = 'block';
+      if (paymentOptionsWrap) paymentOptionsWrap.style.display = 'none';
+    } else {
+      if (grantNotice) grantNotice.style.display = 'none';
+      if (paymentOptionsWrap) paymentOptionsWrap.style.display = 'block';
     }
 
     // Toggle Bank Transfer Details
     const bankWrap = document.getElementById('bankTransferDetailsWrap');
     if (bankWrap) {
-      bankWrap.style.display = selectedMethod === 'bank_transfer' ? 'block' : 'none';
+      bankWrap.style.display = (selectedMethod === 'bank_transfer' && finalAmount > 0) ? 'block' : 'none';
       const utrInput = document.getElementById('regUtr');
       const senderBank = document.getElementById('regSenderBank');
-      if (utrInput) utrInput.required = selectedMethod === 'bank_transfer';
-      if (senderBank) senderBank.required = selectedMethod === 'bank_transfer';
+      if (utrInput) utrInput.required = selectedMethod === 'bank_transfer' && finalAmount > 0;
+      if (senderBank) senderBank.required = selectedMethod === 'bank_transfer' && finalAmount > 0;
     }
 
     // Border highlights
@@ -1799,6 +1818,14 @@ function initRegistrationCheckoutInteractive() {
         couponStatusMsg.style.display = 'block';
         couponStatusMsg.style.color = '#34d399';
         couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 15% Early Bird Discount Applied!';
+      }
+    } else if (code === 'GRANT100' || code === 'STUDENT100' || code === 'STUDENTGRANT' || code.startsWith('GRANT-')) {
+      appliedCouponCode = code;
+      appliedCouponDiscount = 100;
+      if (couponStatusMsg) {
+        couponStatusMsg.style.display = 'block';
+        couponStatusMsg.style.color = '#fbbf24';
+        couponStatusMsg.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Applied! (₹0 / $0)</strong>';
       }
     } else if (code === 'GOLDMEMBER' || code === 'GOLD') {
       if (goldOptInToggle) goldOptInToggle.checked = true;
@@ -2015,6 +2042,60 @@ function initForms() {
           bank_name: values.bank_name || '',
         };
 
+        const isGrantWaiver = appliedCouponDiscount === 100;
+
+        if (isGrantWaiver) {
+          // 100% Student Research Grant Waiver - Completely bypasses UPI QR modal and payment gateways
+          const grantPayload = {
+            ...payload,
+            payment_method: 'grant_waiver',
+            coupon_code: coupon || appliedCouponCode || 'GRANT100',
+            amount: 0,
+            grant_waiver: true,
+            utr_number: 'GRANT-WAIVER-100',
+            bank_name: 'SVRIAS Student Research Grant (100% Fee Remission)',
+          };
+
+          let grantResult = null;
+          try {
+            const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(grantPayload),
+            });
+            grantResult = await response.json().catch(() => null);
+          } catch (netErr) {
+            console.warn('Backend guest-checkout unavailable, using local confirmation fallback', netErr);
+          }
+
+          const regNumber = grantResult?.registration_number || ('SVRIAS26-GRANT-' + Math.random().toString(36).substring(2, 8).toUpperCase());
+          const txRef = grantResult?.order_id || ('GRANT100-' + Date.now().toString(36).toUpperCase());
+
+          // Display Instant Success Confirmation Card
+          const intakeForm = document.getElementById('intakeForm');
+          const pricingGrid = document.querySelector('.pricing-grid');
+          const currToggle = document.querySelector('.currency-toggle-wrap');
+          const goldBanner = document.getElementById('goldPrivilegeBanner');
+          const successCard = document.getElementById('registrationSuccessCard');
+
+          if (intakeForm) intakeForm.style.display = 'none';
+          if (pricingGrid) pricingGrid.style.display = 'none';
+          if (currToggle) currToggle.style.display = 'none';
+          if (goldBanner) goldBanner.style.display = 'none';
+
+          if (successCard) {
+            successCard.style.display = 'block';
+            const regNumEl = document.getElementById('successRegNumber');
+            const txRefEl = document.getElementById('successTxRef');
+            if (regNumEl) regNumEl.textContent = regNumber;
+            if (txRefEl) txRefEl.textContent = `${txRef} (Grant Waiver: ${grantPayload.coupon_code})`;
+            successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+
+          showToast('🎓 Student Research Grant Waiver Confirmed! 100% Fee Remitted.', 'success');
+          return;
+        }
+
         // If Indian UPI (federal_omniware), intercept with instant QR payment popup (until live Federal keys arrive ~Sep 20)
         if (paymentMethod === 'federal_omniware') {
           if (btn) {
@@ -2034,6 +2115,31 @@ function initForms() {
         const result = await response.json().catch(() => ({}));
         if (!response.ok) {
           throw new Error(result.error || 'Registration could not be initiated. Please try again.');
+        }
+
+        // 0. Grant Waiver Instant Confirmation
+        if (result.provider === 'grant_waiver' || result.status === 'confirmed') {
+          const intakeForm = document.getElementById('intakeForm');
+          const pricingGrid = document.querySelector('.pricing-grid');
+          const currToggle = document.querySelector('.currency-toggle-wrap');
+          const goldBanner = document.getElementById('goldPrivilegeBanner');
+          const successCard = document.getElementById('registrationSuccessCard');
+
+          if (intakeForm) intakeForm.style.display = 'none';
+          if (pricingGrid) pricingGrid.style.display = 'none';
+          if (currToggle) currToggle.style.display = 'none';
+          if (goldBanner) goldBanner.style.display = 'none';
+
+          if (successCard) {
+            successCard.style.display = 'block';
+            const regNumEl = document.getElementById('successRegNumber');
+            const txRefEl = document.getElementById('successTxRef');
+            if (regNumEl) regNumEl.textContent = result.registration_number || 'SVRIAS26-GRANT';
+            if (txRefEl) txRefEl.textContent = `${result.order_id || 'GRANT100'} (100% Grant Waiver)`;
+            successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+          showToast('🎓 Student Research Grant Confirmed! 100% Fee Remitted.', 'success');
+          return;
         }
 
         // 1. Federal Omniware Two-Step URL

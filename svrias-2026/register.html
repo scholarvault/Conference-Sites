@@ -96,15 +96,13 @@
 
   <!-- Subpage Main Content -->
   <main class="conference-body" style="padding-top: 20px;">
-    <!-- Floating Cyber Announcement Pill (Option 3) -->
+    <!-- Floating Cyber Announcement Pill - 10 Competitive Student Research Grants -->
     <div class="cyber-announcement-wrap" style="padding-top: 0; margin-bottom: 20px;">
-      <a href="call-for-papers.html" class="cyber-pill" aria-label="Summit Dates and Editorial Review Info">
+      <a href="call-for-papers.html#student-grants" class="cyber-pill cyber-pill-gold" aria-label="10 Competitive Student Research Grants Open - 100% Registration Fee Waiver">
         <span class="cyber-pill-pulse"></span>
-        <span class="cyber-pill-item"><strong>Virtual Summit</strong> &bull; 14 November 2026</span>
+        <span class="cyber-pill-item">🎓 <strong>10 Competitive Student Research Grants Open</strong></span>
         <span class="cyber-pill-dot">&bull;</span>
-        <span class="cyber-pill-item">Call for Abstracts Open</span>
-        <span class="cyber-pill-dot">&bull;</span>
-        <span class="cyber-pill-badge"><i class="fa-solid fa-bolt"></i> 2–4 Day Review SLA</span>
+        <span class="cyber-pill-badge"><i class="fa-solid fa-award"></i> 100% Registration Fee Waiver</span>
       </a>
     </div>
     <div class="conf-section">
@@ -149,6 +147,11 @@
               <li><i class="fa-solid fa-check"></i> Inclusion in archived proceedings</li>
               <li><i class="fa-solid fa-check"></i> Full access to all 6 tracks</li>
             </ul>
+            <!-- Student Grant Waiver Notice -->
+            <div class="student-grant-waiver-callout" style="margin-top: 10px; margin-bottom: 12px; padding: 9px 12px; background: rgba(245, 158, 11, 0.08); border: 1px dashed rgba(245, 158, 11, 0.35); border-radius: 10px; font-size: 12px; color: #fde68a; line-height: 1.45; text-align: left;">
+              <i class="fa-solid fa-graduation-cap" style="color: #fbbf24; margin-right: 4px;"></i>
+              <strong>Student Grant Awardees:</strong> Accepted recipients can apply their official 100% waiver code in the checkout form below for ₹0 registration.
+            </div>
           </div>
           <a href="#intakeForm" class="pill-btn frosted-pill select-pass-btn" data-category-code="student_scholar" style="width: 100%; text-align: center;">Select Student Pass</a>
         </div>
@@ -463,15 +466,18 @@
               <div style="margin-bottom: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                   <label for="couponCodeInput" style="font-size: 12.5px; font-weight: 600; color: #cbd5e1;">
-                    Have a Promo Code or Voucher?
+                    Have a Promo Code or Grant Waiver Voucher?
                   </label>
                   <span style="font-size: 11.5px; color: #94a3b8;">Optional</span>
                 </div>
                 <div style="display: flex; gap: 8px;">
-                  <input type="text" id="couponCodeInput" name="coupon_code" class="form-input" placeholder="e.g. EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
+                  <input type="text" id="couponCodeInput" name="coupon_code" class="form-input" placeholder="e.g. GRANT100, EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
                   <button type="button" id="applyCouponBtn" class="pill-btn frosted-pill" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
                 </div>
                 <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
+                <small style="display: block; font-size: 11.5px; color: #94a3b8; margin-top: 4px;">
+                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24;"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
+                </small>
               </div>
 
               <!-- Ultra-Premium VIP Gold Member Upgrade Section -->
@@ -553,82 +559,95 @@
             </div>
 
             <!-- Payment Method Selector -->
-            <div class="form-group full" style="margin-top: 6px;">
-              <label style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; display: block;">
-                Select Payment Method *
-              </label>
-              
-              <div style="display: flex; flex-direction: column; gap: 10px;">
-                <!-- Option 1: Indian UPI & QR (Intercepted via QR modal with scholarvault@ybl until Federal Bank live keys arrive ~Sep 20) -->
-                <label id="optFederalLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <input type="radio" name="payment_method" value="federal_omniware" checked style="accent-color: #38bdf8;" />
-                    <div>
-                      <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                        Indian UPI &amp; QR Payment <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Instant QR (INR)</span>
-                      </div>
-                      <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                        Scan QR with PhonePe, GPay, Paytm, BHIM or any UPI App &bull; Instant Confirmation
-                      </div>
-                    </div>
-                  </div>
-                  <img src="assets/idzRNcC9U5_logos.png" alt="UPI" style="height: 24px; filter: brightness(1.2);" />
-                </label>
-
-                <!-- Option 2: Dodo Payments (International) -->
-                <label id="optDodoLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <input type="radio" name="payment_method" value="dodo" style="accent-color: #38bdf8;" />
-                    <div>
-                      <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                        International Cards &amp; Apple Pay <span style="font-size: 11px; background: rgba(255, 255, 255, 0.15); color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">USD ($)</span>
-                      </div>
-                      <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                        International Credit &amp; Debit Cards (Visa, Mastercard, Amex, Apple Pay)
-                      </div>
-                    </div>
-                  </div>
-                  <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Cards" style="height: 18px;" />
-                </label>
-
-                <!-- Option 3: Direct Bank Transfer Accordion -->
-                <label id="optBankLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <input type="radio" name="payment_method" value="bank_transfer" style="accent-color: #38bdf8;" />
-                    <div>
-                      <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                        Direct Bank Transfer (NEFT / RTGS / IMPS)
-                      </div>
-                      <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                        Institutional sponsorship or direct wire transfer to ScholarVault Federal Bank account
-                      </div>
-                    </div>
-                  </div>
-                  <i class="fa-solid fa-building-columns" style="color: #94a3b8; font-size: 20px;"></i>
-                </label>
+            <div class="form-group full" id="paymentMethodSection" style="margin-top: 6px;">
+              <!-- 100% Student Research Grant Remission Notice -->
+              <div id="grantWaiverPaymentNotice" style="display: none; padding: 14px 16px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; margin-bottom: 12px; font-size: 13.5px; color: #fef3c7;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24; font-size: 16px;"></i>
+                  <strong style="color: #fbbf24;">100% Student Research Grant Remission Applied</strong>
+                </div>
+                <div style="font-size: 12.5px; color: #cbd5e1;">
+                  No payment gateway transaction required. Your delegate pass and presentation slot will be confirmed immediately upon claiming.
+                </div>
               </div>
 
-              <!-- Unfolded Bank Transfer Details -->
-              <div id="bankTransferDetailsWrap" style="display: none; margin-top: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 16px;">
-                <div style="font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                  <i class="fa-solid fa-info-circle"></i> Official Federal Bank Account Details for Wire Transfer:
+              <div id="paymentOptionsWrap">
+                <label style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; display: block;">
+                  Select Payment Method *
+                </label>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <!-- Option 1: Indian UPI & QR (Intercepted via QR modal with scholarvault@ybl until Federal Bank live keys arrive ~Sep 20) -->
+                  <label id="optFederalLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <input type="radio" name="payment_method" value="federal_omniware" checked style="accent-color: #38bdf8;" />
+                      <div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                          Indian UPI &amp; QR Payment <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Instant QR (INR)</span>
+                        </div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                          Scan QR with PhonePe, GPay, Paytm, BHIM or any UPI App &bull; Instant Confirmation
+                        </div>
+                      </div>
+                    </div>
+                    <img src="assets/idzRNcC9U5_logos.png" alt="UPI" style="height: 24px; filter: brightness(1.2);" />
+                  </label>
+
+                  <!-- Option 2: Dodo Payments (International) -->
+                  <label id="optDodoLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <input type="radio" name="payment_method" value="dodo" style="accent-color: #38bdf8;" />
+                      <div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                          International Cards &amp; Apple Pay <span style="font-size: 11px; background: rgba(255, 255, 255, 0.15); color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">USD ($)</span>
+                        </div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                          International Credit &amp; Debit Cards (Visa, Mastercard, Amex, Apple Pay)
+                        </div>
+                      </div>
+                    </div>
+                    <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Cards" style="height: 18px;" />
+                  </label>
+
+                  <!-- Option 3: Direct Bank Transfer Accordion -->
+                  <label id="optBankLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <input type="radio" name="payment_method" value="bank_transfer" style="accent-color: #38bdf8;" />
+                      <div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                          Direct Bank Transfer (NEFT / RTGS / IMPS)
+                        </div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                          Institutional sponsorship or direct wire transfer to ScholarVault Federal Bank account
+                        </div>
+                      </div>
+                    </div>
+                    <i class="fa-solid fa-building-columns" style="color: #94a3b8; font-size: 20px;"></i>
+                  </label>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; margin-bottom: 14px;">
-                  <div><span style="color: #94a3b8;">Beneficiary Name:</span> <strong style="color: #ffffff;">ScholarVault Conferences</strong></div>
-                  <div><span style="color: #94a3b8;">Bank Name:</span> <strong style="color: #ffffff;">Federal Bank</strong></div>
-                  <div><span style="color: #94a3b8;">Account Number:</span> <strong style="color: #38bdf8; font-family: monospace;">29149900012345</strong></div>
-                  <div><span style="color: #94a3b8;">IFSC Code:</span> <strong style="color: #38bdf8; font-family: monospace;">FDRL0001234</strong></div>
-                  <div><span style="color: #94a3b8;">Account Type:</span> <strong style="color: #ffffff;">Current Account</strong></div>
-                  <div><span style="color: #94a3b8;">Branch:</span> <strong style="color: #ffffff;">Chennai Main</strong></div>
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                  <div style="flex: 1; min-width: 200px;">
-                    <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
-                    <input type="text" name="utr_number" id="regUtr" class="form-input" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
+
+                <!-- Unfolded Bank Transfer Details -->
+                <div id="bankTransferDetailsWrap" style="display: none; margin-top: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 16px;">
+                  <div style="font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-info-circle"></i> Official Federal Bank Account Details for Wire Transfer:
                   </div>
-                  <div style="flex: 1; min-width: 200px;">
-                    <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
-                    <input type="text" name="bank_name" id="regSenderBank" class="form-input" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; margin-bottom: 14px;">
+                    <div><span style="color: #94a3b8;">Beneficiary Name:</span> <strong style="color: #ffffff;">ScholarVault Conferences</strong></div>
+                    <div><span style="color: #94a3b8;">Bank Name:</span> <strong style="color: #ffffff;">Federal Bank</strong></div>
+                    <div><span style="color: #94a3b8;">Account Number:</span> <strong style="color: #38bdf8; font-family: monospace;">29149900012345</strong></div>
+                    <div><span style="color: #94a3b8;">IFSC Code:</span> <strong style="color: #38bdf8; font-family: monospace;">FDRL0001234</strong></div>
+                    <div><span style="color: #94a3b8;">Account Type:</span> <strong style="color: #ffffff;">Current Account</strong></div>
+                    <div><span style="color: #94a3b8;">Branch:</span> <strong style="color: #ffffff;">Chennai Main</strong></div>
+                  </div>
+                  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
+                      <input type="text" name="utr_number" id="regUtr" class="form-input" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
+                      <input type="text" name="bank_name" id="regSenderBank" class="form-input" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
+                    </div>
                   </div>
                 </div>
               </div>
