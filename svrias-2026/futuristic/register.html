@@ -888,10 +888,18 @@
         <img id="modalQrCodeImg" src="assets/phonepe_upi_qr.png" alt="PhonePe UPI QR Code" style="width: 200px; height: 200px; display: block; object-fit: contain; margin: 0 auto;" />
       </div>
 
-      <!-- UPI Deep Link Button for Mobile -->
+      <!-- Direct 1-Tap UPI App Buttons -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
+        <a id="btnOpenPhonePe" href="phonepe://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; font-size: 13px; text-decoration: none; font-weight: 700; background: #5f259f; color: #ffffff; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 12px rgba(95, 37, 159, 0.4);">
+          <i class="fa-solid fa-mobile-screen"></i> PhonePe
+        </a>
+        <a id="btnOpenGPay" href="tez://upi/pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; font-size: 13px; text-decoration: none; font-weight: 700; background: #1a73e8; color: #ffffff; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);">
+          <i class="fa-brands fa-google"></i> Google Pay
+        </a>
+      </div>
       <div style="margin-bottom: 12px;">
-        <a id="modalUpiDeepLink" href="upi://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn glowing-pill" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 11px 16px; font-size: 13.5px; text-decoration: none; font-weight: 700; background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);">
-          <i class="fa-solid fa-mobile-screen-button"></i> Tap to Open UPI App Directly
+        <a id="modalUpiDeepLink" href="upi://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn frosted-pill" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 9px 14px; font-size: 12.5px; text-decoration: none; font-weight: 600;">
+          <i class="fa-solid fa-wallet"></i> Paytm / Other UPI App
         </a>
       </div>
 

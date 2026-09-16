@@ -1847,10 +1847,19 @@ function openUpiQrModal(payload) {
   const modalAmount = document.getElementById('modalUpiAmount');
   if (modalAmount) modalAmount.textContent = `₹${amount.toLocaleString('en-IN')}`;
 
-  const upiUri = `upi://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&am=${amount}&cu=INR&tn=SVRIAS2026-REG`;
+  const upiParams = `pa=scholarvault@ybl&pn=SCHOLARVAULT&am=${amount}&cu=INR&tn=SVRIAS2026-REG`;
+  const genericUri = `upi://pay?${upiParams}`;
+  const phonepeUri = `phonepe://pay?${upiParams}`;
+  const gpayUri = `tez://upi/pay?${upiParams}`;
+
+  const btnPhonePe = document.getElementById('btnOpenPhonePe');
+  if (btnPhonePe) btnPhonePe.href = phonepeUri;
+
+  const btnGPay = document.getElementById('btnOpenGPay');
+  if (btnGPay) btnGPay.href = gpayUri;
 
   const deepLink = document.getElementById('modalUpiDeepLink');
-  if (deepLink) deepLink.href = upiUri;
+  if (deepLink) deepLink.href = genericUri;
 
   const qrImg = document.getElementById('modalQrCodeImg');
   if (qrImg) {
