@@ -141,8 +141,11 @@
       let debounceTimer = null;
       let activeIndex = -1;
       let currentResults = [];
+      let isSelecting = false;
+      let lastSelectedValue = '';
 
       const hideDropdown = () => {
+        clearTimeout(debounceTimer);
         dropdown.style.display = 'none';
         dropdown.innerHTML = '';
         activeIndex = -1;
@@ -151,8 +154,12 @@
 
       const selectResult = (item) => {
         if (!item) return;
+        isSelecting = true;
+        clearTimeout(debounceTimer);
+
         const displayName = item.names?.find((n) => n.types?.includes('ror_display'))?.value || item.names?.[0]?.value || '';
         input.value = displayName;
+        lastSelectedValue = displayName;
 
         const countryName = item.locations?.[0]?.geonames_details?.country_name || '';
         if (countryName && form) {
@@ -172,10 +179,13 @@
           form.dataset.rorName = displayName;
         }
 
-        input.dispatchEvent(new Event('input', { bubbles: true }));
+        hideDropdown();
+
         input.dispatchEvent(new Event('change', { bubbles: true }));
 
-        hideDropdown();
+        setTimeout(() => {
+          isSelecting = false;
+        }, 300);
       };
 
       const renderResults = (items) => {
@@ -254,8 +264,9 @@
 
       input.addEventListener('input', (e) => {
         clearTimeout(debounceTimer);
+        if (isSelecting) return;
         const query = e.target.value;
-        if (!query || query.trim().length < 2) {
+        if (!query || query.trim().length < 2 || query === lastSelectedValue) {
           hideDropdown();
           return;
         }
