@@ -14,9 +14,9 @@ const SV_CONFIG = {
   clarityId: "wh5ekajcop",
 };
 
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-const { createClient } = supabase;
-const db = createClient(SV_CONFIG.supabaseUrl, SV_CONFIG.supabaseKey);
+const reduceMotion = typeof window !== "undefined" && window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)").matches : false;
+const supabaseLib = typeof supabase !== "undefined" ? supabase : (typeof window !== "undefined" && window.supabase ? window.supabase : null);
+const db = supabaseLib && typeof supabaseLib.createClient === "function" ? supabaseLib.createClient(SV_CONFIG.supabaseUrl, SV_CONFIG.supabaseKey) : null;
 let currentCurrency = "INR";
 
 function initNavbar() {
@@ -439,6 +439,10 @@ async function sendEmail(type, data) {
 }
 
 async function insertRecord(table, data) {
+  if (!db) {
+    console.warn("Supabase client not initialized, skipping insertRecord for:", table, data);
+    return;
+  }
   const { error } = await db.from(table).insert({ conf_id: SV_CONFIG.confId, ...data });
   if (error) throw error;
 }

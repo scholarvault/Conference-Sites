@@ -28,14 +28,14 @@ const nav = [
 ];
 
 const tracks = [
-  ["Track 1", "Climate AI & Modelling", "Neural networks for climate prediction, extreme weather forecasting, sea-level simulation, and atmospheric data analysis."],
-  ["Track 2", "Precision Agriculture", "Crop monitoring, soil health analysis, drone inspection, irrigation optimisation, and food security."],
-  ["Track 3", "Smart Energy Grids", "Reinforcement learning for grid management, renewable forecasting, demand response, EV integration, and microgrids."],
-  ["Track 4", "Biodiversity Monitoring", "Computer vision for species identification, acoustic AI, satellite imagery, and ecosystem mapping."],
-  ["Track 5", "Pollution Control & Sensing", "IoT and AI for air and water quality, industrial emissions monitoring, and remediation planning."],
-  ["Track 6", "Ocean & Water Systems", "Marine biodiversity, autonomous water systems, coral reef monitoring, and water resource management."],
-  ["Track 7", "Carbon Accounting & LCA", "Lifecycle assessment, emissions automation, carbon credit verification, and net-zero pathways."],
-  ["Track 8", "Green Computing & AI Ethics", "Efficient AI architectures, sustainable data centres, federated conservation AI, and governance."],
+  ["Track 1", "AI for Climate Modelling & Extreme Weather Prediction", "Neural networks for climate prediction, extreme weather forecasting, sea-level simulation, atmospheric modeling, and climate hazard risk assessment."],
+  ["Track 2", "Smart Energy Grids & Renewable Integration", "Reinforcement learning for grid management, renewable energy forecasting, demand response, EV charging infrastructure integration, and resilient microgrids."],
+  ["Track 3", "Precision Agriculture & Food Security", "Satellite and drone remote sensing, crop yield forecasting, soil microbiome intelligence, automated irrigation optimization, and climate-resilient food supply systems."],
+  ["Track 4", "Biodiversity Intelligence & Ecosystem Monitoring", "Computer vision for wildlife monitoring, bioacoustic AI for species tracking, forest canopy density mapping, and automated ecological health assessment."],
+  ["Track 5", "Carbon Accounting, ESG & Supply Chain Transparency", "Automated greenhouse gas accounting, scope 1-3 lifecycle assessment, ESG data intelligence, green auditing algorithms, and supply chain decarbonization."],
+  ["Track 6", "Ocean & Cryosphere Observation Systems", "Marine biodiversity sensing, polar ice sheet monitoring, autonomous ocean robotics, coral reef degradation detection, and sea-level prediction models."],
+  ["Track 7", "Disaster Resilience, Early Warning & Relief Robotics", "Multi-hazard early warning systems, real-time flood and wildfire monitoring, autonomous disaster relief robotics, and resilient infrastructure defense."],
+  ["Track 8", "Sustainable Materials Discovery & Circular Economy", "Generative AI for sustainable materials discovery, biodegradable polymers, battery recycling optimization, industrial symbiosis, and circular economy design."],
 ];
 
 const whyAttend = [
@@ -207,7 +207,7 @@ function head(slug, title, description) {
     <title>${title}</title>
     <meta name="description" content="${attr(description)}" />
     <meta name="theme-color" content="#081210" />
-    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="icon" type="image/png" href="assets/icon-512.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
