@@ -258,111 +258,104 @@
     <section class="section">
       <div class="site-shell">
         <div class="premium-shell reveal" id="paperWrap">
-          <form id="paperForm" class="premium-form-grid">
-            
-            <!-- Author Info -->
-            <div class="field">
-              <label>Author Name <span class="req">*</span></label>
-              <input name="name" required placeholder="e.g. Dr. Sarah Green" />
-            </div>
-            <div class="field">
-              <label>Email <span class="req">*</span></label>
-              <input name="email" type="email" required placeholder="sarah.g@university.edu" />
-            </div>
-            
-            <div class="field">
-              <label>Phone Number</label>
-              <input name="phone" type="tel" placeholder="+1 234 567 890" />
-            </div>
-            <div class="field">
-              <label>Institution <span class="req">*</span></label>
-              <input name="institution" required placeholder="University / Organisation" />
-            </div>
-
-            <div class="field">
-              <label>Department / Faculty</label>
-              <input name="department" placeholder="e.g. Environmental Science" />
-            </div>
-            <div class="field">
-              <label>Country <span class="req">*</span></label>
-              <input name="country" required placeholder="e.g. United Kingdom" />
-            </div>
-
-            <hr class="premium-sep" />
-
-            <!-- Paper Info -->
-            <div class="field full">
-              <label>Paper Title <span class="req">*</span></label>
-              <input name="title" required placeholder="Enter the full title of your research paper" />
-            </div>
-
-            <div class="field">
-              <label>Research Track <span class="req">*</span></label>
-              <select name="track" required>
-                <option value="">Select track</option>
-                <option>AI for Climate Modelling &amp; Extreme Weather Prediction</option>
-                <option>Smart Energy Grids &amp; Renewable Integration</option>
-                <option>Precision Agriculture &amp; Food Security</option>
-                <option>Biodiversity Intelligence &amp; Ecosystem Monitoring</option>
-                <option>Carbon Accounting, ESG &amp; Supply Chain Transparency</option>
-                <option>Ocean &amp; Cryosphere Observation Systems</option>
-                <option>Disaster Resilience, Early Warning &amp; Relief Robotics</option>
-                <option>Sustainable Materials Discovery &amp; Circular Economy</option>
-              </select>
-            </div>
-            <div class="field">
-              <label>Paper Type <span class="req">*</span></label>
-              <select name="paper_type" required>
-                <option value="">Select type</option>
-                <option>Full Research Paper</option>
-                <option>Short Paper / Case Study</option>
-                <option>Review Article</option>
-                <option>Poster Presentation</option>
-              </select>
-            </div>
-
-            <div class="field full">
-              <label>Keywords <span class="req">*</span></label>
-              <input name="keywords" required placeholder="e.g. Climate AI, biodiversity, forecasting..." />
-            </div>
-
-            <div class="field full">
-              <label>Abstract (250-500 words) <span class="req">*</span></label>
-              <textarea name="abstract" required rows="6" placeholder="Summarise your research objectives, methodology, and findings..."></textarea>
-            </div>
-
-            <div class="field full">
-              <label>Co-Authors (comma separated, if any)</label>
-              <input name="coauthors" placeholder="e.g. Prof. Alan Turing, Dr. Ada Lovelace" />
-            </div>
-
-            <!-- Drag & Drop Upload -->
-            <div class="field full">
-              <label>Upload Full Paper (PDF/DOC) <span class="req">*</span></label>
-              <div class="file-drop-zone" id="paperDropZone">
-                <input id="paperFile" type="file" accept=".pdf,.doc,.docx" required />
-                <span class="file-drop-icon"><i data-lucide="upload-cloud"></i></span>
-                <div class="file-drop-text">
-                  <strong>Click to upload</strong> or drag &amp; drop your paper here
-                </div>
-                <div class="file-drop-hint">Accepted formats: PDF, DOC, DOCX (Max 10MB)</div>
-                <div class="file-selected-name" id="fileNameDisplay"></div>
+                    <form id="paperForm" class="glass-form" style="padding: 0; background: transparent; border: none;">
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Primary Corresponding Author *</label>
+                <input type="text" name="author_name" class="form-input" required placeholder="e.g. Dr. Jane Smith, PhD" />
               </div>
-            </div>
 
-            <!-- Consent & Submit -->
-            <div style="grid-column: 1 / -1; display: flex; align-items: flex-start; gap: 12px; margin-top: 10px; padding: 0 4px;">
-              <input type="checkbox" required style="width: 20px; height: 20px; margin-top: 4px; flex-shrink: 0; cursor: pointer;" id="consent" />
-              <label for="consent" style="text-transform: none; font-size: 15px; font-weight: 500; line-height: 1.5; color: var(--ink-80); cursor: pointer;">
-                I confirm that this paper is original work, has not been published elsewhere, and all co-authors have consented to this submission. <span class="req">*</span>
-              </label>
-            </div>
+              <div class="form-group">
+                <label>Institutional Email Address *</label>
+                <input type="email" name="author_email" class="form-input" required placeholder="jane.smith@institution.edu" />
+              </div>
 
-            <div style="grid-column: 1 / -1;">
-              <!-- VANGUARD: Added form-submit class so setFormLoading can target this button -->
-              <button class="btn-submit-premium form-submit" type="submit">
-                 Submit Research Paper <i data-lucide="arrow-right" style="width:20px;"></i>
-              </button>
+              <div class="form-group">
+                <label>Institutional Affiliation *</label>
+                <input type="text" name="author_institution" class="form-input" required placeholder="e.g. Stanford University / IIT Madras" />
+              </div>
+
+              <div class="form-group">
+                <label>Country *</label>
+                <input type="text" name="author_country" class="form-input" required placeholder="e.g. United States / India" />
+              </div>
+
+              <div class="form-group full">
+                <label>Abstract / Manuscript Title *</label>
+                <input type="text" name="paper_title" class="form-input" required placeholder="e.g. Forecasting Extreme Weather with Transformer Models" />
+              </div>
+
+              <div class="form-group full">
+                <label>Primary Thematic Track *</label>
+                <select name="track" class="form-select" required>
+                  <option value="">Select track...</option>
+                  <option value="AI for Climate Modelling & Extreme Weather Prediction">Track 1: AI for Climate Modelling &amp; Extreme Weather Prediction</option>
+                  <option value="Smart Energy Grids & Renewable Integration">Track 2: Smart Energy Grids &amp; Renewable Integration</option>
+                  <option value="Precision Agriculture & Food Security">Track 3: Precision Agriculture &amp; Food Security</option>
+                  <option value="Biodiversity Intelligence & Ecosystem Monitoring">Track 4: Biodiversity Intelligence &amp; Ecosystem Monitoring</option>
+                  <option value="Carbon Accounting, ESG & Supply Chain Transparency">Track 5: Carbon Accounting, ESG &amp; Supply Chain Transparency</option>
+                  <option value="Ocean & Cryosphere Observation Systems">Track 6: Ocean &amp; Cryosphere Observation Systems</option>
+                  <option value="Disaster Resilience, Early Warning & Relief Robotics">Track 7: Disaster Resilience, Early Warning &amp; Relief Robotics</option>
+                  <option value="Sustainable Materials Discovery & Circular Economy">Track 8: Sustainable Materials Discovery &amp; Circular Economy</option>
+                </select>
+              </div>
+
+              <div class="form-group full">
+                <label>Co-Authors (Names, Affiliations, Emails - Optional)</label>
+                <input type="text" name="coauthors" class="form-input" placeholder="e.g. Co-Author 1 (University A), Co-Author 2 (Lab B)" />
+              </div>
+
+              <div class="form-group full">
+                <label>Manuscript / Abstract PDF File (PDF up to 4MB) *</label>
+                <div class="file-dropzone" id="paperDropZone" style="border: 2px dashed rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 28px 20px; text-align: center; background: rgba(56, 189, 248, 0.04); cursor: pointer; transition: all 0.3s ease;">
+                  <input type="file" name="paper" id="paperFile" accept=".pdf,application/pdf" style="display: none;" required />
+                  <div id="dropZonePrompt">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: #38bdf8; margin-bottom: 12px; display: inline-block;"></i>
+                    <div style="font-weight: 700; color: #ffffff; font-size: 15px; margin-bottom: 4px;">Click or Drag &amp; Drop your Abstract PDF here</div>
+                    <div style="font-size: 12.5px; color: #94a3b8;">Only PDF documents up to 4MB are accepted for direct submission</div>
+                  </div>
+                  <div id="dropZoneFileInfo" style="display: none; align-items: center; justify-content: center; gap: 12px;">
+                    <i class="fa-solid fa-file-pdf" style="font-size: 28px; color: #ef4444;"></i>
+                    <div style="text-align: left;">
+                      <div id="dropZoneFileName" style="font-weight: 700; color: #ffffff; font-size: 14px;"></div>
+                      <div id="dropZoneFileSize" style="font-size: 12px; color: #94a3b8;"></div>
+                    </div>
+                    <button type="button" id="dropZoneRemoveFile" class="pill-btn frosted-pill" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group full">
+                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
+                  <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: #fef3c7; font-size: 13.5px; line-height: 1.5;">
+                    <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 3.5px; width: 16px; height: 16px; accent-color: #f59e0b; cursor: pointer;" />
+                    <span>
+                      <strong style="color: #fbbf24;">?? Apply for ISIAI-SGS 2026 Student Research Grant</strong> (100% Registration Fee Waiver for Top 10 Student Abstracts)
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group full">
+                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
+                  <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: #d1d5db; font-size: 13px; line-height: 1.5;">
+                    <input type="checkbox" name="declaration" required style="margin-top: 3px;" />
+                    <span>I declare that this abstract represents original scholarship. I understand that abstract acceptance grants official presentation rights at ISIAI-SGS 2026 and does not guarantee indexed publication.</span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group full" style="margin-top: 10px;">
+                <button type="submit" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                  <span>Submit Abstract</span>
+                  <i class="fa-solid fa-file-arrow-up"></i>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </button>
+                <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #94a3b8; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                  <i class="fa-solid fa-bolt" style="color: #38bdf8;"></i>
+                  <span>No account is required. We will send a secure confirmation link to this email.</span>
+                </div>
+              </div>
             </div>
           </form>
 
@@ -512,5 +505,6 @@
         });
       }
     </script>
+<script src="js/academic-enrichment.js"></script>
 </body>
 </html>
