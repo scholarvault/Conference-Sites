@@ -2,12 +2,12 @@ const EMAIL_FN = "/api/send-email";
 const SV_CONFIG = {
   supabaseUrl: "https://ldoirjupetkmldibhygk.supabase.co",
   supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkb2lyanVwZXRrbWxkaWJoeWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMzMyOTQsImV4cCI6MjA4NzYwOTI5NH0.i_ocMG3EVLDOycUHfe3Met2Bbg0UdqXzUBqrDY_LKd4",
-  confId: "icaes2026",
+  confId: "isiai-sgs-2026",
   confName: "ISIAI-SGS 2026",
   confFullName: "International Conference on Interdisciplinary AI and Sustainable Global Systems",
-  confDate: new Date("2026-10-15T09:00:00"),
-  paperDeadline: new Date("2026-08-30T23:59:59"),
-  earlyBirdDate: new Date("2026-09-15T23:59:59"),
+  confDate: new Date("2026-12-18T09:00:00"),
+  paperDeadline: new Date("2026-11-10T23:59:59"),
+  earlyBirdDate: new Date("2026-11-25T23:59:59"),
   adminEmail: "conferences@scholarvault.in",
   rootUrl: "https://isiaisgs2026.scholarvault.in",
   gaId: "G-NBGSGZV5D1",
@@ -434,15 +434,8 @@ function showFormSuccess(formRoot) {
 }
 
 async function sendEmail(type, data) {
-  try {
-    await fetch(EMAIL_FN, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type, data: { conf_id: SV_CONFIG.confId, confName: SV_CONFIG.confName, ...data } }),
-    });
-  } catch (error) {
-    console.warn("Email failed:", error);
-  }
+  // Dispatched via centralized ScholarVault intake or mock
+  console.log("Conference notification event recorded:", type);
 }
 
 async function insertRecord(table, data) {

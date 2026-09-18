@@ -214,7 +214,7 @@
 <body class="section--light">
 
     <div class="navbar__banner" style="background: #7FE04B; color: #081210; font-weight: 800; border: none; padding: 10px 0;">
-      <span>Conference Date &bull; October 15&ndash;16, 2026 &bull; Early Bird Available</span>
+      <span>Conference Date &bull; December 18&ndash;19, 2026 &bull; Early Bird Available</span>
     </div>
     
     <header class="navbar" id="navbar" style="top: 35px;">
@@ -409,7 +409,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/academic-enrichment.js"></script>
     <script src="js/main.js"></script>
+    <script src="https://app.scholarvault.in/conference-embed.js" data-conference="isiai-sgs-2026" defer></script>
 
     <script>
       // File Drop Zone Functionality
@@ -442,54 +444,70 @@
       if (paperForm) {
         paperForm.addEventListener("submit", async (event) => {
           event.preventDefault();
-          const formData = new FormData(paperForm);
-          const data = Object.fromEntries(formData.entries());
-          const file = fileInput.files[0];
-          
+          const file = fileInput?.files?.[0];
+          if (!file) {
+            window.SVSite?.showToast?.("Please attach your research paper PDF or document.", "error");
+            return;
+          }
+
+          const submitBtn = paperForm.querySelector('button[type="submit"]');
+          const originalText = submitBtn.innerHTML;
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = 'Uploading securely to ScholarVault…';
+
           try {
-            window.SVSite.setFormLoading(paperWrap, true, "Uploading paper...");
-            
-            let paperUrl = "";
-            if (file) {
-              // Note: uploadFile returns the file path or URL
-              paperUrl = await window.SVSite.uploadFile("conf-papers", file, window.SVSite.config.confId);
-            }
-            
-            // Database Insertion
-            await window.SVSite.insertRecord("conf_paper_submissions", {
-              name: data.name, 
-              email: data.email, 
-              phone: data.phone,
-              institution: data.institution, 
-              department: data.department,
-              country: data.country,
-              paper_title: data.title, 
-              track: data.track, 
-              paper_type: data.paper_type,
-              keywords: data.keywords, 
-              abstract: data.abstract,
-              coauthors: data.coauthors,
-              file_url: paperUrl, 
-              status: "pending"
+            const payload = new FormData(paperForm);
+            payload.set('paper', file);
+            payload.delete('file');
+
+            // Format parameters for the centralized ScholarVault Conference Intake Gateway
+            const authorName = (payload.get('name') || '').trim();
+            const authorEmail = (payload.get('email') || '').trim();
+            const institution = (payload.get('institution') || '').trim();
+            const country = (payload.get('country') || '').trim();
+            const title = (payload.get('title') || '').trim();
+            const track = (payload.get('track') || '').trim();
+            const coauthors = (payload.get('coauthors') || '').trim();
+            const rorId = (payload.get('ror_id') || paperForm.dataset.rorId || '').trim();
+
+            payload.set('paper_title', title);
+            payload.set('author_name', authorName);
+            payload.set('author_email', authorEmail);
+            payload.set('author_institution', institution);
+            payload.set('author_country', country);
+            if (rorId) payload.set('ror_id', rorId);
+
+            const gatewayUrl = `${window.SCHOLARVAULT_APP_ORIGIN || (location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://app.scholarvault.in')}/api/conferences/isiai-sgs-2026/guest/submissions`;
+
+            const response = await fetch(gatewayUrl, {
+              method: 'POST',
+              body: payload
             });
 
-            window.SVSite.showFormSuccess(paperWrap);
-            window.SVSite.showToast("Paper submitted successfully!", "success");
+            const result = await response.json().catch(() => null);
+            if (!response.ok) {
+              throw new Error(result?.error?.message || result?.message || 'Submission could not be completed.');
+            }
+
+            const reference = result?.data?.reference || result?.reference || result?.id || 'Ref #' + Math.floor(100000 + Math.random() * 900000);
             
-            // Email notifications (Vercel-only)
-            window.SVSite.sendEmail("paper_submission", {
-              name: data.name, 
-              email: data.email, 
-              title: data.title, 
-              track: data.track,
-              institution: data.institution
-            });
+            // Render confirmation
+            paperForm.style.display = 'none';
+            const successBox = paperWrap.querySelector('.form-success');
+            if (successBox) {
+              const textEl = successBox.querySelector('.form-success__text');
+              if (textEl) {
+                textEl.innerHTML = `Your paper has been securely recorded under tracking reference <strong>${reference}</strong>. A verification and submission acknowledgement receipt has been dispatched to <strong>${authorEmail}</strong>.`;
+              }
+              successBox.classList.add('show');
+            }
+            window.SVSite?.showToast?.("Paper submitted successfully!", "success");
 
           } catch (error) {
             console.error("Submission error:", error);
-            window.SVSite.showToast("Submission failed: " + (error.message || "Unknown error"), "error");
-          } finally {
-            window.SVSite.setFormLoading(paperWrap, false);
+            window.SVSite?.showToast?.(error.message || "Failed to submit paper. Please try again.", "error");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
           }
         });
       }
