@@ -1,0 +1,29 @@
+/* ICBBSB 2026 Print & Brochure Stylesheet */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+  .navbar, .navbar__banner, .footer, .btn, button, .modal-overlay {
+    display: none !important;
+  }
+  .brochure-page {
+    page-break-after: always;
+    padding: 30px;
+  }
+  .card, .track-card, .timeline-card {
+    border: 1px solid #ddd !important;
+    background: #fafafa !important;
+    color: #111 !important;
+    box-shadow: none !important;
+  }
+}
+
+.brochure-wrap {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+}

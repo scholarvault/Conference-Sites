@@ -316,7 +316,7 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 2px;
   padding: 0;
   margin: 0;
   z-index: 1;
@@ -328,10 +328,10 @@ button {
   align-items: center;
   justify-content: center;
   min-height: 40px;
-  padding: 0 12px;
+  padding: 0 8px;
   border-radius: 999px;
   color: var(--white-80);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 600;
   white-space: nowrap;
   transition: color var(--transition-fast), background var(--transition-fast), transform var(--transition-fast);

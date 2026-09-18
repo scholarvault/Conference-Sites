@@ -1,0 +1,98 @@
+<form id="paperForm" class="glass-form" style="padding: 0; background: transparent; border: none;">
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Primary Corresponding Author *</label>
+              <input type="text" name="author_name" class="form-input" required placeholder="e.g. Dr. Jane Smith, PhD" />
+            </div>
+
+            <div class="form-group">
+              <label>Institutional Email Address *</label>
+              <input type="email" name="author_email" class="form-input" required placeholder="jane.smith@institution.edu" />
+            </div>
+
+            <div class="form-group">
+              <label>Institutional Affiliation *</label>
+              <input type="text" name="author_institution" class="form-input" required placeholder="e.g. Stanford University / IIT Madras" />
+            </div>
+
+            <div class="form-group">
+              <label>Country *</label>
+              <input type="text" name="author_country" class="form-input" required placeholder="e.g. United States / India" />
+            </div>
+
+            <div class="form-group full">
+              <label>Abstract / Manuscript Title *</label>
+              <input type="text" name="paper_title" class="form-input" required placeholder="e.g. Forensic Detection of Synthetic Scientific Figures Using Residual Spectral Forensics" />
+            </div>
+
+            <div class="form-group full">
+              <label>Primary Thematic Track *</label>
+              <select name="track" class="form-select" required>
+                <option value="">Select track...</option>
+                <option value="AI Ethics & Governance">Track 1: AI Ethics &amp; Governance</option>
+                <option value="Research Integrity in the AI Era">Track 2: Research Integrity in the AI Era</option>
+                <option value="Responsible AI Frameworks">Track 3: Responsible AI Frameworks</option>
+                <option value="Authorship, Attribution & AI-Generated Content">Track 4: Authorship, Attribution &amp; AI-Generated Content</option>
+                <option value="Peer Review & Reproducibility">Track 5: Peer Review &amp; Reproducibility</option>
+                <option value="Data Privacy & Algorithmic Accountability">Track 6: Data Privacy &amp; Algorithmic Accountability</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label>Co-Authors (Names, Affiliations, Emails - Optional)</label>
+              <input type="text" name="coauthors" class="form-input" placeholder="e.g. Co-Author 1 (University A), Co-Author 2 (Lab B)" />
+            </div>
+
+            <div class="form-group full">
+              <label>Manuscript / Abstract PDF File (PDF up to 4MB) *</label>
+              <div class="file-dropzone" id="paperDropZone" style="border: 2px dashed rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 28px 20px; text-align: center; background: rgba(56, 189, 248, 0.04); cursor: pointer; transition: all 0.3s ease;">
+                <input type="file" name="paper" id="paperFile" accept=".pdf,application/pdf" style="display: none;" required />
+                <div id="dropZonePrompt">
+                  <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: #38bdf8; margin-bottom: 12px; display: inline-block;"></i>
+                  <div style="font-weight: 700; color: #ffffff; font-size: 15px; margin-bottom: 4px;">Click or Drag &amp; Drop your Abstract PDF here</div>
+                  <div style="font-size: 12.5px; color: #94a3b8;">Only PDF documents up to 4MB are accepted for direct submission</div>
+                </div>
+                <div id="dropZoneFileInfo" style="display: none; align-items: center; justify-content: center; gap: 12px;">
+                  <i class="fa-solid fa-file-pdf" style="font-size: 28px; color: #ef4444;"></i>
+                  <div style="text-align: left;">
+                    <div id="dropZoneFileName" style="font-weight: 700; color: #ffffff; font-size: 14px;"></div>
+                    <div id="dropZoneFileSize" style="font-size: 12px; color: #94a3b8;"></div>
+                  </div>
+                  <button type="button" id="dropZoneRemoveFile" class="pill-btn frosted-pill" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
+                <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: #fef3c7; font-size: 13.5px; line-height: 1.5;">
+                  <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 3.5px; width: 16px; height: 16px; accent-color: #f59e0b; cursor: pointer;" />
+                  <span>
+                    <strong style="color: #fbbf24;">🎓 Apply for SVRIAS 2026 Student Research Grant</strong> (100% Registration Fee Waiver for Top 10 Student Abstracts)
+                  </span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
+                <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: #d1d5db; font-size: 13px; line-height: 1.5;">
+                  <input type="checkbox" name="declaration" required style="margin-top: 3px;" />
+                  <span>I declare that this abstract represents original scholarship. I understand that abstract acceptance grants official presentation rights at SVRIAS 2026 and does not guarantee indexed publication.</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group full" style="margin-top: 10px;">
+              <button type="submit" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span>Submit Abstract</span>
+                <i class="fa-solid fa-file-arrow-up"></i>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #94a3b8; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                <i class="fa-solid fa-bolt" style="color: #38bdf8;"></i>
+                <span>No account is required. We will send a secure confirmation link to this email.</span>
+              </div>
+            </div>
+          </div>
+        </form>

@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta property="og:site_name" content="ScholarVault">
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-NBGSGZV5D1');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10-Minute Conference Paper Presentation Guide: Slide-by-Slide Deck Template (2026) | ScholarVault</title>
+  <meta name="description" content="Master your 10-minute academic conference presentation. Step-by-step slide-by-slide timing breakdown (10 slides), deck architecture, visual cards, and Q&A handling tips.">
+  <link rel="canonical" href="https://www.scholarvault.in/article/how-to-prepare-paper-presentation-conference" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    /* White First, Gold Accent, Black Text */
+    :root {
+      --bg-color: #FFFFFF;
+      --text-main: #000000;
+      --text-muted: #333333;
+      --text-subtle: #666666;
+      --gold-primary: #D4AF37;
+      --gold-dark: #B89223;
+      --gold-light: #F9F4E3;
+      --border-color: #EAEAEA;
+      --card-bg: #FAFAFA;
+      --danger-light: #FEE2E2;
+      --danger-text: #991B1B;
+      --success-light: #ECFDF5;
+      --success-text: #065F46;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.8;
+      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    h1, h2, h3, .case-title {
+      font-feature-settings: "liga" 0, "clig" 0, "dlig" 0;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 2rem;
+      color: var(--gold-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text-main); }
+
+    h1 {
+      font-family: 'Inter', sans-serif;
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      color: var(--text-main);
+      margin-bottom: 1.2rem;
+      line-height: 1.15;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      border-bottom: 2px solid var(--gold-light);
+      padding-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    /* Hero Infographic Card */
+    .infographic-card {
+      background: #FAFAFA;
+      border: 2px solid var(--gold-primary);
+      border-radius: 14px;
+      padding: 2.5rem;
+      margin: 2.5rem 0 3.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    }
+
+    .infographic-title {
+      font-size: 1.8rem;
+      color: var(--text-main);
+      text-align: center;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+    }
+
+    .infographic-subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2.2rem;
+    }
+
+    .slide-flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .slide-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1.3rem;
+      text-align: center;
+      border-top: 4px solid var(--gold-primary);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .slide-box:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(212,175,55,0.15);
+    }
+
+    .slide-num {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--gold-dark);
+      display: block;
+    }
+
+    .slide-name { font-weight: 700; margin: 0.4rem 0; display: block; font-size: 1rem; color: var(--text-main); }
+    .slide-time { font-size: 0.85rem; color: var(--text-muted); font-weight: 600; }
+    .slide-desc { font-size: 0.82rem; color: var(--text-subtle); margin-top: 0.5rem; line-height: 1.4; }
+
+    /* Timing Master Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 2.5rem 0;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    }
+
+    .timing-table {
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+      font-size: 0.92rem;
+      text-align: left;
+      background: #FFFFFF;
+    }
+
+    .timing-table th {
+      background: var(--gold-light);
+      color: var(--text-main);
+      padding: 14px 16px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.82rem;
+      border-bottom: 2px solid var(--gold-primary);
+    }
+
+    .timing-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    .timing-table tr:hover td {
+      background: #FCFAF4;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .badge-gold { background: var(--gold-light); color: var(--gold-dark); border: 1px solid var(--gold-primary); }
+    .badge-time { background: #E5E7EB; color: #1F2937; font-family: monospace; }
+    .badge-danger { background: var(--danger-light); color: var(--danger-text); }
+
+    /* Section & Card Deep Dives */
+    .deck-section {
+      margin: 4.5rem 0;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .deck-section-tag {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+      font-weight: 800;
+      margin-bottom: 0.6rem;
+    }
+
+    .deck-section-title {
+      font-size: 2rem;
+      color: var(--text-main);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    .deck-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin: 1.5rem 0;
+      border-left: 5px solid var(--gold-primary);
+    }
+
+    .deck-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .deck-card-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-main);
+    }
+
+    .script-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      margin: 1rem 0;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .script-box strong { color: var(--gold-dark); }
+
+    .trap-box {
+      background: var(--danger-light);
+      color: var(--danger-text);
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    .chair-tip {
+      background: var(--success-light);
+      color: var(--success-text);
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      font-weight: 500;
+    }
+
+    /* Slide Wireframe / Mockup Component */
+    .slide-mockup {
+      background: #1E293B;
+      color: #F8FAFC;
+      border-radius: 10px;
+      padding: 1.2rem 1.4rem;
+      margin: 1.2rem 0;
+      border: 1px solid #334155;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    }
+    .slide-mockup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+    }
+    .slide-mockup-tag {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gold-primary);
+      font-weight: 800;
+    }
+    .slide-mockup-num {
+      font-size: 0.75rem;
+      color: #94A3B8;
+      font-family: monospace;
+    }
+    .slide-mockup-headline {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .slide-mockup-canvas {
+      background: #0F172A;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.6rem;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .slide-mockup-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.74rem;
+      color: #64748B;
+      border-top: 1px solid #334155;
+      padding-top: 0.5rem;
+    }
+    .checklist-title {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 0.95rem;
+      margin: 1.2rem 0 0.5rem;
+    }
+    .slide-checklist {
+      list-style-type: none;
+      padding-left: 0;
+      margin-bottom: 1rem;
+    }
+    .slide-checklist li {
+      padding: 3px 0 3px 20px;
+      position: relative;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+    .slide-checklist li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--gold-dark);
+      font-weight: 900;
+    }
+
+    .case-quote {
+      font-size: 1.25rem;
+      color: var(--text-main);
+      margin: 2.5rem 0;
+      padding: 1.5rem 2rem;
+      background: var(--gold-light);
+      border-left: 4px solid var(--gold-primary);
+      font-weight: 600;
+      font-style: italic;
+      line-height: 1.6;
+    }
+
+    /* CTA Block */
+    .cta-block {
+      margin: 4.5rem 0 2rem 0;
+      background: #111111;
+      color: #FFFFFF;
+      border-radius: 12px;
+      padding: 3.5rem 2.5rem;
+      text-align: center;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    }
+
+    .cta-block h3 {
+      font-size: 2rem;
+      color: var(--gold-primary);
+      margin-bottom: 1.2rem;
+      font-weight: 800;
+    }
+
+    .cta-block p { 
+      color: #D1D5DB; 
+      margin-bottom: 2.5rem; 
+      font-size: 1.1rem;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--gold-primary);
+      color: #111111;
+      font-weight: 800;
+      padding: 16px 36px;
+      text-decoration: none;
+      font-size: 1.15rem;
+      border-radius: 8px;
+      transition: background 0.25s ease, transform 0.2s ease;
+    }
+    .cta-btn:hover { 
+      background: #E8C14A; 
+      transform: translateY(-2px);
+    }
+
+    /* Social Share Bar */
+    .social-share-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+      padding-top: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+    .social-share-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-right: 8px;
+    }
+    .share-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #F3F4F6;
+      color: #111111;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .share-btn:hover {
+      background: var(--gold-primary);
+      color: #000000;
+      transform: translateY(-2px);
+    }
+    .share-btn svg { width: 16px; height: 16px; fill: currentColor; }
+
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--border-color);
+      object-fit: cover;
+    }
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
+    .author-name {
+      font-weight: 700;
+      color: var(--text-main);
+      font-size: 1.05rem;
+    }
+    .publish-date {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    footer {
+      margin-top: 5rem;
+      padding-top: 2rem;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+
+    @media(max-width: 768px) {
+      body { padding: 24px 16px; }
+      .infographic-card { padding: 1.5rem; }
+      .slide-flow { grid-template-columns: 1fr; }
+      .deck-card { padding: 1.2rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "10-Minute Conference Paper Presentation Guide: Slide-by-Slide Deck Template (2026)",
+    "description": "Master your 10-minute academic conference paper presentation. Official slide-by-slide timing breakdown (10 slides), deck structure, visual cards, and Q&A primer.",
+    "author": {
+      "@type": "Organization",
+      "name": "ScholarVault",
+      "url": "https://www.scholarvault.in"
+    },
+    "datePublished": "2026-07-29",
+    "dateModified": "2026-09-10"
+  }
+  </script>
+
+  <meta property="og:title" content="10-Minute Conference Paper Presentation Guide: Slide-by-Slide Deck Template (2026) | ScholarVault">
+  <meta property="og:description" content="Master your 10-minute academic conference presentation. Step-by-step slide-by-slide timing breakdown (10 slides), deck architecture, visual cards, and Q&A handling tips.">
+  <meta property="og:image" content="https://www.scholarvault.in/logos/presentation_hero.jpg">
+  <meta property="og:url" content="https://www.scholarvault.in/article/how-to-prepare-paper-presentation-conference">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="10-Minute Conference Paper Presentation Guide: Slide-by-Slide Deck Template (2026) | ScholarVault">
+  <meta name="twitter:description" content="Official 10-minute slide deck timing blueprint: Slide 1: Title/1m, Slide 2: Problem/1m, Slides 3-4: Method/2.5m, Slides 5-7: Results/3.5m, Slide 8: Limitations/1m, Slides 9-10: Q&A/1m.">
+  <meta name="twitter:image" content="https://www.scholarvault.in/logos/presentation_hero.jpg">
+  <link rel="preload" as="image" href="../logos/presentation_hero.jpg">
+  <link rel="stylesheet" href="../css/ux-enhancements.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many slides should I prepare for a 10-minute conference presentation?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The golden standard for a 10-minute academic talk is exactly 10 slides: Slide 1 (Title/1m), Slide 2 (Problem/1m), Slides 3–4 (Methodology/2.5m), Slides 5–7 (Results & Analysis/3.5m), Slide 8 (Limitations/1m), and Slides 9–10 (Conclusions & Q&A Primer/1m)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should timing be divided across the 10 minutes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dedicate 2 minutes to Introduction & Problem Motivation (Slides 1-2), 2.5 minutes to Methodology & Architecture (Slides 3-4), 3.5 minutes to Empirical Results & Benchmarks (Slides 5-7), 1 minute to Limitations & Scope (Slide 8), and 1 minute to Conclusions & Q&A Transition (Slides 9-10)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the biggest mistake junior researchers make when presenting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The #1 fatal mistake is cramming 20+ slides with dense mathematical proofs or reading slides word-for-word. This guarantees the session chair will ring the warning bell while you are still on methodology, cutting you off before your results."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How should I handle difficult or critical questions during Q&A?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Follow the 4-part defense formula: 1) Acknowledge the question with gratitude, 2) Clarify or rephrase to ensure mutual understanding, 3) Provide a concise 30-second answer highlighting your experimental boundaries, and 4) Defer deeper discussion to the coffee break or your backup appendix slide."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+  <main>
+    <article data-related='[{"url":"/article/national-conference-2026-india","title":"National Conference 2026 in India","desc":"Find verified national conferences across India."},{"url":"/article/is-this-conference-legit","title":"Is This Conference Legit?","desc":"Verify any academic conference in 12 seconds."}]'>
+
+  <a href="/insights" class="back-link">&larr; Back to Insights</a>
+
+  <h1>How to Prepare a Conference Paper Presentation: 10-Minute Slide Deck Blueprint (2026 Protocol)</h1>
+  
+  <div class="social-share-bar">
+    <span class="social-share-label">Share:</span>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://www.scholarvault.in/article/how-to-prepare-paper-presentation-conference" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on LinkedIn">
+      <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+    </a>
+    <a href="https://api.whatsapp.com/send?text=https://www.scholarvault.in/article/how-to-prepare-paper-presentation-conference" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+    </a>
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.scholarvault.in/article/how-to-prepare-paper-presentation-conference" target="_blank" rel="noopener noreferrer" class="share-btn" title="Share on Facebook">
+      <svg viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.312h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
+    </a>
+    <a href="#" onclick="window.print();return false;" class="share-btn" title="Print Article">
+      <svg viewBox="0 0 24 24"><path d="M14 20h-4v-2h4v2zm6-6h-16v-9h16v9zm-16-11v-3h16v3h2v13h-4v5h-12v-5h-4v-13h2zm4 17h8v-3h-8v3zm10-14h-12v5h12v-5z"/></svg>
+    </a>
+  </div>
+
+  <p class="subtitle">
+    Presenting your research paper at an international academic conference requires balancing rigorous scientific claims with strict session time limits. Here is your battle-tested 10-minute slide deck architecture, timing breakdown, speaker scripts, and session defense framework.
+  </p>
+
+  <div class="article-meta">
+    <img src="../logos/presentation_hero.jpg" alt="Prepare Conference Paper Presentation 10 Minute Slide Deck" style="width:100%;height:auto;border-radius:10px;margin:1rem 0 1.5rem;border:1px solid #EAEAEA;box-shadow:0 4px 15px rgba(0,0,0,0.05);" />
+    <div class="author-info">
+      <img loading="lazy" src="../logos/icon-512.webp" alt="ScholarVault Logo" class="author-avatar">
+      <div class="author-details">
+        <span class="author-name">By ScholarVault Academic Advisory Board</span>
+        <span class="publish-date">Updated: September 2026 &middot; Peer-Reviewed Protocol</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- INFOGRAPHIC CONTAINER (10 SLIDES / 10 MINUTES) -->
+  <div class="infographic-card">
+    <div class="infographic-title">📊 10-Minute Slide Deck Architecture</div>
+    <div class="infographic-subtitle">Engineered for 10-Minute Oral Sessions with Strict Session Chairs</div>
+    
+    <div class="slide-flow">
+      <div class="slide-box">
+        <span class="slide-num">Slide 1</span>
+        <span class="slide-name">Title & Context</span>
+        <span class="slide-time">⏱️ 1.0 min (0:00 – 1:00)</span>
+        <div class="slide-desc">Hook the room, establish problem territory, and introduce affiliations without wasting time.</div>
+      </div>
+      <div class="slide-box">
+        <span class="slide-num">Slide 2</span>
+        <span class="slide-name">Problem & Research Gap</span>
+        <span class="slide-time">⏱️ 1.0 min (1:00 – 2:00)</span>
+        <div class="slide-desc">Sharp definition of the exact technical obstacle and why existing SOTA baselines fail.</div>
+      </div>
+      <div class="slide-box">
+        <span class="slide-num">Slides 3–4</span>
+        <span class="slide-name">Methodology & Architecture</span>
+        <span class="slide-time">⏱️ 2.5 min (2:00 – 4:30)</span>
+        <div class="slide-desc">Pipeline diagram, algorithmic innovations, data parameters, and baseline comparison setup.</div>
+      </div>
+      <div class="slide-box">
+        <span class="slide-num">Slides 5–7</span>
+        <span class="slide-name">Results & Benchmarks</span>
+        <span class="slide-time">⏱️ 3.5 min (4:30 – 8:00)</span>
+        <div class="slide-desc">Quantitative comparisons, ablation studies, and qualitative case analysis. The meat of your talk.</div>
+      </div>
+      <div class="slide-box">
+        <span class="slide-num">Slide 8</span>
+        <span class="slide-name">Limitations & Scope</span>
+        <span class="slide-time">⏱️ 1.0 min (8:00 – 9:00)</span>
+        <div class="slide-desc">Preempt reviewer objections by declaring experimental bounds and open challenges with intellectual honesty.</div>
+      </div>
+      <div class="slide-box">
+        <span class="slide-num">Slides 9–10</span>
+        <span class="slide-name">Conclusion & Q&A Primer</span>
+        <span class="slide-time">⏱️ 1.0 min (9:00 – 10:00)</span>
+        <div class="slide-desc">3 core takeaways, preprint/code QR code, and anticipated Q&A backup slide index.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section 1: The Master Timing Table -->
+  <div class="deck-section">
+    <div class="deck-section-tag">Master Blueprint</div>
+    <h2 class="deck-section-title">The 10-Minute Presentation Master Matrix</h2>
+    <p>Academic session chairs operate on strict stopwatches. At reputable conferences indexed in IEEE Xplore, ACM Digital Library, or Springer, session schedules allow zero tolerance for overrun. Exceeding your time budget by just 90 seconds forces the chair to interrupt you and cuts off your audience Q&A.</p>
+    
+    <div class="table-container">
+      <table class="timing-table">
+        <thead>
+          <tr>
+            <th>Slide #</th>
+            <th>Slide Focus</th>
+            <th>Allotted</th>
+            <th>Cumulative</th>
+            <th>Visual Anchor</th>
+            <th>Primary Objective</th>
+            <th>Deadly Trap to Avoid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Slide 1</strong></td>
+            <td>Title, Authors & Track</td>
+            <td><span class="badge badge-gold">1.0 min</span></td>
+            <td><span class="badge badge-time">0:00 – 1:00</span></td>
+            <td>Clean title, author lab logos, preprint QR</td>
+            <td>Hook the room and state research domain</td>
+            <td>Reading every co-author's biography or CV</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 2</strong></td>
+            <td>Problem & State-of-the-Art Gap</td>
+            <td><span class="badge badge-gold">1.0 min</span></td>
+            <td><span class="badge badge-time">1:00 – 2:00</span></td>
+            <td>Real-world tension graphic or contrast diagram</td>
+            <td>Convince audience the problem is urgent</td>
+            <td>Giving a 5-minute undergraduate textbook intro</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 3</strong></td>
+            <td>System Architecture Overview</td>
+            <td><span class="badge badge-gold">1.25 min</span></td>
+            <td><span class="badge badge-time">2:00 – 3:15</span></td>
+            <td>End-to-end pipeline block diagram</td>
+            <td>Provide high-level mental model of the pipeline</td>
+            <td>Cluttered architecture diagrams with 6pt text</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 4</strong></td>
+            <td>Algorithmic Core & Protocol</td>
+            <td><span class="badge badge-gold">1.25 min</span></td>
+            <td><span class="badge badge-time">3:15 – 4:30</span></td>
+            <td>Single key mathematical equation or step breakdown</td>
+            <td>Isolate the exact mathematical/technical novelty</td>
+            <td>Dumping 30 lines of raw code or full proofs</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 5</strong></td>
+            <td>Primary Benchmark Results</td>
+            <td><span class="badge badge-gold">1.25 min</span></td>
+            <td><span class="badge badge-time">4:30 – 5:45</span></td>
+            <td>High-contrast bar chart or highlighted comparison table</td>
+            <td>Demonstrate clear quantitative superiority</td>
+            <td>Showing 12-column unreadable raw Excel tables</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 6</strong></td>
+            <td>Ablation & Sensitivity Analysis</td>
+            <td><span class="badge badge-gold">1.25 min</span></td>
+            <td><span class="badge badge-time">5:45 – 7:00</span></td>
+            <td>Module contribution chart or variance graph</td>
+            <td>Prove that every single component is necessary</td>
+            <td>Claiming gains without statistical significance</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 7</strong></td>
+            <td>Qualitative Case / Error Modes</td>
+            <td><span class="badge badge-gold">1.0 min</span></td>
+            <td><span class="badge badge-time">7:00 – 8:00</span></td>
+            <td>Side-by-side output comparison / failure case</td>
+            <td>Show grounded reality of where model thrives/fails</td>
+            <td>Hiding failure cases or cherry-picking only 1 sample</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 8</strong></td>
+            <td>Limitations & Research Scope</td>
+            <td><span class="badge badge-gold">1.0 min</span></td>
+            <td><span class="badge badge-time">8:00 – 9:00</span></td>
+            <td>Structured 3-bullet constraints grid</td>
+            <td>Demonstrate scholarly maturity and rigor</td>
+            <td>Saying "our method has no major limitations"</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 9</strong></td>
+            <td>Core Conclusions & Takeaways</td>
+            <td><span class="badge badge-gold">0.5 min</span></td>
+            <td><span class="badge badge-time">9:00 – 9:30</span></td>
+            <td>3 key takeaways (Problem, Solution, Impact)</td>
+            <td>Cement the single message you want remembered</td>
+            <td>Introducing new unverified claims at the last minute</td>
+          </tr>
+          <tr>
+            <td><strong>Slide 10</strong></td>
+            <td>Q&A Primer & Backup Appendix</td>
+            <td><span class="badge badge-gold">0.5 min</span></td>
+            <td><span class="badge badge-time">9:30 – 10:00</span></td>
+            <td>Repository QR, email, and backup slide directory</td>
+            <td>Smooth transition into reviewer Q&A period</td>
+            <td>Ending abruptly with an awkward "that's all I have"</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Detailed Slide-by-Slide Deep Dives (Stripped Down 10-Slide Deck) -->
+  <div class="deck-section">
+    <div class="deck-section-tag">Slide-by-Slide Blueprint</div>
+    <h2 class="deck-section-title">Deconstructing All 10 Slides: Wireframes, Scripts, Visual Layouts &amp; Pitfalls</h2>
+    <p>Every slide in a 10-minute conference talk must justify its existence. Below is the complete, stripped-down anatomical blueprint for all 10 slides, featuring exact visual layout wireframes, content checklists, word-for-word presenter scripts, and session chair pro-tips.</p>
+
+    <!-- Slide 1 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 1: Title, Research Problem Hook &amp; Institutional Affiliation</span>
+        <span class="badge badge-gold">1.0 min (0:00 – 1:00)</span>
+      </div>
+      <p>Your opening slide creates your professional presence and anchors your authority. You have less than 60 seconds to grab the audience's attention while they settle in after the previous speaker.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 1 of 10 &middot; Title &amp; Hook</span>
+        </div>
+        <div class="slide-mockup-headline">[Paper Title: Active, Concise, Under 14 Words]</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div style="flex:1; min-width:200px;">
+              <p style="margin:0 0 4px; color:#E2E8F0; font-weight:600;">Presenter: Firstname Lastname<sup>1</sup>, Co-Authors<sup>2</sup></p>
+              <p style="margin:0; color:#94A3B8; font-size:0.8rem;"><sup>1</sup>Dept of Computer Science, University A &middot; <sup>2</sup>Research Lab, Institution B</p>
+              <p style="margin:6px 0 0; color:#D4AF37; font-size:0.78rem; font-weight:700;">Track: Automated Verification &middot; Paper ID: #2048</p>
+            </div>
+            <div style="background:#1E293B; border:1px solid #D4AF37; border-radius:6px; padding:10px 14px; text-align:center;">
+              <span style="font-size:0.72rem; color:#D4AF37; text-transform:uppercase; font-weight:700; display:block;">Preprint &amp; Slides</span>
+              <span style="font-family:monospace; font-size:0.8rem; color:#FFFFFF;">[Live QR Code]</span>
+            </div>
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Hook room in 30 sec</span>
+          <span>Oral allocation: 20s intro, 40s context</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 1 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>High-contrast paper title (minimum 32pt font, avoid vague generic titles)</li>
+        <li>Lead author name in bold; institutional and funding logos kept clean in the corner</li>
+        <li>Preprint / Open Access QR code so attendees can follow your paper live</li>
+        <li>Session track name and paper ID for chair book-keeping</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.0 min):</strong><br>
+        <em>"Good morning, session chair, referees, and colleagues. I am [Your Name] from [Your Institution]. Today I am presenting our work titled [Paper Title], joint work with [Key Collaborator]. Over the next 9 minutes, I will show how we solved [Core Problem], delivering a 14% performance boost over current baselines while cutting computational latency in half. Let us dive straight into the real-world friction that motivated our research."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Never spend 45 seconds reading co-author titles, department histories, or grant award numbers out loud. Keep the formal introduction under 20 seconds and spend the remaining 40 seconds setting the research territory hook.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Starting with a slow, low-energy pause while fumbling with your pointer or reading your title word-for-word from the slide. Start speaking with immediate confidence.
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 2: Problem Statement &amp; The SOTA Bottleneck</span>
+        <span class="badge badge-gold">1.0 min (1:00 – 2:00)</span>
+      </div>
+      <p>Frame the problem as an unresolved scientific tension. If the audience does not care about the problem within the first 2 minutes, they will tune out for your results.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 2 of 10 &middot; Problem &amp; Gap</span>
+        </div>
+        <div class="slide-mockup-headline">The Bottleneck: High Throughput vs. Exponential Latency</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.4); border-radius:6px; padding:8px 12px;">
+              <span style="color:#F87171; font-weight:700; font-size:0.8rem; text-transform:uppercase;">Existing SOTA Baselines</span>
+              <p style="margin:4px 0 0; color:#CBD5E1; font-size:0.8rem;">O(n²) computational complexity forces aggressive down-sampling, causing 28% data loss under burst traffic.</p>
+            </div>
+            <div style="background:rgba(212,175,55,0.1); border:1px solid rgba(212,175,55,0.4); border-radius:6px; padding:8px 12px;">
+              <span style="color:#D4AF37; font-weight:700; font-size:0.8rem; text-transform:uppercase;">Our Research Objective</span>
+              <p style="margin:4px 0 0; color:#CBD5E1; font-size:0.8rem;">Guarantee sub-5ms latency at scale without dropping packets or requiring expensive accelerator hardware.</p>
+            </div>
+          </div>
+          <div style="margin-top:10px; background:#1E293B; padding:8px 12px; border-radius:4px; border-left:3px solid #D4AF37; color:#E2E8F0; font-size:0.8rem;">
+            <strong>Core Tension:</strong> Existing solutions trade off precision for throughput. We require both simultaneously.
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Create tension</span>
+          <span>Visual: Split-screen contrast diagram</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 2 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Split-screen comparison: "Current Approach vs. The Unresolved Gap"</li>
+        <li>Concrete quantitative evidence of failure (e.g. "drops 28% under high load")</li>
+        <li>1 bold thesis question at the bottom of the slide</li>
+        <li>Zero textbook definitions; jump straight to the technical breakdown point</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.0 min):</strong><br>
+        <em>"Current state-of-the-art approaches rely on [Existing Baseline Method]. However, when tested in real-world deployment, they encounter a fatal bottleneck: as data volume doubles, computational complexity scales quadratically. In high-throughput settings, this forces systems to drop up to 28% of incoming packets to stay responsive. Prior literature has attempted to solve this via aggressive heuristics, but at the cost of catastrophic precision loss. Our central research question was: how can we eliminate this latency bottleneck while guaranteeing zero precision sacrifice?"</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Use the "Problem Gap" split-screen. Give the left side a muted red border and the right side a gold accent border. Visual contrast forces the human brain to see the unresolved dilemma immediately.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Giving a 4-minute undergraduate literature review of the entire field. Assume your audience has basic domain literacy; focus solely on the narrow crack in the literature that your paper fills.
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 3: Methodology Part 1 — End-to-End System Pipeline</span>
+        <span class="badge badge-gold">1.25 min (2:00 – 3:15)</span>
+      </div>
+      <p>The first of two methodology slides. Provide a clean macroscopic mental model of your system architecture before diving into algorithmic equations.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 3 of 10 &middot; System Pipeline</span>
+        </div>
+        <div class="slide-mockup-headline">Proposed System Pipeline &amp; Processing Architecture</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; text-align:center;">
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:10px 6px;">
+              <span style="font-size:0.75rem; color:#94A3B8; display:block;">Stage 1</span>
+              <strong style="font-size:0.82rem; color:#FFFFFF;">Data Ingestion</strong>
+              <span style="font-size:0.7rem; color:#64748B; display:block; margin-top:4px;">Stream normalize</span>
+            </div>
+            <div style="background:rgba(212,175,55,0.15); border:2px solid #D4AF37; border-radius:6px; padding:10px 6px;">
+              <span style="font-size:0.75rem; color:#D4AF37; display:block; font-weight:700;">Stage 2 [Novel]</span>
+              <strong style="font-size:0.82rem; color:#D4AF37;">Adaptive Indexing</strong>
+              <span style="font-size:0.7rem; color:#E2E8F0; display:block; margin-top:4px;">Prunes 78% search</span>
+            </div>
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:10px 6px;">
+              <span style="font-size:0.75rem; color:#94A3B8; display:block;">Stage 3</span>
+              <strong style="font-size:0.82rem; color:#FFFFFF;">Optimization</strong>
+              <span style="font-size:0.7rem; color:#64748B; display:block; margin-top:4px;">Dynamic penalty</span>
+            </div>
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:10px 6px;">
+              <span style="font-size:0.75rem; color:#94A3B8; display:block;">Stage 4</span>
+              <strong style="font-size:0.82rem; color:#FFFFFF;">Output &amp; Audit</strong>
+              <span style="font-size:0.7rem; color:#64748B; display:block; margin-top:4px;">Verified result</span>
+            </div>
+          </div>
+          <div style="margin-top:10px; font-size:0.78rem; color:#94A3B8; text-align:center;">
+            Data Flow: Ingestion &rarr; <strong>Adaptive Indexing (Core Novelty)</strong> &rarr; Optimization &rarr; Verified Output
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Macroscopic mental model</span>
+          <span>Timing: 1 min 15 sec</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 3 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Left-to-right or top-to-bottom pipeline flow diagram (max 4 distinct stages)</li>
+        <li>Highlight your actual contribution in gold, while standard baseline components remain grey</li>
+        <li>Directional flow arrows connecting stages clearly</li>
+        <li>Callout tag identifying inputs, outputs, and runtime guarantees</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.25 min):</strong><br>
+        <em>"To solve this problem, we designed the 4-stage pipeline shown on Slide 3. Incoming telemetry data enters stage 1 for normalization and boundary validation. Now, focus on this highlighted gold block—stage 2. This is our core architectural contribution: the Adaptive Indexing Engine. Rather than conducting brute-force combinatorial evaluations across the full search space, our engine computes a localized topological score that prunes 78% of candidate paths upfront. The pruned candidates then pass to stage 3 for fine-grained parameter optimization before stage 4 issues the verified output."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Referees are constantly asking: <em>"What part did you build vs. what part is standard libraries?"</em> Coloring your custom modules distinctly answers this question without wasting 3 minutes of oral explanation.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Copying an unreadable 50-box architectural diagram from your LaTeX manuscript with 8pt unreadable text. Re-draw a simplified 4-box presentation version.
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 4: Methodology Part 2 — Algorithmic Core &amp; Mathematical Formulation</span>
+        <span class="badge badge-gold">1.25 min (3:15 – 4:30)</span>
+      </div>
+      <p>Isolate your exact algorithmic and mathematical innovation. Present the mathematical insight cleanly without burying the audience under full proofs.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 4 of 10 &middot; Algorithm &amp; Math</span>
+        </div>
+        <div class="slide-mockup-headline">Algorithmic Formulation &amp; Dynamic Regularization</div>
+        <div class="slide-mockup-canvas">
+          <div style="background:#1E293B; border:1px solid #D4AF37; border-radius:6px; padding:12px; text-align:center; margin-bottom:10px;">
+            <div style="font-family:serif; font-size:1.15rem; color:#FFFFFF; letter-spacing:0.5px;">
+              min<sub>&theta;</sub> &sum; L(f(x<sub>i</sub>; &theta;), y<sub>i</sub>) + <span style="color:#D4AF37; font-weight:700;">&lambda;<sub>t</sub> &middot; &Omega;(&theta;)</span>
+            </div>
+            <span style="font-size:0.75rem; color:#94A3B8; display:block; margin-top:4px;">Equation 1: Dynamic regularization with variance-adaptive scheduling</span>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:0.8rem;">
+            <div style="background:#1E293B; padding:8px 10px; border-radius:4px; border-left:2px solid #D4AF37;">
+              <strong style="color:#D4AF37;">Key Innovation: &lambda;<sub>t</sub></strong><br>
+              <span style="color:#CBD5E1;">Adjusts penalty dynamically based on online gradient variance, preventing convergence stalls.</span>
+            </div>
+            <div style="background:#1E293B; padding:8px 10px; border-radius:4px; border-left:2px solid #10B981;">
+              <strong style="color:#10B981;">Complexity Bound</strong><br>
+              <span style="color:#CBD5E1;">Reduces asymptotic complexity from O(n²) to O(n log n) with guaranteed convergence.</span>
+            </div>
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Mathematical insight</span>
+          <span>Methodology Total: 2.5 min</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 4 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Exactly ONE central equation or algorithmic step box in large font (minimum 28pt)</li>
+        <li>Color-coded callouts highlighting the exact novel parameter or term</li>
+        <li>Complexity notation (e.g. O(n log n) vs O(n²)) highlighted prominently</li>
+        <li>Zero pseudocode blocks containing loops or trivial variable declarations</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.25 min):</strong><br>
+        <em>"Mathematically, we formulate this objective in Equation 1. The key departure from standard gradient approaches lies in our dynamic penalty term, lambda-sub-t, highlighted in gold. Standard implementations hold lambda constant, causing severe oscillation when variance spikes. We formulate lambda-t to scale inversely with the running variance of the gradient updates. This guarantees that convergence occurs in bounded O(n log n) steps even under non-stationary distributions, directly resolving the quadratic complexity trap."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Walk through the equation physically. Point to each term and explain *why it exists* conceptually rather than reading Greek symbols aloud.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Showing 30 lines of raw Python/C++ code. Code snippets on conference slides are unreadable and signal an inability to synthesize algorithmic logic.
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 5: Results Part 1 — Primary Quantitative Benchmarks vs. SOTA</span>
+        <span class="badge badge-gold">1.25 min (4:30 – 5:45)</span>
+      </div>
+      <p>The first of three results slides and the cornerstone scientific proof of your paper. Deliver bold, verified quantitative superiority.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 5 of 10 &middot; Primary Benchmarks</span>
+        </div>
+        <div class="slide-mockup-headline">Empirical Benchmark Performance Across 3 Datasets</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:grid; grid-template-columns:2fr 1fr; gap:12px; align-items:center;">
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:10px;">
+              <div style="display:flex; justify-content:space-between; margin-bottom:6px; font-size:0.75rem; color:#94A3B8;">
+                <span>Method</span><span>Benchmark A</span><span>Latency</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:4px 0; font-size:0.78rem; border-bottom:1px solid #334155; color:#94A3B8;">
+                <span>Baseline Alpha (2024)</span><span>81.2%</span><span>18.4 ms</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:4px 0; font-size:0.78rem; border-bottom:1px solid #334155; color:#94A3B8;">
+                <span>Baseline Beta (2025)</span><span>83.7%</span><span>14.1 ms</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; padding:6px 0; font-size:0.82rem; font-weight:700; color:#D4AF37;">
+                <span>Our Model (2026)</span><span>94.6% (+10.9%)</span><span>7.8 ms (-45%)</span>
+              </div>
+            </div>
+            <div style="background:rgba(212,175,55,0.15); border:1px solid #D4AF37; border-radius:6px; padding:12px; text-align:center;">
+              <span style="font-size:1.8rem; font-weight:900; color:#D4AF37; display:block; line-height:1;">+14.2%</span>
+              <span style="font-size:0.75rem; color:#E2E8F0; text-transform:uppercase; font-weight:700; display:block; margin-top:4px;">Avg F1 Improvement</span>
+              <span style="font-size:0.7rem; color:#94A3B8; display:block; margin-top:4px;">p &lt; 0.001 (5 Seeds)</span>
+            </div>
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Quantitative superiority</span>
+          <span>Validation: 95% confidence intervals</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 5 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Clean 3–4 row comparison table or high-contrast bar chart</li>
+        <li>Highlight your method's results in bold gold with percentage delta</li>
+        <li>Prominent stat callout box showing the headline gain (+14.2% / -45% latency)</li>
+        <li>State statistical significance (p-value and number of evaluation runs)</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.25 min):</strong><br>
+        <em>"Now let us examine the empirical proof. We evaluated our system across three standard public benchmarks against leading baselines from 2024 and 2025. Across all tested scenarios, our proposed architecture delivers an average 14.2% improvement in F1-score while cutting inference latency by 45%—dropping runtime from 18.4 milliseconds down to 7.8 milliseconds. As noted in the bottom banner, these numbers represent the mean of 5 independent seeds with 95% confidence intervals, confirming statistical significance at p-value under 0.001."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> State your experimental parameters immediately (seeds, dataset splits, hardware specifications). Stating them aloud disarms referees before they can raise skeptical methodological objections.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Showing a 14-column spreadsheet table with 50 rows of data. The audience cannot read it and you will lose control of their attention.
+      </div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 6: Results Part 2 — Ablation Study &amp; Component Isolation</span>
+        <span class="badge badge-gold">1.25 min (5:45 – 7:00)</span>
+      </div>
+      <p>Every senior referee in the room is wondering: <em>"Which piece actually caused the gain?"</em> Slide 6 proves that your architectural innovation drives the improvement.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 6 of 10 &middot; Ablation Study</span>
+        </div>
+        <div class="slide-mockup-headline">Ablation Study: Dissecting Subsystem Impact</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:8px; text-align:center;">
+            <div style="background:#1E293B; border:2px solid #10B981; border-radius:6px; padding:8px 6px;">
+              <span style="font-size:0.75rem; color:#10B981; font-weight:700; display:block;">Full System</span>
+              <strong style="font-size:1.1rem; color:#FFFFFF;">94.6%</strong>
+              <span style="font-size:0.7rem; color:#94A3B8; display:block; margin-top:2px;">Complete pipeline</span>
+            </div>
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:8px 6px;">
+              <span style="font-size:0.75rem; color:#EF4444; font-weight:700; display:block;">w/o Pruning</span>
+              <strong style="font-size:1.1rem; color:#CBD5E1;">81.3%</strong>
+              <span style="font-size:0.7rem; color:#EF4444; display:block; margin-top:2px;">-13.3% drop</span>
+            </div>
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:8px 6px;">
+              <span style="font-size:0.75rem; color:#F59E0B; font-weight:700; display:block;">w/o Dyn &lambda;</span>
+              <strong style="font-size:1.1rem; color:#CBD5E1;">86.5%</strong>
+              <span style="font-size:0.7rem; color:#F59E0B; display:block; margin-top:2px;">-8.1% drop</span>
+            </div>
+            <div style="background:#1E293B; border:1px solid #334155; border-radius:6px; padding:8px 6px;">
+              <span style="font-size:0.75rem; color:#64748B; font-weight:700; display:block;">Raw Baseline</span>
+              <strong style="font-size:1.1rem; color:#64748B;">78.2%</strong>
+              <span style="font-size:0.7rem; color:#64748B; display:block; margin-top:2px;">No additions</span>
+            </div>
+          </div>
+          <div style="margin-top:10px; background:#1E293B; padding:8px 12px; border-radius:4px; font-size:0.78rem; color:#E2E8F0;">
+            <strong>Ablation Conclusion:</strong> Adaptive pruning delivers 62% of total gain; dynamic lambda provides remaining stability.
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Component isolation</span>
+          <span>Proves no module is redundant</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 6 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Step-down ablation waterfall or clean 4-box card comparison</li>
+        <li>Explicit percentage drop indicators for each disabled submodule (-13.3%, -8.1%)</li>
+        <li>1 summary sentence stating the exact contribution of each module</li>
+        <li>Sensitivity curve graph or variance bounds shown alongside</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.25 min):</strong><br>
+        <em>"A crucial question every referee will ask is: which module actually caused the performance jump? Slide 6 shows our ablation study. When we disable the adaptive indexing module, overall score drops by 13.3%, proving it accounts for over 60% of our accuracy gain. Furthermore, when we remove the dynamic lambda scheduling and revert to static penalties, convergence variance spikes and accuracy drops another 8.1%. This confirms that neither component is redundant—they operate in synergy to deliver the headline results."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Reviewers respect ablation slides above almost all others. A rigorous ablation proves that your results are not an artifact of random hyperparameter overfitting.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Claiming your method works while skipping the ablation. Referees will immediately pounce during Q&A: <em>"Did you test without module X?"</em>
+      </div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 7: Results Part 3 — Qualitative Case Study &amp; Error Mode Analysis</span>
+        <span class="badge badge-gold">1.0 min (7:00 – 8:00)</span>
+      </div>
+      <p>Ground your quantitative metrics with real-world examples. Showing an honest failure case transforms you from an amateur into a respected researcher.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 7 of 10 &middot; Qualitative &amp; Errors</span>
+        </div>
+        <div class="slide-mockup-headline">Qualitative Validation: Success Case &amp; Honest Failure Mode</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="background:#1E293B; border:1px solid #10B981; border-radius:6px; padding:10px;">
+              <span style="color:#10B981; font-weight:700; font-size:0.78rem; text-transform:uppercase;">Success: High-Density Edge Case</span>
+              <p style="margin:4px 0 0; color:#CBD5E1; font-size:0.78rem;">Our model correctly resolves overlapping signal trajectories where baseline methods merge features into a false positive.</p>
+            </div>
+            <div style="background:#1E293B; border:1px solid #EF4444; border-radius:6px; padding:10px;">
+              <span style="color:#EF4444; font-weight:700; font-size:0.78rem; text-transform:uppercase;">Failure: Severe Noise (&gt;20dB)</span>
+              <p style="margin:4px 0 0; color:#CBD5E1; font-size:0.78rem;">Under extreme signal-to-noise degradation, boundary detection drifts by 4.2% due to sensor quantization saturation.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Grounded reality</span>
+          <span>Results Total: 3.5 min</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 7 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>1 visual success comparison (e.g. heatmap, waveform, bounding box vs. baseline)</li>
+        <li>1 honest failure mode image or trace showing exactly where the system struggled</li>
+        <li>Clear 1-sentence technical root-cause explanation for the failure mode</li>
+        <li>Note stating how this failure informs future research</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.0 min):</strong><br>
+        <em>"To ground these aggregate statistics, Slide 7 displays real-world qualitative traces. On the left is a challenging high-density scenario where baseline algorithms merge overlapping signals and produce false positives. Our model cleanly resolves the trajectory boundaries. On the right, we present an honest failure case: when acoustic background noise exceeds 20 decibels, our prediction boundary drifts by 4.2%. Analysis reveals this stems from hardware sensor quantization clipping—an engineering challenge we are actively tackling in our follow-up work."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Showing an honest failure mode immediately diffuses hostile questioning. Referees immediately recognize you as an intellectually mature scientist rather than a marketing presenter.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Cherry-picking one perfect visual and pretending your system has zero flaws. If you don't show where your method breaks, the session chair and audience will find it.
+      </div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 8: Limitations, Environmental Assumptions &amp; Scope</span>
+        <span class="badge badge-gold">1.0 min (8:00 – 9:00)</span>
+      </div>
+      <p>Proactively declaring your boundaries controls the narrative and preempts hostile questions during the Q&amp;A period.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 8 of 10 &middot; Limitations</span>
+        </div>
+        <div class="slide-mockup-headline">Operational Scope, Assumptions &amp; Research Boundaries</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:8px;">
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:8px;">
+              <span style="color:#D4AF37; font-weight:700; font-size:0.75rem; text-transform:uppercase;">1. Data Frequency</span>
+              <p style="margin:4px 0 0; color:#CBD5E1; font-size:0.75rem;">Assumes continuous sensor feeds &ge;100Hz; lower sample rates require interpolation.</p>
+            </div>
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:8px;">
+              <span style="color:#D4AF37; font-weight:700; font-size:0.75rem; text-transform:uppercase;">2. Init Memory</span>
+              <p style="margin:4px 0 0; color:#CBD5E1; font-size:0.75rem;">Initial hash indexing allocates 1.4GB RAM spike before steadying at 320MB.</p>
+            </div>
+            <div style="background:#1E293B; border:1px solid #475569; border-radius:6px; padding:8px;">
+              <span style="color:#D4AF37; font-weight:700; font-size:0.75rem; text-transform:uppercase;">3. Hardware Target</span>
+              <p style="margin:4px 0 0; color:#CBD5E1; font-size:0.75rem;">Verified on x86-64 and ARMv8; FPGA/ASIC synthesis remains future roadmap.</p>
+            </div>
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Intellectual honesty</span>
+          <span>Scope defined before Q&amp;A</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 8 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Exactly 2 or 3 structured boundary cards (Data, Compute/Memory, Hardware)</li>
+        <li>Constructive framing: Each limitation paired with the next research step</li>
+        <li>Precise numerical boundaries (e.g. "requires &ge;100Hz", "1.4GB init memory")</li>
+        <li>Clear statement of deployment constraints</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 1.0 min):</strong><br>
+        <em>"To be entirely transparent regarding our research scope, Slide 8 outlines our operational boundaries. First, our pipeline assumes a telemetry sampling frequency of at least 100 Hertz. Second, the hash table construction creates an initial memory spike of 1.4 gigabytes during cold startup before settling into a 320-megabyte runtime footprint. Third, our experiments were conducted on x86-64 server clusters and ARM edge devices; bare-metal FPGA synthesis remains ongoing research for 2027. Defining these boundaries ensures our findings are applied within validated parameters."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> When a researcher outlines their own limitations clearly on Slide 8, referees often skip hostile nitpicks and instead ask constructive questions about future extensions.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Claiming your method has "no major limitations." Referees will view this as scholarly arrogance and dedicate the entire Q&amp;A to dismantling your claim.
+      </div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 9: Key Takeaways &amp; Architectural Synthesis</span>
+        <span class="badge badge-gold">0.5 min (9:00 – 9:30)</span>
+      </div>
+      <p>Deliver 3 memorable, high-impact takeaways that summarize your entire paper in 30 seconds before transitioning to your final slide.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 9 of 10 &middot; Takeaways</span>
+        </div>
+        <div class="slide-mockup-headline">Core Scientific Contributions &amp; Takeaways</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:grid; gap:8px;">
+            <div style="background:#1E293B; border-left:3px solid #D4AF37; padding:8px 12px; border-radius:4px; font-size:0.8rem;">
+              <strong style="color:#D4AF37;">1. The Bottleneck:</strong> Uncovered and formalized the O(n²) latency barrier in high-throughput SOTA systems.
+            </div>
+            <div style="background:#1E293B; border-left:3px solid #10B981; padding:8px 12px; border-radius:4px; font-size:0.8rem;">
+              <strong style="color:#10B981;">2. The Innovation:</strong> Built adaptive candidate pruning with dynamic lambda regularization to achieve O(n log n).
+            </div>
+            <div style="background:#1E293B; border-left:3px solid #3B82F6; padding:8px 12px; border-radius:4px; font-size:0.8rem;">
+              <strong style="color:#3B82F6;">3. The Verification:</strong> Demonstrated +14.2% accuracy and 45% latency reduction across 3 public benchmarks.
+            </div>
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Cement core message</span>
+          <span>Duration: 30 seconds</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 9 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Exactly 3 concise takeaway bullets (Problem &rarr; Solution &rarr; Verified Impact)</li>
+        <li>Big, bold typography (minimum 24pt font)</li>
+        <li>Zero new facts or unverified assertions</li>
+        <li>Visually distinct from the concluding slide</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 0.5 min):</strong><br>
+        <em>"To summarize our paper in three takeaways: First, we identified and formalized the quadratic latency bottleneck in scaled real-time architectures. Second, we solved it through adaptive candidate pruning and dynamic variance regularization. Third, we verified a 14.2% F1 improvement alongside a 45% latency reduction across three independent benchmarks."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Deliver Slide 9 with firm eye contact across the auditorium. Do not turn your back to the audience to read the bullets off the projection screen.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Introducing new results, speculative claims, or secondary data that was never discussed in your results section.
+      </div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="deck-card">
+      <div class="deck-card-header">
+        <span class="deck-card-title">Slide 10: Q&amp;A Primer, Reproducibility Artifacts &amp; Backup Index</span>
+        <span class="badge badge-gold">0.5 min (9:30 – 10:00)</span>
+      </div>
+      <p>End cleanly at 9 minutes 30 seconds. Provide scannable QR codes for your code/data and a visible menu of backup slides to steer the Q&amp;A.</p>
+      
+      <!-- Visual Slide Wireframe Mockup -->
+      <div class="slide-mockup">
+        <div class="slide-mockup-header">
+          <span class="slide-mockup-tag">Slide Wireframe</span>
+          <span class="slide-mockup-num">Slide 10 of 10 &middot; Q&amp;A Anchor</span>
+        </div>
+        <div class="slide-mockup-headline">Thank You &middot; Questions &amp; Discussion</div>
+        <div class="slide-mockup-canvas">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+            <div style="flex:1; min-width:200px;">
+              <p style="margin:0 0 4px; color:#FFFFFF; font-weight:700;">Open Science &amp; Reproducibility:</p>
+              <p style="margin:0; color:#94A3B8; font-size:0.8rem;">GitHub: github.com/lab/research-code</p>
+              <p style="margin:2px 0 0; color:#94A3B8; font-size:0.8rem;">Pretrained Weights &amp; Docker: DOI 10.5281/zenodo.xxxx</p>
+              <p style="margin:6px 0 0; color:#D4AF37; font-size:0.8rem; font-weight:600;">Presenter Email: author@university.edu</p>
+            </div>
+            <div style="background:#1E293B; border:1px solid #D4AF37; border-radius:6px; padding:10px 14px; text-align:center;">
+              <span style="font-size:0.72rem; color:#D4AF37; text-transform:uppercase; font-weight:700; display:block;">Scan for Code &amp; Data</span>
+              <span style="font-family:monospace; font-size:0.85rem; color:#FFFFFF;">[Artifact QR]</span>
+            </div>
+          </div>
+          <div style="margin-top:10px; padding-top:8px; border-top:1px solid #334155; font-size:0.75rem; color:#94A3B8;">
+            <strong>Backup Appendix Directory:</strong> Slide 11: Hyperparameter Grid &middot; Slide 12: Hardware Benchmark Traces &middot; Slide 13: Full Confusion Matrices
+          </div>
+        </div>
+        <div class="slide-mockup-footer">
+          <span>Target: Smooth Q&amp;A launch</span>
+          <span>Finished at 9:30 &middot; 30s chair buffer</span>
+        </div>
+      </div>
+
+      <div class="checklist-title">Slide 10 Visual Content Requirements:</div>
+      <ul class="slide-checklist">
+        <li>Big, scannable QR code linking to your GitHub repository, pretrained weights, and Docker image</li>
+        <li>Presenter email address and institution website</li>
+        <li>Visible roadmap of backup appendix slides (e.g. "Slide 11: Hyperparameters, Slide 12: Extra Baselines")</li>
+        <li>Zero awkward text like "The End" or empty black screens</li>
+      </ul>
+
+      <div class="script-box">
+        <strong>What to Say (Speaker Script — 0.5 min):</strong><br>
+        <em>"Thank you very much for your time and attention. Our full dataset, reproducible Docker containers, and pretrained weights are freely available at the QR code on screen. I have also prepared backup appendix slides covering hyperparameter sensitivity, hardware traces, and extended confusion matrices. I now gladly open the floor to the session chair and audience for questions."</em>
+      </div>
+
+      <div class="chair-tip">
+        💡 <strong>Session Chair Pro-Tip:</strong> Listing your backup appendix slides on Slide 10 is an expert presenter maneuver. It signals to referees that you anticipated their technical questions, steering Q&amp;A directly toward your prepared slides.
+      </div>
+
+      <div class="trap-box">
+        ⚠️ <strong>Deadly Pitfall:</strong> Ending abruptly at minute 8 and saying "I guess that's all I have," or going over minute 10 so the chair has to interrupt your final slide.
+      </div>
+    </div>
+  </div>
+
+  <div class="case-quote">
+    "Never read your slides word-for-word. Slides are visual anchors for your audience; your voice provides the narrative, and your timing establishes your credibility."
+  </div>
+
+  <!-- Section 3: Emergency Contingency Protocol -->
+  <div class="deck-section">
+    <div class="deck-section-tag">Field Protocol</div>
+    <h2 class="deck-section-title">The Emergency Pacing Protocol: When Things Go Wrong</h2>
+    <p>Academic conferences rarely go 100% according to plan. Projector cables fail, previous speakers overrun their time, and session chairs may abruptly inform you: <em>"You only have 6 minutes left."</em> Here is your emergency contingency plan:</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 2rem 0;">
+      <div style="background:#FFFFFF; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; border-top: 3px solid #D4AF37;">
+        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #111;">If Chair Cuts Time to 6 Minutes</h4>
+        <p style="font-size: 0.9rem; color: #555;">Immediately sacrifice Slide 4 (detailed equations) and Slide 7 (case study). Jump straight from Slide 3 (architecture) to Slide 5 (primary benchmark table). You preserve the problem, the core concept, and the verified proof.</p>
+      </div>
+      <div style="background:#FFFFFF; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; border-top: 3px solid #D4AF37;">
+        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #111;">If Projector Fails Completely</h4>
+        <p style="font-size: 0.9rem; color: #555;">Do not fumble with HDMI adapters for 4 minutes. Stand up, face the room, and deliver your 2-minute elevator pitch: Problem &rarr; Solution &rarr; Metric Gain. Hand out paper preprint copies or write the GitHub link on the whiteboard.</p>
+      </div>
+      <div style="background:#FFFFFF; border: 1px solid var(--border-color); border-radius: 8px; padding: 1.5rem; border-top: 3px solid #D4AF37;">
+        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: #111;">Defending Hostile Q&A</h4>
+        <p style="font-size: 0.9rem; color: #555;">Use the 4-part defense formula: 1) Thank the reviewer, 2) Restate the question concisely, 3) Answer within your tested boundaries, 4) Offer to examine edge cases together during the networking session.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA Block -->
+  <div class="cta-block">
+    <h3>Verify Conference Credibility Before You Present</h3>
+    <p>Before you invest weeks preparing slides and thousands of rupees in travel and registration fees, run a free ScholarVault audit to confirm genuine Scopus proceedings, committee credentials, and official organizer recognition.</p>
+    <a href="https://app.scholarvault.in" target="_blank" class="cta-btn">Audit Your Conference Free &rarr;</a>
+  </div>
+
+  <img loading="lazy" src="../logos/presentation_detail.jpg" alt="Detail View of Academic Conference Presentation Notes" style="width:100%;height:auto;border-radius:10px;margin:2rem 0;border:1px solid #EAEAEA;box-shadow:0 4px 15px rgba(0,0,0,0.05);" />
+
+  <footer>
+    &copy; 2026 ScholarVault. All rights reserved. &middot; Research with confidence.
+  </footer>
+    </article>
+  </main>
+<script src="../js/ux-enhancements.js"></script>
+</body>
+</html>

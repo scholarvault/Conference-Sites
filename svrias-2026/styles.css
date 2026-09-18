@@ -35,14 +35,6 @@
   --glass-glow: 0 10px 40px rgba(0, 0, 0, 0.45);
 }
 
-/* Local Geist Pixel Circle Font-Face Fallback */
-@font-face {
-  font-family: "Geist Pixel Circle";
-  src: url("fonts/GeistPixel-Circle.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* --- Base & Reset --- */
 *, *::before, *::after {

@@ -404,19 +404,7 @@
       </div>
 
       <!-- ScholarVault Gold Membership Addon -->
-      <div class="sv-gold-card reveal" id="svGoldCard">
-        <div class="sv-gold-badge-row">
-          <div class="sv-gold-hex">
-            <svg width="38" height="38" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 0 8px rgba(255,193,7,0.8));">
-              <path d="M12 2L3 6.5V12C3 16.5 7 20.5 12 22C17 20.5 21 16.5 21 12V6.5L12 2Z" fill="#ffc107" stroke="#ffc107" stroke-width="0.5"/>
-              <path d="M9 12l2 2 4-4" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div>
-            <div class="sv-gold-title">ScholarVault Gold — ₹399/mo</div>
-            <div class="sv-gold-subtitle">Save 15% on SVRIDS 2027 registration instantly + unlock full year protection.</div>
-          </div>
-        </div>
+      
 
         <div class="sv-gold-grid">
           <!-- At this conference -->
@@ -476,79 +464,283 @@
           </p>
         </div>
 
-        <form id="registrationForm" class="form-grid" data-custom-submit="true">
-          <div class="field">
-            <label for="currencySelect">Preferred Currency <span class="req">*</span></label>
-            <select name="currency" id="currencySelect" required>
-              <option value="INR" selected>INR (Indian Rupees ₹)</option>
-              <option value="USD">USD (US Dollars $)</option>
-            </select>
-          </div>
+        <form id="registrationForm" class="glass-form" style="padding: 0; background: transparent; border: none;">
+          <input type="hidden" name="category_id" id="regCategoryId" />
+          <input type="hidden" name="category_code" id="regCategoryCode" />
+          <input type="hidden" name="query_type" id="regQueryType" />
+          <input type="hidden" name="currency" id="regCurrency" value="INR" />
 
-          <div class="field">
-            <label for="categorySelect">Registration Tier &amp; Pass Type <span class="req">*</span></label>
-            <select name="category" id="categorySelect" required>
-              <option value="">Choose attendance pass...</option>
-            </select>
-          </div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Full Legal Name *</label>
+              <input type="text" name="name" class="form-input" required placeholder="e.g. Dr. Alex Morgan" />
+            </div>
 
-          <div class="field full" id="priceSummaryBox" style="display:none; background:rgba(15,23,42,0.85); border:1px solid rgba(56,189,248,0.35); border-radius:10px; padding:14px 18px; margin-top:-6px; margin-bottom:10px;">
-            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
-              <div>
-                <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; font-weight:700;">Selected Pass</div>
-                <div id="summaryPassName" style="font-weight:700; color:var(--white); font-size:15px; margin-top:2px;"></div>
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" name="email" class="form-input" required placeholder="alex.morgan@institution.edu" />
+            </div>
+
+            <div class="form-group">
+              <label>Phone / WhatsApp *</label>
+              <input type="tel" name="phone" class="form-input" required placeholder="+91 98765 43210" />
+            </div>
+
+            <div class="form-group">
+              <label>Institution / Organisation *</label>
+              <input type="text" name="institution" class="form-input" required placeholder="e.g. Cambridge University" />
+            </div>
+
+            <div class="form-group">
+              <label>Country of Residence *</label>
+              <input type="text" name="country" id="regCountry" class="form-input" required placeholder="e.g. India / United Kingdom" />
+            </div>
+
+            <div class="form-group">
+              <label>City *</label>
+              <input type="text" name="city" id="regCity" class="form-input" required placeholder="e.g. Bengaluru / London" />
+            </div>
+
+            <div class="form-group">
+              <label>Postal / PIN Code *</label>
+              <input type="text" name="zip_code" id="regZip" class="form-input" required placeholder="e.g. 560001 / EC1A 1BB" />
+            </div>
+
+            <div class="form-group">
+              <label>Registration Pass Category *</label>
+              <select name="category" id="regCategorySelect" class="form-select" required>
+                <option value="">Select pass category...</option>
+                <option value="virtual_student" data-name="Virtual Student Pass">Virtual Student Pass (?1,999 / )</option>
+                <option value="virtual_faculty" data-name="Virtual Faculty/Academic Pass">Virtual Faculty/Academic Pass (?3,999 / )</option>
+                <option value="in_person_student" data-name="In-Person Student Pass">In-Person Student Pass (?3,499 / )</option>
+                <option value="in_person_faculty" data-name="In-Person Faculty/Academic Pass">In-Person Faculty/Academic Pass (?5,999 / )</option>
+                <option value="startup_pitch" data-name="Startup Pitch Pass">Startup Pitch Pass (?4,999 / )</option>
+                <option value="listener" data-name="Listener Pass">Listener Pass (?1,499 / )</option>
+                <option value="co_author" data-name="Co-Author Pass">Co-Author Pass (?2,499 / )</option>
+              </select>
+            </div>
+
+            <div class="form-group full">
+              <label>Accepted Abstract ID (if applicable)</label>
+              <input type="text" name="paper_id" class="form-input" placeholder="e.g. SVRIAS-2026-TR1-042 (Leave blank if registering as Listener)" />
+            </div>
+
+            <!-- In-Page Review & Benefits Section -->
+            <div class="form-group full" style="margin-top: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px;">
+              <!-- Header -->
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <span style="font-weight: 700; color: #ffffff; font-size: 15px;"><i class="fa-solid fa-ticket"></i> Pass Inclusions &amp; Benefits</span>
+                <span id="summaryBadgeTier" style="font-size: 12px; font-weight: 600; color: var(--accent-cyan); background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 999px; padding: 2px 10px;">Academic / Faculty</span>
               </div>
-              <div style="text-align:right;">
-                <div id="summaryOldPrice" style="font-size:13px; color:rgba(255,255,255,0.4); text-decoration:line-through; display:none;"></div>
-                <div id="summaryFinalPrice" style="font-family:var(--font-display); font-size:22px; font-weight:800; color:#38bdf8;"></div>
-                <div id="summaryGoldBadge" style="font-size:11px; color:#ffc107; font-weight:700; display:none;">✦ 15% ScholarVault Gold Discount Applied</div>
+
+              <!-- Dynamic Inclusions Bullets -->
+              <div id="passBenefitsWrap" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px;">
+                <ul id="passBenefitsList" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 13px; color: #cbd5e1;">
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Official Virtual Presentation slot in scheduled track session</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Inclusion of accepted abstract in archived ISBN proceedings</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Verifiable Digital Certificate of Presentation &amp; Authorship</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Full access to all 6 tracks, plenary keynotes &amp; video archives</li>
+                </ul>
+              </div>
+
+              <!-- Promo / Voucher Code Block -->
+              <div style="margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <label for="couponCodeInput" style="font-size: 12.5px; font-weight: 600; color: #cbd5e1;">
+                    Have a Promo Code or Grant Waiver Voucher?
+                  </label>
+                  <span style="font-size: 11.5px; color: #94a3b8;">Optional</span>
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <input type="text" id="couponCodeInput" name="coupon_code" class="form-input" placeholder="e.g. GRANT100, EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
+                  <button type="button" id="applyCouponBtn" class="pill-btn frosted-pill" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
+                </div>
+                <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
+                <small style="display: block; font-size: 11.5px; color: #94a3b8; margin-top: 4px;">
+                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24;"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
+                </small>
+              </div>
+
+              <!-- Ultra-Premium VIP Gold Member Upgrade Section -->
+              <div id="goldOptInCard" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.16) 0%, rgba(180, 83, 9, 0.08) 50%, rgba(12, 14, 20, 0.75) 100%); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(254, 240, 138, 0.25);">
+                
+                <!-- Ambient Top Shimmer Line -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #f59e0b, #fef08a, #f59e0b, transparent); opacity: 0.85;"></div>
+
+                <!-- Top Row: Icon + Title + Savings Badge + Switch -->
+                <label for="goldOptInToggle" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; cursor: pointer; margin-bottom: 12px; user-select: none;">
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <!-- 3D Luxury Gold Crown Emblem -->
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #78350f 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6); flex-shrink: 0; border: 1px solid rgba(254, 240, 138, 0.5);">
+                      <i class="fa-solid fa-crown" style="color: #ffffff; font-size: 19px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));"></i>
+                    </div>
+                    <div>
+                      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span style="font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.01em;">
+                          ScholarVault Gold Privileges
+                        </span>
+                        <span id="goldSavingsBadge" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(16, 185, 129, 0.15) 100%); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);">
+                          Save ₹101 Instantly
+                        </span>
+                      </div>
+                      <div style="font-size: 12.5px; color: #cbd5e1; margin-top: 2px;">
+                        Opt in to unlock instant delegate pass discount + 1-month VIP perks
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Custom Interactive Toggle Switch -->
+                  <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
+                    <span id="goldToggleLabel" style="font-size: 11.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s;">Add Perk</span>
+                    <div id="goldSwitchTrack" style="position: relative; width: 48px; height: 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); transition: all 0.25s ease;">
+                      <input type="checkbox" id="goldOptInToggle" name="gold_addon" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 2; margin: 0;" />
+                      <div id="goldSwitchKnob" style="position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;"></div>
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Inset Perks Container (Matches the Pass Inclusions aesthetic!) -->
+                <div style="background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 10px; padding: 10px 14px;">
+                  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; font-size: 12.5px; color: #e2e8f0;">
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-bolt" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>Instant Pass Discount</strong> applied to total</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-file-pdf" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>SCVS Audit PDF Access</strong> downloadable evidence dossiers</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-file-lines" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>Document &amp; PDF OCR</strong> conference CFP extraction</span>
+                    </li>
+                    <li style="display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-crown" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <span><strong>1-Month Gold Membership</strong> with Research Vault &amp; Credits</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Transparent Price Breakdown -->
+              <div style="border-top: 1px dashed rgba(255, 255, 255, 0.12); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; justify-content: space-between; font-size: 13px; color: #94a3b8;">
+                  <span>Pass Base Fee:</span>
+                  <span id="baseFeeDisplay" style="color: #cbd5e1;">₹4,999</span>
+                </div>
+                <div id="discountLineItem" style="display: none; justify-content: space-between; font-size: 13px; color: #34d399;">
+                  <span id="discountLabel">Discount:</span>
+                  <span id="discountAmountDisplay">-₹0</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 8px; margin-top: 2px;">
+                  <span style="font-size: 14px; font-weight: 700; color: #ffffff;">Total Payable:</span>
+                  <span id="finalPriceDisplay" style="font-size: 22px; font-weight: 800; color: #38bdf8;">₹4,999</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="field">
-            <label for="regName">Full Name <span class="req">*</span></label>
-            <input type="text" id="regName" name="name" required placeholder="Dr. / Prof. / Founder Full Name" autocomplete="name" />
-          </div>
+            <!-- Payment Method Selector -->
+            <div class="form-group full" id="paymentMethodSection" style="margin-top: 6px;">
+              <!-- 100% Student Research Grant Remission Notice -->
+              <div id="grantWaiverPaymentNotice" style="display: none; padding: 14px 16px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; margin-bottom: 12px; font-size: 13.5px; color: #fef3c7;">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24; font-size: 16px;"></i>
+                  <strong style="color: #fbbf24;">100% Student Research Grant Remission Applied</strong>
+                </div>
+                <div style="font-size: 12.5px; color: #cbd5e1;">
+                  No payment gateway transaction required. Your delegate pass and presentation slot will be confirmed immediately upon claiming.
+                </div>
+              </div>
 
-          <div class="field">
-            <label for="regEmail">Work Email <span class="req">*</span></label>
-            <input type="email" id="regEmail" name="email" required placeholder="name@institution.edu or founder@startup.com" autocomplete="email" />
-          </div>
+              <div id="paymentOptionsWrap">
+                <label style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; display: block;">
+                  Select Payment Method *
+                </label>
+                
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                  <!-- Option 1: Indian UPI & QR (Intercepted via QR modal with scholarvault@ybl until Federal Bank live keys arrive ~Sep 20) -->
+                  <label id="optFederalLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <input type="radio" name="payment_method" value="federal_omniware" checked style="accent-color: #38bdf8;" />
+                      <div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                          Indian UPI &amp; QR Payment <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Instant QR (INR)</span>
+                        </div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                          Scan QR with PhonePe, GPay, Paytm, BHIM or any UPI App &bull; Instant Confirmation
+                        </div>
+                      </div>
+                    </div>
+                    <img src="assets/idzRNcC9U5_logos.png" alt="UPI" style="height: 24px; filter: brightness(1.2);" />
+                  </label>
 
-          <div class="field">
-            <label for="regPhone">Contact Phone / WhatsApp <span class="req">*</span></label>
-            <input type="tel" id="regPhone" name="phone" required placeholder="+91 98765 43210" autocomplete="tel" />
-          </div>
+                  <!-- Option 2: Dodo Payments (International) -->
+                  <label id="optDodoLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <input type="radio" name="payment_method" value="dodo" style="accent-color: #38bdf8;" />
+                      <div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                          International Cards &amp; Apple Pay <span style="font-size: 11px; background: rgba(255, 255, 255, 0.15); color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">USD ($)</span>
+                        </div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                          International Credit &amp; Debit Cards (Visa, Mastercard, Amex, Apple Pay)
+                        </div>
+                      </div>
+                    </div>
+                    <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Cards" style="height: 18px;" />
+                  </label>
 
-          <div class="field">
-            <label for="regInstitution">Institution / Organization <span class="req">*</span></label>
-            <input type="text" id="regInstitution" name="institution" required placeholder="University, Research Lab, or Startup Name" />
-          </div>
+                  <!-- Option 3: Direct Bank Transfer Accordion -->
+                  <label id="optBankLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                      <input type="radio" name="payment_method" value="bank_transfer" style="accent-color: #38bdf8;" />
+                      <div>
+                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
+                          Direct Bank Transfer (NEFT / RTGS / IMPS)
+                        </div>
+                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
+                          Institutional sponsorship or direct wire transfer to ScholarVault Federal Bank account
+                        </div>
+                      </div>
+                    </div>
+                    <i class="fa-solid fa-building-columns" style="color: #94a3b8; font-size: 20px;"></i>
+                  </label>
+                </div>
 
-          <div class="field">
-            <label for="regDesignation">Designation / Role <span class="req">*</span></label>
-            <input type="text" id="regDesignation" name="designation" required placeholder="e.g. Professor, Research Scholar, Founder &amp; CEO" />
-          </div>
+                <!-- Unfolded Bank Transfer Details -->
+                <div id="bankTransferDetailsWrap" style="display: none; margin-top: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 16px;">
+                  <div style="font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-info-circle"></i> Official Federal Bank Account Details for Wire Transfer:
+                  </div>
+                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; margin-bottom: 14px;">
+                    <div><span style="color: #94a3b8;">Beneficiary Name:</span> <strong style="color: #ffffff;">ScholarVault Conferences</strong></div>
+                    <div><span style="color: #94a3b8;">Bank Name:</span> <strong style="color: #ffffff;">Federal Bank</strong></div>
+                    <div><span style="color: #94a3b8;">Account Number:</span> <strong style="color: #38bdf8; font-family: monospace;">29149900012345</strong></div>
+                    <div><span style="color: #94a3b8;">IFSC Code:</span> <strong style="color: #38bdf8; font-family: monospace;">FDRL0001234</strong></div>
+                    <div><span style="color: #94a3b8;">Account Type:</span> <strong style="color: #ffffff;">Current Account</strong></div>
+                    <div><span style="color: #94a3b8;">Branch:</span> <strong style="color: #ffffff;">Chennai Main</strong></div>
+                  </div>
+                  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
+                      <input type="text" name="utr_number" id="regUtr" class="form-input" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
+                    </div>
+                    <div style="flex: 1; min-width: 200px;">
+                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
+                      <input type="text" name="bank_name" id="regSenderBank" class="form-input" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-          <div class="field">
-            <label for="regCountry">Country <span class="req">*</span></label>
-            <input type="text" id="regCountry" name="country" required placeholder="e.g. India, United States, Germany..." />
-          </div>
-
-          <div class="field full">
-            <label for="regPaperTitle">Contribution / Project Title (If Applicable)</label>
-            <input type="text" id="regPaperTitle" name="paper_title" placeholder="Paper title, deeptech spinout project name, or pitch deck title" />
-          </div>
-
-          <div class="field full">
-            <button type="submit" id="submitRegBtn" class="btn-primary form-submit" style="width: 100%; min-height: 52px;" data-scholarvault-action="register">
-              <i data-lucide="lock"></i> Proceed to Secure Checkout
-            </button>
-            <p class="form-note" style="margin-top:10px; font-size:12px; color:var(--text-muted); text-align:center;">
-              <i data-lucide="shield-check" style="width:14px; height:14px; display:inline-block; vertical-align:middle; color:#38bdf8;"></i>
-              Your registration intent is securely recorded. You will be redirected to the Dodo Payments checkout.
-            </p>
+            <!-- Submit Button -->
+            <div class="form-group full" style="margin-top: 14px;">
+              <button type="submit" id="regSubmitBtn" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span id="btnSubmitText">Proceed to Federal Bank Payment &bull; ₹4,999</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+            </div>
           </div>
         </form>
 
@@ -643,11 +835,7 @@
           <img src="assets/idzRNcC9U5_logos.png" alt="BHIM" />
           <img src="assets/gpay-logo.png" alt="Google Pay" />
         </div>
-        <div class="footer__protection">
-          <img src="assets/idITJgioup_logos.png" alt="Protected Website" />
-          <img src="assets/idUAcNCLcQ_logos.png" alt="MSME Verified" style="height:30px;" />
-          <img src="assets/App QR.png" alt="Verification QR" style="height:30px; border-radius:4px;" />
-        </div>
+        
       </div>
 
       <div class="footer__bottom">
@@ -737,470 +925,133 @@
   <script>
   (function () {
     const SVRIDS_TIERS = {
-      virtual_student: {
-        category: 'virtual_student',
-        mode: 'virtual',
-        name: 'Virtual Student / Academic Pass',
-        priceINR: 2499,
-        priceUSD: 99,
-        dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK',
-        dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq'
-      },
-      virtual_founder: {
-        category: 'virtual_founder',
-        mode: 'virtual',
-        name: 'Virtual Startup / Industry Pitch Pass',
-        priceINR: 5499,
-        priceUSD: 199,
-        dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK',
-        dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE'
-      },
-      virtual_listener: {
-        category: 'virtual_listener',
-        mode: 'virtual',
-        name: 'Virtual Listener / Attendee Pass',
-        priceINR: 1499,
-        priceUSD: 59,
-        dodoINR: 'pdt_0Nd5khVR6xzYWKMn2CiPn',
-        dodoUSD: 'pdt_0Nd5oPQ5Pg5BpH35V79ry'
-      },
-      virtual_coauthor: {
-        category: 'virtual_coauthor',
-        mode: 'virtual',
-        name: 'Virtual Co-Author Pass',
-        priceINR: 2499,
-        priceUSD: 79,
-        dodoINR: 'pdt_0Nd5kme4fOVnzmFhWGdfD',
-        dodoUSD: 'pdt_0Nd5oUQJh9bYUQYMFtlaL'
-      },
-      inperson_academic: {
-        category: 'inperson_academic',
-        mode: 'in-person',
-        name: 'In-Person Academic / Founder Pass (Bengaluru)',
-        priceINR: 6499,
-        priceUSD: 249,
-        dodoINR: 'pdt_0Nd5kYgKTGfwBr2VCG9Y9',
-        dodoUSD: 'pdt_0Nd5mvbsjDzSK9eeKrn95'
-      },
-      inperson_investor: {
-        category: 'inperson_investor',
-        mode: 'in-person',
-        name: 'In-Person Investor & Corporate VIP Pass (Bengaluru)',
-        priceINR: 11999,
-        priceUSD: 479,
-        dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK',
-        dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE'
-      },
-      inperson_student: {
-        category: 'inperson_student',
-        mode: 'in-person',
-        name: 'In-Person Student Delegate Pass (Bengaluru)',
-        priceINR: 3499,
-        priceUSD: 139,
-        dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK',
-        dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq'
-      }
+      virtual_student: { priceINR: 1999, priceUSD: 79, dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK', dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq' },
+      virtual_faculty: { priceINR: 3999, priceUSD: 149, dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK', dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE' },
+      in_person_student: { priceINR: 3499, priceUSD: 139, dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK', dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq' },
+      in_person_faculty: { priceINR: 5999, priceUSD: 249, dodoINR: 'pdt_0Nd5kYgKTGfwBr2VCG9Y9', dodoUSD: 'pdt_0Nd5mvbsjDzSK9eeKrn95' },
+      startup_pitch: { priceINR: 4999, priceUSD: 199, dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK', dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE' },
+      listener: { priceINR: 1499, priceUSD: 59, dodoINR: 'pdt_0Nd5khVR6xzYWKMn2CiPn', dodoUSD: 'pdt_0Nd5oPQ5Pg5BpH35V79ry' },
+      co_author: { priceINR: 2499, priceUSD: 99, dodoINR: 'pdt_0Nd5kme4fOVnzmFhWGdfD', dodoUSD: 'pdt_0Nd5oUQJh9bYUQYMFtlaL' }
     };
 
     let svGoldApplied = false;
-
-    // DOM Elements
-    const form = document.getElementById('registrationForm');
-    const currencySelect = document.getElementById('currencySelect');
-    const categorySelect = document.getElementById('categorySelect');
-    const priceSummaryBox = document.getElementById('priceSummaryBox');
-    const summaryPassName = document.getElementById('summaryPassName');
-    const summaryOldPrice = document.getElementById('summaryOldPrice');
-    const summaryFinalPrice = document.getElementById('summaryFinalPrice');
-    const summaryGoldBadge = document.getElementById('summaryGoldBadge');
-    const successWrap = document.getElementById('registerSuccess');
-
-    function getCurrentCurrency() {
-      if (currencySelect) return currencySelect.value;
-      if (window.SVSite && typeof window.SVSite.getCurrency === 'function') {
-        return window.SVSite.getCurrency();
-      }
-      return 'INR';
-    }
-
-    function calculateFinalPrice(tierObj, currency) {
-      const basePrice = (currency === 'USD') ? tierObj.priceUSD : tierObj.priceINR;
-      if (svGoldApplied) {
-        return Math.round(basePrice * 0.85);
-      }
-      return basePrice;
-    }
-
-    function updateRegistrationTierOptions() {
-      if (!categorySelect) return;
-      const currency = getCurrentCurrency();
-      const currentSelected = categorySelect.value;
-      const symbol = (currency === 'USD') ? '$' : '₹';
-
-      categorySelect.innerHTML = '<option value="">Choose attendance pass...</option>' +
-        '<optgroup label="Global Virtual Passes">' +
-        ['virtual_student', 'virtual_founder', 'virtual_listener', 'virtual_coauthor'].map(key => {
-          const t = SVRIDS_TIERS[key];
-          const base = (currency === 'USD') ? t.priceUSD : t.priceINR;
-          const discounted = Math.round(base * 0.85);
-          const priceText = svGoldApplied 
-            ? `${symbol}${discounted.toLocaleString()} (15% Gold Applied, Reg: ${symbol}${base.toLocaleString()})`
-            : `${symbol}${base.toLocaleString()}`;
-          return `<option value="${key}">${t.name} — ${priceText}</option>`;
-        }).join('') +
-        '</optgroup>' +
-        '<optgroup label="In-Person Hub Passes (Bengaluru)">' +
-        ['inperson_academic', 'inperson_investor', 'inperson_student'].map(key => {
-          const t = SVRIDS_TIERS[key];
-          const base = (currency === 'USD') ? t.priceUSD : t.priceINR;
-          const discounted = Math.round(base * 0.85);
-          const priceText = svGoldApplied 
-            ? `${symbol}${discounted.toLocaleString()} (15% Gold Applied, Reg: ${symbol}${base.toLocaleString()})`
-            : `${symbol}${base.toLocaleString()}`;
-          return `<option value="${key}">${t.name} — ${priceText}</option>`;
-        }).join('') +
-        '</optgroup>';
-
-      if (currentSelected && SVRIDS_TIERS[currentSelected]) {
-        categorySelect.value = currentSelected;
-      }
-      updatePriceSummary();
-    }
-
-    function updatePriceSummary() {
-      if (!priceSummaryBox || !categorySelect) return;
-      const key = categorySelect.value;
-      if (!key || !SVRIDS_TIERS[key]) {
-        priceSummaryBox.style.display = 'none';
-        return;
-      }
-      const t = SVRIDS_TIERS[key];
-      const currency = getCurrentCurrency();
-      const symbol = (currency === 'USD') ? '$' : '₹';
-      const base = (currency === 'USD') ? t.priceUSD : t.priceINR;
-      const finalPrice = calculateFinalPrice(t, currency);
-
-      summaryPassName.textContent = t.name;
-      if (svGoldApplied) {
-        summaryOldPrice.style.display = 'inline';
-        summaryOldPrice.textContent = `${symbol}${base.toLocaleString()}`;
-        summaryFinalPrice.textContent = `${symbol}${finalPrice.toLocaleString()}`;
-        summaryGoldBadge.style.display = 'block';
-      } else {
-        summaryOldPrice.style.display = 'none';
-        summaryFinalPrice.textContent = `${symbol}${base.toLocaleString()}`;
-        summaryGoldBadge.style.display = 'none';
-      }
-      priceSummaryBox.style.display = 'block';
-    }
-
-    // Synchronize currency select and page toggle
-    if (currencySelect) {
-      currencySelect.addEventListener('change', function () {
-        const val = currencySelect.value;
-        if (window.SVSite && typeof window.SVSite.setCurrency === 'function') {
-          window.SVSite.setCurrency(val);
-        }
-        updateRegistrationTierOptions();
-      });
-    }
-
-    window.addEventListener('currencychange', function (e) {
-      const curr = e.detail && e.detail.currency ? e.detail.currency : 'INR';
-      if (currencySelect && currencySelect.value !== curr) {
-        currencySelect.value = curr;
-      }
-      updateRegistrationTierOptions();
-    });
-
-    if (categorySelect) {
-      categorySelect.addEventListener('change', updatePriceSummary);
-    }
-
-    // Connect tier buttons to select category & scroll
-    document.querySelectorAll('.select-tier-btn').forEach(btn => {
-      btn.addEventListener('click', function () {
-        const cat = btn.dataset.category;
-        if (cat && SVRIDS_TIERS[cat] && categorySelect) {
-          categorySelect.value = cat;
-          updatePriceSummary();
-        }
-      });
-    });
-
-    // Check URL parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('payment') === 'success' && successWrap && form) {
-      form.style.display = 'none';
-      successWrap.classList.add('show');
-    }
-    if (urlParams.get('gold_purchased') === '1') {
-      const msg = document.getElementById('svGoldMsg');
-      if (msg) {
-        msg.style.color = '#ffc107';
-        msg.innerHTML = '✦ <strong>Gold membership activated!</strong> Please enter your Member ID from your email below to apply 15% discount.';
-      }
-    }
-
-    // Initial populate
-    updateRegistrationTierOptions();
-
-    // Form Submission Handler
-    if (form) {
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        if (!form.checkValidity()) {
-          form.reportValidity();
-          return;
-        }
-
-        const categoryKey = categorySelect.value;
-        if (!categoryKey || !SVRIDS_TIERS[categoryKey]) {
-          if (window.SVSite && typeof window.SVSite.showToast === 'function') {
-            window.SVSite.showToast('Please select an attendance category pass.', 'error');
-          } else {
-            alert('Please select an attendance category pass.');
-          }
-          categorySelect.focus();
-          return;
-        }
-
-        const tierObj = SVRIDS_TIERS[categoryKey];
-        const currency = getCurrentCurrency();
-        const finalPrice = calculateFinalPrice(tierObj, currency);
-        const submitBtn = document.getElementById('submitRegBtn') || form.querySelector("button[type='submit']");
-
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.innerHTML = '<span>Processing checkout...</span>';
-        }
-
-        const formData = {
-          name: document.getElementById('regName').value.trim(),
-          email: document.getElementById('regEmail').value.trim(),
-          phone: document.getElementById('regPhone').value.trim(),
-          institution: document.getElementById('regInstitution').value.trim(),
-          designation: document.getElementById('regDesignation').value.trim(),
-          country: document.getElementById('regCountry').value.trim(),
-          paper_title: document.getElementById('regPaperTitle') ? document.getElementById('regPaperTitle').value.trim() : null
-        };
-
-        // 1. Insert record into Supabase conf_registrations with conf_id: 'svrids-2027'
-        const regRecord = {
-          conf_id: 'svrids-2027',
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          institution: formData.institution,
-          designation: formData.designation || '',
-          country: formData.country,
-          category: categoryKey + (svGoldApplied ? '_gold' : ''),
-          tier: 'earlybird',
-          amount: finalPrice,
-          currency: currency,
-          paper_title: formData.paper_title || null,
-          status: 'pending'
-        };
-
-        try {
-          if (window.SVSite && typeof window.SVSite.insertRecord === 'function') {
-            await window.SVSite.insertRecord('conf_registrations', regRecord);
-          } else if (typeof db !== 'undefined' && db) {
-            await db.from('conf_registrations').insert(regRecord);
-          }
-        } catch (dbErr) {
-          console.warn('conf_registrations insert logged:', dbErr);
-        }
-
-        // 2. Redirect to Dodo payments checkout (with &discount_code=GOLD15 if Gold is verified)
-        const product = (currency === 'USD') ? tierObj.dodoUSD : tierObj.dodoINR;
-        const emailEnc = encodeURIComponent(formData.email);
-        const returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + '?payment=success');
-
-        let checkoutUrl = 'https://checkout.dodopayments.com/buy/' + product
-          + '?customer_email=' + emailEnc
-          + '&return_url=' + returnUrl
-          + '&metadata[conf_id]=svrids-2027'
-          + '&metadata[tier]=' + encodeURIComponent(categoryKey);
-
-        if (svGoldApplied) {
-          checkoutUrl += '&discount_code=GOLD15';
-        }
-
-        window.location.href = checkoutUrl;
-      });
-    }
-
-    // Expose applySVGold and Gold modal functions globally
-    window.applySVGold = async function () {
-      const input = document.getElementById('svGoldInput');
-      const id = input ? input.value.trim() : '';
-      const msg = document.getElementById('svGoldMsg');
-      const card = document.getElementById('svGoldCard');
-      const btn = document.getElementById('svGoldBtn');
-
-      if (!id) {
-        if (msg) {
-          msg.style.color = '#fb7185';
-          msg.textContent = 'Please enter your ScholarVault Gold Member ID (e.g. SCHOLAR-XXXXXX).';
-        }
-        return;
-      }
-
-      const validFormat = /^(SCHOLAR-[A-Z0-9]{4,}|SV-[A-Z0-9]{3,})$/i.test(id);
-      if (!validFormat) {
-        if (msg) {
-          msg.style.color = '#fb7185';
-          msg.textContent = '✕ Invalid format. Use SCHOLAR-XXXXXXXX or SV-XXXX.';
-        }
-        return;
-      }
-
-      if (btn) {
-        btn.textContent = 'Verifying...';
-        btn.disabled = true;
-      }
-      if (msg) {
-        msg.style.color = 'rgba(255,193,7,0.8)';
-        msg.textContent = '🔍 Checking membership with ScholarVault...';
-      }
-
-      try {
-        let verified = false;
-        if (window.SVSite && window.SVSite.db && window.SVSite.db.functions) {
-          try {
-            const { data, error } = await window.SVSite.db.functions.invoke('verify-gold-member', {
-              body: { code: id }
-            });
-            if (!error && data && data.isGold) {
-              verified = true;
+    const goldToggle = document.getElementById('goldOptInToggle');
+    if (goldToggle) {
+        goldToggle.addEventListener('change', (e) => {
+            svGoldApplied = e.target.checked;
+            
+            // Toggle visual styling
+            const goldSwitchTrack = document.getElementById('goldSwitchTrack');
+            const goldSwitchKnob = document.getElementById('goldSwitchKnob');
+            const goldToggleLabel = document.getElementById('goldToggleLabel');
+            const goldOptInCard = document.getElementById('goldOptInCard');
+            
+            if (svGoldApplied) {
+                if (goldSwitchTrack) {
+                    goldSwitchTrack.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+                    goldSwitchTrack.style.borderColor = '#fbbf24';
+                }
+                if (goldSwitchKnob) {
+                    goldSwitchKnob.style.transform = 'translateX(22px)';
+                }
+                if (goldToggleLabel) {
+                    goldToggleLabel.textContent = 'Active ?';
+                    goldToggleLabel.style.color = '#34d399';
+                }
+            } else {
+                if (goldSwitchTrack) {
+                    goldSwitchTrack.style.background = 'rgba(255, 255, 255, 0.15)';
+                    goldSwitchTrack.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+                }
+                if (goldSwitchKnob) {
+                    goldSwitchKnob.style.transform = 'translateX(0px)';
+                }
+                if (goldToggleLabel) {
+                    goldToggleLabel.textContent = 'Add Perk';
+                    goldToggleLabel.style.color = '#94a3b8';
+                }
             }
-          } catch (err) {
-            console.warn('Edge function check skipped, falling back to format check:', err);
-          }
-        }
+            updatePricingDisplay();
+        });
+    }
 
-        // Fallback: If format matches regex, reliably succeed!
-        if (!verified && validFormat) {
-          verified = true;
-        }
+    const categorySelect = document.querySelector('select[name="category"]');
+    if (categorySelect) {
+        categorySelect.addEventListener('change', updatePricingDisplay);
+    }
+    
+    function updatePricingDisplay() {
+        if (!categorySelect) return;
+        const cat = categorySelect.value;
+        const tier = SVRIDS_TIERS[cat];
+        if (!tier) return;
+        
+        let baseFee = tier.priceINR;
+        let discount = svGoldApplied ? Math.round(baseFee * 0.15) : 0;
+        let finalFee = baseFee - discount;
+        
+        const baseFeeDisplay = document.getElementById('baseFeeDisplay');
+        const finalPriceDisplay = document.getElementById('finalPriceDisplay');
+        const discountLineItem = document.getElementById('discountLineItem');
+        const discountAmountDisplay = document.getElementById('discountAmountDisplay');
+        const goldSavingsBadge = document.getElementById('goldSavingsBadge');
+        
+        if (baseFeeDisplay) baseFeeDisplay.textContent = '?' + baseFee.toLocaleString();
+        if (finalPriceDisplay) finalPriceDisplay.textContent = '?' + finalFee.toLocaleString();
+        if (discountLineItem) discountLineItem.style.display = discount > 0 ? 'flex' : 'none';
+        if (discountAmountDisplay) discountAmountDisplay.textContent = '-?' + discount.toLocaleString();
+        
+        const possibleSavings = Math.round(baseFee * 0.15);
+        if (goldSavingsBadge) goldSavingsBadge.textContent = 'Save ?' + possibleSavings.toLocaleString() + ' Instantly';
+    }
 
-        if (verified) {
-          svGoldApplied = true;
-          if (card) card.classList.add('activated');
-          if (msg) {
-            msg.style.color = '#ffc107';
-            msg.innerHTML = '✦ <strong>ScholarVault Gold verified!</strong> 15% discount applied across all delegate passes.';
-          }
-          if (window.SVSite && typeof window.SVSite.showToast === 'function') {
-            window.SVSite.showToast('ScholarVault Gold verified! 15% discount applied.', 'success');
-          }
-          updateRegistrationTierOptions();
-        } else {
-          svGoldApplied = false;
-          if (card) card.classList.remove('activated');
-          if (msg) {
-            msg.style.color = '#fb7185';
-            msg.textContent = '✕ ID not found or not a Gold member.';
-          }
-          updateRegistrationTierOptions();
-        }
-      } catch (e) {
-        if (validFormat) {
-          svGoldApplied = true;
-          if (card) card.classList.add('activated');
-          if (msg) {
-            msg.style.color = '#ffc107';
-            msg.innerHTML = '✦ <strong>ScholarVault Gold verified!</strong> 15% discount applied.';
-          }
-          updateRegistrationTierOptions();
-        } else {
-          if (msg) {
-            msg.style.color = '#fb7185';
-            msg.textContent = '✕ Verification failed. Please try again.';
-          }
-        }
-      } finally {
-        if (btn) {
-          btn.textContent = 'Verify & Apply';
-          btn.disabled = false;
-        }
-      }
-    };
+    const regForm = document.getElementById('registrationForm');
+    if (regForm) {
+        regForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(regForm);
+            const categoryKey = formData.get('category');
+            if (!categoryKey || !SVRIDS_TIERS[categoryKey]) return;
+            const tierObj = SVRIDS_TIERS[categoryKey];
+            const finalPrice = tierObj.priceINR - (svGoldApplied ? Math.round(tierObj.priceINR * 0.15) : 0);
+            
+            const regRecord = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                institution: formData.get('institution'),
+                country: formData.get('country'),
+                city: formData.get('city'),
+                zip_code: formData.get('zip_code'),
+                category: categoryKey,
+                paper_id: formData.get('paper_id'),
+                amount: finalPrice,
+                status: 'pending'
+            };
 
-    window.openGoldModal = function (e) {
-      if (e) e.preventDefault();
-      const overlay = document.getElementById('goldModalOverlay');
-      if (overlay) overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      setTimeout(() => {
-        const input = document.getElementById('goldModalEmail');
-        if (input) input.focus();
-      }, 350);
-    };
+            try {
+                if (window.SVSite && typeof window.SVSite.insertRecord === 'function') {
+                    await window.SVSite.insertRecord('conf_registrations', regRecord);
+                }
+            } catch (err) {
+                console.warn(err);
+            }
 
-    window.closeGoldModal = function () {
-      const overlay = document.getElementById('goldModalOverlay');
-      if (overlay) overlay.classList.remove('open');
-      document.body.style.overflow = '';
-      const msg = document.getElementById('goldModalMsg');
-      if (msg) msg.textContent = '';
-    };
+            const product = tierObj.dodoINR;
+            const emailEnc = encodeURIComponent(formData.get('email'));
+            const returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + '?payment=success');
+            let checkoutUrl = 'https://checkout.dodopayments.com/buy/' + product
+                + '?customer_email=' + emailEnc
+                + '&return_url=' + returnUrl
+                + '&metadata[conf_id]=svrids-2027'
+                + '&metadata[tier]=' + encodeURIComponent(categoryKey);
 
-    window.handleGoldOverlayClick = function (e) {
-      if (e.target.id === 'goldModalOverlay') closeGoldModal();
-    };
-
-    window.proceedToGoldCheckout = function () {
-      const emailInput = document.getElementById('goldModalEmail');
-      const msg = document.getElementById('goldModalMsg');
-      const btn = document.getElementById('goldModalBtn');
-
-      if (!emailInput || !emailInput.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
-        if (msg) {
-          msg.textContent = '⚠️ Please enter a valid email address.';
-          msg.style.color = '#fb7185';
-        }
-        if (emailInput) emailInput.focus();
-        return;
-      }
-
-      if (msg) {
-        msg.style.color = 'rgba(255,193,7,0.6)';
-        msg.textContent = '⏳ Opening secure checkout...';
-      }
-      if (btn) {
-        btn.disabled = true;
-        btn.textContent = 'Opening Dodo Payments...';
-      }
-
-      // Dodo checkout link for Gold monthly
-      const GOLD_PRODUCT = 'pdt_0NZmRYTQZ0gA4wAsdjQNF';
-      const returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + '?gold_purchased=1');
-      const email = encodeURIComponent(emailInput.value);
-
-      const checkoutUrl = 'https://test.checkout.dodopayments.com/buy/' + GOLD_PRODUCT
-        + '?customer_email=' + email
-        + '&return_url=' + returnUrl
-        + '&metadata[source]=conference_svrids_2027';
-
-      window.open(checkoutUrl, '_blank');
-
-      if (btn) btn.textContent = 'Waiting for payment...';
-      if (msg) {
-        msg.style.color = 'rgba(255,193,7,0.8)';
-        msg.textContent = '✦ Complete payment in the new tab. Your Member ID will arrive by email.';
-      }
-
-      setTimeout(() => {
-        if (btn) {
-          btn.disabled = false;
-          btn.textContent = 'Get Gold & Unlock 15% Off →';
-        }
-      }, 8000);
-    };
-  })();
+            if (svGoldApplied) checkoutUrl += '&discount_code=GOLD15';
+            
+            window.location.href = checkoutUrl;
+        });
+    }
+})();
   </script>
 
   <!-- Tawk.to Live Chat Script -->

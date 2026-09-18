@@ -1,0 +1,96 @@
+initRegistrationCheckoutInteractive() {
+  const regCatSelect = document.getElementById('regCategorySelect');
+  const goldOptInToggle = document.getElementById('goldOptInToggle');
+  const goldOptInCard = document.getElementById('goldOptInCard');
+  const goldSavingsBadge = document.getElementById('goldSavingsBadge');
+  const couponInput = document.getElementById('couponCodeInput');
+  const applyCouponBtn = document.getElementById('applyCouponBtn');
+  const couponStatusMsg = document.getElementById('couponStatusMsg');
+  const paymentRadios = document.querySelectorAll('input[name="payment_method"]');
+
+  function calculate() {
+    const categoryCode = regCatSelect?.value || 'faculty_researcher';
+    const catInfo = CATEGORY_PRICES[categoryCode] || CATEGORY_PRICES.faculty_researcher;
+    let selectedMethod = 'federal_omniware';
+    paymentRadios.forEach((r) => { if (r.checked) selectedMethod = r.value; });
+
+    const isUSD = selectedMethod === 'dodo';
+    const isGold = Boolean(goldOptInToggle?.checked);
+    const baseAmount = isUSD ? catInfo.usd : catInfo.inr;
+
+    // Dynamic Gold Savings Badge update based on selected tier
+    const goldSavings = Math.max(0, catInfo.inr - catInfo.inrGold);
+    if (goldSavingsBadge) {
+      if (goldSavings > 0) {
+        goldSavingsBadge.style.display = 'inline-block';
+        goldSavingsBadge.textContent = `Save ₹${goldSavings.toLocaleString('en-IN')} Instantly`;
+      } else {
+        goldSavingsBadge.style.display = 'none';
+      }
+    }
+
+    // Dynamic Switch & Card State on Toggle
+    const goldSwitchTrack = document.getElementById('goldSwitchTrack');
+    const goldSwitchKnob = document.getElementById('goldSwitchKnob');
+    const goldToggleLabel = document.getElementById('goldToggleLabel');
+
+    if (isGold) {
+      if (goldSwitchTrack) {
+        goldSwitchTrack.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+        goldSwitchTrack.style.borderColor = '#fbbf24';
+        goldSwitchTrack.style.boxShadow = '0 0 14px rgba(245, 158, 11, 0.5)';
+      }
+      if (goldSwitchKnob) {
+        goldSwitchKnob.style.transform = 'translateX(22px)';
+      }
+      if (goldToggleLabel) {
+        goldToggleLabel.textContent = 'Active ✓';
+        goldToggleLabel.style.color = '#34d399';
+      }
+      if (goldOptInCard) {
+        goldOptInCard.style.borderColor = '#f59e0b';
+        goldOptInCard.style.background = 'radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.22) 0%, rgba(180, 83, 9, 0.12) 50%, rgba(12, 14, 20, 0.85) 100%)';
+        goldOptInCard.style.boxShadow = '0 12px 36px -4px rgba(0, 0, 0, 0.6), 0 0 28px rgba(245, 158, 11, 0.3), inset 0 1px 0 rgba(254, 240, 138, 0.35)';
+      }
+    } else {
+      if (goldSwitchTrack) {
+        goldSwitchTrack.style.background = 'rgba(255, 255, 255, 0.15)';
+        goldSwitchTrack.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+        goldSwitchTrack.style.boxShadow = 'none';
+      }
+      if (goldSwitchKnob) {
+        goldSwitchKnob.style.transform = 'translateX(0px)';
+      }
+      if (goldToggleLabel) {
+        goldToggleLabel.textContent = 'Add Perk';
+        goldToggleLabel.style.color = '#94a3b8';
+      }
+      if (goldOptInCard) {
+        goldOptInCard.style.borderColor = 'rgba(245, 158, 11, 0.4)';
+        goldOptInCard.style.background = 'radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.14) 0%, rgba(180, 83, 9, 0.06) 50%, rgba(12, 14, 20, 0.75) 100%)';
+        goldOptInCard.style.boxShadow = '0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.12), inset 0 1px 0 rgba(254, 240, 138, 0.2)';
+      }
+    }
+
+    // 1. Dynamic Benefits List Update
+    const benefitsList = document.getElementById('passBenefitsList');
+    if (benefitsList) {
+      const perks = CATEGORY_BENEFITS[categoryCode] || CATEGORY_BENEFITS.faculty_researcher;
+      benefitsList.innerHTML = perks.map((p) => `
+        <li style="display: flex; align-items: center; gap: 8px;">
+          <i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i>
+          <span>${p}</span>
+        </li>
+      `).join('');
+    }
+
+    // 2. Pricing & Discount Calculation
+    let finalAmount = baseAmount;
+    let discountAmount = 0;
+    let discountLabelText = 'Discount:';
+
+    if (!isUSD && isGold) {
+      finalAmount = catInfo.inrGold;
+      if (appliedCouponDiscount > 0) {
+        finalAmount = Math.max(0, Math.round(catInfo.inrGold * (1 - appliedCouponDiscount / 100)));
+        discountLabelText = `👑 Gold + Promo (${applied
