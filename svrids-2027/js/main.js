@@ -1,5 +1,7 @@
 const SV_CONFIG = {
-  confId: "svrids2027",
+  supabaseUrl: "https://ldoirjupetkmldibhygk.supabase.co",
+  supabaseKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxkb2lyanVwZXRrbWxkaWJoeWdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIwMzMyOTQsImV4cCI6MjA4NzYwOTI5NH0.i_ocMG3EVLDOycUHfe3Met2Bbg0UdqXzUBqrDY_LKd4",
+  confId: "svrids-2027",
   confName: "SVRIDS 2027",
   confFullName: "ScholarVault Research-to-Impact, DeepTech & Startup Summit 2027",
   confDate: new Date("2027-01-15T09:00:00"),
@@ -12,25 +14,62 @@ const SV_CONFIG = {
 let currentCurrency = "INR";
 let currentAttendanceMode = "virtual"; // 'virtual' or 'in-person'
 
-window.SVSite = {
-  showToast: function (message, type = "info") {
-    let container = document.getElementById("toastContainer");
-    if (!container) {
-      container = document.createElement("div");
-      container.id = "toastContainer";
-      document.body.appendChild(container);
-    }
-    const toast = document.createElement("div");
-    toast.className = `toast toast--${type}`;
-    toast.innerHTML = `<span>${message}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => {
-      toast.style.opacity = "0";
-      toast.style.transform = "translateX(20px)";
-      toast.style.transition = "all 300ms ease";
-      setTimeout(() => toast.remove(), 300);
-    }, 3600);
+const supabaseLib = typeof supabase !== "undefined" ? supabase : (typeof window !== "undefined" && window.supabase ? window.supabase : null);
+const db = supabaseLib && typeof supabaseLib.createClient === "function" ? supabaseLib.createClient(SV_CONFIG.supabaseUrl, SV_CONFIG.supabaseKey) : null;
+
+async function insertRecord(table, data) {
+  if (!db) {
+    console.warn("Supabase db not initialized for insertRecord:", table, data);
+    return;
   }
+  const { error } = await db.from(table).insert({ conf_id: SV_CONFIG.confId, ...data });
+  if (error) throw error;
+}
+
+function showToast(message, type = "info") {
+  let container = document.getElementById("toastContainer");
+  if (!container) {
+    container = document.createElement("div");
+    container.id = "toastContainer";
+    document.body.appendChild(container);
+  }
+  const toast = document.createElement("div");
+  toast.className = `toast toast--${type}`;
+  toast.innerHTML = `<span>${message}</span>`;
+  container.appendChild(toast);
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.style.transform = "translateX(20px)";
+    toast.style.transition = "all 300ms ease";
+    setTimeout(() => toast.remove(), 300);
+  }, 3600);
+}
+
+function setFormLoading(formRoot, loading, text = "Submitting...") {
+  const button = formRoot?.querySelector(".form-submit") || formRoot?.querySelector("button[type='submit']");
+  if (!button) return;
+  if (!button.dataset.defaultText) button.dataset.defaultText = button.innerHTML;
+  button.disabled = loading;
+  button.innerHTML = loading ? `<span>${text}</span>` : button.dataset.defaultText;
+}
+
+function showFormSuccess(formRoot) {
+  const form = formRoot?.querySelector("form");
+  const success = formRoot?.querySelector(".form-success");
+  if (form) form.style.display = "none";
+  if (success) success.classList.add("show");
+}
+
+window.SVSite = {
+  config: SV_CONFIG,
+  db,
+  insertRecord,
+  showToast,
+  setFormLoading,
+  showFormSuccess,
+  getCurrency: () => currentCurrency,
+  setCurrency: (curr) => updateCurrencyDisplay(curr),
+  getAttendanceMode: () => currentAttendanceMode,
 };
 
 function initNavbar() {
@@ -185,6 +224,7 @@ function updateCurrencyDisplay(currency) {
   document.querySelectorAll(".currency-btn").forEach((btn) => {
     btn.classList.toggle("active", btn.dataset.currency === currency);
   });
+  window.dispatchEvent(new CustomEvent("currencychange", { detail: { currency } }));
 }
 
 function initCurrencyToggle() {
@@ -397,8 +437,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setupForm("committeeForm", "committeeWrap", "Application received! Thank you for joining our peer review panel.");
   setupForm("contactForm", "contactWrap", "Message sent! Our secretariat will reply within 24 hours.");
   setupForm("interestForm", "interestWrap", "Thank you for expressing interest in SVRIDS 2027!");
-  setupForm("awardsForm", "awardsWrap", "Award nomination submitted successfully!");
-  setupForm("registrationForm", "registerWrap", "Registration interest noted. Check your inbox for booking links.");
+  if (!document.getElementById("registrationForm")?.dataset?.customSubmit) {
+    setupForm("registrationForm", "registerWrap", "Registration interest noted. Check your inbox for booking links.");
+  }
 
   if (typeof lucide !== "undefined") {
     lucide.createIcons();
