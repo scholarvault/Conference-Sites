@@ -15,88 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
   <script src="https://app.scholarvault.in/conference-embed.js" data-conference="svrids-2027" defer></script>
-  <style>
-  /* Gold Purchase Modal */
-  .gold-modal-overlay {
-    display: none; position: fixed; inset: 0; z-index: 9999;
-    background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
-    align-items: flex-end; justify-content: center;
-  }
-  .gold-modal-overlay.open { display: flex; }
-  .gold-modal {
-    width: 100%; max-width: 520px;
-    background: linear-gradient(160deg, #1a1000, #2a1800, #0d0800);
-    border: 1.5px solid rgba(255,193,7,0.35);
-    border-bottom: none;
-    border-radius: 24px 24px 0 0;
-    padding: 2rem 2rem 2.5rem;
-    box-shadow: 0 -8px 48px rgba(255,193,7,0.15);
-    animation: slideUp 0.3s cubic-bezier(0.32,0.72,0,1);
-    position: relative;
-  }
-  @keyframes slideUp {
-    from { transform: translateY(100%); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
-  }
-  .gold-modal-handle {
-    width: 40px; height: 4px; border-radius: 2px;
-    background: rgba(255,193,7,0.3); margin: 0 auto 1.5rem;
-  }
-  .gold-modal-title {
-    font-family: var(--font-display, 'Manrope', sans-serif); font-size: 1.2rem; font-weight: 900;
-    background: linear-gradient(135deg,#ffc107,#ffe082,#ff8f00);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    margin-bottom: 0.4rem;
-  }
-  .gold-modal-sub {
-    font-size: 13px; color: rgba(255,193,7,0.6); margin-bottom: 1.25rem; line-height: 1.5;
-  }
-  .gold-modal-perks {
-    display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem;
-  }
-  .gold-modal-perk {
-    font-size: 13px; color: rgba(255,220,100,0.85);
-    display: flex; align-items: center; gap: 8px;
-  }
-  .gold-modal-perk::before { content: '✦'; color: #ffc107; font-size: 9px; flex-shrink: 0; }
-  .gold-modal-price-row {
-    display: flex; align-items: baseline; gap: 8px; margin-bottom: 1.25rem;
-  }
-  .gold-modal-price {
-    font-size: 2rem; font-weight: 900; font-family: var(--font-display, 'Manrope', sans-serif);
-    background: linear-gradient(135deg,#ffc107,#ff8f00);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .gold-modal-price-note { font-size: 13px; color: rgba(255,193,7,0.5); }
-  .gold-modal-input-row { display: flex; gap: 10px; margin-bottom: 0.75rem; }
-  .gold-modal-input {
-    flex: 1; padding: 12px 14px; border-radius: 6px;
-    background: rgba(255,193,7,0.07); border: 1.5px solid rgba(255,193,7,0.25);
-    color: #fff; font-size: 14px;
-  }
-  .gold-modal-input::placeholder { color: rgba(255,255,255,0.3); }
-  .gold-modal-input:focus { border-color: #ffc107; outline: none; box-shadow: 0 0 0 3px rgba(255,193,7,0.1); }
-  .gold-modal-btn {
-    width: 100%; padding: 14px; border-radius: 6px;
-    background: linear-gradient(135deg,#ff8f00,#ffc107); color: #000;
-    border: none; cursor: pointer; font-weight: 800; font-size: 15px;
-    transition: all 0.3s ease; letter-spacing: 0.02em;
-  }
-  .gold-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255,193,7,0.4); }
-  .gold-modal-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-  .gold-modal-note {
-    font-size: 11px; color: rgba(255,193,7,0.4); text-align: center;
-    margin-top: 0.75rem; line-height: 1.6;
-  }
-  .gold-modal-close {
-    position: absolute; top: 1.25rem; right: 1.25rem;
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.7); border-radius: 50%; width: 32px; height: 32px;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer; font-size: 16px; transition: all 0.3s ease;
-  }
-  .gold-modal-close:hover { background: rgba(255,255,255,0.1); color: #fff; transform: rotate(90deg); }
-  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 <body>
   <!-- Top Notice Banner -->
@@ -356,7 +275,7 @@
           </p>
         </div>
 
-        <form id="registrationForm" class="form-grid">
+        <form id="registrationForm" class="form-grid" data-custom-submit="true">
           <input type="hidden" name="category_id" id="regCategoryId" />
           <input type="hidden" name="category_code" id="regCategoryCode" />
           <input type="hidden" name="query_type" id="regQueryType" />
@@ -687,49 +606,6 @@
     </div>
   </div>
 
-  <!-- ─── GOLD PURCHASE MODAL ─── -->
-  <div class="gold-modal-overlay" id="goldModalOverlay" onclick="handleGoldOverlayClick(event)">
-    <div class="gold-modal">
-      <button class="gold-modal-close" onclick="closeGoldModal()" aria-label="Close">✕</button>
-      <div class="gold-modal-handle"></div>
-      
-      <h3 class="gold-modal-title">Upgrade to ScholarVault Gold</h3>
-      <p class="gold-modal-sub">Get absolute protection against predatory conferences and save 15% immediately on your SVRIDS 2027 registration today.</p>
-  
-      <div class="gold-modal-perks">
-        <div class="gold-modal-perk">Protect your research and funding from predatory organizers</div>
-        <div class="gold-modal-perk">Full forensic PDF conference verification reports</div>
-        <div class="gold-modal-perk">Instant 15% discount applied across all summit passes</div>
-        <div class="gold-modal-perk">Priority routing into SVRIDS DeepTech investor syndicate</div>
-      </div>
-  
-      <div class="gold-modal-price-row">
-        <span class="gold-modal-price">₹399</span>
-        <span class="gold-modal-price-note">/ month &nbsp;·&nbsp; cancel anytime</span>
-      </div>
-  
-      <div class="gold-modal-input-row">
-        <input
-          type="email"
-          id="goldModalEmail"
-          class="gold-modal-input"
-          placeholder="your@email.com — Member ID is sent here"
-          autocomplete="email"
-        />
-      </div>
-      <div id="goldModalMsg" style="font-size:12px;color:rgba(255,193,7,0.6);min-height:16px;margin-bottom:0.75rem;"></div>
-  
-      <button class="gold-modal-btn" id="goldModalBtn" onclick="proceedToGoldCheckout()">
-        Get Gold &amp; Unlock 15% Off →
-      </button>
-  
-      <div class="gold-modal-note">
-        You'll be taken to secure Dodo Payments checkout.<br/>
-        Your Member ID arrives by email within seconds. Return here and enter it above.
-      </div>
-    </div>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="js/main.js"></script>
@@ -737,134 +613,393 @@
   <script>
   (function () {
     const SVRIDS_TIERS = {
-      virtual_student: { priceINR: 2499, priceUSD: 99, dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK', dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq' },
-      virtual_founder: { priceINR: 5499, priceUSD: 199, dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK', dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE' },
-      virtual_listener: { priceINR: 1499, priceUSD: 59, dodoINR: 'pdt_0Nd5khVR6xzYWKMn2CiPn', dodoUSD: 'pdt_0Nd5oPQ5Pg5BpH35V79ry' },
-      virtual_coauthor: { priceINR: 2499, priceUSD: 79, dodoINR: 'pdt_0Nd5kme4fOVnzmFhWGdfD', dodoUSD: 'pdt_0Nd5oUQJh9bYUQYMFtlaL' },
-      inperson_student: { priceINR: 3499, priceUSD: 139, dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK', dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq' },
-      inperson_academic: { priceINR: 6499, priceUSD: 249, dodoINR: 'pdt_0Nd5kYgKTGfwBr2VCG9Y9', dodoUSD: 'pdt_0Nd5mvbsjDzSK9eeKrn95' },
-      inperson_investor: { priceINR: 11999, priceUSD: 479, dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK', dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE' }
+      virtual_student: {
+        name: 'Virtual Student / Academic',
+        priceINR: 2499,
+        priceUSD: 99,
+        dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK',
+        dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq',
+        perks: [
+          'Official Virtual Presentation slot in scheduled DeepTech track',
+          'Inclusion of accepted abstract in archived ISBN proceedings',
+          'Verifiable Digital Certificate of Presentation & Authorship',
+          'Virtual networking lounge & access to all 6 DeepTech tracks'
+        ]
+      },
+      virtual_founder: {
+        name: 'Virtual Startup Pitch Pass',
+        priceINR: 5499,
+        priceUSD: 199,
+        dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK',
+        dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE',
+        perks: [
+          '10-minute Virtual Startup Pitch slot directly before DeepTech Investor Jury',
+          'Inclusion in SVRIDS 2027 Venture Pitch Directory & investor syndicate book',
+          'Verifiable Digital Certificate of Pitch Presentation & Startup Showcase',
+          'Full access to all 6 DeepTech tracks & direct investor match sessions'
+        ]
+      },
+      virtual_listener: {
+        name: 'Virtual Listener Pass',
+        priceINR: 1499,
+        priceUSD: 59,
+        dodoINR: 'pdt_0Nd5khVR6xzYWKMn2CiPn',
+        dodoUSD: 'pdt_0Nd5oPQ5Pg5BpH35V79ry',
+        perks: [
+          'Full observer access to all live virtual sessions, keynote pitches & Q&A',
+          'Verifiable Digital Certificate of Participation & Summit Attendance',
+          'Access to digital abstract booklet and pitch decks directory',
+          'Access to recorded keynote sessions after conference conclusion'
+        ]
+      },
+      virtual_coauthor: {
+        name: 'Virtual Co-Author Pass',
+        priceINR: 2499,
+        priceUSD: 79,
+        dodoINR: 'pdt_0Nd5kme4fOVnzmFhWGdfD',
+        dodoUSD: 'pdt_0Nd5oUQJh9bYUQYMFtlaL',
+        perks: [
+          'Co-presenter accreditation for accepted paper / startup pitch',
+          'Inclusion in author index & official ISBN proceedings',
+          'Verifiable Digital Certificate of Co-Authorship & Presentation',
+          'Full access to all 6 DeepTech tracks & technical sessions'
+        ]
+      },
+      inperson_student: {
+        name: 'In-Person Student Delegate',
+        priceINR: 3499,
+        priceUSD: 139,
+        dodoINR: 'pdt_0Nd5kUGj8inKqSbyRdiVK',
+        dodoUSD: 'pdt_0Nd5mroA8YckMQG8DFVpq',
+        perks: [
+          'Full physical access to Innovation Hub Stage, Bengaluru venue',
+          'In-person track presentation slot & physical certificate of presentation',
+          'Delegate lunch, coffee breaks & networking badge kit',
+          'Access to physical demo expo & startup networking sessions'
+        ]
+      },
+      inperson_academic: {
+        name: 'In-Person Academic / Founder Pass',
+        priceINR: 6499,
+        priceUSD: 249,
+        dodoINR: 'pdt_0Nd5kYgKTGfwBr2VCG9Y9',
+        dodoUSD: 'pdt_0Nd5mvbsjDzSK9eeKrn95',
+        perks: [
+          'Full 2-day physical pass at Innovation Hub Bengaluru + stage presentation',
+          'Inclusion of accepted paper / spinout in ISBN proceedings',
+          'VIP networking dinner, founder-investor roundtable & delegate kit',
+          '1-on-1 scheduled sessions with venture partners & technology transfer leaders'
+        ]
+      },
+      inperson_investor: {
+        name: 'In-Person Investor & Corporate Pass',
+        priceINR: 11999,
+        priceUSD: 479,
+        dodoINR: 'pdt_0NdOa8jMzPhic3qfAjnhK',
+        dodoUSD: 'pdt_0NdOaDcqj1rebfVwnjkEE',
+        perks: [
+          'Exclusive VIP Pass with private Investor Lounge & Pitch Jury access',
+          'Full confidential Startup Pitch Book & Founder Contact Database',
+          'VIP Networking Dinner & private deal-flow matchmaking concierge',
+          'Executive delegate kit & priority access to all summit proceedings'
+        ]
+      }
     };
 
     let svGoldApplied = false;
+    let appliedCoupon = null; // { code, discountPercent }
+    let currentCurrency = window.SVSite?.getCurrency?.() || 'INR';
+
     const goldToggle = document.getElementById('goldOptInToggle');
+    const goldSwitchTrack = document.getElementById('goldSwitchTrack');
+    const goldSwitchKnob = document.getElementById('goldSwitchKnob');
+    const goldToggleLabel = document.getElementById('goldToggleLabel');
+    const categorySelect = document.getElementById('regCategorySelect');
+    const couponInput = document.getElementById('couponCodeInput');
+    const applyCouponBtn = document.getElementById('applyCouponBtn');
+    const couponStatusMsg = document.getElementById('couponStatusMsg');
+
+    const baseFeeDisplay = document.getElementById('baseFeeDisplay');
+    const finalPriceDisplay = document.getElementById('finalPriceDisplay');
+    const discountLineItem = document.getElementById('discountLineItem');
+    const discountLabel = document.getElementById('discountLabel');
+    const discountAmountDisplay = document.getElementById('discountAmountDisplay');
+    const goldSavingsBadge = document.getElementById('goldSavingsBadge');
+    const summaryBadgeTier = document.getElementById('summaryBadgeTier');
+    const btnSubmitText = document.getElementById('btnSubmitText');
+    const passBenefitsList = document.getElementById('passBenefitsList');
+
     if (goldToggle) {
-        goldToggle.addEventListener('change', (e) => {
-            svGoldApplied = e.target.checked;
-            
-            // Toggle visual styling
-            const goldSwitchTrack = document.getElementById('goldSwitchTrack');
-            const goldSwitchKnob = document.getElementById('goldSwitchKnob');
-            const goldToggleLabel = document.getElementById('goldToggleLabel');
-            
-            if (svGoldApplied) {
-                if (goldSwitchTrack) {
-                    goldSwitchTrack.style.background = 'linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-amber) 100%)';
-                    goldSwitchTrack.style.borderColor = 'var(--accent-amber)';
-                }
-                if (goldSwitchKnob) {
-                    goldSwitchKnob.style.transform = 'translateX(22px)';
-                }
-                if (goldToggleLabel) {
-                    goldToggleLabel.textContent = 'Active ✓';
-                    goldToggleLabel.style.color = '#34d399';
-                }
-            } else {
-                if (goldSwitchTrack) {
-                    goldSwitchTrack.style.background = 'rgba(255, 255, 255, 0.15)';
-                    goldSwitchTrack.style.borderColor = 'rgba(255, 255, 255, 0.25)';
-                }
-                if (goldSwitchKnob) {
-                    goldSwitchKnob.style.transform = 'translateX(0px)';
-                }
-                if (goldToggleLabel) {
-                    goldToggleLabel.textContent = 'Add Perk';
-                    goldToggleLabel.style.color = '#94a3b8';
-                }
-            }
-            updatePricingDisplay();
-        });
+      goldToggle.addEventListener('change', (e) => {
+        svGoldApplied = e.target.checked;
+        if (svGoldApplied) {
+          if (goldSwitchTrack) {
+            goldSwitchTrack.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
+            goldSwitchTrack.style.borderColor = '#f59e0b';
+            goldSwitchTrack.style.boxShadow = '0 0 12px rgba(245, 158, 11, 0.4)';
+          }
+          if (goldSwitchKnob) {
+            goldSwitchKnob.style.transform = 'translateX(22px)';
+          }
+          if (goldToggleLabel) {
+            goldToggleLabel.textContent = 'Active ✓';
+            goldToggleLabel.style.color = '#34d399';
+          }
+        } else {
+          if (goldSwitchTrack) {
+            goldSwitchTrack.style.background = 'rgba(255, 255, 255, 0.15)';
+            goldSwitchTrack.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+            goldSwitchTrack.style.boxShadow = 'none';
+          }
+          if (goldSwitchKnob) {
+            goldSwitchKnob.style.transform = 'translateX(0px)';
+          }
+          if (goldToggleLabel) {
+            goldToggleLabel.textContent = 'Add Perk';
+            goldToggleLabel.style.color = '#94a3b8';
+          }
+        }
+        updatePricingDisplay();
+      });
     }
 
-    const categorySelect = document.querySelector('select[name="category"]');
     if (categorySelect) {
-        categorySelect.addEventListener('change', updatePricingDisplay);
+      categorySelect.addEventListener('change', updatePricingDisplay);
     }
-    
+
+    // Connect tier card buttons
+    document.querySelectorAll('.select-tier-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const cat = btn.dataset.category;
+        if (cat && categorySelect) {
+          categorySelect.value = cat;
+          updatePricingDisplay();
+        }
+      });
+    });
+
+    // Listen for currency toggle
+    window.addEventListener('currencychange', (e) => {
+      if (e.detail?.currency) {
+        currentCurrency = e.detail.currency;
+        const regCurrency = document.getElementById('regCurrency');
+        if (regCurrency) regCurrency.value = currentCurrency;
+        updatePricingDisplay();
+      }
+    });
+
+    // Coupon logic
+    if (applyCouponBtn && couponInput) {
+      applyCouponBtn.addEventListener('click', () => {
+        const code = couponInput.value.trim().toUpperCase();
+        if (!code) {
+          showCouponMessage('Please enter a voucher or promo code.', 'error');
+          return;
+        }
+
+        if (code === 'GRANT100') {
+          appliedCoupon = { code: 'GRANT100', discountPercent: 100 };
+          showCouponMessage('✓ Student Grant Code Applied: 100% Registration Fee Remission granted.', 'success');
+        } else if (code === 'EARLYBIRD') {
+          appliedCoupon = { code: 'EARLYBIRD', discountPercent: 20 };
+          showCouponMessage('✓ Early Bird Code Applied: 20% discount granted.', 'success');
+        } else if (code === 'SVRIDS15' || code === 'ISIAI15') {
+          appliedCoupon = { code, discountPercent: 15 };
+          showCouponMessage(`✓ Code Applied: 15% discount granted (${code}).`, 'success');
+        } else {
+          appliedCoupon = null;
+          showCouponMessage('✕ Invalid or expired voucher code. Check code or contact secretariat.', 'error');
+        }
+        updatePricingDisplay();
+      });
+
+      couponInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          applyCouponBtn.click();
+        }
+      });
+    }
+
+    function showCouponMessage(msg, type) {
+      if (!couponStatusMsg) return;
+      couponStatusMsg.style.display = 'block';
+      couponStatusMsg.style.color = type === 'success' ? '#34d399' : '#f87171';
+      couponStatusMsg.textContent = msg;
+    }
+
     function updatePricingDisplay() {
-        if (!categorySelect) return;
-        const cat = categorySelect.value;
-        const tier = SVRIDS_TIERS[cat];
-        if (!tier) return;
-        
-        let baseFee = tier.priceINR;
-        let discount = svGoldApplied ? Math.round(baseFee * 0.15) : 0;
-        let finalFee = baseFee - discount;
-        
-        const baseFeeDisplay = document.getElementById('baseFeeDisplay');
-        const finalPriceDisplay = document.getElementById('finalPriceDisplay');
-        const discountLineItem = document.getElementById('discountLineItem');
-        const discountAmountDisplay = document.getElementById('discountAmountDisplay');
-        const goldSavingsBadge = document.getElementById('goldSavingsBadge');
-        const btnSubmitText = document.getElementById('btnSubmitText');
-        
-        if (baseFeeDisplay) baseFeeDisplay.textContent = '₹' + baseFee.toLocaleString();
-        if (finalPriceDisplay) finalPriceDisplay.textContent = '₹' + finalFee.toLocaleString();
-        if (discountLineItem) discountLineItem.style.display = discount > 0 ? 'flex' : 'none';
-        if (discountAmountDisplay) discountAmountDisplay.textContent = '-₹' + discount.toLocaleString();
-        
-        const possibleSavings = Math.round(baseFee * 0.15);
-        if (goldSavingsBadge) goldSavingsBadge.textContent = 'Save ₹' + possibleSavings.toLocaleString() + ' Instantly';
-        if (btnSubmitText) btnSubmitText.innerHTML = 'Proceed to Secure Checkout &bull; ₹' + finalFee.toLocaleString();
+      if (!categorySelect) return;
+      const catKey = categorySelect.value || 'virtual_student';
+      const tier = SVRIDS_TIERS[catKey] || SVRIDS_TIERS.virtual_student;
+      const isUSD = currentCurrency === 'USD';
+      const baseFee = isUSD ? tier.priceUSD : tier.priceINR;
+
+      // 1. Update summary badge
+      if (summaryBadgeTier) summaryBadgeTier.textContent = tier.name;
+
+      // 2. Update perks bullets
+      if (passBenefitsList && tier.perks) {
+        passBenefitsList.innerHTML = tier.perks.map((p) => `
+          <li style="display: flex; align-items: center; gap: 8px;">
+            <i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i>
+            <span>${p}</span>
+          </li>
+        `).join('');
+      }
+
+      // 3. Dynamic Gold Savings Badge
+      const possibleSavings = Math.round(baseFee * 0.15);
+      if (goldSavingsBadge) {
+        goldSavingsBadge.textContent = isUSD
+          ? `Save $${possibleSavings} Instantly`
+          : `Save ₹${possibleSavings.toLocaleString('en-IN')} Instantly`;
+      }
+
+      // 4. Calculate final fee & discounts
+      let finalFee = baseFee;
+      let totalDiscount = 0;
+      let discountDesc = 'Discount:';
+
+      if (svGoldApplied && appliedCoupon) {
+        const goldDisc = Math.round(baseFee * 0.15);
+        const rem = baseFee - goldDisc;
+        const couponDisc = Math.round(rem * (appliedCoupon.discountPercent / 100));
+        totalDiscount = Math.min(baseFee, goldDisc + couponDisc);
+        finalFee = Math.max(0, baseFee - totalDiscount);
+        discountDesc = `👑 Gold (15%) + Promo (${appliedCoupon.code} -${appliedCoupon.discountPercent}%):`;
+      } else if (svGoldApplied) {
+        totalDiscount = Math.round(baseFee * 0.15);
+        finalFee = Math.max(0, baseFee - totalDiscount);
+        discountDesc = '👑 ScholarVault Gold (15%):';
+      } else if (appliedCoupon) {
+        totalDiscount = Math.min(baseFee, Math.round(baseFee * (appliedCoupon.discountPercent / 100)));
+        finalFee = Math.max(0, baseFee - totalDiscount);
+        discountDesc = `Promo Code (${appliedCoupon.code} -${appliedCoupon.discountPercent}%):`;
+      }
+
+      // 5. Update DOM displays
+      if (baseFeeDisplay) {
+        baseFeeDisplay.textContent = isUSD ? `$${baseFee}` : `₹${baseFee.toLocaleString('en-IN')}`;
+      }
+
+      if (discountLineItem) {
+        if (totalDiscount > 0) {
+          discountLineItem.style.display = 'flex';
+          if (discountLabel) discountLabel.textContent = discountDesc;
+          if (discountAmountDisplay) {
+            discountAmountDisplay.textContent = isUSD
+              ? `-$${totalDiscount}`
+              : `-₹${totalDiscount.toLocaleString('en-IN')}`;
+          }
+        } else {
+          discountLineItem.style.display = 'none';
+        }
+      }
+
+      if (finalPriceDisplay) {
+        finalPriceDisplay.textContent = isUSD ? `$${finalFee}` : `₹${finalFee.toLocaleString('en-IN')}`;
+      }
+
+      if (btnSubmitText) {
+        if (finalFee === 0) {
+          btnSubmitText.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; ${isUSD ? '$0' : '₹0'}`;
+        } else {
+          btnSubmitText.innerHTML = `Proceed to Secure Checkout &bull; ${isUSD ? '$' + finalFee : '₹' + finalFee.toLocaleString('en-IN')}`;
+        }
+      }
     }
 
     const regForm = document.getElementById('registrationForm');
     if (regForm) {
-        regForm.addEventListener('submit', async function (e) {
-            e.preventDefault();
-            const formData = new FormData(regForm);
-            const categoryKey = formData.get('category');
-            if (!categoryKey || !SVRIDS_TIERS[categoryKey]) return;
-            const tierObj = SVRIDS_TIERS[categoryKey];
-            const finalPrice = tierObj.priceINR - (svGoldApplied ? Math.round(tierObj.priceINR * 0.15) : 0);
-            
-            const regRecord = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                institution: formData.get('institution'),
-                country: formData.get('country'),
-                city: formData.get('city'),
-                zip_code: formData.get('zip_code'),
-                category: categoryKey,
-                paper_id: formData.get('paper_id'),
-                amount: finalPrice,
-                status: 'pending'
-            };
+      regForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const formData = new FormData(regForm);
+        const categoryKey = formData.get('category');
+        if (!categoryKey || !SVRIDS_TIERS[categoryKey]) return;
+        const tierObj = SVRIDS_TIERS[categoryKey];
+        const isUSD = currentCurrency === 'USD';
+        const basePrice = isUSD ? tierObj.priceUSD : tierObj.priceINR;
 
-            try {
-                if (window.SVSite && typeof window.SVSite.insertRecord === 'function') {
-                    await window.SVSite.insertRecord('conf_registrations', regRecord);
-                }
-            } catch (err) {
-                console.warn(err);
+        let finalPrice = basePrice;
+        if (svGoldApplied && appliedCoupon) {
+          const goldDisc = Math.round(basePrice * 0.15);
+          const rem = basePrice - goldDisc;
+          const couponDisc = Math.round(rem * (appliedCoupon.discountPercent / 100));
+          finalPrice = Math.max(0, basePrice - (goldDisc + couponDisc));
+        } else if (svGoldApplied) {
+          finalPrice = Math.max(0, basePrice - Math.round(basePrice * 0.15));
+        } else if (appliedCoupon) {
+          finalPrice = Math.max(0, basePrice - Math.round(basePrice * (appliedCoupon.discountPercent / 100)));
+        }
+
+        const regRecord = {
+          name: formData.get('name'),
+          email: formData.get('email'),
+          phone: formData.get('phone'),
+          institution: formData.get('institution'),
+          country: formData.get('country'),
+          city: formData.get('city'),
+          zip_code: formData.get('zip_code'),
+          category: categoryKey,
+          paper_id: formData.get('paper_id'),
+          amount: finalPrice,
+          currency: currentCurrency,
+          gold_opt_in: svGoldApplied,
+          coupon_code: appliedCoupon?.code || null,
+          ror_id: formData.get('ror_id') || regForm.dataset.rorId || null,
+          status: finalPrice === 0 ? 'confirmed' : 'pending'
+        };
+
+        const submitBtn = regForm.querySelector('button[type="submit"]');
+        const origText = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) {
+          submitBtn.disabled = true;
+          submitBtn.innerHTML = 'Connecting to Secure Checkout…';
+        }
+
+        try {
+          if (window.SVSite && typeof window.SVSite.insertRecord === 'function') {
+            await window.SVSite.insertRecord('conf_registrations', regRecord);
+          }
+        } catch (err) {
+          console.warn('Registration record log note:', err);
+        }
+
+        // If 100% grant waiver, show success immediately
+        if (finalPrice === 0) {
+          regForm.style.display = 'none';
+          const successState = document.getElementById('registerSuccess');
+          if (successState) {
+            successState.classList.add('show');
+            const successText = successState.querySelector('.form-success__text');
+            if (successText) {
+              successText.innerHTML = `Your registration pass has been approved under <strong>${appliedCoupon.code}</strong> 100% Grant Waiver. An official confirmation pass receipt has been dispatched to <strong>${formData.get('email')}</strong>.`;
             }
+          }
+          window.SVSite?.showToast?.('Grant pass confirmed successfully!', 'success');
+          return;
+        }
 
-            const product = tierObj.dodoINR;
-            const emailEnc = encodeURIComponent(formData.get('email'));
-            const returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + '?payment=success');
-            let checkoutUrl = 'https://checkout.dodopayments.com/buy/' + product
-                + '?customer_email=' + emailEnc
-                + '&return_url=' + returnUrl
-                + '&metadata[conf_id]=svrids-2027'
-                + '&metadata[tier]=' + encodeURIComponent(categoryKey);
+        // Redirect to Dodo Payments checkout
+        const product = isUSD ? tierObj.dodoUSD : tierObj.dodoINR;
+        const emailEnc = encodeURIComponent(formData.get('email'));
+        const returnUrl = encodeURIComponent(window.location.origin + window.location.pathname + '?payment=success');
+        let checkoutUrl = 'https://checkout.dodopayments.com/buy/' + product
+          + '?customer_email=' + emailEnc
+          + '&return_url=' + returnUrl
+          + '&metadata[conf_id]=svrids-2027'
+          + '&metadata[tier]=' + encodeURIComponent(categoryKey);
 
-            if (svGoldApplied) checkoutUrl += '&discount_code=GOLD15';
-            
-            window.location.href = checkoutUrl;
-        });
+        if (svGoldApplied) checkoutUrl += '&discount_code=GOLD15';
+
+        window.location.href = checkoutUrl;
+      });
     }
-})();
+
+    // Initialize default display
+    updatePricingDisplay();
+  })();
   </script>
 
   <!-- Tawk.to Live Chat Script -->
@@ -879,5 +1014,6 @@
     s0.parentNode.insertBefore(s1, s0);
   })();
   </script>
+  <script src="js/academic-enrichment.js"></script>
 </body>
 </html>

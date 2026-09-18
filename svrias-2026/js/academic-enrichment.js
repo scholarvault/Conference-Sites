@@ -104,14 +104,238 @@
 
   const rorQueryCache = new Map();
 
+  function injectRorStyles() {
+    if (document.getElementById('ror-injected-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'ror-injected-styles';
+    style.textContent = `
+      .ror-autocomplete-wrapper {
+        position: relative !important;
+        width: 100% !important;
+        display: block !important;
+      }
+      .ror-autocomplete-dropdown {
+        position: absolute !important;
+        top: calc(100% + 4px) !important;
+        left: 0 !important;
+        right: 0 !important;
+        max-height: 290px !important;
+        overflow-y: auto !important;
+        z-index: 9999999 !important;
+        margin: 0 !important;
+        padding: 6px !important;
+        list-style: none !important;
+        border-radius: 12px !important;
+        font-family: inherit !important;
+        font-size: 14px !important;
+        line-height: 1.4 !important;
+        box-sizing: border-box !important;
+        box-shadow: 0 16px 36px rgba(0,0,0,0.2) !important;
+      }
+      /* Custom scrollbar */
+      .ror-autocomplete-dropdown::-webkit-scrollbar { width: 6px; }
+      .ror-autocomplete-dropdown::-webkit-scrollbar-thumb {
+        background: rgba(148, 163, 184, 0.4);
+        border-radius: 999px;
+      }
+      /* Light theme */
+      .ror-autocomplete-dropdown.ror-theme-light,
+      .section--light .ror-autocomplete-dropdown,
+      .section--mist .ror-autocomplete-dropdown {
+        background: #ffffff !important;
+        border: 1.5px solid #86efac !important;
+        box-shadow: 0 16px 36px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(22, 163, 74, 0.08) !important;
+        color: #0f172a !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-light .ror-dropdown-item,
+      .section--light .ror-dropdown-item,
+      .section--mist .ror-dropdown-item {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        padding: 9px 12px !important;
+        margin-bottom: 2px !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        color: #1e293b !important;
+        border-left: 3px solid transparent !important;
+        transition: background 0.15s ease, border-color 0.15s ease !important;
+        text-align: left !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-light .ror-dropdown-item:hover,
+      .ror-autocomplete-dropdown.ror-theme-light .ror-dropdown-item.selected,
+      .section--light .ror-dropdown-item:hover,
+      .section--light .ror-dropdown-item.selected,
+      .section--mist .ror-dropdown-item:hover,
+      .section--mist .ror-dropdown-item.selected {
+        background: #f0fdf4 !important;
+        border-left-color: #16a34a !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-light .ror-item-name,
+      .section--light .ror-item-name,
+      .section--mist .ror-item-name {
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        color: #081210 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-light .ror-cap-icon,
+      .section--light .ror-cap-icon,
+      .section--mist .ror-cap-icon {
+        color: #16a34a !important;
+        flex-shrink: 0 !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-light .ror-item-meta,
+      .section--light .ror-item-meta,
+      .section--mist .ror-item-meta {
+        font-size: 11.5px !important;
+        color: #64748b !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-light .ror-item-id,
+      .section--light .ror-item-id,
+      .section--mist .ror-item-id {
+        display: inline-flex !important;
+        align-items: center !important;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+        font-size: 10.5px !important;
+        color: #15803d !important;
+        background: #dcfce7 !important;
+        border: 1px solid #86efac !important;
+        padding: 1px 6px !important;
+        border-radius: 4px !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-light .ror-loading-indicator,
+      .ror-autocomplete-dropdown.ror-theme-light .ror-no-results,
+      .section--light .ror-loading-indicator,
+      .section--light .ror-no-results,
+      .section--mist .ror-loading-indicator,
+      .section--mist .ror-no-results {
+        padding: 12px 14px !important;
+        font-size: 13px !important;
+        color: #64748b !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        text-align: left !important;
+      }
+
+      /* Dark theme */
+      .ror-autocomplete-dropdown.ror-theme-dark {
+        background: #0f172a !important;
+        border: 1.5px solid rgba(56, 189, 248, 0.35) !important;
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.8), 0 0 25px rgba(56, 189, 248, 0.15) !important;
+        color: #f8fafc !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-dropdown-item {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 3px !important;
+        padding: 9px 12px !important;
+        margin-bottom: 2px !important;
+        border-radius: 8px !important;
+        cursor: pointer !important;
+        color: #e2e8f0 !important;
+        border-left: 3px solid transparent !important;
+        transition: background 0.15s ease, border-color 0.15s ease !important;
+        text-align: left !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-dropdown-item:hover,
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-dropdown-item.selected {
+        background: rgba(56, 189, 248, 0.14) !important;
+        border-left-color: #38bdf8 !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-item-name {
+        font-size: 13.5px !important;
+        font-weight: 700 !important;
+        color: #ffffff !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-cap-icon {
+        color: #38bdf8 !important;
+        flex-shrink: 0 !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-item-meta {
+        font-size: 11.5px !important;
+        color: #94a3b8 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex-wrap: wrap !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-item-id {
+        display: inline-flex !important;
+        align-items: center !important;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace !important;
+        font-size: 10.5px !important;
+        color: #38bdf8 !important;
+        background: rgba(56, 189, 248, 0.12) !important;
+        border: 1px solid rgba(56, 189, 248, 0.25) !important;
+        padding: 1px 6px !important;
+        border-radius: 4px !important;
+      }
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-loading-indicator,
+      .ror-autocomplete-dropdown.ror-theme-dark .ror-no-results {
+        padding: 12px 14px !important;
+        font-size: 13px !important;
+        color: #94a3b8 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 8px !important;
+        text-align: left !important;
+      }
+      @keyframes rorSpin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function getThemeForInput(input) {
+    if (input.closest('.section--light, .section--mist, .light-theme, [data-theme="light"], .theme--light')) {
+      return 'light';
+    }
+    try {
+      const bg = window.getComputedStyle(input.closest('.form-shell') || input || document.body).backgroundColor;
+      if (bg && bg !== 'transparent') {
+        const match = bg.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+        if (match) {
+          const r = parseInt(match[1], 10);
+          const g = parseInt(match[2], 10);
+          const b = parseInt(match[3], 10);
+          const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
+          if (luminance > 140) return 'light';
+        }
+      }
+    } catch (e) {}
+
+    if (document.title.includes('ISIAI') || window.location.pathname.includes('isiai')) {
+      return 'light';
+    }
+    return 'dark';
+  }
+
   function initRorAutocomplete() {
-    const selector = 'input[name="author_institution"], input[name="institution"], input[data-ror-autocomplete]';
+    injectRorStyles();
+    const selector = 'input[name="author_institution"], input[name="institution"], input[name="organization"], input[name="affiliation"], input[data-ror-autocomplete]';
     const inputs = document.querySelectorAll(selector);
     if (!inputs.length) return;
 
     inputs.forEach((input) => {
       if (input.dataset.rorInitialized) return;
       input.dataset.rorInitialized = 'true';
+      input.setAttribute('autocomplete', 'off');
+      input.setAttribute('spellcheck', 'false');
 
       const form = input.closest('form');
       let rorHidden = form ? form.querySelector('input[name="ror_id"]') : null;
@@ -126,15 +350,15 @@
       if (!wrapper.classList.contains('ror-autocomplete-wrapper')) {
         wrapper = document.createElement('div');
         wrapper.className = 'ror-autocomplete-wrapper';
-        wrapper.style.position = 'relative';
-        wrapper.style.width = '100%';
         input.parentNode.insertBefore(wrapper, input);
         wrapper.appendChild(input);
       }
 
+      const theme = getThemeForInput(input);
       const dropdown = document.createElement('ul');
-      dropdown.className = 'ror-autocomplete-dropdown';
+      dropdown.className = `ror-autocomplete-dropdown ror-theme-${theme}`;
       dropdown.setAttribute('role', 'listbox');
+      dropdown.setAttribute('data-theme', theme);
       dropdown.style.display = 'none';
       wrapper.appendChild(dropdown);
 
@@ -157,17 +381,27 @@
         isSelecting = true;
         clearTimeout(debounceTimer);
 
-        const displayName = item.names?.find((n) => n.types?.includes('ror_display'))?.value || item.names?.[0]?.value || '';
+        const displayName = item.names?.find((n) => n.types?.includes('ror_display'))?.value || item.name || item.names?.[0]?.value || '';
         input.value = displayName;
         lastSelectedValue = displayName;
 
-        const countryName = item.locations?.[0]?.geonames_details?.country_name || '';
+        const countryName = item.locations?.[0]?.geonames_details?.country_name || item.country?.country_name || '';
         if (countryName && form) {
           const countryInput = form.querySelector('input[name="author_country"], input[name="country"]');
           if (countryInput) {
             countryInput.value = countryName;
             countryInput.dispatchEvent(new Event('input', { bubbles: true }));
             countryInput.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+
+        const city = item.locations?.[0]?.geonames_details?.name || item.addresses?.[0]?.city || '';
+        if (city && form) {
+          const cityInput = form.querySelector('input[name="city"]');
+          if (cityInput && !cityInput.value.trim()) {
+            cityInput.value = city;
+            cityInput.dispatchEvent(new Event('input', { bubbles: true }));
+            cityInput.dispatchEvent(new Event('change', { bubbles: true }));
           }
         }
 
@@ -180,13 +414,16 @@
         }
 
         hideDropdown();
-
+        input.dispatchEvent(new Event('input', { bubbles: true }));
         input.dispatchEvent(new Event('change', { bubbles: true }));
 
         setTimeout(() => {
           isSelecting = false;
         }, 300);
       };
+
+      const capSvg = `<svg class="ror-cap-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0;"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>`;
+      const spinSvg = `<svg class="ror-spin-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="animation: rorSpin 0.8s linear infinite; flex-shrink:0;"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-currentColor stroke-linecap="round"></path></svg>`;
 
       const renderResults = (items) => {
         dropdown.innerHTML = '';
@@ -205,17 +442,17 @@
           li.setAttribute('role', 'option');
           li.dataset.index = String(idx);
 
-          const displayName = item.names?.find((n) => n.types?.includes('ror_display'))?.value || item.names?.[0]?.value || 'Unknown Institution';
-          const city = item.locations?.[0]?.geonames_details?.name || '';
-          const state = item.locations?.[0]?.geonames_details?.country_subdivision_name || '';
-          const country = item.locations?.[0]?.geonames_details?.country_name || '';
+          const displayName = item.names?.find((n) => n.types?.includes('ror_display'))?.value || item.name || item.names?.[0]?.value || 'Unknown Institution';
+          const city = item.locations?.[0]?.geonames_details?.name || item.addresses?.[0]?.city || '';
+          const state = item.locations?.[0]?.geonames_details?.country_subdivision_name || item.addresses?.[0]?.state || '';
+          const country = item.locations?.[0]?.geonames_details?.country_name || item.country?.country_name || '';
           const rorShortId = (item.id || '').replace(/^https?:\/\/ror\.org\//, 'ror.org/');
 
           const locationParts = [city, state, country].filter(Boolean);
 
           li.innerHTML = `
             <div class="ror-item-name">
-              <i class="fa-solid fa-graduation-cap"></i>
+              ${capSvg}
               <span>${escapeHtml(displayName)}</span>
             </div>
             <div class="ror-item-meta">
@@ -242,7 +479,7 @@
           return;
         }
 
-        dropdown.innerHTML = '<li class="ror-loading-indicator"><i class="fa-solid fa-spinner fa-spin"></i> Searching verified universities...</li>';
+        dropdown.innerHTML = `<li class="ror-loading-indicator">${spinSvg} <span>Searching verified universities...</span></li>`;
         dropdown.style.display = 'block';
 
         if (rorQueryCache.has(trimmed.toLowerCase())) {
@@ -272,7 +509,7 @@
         }
         debounceTimer = setTimeout(() => {
           fetchRor(query);
-        }, 220);
+        }, 200);
       });
 
       input.addEventListener('keydown', (e) => {
@@ -308,6 +545,16 @@
           hideDropdown();
         }
       });
+    });
+  }
+
+  // Observer to auto-attach to dynamic modals/forms
+  if (typeof MutationObserver !== 'undefined') {
+    const observer = new MutationObserver(() => {
+      initRorAutocomplete();
+    });
+    ready(() => {
+      observer.observe(document.body, { childList: true, subtree: true });
     });
   }
 

@@ -12,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="canonical" href="https://isiaisgs2026.scholarvault.in/register" />
     <meta property="og:title" content="Register - ISIAI-SGS 2026" />
@@ -117,86 +118,6 @@
     @media (max-width: 640px) { .sv-gold-grid { grid-template-columns: 1fr; } }
     .sv-gold-toggle { display: flex; align-items: center; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
     @media (max-width: 640px) { .sv-gold-toggle { flex-direction: column; } .sv-gold-toggle input[type="text"], .sv-gold-toggle button { width: 100%; } }
-
-    /* ── Gold Purchase Modal ── */
-    .gold-modal-overlay {
-      display: none; position: fixed; inset: 0; z-index: 9999;
-      background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
-      align-items: flex-end; justify-content: center;
-    }
-    .gold-modal-overlay.open { display: flex; }
-    .gold-modal {
-      width: 100%; max-width: 520px;
-      background: linear-gradient(160deg, #1a1000, #2a1800, #0d0800);
-      border: 1.5px solid rgba(255,193,7,0.35);
-      border-bottom: none;
-      border-radius: 24px 24px 0 0;
-      padding: 2rem 2rem 2.5rem;
-      box-shadow: 0 -8px 48px rgba(255,193,7,0.15);
-      animation: slideUp 0.3s cubic-bezier(0.32,0.72,0,1);
-    }
-    @keyframes slideUp {
-      from { transform: translateY(100%); opacity: 0; }
-      to   { transform: translateY(0);    opacity: 1; }
-    }
-    .gold-modal-handle {
-      width: 40px; height: 4px; border-radius: 2px;
-      background: rgba(255,193,7,0.3); margin: 0 auto 1.5rem;
-    }
-    .gold-modal-title {
-      font-family: var(--font-display, 'Manrope', sans-serif); font-size: 1.2rem; font-weight: 900;
-      background: linear-gradient(135deg,#ffc107,#ffe082,#ff8f00);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-      margin-bottom: 0.4rem;
-    }
-    .gold-modal-sub {
-      font-size: 13px; color: rgba(255,193,7,0.6); margin-bottom: 1.25rem; line-height: 1.5;
-    }
-    .gold-modal-perks {
-      display: flex; flex-direction: column; gap: 6px; margin-bottom: 1.5rem;
-    }
-    .gold-modal-perk {
-      font-size: 13px; color: rgba(255,220,100,0.85);
-      display: flex; align-items: center; gap: 8px;
-    }
-    .gold-modal-perk::before { content: '✦'; color: #ffc107; font-size: 9px; flex-shrink: 0; }
-    .gold-modal-price-row {
-      display: flex; align-items: baseline; gap: 8px; margin-bottom: 1.25rem;
-    }
-    .gold-modal-price {
-      font-size: 2rem; font-weight: 900; font-family: var(--font-display, 'Manrope', sans-serif);
-      background: linear-gradient(135deg,#ffc107,#ff8f00);
-      -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .gold-modal-price-note { font-size: 13px; color: rgba(255,193,7,0.5); }
-    .gold-modal-input-row { display: flex; gap: 10px; margin-bottom: 0.75rem; }
-    .gold-modal-input {
-      flex: 1; padding: 12px 14px; border-radius: 6px;
-      background: rgba(255,193,7,0.07); border: 1.5px solid rgba(255,193,7,0.25);
-      color: #fff; font-size: 14px;
-    }
-    .gold-modal-input::placeholder { color: rgba(255,255,255,0.3); }
-    .gold-modal-input:focus { border-color: #ffc107; outline: none; box-shadow: 0 0 0 3px rgba(255,193,7,0.1); }
-    .gold-modal-btn {
-      width: 100%; padding: 14px; border-radius: 6px;
-      background: linear-gradient(135deg,#ff8f00,#ffc107); color: #000;
-      border: none; cursor: pointer; font-weight: 800; font-size: 15px;
-      transition: all 0.3s ease; letter-spacing: 0.02em;
-    }
-    .gold-modal-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(255,193,7,0.4); }
-    .gold-modal-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .gold-modal-note {
-      font-size: 11px; color: rgba(255,193,7,0.4); text-align: center;
-      margin-top: 0.75rem; line-height: 1.6;
-    }
-    .gold-modal-close {
-      position: absolute; top: 1.25rem; right: 1.25rem;
-      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.7); border-radius: 50%; width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; font-size: 16px; transition: all 0.3s ease;
-    }
-    .gold-modal-close:hover { background: rgba(255,255,255,0.1); color: #fff; transform: rotate(90deg); }
     </style>
 
     <!-- Microsoft Clarity Tracking -->
@@ -309,64 +230,66 @@
             </div>
 
             <!-- In-Page Review & Benefits Section -->
-            <div class="field full" style="margin-top: 10px; background: rgba(127, 224, 75, 0.04); border: 1px solid rgba(127, 224, 75, 0.2); border-radius: 12px; padding: 18px;">
+            <div class="field full" style="margin-top: 10px; background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 16px; padding: 20px;">
               <!-- Header -->
-              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-                <span style="font-weight: 700; color: #ffffff; font-size: 15px;"><i class="fa-solid fa-ticket"></i> Pass Inclusions &amp; Benefits</span>
-                <span id="summaryBadgeTier" style="font-size: 12px; font-weight: 600; color: #7FE04B; background: rgba(127, 224, 75, 0.15); border: 1px solid rgba(127, 224, 75, 0.3); border-radius: 999px; padding: 2px 10px;">Research Delegate</span>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                <span style="font-weight: 800; color: #081210; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-ticket" style="color: #16a34a;"></i> Pass Inclusions &amp; Benefits
+                </span>
+                <span id="summaryBadgeTier" style="font-size: 12px; font-weight: 700; color: #15803d; background: #dcfce7; border: 1px solid #86efac; border-radius: 999px; padding: 3px 12px;">Research Delegate</span>
               </div>
 
               <!-- Dynamic Inclusions Bullets -->
-              <div id="passBenefitsWrap" style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px;">
-                <ul id="passBenefitsList" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 13px; color: #cbd5e1;">
-                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Official Virtual Presentation slot in scheduled track session</li>
-                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Inclusion of accepted abstract in archived ISBN proceedings</li>
-                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Verifiable Digital Certificate of Presentation &amp; Authorship</li>
-                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Full access to all 8 environmental AI tracks, plenary keynotes &amp; video archives</li>
+              <div id="passBenefitsWrap" style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
+                <ul id="passBenefitsList" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: #334155;">
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #16a34a; font-size: 14px;"></i> Official Virtual Presentation slot in scheduled track session</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #16a34a; font-size: 14px;"></i> Inclusion of accepted abstract in archived ISBN proceedings</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #16a34a; font-size: 14px;"></i> Verifiable Digital Certificate of Presentation &amp; Authorship</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #16a34a; font-size: 14px;"></i> Full access to all 8 environmental AI tracks, plenary keynotes &amp; video archives</li>
                 </ul>
               </div>
 
               <!-- Promo / Voucher Code Block -->
-              <div style="margin-bottom: 12px;">
+              <div style="margin-bottom: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                  <label for="couponCodeInput" style="font-size: 12.5px; font-weight: 600; color: #cbd5e1;">
+                  <label for="couponCodeInput" style="font-size: 13px; font-weight: 700; color: #0f172a;">
                     Have a Promo Code or Grant Waiver Voucher?
                   </label>
-                  <span style="font-size: 11.5px; color: #94a3b8;">Optional</span>
+                  <span style="font-size: 12px; color: #64748b;">Optional</span>
                 </div>
                 <div style="display: flex; gap: 8px;">
-                  <input type="text" id="couponCodeInput" name="coupon_code" placeholder="e.g. GRANT100, EARLYBIRD, ISIAI15" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
-                  <button type="button" id="applyCouponBtn" class="btn-outline" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
+                  <input type="text" id="couponCodeInput" name="coupon_code" placeholder="e.g. GRANT100, EARLYBIRD, ISIAI15" style="text-transform: uppercase; font-size: 13px; padding: 10px 14px; letter-spacing: 0.05em; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; color: #0f172a;" />
+                  <button type="button" id="applyCouponBtn" class="btn-outline" style="padding: 10px 20px; font-size: 13px; font-weight: 700; flex-shrink: 0;">Apply</button>
                 </div>
                 <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
-                <small style="display: block; font-size: 11.5px; color: #94a3b8; margin-top: 4px;">
-                  <i class="fa-solid fa-graduation-cap" style="color: #7FE04B;"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
+                <small style="display: block; font-size: 12px; color: #64748b; margin-top: 6px;">
+                  <i class="fa-solid fa-graduation-cap" style="color: #16a34a;"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
                 </small>
               </div>
 
-              <!-- Ultra-Premium VIP Gold Member Upgrade Section -->
-              <div id="goldOptInCard" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at top left, rgba(163, 230, 53, 0.16) 0%, rgba(180, 83, 9, 0.08) 50%, rgba(12, 14, 20, 0.75) 100%); border: 1px solid rgba(163, 230, 53, 0.4); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(163, 230, 53, 0.15), inset 0 1px 0 rgba(254, 240, 138, 0.25);">
+              <!-- Ultra-Premium VIP Gold Member Upgrade Section (Light Themed) -->
+              <div id="goldOptInCard" style="position: relative; overflow: hidden; background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 50%, #fefce8 100%); border: 1.5px solid #86efac; border-radius: 16px; padding: 18px 20px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(16, 185, 129, 0.08);">
                 
                 <!-- Ambient Top Shimmer Line -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-primary), #fef08a, var(--accent-primary), transparent); opacity: 0.85;"></div>
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, #22c55e, #eab308, #22c55e, transparent); opacity: 0.9;"></div>
 
                 <!-- Top Row: Icon + Title + Savings Badge + Switch -->
                 <label for="goldOptInToggle" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; cursor: pointer; margin-bottom: 12px; user-select: none;">
                   <div style="display: flex; align-items: center; gap: 12px;">
-                    <!-- 3D Luxury Gold Crown Emblem -->
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--accent-primary) 0%, #d97706 60%, #78350f 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(163, 230, 53, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6); flex-shrink: 0; border: 1px solid rgba(254, 240, 138, 0.5);">
-                      <i class="fa-solid fa-crown" style="color: #ffffff; font-size: 19px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));"></i>
+                    <!-- Luxury Emblem -->
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #22c55e 0%, #16a34a 60%, #15803d 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3); flex-shrink: 0;">
+                      <i class="fa-solid fa-crown" style="color: #ffffff; font-size: 19px;"></i>
                     </div>
                     <div>
                       <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                        <span style="font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.01em;">
+                        <span style="font-size: 15px; font-weight: 800; color: #064e3b; letter-spacing: -0.01em;">
                           ScholarVault Gold Privileges
                         </span>
-                        <span id="goldSavingsBadge" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(16, 185, 129, 0.15) 100%); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);">
+                        <span id="goldSavingsBadge" style="background: #dcfce7; color: #15803d; border: 1px solid #86efac; font-size: 11px; font-weight: 800; padding: 2px 10px; border-radius: 999px;">
                           Save ₹101 Instantly
                         </span>
                       </div>
-                      <div style="font-size: 12.5px; color: #cbd5e1; margin-top: 2px;">
+                      <div style="font-size: 13px; color: #047857; margin-top: 2px;">
                         Opt in to unlock instant delegate pass discount + 1-month VIP perks
                       </div>
                     </div>
@@ -374,60 +297,60 @@
 
                   <!-- Custom Interactive Toggle Switch -->
                   <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
-                    <span id="goldToggleLabel" style="font-size: 11.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s;">Add Perk</span>
-                    <div id="goldSwitchTrack" style="position: relative; width: 48px; height: 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); transition: all 0.25s ease;">
+                    <span id="goldToggleLabel" style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s;">Add Perk</span>
+                    <div id="goldSwitchTrack" style="position: relative; width: 48px; height: 26px; border-radius: 999px; background: #cbd5e1; border: 1px solid #94a3b8; transition: all 0.25s ease;">
                       <input type="checkbox" id="goldOptInToggle" name="gold_addon" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 2; margin: 0;" />
-                      <div id="goldSwitchKnob" style="position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;"></div>
+                      <div id="goldSwitchKnob" style="position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.25); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;"></div>
                     </div>
                   </div>
                 </label>
 
-                <!-- Inset Perks Container (Matches the Pass Inclusions aesthetic!) -->
-                <div style="background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(163, 230, 53, 0.2); border-radius: 10px; padding: 10px 14px;">
-                  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; font-size: 12.5px; color: #e2e8f0;">
+                <!-- Inset Perks Container -->
+                <div style="background: rgba(255, 255, 255, 0.95); border: 1px solid #bbf7d0; border-radius: 12px; padding: 12px 16px;">
+                  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; font-size: 13px; color: #1e293b;">
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-bolt" style="color: var(--accent-primary); font-size: 12px; flex-shrink: 0;"></i>
+                      <i class="fa-solid fa-bolt" style="color: #16a34a; font-size: 13px; flex-shrink: 0;"></i>
                       <span><strong>Instant Pass Discount</strong> applied to total</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-file-pdf" style="color: var(--accent-primary); font-size: 12px; flex-shrink: 0;"></i>
-                      <span><strong>SCVS Audit PDF Access</strong> downloadable evidence dossiers</span>
+                      <i class="fa-solid fa-file-pdf" style="color: #16a34a; font-size: 13px; flex-shrink: 0;"></i>
+                      <span><strong>SCVS Audit PDF Access</strong> evidence dossiers</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-file-lines" style="color: var(--accent-primary); font-size: 12px; flex-shrink: 0;"></i>
-                      <span><strong>Document &amp; PDF OCR</strong> conference CFP extraction</span>
+                      <i class="fa-solid fa-file-lines" style="color: #16a34a; font-size: 13px; flex-shrink: 0;"></i>
+                      <span><strong>Document &amp; PDF OCR</strong> extraction</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-crown" style="color: var(--accent-primary); font-size: 12px; flex-shrink: 0;"></i>
-                      <span><strong>1-Month Gold Membership</strong> with Research Vault &amp; Credits</span>
+                      <i class="fa-solid fa-crown" style="color: #16a34a; font-size: 13px; flex-shrink: 0;"></i>
+                      <span><strong>1-Month Gold Membership</strong> with Research Vault</span>
                     </li>
                   </ul>
                 </div>
               </div>
 
               <!-- Transparent Price Breakdown -->
-              <div style="border-top: 1px dashed rgba(255, 255, 255, 0.12); padding-top: 12px; display: flex; flex-direction: column; gap: 6px;">
-                <div style="display: flex; justify-content: space-between; font-size: 13px; color: #94a3b8;">
+              <div style="border-top: 1px dashed #cbd5e1; padding-top: 14px; display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; font-size: 14px; color: #64748b;">
                   <span>Pass Base Fee:</span>
-                  <span id="baseFeeDisplay" style="color: #cbd5e1;">₹4,999</span>
+                  <span id="baseFeeDisplay" style="color: #0f172a; font-weight: 700;">₹4,999</span>
                 </div>
-                <div id="discountLineItem" style="display: none; justify-content: space-between; font-size: 13px; color: #34d399;">
+                <div id="discountLineItem" style="display: none; justify-content: space-between; font-size: 14px; color: #16a34a; font-weight: 700;">
                   <span id="discountLabel">Discount:</span>
                   <span id="discountAmountDisplay">-₹0</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 8px; margin-top: 2px;">
-                  <span style="font-size: 14px; font-weight: 700; color: #ffffff;">Total Payable:</span>
-                  <span id="finalPriceDisplay" style="font-size: 22px; font-weight: 800; color: var(--accent-primary);">₹4,999</span>
+                <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1.5px solid #e2e8f0; padding-top: 10px; margin-top: 4px;">
+                  <span style="font-size: 16px; font-weight: 800; color: #081210;">Total Payable:</span>
+                  <span id="finalPriceDisplay" style="font-size: 26px; font-weight: 900; color: #15803d;">₹4,999</span>
                 </div>
               </div>
             </div>
 
             <!-- Payment Gateway Notice & Submit Button -->
             <div class="field full" style="margin-top: 14px;">
-              <div style="background: rgba(127, 224, 75, 0.05); border: 1px solid rgba(127, 224, 75, 0.25); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+              <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 14px; padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
                 <div style="display: flex; align-items: center; gap: 10px;">
-                  <i class="fa-solid fa-lock" style="color: #7FE04B; font-size: 16px;"></i>
-                  <span style="font-size: 13px; color: #cbd5e1;">
+                  <i class="fa-solid fa-lock" style="color: #16a34a; font-size: 16px;"></i>
+                  <span style="font-size: 13.5px; color: #1e293b;">
                     Secure 256-bit encrypted checkout via <strong>Dodo Payments</strong>. Supports UPI, NetBanking, Credit/Debit Cards &amp; Apple Pay.
                   </span>
                 </div>
@@ -438,11 +361,11 @@
                 </div>
               </div>
 
-              <button type="submit" id="regSubmitBtn" class="btn-primary form-submit" style="width: 100%; padding: 16px; font-size: 16px; font-weight: 700; background: linear-gradient(135deg, #A3E635 0%, #2DD4BF 100%); color: #081210; border: none; border-radius: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <button type="submit" id="regSubmitBtn" class="btn-primary form-submit" style="width: 100%; padding: 18px; font-size: 17px; font-weight: 800; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #ffffff; border: none; border-radius: 16px; box-shadow: 0 10px 24px rgba(22, 163, 74, 0.25); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: transform 0.2s ease, box-shadow 0.2s ease;">
                 <span id="btnSubmitText">Proceed to Secure Checkout &bull; ₹4,999</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
-              <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 8px;">
+              <p style="font-size: 12.5px; color: #64748b; text-align: center; margin-top: 10px;">
                 Instant booking confirmation and GST tax invoice will be issued immediately upon payment.
               </p>
             </div>
@@ -512,11 +435,6 @@
           <img src="assets/idzRNcC9U5_logos.png" alt="BHIM" />
           <img src="assets/gpay-logo.png" alt="GPay" />
         </div>
-        <div class="footer__protection">
-          <img src="assets/idITJgioup_logos.png" alt="Website Protection" />
-          <img src="assets/idUAcNCLcQ_logos.png" alt="MSME Verified" style="height: 32px;" />
-          <img src="assets/App QR.png" alt="QR" style="height: 32px; border-radius: 4px;" />
-        </div>
       </div>
 
       <div class="footer__bottom">
@@ -552,273 +470,413 @@
 
 <script src="js/main.js"></script>
     <script>
+    (function () {
       const registerForm = document.getElementById("registrationForm");
       const successState = document.getElementById("registerSuccess");
-      let svGoldApplied = false;
+      const categorySelect = document.getElementById("regCategorySelect");
+      const goldOptInToggle = document.getElementById("goldOptInToggle");
+      const goldSavingsBadge = document.getElementById("goldSavingsBadge");
+      const goldSwitchTrack = document.getElementById("goldSwitchTrack");
+      const goldSwitchKnob = document.getElementById("goldSwitchKnob");
+      const goldToggleLabel = document.getElementById("goldToggleLabel");
+      const goldOptInCard = document.getElementById("goldOptInCard");
+      const couponInput = document.getElementById("couponCodeInput");
+      const applyCouponBtn = document.getElementById("applyCouponBtn");
+      const couponStatusMsg = document.getElementById("couponStatusMsg");
 
-      const productMap = {
-        INR: { 
-          student:  "pdt_0Nd5kUGj8inKqSbyRdiVK", 
-          faculty:  "pdt_0Nd5kYgKTGfwBr2VCG9Y9", 
-          listener: "pdt_0Nd5khVR6xzYWKMn2CiPn", 
-          coauthor: "pdt_0Nd5kme4fOVnzmFhWGdfD", 
-          industry: "pdt_0NdOa8jMzPhic3qfAjnhK" 
+      const baseFeeDisplay = document.getElementById("baseFeeDisplay");
+      const finalPriceDisplay = document.getElementById("finalPriceDisplay");
+      const discountLineItem = document.getElementById("discountLineItem");
+      const discountLabel = document.getElementById("discountLabel");
+      const discountAmountDisplay = document.getElementById("discountAmountDisplay");
+      const summaryBadgeTier = document.getElementById("summaryBadgeTier");
+      const btnSubmitText = document.getElementById("btnSubmitText");
+      const passBenefitsList = document.getElementById("passBenefitsList");
+
+      const CATEGORY_DATA = {
+        student: {
+          name: "Student Delegate",
+          inr: 2496,
+          usd: 99,
+          dodoINR: "pdt_0Nd5kUGj8inKqSbyRdiVK",
+          dodoUSD: "pdt_0Nd5mroA8YckMQG8DFVpq",
+          perks: [
+            "Official Virtual Presentation slot in scheduled track session",
+            "Inclusion of accepted abstract in archived ISBN proceedings",
+            "Verifiable Digital Certificate of Presentation & Authorship",
+            "Student research community access & all 8 environmental AI tracks"
+          ]
         },
-        USD: { 
-          student:  "pdt_0Nd5mroA8YckMQG8DFVpq", 
-          faculty:  "pdt_0Nd5mvbsjDzSK9eeKrn95", 
-          listener: "pdt_0Nd5oPQ5Pg5BpH35V79ry", 
-          coauthor: "pdt_0Nd5oUQJh9bYUQYMFtlaL", 
-          industry: "pdt_0NdOaDcqj1rebfVwnjkEE" 
+        faculty: {
+          name: "Research Delegate / Faculty",
+          inr: 4999,
+          usd: 199,
+          dodoINR: "pdt_0Nd5kYgKTGfwBr2VCG9Y9",
+          dodoUSD: "pdt_0Nd5mvbsjDzSK9eeKrn95",
+          perks: [
+            "Official Virtual Presentation slot in scheduled track session",
+            "Inclusion of accepted abstract in archived ISBN proceedings",
+            "Verifiable Digital Certificate of Presentation & Authorship",
+            "Full access to all 8 environmental AI tracks, plenary keynotes & video archives"
+          ]
+        },
+        listener: {
+          name: "Attendee Pass",
+          inr: 1999,
+          usd: 79,
+          dodoINR: "pdt_0Nd5khVR6xzYWKMn2CiPn",
+          dodoUSD: "pdt_0Nd5oPQ5Pg5BpH35V79ry",
+          perks: [
+            "Full observer access to all live virtual sessions, plenary keynotes & Q&A",
+            "Verifiable Digital Certificate of Participation & Attendance",
+            "Access to digital abstract booklet and presentation slides",
+            "Access to recorded keynote sessions after conference conclusion"
+          ]
+        },
+        coauthor: {
+          name: "Additional Presenter / Co-Author",
+          inr: 2499,
+          usd: 99,
+          dodoINR: "pdt_0Nd5kme4fOVnzmFhWGdfD",
+          dodoUSD: "pdt_0Nd5oUQJh9bYUQYMFtlaL",
+          perks: [
+            "Co-presenter accreditation for accepted paper",
+            "Inclusion in author index & official ISBN proceedings",
+            "Verifiable Digital Certificate of Co-Authorship & Presentation",
+            "Full access to all 8 environmental AI tracks & technical sessions"
+          ]
+        },
+        industry: {
+          name: "Industry Professional",
+          inr: 9999,
+          usd: 397,
+          dodoINR: "pdt_0NdOa8jMzPhic3qfAjnhK",
+          dodoUSD: "pdt_0NdOaDcqj1rebfVwnjkEE",
+          perks: [
+            "Executive delegate pass to all 8 environmental AI tracks & plenary stages",
+            "Priority networking lounge & direct author contact directory",
+            "Executive Certificate of Participation & Sustainability Leadership",
+            "Full access to recorded video archives & industry report downloads"
+          ]
         }
       };
-      const priceMap = {
-        INR: { student: 2496, faculty: 4999, listener: 1999, coauthor: 2499, industry: 9999 },
-        USD: { student: 129, faculty: 199, listener: 99, coauthor: 79, industry: 399 }
-      };
 
-      async function applySVGold() {
-        const id = document.getElementById('svGoldInput').value.trim();
-        const msg = document.getElementById('svGoldMsg');
-        const card = document.getElementById('svGoldCard');
-        const btn = document.querySelector('.sv-gold-toggle button');
+      let currentCurrency = "INR";
+      let isGoldSelected = false;
+      let appliedCoupon = null; // { code, discountPercent }
 
-        if (!id) {
-          msg.style.color = 'rgba(255,255,255,0.4)';
-          msg.textContent = 'Enter your SV Member ID';
-          return;
+      function updatePricing() {
+        const catKey = categorySelect?.value || "faculty";
+        const cat = CATEGORY_DATA[catKey] || CATEGORY_DATA.faculty;
+        const isUSD = currentCurrency === "USD";
+        const baseAmount = isUSD ? cat.usd : cat.inr;
+
+        // 1. Update summary badge
+        if (summaryBadgeTier) summaryBadgeTier.textContent = cat.name;
+
+        // 2. Update perks bullets
+        if (passBenefitsList && cat.perks) {
+          passBenefitsList.innerHTML = cat.perks.map((p) => `
+            <li style="display: flex; align-items: center; gap: 8px;">
+              <i class="fa-solid fa-circle-check" style="color: #16a34a; font-size: 14px;"></i>
+              <span>${p}</span>
+            </li>
+          `).join('');
         }
 
-        const validFormat = /^(SCHOLAR-[A-Z0-9]{4,}|SV-[A-Z0-9]{3,})$/i.test(id);
-        if (!validFormat) {
-          msg.style.color = '#fb7185';
-          msg.textContent = '✕ Invalid format. Use SCHOLAR-XXXXXXXX or SV-XXXX.';
-          return;
+        // 3. Dynamic Gold Savings Badge
+        const possibleSavings = Math.round(baseAmount * 0.15);
+        if (goldSavingsBadge) {
+          goldSavingsBadge.textContent = isUSD
+            ? `Save $${possibleSavings} Instantly`
+            : `Save ₹${possibleSavings.toLocaleString('en-IN')} Instantly`;
         }
 
-        btn.textContent = 'Verifying...';
-        btn.disabled = true;
-        msg.style.color = 'rgba(255,255,255,0.4)';
-        msg.textContent = '🔍 Checking membership...';
+        // 4. Calculate final fee & discounts
+        let finalAmount = baseAmount;
+        let totalDiscount = 0;
+        let discountDesc = "Discount:";
 
-        try {
-          let verified = false;
-          if (window.SVSite && window.SVSite.db && window.SVSite.db.functions) {
-            try {
-              const { data, error } = await window.SVSite.db.functions.invoke('verify-gold-member', {
-                body: { code: id }
-              });
-              if (!error && data && data.isGold) {
-                verified = true;
-              }
-            } catch (err) {
-              console.warn('Edge function check skipped, falling back to format check:', err);
-            }
-          }
+        if (isGoldSelected && appliedCoupon) {
+          // Combined gold + coupon
+          const goldDisc = Math.round(baseAmount * 0.15);
+          const rem = baseAmount - goldDisc;
+          const couponDisc = Math.round(rem * (appliedCoupon.discountPercent / 100));
+          totalDiscount = Math.min(baseAmount, goldDisc + couponDisc);
+          finalAmount = Math.max(0, baseAmount - totalDiscount);
+          discountDesc = `👑 Gold (15%) + Promo (${appliedCoupon.code} -${appliedCoupon.discountPercent}%):`;
+        } else if (isGoldSelected) {
+          totalDiscount = Math.round(baseAmount * 0.15);
+          finalAmount = Math.max(0, baseAmount - totalDiscount);
+          discountDesc = "👑 ScholarVault Gold (15%):";
+        } else if (appliedCoupon) {
+          totalDiscount = Math.min(baseAmount, Math.round(baseAmount * (appliedCoupon.discountPercent / 100)));
+          finalAmount = Math.max(0, baseAmount - totalDiscount);
+          discountDesc = `Promo Code (${appliedCoupon.code} -${appliedCoupon.discountPercent}%):`;
+        }
 
-          // Fallback: If format is valid, verify!
-          if (!verified && validFormat) {
-            verified = true;
-          }
+        // 5. Update DOM displays
+        if (baseFeeDisplay) {
+          baseFeeDisplay.textContent = isUSD ? `$${baseAmount}` : `₹${baseAmount.toLocaleString('en-IN')}`;
+        }
 
-          if (verified) {
-            svGoldApplied = true;
-            card.classList.add('activated');
-            msg.style.color = '#ffc107';
-            msg.textContent = '✦ ScholarVault Gold verified! 15% discount applied.';
-            if (window.SVSite && typeof window.SVSite.showToast === 'function') {
-              window.SVSite.showToast('ScholarVault Gold verified! 15% discount applied.', 'success');
+        if (discountLineItem) {
+          if (totalDiscount > 0) {
+            discountLineItem.style.display = "flex";
+            if (discountLabel) discountLabel.textContent = discountDesc;
+            if (discountAmountDisplay) {
+              discountAmountDisplay.textContent = isUSD
+                ? `-$${totalDiscount}`
+                : `-₹${totalDiscount.toLocaleString('en-IN')}`;
             }
           } else {
-            svGoldApplied = false;
-            card.classList.remove('activated');
-            msg.style.color = '#fb7185';
-            msg.textContent = '✕ ID not found or not a Gold member.';
+            discountLineItem.style.display = "none";
           }
-        } catch(e) {
-          if (validFormat) {
-            svGoldApplied = true;
-            card.classList.add('activated');
-            msg.style.color = '#ffc107';
-            msg.textContent = '✦ ScholarVault Gold verified! 15% discount applied.';
+        }
+
+        if (finalPriceDisplay) {
+          finalPriceDisplay.textContent = isUSD ? `$${finalAmount}` : `₹${finalAmount.toLocaleString('en-IN')}`;
+        }
+
+        if (btnSubmitText) {
+          if (finalAmount === 0) {
+            btnSubmitText.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; ${isUSD ? '$0' : '₹0'}`;
           } else {
-            msg.style.color = '#fb7185';
-            msg.textContent = '✕ Verification failed. Please try again.';
+            btnSubmitText.innerHTML = `Proceed to Secure Checkout &bull; ${isUSD ? '$' + finalAmount : '₹' + finalAmount.toLocaleString('en-IN')}`;
           }
-        } finally {
-          btn.textContent = 'Verify & Apply';
-          btn.disabled = false;
         }
       }
 
+      // Toggle Switch visual update
+      function updateGoldVisual() {
+        if (isGoldSelected) {
+          if (goldSwitchTrack) {
+            goldSwitchTrack.style.background = "linear-gradient(135deg, #22c55e 0%, #16a34a 100%)";
+            goldSwitchTrack.style.borderColor = "#16a34a";
+            goldSwitchTrack.style.boxShadow = "0 0 12px rgba(22, 163, 74, 0.4)";
+          }
+          if (goldSwitchKnob) {
+            goldSwitchKnob.style.transform = "translateX(22px)";
+          }
+          if (goldToggleLabel) {
+            goldToggleLabel.textContent = "Active ✓";
+            goldToggleLabel.style.color = "#16a34a";
+          }
+          if (goldOptInCard) {
+            goldOptInCard.style.borderColor = "#22c55e";
+            goldOptInCard.style.boxShadow = "0 6px 24px rgba(22, 163, 74, 0.18)";
+          }
+        } else {
+          if (goldSwitchTrack) {
+            goldSwitchTrack.style.background = "#cbd5e1";
+            goldSwitchTrack.style.borderColor = "#94a3b8";
+            goldSwitchTrack.style.boxShadow = "none";
+          }
+          if (goldSwitchKnob) {
+            goldSwitchKnob.style.transform = "translateX(0px)";
+          }
+          if (goldToggleLabel) {
+            goldToggleLabel.textContent = "Add Perk";
+            goldToggleLabel.style.color = "#64748b";
+          }
+          if (goldOptInCard) {
+            goldOptInCard.style.borderColor = "#86efac";
+            goldOptInCard.style.boxShadow = "0 4px 20px rgba(16, 185, 129, 0.08)";
+          }
+        }
+      }
+
+      // Event listeners for Category & Gold
+      if (categorySelect) {
+        categorySelect.addEventListener("change", updatePricing);
+      }
+
+      if (goldOptInToggle) {
+        goldOptInToggle.addEventListener("change", (e) => {
+          isGoldSelected = Boolean(e.target.checked);
+          updateGoldVisual();
+          updatePricing();
+        });
+      }
+
+      // Coupon application logic
+      if (applyCouponBtn && couponInput) {
+        applyCouponBtn.addEventListener("click", () => {
+          const code = couponInput.value.trim().toUpperCase();
+          if (!code) {
+            appliedCoupon = null;
+            if (couponStatusMsg) couponStatusMsg.style.display = "none";
+            updatePricing();
+            return;
+          }
+
+          if (code === "GRANT100" || code === "STUDENT100") {
+            appliedCoupon = { code, discountPercent: 100 };
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = "block";
+              couponStatusMsg.style.color = "#15803d";
+              couponStatusMsg.innerHTML = "<strong>✓ 100% Student Research Grant Remission Applied!</strong> Registration fee fully waived.";
+            }
+          } else if (code === "EARLYBIRD") {
+            appliedCoupon = { code, discountPercent: 20 };
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = "block";
+              couponStatusMsg.style.color = "#15803d";
+              couponStatusMsg.innerHTML = "<strong>✓ Early Bird 20% discount applied!</strong>";
+            }
+          } else if (code === "ISIAI15" || code === "GOLD15") {
+            appliedCoupon = { code, discountPercent: 15 };
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = "block";
+              couponStatusMsg.style.color = "#15803d";
+              couponStatusMsg.innerHTML = "<strong>✓ 15% discount applied!</strong>";
+            }
+          } else {
+            appliedCoupon = null;
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = "block";
+              couponStatusMsg.style.color = "#dc2626";
+              couponStatusMsg.innerHTML = "✕ Invalid promo or grant voucher code.";
+            }
+          }
+          updatePricing();
+        });
+      }
+
+      // Currency toggle integration
+      document.querySelectorAll(".pricing-toggle .currency-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          currentCurrency = btn.dataset.currency || "INR";
+          const currencyHidden = document.getElementById("regCurrency");
+          if (currencyHidden) currencyHidden.value = currentCurrency;
+          updatePricing();
+        });
+      });
+
+      // Show payment success state if redirected back
       if (new URLSearchParams(location.search).get("payment") === "success" && successState) {
         successState.classList.add("show");
+        if (registerForm) registerForm.style.display = "none";
       }
+
+      // Form submission handling
       if (registerForm) {
         registerForm.addEventListener("submit", async (event) => {
           event.preventDefault();
-          const data = Object.fromEntries(new FormData(registerForm).entries());
-          const currency = window.SVSite && typeof window.SVSite.getCurrency === "function" ? window.SVSite.getCurrency() : "INR";
-          const tier = data.category;
-          if (!tier) {
-            if (window.SVSite && typeof window.SVSite.showToast === "function") {
-              window.SVSite.showToast("Please select a delegate category.", "error");
-            } else {
-              alert("Please select a delegate category.");
+          const formData = new FormData(registerForm);
+          const data = Object.fromEntries(formData.entries());
+          const catKey = data.category || "faculty";
+          const cat = CATEGORY_DATA[catKey] || CATEGORY_DATA.faculty;
+          const isUSD = currentCurrency === "USD";
+          const baseAmount = isUSD ? cat.usd : cat.inr;
+
+          let finalPrice = baseAmount;
+          if (isGoldSelected && appliedCoupon) {
+            const goldD = Math.round(baseAmount * 0.15);
+            const couponD = Math.round((baseAmount - goldD) * (appliedCoupon.discountPercent / 100));
+            finalPrice = Math.max(0, baseAmount - goldD - couponD);
+          } else if (isGoldSelected) {
+            finalPrice = Math.max(0, baseAmount - Math.round(baseAmount * 0.15));
+          } else if (appliedCoupon) {
+            finalPrice = Math.max(0, baseAmount - Math.round(baseAmount * (appliedCoupon.discountPercent / 100)));
+          }
+
+          const submitBtn = document.getElementById("regSubmitBtn");
+          const originalBtnHtml = submitBtn ? submitBtn.innerHTML : "";
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing registration…';
+          }
+
+          // Case 1: 100% Grant Remission (Free pass)
+          if (finalPrice === 0) {
+            try {
+              if (window.SVSite && typeof window.SVSite.insertRecord === "function") {
+                await window.SVSite.insertRecord("conf_registrations", {
+                  conf_id: "isiai-sgs-2026",
+                  name: data.name,
+                  email: data.email,
+                  phone: data.phone,
+                  institution: data.institution,
+                  country: data.country,
+                  city: data.city || "",
+                  zip_code: data.zip_code || "",
+                  category: catKey + (isGoldSelected ? "_gold" : ""),
+                  paper_id: data.paper_id || "",
+                  amount: 0,
+                  currency: currentCurrency,
+                  status: "approved_grant_waived",
+                  notes: `Grant code: ${appliedCoupon ? appliedCoupon.code : 'GRANT100'}`
+                });
+              }
+              registerForm.style.display = "none";
+              if (successState) {
+                const title = successState.querySelector(".form-success__title");
+                const text = successState.querySelector(".form-success__text");
+                if (title) title.textContent = "Student Grant Registration Confirmed!";
+                if (text) text.innerHTML = `Your registration has been marked as confirmed under Grant Code <strong>${appliedCoupon?.code || 'GRANT100'}</strong> with 100% fee remission. An official confirmation email and virtual presentation credentials will be dispatched to <strong>${data.email}</strong>.`;
+                successState.classList.add("show");
+              }
+              window.SVSite?.showToast?.("Grant waiver registered successfully!", "success");
+            } catch (err) {
+              console.error(err);
+              window.SVSite?.showToast?.("Registration recorded. Confirmation will follow by email.", "success");
             }
             return;
           }
-          try {
-            if (window.SVSite && typeof window.SVSite.setFormLoading === "function") {
-              window.SVSite.setFormLoading(registerForm.parentElement, true, "Preparing checkout...");
-            }
-            
-            let finalPrice = priceMap[currency] && priceMap[currency][tier] ? priceMap[currency][tier] : 2496;
-            if (svGoldApplied) {
-              finalPrice = Math.round(finalPrice * 0.85);
-            }
 
+          // Case 2: Paid Checkout via Dodo Payments
+          try {
             if (window.SVSite && typeof window.SVSite.insertRecord === "function") {
               try {
                 await window.SVSite.insertRecord("conf_registrations", {
                   conf_id: "isiai-sgs-2026",
-                  name: data.name, email: data.email, phone: data.phone, institution: data.institution,
-                  designation: data.designation || "", country: data.country, 
-                  category: tier + (svGoldApplied ? '_gold' : ''), 
-                  tier: "earlybird",
-                  amount: finalPrice, currency, status: "pending"
+                  name: data.name,
+                  email: data.email,
+                  phone: data.phone,
+                  institution: data.institution,
+                  country: data.country,
+                  city: data.city || "",
+                  zip_code: data.zip_code || "",
+                  category: catKey + (isGoldSelected ? "_gold" : ""),
+                  paper_id: data.paper_id || "",
+                  amount: finalPrice,
+                  currency: currentCurrency,
+                  status: "pending"
                 });
               } catch (dbErr) {
                 console.warn("conf_registrations insert logged:", dbErr);
               }
             }
-            const product = (productMap[currency] && productMap[currency][tier]) || productMap.INR.student;
-            const email = encodeURIComponent(data.email);
-            const returnUrl = encodeURIComponent((window.SVSite && window.SVSite.config ? window.SVSite.config.rootUrl : window.location.origin) + "/register?payment=success");
-            let checkoutUrl = "https://checkout.dodopayments.com/buy/" + product + "?customer_email=" + email + "&return_url=" + returnUrl;
-            
-            // Auto-apply GOLD15 discount if member is verified
-            if (svGoldApplied) {
+
+            const productId = isUSD ? cat.dodoUSD : cat.dodoINR;
+            const emailEnc = encodeURIComponent(data.email);
+            const returnUrl = encodeURIComponent(location.origin + location.pathname + "?payment=success");
+
+            let checkoutUrl = `https://checkout.dodopayments.com/buy/${productId}?customer_email=${emailEnc}&return_url=${returnUrl}&metadata[conf_id]=isiai-sgs-2026&metadata[tier]=${encodeURIComponent(catKey)}`;
+
+            if (isGoldSelected) {
               checkoutUrl += "&discount_code=GOLD15";
+            } else if (appliedCoupon) {
+              checkoutUrl += `&discount_code=${encodeURIComponent(appliedCoupon.code)}`;
             }
 
             location.href = checkoutUrl;
           } catch (error) {
-            if (window.SVSite && typeof window.SVSite.showToast === "function") {
-              window.SVSite.showToast("Could not start checkout. Please try again.", "error");
+            console.error("Checkout launch error:", error);
+            if (submitBtn) {
+              submitBtn.disabled = false;
+              submitBtn.innerHTML = originalBtnHtml;
             }
-            if (window.SVSite && typeof window.SVSite.setFormLoading === "function") {
-              window.SVSite.setFormLoading(registerForm.parentElement, false);
-            }
+            window.SVSite?.showToast?.("Could not start checkout. Please try again.", "error");
           }
         });
       }
+
+      // Initialize defaults
+      updatePricing();
+    })();
     </script>
-  
-
-  <!-- ─── GOLD PURCHASE MODAL ─── -->
-  <div class="gold-modal-overlay" id="goldModalOverlay" onclick="handleOverlayClick(event)">
-    <div class="gold-modal gold-modal-wrap">
-      <button class="gold-modal-close" onclick="closeGoldModal()" aria-label="Close">✕</button>
-      <div class="gold-modal-handle"></div>
-      
-      <h3 class="gold-modal-title">Upgrade to ScholarVault Gold</h3>
-      <p class="gold-modal-sub">Get absolute protection against fake conferences and save 15% immediately on your registration today.</p>
-  
-      <div class="gold-modal-perks">
-        <div class="gold-modal-perk">Protect your career from predatory publishers forever</div>
-        <div class="gold-modal-perk">Full PDF forensic reports on any conference</div>
-        <div class="gold-modal-perk">Instant 15% discount applies automatically to your cart</div>
-      </div>
-  
-      <div class="gold-modal-price-row">
-        <span class="gold-modal-price">₹399</span>
-        <span class="gold-modal-price-note">/ month &nbsp;·&nbsp; cancel anytime</span>
-      </div>
-  
-      <div class="gold-modal-input-row">
-        <input
-          type="email"
-          id="goldModalEmail"
-          class="gold-modal-input"
-          placeholder="your@email.com — we'll send your Member ID here"
-          autocomplete="email"
-        />
-      </div>
-      <div id="goldModalMsg" style="font-size:12px;color:rgba(255,193,7,0.6);min-height:16px;margin-bottom:0.75rem;"></div>
-  
-      <button class="gold-modal-btn" id="goldModalBtn" onclick="proceedToGoldCheckout()">
-        Get Gold &amp; Unlock 15% Off →
-      </button>
-  
-      <div class="gold-modal-note">
-        You'll be taken to a secure Dodo Payments checkout.<br/>
-        Your Member ID is emailed within seconds of payment. Then come back and enter it above.
-      </div>
-    </div>
-  </div>
-  
-  <script>
-  /* ── Gold Modal Logic ── */
-  function openGoldModal(e) {
-    if (e) e.preventDefault();
-    document.getElementById('goldModalOverlay').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('goldModalEmail').focus(), 350);
-  }
-  
-  function closeGoldModal() {
-    document.getElementById('goldModalOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-    document.getElementById('goldModalMsg').textContent = '';
-  }
-  
-  function handleOverlayClick(e) {
-    if (e.target.id === 'goldModalOverlay') closeGoldModal();
-  }
-  
-  function proceedToGoldCheckout() {
-    const emailInput = document.getElementById('goldModalEmail');
-    const msg = document.getElementById('goldModalMsg');
-    const btn = document.getElementById('goldModalBtn');
-  
-    if (!emailInput.value || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailInput.value)) {
-      msg.textContent = '⚠️ Please enter a valid email address.';
-      msg.style.color = '#fb7185';
-      emailInput.focus();
-      return;
-    }
-  
-    msg.style.color = 'rgba(255,193,7,0.6)';
-    msg.textContent = '⏳ Opening secure checkout...';
-    btn.disabled = true;
-    btn.textContent = 'Opening Dodo Payments...';
-    
-    // Dodo checkout for ScholarVault Gold Monthly
-    const GOLD_PRODUCT = 'pdt_0NZmRYTQZ0gA4wAsdjQNF'; 
-    const returnUrl = encodeURIComponent(location.origin + location.pathname + '?gold_purchased=1');
-    const email = encodeURIComponent(emailInput.value);
-    
-    const checkoutUrl = `https://checkout.dodopayments.com/buy/${GOLD_PRODUCT}`
-      + `?customer_email=${email}`
-      + `&return_url=${returnUrl}`
-      + `&metadata[source]=conference_isiai_sgs_2026`;
-      
-    // Open in new tab so user stays on the registration page
-    window.open(checkoutUrl, '_blank');
-
-    // Show instructions while tab is open
-    btn.textContent = 'Waiting for payment...';
-    msg.style.color = 'rgba(255,193,7,0.8)';
-    msg.textContent = '✦ Complete payment in the new tab. Your Member ID will arrive by email.';
-
-    // Re-enable after 8s so they can retry if needed
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.textContent = 'Get Gold & Unlock 15% Off →';
-    }, 8000);
-  }
-  </script>
 
   <!--Start of Tawk.to Script-->
   <script type="text/javascript">
