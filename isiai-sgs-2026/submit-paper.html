@@ -259,7 +259,7 @@
       <div class="site-shell">
         <div class="form-shell reveal" id="paperWrap">
                     <form id="paperForm" style="padding: 0; background: transparent; border: none;">
-            <div class="form-grid">
+            <div class="premium-form-grid">
               <div class="field">
                 <label>Primary Corresponding Author *</label>
                 <input type="text" name="author_name" required placeholder="e.g. Dr. Jane Smith, PhD" />
@@ -307,52 +307,48 @@
 
               <div class="field full">
                 <label>Manuscript / Abstract PDF File (PDF up to 4MB) *</label>
-                <div class="file-dropzone" id="paperDropZone" style="border: 2px dashed rgba(163, 230, 53, 0.4); border-radius: 14px; padding: 28px 20px; text-align: center; background: rgba(163, 230, 53, 0.04); cursor: pointer; transition: all 0.3s ease;">
-                  <input type="file" name="paper" id="paperFile" accept=".pdf,application/pdf" style="display: none;" required />
+                <div class="file-drop-zone" id="paperDropZone">
+                  <input type="file" name="paper" id="paperFile" accept=".pdf,application/pdf" required />
                   <div id="dropZonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: var(--accent-primary); margin-bottom: 12px; display: inline-block;"></i>
-                    <div style="font-weight: 700; color: #ffffff; font-size: 15px; margin-bottom: 4px;">Click or Drag &amp; Drop your Abstract PDF here</div>
-                    <div style="font-size: 12.5px; color: #94a3b8;">Only PDF documents up to 4MB are accepted for direct submission</div>
+                    <span class="file-drop-icon">📄</span>
+                    <div class="file-drop-text">Click to <strong>upload</strong> or drag & drop your paper here</div>
+                    <div class="file-drop-hint">Accepted formats: PDF. Max size: 4MB</div>
                   </div>
-                  <div id="dropZoneFileInfo" style="display: none; align-items: center; justify-content: center; gap: 12px;">
-                    <i class="fa-solid fa-file-pdf" style="font-size: 28px; color: #ef4444;"></i>
-                    <div style="text-align: left;">
-                      <div id="dropZoneFileName" style="font-weight: 700; color: #ffffff; font-size: 14px;"></div>
-                      <div id="dropZoneFileSize" style="font-size: 12px; color: #94a3b8;"></div>
-                    </div>
-                    <button type="button" id="dropZoneRemoveFile" class="btn-outline" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
+                  <div class="file-selected-name" id="dropZoneFileInfo">
+                    <span id="dropZoneFileName"></span>
+                    <button type="button" id="dropZoneRemoveFile" class="btn-outline" style="padding: 4px 12px; font-size: 11px;">Remove</button>
                   </div>
                 </div>
               </div>
 
               <div class="field full">
-                <div style="background: rgba(163, 230, 53, 0.08); border: 1px solid rgba(163, 230, 53, 0.35); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
-                  <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: #fef3c7; font-size: 13.5px; line-height: 1.5;">
-                    <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 3.5px; width: 16px; height: 16px; accent-color: var(--accent-primary); cursor: pointer;" />
+                <div style="background: rgba(127, 224, 75, 0.08); border: 1px solid rgba(127, 224, 75, 0.35); border-radius: 14px; padding: 16px 20px; margin-top: 4px;">
+                  <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: #1a2e05; font-size: 14px; line-height: 1.6;">
+                    <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 4px; width: 18px; height: 18px; accent-color: #7FE04B; cursor: pointer;" />
                     <span>
-                      <strong style="color: var(--accent-primary);">?? Apply for ISIAI-SGS 2026 Student Research Grant</strong> (100% Registration Fee Waiver for Top 10 Student Abstracts)
+                      <strong style="color: #2d6a0f;">🎓 Apply for ISIAI-SGS 2026 Student Research Grant</strong> (100% Registration Fee Waiver for Top 10 Student Abstracts)
                     </span>
                   </label>
                 </div>
               </div>
 
               <div class="field full">
-                <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
-                  <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: #d1d5db; font-size: 13px; line-height: 1.5;">
-                    <input type="checkbox" name="declaration" required style="margin-top: 3px;" />
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 16px 20px; margin-top: 4px;">
+                  <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: var(--ink-900); font-size: 14px; line-height: 1.6;">
+                    <input type="checkbox" name="declaration" required style="margin-top: 4px; width: 18px; height: 18px; accent-color: #7FE04B; cursor: pointer;" />
                     <span>I declare that this abstract represents original scholarship. I understand that abstract acceptance grants official presentation rights at ISIAI-SGS 2026 and does not guarantee indexed publication.</span>
                   </label>
                 </div>
               </div>
 
               <div class="field full" style="margin-top: 10px;">
-                <button type="submit" class="btn-primary form-submit" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <button type="submit" class="btn-submit-premium">
                   <span>Submit Abstract</span>
                   <i class="fa-solid fa-file-arrow-up"></i>
                   <i class="fa-solid fa-arrow-right"></i>
                 </button>
-                <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #94a3b8; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                  <i class="fa-solid fa-bolt" style="color: var(--accent-primary);"></i>
+                <div style="text-align: center; margin-top: 12px; font-size: 13px; color: var(--ink-60); display: flex; align-items: center; justify-content: center; gap: 6px;">
+                  <i class="fa-solid fa-bolt" style="color: #7FE04B;"></i>
                   <span>No account is required. We will send a secure confirmation link to this email.</span>
                 </div>
               </div>
@@ -410,7 +406,10 @@
       // File Drop Zone Functionality
       const dropZone = document.getElementById("paperDropZone");
       const fileInput = document.getElementById("paperFile");
-      const fileNameDisplay = document.getElementById("fileNameDisplay");
+      const fileNameDisplay = document.getElementById("dropZoneFileName");
+      const fileInfoWrap = document.getElementById("dropZoneFileInfo");
+      const removeFileBtn = document.getElementById("dropZoneRemoveFile");
+      const promptWrap = document.getElementById("dropZonePrompt");
 
       if (dropZone && fileInput) {
         dropZone.addEventListener("dragover", (e) => {
@@ -425,10 +424,21 @@
         fileInput.addEventListener("change", () => {
           if (fileInput.files.length > 0) {
             dropZone.classList.add("has-file");
-            fileNameDisplay.innerText = "Selected: " + fileInput.files[0].name;
-            fileNameDisplay.classList.add("visible");
+            if (fileNameDisplay) fileNameDisplay.innerText = fileInput.files[0].name;
+            if (fileInfoWrap) fileInfoWrap.classList.add("visible");
+            if (promptWrap) promptWrap.style.display = "none";
           }
         });
+
+        if (removeFileBtn) {
+          removeFileBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            fileInput.value = "";
+            dropZone.classList.remove("has-file");
+            if (fileInfoWrap) fileInfoWrap.classList.remove("visible");
+            if (promptWrap) promptWrap.style.display = "block";
+          });
+        }
       }
 
       const paperWrap = document.getElementById("paperWrap");
@@ -454,11 +464,11 @@
             payload.delete('file');
 
             // Format parameters for the centralized ScholarVault Conference Intake Gateway
-            const authorName = (payload.get('name') || '').trim();
-            const authorEmail = (payload.get('email') || '').trim();
-            const institution = (payload.get('institution') || '').trim();
-            const country = (payload.get('country') || '').trim();
-            const title = (payload.get('title') || '').trim();
+            const authorName = (payload.get('author_name') || payload.get('name') || '').trim();
+            const authorEmail = (payload.get('author_email') || payload.get('email') || '').trim();
+            const institution = (payload.get('author_institution') || payload.get('institution') || '').trim();
+            const country = (payload.get('author_country') || payload.get('country') || '').trim();
+            const title = (payload.get('paper_title') || payload.get('title') || '').trim();
             const track = (payload.get('track') || '').trim();
             const coauthors = (payload.get('coauthors') || '').trim();
             const rorId = (payload.get('ror_id') || paperForm.dataset.rorId || '').trim();

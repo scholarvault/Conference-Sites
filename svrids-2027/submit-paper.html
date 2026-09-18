@@ -40,7 +40,6 @@
         <a href="call-for-papers.html" class="navbar__link">Call for Papers</a>
         <a href="speakers.html" class="navbar__link">Speakers</a>
         <a href="committee.html" class="navbar__link">Committee</a>
-        <a href="register.html" class="navbar__link">Register</a>
         <a href="awards.html" class="navbar__link">Awards</a>
         <a href="blog.html" class="navbar__link">Blog</a>
         <a href="downloads.html" class="navbar__link">Downloads</a>
@@ -121,31 +120,30 @@
         </div>
 
         <form id="submitPaperForm" class="form-grid">
-          <div style="display: contents;">
-            <div class="field">
-              <label>Primary Corresponding Author *</label>
-              <input type="text" name="author_name"  required placeholder="e.g. Dr. Jane Smith, PhD" />
-            </div>
+          <div class="field">
+            <label>Primary Corresponding Author *</label>
+            <input type="text" name="author_name" required placeholder="e.g. Dr. Jane Smith, PhD" />
+          </div>
 
-            <div class="field">
-              <label>Institutional Email Address *</label>
-              <input type="email" name="author_email"  required placeholder="jane.smith@institution.edu" />
-            </div>
+          <div class="field">
+            <label>Institutional Email Address *</label>
+            <input type="email" name="author_email" required placeholder="jane.smith@institution.edu" />
+          </div>
 
-            <div class="field">
-              <label>Institutional Affiliation *</label>
-              <input type="text" name="author_institution"  required placeholder="e.g. Stanford University / IIT Madras" />
-            </div>
+          <div class="field">
+            <label>Institutional Affiliation *</label>
+            <input type="text" name="author_institution" required placeholder="e.g. Stanford University / IIT Madras" />
+          </div>
 
-            <div class="field">
-              <label>Country *</label>
-              <input type="text" name="author_country"  required placeholder="e.g. United States / India" />
-            </div>
+          <div class="field">
+            <label>Country *</label>
+            <input type="text" name="author_country" required placeholder="e.g. United States / India" />
+          </div>
 
-            <div class="field full">
-              <label>Abstract / Manuscript Title *</label>
-              <input type="text" name="paper_title"  required placeholder="e.g. Forensic Detection of Synthetic Scientific Figures Using Residual Spectral Forensics" />
-            </div>
+          <div class="field full">
+            <label>Abstract / Manuscript Title *</label>
+            <input type="text" name="paper_title" required placeholder="e.g. Scalable Quantum Error Correction Using Monolithic Silicon Architectures" />
+          </div>
 
             <div class="field full">
               <label>Primary Thematic Track *</label>
@@ -216,7 +214,6 @@
                 <span>No account is required. We will send a secure confirmation link to this email.</span>
               </div>
             </div>
-          </div>
         </form>
 
         <div class="form-success">
@@ -428,7 +425,7 @@
 
         // Safe fallback text so backend validators pass smoothly without requiring inline user input
         if (!payload.get('abstract')) payload.set('abstract', 'Abstract included in attached manuscript PDF.');
-        if (!payload.get('keywords')) payload.set('keywords', 'Research Integrity, Responsible AI');
+        if (!payload.get('keywords')) payload.set('keywords', 'DeepTech, Quantum, Autonomous Systems, CleanTech, BioTech');
 
         // Single file attachment (prevent payload duplication exceeding Vercel 4.5MB limit)
         if (file) {

@@ -294,35 +294,35 @@
             <div class="field">
               <label>Registration Pass Category *</label>
               <select name="category" id="regCategorySelect" required>
-  <option value="">Select pass category...</option>
-  <option value="student_presenter">Student Presenter [?2,496 / ]</option>
-  <option value="research_delegate">Research Delegate / Faculty [?4,999 / ]</option>
-  <option value="attendee">Attendee Pass [?1,999 / ]</option>
-  <option value="coauthor">Additional Presenter / Co-Author [?2,499 / ]</option>
-  <option value="industry">Industry Professional [?9,999 / ]</option>
-</select>
+                <option value="">Select pass category...</option>
+                <option value="student" data-name="Student Delegate">Student Presenter (₹2,496 / $99)</option>
+                <option value="faculty" data-name="Research Delegate / Faculty" selected>Research Delegate / Faculty (₹4,999 / $199)</option>
+                <option value="listener" data-name="Attendee Pass">Attendee Pass (₹1,999 / $79)</option>
+                <option value="coauthor" data-name="Additional Presenter / Co-Author">Additional Presenter / Co-Author (₹2,499 / $99)</option>
+                <option value="industry" data-name="Industry Professional">Industry Professional (₹9,999 / $397)</option>
+              </select>
             </div>
 
             <div class="field full">
               <label>Accepted Abstract ID (if applicable)</label>
-              <input type="text" name="paper_id" placeholder="e.g. SVRIAS-2026-TR1-042 (Leave blank if registering as Listener)" />
+              <input type="text" name="paper_id" placeholder="e.g. ISIAI-2026-TR1-042 (Leave blank if registering as Listener)" />
             </div>
 
             <!-- In-Page Review & Benefits Section -->
-            <div class="field full" style="margin-top: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px;">
+            <div class="field full" style="margin-top: 10px; background: rgba(127, 224, 75, 0.04); border: 1px solid rgba(127, 224, 75, 0.2); border-radius: 12px; padding: 18px;">
               <!-- Header -->
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
                 <span style="font-weight: 700; color: #ffffff; font-size: 15px;"><i class="fa-solid fa-ticket"></i> Pass Inclusions &amp; Benefits</span>
-                <span id="summaryBadgeTier" style="font-size: 12px; font-weight: 600; color: var(--accent-cyan); background: rgba(163, 230, 53, 0.1); border: 1px solid rgba(163, 230, 53, 0.3); border-radius: 999px; padding: 2px 10px;">Academic / Faculty</span>
+                <span id="summaryBadgeTier" style="font-size: 12px; font-weight: 600; color: #7FE04B; background: rgba(127, 224, 75, 0.15); border: 1px solid rgba(127, 224, 75, 0.3); border-radius: 999px; padding: 2px 10px;">Research Delegate</span>
               </div>
 
               <!-- Dynamic Inclusions Bullets -->
-              <div id="passBenefitsWrap" style="background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px;">
+              <div id="passBenefitsWrap" style="background: rgba(0, 0, 0, 0.25); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px;">
                 <ul id="passBenefitsList" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 13px; color: #cbd5e1;">
                   <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Official Virtual Presentation slot in scheduled track session</li>
                   <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Inclusion of accepted abstract in archived ISBN proceedings</li>
                   <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Verifiable Digital Certificate of Presentation &amp; Authorship</li>
-                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Full access to all 6 tracks, plenary keynotes &amp; video archives</li>
+                  <li style="display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-circle-check" style="color: #34d399; font-size: 13px;"></i> Full access to all 8 environmental AI tracks, plenary keynotes &amp; video archives</li>
                 </ul>
               </div>
 
@@ -335,12 +335,12 @@
                   <span style="font-size: 11.5px; color: #94a3b8;">Optional</span>
                 </div>
                 <div style="display: flex; gap: 8px;">
-                  <input type="text" id="couponCodeInput" name="coupon_code" placeholder="e.g. GRANT100, EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
+                  <input type="text" id="couponCodeInput" name="coupon_code" placeholder="e.g. GRANT100, EARLYBIRD, ISIAI15" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
                   <button type="button" id="applyCouponBtn" class="btn-outline" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
                 </div>
                 <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
                 <small style="display: block; font-size: 11.5px; color: #94a3b8; margin-top: 4px;">
-                  <i class="fa-solid fa-graduation-cap" style="color: var(--accent-primary);"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
+                  <i class="fa-solid fa-graduation-cap" style="color: #7FE04B;"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
                 </small>
               </div>
 
@@ -422,107 +422,29 @@
               </div>
             </div>
 
-            <!-- Payment Method Selector -->
-            <div class="field full" id="paymentMethodSection" style="margin-top: 6px;">
-              <!-- 100% Student Research Grant Remission Notice -->
-              <div id="grantWaiverPaymentNotice" style="display: none; padding: 14px 16px; background: rgba(163, 230, 53, 0.12); border: 1px solid rgba(163, 230, 53, 0.4); border-radius: 12px; margin-bottom: 12px; font-size: 13.5px; color: #fef3c7;">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                  <i class="fa-solid fa-graduation-cap" style="color: var(--accent-primary); font-size: 16px;"></i>
-                  <strong style="color: var(--accent-primary);">100% Student Research Grant Remission Applied</strong>
-                </div>
-                <div style="font-size: 12.5px; color: #cbd5e1;">
-                  No payment gateway transaction required. Your delegate pass and presentation slot will be confirmed immediately upon claiming.
-                </div>
-              </div>
-
-              <div id="paymentOptionsWrap">
-                <label style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; display: block;">
-                  Select Payment Method *
-                </label>
-                
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                  <!-- Option 1: Indian UPI & QR (Intercepted via QR modal with scholarvault@ybl until Federal Bank live keys arrive ~Sep 20) -->
-                  <label id="optFederalLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(163, 230, 53, 0.08); border: 1px solid rgba(163, 230, 53, 0.3); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                      <input type="radio" name="payment_method" value="federal_omniware" checked style="accent-color: var(--accent-primary);" />
-                      <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                          Indian UPI &amp; QR Payment <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Instant QR (INR)</span>
-                        </div>
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                          Scan QR with PhonePe, GPay, Paytm, BHIM or any UPI App &bull; Instant Confirmation
-                        </div>
-                      </div>
-                    </div>
-                    <img src="assets/idzRNcC9U5_logos.png" alt="UPI" style="height: 24px; filter: brightness(1.2);" />
-                  </label>
-
-                  <!-- Option 2: Dodo Payments (International) -->
-                  <label id="optDodoLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                      <input type="radio" name="payment_method" value="dodo" style="accent-color: var(--accent-primary);" />
-                      <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                          International Cards &amp; Apple Pay <span style="font-size: 11px; background: rgba(255, 255, 255, 0.15); color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">USD ($)</span>
-                        </div>
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                          International Credit &amp; Debit Cards (Visa, Mastercard, Amex, Apple Pay)
-                        </div>
-                      </div>
-                    </div>
-                    <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Cards" style="height: 18px;" />
-                  </label>
-
-                  <!-- Option 3: Direct Bank Transfer Accordion -->
-                  <label id="optBankLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                      <input type="radio" name="payment_method" value="bank_transfer" style="accent-color: var(--accent-primary);" />
-                      <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                          Direct Bank Transfer (NEFT / RTGS / IMPS)
-                        </div>
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                          Institutional sponsorship or direct wire transfer to ScholarVault Federal Bank account
-                        </div>
-                      </div>
-                    </div>
-                    <i class="fa-solid fa-building-columns" style="color: #94a3b8; font-size: 20px;"></i>
-                  </label>
-                </div>
-
-                <!-- Unfolded Bank Transfer Details -->
-                <div id="bankTransferDetailsWrap" style="display: none; margin-top: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(163, 230, 53, 0.3); border-radius: 10px; padding: 16px;">
-                  <div style="font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-info-circle"></i> Official Federal Bank Account Details for Wire Transfer:
-                  </div>
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; margin-bottom: 14px;">
-                    <div><span style="color: #94a3b8;">Beneficiary Name:</span> <strong style="color: #ffffff;">ScholarVault Conferences</strong></div>
-                    <div><span style="color: #94a3b8;">Bank Name:</span> <strong style="color: #ffffff;">Federal Bank</strong></div>
-                    <div><span style="color: #94a3b8;">Account Number:</span> <strong style="color: var(--accent-primary); font-family: monospace;">29149900012345</strong></div>
-                    <div><span style="color: #94a3b8;">IFSC Code:</span> <strong style="color: var(--accent-primary); font-family: monospace;">FDRL0001234</strong></div>
-                    <div><span style="color: #94a3b8;">Account Type:</span> <strong style="color: #ffffff;">Current Account</strong></div>
-                    <div><span style="color: #94a3b8;">Branch:</span> <strong style="color: #ffffff;">Chennai Main</strong></div>
-                  </div>
-                  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 200px;">
-                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
-                      <input type="text" name="utr_number" id="regUtr" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
-                    </div>
-                    <div style="flex: 1; min-width: 200px;">
-                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
-                      <input type="text" name="bank_name" id="regSenderBank" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Submit Button -->
+            <!-- Payment Gateway Notice & Submit Button -->
             <div class="field full" style="margin-top: 14px;">
-              <button type="submit" id="regSubmitBtn" class="btn-primary form-submit" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                <span id="btnSubmitText">Proceed to Federal Bank Payment &bull; ₹4,999</span>
+              <div style="background: rgba(127, 224, 75, 0.05); border: 1px solid rgba(127, 224, 75, 0.25); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <i class="fa-solid fa-lock" style="color: #7FE04B; font-size: 16px;"></i>
+                  <span style="font-size: 13px; color: #cbd5e1;">
+                    Secure 256-bit encrypted checkout via <strong>Dodo Payments</strong>. Supports UPI, NetBanking, Credit/Debit Cards &amp; Apple Pay.
+                  </span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                  <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" style="height: 16px; opacity: 0.8;" />
+                  <img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" style="height: 16px; opacity: 0.8;" />
+                  <img src="assets/idzRNcC9U5_logos.png" alt="UPI" style="height: 18px; opacity: 0.8;" />
+                </div>
+              </div>
+
+              <button type="submit" id="regSubmitBtn" class="btn-primary form-submit" style="width: 100%; padding: 16px; font-size: 16px; font-weight: 700; background: linear-gradient(135deg, #A3E635 0%, #2DD4BF 100%); color: #081210; border: none; border-radius: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <span id="btnSubmitText">Proceed to Secure Checkout &bull; ₹4,999</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
+              <p style="font-size: 12px; color: #94a3b8; text-align: center; margin-top: 8px;">
+                Instant booking confirmation and GST tax invoice will be issued immediately upon payment.
+              </p>
             </div>
           </div>
         </form><div class="form-success" id="registerSuccess"><div class="form-success__title">Payment completed</div><p class="form-success__text">Your registration has been marked as completed. A confirmation email and next steps will follow from the conference team.</p></div></div></div></section>
