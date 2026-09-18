@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="css/style.css" />
     <style>
         /* ─── PREMIUM FORM STYLES (WHITE THEME) ─── */
-        .premium-shell { 
+        .form-shell { 
           max-width: 1000px; 
           margin: 0 auto; 
           background: #ffffff;
@@ -37,7 +37,7 @@
           z-index: 10;
         }
         @media (max-width: 768px) { 
-          .premium-shell { padding: 2rem 1.5rem; border-radius: 20px; } 
+          .form-shell { padding: 2rem 1.5rem; border-radius: 20px; } 
         }
 
         .premium-form-grid {
@@ -200,7 +200,7 @@
 
         /* Sharp Section Transition */
         .page-hero + .section { padding-top: 60px !important; }
-        .premium-shell { margin-top: -40px; position: relative; z-index: 10; }
+        .form-shell { margin-top: -40px; position: relative; z-index: 10; }
     </style>
     <!-- Microsoft Clarity Tracking -->
     <script type="text/javascript">
@@ -257,37 +257,37 @@
 
     <section class="section">
       <div class="site-shell">
-        <div class="premium-shell reveal" id="paperWrap">
-                    <form id="paperForm" class="glass-form" style="padding: 0; background: transparent; border: none;">
+        <div class="form-shell reveal" id="paperWrap">
+                    <form id="paperForm" style="padding: 0; background: transparent; border: none;">
             <div class="form-grid">
-              <div class="form-group">
+              <div class="field">
                 <label>Primary Corresponding Author *</label>
-                <input type="text" name="author_name" class="form-input" required placeholder="e.g. Dr. Jane Smith, PhD" />
+                <input type="text" name="author_name" required placeholder="e.g. Dr. Jane Smith, PhD" />
               </div>
 
-              <div class="form-group">
+              <div class="field">
                 <label>Institutional Email Address *</label>
-                <input type="email" name="author_email" class="form-input" required placeholder="jane.smith@institution.edu" />
+                <input type="email" name="author_email" required placeholder="jane.smith@institution.edu" />
               </div>
 
-              <div class="form-group">
+              <div class="field">
                 <label>Institutional Affiliation *</label>
-                <input type="text" name="author_institution" class="form-input" required placeholder="e.g. Stanford University / IIT Madras" />
+                <input type="text" name="author_institution" required placeholder="e.g. Stanford University / IIT Madras" />
               </div>
 
-              <div class="form-group">
+              <div class="field">
                 <label>Country *</label>
-                <input type="text" name="author_country" class="form-input" required placeholder="e.g. United States / India" />
+                <input type="text" name="author_country" required placeholder="e.g. United States / India" />
               </div>
 
-              <div class="form-group full">
+              <div class="field full">
                 <label>Abstract / Manuscript Title *</label>
-                <input type="text" name="paper_title" class="form-input" required placeholder="e.g. Forecasting Extreme Weather with Transformer Models" />
+                <input type="text" name="paper_title" required placeholder="e.g. Forecasting Extreme Weather with Transformer Models" />
               </div>
 
-              <div class="form-group full">
+              <div class="field full">
                 <label>Primary Thematic Track *</label>
-                <select name="track" class="form-select" required>
+                <select name="track" required>
                   <option value="">Select track...</option>
                   <option value="AI for Climate Modelling & Extreme Weather Prediction">Track 1: AI for Climate Modelling &amp; Extreme Weather Prediction</option>
                   <option value="Smart Energy Grids & Renewable Integration">Track 2: Smart Energy Grids &amp; Renewable Integration</option>
@@ -300,17 +300,17 @@
                 </select>
               </div>
 
-              <div class="form-group full">
+              <div class="field full">
                 <label>Co-Authors (Names, Affiliations, Emails - Optional)</label>
-                <input type="text" name="coauthors" class="form-input" placeholder="e.g. Co-Author 1 (University A), Co-Author 2 (Lab B)" />
+                <input type="text" name="coauthors" placeholder="e.g. Co-Author 1 (University A), Co-Author 2 (Lab B)" />
               </div>
 
-              <div class="form-group full">
+              <div class="field full">
                 <label>Manuscript / Abstract PDF File (PDF up to 4MB) *</label>
-                <div class="file-dropzone" id="paperDropZone" style="border: 2px dashed rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 28px 20px; text-align: center; background: rgba(56, 189, 248, 0.04); cursor: pointer; transition: all 0.3s ease;">
+                <div class="file-dropzone" id="paperDropZone" style="border: 2px dashed rgba(163, 230, 53, 0.4); border-radius: 14px; padding: 28px 20px; text-align: center; background: rgba(163, 230, 53, 0.04); cursor: pointer; transition: all 0.3s ease;">
                   <input type="file" name="paper" id="paperFile" accept=".pdf,application/pdf" style="display: none;" required />
                   <div id="dropZonePrompt">
-                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: #38bdf8; margin-bottom: 12px; display: inline-block;"></i>
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: var(--accent-primary); margin-bottom: 12px; display: inline-block;"></i>
                     <div style="font-weight: 700; color: #ffffff; font-size: 15px; margin-bottom: 4px;">Click or Drag &amp; Drop your Abstract PDF here</div>
                     <div style="font-size: 12.5px; color: #94a3b8;">Only PDF documents up to 4MB are accepted for direct submission</div>
                   </div>
@@ -320,23 +320,23 @@
                       <div id="dropZoneFileName" style="font-weight: 700; color: #ffffff; font-size: 14px;"></div>
                       <div id="dropZoneFileSize" style="font-size: 12px; color: #94a3b8;"></div>
                     </div>
-                    <button type="button" id="dropZoneRemoveFile" class="pill-btn frosted-pill" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
+                    <button type="button" id="dropZoneRemoveFile" class="btn-outline" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
                   </div>
                 </div>
               </div>
 
-              <div class="form-group full">
-                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
+              <div class="field full">
+                <div style="background: rgba(163, 230, 53, 0.08); border: 1px solid rgba(163, 230, 53, 0.35); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
                   <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: #fef3c7; font-size: 13.5px; line-height: 1.5;">
-                    <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 3.5px; width: 16px; height: 16px; accent-color: #f59e0b; cursor: pointer;" />
+                    <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 3.5px; width: 16px; height: 16px; accent-color: var(--accent-primary); cursor: pointer;" />
                     <span>
-                      <strong style="color: #fbbf24;">?? Apply for ISIAI-SGS 2026 Student Research Grant</strong> (100% Registration Fee Waiver for Top 10 Student Abstracts)
+                      <strong style="color: var(--accent-primary);">?? Apply for ISIAI-SGS 2026 Student Research Grant</strong> (100% Registration Fee Waiver for Top 10 Student Abstracts)
                     </span>
                   </label>
                 </div>
               </div>
 
-              <div class="form-group full">
+              <div class="field full">
                 <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
                   <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: #d1d5db; font-size: 13px; line-height: 1.5;">
                     <input type="checkbox" name="declaration" required style="margin-top: 3px;" />
@@ -345,14 +345,14 @@
                 </div>
               </div>
 
-              <div class="form-group full" style="margin-top: 10px;">
-                <button type="submit" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+              <div class="field full" style="margin-top: 10px;">
+                <button type="submit" class="btn-primary form-submit" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
                   <span>Submit Abstract</span>
                   <i class="fa-solid fa-file-arrow-up"></i>
                   <i class="fa-solid fa-arrow-right"></i>
                 </button>
                 <div style="text-align: center; margin-top: 10px; font-size: 12px; color: #94a3b8; display: flex; align-items: center; justify-content: center; gap: 6px;">
-                  <i class="fa-solid fa-bolt" style="color: #38bdf8;"></i>
+                  <i class="fa-solid fa-bolt" style="color: var(--accent-primary);"></i>
                   <span>No account is required. We will send a secure confirmation link to this email.</span>
                 </div>
               </div>

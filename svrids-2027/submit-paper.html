@@ -121,359 +121,35 @@
         </div>
 
         <form id="submitPaperForm" class="form-grid">
-          <!-- Primary Submitter Info -->
-          <div class="field">
-            <label>Primary Author / Founder Name <span class="req">*</span></label>
-            <input type="text" name="name" required placeholder="e.g. Dr. Jennifer Wu" />
-          </div>
-
-          <div class="field">
-            <label>Work / Academic Email <span class="req">*</span></label>
-            <input type="email" name="email" required placeholder="jennifer.wu@university.edu" />
-          </div>
-
-          <div class="field">
-            <label>Primary Institution / Venture Name <span class="req">*</span></label>
-            <input type="text" name="institution" required placeholder="e.g. Centre for Quantum Systems / NanoPhotonics Inc." />
-          </div>
-
-          <div class="field">
-            <label>Phone / WhatsApp Number <span class="req">*</span></label>
-            <input type="tel" name="phone" required placeholder="+91 98765 43210 / +1 415 555 0199" />
-          </div>
-
-          <div class="field">
-            <label>Country of Origin <span class="req">*</span></label>
-            <input type="text" name="country" required placeholder="e.g. India, United States, Germany, Singapore" />
-          </div>
-
-          <div class="field">
-            <label>Submission Track <span class="req">*</span></label>
-            <select name="track" required>
-              <option value="">Select conference track...</option>
-              <option value="Track 1: DeepTech Ventures &amp; Commercialization">Track 1: DeepTech Ventures &amp; Commercialization</option>
-              <option value="Track 2: Research-to-Startup Pathways">Track 2: Research-to-Startup Pathways</option>
-              <option value="Track 3: AI &amp; ML Startup Ecosystem">Track 3: AI &amp; ML Startup Ecosystem</option>
-              <option value="Track 4: IP Strategy &amp; Patent Commercialization">Track 4: IP Strategy &amp; Patent Commercialization</option>
-              <option value="Track 5: Funding, Investment &amp; Pitch Readiness">Track 5: Funding, Investment &amp; Pitch Readiness</option>
-              <option value="Track 6: Social Impact Innovation &amp; SDGs">Track 6: Social Impact Innovation &amp; SDGs</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Submission Type <span class="req">*</span></label>
-            <select name="submission_type" required>
-              <option value="">Select contribution type...</option>
-              <option value="Academic Research Paper">Academic Research Paper (ISBN Proceedings)</option>
-              <option value="Startup Pitch Deck">Startup Pitch Deck (Venture Jury &amp; Pitch Arena)</option>
-              <option value="Tech Transfer Whitepaper">Tech Transfer Case Study / Whitepaper</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Target Attendance Preference <span class="req">*</span></label>
-            <select name="attendance_preference" required>
-              <option value="In-Person (Innovation Hub Stage, Bengaluru)">In-Person (Innovation Hub Stage, Bengaluru)</option>
-              <option value="Global Virtual Presentation (Interactive Zoom)">Global Virtual Presentation (Interactive Zoom)</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label>Contribution Title <span class="req">*</span></label>
-            <input type="text" name="title" required placeholder="Full title of your research paper or venture pitch" />
-          </div>
-
-          <div class="field full">
-            <label>Keywords (3–6 separated by commas) <span class="req">*</span></label>
-            <input type="text" name="keywords" required placeholder="e.g. DeepTech, Silicon Photonics, Technology Transfer, Venture Capital, Cap Table" />
-          </div>
-
-          <div class="field full">
-            <label>Abstract / Executive Summary (250–500 words) <span class="req">*</span></label>
-            <textarea name="abstract" rows="6" required placeholder="Summarize your technical novelty, experimental results, commercial application, and intellectual property status..."></textarea>
-          </div>
-
-          <div class="field full">
-            <label>Co-Authors / Co-Founders (Name, Email, Affiliation)</label>
-            <textarea name="coauthors" rows="3" placeholder="e.g. 1. Prof. Rajesh Kumar (IIT Bombay, rajesh@iitb.ac.in)&#10;2. Dr. Anita Sharma (Co-Founder, anita@startup.com)"></textarea>
-          </div>
-
-          <!-- Drag and Drop File Zone -->
-          <div class="field full">
-            <label>Upload Draft Paper / Pitch Deck (PDF, DOCX, PPTX) <span class="req">*</span></label>
-            <div class="file-drop-zone" id="paperDropZone">
-              <input type="file" id="paperFile" accept=".pdf,.doc,.docx,.ppt,.pptx" />
-              <div class="file-drop-icon"><i data-lucide="upload-cloud"></i></div>
-              <strong style="color:var(--white); display:block; margin-bottom:4px;">Drag &amp; drop file here, or click to browse</strong>
-              <span style="font-size:0.8rem; color:var(--text-muted); display:block;">Supported formats: PDF, DOCX, PPTX (Max 15MB)</span>
-              <div id="fileNameDisplay" style="display:none; color:#60a5fa; font-weight:700; margin-top:10px; font-size:0.9rem;"></div>
-            </div>
-          </div>
-
-          <div class="field full">
-            <label class="check-row">
-              <input type="checkbox" name="originality_declared" required checked />
-              <span>I declare that this submission represents original work or authorized spinout material, and all co-authors/founders consent to peer review.</span>
-            </label>
-          </div>
-
-          <div class="field full">
-            <button type="submit" class="btn-secondary form-submit" style="width: 100%; min-height: 52px;">
-              <i data-lucide="send"></i> Submit Abstract / Pitch for Review
-            </button>
-          </div>
-        </form>
-
-        <div class="form-success">
-          <div class="icon-badge orange" style="width:64px; height:64px; margin:0 auto 16px;"><i data-lucide="check-check" style="width:32px; height:32px;"></i></div>
-          <div class="form-success__title">Submission Successfully Received!</div>
-          <p class="form-success__text">
-            Your draft submission has been queued for review by the SVRIDS 2027 track chairs and venture mentors. An automated confirmation and reference ID have been dispatched to your email.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Submission Help Desk -->
-  <section class="section section--dark">
-    <div class="site-shell">
-      <div class="grid-2">
-        <div class="card reveal-left">
-          <div class="icon-badge"><i data-lucide="help-circle"></i></div>
-          <h3>Need Pre-Submission Guidance?</h3>
-          <p>If you have questions regarding track selection, confidentiality of proprietary pitch decks, or multi-author registration policies, our secretariat is available to assist you.</p>
-          <a href="contact.html" class="btn-outline" style="margin-top:14px;"><i data-lucide="mail"></i> Contact Submission Desk</a>
-        </div>
-
-        <div class="card reveal-right">
-          <div class="icon-badge orange"><i data-lucide="file-down"></i></div>
-          <h3>Download Author &amp; Pitch Templates</h3>
-          <p>Ensure your submission conforms to our formatting standards. Download the official SVRIDS 2027 Abstract Template and Pitch Deck Guide.</p>
-          <a href="#" class="btn-secondary" data-download style="margin-top:14px;"><i data-lucide="download"></i> Download Template Kit</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="site-shell">
-      <div class="footer__grid">
-        <div class="footer__brand">
-          <div class="navbar__logo-text">
-            <strong>SVRIDS <span class="grad-text">2027</span></strong>
-            <span>DeepTech &amp; Startup Summit</span>
-          </div>
-          <p>
-            ScholarVault Research-to-Impact, DeepTech &amp; Startup Summit 2027 unites academic researchers, technology transfer leaders, and venture capitalists to transform lab discoveries into market-defining enterprises.
-          </p>
-          <div style="display:flex; align-items:center; gap:12px;">
-            <img src="assets/icon-512.png" alt="ScholarVault" style="width:32px; height:32px; border-radius:8px;" />
-            <div style="line-height:1.2;">
-              <span style="font-size:0.75rem; color:var(--text-muted); display:block;">Organised by</span>
-              <strong style="font-size:0.95rem; color:var(--white);">ScholarVault Network</strong>
-            </div>
-          </div>
-        </div>
-
-        <div class="footer__col">
-          <strong>Conference</strong>
-          <a href="about.html">About Summit</a>
-          <a href="call-for-papers.html">Call for Papers</a>
-          <a href="speakers.html">Keynotes &amp; Mentors</a>
-          <a href="committee.html">Committee &amp; Jury</a>
-          <a href="awards.html">Awards Program</a>
-        </div>
-
-        <div class="footer__col">
-          <strong>Participate</strong>
-          <a href="submit-paper.html">Submit Abstract / Pitch</a>
-          <a href="register.html">Registration &amp; Pricing</a>
-          <a href="speaker-form.html">Apply as Speaker</a>
-          <a href="committee-form.html">Join Review Pool</a>
-          <a href="interest-form.html">Express Interest</a>
-        </div>
-
-        <div class="footer__col">
-          <strong>Information</strong>
-          <a href="downloads.html">Downloads &amp; Templates</a>
-          <a href="blog.html">Insights &amp; Articles</a>
-          <a href="media.html">Media &amp; Press Kit</a>
-          <a href="contact.html">Contact Help Desk</a>
-        </div>
-      </div>
-
-      <div class="footer__trust">
-        <div class="footer__payment-methods">
-          <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" />
-          <img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" />
-          <img src="assets/idzRNcC9U5_logos.png" alt="BHIM" />
-          <img src="assets/gpay-logo.png" alt="Google Pay" />
-        </div>
-        
-      </div>
-
-      <div class="footer__bottom">
-        <p>&copy; 2027 SVRIDS Summit. All rights reserved. Organized by ScholarVault.</p>
-        <div class="footer__bottom-links">
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="refund.html">Refund Policy</a>
-          <a href="contact.html">Contact Us</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Download Modal -->
-  <div class="modal-overlay" id="downloadModal">
-    <div class="modal-panel">
-      <button class="modal-close" aria-label="Close modal">&times;</button>
-      <div class="eyebrow eyebrow--orange">Resource Delivery</div>
-      <h3 style="font-family: var(--font-display); font-size: 1.5rem; margin: 12px 0 6px;">Get SVRIDS 2027 Brochure</h3>
-      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 20px;">Enter your details to receive the official conference brochure, call-for-papers package, and author kits.</p>
-
-      <form id="downloadForm" class="form-grid form-grid--single">
-        <div class="field">
-          <label>Full Name <span class="req">*</span></label>
-          <input type="text" name="name" required placeholder="Dr. / Prof. / Founder Name" />
-        </div>
-        <div class="field">
-          <label>Work Email <span class="req">*</span></label>
-          <input type="email" name="email" required placeholder="name@institution.edu or name@startup.com" />
-        </div>
-        <div class="field">
-          <label>Institution / Startup / Fund</label>
-          <input type="text" name="institution" placeholder="University, Organization, or Venture Name" />
-        </div>
-        <button type="submit" class="btn-secondary" style="width:100%; margin-top:10px;">Send Resource Package</button>
-      </form>
-    </div>
-  </div>
-
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="js/academic-enrichment.js"></script>
-  <script src="js/main.js"></script>
-  <script src="https://app.scholarvault.in/conference-embed.js" data-conference="svrids-2027" defer></script>
-
-  <!-- Tawk.to Live Chat Script -->
-  <script type="text/javascript">
-  var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-  (function(){
-    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/6a1556cb3f29381c3623f33e/1jphlm3mo';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1, s0);
-  })();
-  </script>
-
-  <script>
-    const paperForm = document.getElementById('paperForm');
-    const paperWrap = document.getElementById('paperWrap');
-    const paperFileInput = document.getElementById('paperFile');
-
-    if (paperForm) {
-      paperForm.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const file = paperFileInput?.files?.[0];
-        if (!file) {
-          window.SVSite?.showToast?.("Please attach your manuscript or pitch deck.", "error");
-          return;
-        }
-
-        const submitBtn = paperForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<i data-lucide="loader" class="fa-spin"></i> Submitting to ScholarVault…';
-
-        try {
-          const payload = new FormData(paperForm);
-          payload.set('paper', file);
-          payload.delete('file');
-
-          const title = (payload.get('title') || '').trim();
-          const authorName = (payload.get('name') || '').trim();
-          const authorEmail = (payload.get('email') || '').trim();
-          const institution = (payload.get('institution') || '').trim();
-          const country = (payload.get('country') || '').trim();
-          const track = (payload.get('track') || '').trim();
-          const coauthors = (payload.get('coauthors') || '').trim();
-          const rorId = (payload.get('ror_id') || paperForm.dataset.rorId || '').trim();
-
-          payload.set('paper_title', title);
-          payload.set('author_name', authorName);
-          payload.set('author_email', authorEmail);
-          payload.set('author_institution', institution);
-          payload.set('author_country', country);
-          if (rorId) payload.set('ror_id', rorId);
-
-          const gatewayUrl = `${window.SCHOLARVAULT_APP_ORIGIN || (location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://app.scholarvault.in')}/api/conferences/svrids-2027/guest/submissions`;
-
-          const response = await fetch(gatewayUrl, {
-            method: 'POST',
-            body: payload
-          });
-
-          const result = await response.json().catch(() => null);
-          if (!response.ok) {
-            throw new Error(result?.error?.message || result?.message || 'Submission could not be completed.');
-          }
-
-          const reference = result?.data?.reference || result?.reference || result?.id || 'Ref #' + Math.floor(100000 + Math.random() * 900000);
-
-          paperForm.style.display = 'none';
-          const successBox = paperWrap.querySelector('.form-success');
-          if (successBox) {
-            const textEl = successBox.querySelector('.form-success__text');
-            if (textEl) {
-              textEl.innerHTML = `Your submission has been securely received under tracking reference <strong>${reference}</strong>. A verification and confirmation receipt has been sent to <strong>${authorEmail}</strong>.`;
-            }
-            successBox.classList.add('show');
-          }
-          window.SVSite?.showToast?.("Submission received successfully!", "success");
-
-        } catch (err) {
-          console.error("Submission error:", err);
-          window.SVSite?.showToast?.(err.message || "Failed to submit. Please check your network and try again.", "error");
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalText;
-        }
-      });
-    }
-  </script>
-</body>
-</html><form id="paperForm" class="glass-form" style="padding: 0; background: transparent; border: none;">
-          <div class="form-grid">
-            <div class="form-group">
+          <div style="display: contents;">
+            <div class="field">
               <label>Primary Corresponding Author *</label>
-              <input type="text" name="author_name" class="form-input" required placeholder="e.g. Dr. Jane Smith, PhD" />
+              <input type="text" name="author_name"  required placeholder="e.g. Dr. Jane Smith, PhD" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Institutional Email Address *</label>
-              <input type="email" name="author_email" class="form-input" required placeholder="jane.smith@institution.edu" />
+              <input type="email" name="author_email"  required placeholder="jane.smith@institution.edu" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Institutional Affiliation *</label>
-              <input type="text" name="author_institution" class="form-input" required placeholder="e.g. Stanford University / IIT Madras" />
+              <input type="text" name="author_institution"  required placeholder="e.g. Stanford University / IIT Madras" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Country *</label>
-              <input type="text" name="author_country" class="form-input" required placeholder="e.g. United States / India" />
+              <input type="text" name="author_country"  required placeholder="e.g. United States / India" />
             </div>
 
-            <div class="form-group full">
+            <div class="field full">
               <label>Abstract / Manuscript Title *</label>
-              <input type="text" name="paper_title" class="form-input" required placeholder="e.g. Forensic Detection of Synthetic Scientific Figures Using Residual Spectral Forensics" />
+              <input type="text" name="paper_title"  required placeholder="e.g. Forensic Detection of Synthetic Scientific Figures Using Residual Spectral Forensics" />
             </div>
 
-            <div class="form-group full">
+            <div class="field full">
               <label>Primary Thematic Track *</label>
-              <select name="track" class="form-select" required>
+              <select name="track"  required>
                 <option value="">Select track...</option>
                 <option value="Lab-to-Market Spinouts & DeepTech Commercialization">Track 1: Lab-to-Market Spinouts &amp; DeepTech Commercialization</option>
                 <option value="Frontier AI, Autonomous Systems & Robotics">Track 2: Frontier AI, Autonomous Systems &amp; Robotics</option>
@@ -484,12 +160,12 @@
               </select>
             </div>
 
-            <div class="form-group full">
+            <div class="field full">
               <label>Co-Authors (Names, Affiliations, Emails - Optional)</label>
-              <input type="text" name="coauthors" class="form-input" placeholder="e.g. Co-Author 1 (University A), Co-Author 2 (Lab B)" />
+              <input type="text" name="coauthors"  placeholder="e.g. Co-Author 1 (University A), Co-Author 2 (Lab B)" />
             </div>
 
-            <div class="form-group full">
+            <div class="field full">
               <label>Manuscript / Abstract PDF File (PDF up to 4MB) *</label>
               <div class="file-dropzone" id="paperDropZone" style="border: 2px dashed rgba(56, 189, 248, 0.4); border-radius: 14px; padding: 28px 20px; text-align: center; background: rgba(56, 189, 248, 0.04); cursor: pointer; transition: all 0.3s ease;">
                 <input type="file" name="paper" id="paperFile" accept=".pdf,application/pdf" style="display: none;" required />
@@ -504,12 +180,12 @@
                     <div id="dropZoneFileName" style="font-weight: 700; color: #ffffff; font-size: 14px;"></div>
                     <div id="dropZoneFileSize" style="font-size: 12px; color: #94a3b8;"></div>
                   </div>
-                  <button type="button" id="dropZoneRemoveFile" class="pill-btn frosted-pill" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
+                  <button type="button" id="dropZoneRemoveFile" class="btn-outline" style="padding: 4px 12px; font-size: 11px; margin-left: 10px;">Remove</button>
                 </div>
               </div>
             </div>
 
-            <div class="form-group full">
+            <div class="field full">
               <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
                 <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; color: #fef3c7; font-size: 13.5px; line-height: 1.5;">
                   <input type="checkbox" name="student_grant" id="studentGrantCheckbox" value="yes" style="margin-top: 3.5px; width: 16px; height: 16px; accent-color: #f59e0b; cursor: pointer;" />
@@ -520,7 +196,7 @@
               </div>
             </div>
 
-            <div class="form-group full">
+            <div class="field full">
               <div style="background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 16px; margin-top: 4px;">
                 <label style="display: flex; align-items: flex-start; gap: 10px; cursor: pointer; color: #d1d5db; font-size: 13px; line-height: 1.5;">
                   <input type="checkbox" name="declaration" required style="margin-top: 3px;" />
@@ -529,8 +205,8 @@
               </div>
             </div>
 
-            <div class="form-group full" style="margin-top: 10px;">
-              <button type="submit" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <div class="field full" style="margin-top: 10px;">
+              <button type="submit" class="btn-primary" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
                 <span>Submit Abstract</span>
                 <i class="fa-solid fa-file-arrow-up"></i>
                 <i class="fa-solid fa-arrow-right"></i>
@@ -540,230 +216,6 @@
                 <span>No account is required. We will send a secure confirmation link to this email.</span>
               </div>
             </div>
-          </div>
-        </form>ype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Submit Research or Startup Pitch | SVRIDS 2027</title>
-  <meta name="description" content="Submit your research abstract, startup pitch summary, or technology transfer whitepaper for SVRIDS 2027. Rolling review in 3-5 working days." />
-  <meta name="theme-color" content="#0f172a" />
-  <link rel="icon" type="image/png" href="assets/icon-512.png" />
-  <link rel="apple-touch-icon" href="assets/icon-512.png" />
-  <link rel="canonical" href="https://svrids2027.scholarvault.in/submit-paper.html" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
-</head>
-<body>
-  <!-- Top Notice Banner -->
-  <div class="navbar__banner">
-    <span>Summit Dates: <strong>15–16 January 2027</strong></span>
-    <span class="badge-hybrid"><i data-lucide="globe"></i> HYBRID: In-Person + Global Virtual</span>
-    <span>Abstract &amp; Pitch Deadline: <strong>10 Dec 2026</strong></span>
-  </div>
-
-  <!-- Master Navbar -->
-  <header class="navbar" id="navbar">
-    <div class="navbar__inner">
-      <a class="navbar__logo" href="index.html">
-        <img src="assets/icon-512.png" alt="SVRIDS 2027" class="navbar__logo-img" />
-        <div class="navbar__logo-text">
-          <strong>SVRIDS <span class="grad-text">2027</span></strong>
-          <span>DeepTech &amp; Startup Summit</span>
-        </div>
-      </a>
-
-      <nav class="navbar__links">
-        <a href="index.html" class="navbar__link">Home</a>
-        <a href="about.html" class="navbar__link">About</a>
-        <a href="call-for-papers.html" class="navbar__link">Call for Papers</a>
-        <a href="speakers.html" class="navbar__link">Speakers</a>
-        <a href="committee.html" class="navbar__link">Committee</a>
-        <a href="register.html" class="navbar__link">Register</a>
-        <a href="awards.html" class="navbar__link">Awards</a>
-        <a href="blog.html" class="navbar__link">Blog</a>
-        <a href="downloads.html" class="navbar__link">Downloads</a>
-        <a href="contact.html" class="navbar__link">Contact</a>
-      </nav>
-
-      <div class="navbar__cta">
-        <a class="btn-outline" href="interest-form.html">Express Interest</a>
-        <a class="btn-primary" href="register.html">Register Now <i data-lucide="arrow-right"></i></a>
-      </div>
-
-      <button class="navbar__hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
-
-  <!-- Mobile Drawer -->
-  <nav class="navbar__mobile" id="mobileMenu">
-    <a href="index.html">Home <i data-lucide="chevron-right"></i></a>
-    <a href="about.html">About Summit <i data-lucide="chevron-right"></i></a>
-    <a href="call-for-papers.html">Call for Papers &amp; Pitches <i data-lucide="chevron-right"></i></a>
-    <a href="submit-paper.html" class="active">Submit Contribution <i data-lucide="chevron-right"></i></a>
-    <a href="speakers.html">Keynotes &amp; Mentors <i data-lucide="chevron-right"></i></a>
-    <a href="committee.html">Committee &amp; Jury <i data-lucide="chevron-right"></i></a>
-    <a href="register.html">Registration &amp; Pricing <i data-lucide="chevron-right"></i></a>
-    <a href="awards.html">Awards &amp; Recognition <i data-lucide="chevron-right"></i></a>
-    <a href="blog.html">Insights &amp; Articles <i data-lucide="chevron-right"></i></a>
-    <a href="downloads.html">Downloads &amp; Templates <i data-lucide="chevron-right"></i></a>
-    <a href="media.html">Media Center <i data-lucide="chevron-right"></i></a>
-    <a href="contact.html">Contact Help Desk <i data-lucide="chevron-right"></i></a>
-    <a href="interest-form.html">Express Interest <i data-lucide="chevron-right"></i></a>
-    <a href="register.html" class="btn-primary" style="margin-top: 14px; justify-content: center;">Register Now <i data-lucide="arrow-right"></i></a>
-  </nav>
-
-  <!-- Page Hero -->
-  <section class="page-hero">
-    <div class="page-hero__lightcone"></div>
-    <div class="page-hero__inner reveal">
-      <div class="breadcrumbs">
-        <a href="index.html">SVRIDS 2027</a>
-        <span>/</span>
-        <span>Submit Contribution</span>
-      </div>
-      <div class="eyebrow eyebrow--orange">Author &amp; Founder Portal</div>
-      <h1 class="page-hero__title">Submit Your <span>Research or Startup Pitch</span></h1>
-      <p class="page-hero__desc">
-        Free initial intake. Submit your research abstract, startup pitch summary, or tech transfer case study for rapid peer evaluation within 3 to 5 working days.
-      </p>
-    </div>
-  </section>
-
-  <!-- Submission Form & Coming Soon Overlay -->
-  <section class="section section--mist">
-    <div class="site-shell">
-      <!-- Coming Soon Information Banner -->
-      <div class="coming-soon-banner reveal">
-        <div style="display:flex; align-items:center; gap:16px;">
-          <div class="icon-badge orange" style="margin-bottom:0;"><i data-lucide="clock"></i></div>
-          <div>
-            <strong style="color:var(--white); font-size:1.15rem; display:block;">Automated Submission Intake Portal — Opening Shortly</strong>
-            <span style="font-size:0.88rem; color:var(--text-secondary);">
-              Preview the required submission fields below. You can also express early interest or email your draft directly to <a href="mailto:conferences@scholarvault.in" style="color:#60a5fa; text-decoration:underline;">conferences@scholarvault.in</a>.
-            </span>
-          </div>
-        </div>
-        <a href="interest-form.html" class="btn-primary" style="flex-shrink:0;">Register Early Interest <i data-lucide="arrow-right"></i></a>
-      </div>
-
-      <div class="form-shell card reveal" id="submitPaperWrap" style="background: rgba(30, 41, 59, 0.85); border-color: rgba(59, 130, 246, 0.3);">
-        <div style="margin-bottom: 28px; border-bottom: 1px solid var(--border-subtle); padding-bottom: 20px;">
-          <h2 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--white); margin: 0 0 6px;">
-            Contribution Intake Form (Preview)
-          </h2>
-          <p style="color: var(--text-secondary); font-size: 0.9rem; margin: 0;">
-            Please ensure all author metadata and track selections are accurate prior to submission.
-          </p>
-        </div>
-
-        <form id="submitPaperForm" class="form-grid">
-          <!-- Primary Submitter Info -->
-          <div class="field">
-            <label>Primary Author / Founder Name <span class="req">*</span></label>
-            <input type="text" name="name" required placeholder="e.g. Dr. Jennifer Wu" />
-          </div>
-
-          <div class="field">
-            <label>Work / Academic Email <span class="req">*</span></label>
-            <input type="email" name="email" required placeholder="jennifer.wu@university.edu" />
-          </div>
-
-          <div class="field">
-            <label>Primary Institution / Venture Name <span class="req">*</span></label>
-            <input type="text" name="institution" required placeholder="e.g. Centre for Quantum Systems / NanoPhotonics Inc." />
-          </div>
-
-          <div class="field">
-            <label>Phone / WhatsApp Number <span class="req">*</span></label>
-            <input type="tel" name="phone" required placeholder="+91 98765 43210 / +1 415 555 0199" />
-          </div>
-
-          <div class="field">
-            <label>Country of Origin <span class="req">*</span></label>
-            <input type="text" name="country" required placeholder="e.g. India, United States, Germany, Singapore" />
-          </div>
-
-          <div class="field">
-            <label>Submission Track <span class="req">*</span></label>
-            <select name="track" required>
-              <option value="">Select conference track...</option>
-              <option value="Track 1: DeepTech Ventures &amp; Commercialization">Track 1: DeepTech Ventures &amp; Commercialization</option>
-              <option value="Track 2: Research-to-Startup Pathways">Track 2: Research-to-Startup Pathways</option>
-              <option value="Track 3: AI &amp; ML Startup Ecosystem">Track 3: AI &amp; ML Startup Ecosystem</option>
-              <option value="Track 4: IP Strategy &amp; Patent Commercialization">Track 4: IP Strategy &amp; Patent Commercialization</option>
-              <option value="Track 5: Funding, Investment &amp; Pitch Readiness">Track 5: Funding, Investment &amp; Pitch Readiness</option>
-              <option value="Track 6: Social Impact Innovation &amp; SDGs">Track 6: Social Impact Innovation &amp; SDGs</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Submission Type <span class="req">*</span></label>
-            <select name="submission_type" required>
-              <option value="">Select contribution type...</option>
-              <option value="Academic Research Paper">Academic Research Paper (ISBN Proceedings)</option>
-              <option value="Startup Pitch Deck">Startup Pitch Deck (Venture Jury &amp; Pitch Arena)</option>
-              <option value="Tech Transfer Whitepaper">Tech Transfer Case Study / Whitepaper</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label>Target Attendance Preference <span class="req">*</span></label>
-            <select name="attendance_preference" required>
-              <option value="In-Person (Innovation Hub Stage, Bengaluru)">In-Person (Innovation Hub Stage, Bengaluru)</option>
-              <option value="Global Virtual Presentation (Interactive Zoom)">Global Virtual Presentation (Interactive Zoom)</option>
-            </select>
-          </div>
-
-          <div class="field full">
-            <label>Contribution Title <span class="req">*</span></label>
-            <input type="text" name="title" required placeholder="Full title of your research paper or venture pitch" />
-          </div>
-
-          <div class="field full">
-            <label>Keywords (3–6 separated by commas) <span class="req">*</span></label>
-            <input type="text" name="keywords" required placeholder="e.g. DeepTech, Silicon Photonics, Technology Transfer, Venture Capital, Cap Table" />
-          </div>
-
-          <div class="field full">
-            <label>Abstract / Executive Summary (250–500 words) <span class="req">*</span></label>
-            <textarea name="abstract" rows="6" required placeholder="Summarize your technical novelty, experimental results, commercial application, and intellectual property status..."></textarea>
-          </div>
-
-          <div class="field full">
-            <label>Co-Authors / Co-Founders (Name, Email, Affiliation)</label>
-            <textarea name="coauthors" rows="3" placeholder="e.g. 1. Prof. Rajesh Kumar (IIT Bombay, rajesh@iitb.ac.in)&#10;2. Dr. Anita Sharma (Co-Founder, anita@startup.com)"></textarea>
-          </div>
-
-          <!-- Drag and Drop File Zone -->
-          <div class="field full">
-            <label>Upload Draft Paper / Pitch Deck (PDF, DOCX, PPTX) <span class="req">*</span></label>
-            <div class="file-drop-zone" id="paperDropZone">
-              <input type="file" id="paperFile" accept=".pdf,.doc,.docx,.ppt,.pptx" />
-              <div class="file-drop-icon"><i data-lucide="upload-cloud"></i></div>
-              <strong style="color:var(--white); display:block; margin-bottom:4px;">Drag &amp; drop file here, or click to browse</strong>
-              <span style="font-size:0.8rem; color:var(--text-muted); display:block;">Supported formats: PDF, DOCX, PPTX (Max 15MB)</span>
-              <div id="fileNameDisplay" style="display:none; color:#60a5fa; font-weight:700; margin-top:10px; font-size:0.9rem;"></div>
-            </div>
-          </div>
-
-          <div class="field full">
-            <label class="check-row">
-              <input type="checkbox" name="originality_declared" required checked />
-              <span>I declare that this submission represents original work or authorized spinout material, and all co-authors/founders consent to peer review.</span>
-            </label>
-          </div>
-
-          <div class="field full">
-            <button type="submit" class="btn-secondary form-submit" style="width: 100%; min-height: 52px;">
-              <i data-lucide="send"></i> Submit Abstract / Pitch for Review
-            </button>
           </div>
         </form>
 
@@ -930,7 +382,7 @@
     });
 
     /* Capture phase deliberately replaces the legacy social-login lead handler. */
-    document.getElementById('paperForm')?.addEventListener('submit', async function (event) {
+    document.getElementById('submitPaperForm')?.addEventListener('submit', async function (event) {
       event.preventDefault();
       event.stopImmediatePropagation();
       const form = event.currentTarget;
@@ -990,10 +442,10 @@
         const response = await fetch(`${window.SCHOLARVAULT_APP_ORIGIN || (location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://app.scholarvault.in')}/api/conferences/svrids-2027/guest/submissions`, { method: 'POST', body: payload });
         const result = await response.json().catch(() => null);
         if (!response.ok) throw new Error(result?.error?.message || result?.message || 'Submission could not be completed.');
-        const card = form.closest('.glass-card') || form.parentElement;
+        const card = form.closest('.form-shell') || form.parentElement;
         const reference = result?.data?.reference || result?.reference || result?.id || 'Pending Confirmation';
         const email = result?.data?.email || result?.email || authorEmail;
-        card.innerHTML = `<div class="section-head"><span class="section-eyebrow">SUBMISSION RECEIVED</span><h2 class="section-title">CHECK YOUR EMAIL</h2><p class="section-desc">Your reference is <strong>${reference}</strong>. We sent a secure confirmation link to <strong>${email}</strong>. Confirm it before editorial screening begins.</p><a class="pill-btn glowing-pill" href="index.html">Return to summit home</a></div>`;
+        card.innerHTML = `<div class="section-head"><span class="section-eyebrow">SUBMISSION RECEIVED</span><h2 class="section-title">CHECK YOUR EMAIL</h2><p class="section-desc">Your reference is <strong>${reference}</strong>. We sent a secure confirmation link to <strong>${email}</strong>. Confirm it before editorial screening begins.</p><a class="btn-primary" href="index.html">Return to summit home</a></div>`;
       } catch (error) {
         console.error('Submission error:', error);
         const errorMsg = error?.message === 'Failed to fetch'

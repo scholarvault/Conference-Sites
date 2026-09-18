@@ -16,66 +16,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <script src="https://app.scholarvault.in/conference-embed.js" data-conference="svrids-2027" defer></script>
   <style>
-  /* ── SV Gold Addon Card Styles ── */
-  .sv-gold-card {
-    position: relative; overflow: hidden;
-    background: linear-gradient(135deg, #1a1000, #2a1a00, #1a0a00);
-    border: 1.5px solid rgba(255, 193, 7, 0.4);
-    border-radius: 20px; padding: 1.5rem;
-    margin-bottom: 2rem; cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    color: white; text-align: left;
-  }
-  .sv-gold-card::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, rgba(255,193,7,0.08), transparent 70%);
-    pointer-events: none;
-  }
-  .sv-gold-card:hover { border-color: rgba(255,193,7,0.7); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(255,193,7,0.15); }
-  .sv-gold-card.activated {
-    border-color: #ffc107;
-    background: linear-gradient(135deg, #201200, #2e1800, #201000);
-    box-shadow: 0 0 32px rgba(255,193,7,0.2), inset 0 0 20px rgba(255,193,7,0.05);
-  }
-  .sv-gold-hex {
-    font-size: 2.5rem; display: inline-block;
-    animation: goldPulse 2.5s ease-in-out infinite;
-  }
-  @keyframes goldPulse {
-    0%, 100% { filter: drop-shadow(0 0 6px rgba(255,193,7,0.6)); transform: scale(1); }
-    50% { filter: drop-shadow(0 0 14px rgba(255,193,7,1)); transform: scale(1.08); }
-  }
-  .sv-gold-badge-row {
-    display: flex; align-items: center; gap: 14px; margin-bottom: 0.75rem;
-  }
-  .sv-gold-title {
-    font-size: 1.1rem; font-weight: 900; font-family: var(--font-display, 'Manrope', sans-serif);
-    background: linear-gradient(135deg, #ffc107, #ffe082, #ff8f00);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .sv-gold-subtitle { font-size: 12px; color: rgba(255,193,7,0.7); font-weight:600; margin-top:2px; }
-  .sv-gold-perks { display: flex; flex-direction: column; gap: 7px; margin: 1rem 0; }
-  .sv-gold-perk { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: rgba(255,220,100,0.9); line-height: 1.5; }
-  .sv-gold-perk::before { content: '✦'; color: #ffc107; font-size: 10px; flex-shrink: 0; margin-top: 3px; }
-  .sv-gold-perk em { color: inherit; font-style: normal; font-weight: 700; }
-  .sv-gold-toggle { display: flex; align-items: center; gap: 10px; margin-top: 1rem; flex-wrap: wrap; }
-  .sv-gold-toggle input[type="text"] {
-    flex: 1; min-width: 240px; padding: 10px 14px; border-radius: 6px;
-    background: rgba(255,193,7,0.08); border: 1.5px solid rgba(255,193,7,0.3);
-    color: #fff; font-size: 14px;
-  }
-  .sv-gold-toggle input:focus { border-color: #ffc107; box-shadow: 0 0 0 3px rgba(255,193,7,0.12); outline:none; }
-  .sv-gold-toggle button {
-    padding: 10px 16px; border-radius: 6px; white-space: nowrap;
-    background: linear-gradient(135deg, #ff8f00, #ffc107); color: #071411;
-    border: none; cursor: pointer; font-weight: 700; font-size: 13px;
-    transition: all 0.3s ease;
-  }
-  .sv-gold-toggle button:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(255,193,7,0.4); }
-  .sv-gold-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 1rem 0; }
-  @media (max-width: 640px) { .sv-gold-grid { grid-template-columns: 1fr; } .sv-gold-toggle input[type="text"], .sv-gold-toggle button { width: 100%; } }
-
-  /* ── Gold Purchase Modal ── */
+  /* Gold Purchase Modal */
   .gold-modal-overlay {
     display: none; position: fixed; inset: 0; z-index: 9999;
     background: rgba(0,0,0,0.75); backdrop-filter: blur(4px);
@@ -403,55 +344,7 @@
         </article>
       </div>
 
-      <!-- ScholarVault Gold Membership Addon -->
-      
-
-        <div class="sv-gold-grid">
-          <!-- At this conference -->
-          <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
-            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">At SVRIDS 2027</div>
-            <div class="sv-gold-perk">15% off your registration — saves ₹375 to ₹1,800 instantly</div>
-            <div class="sv-gold-perk">Certificate marked "ScholarVault Gold Delegate" — elite credential</div>
-            <div class="sv-gold-perk">Priority 2hr support &amp; concierge fast-lane</div>
-          </div>
-          <!-- Beyond this conference -->
-          <div style="background:rgba(255,193,7,0.06);border:1px solid rgba(255,193,7,0.15);border-radius:10px;padding:14px;">
-            <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,193,7,0.6);margin-bottom:10px;">Beyond SVRIDS 2027</div>
-            <div class="sv-gold-perk">Verify unlimited conferences — avoid predatory conferences</div>
-            <div class="sv-gold-perk">PDF Forensic Reports accepted by HODs &amp; committees</div>
-            <div class="sv-gold-perk">DeepTech CFP alerts &amp; investor matchmaking priority</div>
-            <div class="sv-gold-perk">48hr early threat alerts on predatory publishers</div>
-          </div>
-        </div>
-
-        <div style="background:rgba(0,0,0,0.3);border-left:3px solid rgba(255,193,7,0.6);border-radius:4px;padding:10px 14px;margin-bottom:1rem;font-size:13px;color:rgba(255,220,100,0.85);font-style:italic;">
-          One predatory conference costs ₹15,000+. ScholarVault Gold costs just ₹399/mo.
-        </div>
-
-        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:rgba(255,193,7,0.5);margin-bottom:8px;">Already a Gold member? Enter your ID below</div>
-        <div class="sv-gold-toggle">
-          <input type="text" id="svGoldInput" aria-label="SV Gold Member ID" placeholder="Enter Gold Member ID (e.g. SCHOLAR-XXXXXX or SV-XXXX)" />
-          <button type="button" id="svGoldBtn" onclick="applySVGold()">Verify &amp; Apply</button>
-        </div>
-        <div id="svGoldMsg" style="font-size:12px;margin-top:8px;min-height:18px;"></div>
-        <div style="margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid rgba(255,193,7,0.15);">
-          <button type="button" onclick="openGoldModal(event)" style="
-            width: 100%; padding: 14px 20px;
-            background: linear-gradient(135deg, #ff8f00, #ffc107);
-            color: #0a0a0a; border: none; border-radius: 6px;
-            font-size: 15px; font-weight: 800; cursor: pointer;
-            letter-spacing: 0.02em; transition: all 0.3s ease;
-          " onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 24px rgba(255,193,7,0.4)';"
-            onmouseout="this.style.transform='';this.style.boxShadow='';">
-            ⬡ Not a member? Buy ScholarVault Gold — ₹399/mo &amp; save 15% →
-          </button>
-          <p style="font-size:11px;color:rgba(255,193,7,0.4);text-align:center;margin-top:8px;">Your Member ID arrives by email within seconds of payment.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Registration Intent Form -->
+      <!-- Registration Intent Form -->
   <section class="section section--dark" id="registerSection">
     <div class="site-shell">
       <div class="form-shell card reveal" id="registerWrap" style="background: rgba(30, 41, 59, 0.85); border-color: rgba(59, 130, 246, 0.35); max-width: 860px; margin: 0 auto;">
@@ -464,51 +357,51 @@
           </p>
         </div>
 
-        <form id="registrationForm" class="glass-form" style="padding: 0; background: transparent; border: none;">
+        <form id="registrationForm" class="form-grid">
           <input type="hidden" name="category_id" id="regCategoryId" />
           <input type="hidden" name="category_code" id="regCategoryCode" />
           <input type="hidden" name="query_type" id="regQueryType" />
           <input type="hidden" name="currency" id="regCurrency" value="INR" />
 
-          <div class="form-grid">
-            <div class="form-group">
+          <div style="display: contents;">
+            <div class="field">
               <label>Full Legal Name *</label>
-              <input type="text" name="name" class="form-input" required placeholder="e.g. Dr. Alex Morgan" />
+              <input type="text" name="name"  required placeholder="e.g. Dr. Alex Morgan" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Email Address *</label>
-              <input type="email" name="email" class="form-input" required placeholder="alex.morgan@institution.edu" />
+              <input type="email" name="email"  required placeholder="alex.morgan@institution.edu" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Phone / WhatsApp *</label>
-              <input type="tel" name="phone" class="form-input" required placeholder="+91 98765 43210" />
+              <input type="tel" name="phone"  required placeholder="+91 98765 43210" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Institution / Organisation *</label>
-              <input type="text" name="institution" class="form-input" required placeholder="e.g. Cambridge University" />
+              <input type="text" name="institution"  required placeholder="e.g. Cambridge University" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Country of Residence *</label>
-              <input type="text" name="country" id="regCountry" class="form-input" required placeholder="e.g. India / United Kingdom" />
+              <input type="text" name="country" id="regCountry"  required placeholder="e.g. India / United Kingdom" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>City *</label>
-              <input type="text" name="city" id="regCity" class="form-input" required placeholder="e.g. Bengaluru / London" />
+              <input type="text" name="city" id="regCity"  required placeholder="e.g. Bengaluru / London" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Postal / PIN Code *</label>
-              <input type="text" name="zip_code" id="regZip" class="form-input" required placeholder="e.g. 560001 / EC1A 1BB" />
+              <input type="text" name="zip_code" id="regZip"  required placeholder="e.g. 560001 / EC1A 1BB" />
             </div>
 
-            <div class="form-group">
+            <div class="field">
               <label>Registration Pass Category *</label>
-              <select name="category" id="regCategorySelect" class="form-select" required>
+              <select name="category" id="regCategorySelect"  required>
                 <option value="">Select pass category...</option>
                 <option value="virtual_student" data-name="Virtual Student Pass">Virtual Student Pass (?1,999 / )</option>
                 <option value="virtual_faculty" data-name="Virtual Faculty/Academic Pass">Virtual Faculty/Academic Pass (?3,999 / )</option>
@@ -520,13 +413,13 @@
               </select>
             </div>
 
-            <div class="form-group full">
+            <div class="field full">
               <label>Accepted Abstract ID (if applicable)</label>
-              <input type="text" name="paper_id" class="form-input" placeholder="e.g. SVRIAS-2026-TR1-042 (Leave blank if registering as Listener)" />
+              <input type="text" name="paper_id"  placeholder="e.g. SVRIAS-2026-TR1-042 (Leave blank if registering as Listener)" />
             </div>
 
             <!-- In-Page Review & Benefits Section -->
-            <div class="form-group full" style="margin-top: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px;">
+            <div class="field full" style="margin-top: 10px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 18px;">
               <!-- Header -->
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
                 <span style="font-weight: 700; color: #ffffff; font-size: 15px;"><i class="fa-solid fa-ticket"></i> Pass Inclusions &amp; Benefits</span>
@@ -552,26 +445,26 @@
                   <span style="font-size: 11.5px; color: #94a3b8;">Optional</span>
                 </div>
                 <div style="display: flex; gap: 8px;">
-                  <input type="text" id="couponCodeInput" name="coupon_code" class="form-input" placeholder="e.g. GRANT100, EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
-                  <button type="button" id="applyCouponBtn" class="pill-btn frosted-pill" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
+                  <input type="text" id="couponCodeInput" name="coupon_code"  placeholder="e.g. GRANT100, EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
+                  <button type="button" id="applyCouponBtn" class="btn-outline" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
                 </div>
                 <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
                 <small style="display: block; font-size: 11.5px; color: #94a3b8; margin-top: 4px;">
-                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24;"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
+                  <i class="fa-solid fa-graduation-cap" style="color: var(--accent-amber);"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
                 </small>
               </div>
 
               <!-- Ultra-Premium VIP Gold Member Upgrade Section -->
-              <div id="goldOptInCard" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.16) 0%, rgba(180, 83, 9, 0.08) 50%, rgba(12, 14, 20, 0.75) 100%); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(254, 240, 138, 0.25);">
+              <div id="goldOptInCard" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at top left, var(--bg-surface) 0%, var(--bg-surface) 50%, var(--bg-surface) 100%); border: 1px solid var(--border-subtle); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(254, 240, 138, 0.25);">
                 
                 <!-- Ambient Top Shimmer Line -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #f59e0b, #fef08a, #f59e0b, transparent); opacity: 0.85;"></div>
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-amber), var(--accent-amber), var(--accent-amber), transparent); opacity: 0.85;"></div>
 
                 <!-- Top Row: Icon + Title + Savings Badge + Switch -->
                 <label for="goldOptInToggle" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; cursor: pointer; margin-bottom: 12px; user-select: none;">
                   <div style="display: flex; align-items: center; gap: 12px;">
                     <!-- 3D Luxury Gold Crown Emblem -->
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #78350f 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6); flex-shrink: 0; border: 1px solid rgba(254, 240, 138, 0.5);">
+                    <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-amber) 60%, var(--bg-surface) 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px var(--border-subtle), inset 0 1px 1px rgba(255, 255, 255, 0.6); flex-shrink: 0; border: 1px solid var(--border-subtle);">
                       <i class="fa-solid fa-crown" style="color: #ffffff; font-size: 19px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));"></i>
                     </div>
                     <div>
@@ -600,22 +493,22 @@
                 </label>
 
                 <!-- Inset Perks Container (Matches the Pass Inclusions aesthetic!) -->
-                <div style="background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 10px; padding: 10px 14px;">
+                <div style="background: rgba(0, 0, 0, 0.32); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 10px 14px;">
                   <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; font-size: 12.5px; color: #e2e8f0;">
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-bolt" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <i class="fa-solid fa-bolt" style="color: var(--accent-amber); font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>Instant Pass Discount</strong> applied to total</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-file-pdf" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <i class="fa-solid fa-file-pdf" style="color: var(--accent-amber); font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>SCVS Audit PDF Access</strong> downloadable evidence dossiers</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-file-lines" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <i class="fa-solid fa-file-lines" style="color: var(--accent-amber); font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>Document &amp; PDF OCR</strong> conference CFP extraction</span>
                     </li>
                     <li style="display: flex; align-items: center; gap: 8px;">
-                      <i class="fa-solid fa-crown" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
+                      <i class="fa-solid fa-crown" style="color: var(--accent-amber); font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>1-Month Gold Membership</strong> with Research Vault &amp; Credits</span>
                     </li>
                   </ul>
@@ -640,12 +533,12 @@
             </div>
 
             <!-- Payment Method Selector -->
-            <div class="form-group full" id="paymentMethodSection" style="margin-top: 6px;">
+            <div class="field full" id="paymentMethodSection" style="margin-top: 6px;">
               <!-- 100% Student Research Grant Remission Notice -->
-              <div id="grantWaiverPaymentNotice" style="display: none; padding: 14px 16px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; margin-bottom: 12px; font-size: 13.5px; color: #fef3c7;">
+              <div id="grantWaiverPaymentNotice" style="display: none; padding: 14px 16px; background: rgba(245, 158, 11, 0.12); border: 1px solid var(--border-subtle); border-radius: 12px; margin-bottom: 12px; font-size: 13.5px; color: #fef3c7;">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24; font-size: 16px;"></i>
-                  <strong style="color: #fbbf24;">100% Student Research Grant Remission Applied</strong>
+                  <i class="fa-solid fa-graduation-cap" style="color: var(--accent-amber); font-size: 16px;"></i>
+                  <strong style="color: var(--accent-amber);">100% Student Research Grant Remission Applied</strong>
                 </div>
                 <div style="font-size: 12.5px; color: #cbd5e1;">
                   No payment gateway transaction required. Your delegate pass and presentation slot will be confirmed immediately upon claiming.
@@ -723,11 +616,11 @@
                   <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                     <div style="flex: 1; min-width: 200px;">
                       <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
-                      <input type="text" name="utr_number" id="regUtr" class="form-input" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
+                      <input type="text" name="utr_number" id="regUtr"  placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
                     </div>
                     <div style="flex: 1; min-width: 200px;">
                       <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
-                      <input type="text" name="bank_name" id="regSenderBank" class="form-input" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
+                      <input type="text" name="bank_name" id="regSenderBank"  placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
                     </div>
                   </div>
                 </div>
@@ -735,8 +628,8 @@
             </div>
 
             <!-- Submit Button -->
-            <div class="form-group full" style="margin-top: 14px;">
-              <button type="submit" id="regSubmitBtn" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            <div class="field full" style="margin-top: 14px;">
+              <button type="submit" id="regSubmitBtn" class="btn-primary" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
                 <span id="btnSubmitText">Proceed to Federal Bank Payment &bull; ₹4,999</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
@@ -948,8 +841,8 @@
             
             if (svGoldApplied) {
                 if (goldSwitchTrack) {
-                    goldSwitchTrack.style.background = 'linear-gradient(135deg, #f59e0b 0%, #d97706 100%)';
-                    goldSwitchTrack.style.borderColor = '#fbbf24';
+                    goldSwitchTrack.style.background = 'linear-gradient(135deg, var(--accent-amber) 0%, var(--accent-amber) 100%)';
+                    goldSwitchTrack.style.borderColor = 'var(--accent-amber)';
                 }
                 if (goldSwitchKnob) {
                     goldSwitchKnob.style.transform = 'translateX(22px)';
