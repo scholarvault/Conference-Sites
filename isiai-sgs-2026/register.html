@@ -224,13 +224,13 @@
               </select>
             </div>
 
-            <div class="field full">
+            <div class="field full" style="grid-column: 1 / -1;">
               <label>Accepted Abstract ID (if applicable)</label>
-              <input type="text" name="paper_id" placeholder="e.g. ISIAI-2026-TR1-042 (Leave blank if registering as Listener)" />
+              <input type="text" name="paper_id" placeholder="e.g. ISIAI-2026-TR1-042 (Leave blank if registering as Listener)" style="height: 52px; min-height: 52px;" />
             </div>
 
             <!-- In-Page Review & Benefits Section -->
-            <div class="field full" style="margin-top: 10px; background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 16px; padding: 20px;">
+            <div class="field full" style="grid-column: 1 / -1; margin-top: 10px; background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 16px; padding: 20px;">
               <!-- Header -->
               <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
                 <span style="font-weight: 800; color: #081210; font-size: 16px; display: flex; align-items: center; gap: 8px;">
@@ -259,7 +259,7 @@
                 </div>
                 <div style="display: flex; gap: 8px;">
                   <input type="text" id="couponCodeInput" name="coupon_code" placeholder="e.g. GRANT100, EARLYBIRD, ISIAI15" style="text-transform: uppercase; font-size: 13px; padding: 10px 14px; letter-spacing: 0.05em; background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; color: #0f172a;" />
-                  <button type="button" id="applyCouponBtn" class="btn-outline" style="padding: 10px 20px; font-size: 13px; font-weight: 700; flex-shrink: 0;">Apply</button>
+                  <button type="button" id="applyCouponBtn" style="padding: 10px 22px; font-size: 13.5px; font-weight: 800; background: #16a34a; color: #ffffff; border: none; border-radius: 10px; cursor: pointer; flex-shrink: 0; transition: background 0.2s ease;">Apply</button>
                 </div>
                 <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
                 <small style="display: block; font-size: 12px; color: #64748b; margin-top: 6px;">
@@ -346,7 +346,7 @@
             </div>
 
             <!-- Payment Gateway Notice & Submit Button -->
-            <div class="field full" style="margin-top: 14px;">
+            <div class="field full" style="grid-column: 1 / -1; margin-top: 14px;">
               <div style="background: #f0fdf4; border: 1.5px solid #bbf7d0; border-radius: 14px; padding: 14px 18px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
                 <div style="display: flex; align-items: center; gap: 10px;">
                   <i class="fa-solid fa-lock" style="color: #16a34a; font-size: 16px;"></i>
@@ -891,6 +891,7 @@
   })();
   </script>
   <!--End of Tawk.to Script-->
+<script src="js/main.js"></script>
 <script src="js/academic-enrichment.js"></script>
 </body>
 </html>

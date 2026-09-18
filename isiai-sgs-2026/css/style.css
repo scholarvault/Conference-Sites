@@ -129,7 +129,11 @@ button {
   right: 0;
   z-index: 2000;
   transition: all var(--transition);
-  background: transparent;
+  background: rgba(8, 22, 18, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   height: var(--navbar-h);
 }
 
@@ -137,41 +141,56 @@ button {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(5, 12, 11, 0.68), rgba(5, 12, 11, 0.18));
-  opacity: 0.75;
+  background: rgba(8, 22, 18, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 1;
   transition: opacity var(--transition);
 }
 
-.navbar.scrolled::before,
-.navbar.navbar--light::before {
+.navbar.scrolled {
+  background: rgba(8, 22, 18, 0.98);
+  border-bottom: 1px solid rgba(163, 230, 53, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+}
+
+.navbar.scrolled::before {
   opacity: 1;
-  background: rgba(247, 245, 239, 0.86);
+  background: rgba(8, 22, 18, 0.98);
 }
 
 .navbar.navbar--light .navbar__link,
 .navbar.scrolled .navbar__link,
 .navbar.navbar--light .navbar__logo-sub,
 .navbar.scrolled .navbar__logo-sub {
-  color: rgba(7, 20, 17, 0.66);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.navbar.navbar--light .navbar__link:hover,
+.navbar.scrolled .navbar__link:hover {
+  color: #A3E635;
 }
 
 .navbar.navbar--light .navbar__logo-text strong,
-.navbar.scrolled .navbar__logo-text strong,
+.navbar.scrolled .navbar__logo-text strong {
+  color: #ffffff;
+}
+
 .navbar.navbar--light .navbar__logo-text span,
 .navbar.scrolled .navbar__logo-text span {
-  color: var(--ink-900);
+  color: rgba(255, 255, 255, 0.45);
 }
 
 .navbar.navbar--light .navbar__cta .btn-outline,
 .navbar.scrolled .navbar__cta .btn-outline {
-  color: var(--ink-900);
-  border-color: rgba(7, 20, 17, 0.14);
-  background: rgba(255, 255, 255, 0.72);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .navbar.navbar--light .navbar__hamburger span,
 .navbar.scrolled .navbar__hamburger span {
-  background: var(--ink-900);
+  background: #ffffff;
 }
 
 .navbar__inner {
@@ -1224,9 +1243,20 @@ select:focus {
   grid-template-columns: 1fr;
 }
 
+.field.full,
+.form-grid .full {
+  grid-column: 1 / -1;
+}
+
 .field {
   display: grid;
   gap: 10px;
+}
+
+.field input,
+.field select {
+  height: 52px;
+  min-height: 52px;
 }
 
 .field label {
