@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initForms();
   initRegistrationOptions();
   initLiveScvsBadge();
+  initUpiLogoShuffler();
 });
 
 /**
@@ -526,28 +527,99 @@ function initCurrencyToggle() {
   const currencyBtns = document.querySelectorAll('.currency-btn');
   if (!currencyBtns.length) return;
 
-  currencyBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      currencyBtns.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const currency = btn.getAttribute('data-currency');
-      const inrPrices = document.querySelectorAll('.price-inr');
-      const usdPrices = document.querySelectorAll('.price-usd');
-
-      if (currency === 'USD') {
-        inrPrices.forEach((el) => (el.style.display = 'none'));
-        usdPrices.forEach((el) => (el.style.display = 'inline-block'));
+  const setCurrency = (currency) => {
+    currencyBtns.forEach((b) => {
+      if (b.getAttribute('data-currency') === currency) {
+        b.classList.add('active');
       } else {
-        inrPrices.forEach((el) => (el.style.display = 'inline-block'));
-        usdPrices.forEach((el) => (el.style.display = 'none'));
-      }
-
-      const regCurrency = document.getElementById('regCurrency');
-      if (regCurrency && currency) {
-        regCurrency.value = currency;
+        b.classList.remove('active');
       }
     });
+
+    const inrPrices = document.querySelectorAll('.price-inr');
+    const usdPrices = document.querySelectorAll('.price-usd');
+    const optFederal = document.getElementById('optFederalLabel');
+    const optDodo = document.getElementById('optDodoLabel');
+    const dodoRadio = document.querySelector('input[name="payment_method"][value="dodo"]');
+    const fedRadio = document.querySelector('input[name="payment_method"][value="federal_omniware"]');
+    const currencyNoticeText = document.getElementById('currencySwitchNoticeText');
+    const btnSwitchHint = document.getElementById('btnSwitchCurrencyHint');
+    const regCurrency = document.getElementById('regCurrency');
+
+    if (currency === 'USD') {
+      inrPrices.forEach((el) => (el.style.display = 'none'));
+      usdPrices.forEach((el) => (el.style.display = 'inline-block'));
+      if (optFederal) optFederal.style.display = 'none';
+      if (optDodo) optDodo.style.display = 'flex';
+      if (dodoRadio) {
+        dodoRadio.checked = true;
+        dodoRadio.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      if (currencyNoticeText) currencyNoticeText.textContent = 'Paying from an Indian bank account in INR (₹)?';
+      if (btnSwitchHint) btnSwitchHint.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Switch to INR (₹) for UPI';
+      if (regCurrency) regCurrency.value = 'USD';
+    } else {
+      inrPrices.forEach((el) => (el.style.display = 'inline-block'));
+      usdPrices.forEach((el) => (el.style.display = 'none'));
+      if (optFederal) optFederal.style.display = 'flex';
+      if (optDodo) optDodo.style.display = 'none';
+      if (fedRadio) {
+        fedRadio.checked = true;
+        fedRadio.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      if (currencyNoticeText) currencyNoticeText.textContent = 'Attending from outside India and wish to pay in USD ($)?';
+      if (btnSwitchHint) btnSwitchHint.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Switch to USD ($)';
+      if (regCurrency) regCurrency.value = 'INR';
+    }
+
+    const regCatSelect = document.getElementById('regCategorySelect');
+    if (regCatSelect) regCatSelect.dispatchEvent(new Event('change', { bubbles: true }));
+  };
+
+  currencyBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const currency = btn.getAttribute('data-currency');
+      setCurrency(currency);
+    });
+  });
+
+  const btnSwitchHint = document.getElementById('btnSwitchCurrencyHint');
+  if (btnSwitchHint) {
+    btnSwitchHint.addEventListener('click', () => {
+      const activeBtn = document.querySelector('.currency-btn.active');
+      const current = activeBtn ? activeBtn.getAttribute('data-currency') : 'INR';
+      const target = current === 'USD' ? 'INR' : 'USD';
+      setCurrency(target);
+      const intakeForm = document.getElementById('intakeForm');
+      if (intakeForm) intakeForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  }
+}
+
+/**
+ * 8b. Animated UPI Logo Shuffler (Google Pay, PhonePe, Paytm, BHIM)
+ */
+function initUpiLogoShuffler() {
+  const shufflers = document.querySelectorAll('.upi-logo-shuffler');
+  if (!shufflers.length) return;
+
+  shufflers.forEach((shuffler) => {
+    const logos = shuffler.querySelectorAll('.shuffle-logo');
+    if (logos.length <= 1) return;
+    let currentIndex = 0;
+
+    setInterval(() => {
+      const current = logos[currentIndex];
+      current.classList.remove('active');
+      current.classList.add('prev');
+
+      setTimeout(() => {
+        current.classList.remove('prev');
+      }, 450);
+
+      currentIndex = (currentIndex + 1) % logos.length;
+      logos[currentIndex].classList.add('active');
+    }, 2000);
   });
 }
 
@@ -578,6 +650,35 @@ function initSocialDock() {
 }
 
 /**
+ * On-demand Tawk.to Live Chat Launcher
+ * Prevents intrusive floating popups on page load, matching the Indian portal standard.
+ */
+window.openTawkChat = function() {
+  if (typeof window === 'undefined') return;
+  const win = window;
+  if (win.Tawk_API && typeof win.Tawk_API.maximize === 'function') {
+    win.Tawk_API.showWidget();
+    win.Tawk_API.maximize();
+    return;
+  }
+  win.Tawk_API = win.Tawk_API || {};
+  win.Tawk_LoadStart = new Date();
+  win.Tawk_API.onLoad = function() {
+    if (win.Tawk_API.showWidget && win.Tawk_API.maximize) {
+      win.Tawk_API.showWidget();
+      win.Tawk_API.maximize();
+    }
+  };
+  const d = document;
+  const s = d.createElement('script');
+  s.src = 'https://embed.tawk.to/6a96f50c6318273445cd9f15/1k1eqqee6';
+  s.async = true;
+  s.charset = 'UTF-8';
+  s.setAttribute('crossorigin', '*');
+  (d.head || d.body).appendChild(s);
+};
+
+/**
  * Central API Resolver & Conference Configuration
  */
 const SCHOLARVAULT_CONFERENCE_SLUG = 'research-integrity-responsible-ai-summit-2026';
@@ -586,12 +687,6 @@ function getScholarVaultAppOrigin() {
   if (window.SCHOLARVAULT_APP_ORIGIN) return window.SCHOLARVAULT_APP_ORIGIN;
   const urlParam = new URLSearchParams(window.location.search).get('app_origin');
   if (urlParam) return urlParam.replace(/\/+$/, '');
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return 'http://localhost:3000';
-  }
-  if (window.location.hostname.includes('vercel.app')) {
-    return 'https://scholarvault-v2-git-preview-scholarvault-5721s-projects.vercel.app';
-  }
   return 'https://app.scholarvault.in';
 }
 
@@ -1512,6 +1607,41 @@ function initLiveScvsBadge() {
 /**
  * 12c. Registration Status & Interactive Checkout Controller
  */
+function renderRegistrationSuccess(regNumber, txRef, orderId) {
+  const successCard = document.getElementById('registrationSuccessCard');
+  const intakeForm = document.getElementById('intakeForm');
+  const pricingGrid = document.querySelector('.pricing-grid');
+  const currToggle = document.querySelector('.currency-toggle-wrap');
+  const goldBanner = document.getElementById('goldPrivilegeBanner');
+  const sectionHead = document.querySelector('.section-head');
+
+  if (successCard) {
+    successCard.style.display = 'block';
+    const regEl = document.getElementById('successRegNumber');
+    const txEl = document.getElementById('successTxRef');
+    if (regEl) regEl.textContent = regNumber || orderId || 'SVRIAS26-CONFIRMED';
+    if (txEl) txEl.textContent = txRef || 'Verified via Federal Bank';
+    if (intakeForm) intakeForm.style.display = 'none';
+    if (pricingGrid) pricingGrid.style.display = 'none';
+    if (currToggle) currToggle.style.display = 'none';
+    if (goldBanner) goldBanner.style.display = 'none';
+
+    if (sectionHead) {
+      const titleEl = sectionHead.querySelector('.section-title');
+      const descEl = sectionHead.querySelector('.section-desc');
+      const eyebrowEl = sectionHead.querySelector('.section-eyebrow');
+      if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> PASS CONFIRMED';
+      if (titleEl) titleEl.innerHTML = 'REGISTRATION <span>SUCCESSFUL</span>';
+      if (descEl) descEl.textContent = 'Your payment has been verified and your delegate pass is officially registered for SVRIAS 2026.';
+    }
+
+    setTimeout(() => {
+      successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+    showToast('Registration Confirmed! Invoice and credentials dispatched via email.', 'success');
+  }
+}
+
 function checkRegistrationUrlStatus() {
   const params = new URLSearchParams(window.location.search);
   const status = params.get('status');
@@ -1529,31 +1659,7 @@ function checkRegistrationUrlStatus() {
   const sectionHead = document.querySelector('.section-head');
 
   if (status === 'success') {
-    if (successCard) {
-      successCard.style.display = 'block';
-      const regEl = document.getElementById('successRegNumber');
-      const txEl = document.getElementById('successTxRef');
-      if (regEl) regEl.textContent = regNumber || orderId || 'SVRIAS26-CONFIRMED';
-      if (txEl) txEl.textContent = txRef || 'Verified via Federal Bank';
-      if (intakeForm) intakeForm.style.display = 'none';
-      if (pricingGrid) pricingGrid.style.display = 'none';
-      if (currToggle) currToggle.style.display = 'none';
-      if (goldBanner) goldBanner.style.display = 'none';
-
-      if (sectionHead) {
-        const titleEl = sectionHead.querySelector('.section-title');
-        const descEl = sectionHead.querySelector('.section-desc');
-        const eyebrowEl = sectionHead.querySelector('.section-eyebrow');
-        if (eyebrowEl) eyebrowEl.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i> PASS CONFIRMED';
-        if (titleEl) titleEl.innerHTML = 'REGISTRATION <span>SUCCESSFUL</span>';
-        if (descEl) descEl.textContent = 'Your payment has been verified and your delegate pass is officially registered for SVRIAS 2026.';
-      }
-
-      setTimeout(() => {
-        successCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }, 100);
-      showToast('Registration Confirmed! Invoice and credentials dispatched via email.', 'success');
-    }
+    renderRegistrationSuccess(regNumber, txRef, orderId);
   } else if (status === 'failed' || status === 'error' || status === 'cancelled') {
     if (failedCard) {
       failedCard.style.display = 'block';
@@ -1631,6 +1737,311 @@ function checkRegistrationUrlStatus() {
   }
 }
 
+/**
+ * 12d. In-Page Federal Omniware UPI & Bottom-Sheet Checkout System (dashboard-ui-system)
+ */
+function openInPageOmniwareModal(result, payload, btn, originalText) {
+  const existing = document.getElementById('omniwareCheckoutModal');
+  if (existing) existing.remove();
+
+  const amount = Number(result.amount || payload.amount || 1999);
+  const formattedAmount = '₹' + amount.toLocaleString('en-IN');
+  const orderId = result.order_id || 'SV-SVRIAS26-ORDER';
+  const regNumber = result.registration_number || orderId;
+  const merchantVpa = result.vpa || 'scholarvault804239@fbl';
+  const merchantName = result.merchant_name || 'SCHOLARVAULT';
+
+  // Construct official Federal Bank UPI Intent URIs conforming to NPCI specification
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const isAndroid = /Android/i.test(navigator.userAgent);
+
+  const baseParams = 'pa=' + encodeURIComponent(merchantVpa) +
+    '&pn=' + encodeURIComponent(merchantName) +
+    '&mc=8699' +
+    '&tr=' + encodeURIComponent(orderId) +
+    '&am=' + amount.toFixed(2) +
+    '&cu=INR';
+
+  // Standard universal UPI intent URI (triggers Android/iOS native app picker)
+  const upiUrl = result.upi_intent_url || ('upi://pay?' + baseParams);
+
+  // App-specific intent URIs for direct 1-tap launching on mobile
+  const gpayUrl = isAndroid
+    ? ('intent://pay?' + baseParams + '#Intent;scheme=upi;package=com.google.android.apps.nbu.paisa.user;end')
+    : upiUrl;
+  const phonepeUrl = 'phonepe://pay?' + baseParams;
+  const paytmUrl = 'paytmmp://pay?' + baseParams;
+  const bhimUrl = isAndroid
+    ? ('intent://pay?' + baseParams + '#Intent;scheme=upi;package=in.org.npci.upiapp;end')
+    : upiUrl;
+
+  const qrCodeUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&margin=0&data=' + encodeURIComponent(upiUrl);
+
+  const modalHtml = `
+    <div class="sv-checkout-overlay" id="omniwareCheckoutModal" role="dialog" aria-modal="true" aria-labelledby="svCheckoutTitle">
+      <div class="sv-checkout-sheet">
+        <div class="sv-sheet-handle"></div>
+        <div class="sv-checkout-header">
+          <div class="sv-checkout-brand-wrap" style="align-items: center; gap: 12px;">
+            <div style="background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(56, 189, 248, 0.35); padding: 4px; border-radius: 12px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; box-shadow: 0 4px 14px rgba(0,0,0,0.4); flex-shrink: 0;">
+              <img src="assets/icon-512.png" alt="ScholarVault" style="width: 30px; height: 30px; object-fit: contain;" />
+            </div>
+            <div class="sv-checkout-title-wrap">
+              <h3 id="svCheckoutTitle" style="font-size: 16px; font-weight: 700; color: #ffffff; margin: 0; letter-spacing: -0.01em;">ScholarVault Checkout</h3>
+              <p style="font-size: 11px; color: #94a3b8; margin: 2px 0 0;">SVRIAS 2026 Summit Pass &bull; Secured by Federal Bank</p>
+            </div>
+          </div>
+          <button type="button" class="sv-checkout-close-btn" id="closeCheckoutModalBtn" aria-label="Close Checkout">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <div class="sv-checkout-amount-box">
+          <div>
+            <div class="sv-amount-val">${formattedAmount}</div>
+            <div class="sv-amount-sub">
+              <i class="fa-solid fa-circle-check"></i> Instant Pass &amp; Invoice Confirmation
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div class="sv-order-badge">${orderId.length > 20 ? orderId.slice(0, 18) + '...' : orderId}</div>
+            <div style="font-size:10px; color:#64748b; margin-top:3px;">${payload.name ? payload.name.slice(0, 16) : 'Delegate'}</div>
+          </div>
+        </div>
+
+        <!-- 1. Supported UPI Apps Row (Placed ABOVE the QR Code) -->
+        <div class="sv-apps-section">
+          <div class="sv-apps-label">Pay with any UPI App:</div>
+          <div class="sv-apps-grid">
+            <a href="${gpayUrl}" class="sv-app-tile" data-app="Google Pay" title="Pay with Google Pay" aria-label="Open in Google Pay">
+              <img src="assets/logos/gpay.png" alt="Google Pay" style="width: 32px; height: 32px; object-fit: contain;" />
+            </a>
+            <a href="${phonepeUrl}" class="sv-app-tile" data-app="PhonePe" title="Pay with PhonePe" aria-label="Open in PhonePe">
+              <img src="assets/logos/phonepe.png" alt="PhonePe" style="width: 32px; height: 32px; object-fit: contain;" />
+            </a>
+            <a href="${paytmUrl}" class="sv-app-tile" data-app="Paytm" title="Pay with Paytm" aria-label="Open in Paytm">
+              <img src="assets/logos/paytm_icon.png" alt="Paytm" style="width: 32px; height: 32px; object-fit: contain;" />
+            </a>
+            <a href="${bhimUrl}" class="sv-app-tile" data-app="BHIM UPI" title="Pay with BHIM UPI" aria-label="Open in BHIM UPI">
+              <img src="assets/logos/bhim.svg" alt="BHIM" style="width: 34px; height: auto; object-fit: contain;" />
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. Dynamic QR Code & Scanning Stage -->
+        <div class="sv-qr-box">
+          <div class="sv-qr-frame" id="svQrFrame">
+            <img src="${qrCodeUrl}" alt="Scan to pay ${formattedAmount} via UPI" class="sv-qr-img" loading="eager" />
+          </div>
+          <div class="sv-qr-caption">Scan QR with your mobile camera or any UPI app</div>
+        </div>
+
+        <!-- 3. 1-Click UPI Intent Launch (Placed BELOW the QR Code) -->
+        <a href="${upiUrl}" class="sv-upi-intent-cta" id="btnLaunchUpiIntent">
+          <i class="fa-solid fa-bolt thunder-anim"></i> Pay via UPI App (Tap to Choose App)
+        </a>
+
+        <!-- Copy VPA Strip -->
+        <div class="sv-vpa-copy-box">
+          <div class="sv-vpa-info">
+            <span class="sv-vpa-lbl">Verified UPI ID (VPA)</span>
+            <span class="sv-vpa-txt" id="svVpaText">${merchantVpa}</span>
+          </div>
+          <button type="button" class="sv-copy-btn" id="btnCopyVpa">
+            <i class="fa-regular fa-copy"></i> Copy
+          </button>
+        </div>
+
+        <!-- Real-Time Pulse & Session Expiry Bar -->
+        <div class="sv-status-pulse-bar">
+          <div class="sv-pulse-status">
+            <span class="sv-pulse-dot"></span>
+            <span id="svPulseStatusText">Awaiting UPI payment confirmation...</span>
+          </div>
+          <div class="sv-countdown-txt" id="svCheckoutTimer">14:59</div>
+        </div>
+
+        <!-- Fallback Cards / NetBanking on Federal Bank -->
+        <div class="sv-cards-fallback-wrap">
+          <div class="sv-cards-fallback-header">
+            <span class="sv-fallback-title">Prefer Card or Net Banking?</span>
+            <div class="sv-card-badge-row">
+              <span class="sv-card-ico-pill" title="Visa Card"><img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Visa" class="sv-card-ico sv-card-ico-visa" /></span>
+              <span class="sv-card-ico-pill" title="Mastercard"><img src="assets/Mastercard_Symbol_1.png" alt="Mastercard" class="sv-card-ico sv-card-ico-mc" /></span>
+              <span class="sv-card-ico-pill sv-card-ico-pill-dark" title="ATM / Debit Card"><img src="assets/atm-card.png" alt="Debit / ATM Card" class="sv-card-ico" /></span>
+              <span class="sv-card-ico-pill sv-card-ico-pill-dark" title="Contactless Payment"><img src="assets/contactless.png" alt="Contactless" class="sv-card-ico" /></span>
+            </div>
+          </div>
+          <a href="${result.payment_url || ('https://omniware.federalbank.co.in/checkout?ref=' + encodeURIComponent(orderId))}" class="sv-cards-fallback-btn" target="_blank" rel="noopener noreferrer">
+            <i class="fa-regular fa-credit-card"></i>
+            <span>Pay with Debit / Credit Cards or Net Banking</span>
+            <i class="fa-solid fa-arrow-up-right-from-square sv-ext-icon"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  `;
+
+  document.body.insertAdjacentHTML('beforeend', modalHtml);
+  const modalEl = document.getElementById('omniwareCheckoutModal');
+  requestAnimationFrame(() => {
+    if (modalEl) modalEl.classList.add('active');
+  });
+
+  // Desktop guide: If clicked on computer without mobile UPI, pulse QR code with friendly hint
+  if (!isMobile) {
+    const qrFrame = document.getElementById('svQrFrame');
+    const triggerQrHighlight = (msg) => {
+      if (qrFrame) {
+        qrFrame.classList.add('sv-qr-highlight');
+        setTimeout(() => qrFrame.classList.remove('sv-qr-highlight'), 1200);
+      }
+      showToast(msg, 'info');
+    };
+
+    modalEl.querySelectorAll('.sv-app-tile').forEach((tile) => {
+      tile.addEventListener('click', (e) => {
+        e.preventDefault();
+        const app = tile.getAttribute('data-app') || 'your UPI app';
+        triggerQrHighlight(`On computer: Scan the QR code with ${app} on your mobile.`);
+      });
+    });
+
+    const launchBtn = document.getElementById('btnLaunchUpiIntent');
+    if (launchBtn) {
+      launchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        triggerQrHighlight('On computer: Scan the QR code using your phone or copy the UPI ID below.');
+      });
+    }
+  }
+
+  // Suppress any floating chat badges or support docks while payment modal is active
+  document.body.classList.add('sv-checkout-active');
+  if (window.Tawk_API && typeof window.Tawk_API.hideWidget === 'function') {
+    try { window.Tawk_API.hideWidget(); } catch (e) {}
+  }
+  const socialDock = document.getElementById('socialDock');
+  if (socialDock) socialDock.setAttribute('hidden', '');
+
+  let isCleanedUp = false;
+  let pollIntervalId = null;
+  let countdownTimerId = null;
+
+  const closeModal = () => {
+    if (isCleanedUp) return;
+    isCleanedUp = true;
+    if (pollIntervalId) clearInterval(pollIntervalId);
+    if (countdownTimerId) clearInterval(countdownTimerId);
+
+    document.body.classList.remove('sv-checkout-active');
+
+    if (modalEl) {
+      modalEl.classList.remove('active');
+      setTimeout(() => {
+        if (modalEl.parentNode) modalEl.parentNode.removeChild(modalEl);
+      }, 250);
+    }
+
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalText;
+    }
+  };
+
+  const closeBtn = document.getElementById('closeCheckoutModalBtn');
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modalEl.addEventListener('click', (e) => {
+    if (e.target === modalEl) closeModal();
+  });
+
+  const escHandler = (e) => {
+    if (e.key === 'Escape') {
+      closeModal();
+      document.removeEventListener('keydown', escHandler);
+    }
+  };
+  document.addEventListener('keydown', escHandler);
+
+  // Copy VPA Button
+  const copyBtn = document.getElementById('btnCopyVpa');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(merchantVpa);
+        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+        copyBtn.style.color = '#34d399';
+        setTimeout(() => {
+          copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+          copyBtn.style.color = '';
+        }, 2000);
+      } catch {
+        showToast('UPI ID: ' + merchantVpa, 'info');
+      }
+    });
+  }
+
+  // 15-Minute Countdown Timer
+  let remainingSeconds = 15 * 60;
+  const timerEl = document.getElementById('svCheckoutTimer');
+  countdownTimerId = setInterval(() => {
+    remainingSeconds--;
+    if (remainingSeconds <= 0) {
+      clearInterval(countdownTimerId);
+      if (timerEl) timerEl.textContent = 'Expired';
+      showToast('Checkout session expired. Please retry.', 'error');
+      closeModal();
+      return;
+    }
+    const mins = Math.floor(remainingSeconds / 60).toString().padStart(2, '0');
+    const secs = (remainingSeconds % 60).toString().padStart(2, '0');
+    if (timerEl) timerEl.textContent = `${mins}:${secs}`;
+  }, 1000);
+
+  // Real-time Status Polling
+  const checkStatus = async () => {
+    if (isCleanedUp) return;
+    try {
+      const res = await fetch(
+        `${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/payment-status?order_id=${encodeURIComponent(orderId)}`
+      );
+      if (!res.ok) return;
+      const data = await res.json().catch(() => null);
+      if (data && data.status === 'paid') {
+        if (pollIntervalId) clearInterval(pollIntervalId);
+        if (countdownTimerId) clearInterval(countdownTimerId);
+        isCleanedUp = true;
+
+        const sheetEl = modalEl.querySelector('.sv-checkout-sheet');
+        if (sheetEl) {
+          sheetEl.innerHTML = `
+            <div class="sv-checkout-success-view">
+              <div class="sv-success-icon-ring">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+              <h3 class="sv-success-title">Payment Confirmed!</h3>
+              <p class="sv-success-desc">Issuing your SVRIAS 2026 Delegate Pass...</p>
+            </div>
+          `;
+        }
+
+        setTimeout(() => {
+          modalEl.classList.remove('active');
+          setTimeout(() => {
+            if (modalEl.parentNode) modalEl.parentNode.removeChild(modalEl);
+            renderRegistrationSuccess(data.registration_number || regNumber, data.transaction_id || orderId, orderId);
+          }, 250);
+        }, 1200);
+      }
+    } catch {
+      // Network tolerance during polling
+    }
+  };
+
+  pollIntervalId = setInterval(checkStatus, 2500);
+}
+
 const CATEGORY_PRICES = {
   student_scholar: { inr: 2500, inrGold: 2399, usd: 129, label: 'Student Presenter' },
   faculty_researcher: { inr: 4999, inrGold: 4898, usd: 199, label: 'Academic / Faculty' },
@@ -1642,18 +2053,18 @@ const CATEGORY_PRICES = {
 const CATEGORY_BENEFITS = {
   student_scholar: [
     'Official Virtual Presentation slot in scheduled track session',
-    'Inclusion of accepted abstract in archived ISBN proceedings',
+    'Publication in SVRIAS 2026 Proceedings (ISBN: 978-81-181597-0-4)',
     'Digital Certificate of Presentation & Research Attribution',
     'Full access to all 6 tracks, plenary keynotes & virtual stages'
   ],
   faculty_researcher: [
     'Priority Virtual Presentation stage in designated track session',
-    'Inclusion of accepted abstract in archived ISBN proceedings book',
+    'Publication in SVRIAS 2026 Conference Proceedings (ISBN: 978-81-181597-0-4)',
     'Verifiable Digital Certificate of Presentation & Authorship',
     'Keynote Q&A access, co-author credentials & session recordings'
   ],
   co_author: [
-    'Co-Author recognition & listing in conference proceedings',
+    'Co-Author recognition in SVRIAS 2026 Proceedings (ISBN: 978-81-181597-0-4)',
     'Digital Certificate of Co-Authorship & Research Attribution',
     'Full audience access to presentation session & track Q&A',
     'Official conference program guide & proceedings digital copy'
@@ -1663,6 +2074,12 @@ const CATEGORY_BENEFITS = {
     'Executive networking breakout rooms & industry roundtables',
     'Full summit recorded video proceedings & archival access',
     'Digital Certificate of Professional Participation & CPD credit'
+  ],
+  institutional_cohort: [
+    'Subsidized institutional cohort package for 25 student papers (effective ₹750/paper)',
+    'Full virtual oral presentation slots for 25 student researchers',
+    'Official ISBN Conference Proceedings (ISBN: 978-81-181597-0-4) with Zenodo DOIs',
+    'Verifiable digital presentation certificates and institutional recognition'
   ],
   listener: [
     'Complete virtual audience stage access to all 6 tracks',
@@ -1688,10 +2105,14 @@ function initRegistrationCheckoutInteractive() {
   function calculate() {
     const categoryCode = regCatSelect?.value || 'faculty_researcher';
     const catInfo = CATEGORY_PRICES[categoryCode] || CATEGORY_PRICES.faculty_researcher;
-    let selectedMethod = 'federal_omniware';
+    const regCurrencyInput = document.getElementById('regCurrency');
+    const activeCurrencyBtn = document.querySelector('.currency-btn.active');
+    const currency = regCurrencyInput?.value || activeCurrencyBtn?.getAttribute('data-currency') || 'INR';
+    const isUSD = currency === 'USD';
+
+    let selectedMethod = isUSD ? 'dodo' : 'federal_omniware';
     paymentRadios.forEach((r) => { if (r.checked) selectedMethod = r.value; });
 
-    const isUSD = selectedMethod === 'dodo';
     const isGold = Boolean(goldOptInToggle?.checked);
     const baseAmount = isUSD ? catInfo.usd : catInfo.inr;
 
@@ -1797,9 +2218,13 @@ function initRegistrationCheckoutInteractive() {
       if (baseFeeDisplay) baseFeeDisplay.textContent = `$${catInfo.usd}`;
       if (finalPriceDisplay) finalPriceDisplay.textContent = `$${finalAmount}`;
       if (btnSubmitText) {
-        btnSubmitText.innerHTML = finalAmount === 0
-          ? '<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; $0'
-          : `Proceed to Card Checkout &bull; $${finalAmount}`;
+        if (finalAmount === 0) {
+          btnSubmitText.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> Claim 100% Grant Waiver Pass &bull; $0';
+        } else if (selectedMethod === 'bank_transfer') {
+          btnSubmitText.innerHTML = `Submit Wire Transfer Reference &bull; $${finalAmount}`;
+        } else {
+          btnSubmitText.innerHTML = `<i class="fa-regular fa-credit-card"></i> Proceed to Card Checkout &bull; $${finalAmount}`;
+        }
       }
       if (discountLineItem) {
         if (discountAmount > 0) {
@@ -1830,7 +2255,7 @@ function initRegistrationCheckoutInteractive() {
         } else if (selectedMethod === 'bank_transfer') {
           btnSubmitText.innerHTML = `Submit Bank Transfer Reference &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
         } else {
-          btnSubmitText.innerHTML = `Proceed to UPI Payment &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
+          btnSubmitText.innerHTML = `<i class="fa-solid fa-bolt thunder-anim"></i> Pay Now &bull; ₹${finalAmount.toLocaleString('en-IN')}`;
         }
       }
     }
@@ -1845,13 +2270,43 @@ function initRegistrationCheckoutInteractive() {
       if (senderBank) senderBank.required = selectedMethod === 'bank_transfer';
     }
 
-    // Border highlights
+    // Toggle Method Visibility based on Currency (INR vs USD)
     const optFederal = document.getElementById('optFederalLabel');
     const optDodo = document.getElementById('optDodoLabel');
     const optBank = document.getElementById('optBankLabel');
-    if (optFederal) optFederal.style.borderColor = selectedMethod === 'federal_omniware' ? '#38bdf8' : 'rgba(255,255,255,0.1)';
-    if (optDodo) optDodo.style.borderColor = selectedMethod === 'dodo' ? '#38bdf8' : 'rgba(255,255,255,0.1)';
-    if (optBank) optBank.style.borderColor = selectedMethod === 'bank_transfer' ? '#f59e0b' : 'rgba(255,255,255,0.1)';
+    const currencyNoticeText = document.getElementById('currencySwitchNoticeText');
+    const btnSwitchHint = document.getElementById('btnSwitchCurrencyHint');
+
+    if (isUSD) {
+      if (optFederal) optFederal.style.display = 'none';
+      if (optDodo) optDodo.style.display = 'flex';
+      if (currencyNoticeText) currencyNoticeText.textContent = 'Paying from an Indian bank in INR (₹)?';
+      if (btnSwitchHint) btnSwitchHint.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Switch to INR (₹) for UPI';
+    } else {
+      if (optFederal) optFederal.style.display = 'flex';
+      if (optDodo) optDodo.style.display = 'none';
+      if (currencyNoticeText) currencyNoticeText.textContent = 'Attending from outside India and wish to pay in USD ($)?';
+      if (btnSwitchHint) btnSwitchHint.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Switch to USD ($)';
+    }
+
+    if (optFederal) {
+      const isFed = selectedMethod === 'federal_omniware';
+      optFederal.style.borderColor = isFed ? '#38bdf8' : 'rgba(255,255,255,0.1)';
+      optFederal.style.background = isFed ? 'rgba(56, 189, 248, 0.08)' : 'rgba(255,255,255,0.03)';
+      optFederal.classList.toggle('active', isFed);
+    }
+    if (optDodo) {
+      const isDodo = selectedMethod === 'dodo';
+      optDodo.style.borderColor = isDodo ? '#38bdf8' : 'rgba(255,255,255,0.1)';
+      optDodo.style.background = isDodo ? 'rgba(56, 189, 248, 0.08)' : 'rgba(255,255,255,0.03)';
+      optDodo.classList.toggle('active', isDodo);
+    }
+    if (optBank) {
+      const isBank = selectedMethod === 'bank_transfer';
+      optBank.style.borderColor = isBank ? '#f59e0b' : 'rgba(255,255,255,0.1)';
+      optBank.style.background = isBank ? 'rgba(245, 158, 11, 0.08)' : 'rgba(255,255,255,0.03)';
+      optBank.classList.toggle('active', isBank);
+    }
   }
 
   if (regCatSelect) regCatSelect.addEventListener('change', calculate);
@@ -1930,140 +2385,31 @@ function initRegistrationCheckoutInteractive() {
   }
 
   calculate();
-}
 
-function openUpiQrModal(payload) {
-  const modal = document.getElementById('upiQrModal');
-  if (!modal) return;
-
-  const categoryCode = payload.category_code || 'faculty_researcher';
-  const catInfo = CATEGORY_PRICES[categoryCode] || CATEGORY_PRICES.faculty_researcher;
-  let amount = payload.gold_addon ? catInfo.inrGold : catInfo.inr;
-
-  if (appliedCouponDiscount > 0) {
-    amount = Math.max(0, Math.round(amount * (1 - appliedCouponDiscount / 100)));
-  }
-
-  const modalAmount = document.getElementById('modalUpiAmount');
-  if (modalAmount) modalAmount.textContent = `₹${amount.toLocaleString('en-IN')}`;
-
-  const upiParams = `pa=scholarvault@ybl&pn=SCHOLARVAULT&am=${amount}&cu=INR&tn=SVRIAS2026-REG`;
-  const upiUri = `upi://pay?${upiParams}`;
-  const genericUri = upiUri;
-  const phonepeUri = `phonepe://pay?${upiParams}`;
-  const gpayUri = `tez://upi/pay?${upiParams}`;
-
-  const btnPhonePe = document.getElementById('btnOpenPhonePe');
-  if (btnPhonePe) btnPhonePe.href = phonepeUri;
-
-  const btnGPay = document.getElementById('btnOpenGPay');
-  if (btnGPay) btnGPay.href = gpayUri;
-
-  const deepLink = document.getElementById('modalUpiDeepLink');
-  if (deepLink) deepLink.href = genericUri;
-
-  const qrImg = document.getElementById('modalQrCodeImg');
-  if (qrImg) {
-    const dynamicQr = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(upiUri)}`;
-    qrImg.onerror = () => { qrImg.src = 'assets/phonepe_upi_qr.png'; };
-    qrImg.src = dynamicQr;
-  }
-
-  const utrInput = document.getElementById('modalUtrInput');
-  const utrError = document.getElementById('modalUtrError');
-  const confirmBtn = document.getElementById('modalConfirmUtrBtn');
-  if (utrInput) utrInput.value = '';
-  if (utrError) { utrError.style.display = 'none'; utrError.textContent = ''; }
-  if (confirmBtn) {
-    confirmBtn.disabled = false;
-    confirmBtn.innerHTML = '<i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration';
-  }
-
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
-
-  const closeBtn = document.getElementById('closeUpiQrModalBtn');
-  if (closeBtn) {
-    closeBtn.onclick = () => {
-      modal.style.display = 'none';
-      document.body.style.overflow = '';
-    };
-  }
-
-  const copyBtn = document.getElementById('modalCopyUpiBtn');
-  if (copyBtn) {
-    copyBtn.onclick = () => {
-      navigator.clipboard.writeText('scholarvault@ybl').then(() => {
-        copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-        copyBtn.style.color = '#34d399';
-        setTimeout(() => {
-          copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
-          copyBtn.style.color = '#38bdf8';
-        }, 2000);
-      });
-    };
-  }
-
-  if (confirmBtn) {
-    confirmBtn.onclick = async () => {
-      const utrVal = utrInput ? utrInput.value.trim().toUpperCase() : '';
-      if (!utrVal || utrVal.length < 6) {
-        if (utrError) {
-          utrError.style.display = 'block';
-          utrError.textContent = 'Please enter a valid 12-digit UPI reference / UTR number from your payment receipt.';
-        }
-        return;
-      }
-
-      if (utrError) utrError.style.display = 'none';
-      confirmBtn.disabled = true;
-      confirmBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Confirming Registration...';
-
-      try {
-        const finalPayload = {
-          ...payload,
-          payment_method: 'bank_transfer',
-          utr_number: utrVal,
-          bank_name: 'PhonePe / UPI (scholarvault@ybl)'
-        };
-
-        const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(finalPayload),
+  // Scroll-Triggered Subtle Bolt Strike (Strikes once when user scrolls to this place)
+  const submitBtn = document.getElementById('regSubmitBtn');
+  if (submitBtn) {
+    if ('IntersectionObserver' in window) {
+      const strikeObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            submitBtn.classList.remove('strike-once');
+            void submitBtn.offsetWidth;
+            submitBtn.classList.add('strike-once');
+            strikeObserver.unobserve(submitBtn);
+          }
         });
-
-        const result = await response.json().catch(() => ({}));
-        if (!response.ok) {
-          throw new Error(result.error || 'Registration submission failed. Please try again.');
-        }
-
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-
-        const intakeForm = document.getElementById('intakeForm');
-        const btCard = document.getElementById('bankTransferPendingCard');
-        if (intakeForm) intakeForm.style.display = 'none';
-        if (btCard) {
-          btCard.style.display = 'block';
-          const regNumEl = document.getElementById('btRegNumber');
-          const utrEl = document.getElementById('btUtrNumber');
-          if (regNumEl) regNumEl.textContent = result.registration_number || 'SVRIAS26-PENDING';
-          if (utrEl) utrEl.textContent = utrVal;
-          btCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        showToast('UPI payment reference recorded! Confirmation email dispatched.', 'success');
-      } catch (err) {
-        confirmBtn.disabled = false;
-        confirmBtn.innerHTML = '<i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration';
-        if (utrError) {
-          utrError.style.display = 'block';
-          utrError.textContent = err.message || 'Error recording registration. Please retry.';
-        }
-      }
-    };
+      }, {
+        threshold: 0.25,
+        rootMargin: '0px 0px -40px 0px'
+      });
+      strikeObserver.observe(submitBtn);
+    } else {
+      submitBtn.classList.add('strike-once');
+    }
   }
 }
+
 
 /**
  * 13. Form Handlers (Registration, Abstract, Contact, Award, Committee, Speaker, Standalone Interest)
@@ -2075,12 +2421,33 @@ function initForms() {
     initRegistrationCheckoutInteractive();
     checkRegistrationUrlStatus();
 
+    // Restore submit button state if user navigates back from gateway or switches tabs
+    const restoreSubmitBtn = () => {
+      const btn = regForm.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = false;
+      const activeRadio = regForm.querySelector('input[name="payment_method"]:checked');
+      if (activeRadio) activeRadio.dispatchEvent(new Event('change', { bubbles: true }));
+    };
+    window.addEventListener('pageshow', restoreSubmitBtn);
+    window.addEventListener('focus', restoreSubmitBtn);
+
     regForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!regForm.checkValidity()) {
         regForm.reportValidity();
         return;
       }
+
+      // If opened as local file (file:///), modern browsers block cross-origin fetch calls.
+      // Redirect seamlessly to the local testing server.
+      if (window.location.protocol === 'file:') {
+        showToast('Local file detected. Redirecting to http://localhost:8080 for live testing...', 'info');
+        setTimeout(() => {
+          window.location.href = 'http://localhost:8080/register.html' + (window.location.hash || '#intakeForm');
+        }, 600);
+        return;
+      }
+
       const btn = regForm.querySelector('button[type="submit"]');
       const originalText = btn ? btn.innerHTML : 'Proceed to Payment';
       if (btn) {
@@ -2115,15 +2482,6 @@ function initForms() {
           bank_name: values.bank_name || '',
         };
 
-        // If Indian UPI (federal_omniware), intercept with instant QR payment popup (until live Federal keys arrive ~Sep 20)
-        if (paymentMethod === 'federal_omniware') {
-          if (btn) {
-            btn.disabled = false;
-            btn.innerHTML = originalText;
-          }
-          openUpiQrModal(payload);
-          return;
-        }
 
         const response = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout`, {
           method: 'POST',
@@ -2136,9 +2494,9 @@ function initForms() {
           throw new Error(result.error || 'Registration could not be initiated. Please try again.');
         }
 
-        // 1. Federal Omniware Two-Step URL
-        if (result.provider === 'federal_omniware' && result.payment_url) {
-          window.location.href = result.payment_url;
+        // 1. Federal Omniware Direct In-Page UPI Modal & Bottom Sheet (dashboard-ui-system)
+        if (result.provider === 'federal_omniware') {
+          openInPageOmniwareModal(result, payload, btn, originalText);
           return;
         }
 

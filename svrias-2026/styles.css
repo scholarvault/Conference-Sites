@@ -3502,3 +3502,1058 @@ body.menu-open .burger-btn .burger-bar:nth-child(3) {
     padding: 10px 12px;
   }
 }
+
+/* ==========================================================================
+   7b) Animated UPI Logo Shuffler & Electric Thunder Bolt
+   ========================================================================== */
+.upi-logo-shuffler {
+  position: relative;
+  width: 50px;
+  height: 32px;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.upi-logo-shuffler:hover {
+  transform: scale(1.06);
+  box-shadow: 0 4px 14px rgba(56, 189, 248, 0.45);
+}
+
+.shuffle-logo {
+  position: absolute;
+  max-width: 34px;
+  max-height: 22px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  opacity: 0;
+  transform: translateY(8px) scale(0.9);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.shuffle-logo.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+.shuffle-logo.prev {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.9);
+}
+
+/* ==========================================================================
+   7b) Subtle Black Thunder Bolt Strike Animation (Single Strike on Scroll)
+   ========================================================================== */
+.thunder-anim,
+#regSubmitBtn .fa-bolt {
+  display: inline-block;
+  color: #000000 !important;
+  filter: none !important;
+  transform-origin: center center;
+  transform: scale(1) rotate(0deg);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Modal intent CTA bolt inherits text color without yellow filter */
+.sv-upi-intent-cta .fa-bolt {
+  display: inline-block;
+  color: inherit;
+  filter: none;
+  transform-origin: center center;
+}
+
+/* Single subtle strike when user scrolls to this place */
+#regSubmitBtn.strike-once .fa-bolt,
+#regSubmitBtn.strike-once .thunder-anim {
+  animation: subtleStrikeOnce 0.65s cubic-bezier(0.16, 1, 0.3, 1) 1 forwards;
+}
+
+/* Subtle micro-strike on button hover */
+#regSubmitBtn:hover .fa-bolt,
+#regSubmitBtn:hover .thunder-anim,
+.sv-upi-intent-cta:hover .fa-bolt {
+  transform: scale(1.22) rotate(-10deg);
+}
+
+@keyframes subtleStrikeOnce {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  20% {
+    transform: scale(1.32) rotate(-14deg);
+  }
+  42% {
+    transform: scale(0.92) rotate(6deg);
+  }
+  68% {
+    transform: scale(1.12) rotate(-3deg);
+  }
+  86% {
+    transform: scale(0.98) rotate(1deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* ==========================================================================
+   7c) Payment Option Cards & Gold Privileges UI System (dashboard-ui-system)
+   ========================================================================== */
+.payment-option-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.payment-option-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+.payment-option-card.active,
+.payment-option-card.selected {
+  background: rgba(56, 189, 248, 0.08);
+  border-color: #38bdf8;
+  box-shadow: 0 4px 18px -4px rgba(56, 189, 248, 0.2);
+}
+
+.payment-option-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.payment-option-radio {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: #38bdf8;
+  cursor: pointer;
+  margin: 0;
+}
+
+.payment-option-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.payment-option-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.payment-option-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
+.payment-method-badge {
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  padding: 2px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.payment-method-badge.badge-usd {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.payment-option-sub {
+  font-size: 11.5px;
+  color: #94a3b8;
+  margin-top: 3px;
+  line-height: 1.35;
+  word-break: break-word;
+}
+
+.payment-option-tail {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 6px;
+}
+
+/* Ultra-Premium VIP Gold Member Card */
+.gold-privileges-card {
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.16) 0%, rgba(180, 83, 9, 0.08) 50%, rgba(12, 14, 20, 0.75) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  border-radius: 14px;
+  padding: 16px 18px;
+  margin-bottom: 16px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(254, 240, 138, 0.25);
+}
+
+.gold-shimmer-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f59e0b, #fef08a, #f59e0b, transparent);
+  opacity: 0.85;
+}
+
+.gold-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.gold-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.gold-crown-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #78350f 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  border: 1px solid rgba(254, 240, 138, 0.5);
+}
+
+.gold-crown-icon i {
+  color: #ffffff;
+  font-size: 18px;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.gold-title-area {
+  min-width: 0;
+}
+
+.gold-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.gold-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+
+.gold-savings-badge {
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(16, 185, 129, 0.15) 100%);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.5);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);
+  white-space: nowrap;
+}
+
+.gold-toggle-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+}
+
+.gold-toggle-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: color 0.2s;
+}
+
+.gold-switch-track {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.25s ease;
+}
+
+.gold-switch-input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 2;
+  margin: 0;
+}
+
+.gold-switch-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;
+}
+
+.gold-card-desc {
+  font-size: 12px;
+  color: #cbd5e1;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+
+.gold-perks-box {
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+
+.gold-perks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 8px;
+  font-size: 12px;
+  color: #e2e8f0;
+}
+
+.gold-perks-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   8) In-Page Omniware UPI & Bottom-Sheet Checkout System (dashboard-ui-system)
+   ========================================================================== */
+.sv-checkout-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100000;
+  background: rgba(4, 7, 18, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sv-checkout-overlay.active {
+  opacity: 1;
+}
+
+.sv-checkout-sheet {
+  background: linear-gradient(180deg, #0e1628 0%, #090e1c 100%);
+  border: 1px solid rgba(59, 130, 246, 0.32);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 430px;
+  box-shadow: 0 25px 60px -10px rgba(0, 0, 0, 0.9), 0 0 50px rgba(59, 130, 246, 0.15);
+  position: relative;
+  overflow: hidden;
+  padding: 24px 22px;
+  color: #ffffff;
+  font-family: var(--font-sans, system-ui, -apple-system, sans-serif);
+  animation: svModalPop 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes svModalPop {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.sv-sheet-handle {
+  display: none;
+  width: 42px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+  margin: 0 auto 14px;
+}
+
+.sv-checkout-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  position: relative;
+}
+
+.sv-checkout-brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sv-checkout-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.4));
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  display: grid;
+  place-items: center;
+  color: #60a5fa;
+  font-size: 16px;
+}
+
+.sv-checkout-title-wrap h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.25;
+}
+
+.sv-checkout-title-wrap p {
+  font-size: 11.5px;
+  color: #94a3b8;
+  margin: 2px 0 0;
+}
+
+.sv-checkout-close-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #94a3b8;
+  font-size: 13px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sv-checkout-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #ef4444;
+  transform: rotate(90deg);
+}
+
+.sv-checkout-amount-box {
+  background: rgba(15, 23, 42, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sv-amount-val {
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
+  font-family: var(--font-sans, monospace);
+  letter-spacing: -0.02em;
+}
+
+.sv-amount-sub {
+  font-size: 10.5px;
+  color: #10b981;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.sv-order-badge {
+  font-size: 11px;
+  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-family: monospace;
+}
+
+/* 1. Apps Section (Top of QR) */
+.sv-apps-section {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.sv-apps-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.sv-apps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  max-width: 260px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.sv-app-tile {
+  height: 44px;
+  min-height: 44px;
+  width: 100%;
+  border-radius: 12px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  overflow: hidden;
+  padding: 4px;
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.sv-app-tile:hover,
+.sv-app-tile:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+  border-color: #38bdf8;
+}
+
+.sv-app-tile:active {
+  transform: scale(0.95);
+}
+
+/* 2. QR Code Box (Center Stage) */
+.sv-qr-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 14px;
+}
+
+.sv-qr-frame {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  line-height: 0;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.sv-qr-frame.sv-qr-highlight {
+  box-shadow: 0 0 0 4px #38bdf8, 0 8px 30px rgba(56, 189, 248, 0.6);
+  transform: scale(1.02);
+}
+
+.sv-qr-img {
+  width: 180px;
+  height: 180px;
+  display: block;
+}
+
+.sv-qr-caption {
+  font-size: 11px;
+  color: #94a3b8;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* 3. 1-Click Universal UPI Intent Button (Below QR) */
+.sv-upi-intent-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 46px;
+  padding: 13px 18px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 14.5px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+  margin-bottom: 14px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.sv-upi-intent-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 99, 235, 0.6);
+  color: #ffffff;
+}
+
+.sv-upi-intent-cta:active {
+  transform: scale(0.98);
+}
+
+.sv-vpa-copy-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.sv-vpa-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sv-vpa-lbl {
+  font-size: 10px;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.sv-vpa-txt {
+  font-size: 12.5px;
+  color: #e2e8f0;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.sv-copy-btn {
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #60a5fa;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sv-copy-btn:hover {
+  background: rgba(59, 130, 246, 0.3);
+  color: #ffffff;
+}
+
+.sv-status-pulse-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  margin-bottom: 12px;
+}
+
+.sv-pulse-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #34d399;
+  font-weight: 500;
+}
+
+.sv-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: svPulse 1.8s infinite;
+}
+
+@keyframes svPulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 7px rgba(16, 185, 129, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.sv-countdown-txt {
+  font-size: 11px;
+  color: #94a3b8;
+  font-family: monospace;
+}
+
+.sv-cards-fallback-wrap {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  text-align: left;
+}
+
+.sv-cards-fallback-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.sv-fallback-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.sv-card-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sv-card-ico-pill {
+  background: #ffffff;
+  border-radius: 5px;
+  height: 22px;
+  padding: 2px 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.sv-card-ico-pill.sv-card-ico-pill-dark {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sv-card-ico {
+  height: 14px;
+  width: auto;
+  max-width: 32px;
+  object-fit: contain;
+  display: block;
+}
+
+.sv-card-ico-visa {
+  height: 11px;
+}
+
+.sv-card-ico-mc {
+  height: 13px;
+}
+
+.sv-cards-fallback-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 9px 12px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.28);
+  border-radius: 10px;
+  color: #93c5fd;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.sv-cards-fallback-btn:hover {
+  background: rgba(59, 130, 246, 0.22);
+  border-color: rgba(59, 130, 246, 0.45);
+  color: #ffffff;
+}
+
+.sv-cards-fallback-btn .sv-ext-icon {
+  font-size: 10px;
+  opacity: 0.8;
+}
+
+/* Suppress floating support widget & any Tawk embeds during checkout */
+body.sv-checkout-active #socialDock,
+body.sv-checkout-active #socialDockToggle,
+body.sv-checkout-active .social-dock,
+body.sv-checkout-active .social-dock-toggle,
+body.sv-checkout-active #tawk-bubble-container,
+body.sv-checkout-active .tawk-min-container,
+body.sv-checkout-active div[class*="tawk-"],
+body.sv-checkout-active iframe[src*="tawk.to"],
+body.sv-checkout-active iframe[title*="chat" i] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
+/* Success Confirmation Inside Modal */
+.sv-checkout-success-view {
+  text-align: center;
+  padding: 24px 8px 16px;
+  animation: svModalPop 0.3s ease forwards;
+}
+
+.sv-success-icon-ring {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  border: 2px solid #10b981;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+  color: #10b981;
+  font-size: 28px;
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.3);
+}
+
+.sv-success-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.sv-success-desc {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-bottom: 0;
+}
+
+/* Mobile Bottom Sheet & UI Adaptation (< 768px) (dashboard-ui-system) */
+@media (max-width: 768px) {
+  /* Floating Support Dock: Compact 44x44 FAB */
+  .social-dock-toggle {
+    bottom: 16px;
+    right: 16px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border-radius: 50%;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.55);
+  }
+  .social-dock-toggle span {
+    display: none !important;
+  }
+  .social-dock-toggle i {
+    font-size: 16px;
+    margin: 0;
+  }
+  .social-dock {
+    right: 14px;
+    left: 14px;
+    bottom: 68px;
+    width: auto;
+    max-width: calc(100vw - 28px);
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  /* Payment Option Cards Responsive Tuning */
+  .payment-option-card {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+  .payment-option-main {
+    gap: 10px;
+  }
+  .payment-option-title {
+    font-size: 13.5px;
+  }
+  .payment-option-sub {
+    font-size: 11px;
+  }
+  .upi-logo-shuffler {
+    width: 44px;
+    height: 28px;
+  }
+  .shuffle-logo {
+    max-width: 30px;
+    max-height: 20px;
+  }
+
+  /* Gold Privileges Card */
+  .gold-privileges-card {
+    padding: 14px 14px;
+  }
+  .gold-crown-icon {
+    width: 38px;
+    height: 38px;
+  }
+  .gold-crown-icon i {
+    font-size: 16px;
+  }
+  .gold-title {
+    font-size: 14px;
+  }
+  .gold-savings-badge {
+    font-size: 10.5px;
+    padding: 2px 7px;
+  }
+  .gold-card-desc {
+    font-size: 11.5px;
+    margin-bottom: 10px;
+  }
+  .gold-perks-list {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    font-size: 11.5px;
+  }
+
+  /* In-Page Checkout Modal Bottom Sheet */
+  .sv-checkout-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .sv-checkout-sheet {
+    max-width: 100%;
+    border-radius: 24px 24px 0 0;
+    padding: 16px 20px 28px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-bottom: none;
+    animation: svSheetSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .sv-sheet-handle {
+    display: block;
+  }
+  .sv-qr-img {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .intake-form-card {
+    padding: 18px 14px !important;
+  }
+  .payment-option-card {
+    padding: 11px 12px;
+  }
+  .payment-option-title-row {
+    gap: 5px;
+  }
+  .payment-option-title {
+    font-size: 13px;
+  }
+  .payment-method-badge {
+    font-size: 9.5px;
+    padding: 1.5px 6px;
+  }
+  .gold-crown-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
+  .gold-crown-icon i {
+    font-size: 14px;
+  }
+  .gold-title {
+    font-size: 13px;
+  }
+  .gold-toggle-label {
+    font-size: 10px;
+  }
+  .gold-switch-track {
+    width: 44px;
+    height: 24px;
+  }
+  .gold-switch-knob {
+    width: 18px;
+    height: 18px;
+    top: 2px;
+    left: 2px;
+  }
+}
+
+@keyframes svSheetSlideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+

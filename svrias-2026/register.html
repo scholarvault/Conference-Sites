@@ -96,13 +96,15 @@
 
   <!-- Subpage Main Content -->
   <main class="conference-body" style="padding-top: 20px;">
-    <!-- Floating Cyber Announcement Pill - 10 Competitive Student Research Grants -->
+    <!-- Floating Cyber Announcement Pill (Option 3) -->
     <div class="cyber-announcement-wrap" style="padding-top: 0; margin-bottom: 20px;">
-      <a href="call-for-papers.html#student-grants" class="cyber-pill cyber-pill-gold" aria-label="10 Competitive Student Research Grants Open - 100% Registration Fee Waiver">
+      <a href="call-for-papers.html" class="cyber-pill" aria-label="Summit Dates and Editorial Review Info">
         <span class="cyber-pill-pulse"></span>
-        <span class="cyber-pill-item">🎓 <strong>10 Competitive Student Research Grants Open</strong></span>
+        <span class="cyber-pill-item"><strong>Virtual Summit</strong> &bull; 14 November 2026</span>
         <span class="cyber-pill-dot">&bull;</span>
-        <span class="cyber-pill-badge"><i class="fa-solid fa-award"></i> 100% Registration Fee Waiver</span>
+        <span class="cyber-pill-item">Call for Abstracts Open</span>
+        <span class="cyber-pill-dot">&bull;</span>
+        <span class="cyber-pill-badge"><i class="fa-solid fa-bolt"></i> 2–4 Day Review SLA</span>
       </a>
     </div>
     <div class="conf-section">
@@ -147,11 +149,6 @@
               <li><i class="fa-solid fa-check"></i> Inclusion in archived proceedings</li>
               <li><i class="fa-solid fa-check"></i> Full access to all 6 tracks</li>
             </ul>
-            <!-- Student Grant Waiver Notice -->
-            <div class="student-grant-waiver-callout" style="margin-top: 10px; margin-bottom: 12px; padding: 9px 12px; background: rgba(245, 158, 11, 0.08); border: 1px dashed rgba(245, 158, 11, 0.35); border-radius: 10px; font-size: 12px; color: #fde68a; line-height: 1.45; text-align: left;">
-              <i class="fa-solid fa-graduation-cap" style="color: #fbbf24; margin-right: 4px;"></i>
-              <strong>Student Grant Awardees:</strong> Accepted recipients can apply their official 100% waiver code in the checkout form below for ₹0 registration.
-            </div>
           </div>
           <a href="#intakeForm" class="pill-btn frosted-pill select-pass-btn" data-category-code="student_scholar" style="width: 100%; text-align: center;">Select Student Pass</a>
         </div>
@@ -257,17 +254,25 @@
         </div>
       </div>
 
-      <div id="goldPrivilegeBanner" style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.28); border-radius: 16px; padding: 14px 20px; margin-top: -24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13.5px; color: #fde68a; flex-wrap: wrap; text-align: center;">
+      <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.28); border-radius: 16px; padding: 14px 20px; margin-top: -24px; margin-bottom: 40px; display: flex; align-items: center; justify-content: center; gap: 12px; font-size: 13.5px; color: #fde68a; flex-wrap: wrap; text-align: center;">
         <i class="fa-solid fa-crown" style="color: var(--accent-gold); font-size: 16px;"></i>
         <span><strong>ScholarVault Gold Member Privilege:</strong> Enjoy exclusive discounted rates on registration tiers (Student: ₹2,399 | Faculty: ₹4,898 | Industry: ₹9,898 | Listener: ₹1,898). Applied automatically during invoice generation.</span>
       </div>
 
+      <!-- Registration Form -->
+      <div class="glass-card intake-form-card" id="intakeForm" style="padding: clamp(18px, 4vw, 36px); max-width: 760px; margin: 0 auto clamp(40px, 8vw, 64px);">
+        <div class="card-num"><i class="fa-solid fa-lock"></i> SECURE DELEGATE INTAKE</div>
+        <h2 style="font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Register Delegate Pass</h2>
+        <p style="font-size: 13.5px; color: #a1a1aa; margin-bottom: 24px;">
+          Enter your basic details once. ScholarVault will securely resume your selected category, confirm Gold benefits and show the final amount before payment.
+        </p>
+
       <!-- Instant Success Confirmation Card -->
-      <div class="glass-card" id="registrationSuccessCard" style="display: none; padding: clamp(32px, 5vw, 48px); max-width: 820px; margin: 0 auto 40px; border: 1px solid rgba(16, 185, 129, 0.45); background: radial-gradient(circle at top, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.3) 100%), rgba(10, 15, 29, 0.85); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(16, 185, 129, 0.15); text-align: center; border-radius: 20px;">
-        <div style="display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; margin-bottom: 16px; box-shadow: 0 0 24px rgba(16, 185, 129, 0.4);">
-          <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 38px;"></i>
+      <div class="glass-card" id="registrationSuccessCard" style="display: none; padding: clamp(28px, 5vw, 44px); max-width: 760px; margin: 0 auto 36px; border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(6, 78, 59, 0.25); text-align: center;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; margin-bottom: 16px;">
+          <i class="fa-solid fa-circle-check" style="color: #10b981; font-size: 32px;"></i>
         </div>
-        <div class="card-num" style="color: #34d399; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.08em;"><i class="fa-solid fa-shield-halved"></i> PASS VERIFIED &amp; CONFIRMED</div>
+        <div class="card-num" style="color: #34d399; margin-bottom: 8px;"><i class="fa-solid fa-shield-halved"></i> PASS VERIFIED &amp; CONFIRMED</div>
         <h2 style="font-size: 26px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Registration Confirmed!</h2>
         <p style="font-size: 15px; color: #d1fae5; margin-bottom: 24px; max-width: 580px; margin-left: auto; margin-right: auto;">
           Welcome to the <strong>Research Integrity &amp; Responsible AI Summit (SVRIAS 2026)</strong>. Your delegate credentials have been successfully secured.
@@ -331,54 +336,8 @@
         <a href="index.html" class="pill-btn frosted-pill">Back to Summit Home</a>
       </div>
 
-      <!-- Payment Failed / Action Required Guidance Card -->
-      <div class="glass-card" id="registrationFailedCard" style="display: none; padding: clamp(32px, 5vw, 48px); max-width: 820px; margin: 0 auto 40px; border: 1px solid rgba(239, 68, 68, 0.45); background: radial-gradient(circle at top, rgba(239, 68, 68, 0.15) 0%, rgba(127, 29, 29, 0.3) 100%), rgba(10, 15, 29, 0.85); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 40px rgba(239, 68, 68, 0.15); text-align: center; border-radius: 20px;">
-        <div style="display: inline-flex; align-items: center; justify-content: center; width: 72px; height: 72px; border-radius: 50%; background: rgba(239, 68, 68, 0.2); border: 2px solid #ef4444; margin-bottom: 16px; box-shadow: 0 0 24px rgba(239, 68, 68, 0.4);">
-          <i class="fa-solid fa-triangle-exclamation" style="color: #ef4444; font-size: 36px;"></i>
-        </div>
-        <div class="card-num" style="color: #f87171; margin-bottom: 8px; font-weight: 700; letter-spacing: 0.08em;"><i class="fa-solid fa-shield-halved"></i> PAYMENT INCOMPLETE / ACTION REQUIRED</div>
-        <h2 style="font-size: 26px; font-weight: 800; color: #ffffff; margin-bottom: 8px;">Payment Could Not Be Completed</h2>
-        <p id="failedCardReason" style="font-size: 15px; color: #fecaca; margin-bottom: 24px; max-width: 620px; margin-left: auto; margin-right: auto;">
-          The payment attempt was declined or cancelled by the gateway. Don't worry—no duplicate charges have occurred, and you can safely complete your registration below.
-        </p>
-
-        <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; max-width: 520px; margin: 0 auto 24px; text-align: left;">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
-            <span style="color: #94a3b8;">Order / Attempt Reference:</span>
-            <span id="failedTxRef" style="color: #38bdf8; font-family: monospace; font-size: 14px;">...</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 14px;">
-            <span style="color: #94a3b8;">Payment Gateway:</span>
-            <span style="color: #ffffff; font-size: 13.5px;">Federal Bank / Omniware</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; font-size: 14px;">
-            <span style="color: #94a3b8;">Status:</span>
-            <span style="color: #f87171; font-weight: 700;"><i class="fa-solid fa-circle-xmark"></i> INCOMPLETE / DECLINED</span>
-          </div>
-        </div>
-
-        <!-- Actionable Guidance Box -->
-        <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); border-radius: 12px; padding: 18px 20px; max-width: 580px; margin: 0 auto 24px; font-size: 13.5px; color: #fecaca; text-align: left;">
-          <div style="font-weight: 700; color: #ffffff; margin-bottom: 10px; font-size: 14px; display: flex; align-items: center; gap: 8px;">
-            <i class="fa-solid fa-compass" style="color: #f87171;"></i> What to do next:
-          </div>
-          <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: #fed7aa;">
-            <li><strong>Try UPI / QR for Instant Clearance:</strong> UPI payments via GPay, PhonePe, Paytm, or BHIM have the highest clearance rate across Indian banking networks.</li>
-            <li><strong>Pay via Direct Bank Wire (NEFT / RTGS / IMPS):</strong> You can transfer directly from your bank or institutional account and submit the UTR reference for manual verification within 24 hours.</li>
-            <li><strong>Debited from your account?</strong> If money was deducted by your bank, the Reserve Bank of India (RBI) mandates an automatic reversal back to your original source within 2 to 4 working days.</li>
-            <li><strong>Email Notification Sent:</strong> A payment failure notification with a direct recovery link has been emailed to your registered address for your records.</li>
-          </ul>
-        </div>
-
-        <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-          <button type="button" id="btnRetryPayment" class="pill-btn glowing-pill" style="cursor: pointer; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);"><i class="fa-solid fa-rotate-right"></i> Try Payment Again</button>
-          <button type="button" id="btnSwitchBankTransfer" class="pill-btn frosted-pill" style="cursor: pointer;"><i class="fa-solid fa-building-columns"></i> Pay via Direct Bank Transfer</button>
-          <a href="https://wa.me/919344900624?text=Hi%20SVRIAS%20Desk%2C%20my%20registration%20payment%20failed" target="_blank" class="pill-btn frosted-pill"><i class="fa-brands fa-whatsapp" style="color: #25d366;"></i> WhatsApp Support Desk</a>
-        </div>
-      </div>
-
       <!-- Registration Form -->
-      <div class="glass-card" id="intakeForm" style="padding: clamp(16px, 4vw, 36px); max-width: 760px; margin: 0 auto 36px;">
+      <div class="glass-card" id="intakeForm" style="padding: clamp(24px, 4vw, 40px); max-width: 760px; margin: 0 auto 36px;">
         <div class="card-num"><i class="fa-solid fa-lock"></i> SECURE DELEGATE INTAKE</div>
         <h2 style="font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Register Delegate Pass</h2>
         <p style="font-size: 13.5px; color: #a1a1aa; margin-bottom: 24px;">
@@ -466,74 +425,67 @@
               <div style="margin-bottom: 12px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                   <label for="couponCodeInput" style="font-size: 12.5px; font-weight: 600; color: #cbd5e1;">
-                    Have a Promo Code or Grant Waiver Voucher?
+                    Have a Promo Code or Voucher?
                   </label>
                   <span style="font-size: 11.5px; color: #94a3b8;">Optional</span>
                 </div>
                 <div style="display: flex; gap: 8px;">
-                  <input type="text" id="couponCodeInput" name="coupon_code" class="form-input" placeholder="e.g. GRANT100, EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
+                  <input type="text" id="couponCodeInput" name="coupon_code" class="form-input" placeholder="e.g. EARLYBIRD, SVRIAS10" style="text-transform: uppercase; font-size: 13px; padding: 8px 12px; letter-spacing: 0.05em;" />
                   <button type="button" id="applyCouponBtn" class="pill-btn frosted-pill" style="padding: 8px 18px; font-size: 13px; flex-shrink: 0;">Apply</button>
                 </div>
                 <div id="couponStatusMsg" style="display: none; font-size: 12.5px; margin-top: 6px;"></div>
-                <small style="display: block; font-size: 11.5px; color: #94a3b8; margin-top: 4px;">
-                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24;"></i> Accepted Student Grant recipients: Apply your official grant waiver code here for 100% fee remission.
-                </small>
               </div>
 
               <!-- Ultra-Premium VIP Gold Member Upgrade Section -->
-              <div id="goldOptInCard" style="position: relative; overflow: hidden; background: radial-gradient(ellipse at top left, rgba(245, 158, 11, 0.16) 0%, rgba(180, 83, 9, 0.08) 50%, rgba(12, 14, 20, 0.75) 100%); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 14px; padding: 16px 18px; margin-bottom: 16px; transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 8px 30px -4px rgba(0, 0, 0, 0.5), 0 0 20px -2px rgba(245, 158, 11, 0.15), inset 0 1px 0 rgba(254, 240, 138, 0.25);">
-                
+              <div id="goldOptInCard" class="gold-privileges-card">
                 <!-- Ambient Top Shimmer Line -->
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, #f59e0b, #fef08a, #f59e0b, transparent); opacity: 0.85;"></div>
+                <div class="gold-shimmer-line"></div>
 
                 <!-- Top Row: Icon + Title + Savings Badge + Switch -->
-                <label for="goldOptInToggle" style="display: flex; align-items: center; justify-content: space-between; gap: 14px; cursor: pointer; margin-bottom: 12px; user-select: none;">
-                  <div style="display: flex; align-items: center; gap: 12px;">
+                <div class="gold-card-header">
+                  <div class="gold-brand-wrap">
                     <!-- 3D Luxury Gold Crown Emblem -->
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #78350f 100%); display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.6); flex-shrink: 0; border: 1px solid rgba(254, 240, 138, 0.5);">
-                      <i class="fa-solid fa-crown" style="color: #ffffff; font-size: 19px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));"></i>
+                    <div class="gold-crown-icon">
+                      <i class="fa-solid fa-crown"></i>
                     </div>
-                    <div>
-                      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                        <span style="font-size: 15px; font-weight: 800; color: #ffffff; letter-spacing: -0.01em;">
-                          ScholarVault Gold Privileges
-                        </span>
-                        <span id="goldSavingsBadge" style="background: linear-gradient(135deg, rgba(34, 197, 94, 0.25) 0%, rgba(16, 185, 129, 0.15) 100%); color: #86efac; border: 1px solid rgba(34, 197, 94, 0.5); font-size: 11px; font-weight: 700; padding: 2px 10px; border-radius: 999px; box-shadow: 0 0 10px rgba(34, 197, 94, 0.2);">
-                          Save ₹101 Instantly
-                        </span>
-                      </div>
-                      <div style="font-size: 12.5px; color: #cbd5e1; margin-top: 2px;">
-                        Opt in to unlock instant delegate pass discount + 1-month VIP perks
+                    <div class="gold-title-area">
+                      <div class="gold-title-row">
+                        <span class="gold-title">ScholarVault Gold Privileges</span>
+                        <span id="goldSavingsBadge" class="gold-savings-badge">Save ₹101 Instantly</span>
                       </div>
                     </div>
                   </div>
 
                   <!-- Custom Interactive Toggle Switch -->
-                  <div style="display: flex; align-items: center; gap: 10px; flex-shrink: 0;">
-                    <span id="goldToggleLabel" style="font-size: 11.5px; font-weight: 700; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; transition: color 0.2s;">Add Perk</span>
-                    <div id="goldSwitchTrack" style="position: relative; width: 48px; height: 26px; border-radius: 999px; background: rgba(255, 255, 255, 0.15); border: 1px solid rgba(255, 255, 255, 0.25); transition: all 0.25s ease;">
-                      <input type="checkbox" id="goldOptInToggle" name="gold_addon" style="position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; z-index: 2; margin: 0;" />
-                      <div id="goldSwitchKnob" style="position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 50%; background: #ffffff; box-shadow: 0 2px 6px rgba(0,0,0,0.4); transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease;"></div>
+                  <label for="goldOptInToggle" class="gold-toggle-control" id="goldToggleLabelWrapper">
+                    <span id="goldToggleLabel" class="gold-toggle-label">Add Perk</span>
+                    <div id="goldSwitchTrack" class="gold-switch-track">
+                      <input type="checkbox" id="goldOptInToggle" name="gold_addon" class="gold-switch-input" />
+                      <div id="goldSwitchKnob" class="gold-switch-knob"></div>
                     </div>
-                  </div>
-                </label>
+                  </label>
+                </div>
+
+                <div class="gold-card-desc">
+                  Opt in to unlock instant delegate pass discount + 1-month VIP perks
+                </div>
 
                 <!-- Inset Perks Container (Matches the Pass Inclusions aesthetic!) -->
-                <div style="background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(245, 158, 11, 0.2); border-radius: 10px; padding: 10px 14px;">
-                  <ul style="list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 8px; font-size: 12.5px; color: #e2e8f0;">
-                    <li style="display: flex; align-items: center; gap: 8px;">
+                <div class="gold-perks-box">
+                  <ul class="gold-perks-list">
+                    <li>
                       <i class="fa-solid fa-bolt" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>Instant Pass Discount</strong> applied to total</span>
                     </li>
-                    <li style="display: flex; align-items: center; gap: 8px;">
+                    <li>
                       <i class="fa-solid fa-file-pdf" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>SCVS Audit PDF Access</strong> downloadable evidence dossiers</span>
                     </li>
-                    <li style="display: flex; align-items: center; gap: 8px;">
+                    <li>
                       <i class="fa-solid fa-file-lines" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>Document &amp; PDF OCR</strong> conference CFP extraction</span>
                     </li>
-                    <li style="display: flex; align-items: center; gap: 8px;">
+                    <li>
                       <i class="fa-solid fa-crown" style="color: #fbbf24; font-size: 12px; flex-shrink: 0;"></i>
                       <span><strong>1-Month Gold Membership</strong> with Research Vault &amp; Credits</span>
                     </li>
@@ -559,95 +511,103 @@
             </div>
 
             <!-- Payment Method Selector -->
-            <div class="form-group full" id="paymentMethodSection" style="margin-top: 6px;">
-              <!-- 100% Student Research Grant Remission Notice -->
-              <div id="grantWaiverPaymentNotice" style="display: none; padding: 14px 16px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 12px; margin-bottom: 12px; font-size: 13.5px; color: #fef3c7;">
-                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                  <i class="fa-solid fa-graduation-cap" style="color: #fbbf24; font-size: 16px;"></i>
-                  <strong style="color: #fbbf24;">100% Student Research Grant Remission Applied</strong>
-                </div>
-                <div style="font-size: 12.5px; color: #cbd5e1;">
-                  No payment gateway transaction required. Your delegate pass and presentation slot will be confirmed immediately upon claiming.
-                </div>
+            <div class="form-group full" style="margin-top: 6px;">
+              <label style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; display: block;">
+                Select Payment Method *
+              </label>
+              
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <!-- Option 1: Federal Omniware -->
+                <label id="optFederalLabel" class="payment-option-card active">
+                  <div class="payment-option-main">
+                    <input type="radio" name="payment_method" value="federal_omniware" checked class="payment-option-radio" />
+                    <div class="payment-option-info">
+                      <div class="payment-option-title-row">
+                        <span class="payment-option-title">UPI &amp; Net Banking</span>
+                        <span class="payment-method-badge">Instant</span>
+                      </div>
+                      <div class="payment-option-sub">
+                        Google Pay, PhonePe, Paytm, BHIM &amp; Net Banking
+                      </div>
+                    </div>
+                  </div>
+                  <div class="payment-option-tail">
+                    <div class="upi-logo-shuffler" id="upiOptionShuffler" title="Google Pay, PhonePe, Paytm, BHIM UPI">
+                      <img src="assets/logos/gpay.png" alt="Google Pay" class="shuffle-logo active" />
+                      <img src="assets/logos/phonepe.png" alt="PhonePe" class="shuffle-logo" />
+                      <img src="assets/logos/paytm_icon.png" alt="Paytm" class="shuffle-logo" />
+                      <img src="assets/logos/bhim.svg" alt="BHIM UPI" class="shuffle-logo" />
+                    </div>
+                  </div>
+                </label>
+
+                <!-- Option 2: Dodo Payments (International Cards & Apple Pay) -->
+                <label id="optDodoLabel" class="payment-option-card" style="display: none;">
+                  <div class="payment-option-main">
+                    <input type="radio" name="payment_method" value="dodo" class="payment-option-radio" />
+                    <div class="payment-option-info">
+                      <div class="payment-option-title-row">
+                        <span class="payment-option-title">International Cards &amp; Apple Pay</span>
+                        <span class="payment-method-badge badge-usd">USD ($)</span>
+                      </div>
+                      <div class="payment-option-sub">
+                        Credit &amp; Debit Cards (Visa, Mastercard, Amex, Apple Pay)
+                      </div>
+                    </div>
+                  </div>
+                  <div class="payment-option-tail">
+                    <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Cards" style="height: 18px;" />
+                  </div>
+                </label>
+
+                <!-- Option 3: Direct Bank Transfer Accordion -->
+                <label id="optBankLabel" class="payment-option-card">
+                  <div class="payment-option-main">
+                    <input type="radio" name="payment_method" value="bank_transfer" class="payment-option-radio" />
+                    <div class="payment-option-info">
+                      <div class="payment-option-title-row">
+                        <span class="payment-option-title">Direct Bank Transfer (NEFT / RTGS / IMPS)</span>
+                      </div>
+                      <div class="payment-option-sub">
+                        Institutional wire transfer to ScholarVault bank account
+                      </div>
+                    </div>
+                  </div>
+                  <div class="payment-option-tail">
+                    <i class="fa-solid fa-building-columns" style="color: #94a3b8; font-size: 20px;"></i>
+                  </div>
+                </label>
               </div>
 
-              <div id="paymentOptionsWrap">
-                <label style="font-size: 14px; font-weight: 700; color: #ffffff; margin-bottom: 10px; display: block;">
-                  Select Payment Method *
-                </label>
-                
-                <div style="display: flex; flex-direction: column; gap: 10px;">
-                  <!-- Option 1: Indian UPI & QR (Intercepted via QR modal with scholarvault@ybl until Federal Bank live keys arrive ~Sep 20) -->
-                  <label id="optFederalLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                      <input type="radio" name="payment_method" value="federal_omniware" checked style="accent-color: #38bdf8;" />
-                      <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                          Indian UPI &amp; QR Payment <span style="font-size: 11px; background: #0284c7; color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">Instant QR (INR)</span>
-                        </div>
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                          Scan QR with PhonePe, GPay, Paytm, BHIM or any UPI App &bull; Instant Confirmation
-                        </div>
-                      </div>
-                    </div>
-                    <img src="assets/idzRNcC9U5_logos.png" alt="UPI" style="height: 24px; filter: brightness(1.2);" />
-                  </label>
+              <!-- Currency Switch Notice Helper -->
+              <div id="currencySwitchNotice" style="font-size: 12px; color: #94a3b8; margin-top: 10px; padding: 10px 14px; background: rgba(255, 255, 255, 0.03); border: 1px dashed rgba(255, 255, 255, 0.12); border-radius: 10px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                <span id="currencySwitchNoticeText">Attending from outside India and wish to pay in USD ($)?</span>
+                <button type="button" id="btnSwitchCurrencyHint" style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); color: #38bdf8; font-size: 11.5px; font-weight: 600; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all 0.15s ease;">
+                  <i class="fa-solid fa-arrows-rotate"></i> Switch to USD ($)
+                </button>
+              </div>
 
-                  <!-- Option 2: Dodo Payments (International) -->
-                  <label id="optDodoLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                      <input type="radio" name="payment_method" value="dodo" style="accent-color: #38bdf8;" />
-                      <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                          International Cards &amp; Apple Pay <span style="font-size: 11px; background: rgba(255, 255, 255, 0.15); color: #ffffff; padding: 2px 8px; border-radius: 999px; margin-left: 6px;">USD ($)</span>
-                        </div>
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                          International Credit &amp; Debit Cards (Visa, Mastercard, Amex, Apple Pay)
-                        </div>
-                      </div>
-                    </div>
-                    <img src="assets/Visa Inc._idDUM8TcN7_1.png" alt="Cards" style="height: 18px;" />
-                  </label>
-
-                  <!-- Option 3: Direct Bank Transfer Accordion -->
-                  <label id="optBankLabel" style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; cursor: pointer; transition: all 0.2s ease;">
-                    <div style="display: flex; align-items: center; gap: 12px;">
-                      <input type="radio" name="payment_method" value="bank_transfer" style="accent-color: #38bdf8;" />
-                      <div>
-                        <div style="font-size: 14px; font-weight: 700; color: #ffffff;">
-                          Direct Bank Transfer (NEFT / RTGS / IMPS)
-                        </div>
-                        <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">
-                          Institutional sponsorship or direct wire transfer to ScholarVault Federal Bank account
-                        </div>
-                      </div>
-                    </div>
-                    <i class="fa-solid fa-building-columns" style="color: #94a3b8; font-size: 20px;"></i>
-                  </label>
+              <!-- Unfolded Bank Transfer Details -->
+              <div id="bankTransferDetailsWrap" style="display: none; margin-top: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 16px;">
+                <div style="font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                  <i class="fa-solid fa-info-circle"></i> Official Federal Bank Account Details for Wire Transfer:
                 </div>
-
-                <!-- Unfolded Bank Transfer Details -->
-                <div id="bankTransferDetailsWrap" style="display: none; margin-top: 12px; background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 16px;">
-                  <div style="font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
-                    <i class="fa-solid fa-info-circle"></i> Official Federal Bank Account Details for Wire Transfer:
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; margin-bottom: 14px;">
+                  <div><span style="color: #94a3b8;">Beneficiary Name:</span> <strong style="color: #ffffff;">ScholarVault Conferences</strong></div>
+                  <div><span style="color: #94a3b8;">Bank Name:</span> <strong style="color: #ffffff;">Federal Bank</strong></div>
+                  <div><span style="color: #94a3b8;">Account Number:</span> <strong style="color: #38bdf8; font-family: monospace;">29149900012345</strong></div>
+                  <div><span style="color: #94a3b8;">IFSC Code:</span> <strong style="color: #38bdf8; font-family: monospace;">FDRL0001234</strong></div>
+                  <div><span style="color: #94a3b8;">Account Type:</span> <strong style="color: #ffffff;">Current Account</strong></div>
+                  <div><span style="color: #94a3b8;">Branch:</span> <strong style="color: #ffffff;">Chennai Main</strong></div>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <div style="flex: 1; min-width: 200px;">
+                    <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
+                    <input type="text" name="utr_number" id="regUtr" class="form-input" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
                   </div>
-                  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; margin-bottom: 14px;">
-                    <div><span style="color: #94a3b8;">Beneficiary Name:</span> <strong style="color: #ffffff;">ScholarVault Conferences</strong></div>
-                    <div><span style="color: #94a3b8;">Bank Name:</span> <strong style="color: #ffffff;">Federal Bank</strong></div>
-                    <div><span style="color: #94a3b8;">Account Number:</span> <strong style="color: #38bdf8; font-family: monospace;">29149900012345</strong></div>
-                    <div><span style="color: #94a3b8;">IFSC Code:</span> <strong style="color: #38bdf8; font-family: monospace;">FDRL0001234</strong></div>
-                    <div><span style="color: #94a3b8;">Account Type:</span> <strong style="color: #ffffff;">Current Account</strong></div>
-                    <div><span style="color: #94a3b8;">Branch:</span> <strong style="color: #ffffff;">Chennai Main</strong></div>
-                  </div>
-                  <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <div style="flex: 1; min-width: 200px;">
-                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">12-Digit UTR / Ref Number *</label>
-                      <input type="text" name="utr_number" id="regUtr" class="form-input" placeholder="e.g. UTR123456789012" style="padding: 8px 12px; font-size: 13px;" />
-                    </div>
-                    <div style="flex: 1; min-width: 200px;">
-                      <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
-                      <input type="text" name="bank_name" id="regSenderBank" class="form-input" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
-                    </div>
+                  <div style="flex: 1; min-width: 200px;">
+                    <label style="font-size: 12px; color: #cbd5e1; margin-bottom: 4px; display: block;">Sender Bank Name *</label>
+                    <input type="text" name="bank_name" id="regSenderBank" class="form-input" placeholder="e.g. State Bank of India / HDFC" style="padding: 8px 12px; font-size: 13px;" />
                   </div>
                 </div>
               </div>
@@ -656,7 +616,7 @@
             <!-- Submit Button -->
             <div class="form-group full" style="margin-top: 14px;">
               <button type="submit" id="regSubmitBtn" class="pill-btn glowing-pill" style="width: 100%; padding: 15px; font-size: 15px; display: flex; align-items: center; justify-content: center; gap: 10px;">
-                <span id="btnSubmitText">Proceed to Federal Bank Payment &bull; ₹4,999</span>
+                <span id="btnSubmitText"><i class="fa-solid fa-bolt thunder-anim"></i> Pay Now &bull; ₹4,999</span>
                 <i class="fa-solid fa-arrow-right"></i>
               </button>
             </div>
@@ -797,8 +757,9 @@
       <span>conferences@scholarvault.in</span>
     </a>
     <div class="dock-links">
-      <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/social.png" alt="WhatsApp Desk" /> WhatsApp Desk</a>
-      <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/telegram.png" alt="Telegram Desk" /> Telegram Desk</a>
+      <a href="javascript:void(0)" onclick="openTawkChat()"><i class="fa-solid fa-comments"></i> Live Chat Desk</a>
+      <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/social.png" alt="" /> WhatsApp Desk</a>
+      <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/telegram.png" alt="" /> Telegram Desk</a>
       <a href="contact.html"><i class="fa-solid fa-message"></i> Submit Query Ticket</a>
     </div>
   </aside>
@@ -882,90 +843,8 @@
     </div>
   </div>
 
-  <!-- UPI QR Instant Payment Modal -->
-  <div id="upiQrModal" style="display: none; position: fixed; inset: 0; z-index: 99999; background: rgba(5, 7, 15, 0.88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); align-items: center; justify-content: center; padding: 16px; overflow-y: auto;">
-    <div style="background: linear-gradient(145deg, rgba(20, 24, 38, 0.98), rgba(12, 14, 22, 0.98)); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 20px; max-width: 440px; width: 100%; padding: clamp(20px, 4vw, 28px); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 35px rgba(56, 189, 248, 0.2); position: relative; margin: auto; text-align: center; box-sizing: border-box;">
-      <!-- Close Button -->
-      <button type="button" id="closeUpiQrModalBtn" style="position: absolute; top: 16px; right: 16px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #cbd5e1; border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; transition: all 0.2s ease;">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-      <!-- Header Badge -->
-      <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 999px; padding: 4px 14px; font-size: 12px; font-weight: 700; color: #38bdf8; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em;">
-        <i class="fa-solid fa-qrcode"></i> Instant UPI Payment
-      </div>
-
-      <h3 style="font-size: 20px; font-weight: 800; color: #ffffff; margin-bottom: 4px;">
-        Scan to Pay &bull; <span id="modalUpiAmount" style="color: #38bdf8;">₹4,999</span>
-      </h3>
-      <p style="font-size: 12.5px; color: #94a3b8; margin-bottom: 14px;">
-        Scan using PhonePe, Google Pay, Paytm, BHIM, or any UPI app
-      </p>
-
-      <!-- QR Code Box -->
-      <div style="background: #ffffff; border-radius: 16px; padding: 12px; display: inline-block; margin-bottom: 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); border: 2px solid rgba(56, 189, 248, 0.4);">
-        <img id="modalQrCodeImg" src="assets/phonepe_upi_qr.png" alt="PhonePe UPI QR Code" style="width: 200px; height: 200px; display: block; object-fit: contain; margin: 0 auto;" />
-      </div>
-
-      <!-- Direct 1-Tap UPI App Buttons -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px;">
-        <a id="btnOpenPhonePe" href="phonepe://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; font-size: 13px; text-decoration: none; font-weight: 700; background: #5f259f; color: #ffffff; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 12px rgba(95, 37, 159, 0.4);">
-          <i class="fa-solid fa-mobile-screen"></i> PhonePe
-        </a>
-        <a id="btnOpenGPay" href="tez://upi/pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn" style="display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 12px; font-size: 13px; text-decoration: none; font-weight: 700; background: #1a73e8; color: #ffffff; border-radius: 10px; border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 4px 12px rgba(26, 115, 232, 0.4);">
-          <i class="fa-brands fa-google"></i> Google Pay
-        </a>
-      </div>
-      <div style="margin-bottom: 12px;">
-        <a id="modalUpiDeepLink" href="upi://pay?pa=scholarvault@ybl&pn=SCHOLARVAULT&cu=INR" class="pill-btn frosted-pill" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 9px 14px; font-size: 12.5px; text-decoration: none; font-weight: 600;">
-          <i class="fa-solid fa-wallet"></i> Paytm / Other UPI App
-        </a>
-      </div>
-
-      <!-- UPI ID Copy Box -->
-      <div style="background: rgba(0, 0, 0, 0.35); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; padding: 8px 12px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; font-size: 13px;">
-        <div style="text-align: left;">
-          <span style="display: block; font-size: 11px; color: #94a3b8; text-transform: uppercase; font-weight: 600;">Verified UPI VPA:</span>
-          <span style="font-family: monospace; font-weight: 700; color: #ffffff;">scholarvault@ybl</span>
-        </div>
-        <button type="button" id="modalCopyUpiBtn" style="background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); color: #38bdf8; border-radius: 6px; padding: 5px 12px; font-size: 11.5px; font-weight: 700; cursor: pointer; transition: all 0.2s ease;">
-          <i class="fa-regular fa-copy"></i> Copy
-        </button>
-      </div>
-
-      <!-- UTR Reference Verification Section -->
-      <div style="border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 14px; text-align: left;">
-        <label for="modalUtrInput" style="display: block; font-size: 13px; font-weight: 700; color: #fde68a; margin-bottom: 4px;">
-          <i class="fa-solid fa-circle-check" style="color: #34d399;"></i> Step 2: Enter 12-Digit UPI / UTR Reference *
-        </label>
-        <p style="font-size: 11.5px; color: #94a3b8; margin-bottom: 8px;">
-          After completing payment in your UPI app, enter the 12-digit transaction ID / UTR number below:
-        </p>
-        <input type="text" id="modalUtrInput" placeholder="e.g. 425619284012 (12 digits)" maxlength="24" style="width: 100%; box-sizing: border-box; background: rgba(24, 24, 28, 0.9); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 10px; padding: 10px 14px; font-size: 14px; color: #ffffff; font-family: monospace; margin-bottom: 10px; outline: none;" />
-        <button type="button" id="modalConfirmUtrBtn" class="pill-btn glowing-pill" style="width: 100%; box-sizing: border-box; padding: 12px; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;">
-          <i class="fa-solid fa-check"></i> Confirm &amp; Submit Registration
-        </button>
-        <div id="modalUtrError" style="display: none; color: #f87171; font-size: 12px; margin-top: 6px; text-align: center;"></div>
-      </div>
-    </div>
-  </div>
-
   <script src="https://app.scholarvault.in/conference-embed.js" data-conference="research-integrity-responsible-ai-summit-2026" data-origin="https://app.scholarvault.in"></script>
   <script src="js/academic-enrichment.js"></script>
   <script src="main.js"></script>
-
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/6a96f50c6318273445cd9f15/1k1eqqee6';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script>
-  <!--End of Tawk.to Script-->
 </body>
 </html>

@@ -64,7 +64,7 @@
       SUPABASE_URL +
       '/rest/v1/' +
       table +
-      '?select=*&status=eq.accepted&conf_id=in.' +
+      '?select=*&status=in.(accepted,confirmed,invited)&conf_id=in.' +
       encodeURIComponent(inParam) +
       '&order=sort_order.asc,created_at.asc';
 
@@ -90,8 +90,37 @@
     var expertise = !isSpeaker ? esc(item.expertise || '') : '';
     var photoUrl = item.photo_url || '';
     var linkedin = item.linkedin || '';
-    var talkType = isSpeaker ? esc(item.talk_type || 'Keynote Address') : 'Academic Committee';
     var initials = getInitials(item.name);
+    var isConfirmed = item.status === 'confirmed' || item.status === 'accepted';
+    var isInvited = item.status === 'invited';
+
+    var statusBadgeHTML = '';
+    var sessionLabel = '';
+    var topicHeading = '';
+    var cardFootnote = '';
+
+    if (isConfirmed) {
+      statusBadgeHTML =
+        '<span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; background: rgba(16, 185, 129, 0.16); border: 1px solid rgba(16, 185, 129, 0.35); color: #34d399; margin-bottom: 8px;">' +
+        '<i class="fa-solid fa-circle-check" style="font-size: 9.5px;"></i> Confirmed ' + (isSpeaker ? 'Keynote' : 'Member') +
+        '</span>';
+      sessionLabel = isSpeaker ? esc(item.talk_type || 'Keynote Address (45 min)') : 'Academic Committee';
+      topicHeading = isSpeaker ? 'Keynote Topic' : 'Role &amp; Expertise';
+    } else if (isInvited) {
+      statusBadgeHTML =
+        '<span style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 999px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; background: rgba(56, 189, 248, 0.16); border: 1px solid rgba(56, 189, 248, 0.35); color: #38bdf8; margin-bottom: 8px;">' +
+        '<i class="fa-regular fa-clock" style="font-size: 9.5px;"></i> Invited &mdash; Awaiting Acceptance' +
+        '</span>';
+      sessionLabel = isSpeaker ? 'Proposed Keynote Session' : 'Proposed Committee Nomination';
+      topicHeading = isSpeaker ? 'Proposed Topic' : 'Proposed Area of Expertise';
+      cardFootnote =
+        '<div style="margin-top: 12px; padding-top: 8px; border-top: 1px dashed rgba(255, 255, 255, 0.08); font-size: 10px; color: #94a3b8; line-height: 1.4;">' +
+        '<i class="fa-regular fa-clock" style="margin-right: 4px;"></i> Formal invitation extended &bull; Final participation subject to role acceptance' +
+        '</div>';
+    } else {
+      sessionLabel = isSpeaker ? esc(item.talk_type || 'Keynote Address') : 'Academic Committee';
+      topicHeading = isSpeaker ? 'Keynote Topic' : 'Role &amp; Expertise';
+    }
 
     var photoHTML = photoUrl
       ? '<img src="' +
@@ -120,7 +149,9 @@
     if (isSpeaker && topic) {
       topicBoxHTML =
         '<div style="margin-top: 14px; padding: 10px 14px; border-radius: 12px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); font-size: 12px; line-height: 1.5; color: #e4e4e7;">' +
-        '<span style="color: var(--accent-cyan, #38bdf8); font-weight: 700; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.04em; display: block; margin-bottom: 2px;">Keynote Topic</span>' +
+        '<span style="color: var(--accent-cyan, #38bdf8); font-weight: 700; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.04em; display: block; margin-bottom: 2px;">' +
+        topicHeading +
+        '</span>' +
         '&ldquo;' +
         topic +
         '&rdquo;' +
@@ -131,7 +162,9 @@
     if (!isSpeaker && expertise) {
       roleBoxHTML =
         '<div style="margin-top: 12px; padding: 8px 12px; border-radius: 10px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); font-size: 12px; color: #e4e4e7;">' +
-        '<span style="color: var(--accent-gold, #f59e0b); font-weight: 700; text-transform: uppercase; font-size: 10.5px; display: block; margin-bottom: 2px;">Role &amp; Expertise</span>' +
+        '<span style="color: var(--accent-gold, #f59e0b); font-weight: 700; text-transform: uppercase; font-size: 10.5px; display: block; margin-bottom: 2px;">' +
+        topicHeading +
+        '</span>' +
         expertise +
         '</div>';
     }
@@ -140,8 +173,11 @@
       '<div class="glass-card" style="text-align: center; display: flex; flex-direction: column; justify-content: space-between; padding: clamp(20px, 3vw, 28px);">' +
       '<div>' +
       photoHTML +
-      '<div class="card-num" style="font-size: 11px; margin-bottom: 8px; color: var(--accent-cyan, #38bdf8);">' +
-      talkType +
+      '<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; margin-bottom: 8px;">' +
+      statusBadgeHTML +
+      '<div class="card-num" style="font-size: 11px; color: var(--accent-cyan, #38bdf8); margin-bottom: 0;">' +
+      sessionLabel +
+      '</div>' +
       '</div>' +
       '<h3 style="font-size: 18px; font-weight: 700; color: #ffffff; margin-bottom: 6px; line-height: 1.25;">' +
       name +
@@ -159,6 +195,7 @@
       '</div>' +
       '<div>' +
       linkedinHTML +
+      cardFootnote +
       '</div>' +
       '</div>'
     );
@@ -200,24 +237,86 @@
     return fetchFromSupabase('conf_speakers', confIds)
       .then(function (data) {
         if (!data || data.length === 0) {
+          if (options.preserveInitialIfEmpty) {
+            return;
+          }
           container.innerHTML = renderPlaceholder('speaker');
           return;
         }
 
-        var speakers = data;
-        if (options.limit && speakers.length > options.limit) {
-          speakers = speakers.slice(0, options.limit);
+        var confirmedSpeakers = data.filter(function (s) {
+          return s.status === 'confirmed' || s.status === 'accepted';
+        });
+        var invitedSpeakers = data.filter(function (s) {
+          return s.status === 'invited';
+        });
+
+        var html = '';
+
+        if (confirmedSpeakers.length > 0) {
+          html +=
+            '<div style="grid-column: 1 / -1; margin-bottom: 12px;">' +
+            '<div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: 999px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #34d399;">' +
+            '<i class="fa-solid fa-circle-check"></i> Confirmed Academic Leadership' +
+            '</div>' +
+            '</div>' +
+            confirmedSpeakers
+              .map(function (s) {
+                return renderCard(s, 'speaker');
+              })
+              .join('');
         }
 
-        container.innerHTML = speakers
-          .map(function (s) {
-            return renderCard(s, 'speaker');
-          })
-          .join('');
+        if (invitedSpeakers.length > 0) {
+          var noticeMarginTop = confirmedSpeakers.length > 0 ? '36px' : '0px';
+          html +=
+            '<div style="grid-column: 1 / -1; margin-top: ' + noticeMarginTop + '; margin-bottom: 18px; padding: 18px 22px; border-radius: 16px; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.22);">' +
+            '<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 8px;">' +
+            '<span style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-cyan, #38bdf8); display: inline-flex; align-items: center; gap: 6px;">' +
+            '<i class="fa-regular fa-clock"></i> Invited Scholars &amp; Plenary Outreach' +
+            '</span>' +
+            '<span style="font-size: 10.5px; font-weight: 700; color: var(--accent-cyan, #38bdf8); background: rgba(56, 189, 248, 0.12); padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(56, 189, 248, 0.25); text-transform: uppercase; letter-spacing: 0.03em;">' +
+            '<i class="fa-regular fa-clock" style="margin-right: 4px;"></i> Awaiting Formal Acceptance' +
+            '</span>' +
+            '</div>' +
+            '<p style="font-size: 12.5px; line-height: 1.55; color: #cbd5e1; margin: 0;">' +
+            'The distinguished researchers below have been formally invited by the SVRIAS 2026 Academic Steering Committee in recognition of their leading contributions to AI ethics and research integrity. Sessions and topics listed below represent proposed lecture themes under active correspondence, with formal schedules confirmed upon signed role acceptance.' +
+            '</p>' +
+            '</div>' +
+            invitedSpeakers
+              .map(function (s) {
+                return renderCard(s, 'speaker');
+              })
+              .join('');
+        }
+
+        container.innerHTML = html;
+
+        var suffix = document.getElementById('peopleTitleSuffix');
+        if (suffix) {
+          if (confirmedSpeakers.length > 0 && invitedSpeakers.length > 0) {
+            suffix.textContent = 'Confirmed Academic Leadership & Invited Outreach';
+          } else if (confirmedSpeakers.length > 0) {
+            suffix.textContent = 'Confirmed Academic Leadership';
+          } else if (invitedSpeakers.length > 0) {
+            suffix.textContent = 'Academic Leadership & Outreach';
+          } else {
+            suffix.textContent = 'Academic Leadership';
+          }
+        }
+        var sectionDesc = document.getElementById('peopleSectionDesc');
+        if (sectionDesc) {
+          sectionDesc.innerHTML =
+            'SVRIAS 2026 convenes global leaders in AI ethics, governance, and publication forensics. Confirmed keynote appointments are published under formal role acceptance and signed consent, alongside distinguished scholars under active summit outreach.';
+        }
+        var viewAll = document.getElementById('peopleViewAllWrap');
+        if (viewAll) viewAll.style.display = 'block';
       })
       .catch(function (err) {
         console.warn('Could not load speakers:', err);
-        container.innerHTML = renderPlaceholder('speaker');
+        if (!options.preserveInitialIfEmpty) {
+          container.innerHTML = renderPlaceholder('speaker');
+        }
       });
   }
 
@@ -236,16 +335,53 @@
           return;
         }
 
-        var members = data;
-        if (options.limit && members.length > options.limit) {
-          members = members.slice(0, options.limit);
+        var confirmedMembers = data.filter(function (m) {
+          return m.status === 'confirmed' || m.status === 'accepted';
+        });
+        var invitedMembers = data.filter(function (m) {
+          return m.status === 'invited';
+        });
+
+        var html = '';
+
+        if (confirmedMembers.length > 0) {
+          html +=
+            '<div style="grid-column: 1 / -1; margin-bottom: 12px;">' +
+            '<div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; border-radius: 999px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #34d399;">' +
+            '<i class="fa-solid fa-circle-check"></i> Confirmed Committee &amp; Review Leadership' +
+            '</div>' +
+            '</div>' +
+            confirmedMembers
+              .map(function (m) {
+                return renderCard(m, 'committee');
+              })
+              .join('');
         }
 
-        container.innerHTML = members
-          .map(function (m) {
-            return renderCard(m, 'committee');
-          })
-          .join('');
+        if (invitedMembers.length > 0) {
+          var noticeMarginTop = confirmedMembers.length > 0 ? '36px' : '0px';
+          html +=
+            '<div style="grid-column: 1 / -1; margin-top: ' + noticeMarginTop + '; margin-bottom: 18px; padding: 18px 22px; border-radius: 16px; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.22);">' +
+            '<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 6px;">' +
+            '<span style="font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent-cyan, #38bdf8); display: inline-flex; align-items: center; gap: 6px;">' +
+            '<i class="fa-regular fa-clock"></i> Invited Committee Nominees &amp; Prospective Track Chairs' +
+            '</span>' +
+            '<span style="font-size: 10.5px; font-weight: 700; color: var(--accent-cyan, #38bdf8); background: rgba(56, 189, 248, 0.12); padding: 3px 10px; border-radius: 999px; border: 1px solid rgba(56, 189, 248, 0.25); text-transform: uppercase; letter-spacing: 0.03em;">' +
+            '<i class="fa-regular fa-clock" style="margin-right: 4px;"></i> Awaiting Consent' +
+            '</span>' +
+            '</div>' +
+            '<p style="font-size: 12.5px; line-height: 1.55; color: #cbd5e1; margin: 0;">' +
+            'Nominated faculty and peer-review panelists below are under active correspondence for Technical Program Committee and session chairing roles, awaiting formal consent and conflict-of-interest declarations.' +
+            '</p>' +
+            '</div>' +
+            invitedMembers
+              .map(function (m) {
+                return renderCard(m, 'committee');
+              })
+              .join('');
+        }
+
+        container.innerHTML = html;
       })
       .catch(function (err) {
         console.warn('Could not load committee:', err);
@@ -259,7 +395,7 @@
       loadSpeakers('speakerGrid');
     }
     if (document.getElementById('keynoteGrid')) {
-      loadSpeakers('keynoteGrid', { limit: 4 });
+      loadSpeakers('keynoteGrid', { preserveInitialIfEmpty: true });
     }
     if (document.getElementById('committeeGrid')) {
       loadCommittee('committeeGrid');

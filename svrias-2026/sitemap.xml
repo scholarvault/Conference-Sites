@@ -15,7 +15,11 @@
   <url><loc>https://researchintegrity2026.scholarvault.in/media.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://researchintegrity2026.scholarvault.in/privacy.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://researchintegrity2026.scholarvault.in/refund.html</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://researchintegrity2026.scholarvault.in/brochure.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://researchintegrity2026.scholarvault.in/call-for-papers-doc.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://researchintegrity2026.scholarvault.in/brochure-doc.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://researchintegrity2026.scholarvault.in/badge.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://researchintegrity2026.scholarvault.in/llms.txt</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 </urlset>
 
 

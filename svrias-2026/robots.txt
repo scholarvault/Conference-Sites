@@ -3,3 +3,6 @@ Allow: /
 
 Sitemap: https://researchintegrity2026.scholarvault.in/sitemap.xml
 
+# LLM Discovery Standard
+# https://researchintegrity2026.scholarvault.in/llms.txt
+

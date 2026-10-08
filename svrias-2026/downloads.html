@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -120,7 +120,53 @@
 
       <!-- Downloads List -->
       <div style="display: flex; flex-direction: column; gap: 20px; max-width: 860px; margin: 0 auto 48px;">
-        <!-- Card 1: Official Brochure -->
+        <!-- Card 0: Official Proceedings Volume Registration -->
+        <div class="glass-card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; border-color: rgba(16, 185, 129, 0.4); background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(20, 20, 25, 0.95) 100%);">
+          <div style="display: flex; align-items: center; gap: 18px;">
+            <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); display: grid; place-items: center; color: #10b981; font-size: 20px; flex-shrink: 0;">
+              <i class="fa-solid fa-book-bookmark"></i>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <h3 style="font-size: 17.5px; font-weight: 700; color: #ffffff; margin: 0;">SVRIAS 2026 Conference Proceedings</h3>
+                <span style="font-size: 11px; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 6px; padding: 2px 8px;">Official Volume</span>
+              </div>
+              <p style="font-size: 13px; color: #cbd5e1; margin-bottom: 6px;">Registered proceedings book compiling all peer-reviewed and presented works. Camera-ready works receive individual DOIs upon post-conference publication.</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span style="font-size: 11.5px; color: #34d399; font-weight: 700;"><i class="fa-solid fa-barcode"></i> ISBN: 978-81-181597-0-4</span>
+                <span style="font-size: 11.5px; color: #71717a;">&bull; Publisher: ScholarVault Conferences</span>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="submit-paper.html" class="pill-btn glowing-pill"><i class="fa-solid fa-file-arrow-up"></i> Submit Paper</a>
+          </div>
+        </div>
+
+        <!-- Card 1: Official Call for Papers Document -->
+        <div class="glass-card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px; border-color: rgba(56, 189, 248, 0.35);">
+          <div style="display: flex; align-items: center; gap: 18px;">
+            <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); display: grid; place-items: center; color: var(--accent-cyan); font-size: 20px; flex-shrink: 0;">
+              <i class="fa-solid fa-file-invoice"></i>
+            </div>
+            <div>
+              <h3 style="font-size: 17.5px; font-weight: 700; color: #ffffff; margin-bottom: 4px;">Official Call for Papers (CFP Document)</h3>
+              <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 6px;">3-page publication-grade call with 6 research tracks, milestones, CRediT guidelines, 10 student grants, and fee schedule.</p>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span style="font-size: 11.5px; color: #71717a; font-weight: 600;">PDF &bull; Interactive HTML Edition &bull; Print-Ready A4</span>
+                <a href="https://doi.org/10.5281/zenodo.22871615" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: #38bdf8; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); padding: 2px 8px; border-radius: 6px; text-decoration: none;">
+                  <i class="fa-solid fa-fingerprint"></i> Zenodo CFP DOI: 10.5281/zenodo.22871615 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 9px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="call-for-papers-doc.html" class="pill-btn glowing-pill"><i class="fa-solid fa-eye"></i> View Document</a>
+            <a href="assets/SVRIAS-2026-Call-for-Papers.pdf" download="SVRIAS-2026-Call-for-Papers.pdf" class="pill-btn frosted-pill"><i class="fa-solid fa-download"></i> Download PDF</a>
+          </div>
+        </div>
+
+        <!-- Card 2: Official Brochure -->
         <div class="glass-card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px;">
           <div style="display: flex; align-items: center; gap: 18px;">
             <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.25); display: grid; place-items: center; color: var(--accent-cyan); font-size: 20px; flex-shrink: 0;">
@@ -135,7 +181,7 @@
           <button type="button" class="pill-btn glowing-pill" onclick="openBrochureModal()"><i class="fa-solid fa-download"></i> Get Brochure</button>
         </div>
 
-        <!-- Card 2: Official Poster -->
+        <!-- Card 3: Official Poster -->
         <div class="glass-card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px; padding: 24px 28px;">
           <div style="display: flex; align-items: center; gap: 18px;">
             <div style="width: 48px; height: 48px; border-radius: 14px; background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.25); display: grid; place-items: center; color: var(--accent-gold); font-size: 20px; flex-shrink: 0;">
@@ -144,12 +190,18 @@
             <div>
               <h3 style="font-size: 17.5px; font-weight: 700; color: #ffffff; margin-bottom: 4px;">Official Conference Call Poster</h3>
               <p style="font-size: 13px; color: #a1a1aa; margin-bottom: 6px;">High-resolution graphic poster with confirmed summit dates, research tracks, and verification QR code.</p>
-              <span style="font-size: 11.5px; color: #71717a; font-weight: 600;">PNG &bull; Print-Ready PDF &bull; 1080 x 1350 High Res</span>
+              <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+                <span style="font-size: 11.5px; color: #71717a; font-weight: 600;">PNG &bull; Print-Ready PDF &bull; 1080 x 1350 High Res</span>
+                <a href="https://doi.org/10.5281/zenodo.22871615" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: #fbbf24; background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); padding: 2px 8px; border-radius: 6px; text-decoration: none;">
+                  <i class="fa-solid fa-fingerprint"></i> Zenodo Poster DOI: 10.5281/zenodo.22871615 <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 9px;"></i>
+                </a>
+              </div>
             </div>
           </div>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
             <a href="poster.html" class="pill-btn glowing-pill"><i class="fa-solid fa-eye"></i> View Poster</a>
-            <a href="assets/poster-bg.png" download="SVRIAS-2026-Poster.png" class="pill-btn frosted-pill"><i class="fa-solid fa-download"></i> Download Image</a>
+            <a href="assets/SVRIAS-2026-Conference-Poster.pdf" download="SVRIAS-2026-Conference-Poster.pdf" class="pill-btn frosted-pill"><i class="fa-solid fa-file-pdf"></i> Download PDF</a>
+            <a href="assets/SVRIAS-2026-Conference-Poster.png" download="SVRIAS-2026-Conference-Poster.png" class="pill-btn frosted-pill"><i class="fa-solid fa-image"></i> Download PNG</a>
           </div>
         </div>
 
@@ -328,6 +380,7 @@
       <span>conferences@scholarvault.in</span>
     </a>
     <div class="dock-links">
+      <a href="javascript:void(0)" onclick="openTawkChat()"><i class="fa-solid fa-comments"></i> Live Chat Desk</a>
       <a href="https://wa.me/919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/social.png" alt="WhatsApp Desk" /> WhatsApp Desk</a>
       <a href="https://t.me/+919344900624" target="_blank" rel="noopener noreferrer"><img src="assets/Social/telegram.png" alt="Telegram Desk" /> Telegram Desk</a>
       <a href="contact.html"><i class="fa-solid fa-message"></i> Submit Query Ticket</a>
@@ -415,18 +468,5 @@
 
   <script src="main.js"></script>
 
-  <!--Start of Tawk.to Script-->
-  <script type="text/javascript">
-  var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-  (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/6a96f50c6318273445cd9f15/1k1eqqee6';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
-  })();
-  </script>
-  <!--End of Tawk.to Script-->
-</body>
+  </body>
 </html>
