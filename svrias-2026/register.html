@@ -259,14 +259,6 @@
         <span><strong>ScholarVault Gold Member Privilege:</strong> Enjoy exclusive discounted rates on registration tiers (Student: ₹2,399 | Faculty: ₹4,898 | Industry: ₹9,898 | Listener: ₹1,898). Applied automatically during invoice generation.</span>
       </div>
 
-      <!-- Registration Form -->
-      <div class="glass-card intake-form-card" id="intakeForm" style="padding: clamp(18px, 4vw, 36px); max-width: 760px; margin: 0 auto clamp(40px, 8vw, 64px);">
-        <div class="card-num"><i class="fa-solid fa-lock"></i> SECURE DELEGATE INTAKE</div>
-        <h2 style="font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Register Delegate Pass</h2>
-        <p style="font-size: 13.5px; color: #a1a1aa; margin-bottom: 24px;">
-          Enter your basic details once. ScholarVault will securely resume your selected category, confirm Gold benefits and show the final amount before payment.
-        </p>
-
       <!-- Instant Success Confirmation Card -->
       <div class="glass-card" id="registrationSuccessCard" style="display: none; padding: clamp(28px, 5vw, 44px); max-width: 760px; margin: 0 auto 36px; border: 1px solid rgba(16, 185, 129, 0.4); background: rgba(6, 78, 59, 0.25); text-align: center;">
         <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 50%; background: rgba(16, 185, 129, 0.2); border: 2px solid #10b981; margin-bottom: 16px;">
@@ -336,9 +328,23 @@
         <a href="index.html" class="pill-btn frosted-pill">Back to Summit Home</a>
       </div>
 
-      <!-- Registration Form -->
-      <div class="glass-card" id="intakeForm" style="padding: clamp(24px, 4vw, 40px); max-width: 760px; margin: 0 auto 36px;">
-        <div class="card-num"><i class="fa-solid fa-lock"></i> SECURE DELEGATE INTAKE</div>
+      <!-- Select Pass Prompt (Visible before a pass is selected) -->
+      <div id="selectPassPrompt" class="glass-card select-pass-prompt" style="text-align: center; max-width: 760px; margin: 0 auto 48px; padding: 34px 24px; border: 1px dashed rgba(56, 189, 248, 0.35); background: rgba(56, 189, 248, 0.04); border-radius: 16px;">
+        <div style="width: 54px; height: 54px; border-radius: 50%; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); display: inline-flex; align-items: center; justify-content: center; color: var(--accent-cyan); font-size: 22px; margin-bottom: 14px;">
+          <i class="fa-solid fa-arrow-up"></i>
+        </div>
+        <h3 style="color: #ffffff; font-size: 19.5px; font-weight: 700; margin-bottom: 8px;">Select a Pass Above to Register</h3>
+        <p style="color: #94a3b8; font-size: 13.5px; max-width: 520px; margin: 0 auto; line-height: 1.6;">
+          Choose your category (Student, Faculty, Co-Author, Industry, or Listener) above. Once selected, the registration intake form and payment checkout will open here automatically.
+        </p>
+      </div>
+
+      <!-- Registration Form (Opens upon selecting a pass) -->
+      <div class="glass-card intake-form-card" id="intakeForm" style="display: none; padding: clamp(24px, 4vw, 40px); max-width: 760px; margin: 0 auto 36px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+          <div class="card-num" style="margin-bottom: 0;"><i class="fa-solid fa-lock"></i> SECURE DELEGATE INTAKE</div>
+          <span id="selectedCategoryPill" style="display: none; font-size: 12px; font-weight: 700; color: #38bdf8; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 999px; padding: 3px 12px;"></span>
+        </div>
         <h2 style="font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 6px;">Register Delegate Pass</h2>
         <p style="font-size: 13.5px; color: #a1a1aa; margin-bottom: 24px;">
           Complete your registration below. Select your pass, choose your payment method, and complete your registration directly on the conference platform.
@@ -389,9 +395,9 @@
             <div class="form-group">
               <label>Registration Pass Category *</label>
               <select name="category" id="regCategorySelect" class="form-select" required>
-                <option value="">Select pass category...</option>
+                <option value="" selected>Select pass category...</option>
                 <option value="student_scholar" data-name="Student / Scholar">Student Presenter (₹2,500 / $129 &bull; Gold: ₹2,399)</option>
-                <option value="faculty_researcher" data-name="Faculty / Researcher" selected>Academic / Faculty Presenter (₹4,999 / $199 &bull; Gold: ₹4,898)</option>
+                <option value="faculty_researcher" data-name="Faculty / Researcher">Academic / Faculty Presenter (₹4,999 / $199 &bull; Gold: ₹4,898)</option>
                 <option value="co_author" data-name="Co-Author Delegate">Co-Author Delegate (₹2,200 / $79)</option>
                 <option value="industry_professional" data-name="Industry Professional">Industry Professional (₹9,999 / $397 • Gold: ₹9,898)</option>
                 <option value="listener" data-name="Listener Delegate Pass">Listener / Observer Pass (₹1,999 / $99 &bull; Gold: ₹1,898)</option>

@@ -1439,54 +1439,125 @@ function initRegistrationOptions() {
   const categoryIdInput = document.getElementById('regCategoryId');
   const categoryCodeInput = document.getElementById('regCategoryCode');
   const queryTypeInput = document.getElementById('regQueryType');
+  const intakeForm = document.getElementById('intakeForm');
+  const selectPassPrompt = document.getElementById('selectPassPrompt');
+  const selectedCategoryPill = document.getElementById('selectedCategoryPill');
 
-  const selectCategory = (categoryCode, categoryName) => {
+  const openFormAndSelect = (categoryCode, categoryName, shouldScroll = true) => {
+    if (!categoryCode) return;
+
+    // 1. Reveal form and hide the prompt
+    if (intakeForm) {
+      intakeForm.style.display = 'block';
+      intakeForm.classList.add('is-open');
+    }
+    if (selectPassPrompt) {
+      selectPassPrompt.style.display = 'none';
+    }
+
+    // 2. Sync category in select dropdown
     if (regCategorySelect) {
       if (regCategorySelect.value !== categoryCode) {
         regCategorySelect.value = categoryCode;
       }
       const option = regCategorySelect.querySelector(`option[value="${categoryCode}"]`);
-      if (option && option.dataset.name) {
-        if (queryTypeInput) queryTypeInput.value = option.dataset.name;
-      } else if (categoryName && queryTypeInput) {
-        queryTypeInput.value = categoryName;
+      const resolvedName = option?.dataset?.name || categoryName || '';
+      if (resolvedName && queryTypeInput) {
+        queryTypeInput.value = resolvedName;
       }
       regCategorySelect.dispatchEvent(new Event('change', { bubbles: true }));
     }
     if (categoryCodeInput) categoryCodeInput.value = categoryCode;
+
+    // 3. Highlight the selected card and sync categoryId if already loaded
     cards.forEach((c) => {
       const isMatch = c.dataset.categoryCode === categoryCode;
-      c.style.borderColor = isMatch ? '#38bdf8' : '';
-      c.style.boxShadow = isMatch ? '0 0 25px rgba(56, 189, 248, 0.3)' : '';
-      if (isMatch && categoryIdInput && c.dataset.categoryId) {
-        categoryIdInput.value = c.dataset.categoryId;
+      if (isMatch) {
+        c.classList.add('is-selected');
+        c.style.borderColor = '#38bdf8';
+        c.style.boxShadow = '0 0 28px rgba(56, 189, 248, 0.35)';
+        if (categoryIdInput && c.dataset.categoryId) {
+          categoryIdInput.value = c.dataset.categoryId;
+        }
+      } else {
+        c.classList.remove('is-selected');
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
       }
     });
+
+    // 4. Update the Selected Pass pill in the form header
+    if (selectedCategoryPill) {
+      const option = regCategorySelect ? regCategorySelect.querySelector(`option[value="${categoryCode}"]`) : null;
+      const resolvedTitle = option?.dataset?.name || categoryName || categoryCode;
+      selectedCategoryPill.textContent = `Selected Pass: ${resolvedTitle}`;
+      selectedCategoryPill.style.display = 'inline-flex';
+    }
+
+    // 5. Smooth scroll down to intake form
+    if (shouldScroll && intakeForm) {
+      setTimeout(() => {
+        intakeForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
   };
 
+  // Wire "Select Pass" buttons
   selectBtns.forEach((btn) => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
       const code = btn.dataset.categoryCode;
-      if (code) selectCategory(code);
+      if (code) {
+        openFormAndSelect(code, '', true);
+      }
     });
   });
 
+  // Wire full card click
+  cards.forEach((card) => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('a') || e.target.closest('button')) return;
+      const code = card.dataset.categoryCode;
+      if (code) {
+        openFormAndSelect(code, card.dataset.categoryName || '', true);
+      }
+    });
+  });
+
+  // Handle category change directly from dropdown
   if (regCategorySelect) {
     regCategorySelect.addEventListener('change', () => {
-      const selOpt = regCategorySelect.options[regCategorySelect.selectedIndex];
-      selectCategory(regCategorySelect.value, selOpt?.dataset?.name);
+      const code = regCategorySelect.value;
+      if (code) {
+        const selOpt = regCategorySelect.options[regCategorySelect.selectedIndex];
+        openFormAndSelect(code, selOpt?.dataset?.name, false);
+      }
     });
 
+    // Check URL query parameters or hash on initial load
     const urlParams = new URLSearchParams(window.location.search);
     let requestedCategory = urlParams.get('category') || urlParams.get('tier');
     if (requestedCategory === 'corporate') {
       requestedCategory = 'industry_professional';
     }
+
     if (requestedCategory) {
-      selectCategory(requestedCategory);
-    } else if (regCategorySelect.value) {
-      const selOpt = regCategorySelect.options[regCategorySelect.selectedIndex];
-      selectCategory(regCategorySelect.value, selOpt?.dataset?.name);
+      // Pass was selected from incoming URL: open form and scroll down
+      openFormAndSelect(requestedCategory, '', true);
+    } else if (window.location.hash === '#intakeForm') {
+      // Anchored to form: default to faculty and open
+      openFormAndSelect('faculty_researcher', 'Academic / Faculty', true);
+    } else {
+      // Direct visit without pass selected: KEEP FORM HIDDEN until user selects pass!
+      if (intakeForm) intakeForm.style.display = 'none';
+      if (selectPassPrompt) selectPassPrompt.style.display = 'block';
+      if (regCategorySelect) regCategorySelect.value = '';
+      cards.forEach((c) => {
+        c.classList.remove('is-selected');
+        c.style.borderColor = '';
+        c.style.boxShadow = '';
+      });
     }
   }
 
