@@ -221,8 +221,8 @@ function initSummitDrawer() {
 function initCountdownTimer() {
   // Target 1: Virtual Summit Day - 14 November 2026 09:00:00 UTC
   const summitTarget = new Date(Date.UTC(2026, 10, 14, 9, 0, 0)).getTime();
-  // Target 2: Abstract Submission Deadline - 15 October 2026 23:59:59 UTC
-  const abstractTarget = new Date(Date.UTC(2026, 9, 15, 23, 59, 59)).getTime();
+  // Target 2: Abstract Submission Deadline - 25 October 2026 23:59:59 UTC (Extended)
+  const abstractTarget = new Date(Date.UTC(2026, 9, 25, 23, 59, 59)).getTime();
 
   // Scoped query helper to strictly isolate countdown containers and prevent cross-contamination
   const queryUnits = (targetType, unit) => {

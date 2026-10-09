@@ -73,12 +73,12 @@
 
   const DEADLINE_EVENT = {
     title: 'SVRIAS 2026 - Abstract Submission Deadline',
-    startUtc: '20261015T182959Z', // 23:59:59 IST
-    endUtc: '20261015T182959Z',
-    startIso: '2026-10-15T18:29:59Z',
-    endIso: '2026-10-15T18:29:59Z',
+    startUtc: '20261025T182959Z', // 23:59:59 IST
+    endUtc: '20261025T182959Z',
+    startIso: '2026-10-25T18:29:59Z',
+    endIso: '2026-10-25T18:29:59Z',
     location: 'https://researchintegrity2026.scholarvault.in/submit-paper.html',
-    details: 'Final deadline to submit 250-500 word abstracts to SVRIAS 2026 across 6 thematic tracks.\nSubmit online: https://researchintegrity2026.scholarvault.in/submit-paper.html'
+    details: 'Extended deadline to submit 250-500 word abstracts to SVRIAS 2026 across 6 thematic tracks.\nSubmit online: https://researchintegrity2026.scholarvault.in/submit-paper.html'
   };
 
   function ready(fn) {
@@ -585,8 +585,8 @@
     const userTz = detectUserTimezone();
     const isIndia = userTz === SUMMIT_TIMEZONE;
 
-    // Abstract Deadline: 15 October 2026 23:59:59 UTC
-    const abstractDeadlineUTC = new Date(Date.UTC(2026, 9, 15, 23, 59, 59));
+    // Abstract Deadline: 25 October 2026 23:59:59 UTC (Extended)
+    const abstractDeadlineUTC = new Date(Date.UTC(2026, 9, 25, 23, 59, 59));
     // Summit Day: 14 November 2026 09:00:00 UTC
     const summitDayUTC = new Date(Date.UTC(2026, 10, 14, 9, 0, 0));
 
@@ -940,7 +940,7 @@
           <span>Outlook / Office 365</span>
         </a>
 
-        <div class="calendar-menu-header" style="margin-top: 6px;">15 Oct 2026 • Abstract Deadline</div>
+        <div class="calendar-menu-header" style="margin-top: 6px;">25 Oct 2026 • Abstract Deadline (Extended)</div>
         <a href="${getGoogleCalendarUrl(DEADLINE_EVENT)}" target="_blank" rel="noopener noreferrer" class="calendar-menu-item">
           <i class="fa-solid fa-hourglass-half" style="color: var(--accent-gold);"></i>
           <span>Add Deadline to Google</span>
