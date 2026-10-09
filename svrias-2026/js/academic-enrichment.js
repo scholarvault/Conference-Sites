@@ -706,8 +706,18 @@
       const inrEl = card.querySelector('.price-inr');
       if (!inrEl) return;
 
-      const rawInr = inrEl.textContent.replace(/[^0-9]/g, '');
-      const inrAmount = parseInt(rawInr, 10);
+      let inrAmount = NaN;
+      if (card.dataset.priceInr) {
+        inrAmount = parseInt(card.dataset.priceInr.replace(/[^0-9]/g, ''), 10);
+      }
+      if (isNaN(inrAmount) || inrAmount <= 0) {
+        const match = inrEl.textContent.match(/₹\s*([0-9,]+)/);
+        if (match && match[1]) {
+          inrAmount = parseInt(match[1].replace(/,/g, ''), 10);
+        } else {
+          inrAmount = parseInt(inrEl.textContent.replace(/[^0-9]/g, ''), 10);
+        }
+      }
       if (isNaN(inrAmount) || inrAmount <= 0) return;
 
       const converted = Math.round(inrAmount * rate);
