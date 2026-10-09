@@ -2075,12 +2075,6 @@ const CATEGORY_BENEFITS = {
     'Full summit recorded video proceedings & archival access',
     'Digital Certificate of Professional Participation & CPD credit'
   ],
-  institutional_cohort: [
-    'Subsidized institutional cohort package for 25 student papers (effective ₹750/paper)',
-    'Full virtual oral presentation slots for 25 student researchers',
-    'Official ISBN Conference Proceedings (ISBN: 978-81-181597-0-4) with Zenodo DOIs',
-    'Verifiable digital presentation certificates and institutional recognition'
-  ],
   listener: [
     'Complete virtual audience stage access to all 6 tracks',
     'Interactive live Q&A participation with keynote speakers',

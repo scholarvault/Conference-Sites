@@ -33,6 +33,7 @@ The **ScholarVault Research Integrity & Responsible AI Summit 2026 (SVRIAS 2026)
 - **Abstract Intake**: Open Now (Zero submission fee / 100% free intake)
 - **Abstract Submission Deadline**: 25 October 2026
 - **Rolling Peer Review SLA**: Fast-track double-blind review decision within 2–4 working days
+- **Early-Bird Registration Deadline**: 25 October 2026
 - **Presenter Registration Closes**: 01 November 2026
 - **Presentation Slides Due**: 08 November 2026
 - **Final Official Programme Published**: 10 November 2026
@@ -82,14 +83,17 @@ SVRIAS 2026 maintains an egalitarian pricing and access policy:
 - **Abstract Submission**: **100% Free** (No charge to submit, evaluate, or receive editorial feedback).
 - **10 Full Student Fee Waivers**: 10 competitive 100% registration fee grants awarded to qualifying undergraduate, master's, and doctoral first-authors based on reviewer merit.
 - **Presenter Registration (Domestic - India)**:
-  - Student / Research Scholar: ₹799 Early Bird · ₹999 Standard
-  - Faculty / Academic Researcher / Editor: ₹1,499
-  - Industry / Corporate / Responsible AI Professional: ₹1,999
-  - Institutional Cohort Pack (Up to 20 participants): ₹15,000
-- **International Presenter Registration**:
-  - Student Presenter: $49 – $99 USD
-  - Academic / Faculty Presenter: $129 – $149 USD
-  - Industry Delegate: $199 USD
+  - Student Presenter: ₹2,500 (ScholarVault Gold Member: ₹2,399)
+  - Academic / Faculty Presenter: ₹4,999 (ScholarVault Gold Member: ₹4,898)
+  - Co-Author Delegate: ₹2,200 (ScholarVault Gold Member: ₹2,099)
+  - Industry Professional: ₹9,999 (ScholarVault Gold Member: ₹9,898)
+  - Listener / Observer Pass: ₹1,999 (ScholarVault Gold Member: ₹1,898)
+- **International Presenter Registration (USD)**:
+  - Student Presenter: $129 USD
+  - Academic / Faculty Presenter: $199 USD
+  - Co-Author Delegate: $79 USD
+  - Industry Professional: $397 USD
+  - Listener / Observer Pass: $99 USD
 
 ---
 
