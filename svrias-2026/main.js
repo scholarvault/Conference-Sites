@@ -1472,10 +1472,14 @@ function initRegistrationOptions() {
     // 3. Highlight the selected card and sync categoryId if already loaded
     cards.forEach((c) => {
       const isMatch = c.dataset.categoryCode === categoryCode;
+      const btn = c.querySelector('.select-pass-btn');
       if (isMatch) {
         c.classList.add('is-selected');
         c.style.borderColor = '#38bdf8';
         c.style.boxShadow = '0 0 28px rgba(56, 189, 248, 0.35)';
+        if (btn && intakeForm) {
+          btn.innerHTML = 'Selected <i class="fa-solid fa-check"></i>';
+        }
         if (categoryIdInput && c.dataset.categoryId) {
           categoryIdInput.value = c.dataset.categoryId;
         }
@@ -1483,6 +1487,10 @@ function initRegistrationOptions() {
         c.classList.remove('is-selected');
         c.style.borderColor = '';
         c.style.boxShadow = '';
+        if (btn && intakeForm) {
+          const isFaculty = c.dataset.categoryCode === 'faculty_researcher';
+          btn.innerHTML = isFaculty ? 'Select Faculty <i class="fa-solid fa-arrow-down"></i>' : 'Select Pass <i class="fa-solid fa-arrow-down"></i>';
+        }
       }
     });
 
@@ -1505,6 +1513,10 @@ function initRegistrationOptions() {
   // Wire "Select Pass" buttons
   selectBtns.forEach((btn) => {
     btn.addEventListener('click', (e) => {
+      if (!intakeForm) {
+        // Not on register.html: allow natural link navigation to register.html
+        return;
+      }
       e.preventDefault();
       const code = btn.dataset.categoryCode;
       if (code) {
@@ -1513,13 +1525,17 @@ function initRegistrationOptions() {
     });
   });
 
-  // Wire full card click
+  // Wire full card/row click
   cards.forEach((card) => {
     card.style.cursor = 'pointer';
     card.addEventListener('click', (e) => {
       if (e.target.closest('a') || e.target.closest('button')) return;
       const code = card.dataset.categoryCode;
       if (code) {
+        if (!intakeForm) {
+          window.location.href = `register.html?category=${code}#intakeForm`;
+          return;
+        }
         openFormAndSelect(code, card.dataset.categoryName || '', true);
       }
     });
@@ -1557,6 +1573,11 @@ function initRegistrationOptions() {
         c.classList.remove('is-selected');
         c.style.borderColor = '';
         c.style.boxShadow = '';
+        const btn = c.querySelector('.select-pass-btn');
+        if (btn && intakeForm) {
+          const isFaculty = c.dataset.categoryCode === 'faculty_researcher';
+          btn.innerHTML = isFaculty ? 'Select Faculty <i class="fa-solid fa-arrow-down"></i>' : 'Select Pass <i class="fa-solid fa-arrow-down"></i>';
+        }
       });
     }
   }

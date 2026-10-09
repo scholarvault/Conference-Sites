@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SVRIAS 2026 - Registration Card UI Prototypes</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <style>
+    /* Prototype Harness Toolbar */
+    .prototype-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10, 12, 18, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.25);
+      padding: 14px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    }
+    .proto-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .proto-badge {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+    .proto-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+    .proto-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 10px;
+    }
+    .proto-btn-group {
+      display: inline-flex;
+      background: rgba(255, 255, 255, 0.06);
+      padding: 3px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .proto-tab-btn {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      padding: 6px 14px;
+      border-radius: 7px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .proto-tab-btn:hover {
+      color: #ffffff;
+    }
+    .proto-tab-btn.active {
+      background: #38bdf8;
+      color: #030712;
+      font-weight: 700;
+      box-shadow: 0 2px 10px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Option Sections */
+    .proto-section {
+      display: none;
+      padding: 36px 20px;
+      max-width: 1360px;
+      margin: 0 auto;
+      animation: protoFade 0.35s ease forwards;
+    }
+    .proto-section.active {
+      display: block;
+    }
+    @keyframes protoFade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .proto-header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .proto-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .proto-heading {
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 10px;
+      font-family: var(--font-title);
+    }
+    .proto-desc {
+      font-size: 14.5px;
+      color: #94a3b8;
+      max-width: 720px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ==========================================================================
+       OPTION 1: All-in-One Horizontal Row List (Airline / SaaS Row Matrix)
+       ========================================================================== */
+    .opt1-container {
+      background: linear-gradient(135deg, rgba(20, 24, 33, 0.85) 0%, rgba(12, 14, 20, 0.95) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      padding: 12px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(56, 189, 248, 0.08);
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+    .opt1-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .opt1-top-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .opt1-row {
+      display: grid;
+      grid-template-columns: 280px 1fr 180px 170px;
+      align-items: center;
+      padding: 18px 20px;
+      margin-bottom: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      cursor: pointer;
+      gap: 20px;
+    }
+    .opt1-row:last-child {
+      margin-bottom: 0;
+    }
+    .opt1-row:hover {
+      background: rgba(56, 189, 248, 0.05);
+      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateX(4px);
+    }
+    .opt1-row.is-selected {
+      background: linear-gradient(90deg, rgba(56, 189, 248, 0.12) 0%, rgba(20, 24, 33, 0.9) 100%);
+      border-color: #38bdf8;
+      box-shadow: 0 0 24px rgba(56, 189, 248, 0.25);
+      transform: translateX(6px);
+    }
+    .opt1-row.featured-tier {
+      border-color: rgba(56, 189, 248, 0.25);
+      background: rgba(56, 189, 248, 0.03);
+    }
+    .opt1-tier-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .opt1-tier-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .opt1-tier-tag {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #94a3b8;
+    }
+    .opt1-tier-name {
+      font-size: 16.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+    .opt1-tier-sub {
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 0;
+    }
+    .opt1-inclusions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .opt1-inc-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.8px;
+      color: #cbd5e1;
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 4px 9px;
+      border-radius: 7px;
+      white-space: nowrap;
+    }
+    .opt1-inc-chip i {
+      color: #10b981;
+      font-size: 11px;
+    }
+    .opt1-pricing {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 3px;
+    }
+    .opt1-price-val {
+      font-size: 22px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--font-title);
+      letter-spacing: -0.02em;
+    }
+    .opt1-gold-val {
+      font-size: 11.5px;
+      color: #fbbf24;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .opt1-action {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .opt1-select-btn {
+      width: 100%;
+      padding: 9px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 999px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(255, 255, 255, 0.08);
+      color: #ffffff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .opt1-row.is-selected .opt1-select-btn {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      color: #030712;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.4);
+    }
+
+    @media (max-width: 980px) {
+      .opt1-row {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        text-align: left;
+      }
+      .opt1-pricing {
+        text-align: left;
+        align-items: flex-start;
+      }
+      .opt1-action {
+        justify-content: flex-start;
+      }
+      .opt1-select-btn {
+        width: 100%;
+      }
+    }
+
+    /* ==========================================================================
+       OPTION 2: 5-Column Panoramic Ribbon (Horizontal Grid)
+       ========================================================================== */
+    .opt2-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      max-width: 1320px;
+      margin: 0 auto;
+    }
+    .opt2-card {
+      background: rgba(18, 20, 26, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      position: relative;
+    }
+    .opt2-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+    }
+    .opt2-card.is-selected {
+      border-color: #38bdf8;
+      box-shadow: 0 0 25px rgba(56, 189, 248, 0.35);
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.08) 0%, rgba(18, 20, 26, 0.95) 100%);
+      transform: translateY(-5px);
+    }
+    .opt2-card.featured {
+      border-color: rgba(56, 189, 248, 0.35);
+      background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, rgba(18, 20, 26, 0.85) 100%);
+    }
+    .opt2-badge {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .opt2-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+    .opt2-desc {
+      font-size: 11.5px;
+      color: #94a3b8;
+      margin-bottom: 14px;
+      min-height: 32px;
+      line-height: 1.4;
+    }
+    .opt2-price {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--font-title);
+      margin-bottom: 4px;
+    }
+    .opt2-gold {
+      font-size: 11px;
+      color: #fbbf24;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+    .opt2-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      padding-top: 12px;
+    }
+    .opt2-list li {
+      font-size: 11.5px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: flex-start;
+      gap: 6px;
+      line-height: 1.35;
+    }
+    .opt2-list li i {
+      color: #10b981;
+      font-size: 10.5px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .opt2-btn {
+      width: 100%;
+      padding: 8px 12px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.06);
+      color: #ffffff;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s ease;
+    }
+    .opt2-card.is-selected .opt2-btn {
+      background: #38bdf8;
+      border-color: #38bdf8;
+      color: #030712;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
+    }
+
+    @media (max-width: 1100px) {
+      .opt2-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 640px) {
+      .opt2-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================================================
+       OPTION 3: Segmented Tab Bar Switcher + Dynamic Detail Card
+       ========================================================================== */
+    .opt3-wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .opt3-tabs-bar {
+      display: flex;
+      background: rgba(20, 24, 33, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      padding: 6px;
+      gap: 6px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+    .opt3-tab {
+      flex: 1;
+      min-width: 130px;
+      padding: 10px 14px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-align: center;
+      white-space: nowrap;
+    }
+    .opt3-tab:hover {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .opt3-tab.active {
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.2) 0%, rgba(56, 189, 248, 0.08) 100%);
+      color: #38bdf8;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      font-weight: 700;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.15);
+    }
+    .opt3-card {
+      background: linear-gradient(135deg, rgba(20, 24, 33, 0.9) 0%, rgba(12, 14, 20, 0.98) 100%);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      border-radius: 20px;
+      padding: clamp(24px, 4vw, 36px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 32px;
+      align-items: center;
+    }
+    .opt3-left h3 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      font-family: var(--font-title);
+    }
+    .opt3-left p {
+      font-size: 13.5px;
+      color: #94a3b8;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    .opt3-features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .opt3-feat-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+    .opt3-feat-item i {
+      color: #10b981;
+    }
+    .opt3-right {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .opt3-price-big {
+      font-size: 36px;
+      font-weight: 800;
+      color: #ffffff;
+      font-family: var(--font-title);
+    }
+    .opt3-gold-badge {
+      font-size: 12.5px;
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      .opt3-card {
+        grid-template-columns: 1fr;
+      }
+      .opt3-features-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ==========================================================================
+       OPTION 4: 3 Presenter + 2 Attendee Split Grouping
+       ========================================================================== */
+    .opt4-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .opt4-group-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .opt4-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .opt4-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 860px) {
+      .opt4-grid-3, .opt4-grid-2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Live Interaction Demo Target */
+    .demo-feedback-box {
+      max-width: 760px;
+      margin: 40px auto 0;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 16px;
+      padding: 20px 24px;
+      display: none;
+      animation: intakeRevealSlideIn 0.4s ease forwards;
+    }
+    .demo-feedback-box.is-open {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body class="scrollable">
+
+  <!-- Background Video & Overlay -->
+  <div class="bg">
+    <video class="bg-video" autoplay muted loop playsinline>
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4" type="video/mp4" />
+    </video>
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- Interactive Prototype Controller Toolbar -->
+  <div class="prototype-bar">
+    <div class="proto-brand">
+      <span class="proto-badge">UI Prototype</span>
+      <h1 class="proto-title">Registration Cards Layout Lab</h1>
+    </div>
+
+    <div class="proto-controls">
+      <!-- Layout Switcher -->
+      <div class="proto-btn-group">
+        <button type="button" class="proto-tab-btn active" onclick="switchProtoView('opt1')">
+          <i class="fa-solid fa-bars"></i> Option 1: Horizontal Row List
+        </button>
+        <button type="button" class="proto-tab-btn" onclick="switchProtoView('opt2')">
+          <i class="fa-solid fa-table-columns"></i> Option 2: 5-Card Ribbon
+        </button>
+        <button type="button" class="proto-tab-btn" onclick="switchProtoView('opt3')">
+          <i class="fa-solid fa-layer-group"></i> Option 3: Tab Switcher
+        </button>
+        <button type="button" class="proto-tab-btn" onclick="switchProtoView('opt4')">
+          <i class="fa-solid fa-shapes"></i> Option 4: Split Grouping
+        </button>
+      </div>
+
+      <!-- Currency Switcher -->
+      <div class="proto-btn-group">
+        <button type="button" class="proto-tab-btn active" id="btnProtoInr" onclick="setProtoCurrency('INR')">INR (₹)</button>
+        <button type="button" class="proto-tab-btn" id="btnProtoUsd" onclick="setProtoCurrency('USD')">USD ($)</button>
+      </div>
+
+      <!-- Live Site Link -->
+      <a href="register.html" class="pill-btn frosted-pill" style="font-size: 11.5px; padding: 6px 12px;">
+        <i class="fa-solid fa-arrow-left"></i> Current Live Site
+      </a>
+    </div>
+  </div>
+
+  <main style="padding: 24px 16px 80px;">
+
+    <!-- ====================================================================
+         OPTION 1: Unified Horizontal Row List
+         ==================================================================== -->
+    <section id="view-opt1" class="proto-section active">
+      <div class="proto-header">
+        <span class="proto-label"><i class="fa-solid fa-star" style="color: #fbbf24;"></i> Recommended Design · Highest Efficiency</span>
+        <h2 class="proto-heading">Option 1: All-in-One Horizontal Row List</h2>
+        <p class="proto-desc">
+          Organizes all 5 tiers into one unified, elegant glass card (like an airline cabin class or modern SaaS plan selector). Completely eliminates the awkward 3+2 empty space, allows instant price comparison in 2 seconds, and scrolls smoothly into checkout.
+        </p>
+      </div>
+
+      <div class="opt1-container">
+        <div class="opt1-top-bar">
+          <div class="opt1-top-title">
+            <i class="fa-solid fa-ticket" style="color: var(--accent-cyan);"></i>
+            <span>SELECT DELEGATE PASS CATEGORY</span>
+          </div>
+          <span style="font-size: 12px; color: #94a3b8;"><i class="fa-solid fa-shield-halved" style="color: #10b981;"></i> All passes include official ISBN Proceedings (ISBN: 978-81-181597-0-4)</span>
+        </div>
+
+        <!-- Row 1: Student -->
+        <div class="opt1-row" data-proto-code="student_scholar" onclick="protoSelectTier('student_scholar', 'Student Presenter', '₹2,500', '$129')">
+          <div class="opt1-tier-meta">
+            <div class="opt1-tier-badge-row">
+              <span class="opt1-tier-tag">Scholar Tier</span>
+            </div>
+            <h3 class="opt1-tier-name">Student Presenter</h3>
+            <p class="opt1-tier-sub">Enrolled UG, PG &amp; PhD student authors</p>
+          </div>
+
+          <div class="opt1-inclusions">
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Virtual Oral Slot</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Digital Certificate</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> ISBN Proceedings</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> 6 Track Access</span>
+          </div>
+
+          <div class="opt1-pricing">
+            <div class="opt1-price-val" data-price-inr="₹2,500" data-price-usd="$129">₹2,500</div>
+            <div class="opt1-gold-val"><i class="fa-solid fa-crown"></i> Gold: ₹2,399</div>
+          </div>
+
+          <div class="opt1-action">
+            <button type="button" class="opt1-select-btn">Select Pass <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </div>
+
+        <!-- Row 2: Faculty (Featured) -->
+        <div class="opt1-row featured-tier is-selected" data-proto-code="faculty_researcher" onclick="protoSelectTier('faculty_researcher', 'Academic / Faculty', '₹4,999', '$199')">
+          <div class="opt1-tier-meta">
+            <div class="opt1-tier-badge-row">
+              <span class="opt1-tier-tag" style="background: rgba(56, 189, 248, 0.18); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.35);">Recommended</span>
+            </div>
+            <h3 class="opt1-tier-name" style="color: #38bdf8;">Academic / Faculty</h3>
+            <p class="opt1-tier-sub">Professors, postdocs &amp; institutional scientists</p>
+          </div>
+
+          <div class="opt1-inclusions">
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Priority Oral Stage</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Co-Author Recognition</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> ISBN Proceedings</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Keynote Q&amp;A Room</span>
+          </div>
+
+          <div class="opt1-pricing">
+            <div class="opt1-price-val" data-price-inr="₹4,999" data-price-usd="$199">₹4,999</div>
+            <div class="opt1-gold-val"><i class="fa-solid fa-crown"></i> Gold: ₹4,898</div>
+          </div>
+
+          <div class="opt1-action">
+            <button type="button" class="opt1-select-btn">Selected <i class="fa-solid fa-check"></i></button>
+          </div>
+        </div>
+
+        <!-- Row 3: Co-Author -->
+        <div class="opt1-row" data-proto-code="co_author" onclick="protoSelectTier('co_author', 'Co-Author Pass', '₹2,200', '$79')">
+          <div class="opt1-tier-meta">
+            <div class="opt1-tier-badge-row">
+              <span class="opt1-tier-tag">Collaborator Tier</span>
+            </div>
+            <h3 class="opt1-tier-name">Co-Author Pass</h3>
+            <p class="opt1-tier-sub">Co-authors joining primary presenter</p>
+          </div>
+
+          <div class="opt1-inclusions">
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Co-Author Rights</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Certificate</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> ISBN Attribution</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Full 6 Tracks</span>
+          </div>
+
+          <div class="opt1-pricing">
+            <div class="opt1-price-val" data-price-inr="₹2,200" data-price-usd="$79">₹2,200</div>
+            <div class="opt1-gold-val"><i class="fa-solid fa-crown"></i> Gold Member: ₹2,099</div>
+          </div>
+
+          <div class="opt1-action">
+            <button type="button" class="opt1-select-btn">Select Pass <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </div>
+
+        <!-- Row 4: Industry -->
+        <div class="opt1-row" data-proto-code="industry_professional" onclick="protoSelectTier('industry_professional', 'Industry Delegate', '₹9,999', '$397')">
+          <div class="opt1-tier-meta">
+            <div class="opt1-tier-badge-row">
+              <span class="opt1-tier-tag">Corporate Tier</span>
+            </div>
+            <h3 class="opt1-tier-name">Industry Delegate</h3>
+            <p class="opt1-tier-sub">Enterprise AI engineers, policy &amp; R&amp;D directors</p>
+          </div>
+
+          <div class="opt1-inclusions">
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Industry Track Pass</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Executive Networking</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Full Video Archives</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> CPD Certificate</span>
+          </div>
+
+          <div class="opt1-pricing">
+            <div class="opt1-price-val" data-price-inr="₹9,999" data-price-usd="$397">₹9,999</div>
+            <div class="opt1-gold-val"><i class="fa-solid fa-crown"></i> Gold: ₹9,898</div>
+          </div>
+
+          <div class="opt1-action">
+            <button type="button" class="opt1-select-btn">Select Pass <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </div>
+
+        <!-- Row 5: Listener -->
+        <div class="opt1-row" data-proto-code="listener" onclick="protoSelectTier('listener', 'Listener Pass', '₹1,999', '$99')">
+          <div class="opt1-tier-meta">
+            <div class="opt1-tier-badge-row">
+              <span class="opt1-tier-tag">Observer Tier</span>
+            </div>
+            <h3 class="opt1-tier-name">Listener Pass</h3>
+            <p class="opt1-tier-sub">Non-presenting attendees seeking research insights</p>
+          </div>
+
+          <div class="opt1-inclusions">
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Full Audience Stage</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Keynote Q&amp;A Chat</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Attendance Cert</span>
+            <span class="opt1-inc-chip"><i class="fa-solid fa-check"></i> Program Guide</span>
+          </div>
+
+          <div class="opt1-pricing">
+            <div class="opt1-price-val" data-price-inr="₹1,999" data-price-usd="$99">₹1,999</div>
+            <div class="opt1-gold-val"><i class="fa-solid fa-crown"></i> Gold: ₹1,898</div>
+          </div>
+
+          <div class="opt1-action">
+            <button type="button" class="opt1-select-btn">Select Pass <i class="fa-solid fa-arrow-down"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         OPTION 2: 5-Column Panoramic Ribbon (Equal-Width Row)
+         ==================================================================== -->
+    <section id="view-opt2" class="proto-section">
+      <div class="proto-header">
+        <span class="proto-label"><i class="fa-solid fa-table-columns"></i> Panoramic Horizontal Ribbon</span>
+        <h2 class="proto-heading">Option 2: 5-Card Panoramic Grid (Single Line)</h2>
+        <p class="proto-desc">
+          Maintains the standalone card concept, but fits all 5 passes side-by-side in one single row on desktop screens. Removes the 3+2 gap while keeping individual card framing.
+        </p>
+      </div>
+
+      <div class="opt2-grid">
+        <!-- Card 1 -->
+        <div class="opt2-card" data-proto-code="student_scholar" onclick="protoSelectTier('student_scholar', 'Student Presenter', '₹2,500', '$129')">
+          <div>
+            <span class="opt2-badge">Scholar Tier</span>
+            <h3 class="opt2-title">Student Presenter</h3>
+            <p class="opt2-desc">Enrolled UG, PG &amp; PhD student authors.</p>
+            <div class="opt2-price" data-price-inr="₹2,500" data-price-usd="$129">₹2,500</div>
+            <div class="opt2-gold"><i class="fa-solid fa-crown"></i> Gold: ₹2,399</div>
+            <ul class="opt2-list">
+              <li><i class="fa-solid fa-check"></i> Virtual Oral Slot</li>
+              <li><i class="fa-solid fa-check"></i> Digital Certificate</li>
+              <li><i class="fa-solid fa-check"></i> ISBN Proceedings</li>
+              <li><i class="fa-solid fa-check"></i> All 6 Tracks</li>
+            </ul>
+          </div>
+          <button type="button" class="opt2-btn">Select Student Pass</button>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="opt2-card featured is-selected" data-proto-code="faculty_researcher" onclick="protoSelectTier('faculty_researcher', 'Academic / Faculty', '₹4,999', '$199')">
+          <div>
+            <span class="opt2-badge">Recommended</span>
+            <h3 class="opt2-title">Academic / Faculty</h3>
+            <p class="opt2-desc">Professors, postdocs &amp; institutional scientists.</p>
+            <div class="opt2-price" data-price-inr="₹4,999" data-price-usd="$199">₹4,999</div>
+            <div class="opt2-gold"><i class="fa-solid fa-crown"></i> Gold: ₹4,898</div>
+            <ul class="opt2-list">
+              <li><i class="fa-solid fa-check"></i> Priority Oral Stage</li>
+              <li><i class="fa-solid fa-check"></i> Co-Author Certificate</li>
+              <li><i class="fa-solid fa-check"></i> ISBN Proceedings</li>
+              <li><i class="fa-solid fa-check"></i> Keynote Q&amp;A Access</li>
+            </ul>
+          </div>
+          <button type="button" class="opt2-btn">Selected Pass ✓</button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="opt2-card" data-proto-code="co_author" onclick="protoSelectTier('co_author', 'Co-Author Pass', '₹2,200', '$79')">
+          <div>
+            <span class="opt2-badge">Collaborator</span>
+            <h3 class="opt2-title">Co-Author Pass</h3>
+            <p class="opt2-desc">Co-authors joining primary presenter.</p>
+            <div class="opt2-price" data-price-inr="₹2,200" data-price-usd="$79">₹2,200</div>
+            <div class="opt2-gold"><i class="fa-solid fa-crown"></i> Gold: ₹2,099</div>
+            <ul class="opt2-list">
+              <li><i class="fa-solid fa-check"></i> Co-Author Rights</li>
+              <li><i class="fa-solid fa-check"></i> Digital Certificate</li>
+              <li><i class="fa-solid fa-check"></i> ISBN Attribution</li>
+              <li><i class="fa-solid fa-check"></i> All 6 Tracks</li>
+            </ul>
+          </div>
+          <button type="button" class="opt2-btn">Select Co-Author</button>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="opt2-card" data-proto-code="industry_professional" onclick="protoSelectTier('industry_professional', 'Industry Delegate', '₹9,999', '$397')">
+          <div>
+            <span class="opt2-badge">Corporate</span>
+            <h3 class="opt2-title">Industry Delegate</h3>
+            <p class="opt2-desc">Enterprise AI engineers &amp; policy leads.</p>
+            <div class="opt2-price" data-price-inr="₹9,999" data-price-usd="$397">₹9,999</div>
+            <div class="opt2-gold"><i class="fa-solid fa-crown"></i> Gold: ₹9,898</div>
+            <ul class="opt2-list">
+              <li><i class="fa-solid fa-check"></i> Industry Track Pass</li>
+              <li><i class="fa-solid fa-check"></i> Executive Breakouts</li>
+              <li><i class="fa-solid fa-check"></i> Video Archives</li>
+              <li><i class="fa-solid fa-check"></i> CPD Certificate</li>
+            </ul>
+          </div>
+          <button type="button" class="opt2-btn">Select Industry Pass</button>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="opt2-card" data-proto-code="listener" onclick="protoSelectTier('listener', 'Listener Pass', '₹1,999', '$99')">
+          <div>
+            <span class="opt2-badge">Observer</span>
+            <h3 class="opt2-title">Listener Pass</h3>
+            <p class="opt2-desc">Non-presenting attendees seeking insights.</p>
+            <div class="opt2-price" data-price-inr="₹1,999" data-price-usd="$99">₹1,999</div>
+            <div class="opt2-gold"><i class="fa-solid fa-crown"></i> Gold: ₹1,898</div>
+            <ul class="opt2-list">
+              <li><i class="fa-solid fa-check"></i> Complete Stage Access</li>
+              <li><i class="fa-solid fa-check"></i> Keynote Q&amp;A Chat</li>
+              <li><i class="fa-solid fa-check"></i> Attendance Cert</li>
+              <li><i class="fa-solid fa-check"></i> Program Guide</li>
+            </ul>
+          </div>
+          <button type="button" class="opt2-btn">Select Listener Pass</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         OPTION 3: Segmented Tab Bar Switcher + Dynamic Detail Card
+         ==================================================================== -->
+    <section id="view-opt3" class="proto-section">
+      <div class="proto-header">
+        <span class="proto-label"><i class="fa-solid fa-layer-group"></i> Ultra-Compact Layout</span>
+        <h2 class="proto-heading">Option 3: Segmented Tab Switcher</h2>
+        <p class="proto-desc">
+          Clicking a tier pill swaps the spotlight card dynamically. Has the smallest vertical footprint on the page and gives maximum real estate to inclusions.
+        </p>
+      </div>
+
+      <div class="opt3-wrap">
+        <!-- Top Pill Tabs -->
+        <div class="opt3-tabs-bar">
+          <button type="button" class="opt3-tab" onclick="switchOpt3Tier('student_scholar')">Student Presenter</button>
+          <button type="button" class="opt3-tab active" onclick="switchOpt3Tier('faculty_researcher')">⭐ Academic / Faculty</button>
+          <button type="button" class="opt3-tab" onclick="switchOpt3Tier('co_author')">Co-Author Pass</button>
+          <button type="button" class="opt3-tab" onclick="switchOpt3Tier('industry_professional')">Industry Delegate</button>
+          <button type="button" class="opt3-tab" onclick="switchOpt3Tier('listener')">Listener Pass</button>
+        </div>
+
+        <!-- Spotlight Card -->
+        <div class="opt3-card" id="opt3SpotlightCard">
+          <div class="opt3-left">
+            <span style="font-size: 11px; font-weight: 800; color: #38bdf8; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 4px;" id="opt3Badge">Recommended Tier</span>
+            <h3 id="opt3Title">Academic / Faculty Presenter</h3>
+            <p id="opt3Desc">Designed for university professors, postdoctoral researchers, and institutional scientists delivering oral research papers.</p>
+            
+            <div class="opt3-features-grid" id="opt3Features">
+              <div class="opt3-feat-item"><i class="fa-solid fa-circle-check"></i> Priority Virtual Presentation stage</div>
+              <div class="opt3-feat-item"><i class="fa-solid fa-circle-check"></i> Co-author recognition certificate</div>
+              <div class="opt3-feat-item"><i class="fa-solid fa-circle-check"></i> ISBN proceedings entry with Zenodo DOI</div>
+              <div class="opt3-feat-item"><i class="fa-solid fa-circle-check"></i> Full access to all 6 tracks &amp; keynotes</div>
+            </div>
+          </div>
+
+          <div class="opt3-right">
+            <span style="font-size: 12px; color: #94a3b8;">Registration Rate</span>
+            <div class="opt3-price-big" id="opt3Price">₹4,999</div>
+            <div class="opt3-gold-badge" id="opt3Gold"><i class="fa-solid fa-crown"></i> Gold Member: ₹4,898</div>
+            <button type="button" class="pill-btn glowing-pill" style="width: 100%; margin-top: 10px;" onclick="protoSelectTier('faculty_researcher', 'Academic / Faculty', '₹4,999', '$199')">
+              Select This Pass <i class="fa-solid fa-arrow-down"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         OPTION 4: 3 Presenter + 2 Attendee Split Grouping
+         ==================================================================== -->
+    <section id="view-opt4" class="proto-section">
+      <div class="proto-header">
+        <span class="proto-label"><i class="fa-solid fa-shapes"></i> Logical Two-Row Split</span>
+        <h2 class="proto-heading">Option 4: Presenter vs Attendee Split</h2>
+        <p class="proto-desc">
+          Groups the 3 research paper presenters in the top row, and delegates/attendees in the bottom row. Keeps both rows visually balanced without awkward gaps.
+        </p>
+      </div>
+
+      <div class="opt4-wrap">
+        <!-- Group A: Research Presenters (3-Grid) -->
+        <div class="opt4-group-title">
+          <i class="fa-solid fa-microphone-lines"></i> Section A: Research Paper Authors &amp; Presenters (3 Tiers)
+        </div>
+        <div class="opt4-grid-3">
+          <!-- Student -->
+          <div class="pricing-card" onclick="protoSelectTier('student_scholar', 'Student Presenter', '₹2,500', '$129')">
+            <span class="pricing-badge">Scholar Tier</span>
+            <h3 class="pricing-name">Student Presenter</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">For enrolled UG, PG &amp; PhD student authors.</p>
+            <div class="pricing-amount"><span class="price-inr">₹2,500</span></div>
+            <div class="gold-discount-tag"><i class="fa-solid fa-crown"></i> <span>Gold: ₹2,399</span></div>
+            <button type="button" class="pill-btn frosted-pill" style="width: 100%; margin-top: 16px;">Select Student</button>
+          </div>
+          <!-- Faculty -->
+          <div class="pricing-card featured is-selected" onclick="protoSelectTier('faculty_researcher', 'Academic / Faculty', '₹4,999', '$199')">
+            <span class="pricing-badge" style="color: var(--accent-cyan);">Recommended</span>
+            <h3 class="pricing-name">Academic / Faculty</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">For university professors and institutional scientists.</p>
+            <div class="pricing-amount"><span class="price-inr">₹4,999</span></div>
+            <div class="gold-discount-tag"><i class="fa-solid fa-crown"></i> <span>Gold: ₹4,898</span></div>
+            <button type="button" class="pill-btn glowing-pill" style="width: 100%; margin-top: 16px;">Selected Pass ✓</button>
+          </div>
+          <!-- Co-Author -->
+          <div class="pricing-card" onclick="protoSelectTier('co_author', 'Co-Author Pass', '₹2,200', '$79')">
+            <span class="pricing-badge">Collaborator</span>
+            <h3 class="pricing-name">Co-Author Pass</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">For co-authors joining presenting authors.</p>
+            <div class="pricing-amount"><span class="price-inr">₹2,200</span></div>
+            <div class="gold-discount-tag"><i class="fa-solid fa-crown"></i> <span>Gold: ₹2,099</span></div>
+            <button type="button" class="pill-btn frosted-pill" style="width: 100%; margin-top: 16px;">Select Co-Author</button>
+          </div>
+        </div>
+
+        <!-- Group B: Industry & Observers (2-Grid) -->
+        <div class="opt4-group-title" style="margin-top: 16px;">
+          <i class="fa-solid fa-users"></i> Section B: Professional Delegates &amp; Observers (2 Tiers)
+        </div>
+        <div class="opt4-grid-2">
+          <!-- Industry -->
+          <div class="pricing-card" onclick="protoSelectTier('industry_professional', 'Industry Delegate', '₹9,999', '$397')">
+            <span class="pricing-badge">Corporate Tier</span>
+            <h3 class="pricing-name">Industry Delegate</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">Enterprise AI engineers, policy advisors, and R&amp;D directors.</p>
+            <div class="pricing-amount"><span class="price-inr">₹9,999</span></div>
+            <div class="gold-discount-tag"><i class="fa-solid fa-crown"></i> <span>Gold: ₹9,898</span></div>
+            <button type="button" class="pill-btn frosted-pill" style="width: 100%; margin-top: 16px;">Select Industry Pass</button>
+          </div>
+          <!-- Listener -->
+          <div class="pricing-card" onclick="protoSelectTier('listener', 'Listener Pass', '₹1,999', '$99')">
+            <span class="pricing-badge">Observer Tier</span>
+            <h3 class="pricing-name">Listener Pass</h3>
+            <p style="font-size: 13px; color: #a1a1aa;">Non-presenting attendees seeking research insights.</p>
+            <div class="pricing-amount"><span class="price-inr">₹1,999</span></div>
+            <div class="gold-discount-tag"><i class="fa-solid fa-crown"></i> <span>Gold: ₹1,898</span></div>
+            <button type="button" class="pill-btn frosted-pill" style="width: 100%; margin-top: 16px;">Select Listener Pass</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         LIVE DEMO: Simulated Auto-Scroll & Form Opening
+         ==================================================================== -->
+    <div id="demoFormAnchor" style="scroll-margin-top: 90px;"></div>
+    <div id="demoFeedback" class="demo-feedback-box">
+      <div style="display: flex; align-items: center; gap: 14px;">
+        <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.4); display: flex; align-items: center; justify-content: center; color: #10b981; font-size: 20px;">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <div>
+          <div style="font-size: 11px; font-weight: 800; color: #10b981; text-transform: uppercase; letter-spacing: 0.06em;">Pass Selected &bull; Form Opened with Smooth Scroll</div>
+          <strong id="demoFeedbackTitle" style="color: #ffffff; font-size: 17px; display: block;">Academic / Faculty Presenter</strong>
+          <span id="demoFeedbackPrice" style="color: #94a3b8; font-size: 13px;">Rate: ₹4,999 (Gold: ₹4,898)</span>
+        </div>
+      </div>
+      <div style="display: flex; gap: 10px;">
+        <span style="font-size: 12px; color: #38bdf8; background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 6px 14px; font-weight: 700;">
+          <i class="fa-solid fa-arrow-down"></i> Intake &amp; Checkout Ready Below
+        </span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    let currentCurrency = 'INR';
+
+    const OPT3_DATA = {
+      student_scholar: {
+        badge: 'Scholar Tier',
+        title: 'Student Presenter',
+        desc: 'For enrolled undergraduate, postgraduate, and PhD student authors presenting original research papers.',
+        priceInr: '₹2,500',
+        priceUsd: '$129',
+        goldInr: '₹2,399',
+        features: [
+          'Official Virtual Presentation slot in scheduled track session',
+          'Digital Certificate of Presentation & Research Attribution',
+          'Inclusion of accepted abstract in archived ISBN proceedings',
+          'Full audience access to all 6 tracks, keynotes & sessions'
+        ]
+      },
+      faculty_researcher: {
+        badge: 'Recommended Tier',
+        title: 'Academic / Faculty Presenter',
+        desc: 'For university professors, postdoctoral researchers, and institutional scientists delivering oral research papers.',
+        priceInr: '₹4,999',
+        priceUsd: '$199',
+        goldInr: '₹4,898',
+        features: [
+          'Priority Virtual Presentation stage in scheduled track session',
+          'Co-author recognition certificate & verifiable credentials',
+          'Official ISBN Proceedings (ISBN: 978-81-181597-0-4) with Zenodo DOI',
+          'Keynote Q&A room access, recording archives & summit toolkit'
+        ]
+      },
+      co_author: {
+        badge: 'Collaborator Tier',
+        title: 'Co-Author Pass',
+        desc: 'For co-authors joining presenting authors for joint paper presentation and official proceedings attribution.',
+        priceInr: '₹2,200',
+        priceUsd: '$79',
+        goldInr: '₹2,099',
+        features: [
+          'Co-Author presentation stage rights with primary presenter',
+          'Digital Certificate of Presentation & Authorship Attribution',
+          'Official ISBN proceedings co-author listing & DOI entry',
+          'Full access to all 6 summit tracks and discussions'
+        ]
+      },
+      industry_professional: {
+        badge: 'Corporate Tier',
+        title: 'Industry Delegate',
+        desc: 'For enterprise AI engineers, ethics and compliance officers, policy advisors, and R&D executives.',
+        priceInr: '₹9,999',
+        priceUsd: '$397',
+        goldInr: '₹9,898',
+        features: [
+          'Industry Track Presentation pass & spotlight session',
+          'Executive networking breakout rooms & private discussions',
+          'Full summit recorded video proceedings & archival access',
+          'Digital Certificate of Professional Participation & CPD credit'
+        ]
+      },
+      listener: {
+        badge: 'Observer Tier',
+        title: 'Listener Pass',
+        desc: 'For non-presenting researchers, students, and practitioners seeking research insights and attendance credit.',
+        priceInr: '₹1,999',
+        priceUsd: '$99',
+        goldInr: '₹1,898',
+        features: [
+          'Complete virtual audience stage access to all 6 tracks',
+          'Interactive live chat & Q&A participation with keynotes',
+          'Official Digital Certificate of Attendance',
+          'Conference Brochure, Program Guide & Abstract Book download'
+        ]
+      }
+    };
+
+    function switchProtoView(viewId) {
+      document.querySelectorAll('.proto-section').forEach(sec => sec.classList.remove('active'));
+      const target = document.getElementById('view-' + viewId);
+      if (target) target.classList.add('active');
+
+      document.querySelectorAll('.proto-tab-btn').forEach(btn => {
+        if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(viewId)) {
+          btn.classList.add('active');
+        } else if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes('switchProtoView')) {
+          btn.classList.remove('active');
+        }
+      });
+    }
+
+    function setProtoCurrency(curr) {
+      currentCurrency = curr;
+      document.getElementById('btnProtoInr').classList.toggle('active', curr === 'INR');
+      document.getElementById('btnProtoUsd').classList.toggle('active', curr === 'USD');
+
+      // Update all prices across options
+      document.querySelectorAll('[data-price-inr]').forEach(el => {
+        el.textContent = curr === 'INR' ? el.getAttribute('data-price-inr') : el.getAttribute('data-price-usd');
+      });
+
+      // Update Opt 3
+      const activeOpt3Btn = document.querySelector('.opt3-tab.active');
+      if (activeOpt3Btn) {
+        const code = activeOpt3Btn.getAttribute('onclick').match(/'([^']+)'/)[1];
+        switchOpt3Tier(code);
+      }
+    }
+
+    function switchOpt3Tier(code) {
+      const data = OPT3_DATA[code];
+      if (!data) return;
+
+      document.querySelectorAll('.opt3-tab').forEach(b => {
+        const isMatch = b.getAttribute('onclick').includes(code);
+        b.classList.toggle('active', isMatch);
+      });
+
+      document.getElementById('opt3Badge').textContent = data.badge;
+      document.getElementById('opt3Title').textContent = data.title;
+      document.getElementById('opt3Desc').textContent = data.desc;
+      document.getElementById('opt3Price').textContent = currentCurrency === 'INR' ? data.priceInr : data.priceUsd;
+      document.getElementById('opt3Gold').innerHTML = `<i class="fa-solid fa-crown"></i> Gold Member: ${data.goldInr}`;
+
+      const featWrap = document.getElementById('opt3Features');
+      featWrap.innerHTML = data.features.map(f => `<div class="opt3-feat-item"><i class="fa-solid fa-circle-check"></i> ${f}</div>`).join('');
+    }
+
+    function protoSelectTier(code, title, inr, usd) {
+      // Highlight card in active option
+      document.querySelectorAll(`[data-proto-code]`).forEach(el => {
+        const isMatch = el.getAttribute('data-proto-code') === code;
+        el.classList.toggle('is-selected', isMatch);
+        const btn = el.querySelector('.opt1-select-btn, .opt2-btn');
+        if (btn) {
+          btn.innerHTML = isMatch ? 'Selected Pass <i class="fa-solid fa-check"></i>' : 'Select Pass <i class="fa-solid fa-arrow-down"></i>';
+        }
+      });
+
+      // Show feedback banner
+      const fb = document.getElementById('demoFeedback');
+      fb.classList.add('is-open');
+      document.getElementById('demoFeedbackTitle').textContent = title;
+      document.getElementById('demoFeedbackPrice').textContent = `Rate: ${currentCurrency === 'INR' ? inr : usd} (ScholarVault Gold Privileges Apply)`;
+
+      // Smooth scroll down
+      setTimeout(() => {
+        document.getElementById('demoFormAnchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
+  </script>
+</body>
+</html>
