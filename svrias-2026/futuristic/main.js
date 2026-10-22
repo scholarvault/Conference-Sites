@@ -1866,7 +1866,7 @@ function initRegistrationCheckoutInteractive() {
   }
   paymentRadios.forEach((r) => r.addEventListener('change', calculate));
 
-  function handleCouponSubmit() {
+  async function handleCouponSubmit() {
     const code = couponInput ? couponInput.value.trim().toUpperCase() : '';
     if (!code) {
       appliedCouponCode = '';
@@ -1876,47 +1876,78 @@ function initRegistrationCheckoutInteractive() {
       return;
     }
 
-    if (code === 'SVRIAS10' || code === 'WELCOME10') {
-      appliedCouponCode = code;
-      appliedCouponDiscount = 10;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#34d399';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 10% Summit Discount Applied!';
+    if (applyCouponBtn) {
+      applyCouponBtn.disabled = true;
+      applyCouponBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+    }
+
+    try {
+      if (code === 'SVRIAS10' || code === 'WELCOME10') {
+        appliedCouponCode = code;
+        appliedCouponDiscount = 10;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#34d399';
+          couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 10% Summit Discount Applied!';
+        }
+      } else if (code === 'EARLYBIRD') {
+        appliedCouponCode = code;
+        appliedCouponDiscount = 15;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#34d399';
+          couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 15% Early Bird Discount Applied!';
+        }
+      } else if (code === 'GOLDMEMBER' || code === 'GOLD') {
+        if (goldOptInToggle) goldOptInToggle.checked = true;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#fde68a';
+          couponStatusMsg.innerHTML = '👑 <strong>ScholarVault Gold Member Opt-in Activated!</strong>';
+        }
+      } else {
+        // Query live server API for dynamic grant codes (WAIVE100-XXXXXX / WAIVE50-XXXXXX)
+        const resp = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout?coupon=${encodeURIComponent(code)}`);
+        const data = await resp.json().catch(() => ({}));
+
+        if (resp.ok && data.valid) {
+          appliedCouponCode = code;
+          appliedCouponDiscount = Number(data.discount_percent || 0);
+          if (couponStatusMsg) {
+            couponStatusMsg.style.display = 'block';
+            if (appliedCouponDiscount === 100) {
+              couponStatusMsg.style.color = '#34d399';
+              couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Verified! (₹0 Due)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
+            } else {
+              couponStatusMsg.style.color = '#fbbf24';
+              couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>50% Student Travel Grant Concession Verified! (50% Off)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
+            }
+          }
+        } else {
+          appliedCouponCode = '';
+          appliedCouponDiscount = 0;
+          if (couponStatusMsg) {
+            couponStatusMsg.style.display = 'block';
+            couponStatusMsg.style.color = '#f87171';
+            couponStatusMsg.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${data.error || 'Invalid or expired promo code.'}`;
+          }
+        }
       }
-    } else if (code === 'EARLYBIRD') {
-      appliedCouponCode = code;
-      appliedCouponDiscount = 15;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#34d399';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 15% Early Bird Discount Applied!';
-      }
-    } else if (code === 'GRANT100' || code === 'STUDENT100' || code === 'STUDENTGRANT' || code.startsWith('GRANT-')) {
-      appliedCouponCode = code;
-      appliedCouponDiscount = 100;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#fbbf24';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Applied! (₹0 / $0)</strong>';
-      }
-    } else if (code === 'GOLDMEMBER' || code === 'GOLD') {
-      if (goldOptInToggle) goldOptInToggle.checked = true;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#fde68a';
-        couponStatusMsg.innerHTML = '👑 <strong>ScholarVault Gold Member Opt-in Activated!</strong>';
-      }
-    } else {
+    } catch {
       appliedCouponCode = '';
       appliedCouponDiscount = 0;
       if (couponStatusMsg) {
         couponStatusMsg.style.display = 'block';
         couponStatusMsg.style.color = '#f87171';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid or expired promo code.';
+        couponStatusMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Could not verify coupon with server. Please retry.';
       }
+    } finally {
+      if (applyCouponBtn) {
+        applyCouponBtn.disabled = false;
+        applyCouponBtn.innerHTML = 'Apply';
+      }
+      calculate();
     }
-    calculate();
   }
 
   if (applyCouponBtn && couponInput) {
@@ -2134,6 +2165,20 @@ function initForms() {
         const result = await response.json().catch(() => ({}));
         if (!response.ok) {
           throw new Error(result.error || 'Registration could not be initiated. Please try again.');
+        }
+
+        // 0. 100% Student Research Grant Waiver Confirmed (₹0 - Omniware Bypassed)
+        if (result.free || result.provider === 'waiver') {
+          const intakeForm = document.getElementById('intakeForm');
+          renderSuccessState(
+            intakeForm,
+            'Registration Confirmed!',
+            `Congratulations, ${payload.name}! Your presenter pass for SVRIAS 2026 has been confirmed under your Student Research Grant Waiver (₹0 Fee). Registration Reference: <strong>${result.registration_number}</strong>. An official confirmation email with presentation guidelines has been dispatched to ${payload.email}.`,
+            '100% GRANT WAIVER CONFIRMED',
+            `<a href="${getScholarVaultAppOrigin()}/conference/${SCHOLARVAULT_CONFERENCE_SLUG}/submission/${result.registration_number}" class="pill-btn glowing-pill"><i class="fa-solid fa-file-lines"></i> View Presentation Dossier</a>`
+          );
+          showToast('100% Grant Waiver Confirmed! Registration fee waived (₹0).', 'success');
+          return;
         }
 
         // 1. Federal Omniware Two-Step URL
