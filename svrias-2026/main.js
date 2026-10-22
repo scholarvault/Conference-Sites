@@ -221,8 +221,8 @@ function initSummitDrawer() {
 function initCountdownTimer() {
   // Target 1: Virtual Summit Day - 14 November 2026 09:00:00 UTC
   const summitTarget = new Date(Date.UTC(2026, 10, 14, 9, 0, 0)).getTime();
-  // Target 2: Abstract Submission Deadline - 25 October 2026 23:59:59 UTC (Extended)
-  const abstractTarget = new Date(Date.UTC(2026, 9, 25, 23, 59, 59)).getTime();
+  // Target 2: Abstract Submission Deadline - 10 November 2026 23:59:59 UTC (Extended)
+  const abstractTarget = new Date(Date.UTC(2026, 10, 10, 23, 59, 59)).getTime();
 
   // Scoped query helper to strictly isolate countdown containers and prevent cross-contamination
   const queryUnits = (targetType, unit) => {
@@ -2177,6 +2177,7 @@ const CATEGORY_BENEFITS = {
 
 let appliedCouponCode = '';
 let appliedCouponDiscount = 0;
+let appliedFixedAmount = 0;
 
 function initRegistrationCheckoutInteractive() {
   const regCatSelect = document.getElementById('regCategorySelect');
@@ -2273,7 +2274,11 @@ function initRegistrationCheckoutInteractive() {
     let discountAmount = 0;
     let discountLabelText = 'Discount:';
 
-    if (!isUSD && isGold) {
+    if (appliedFixedAmount > 0) {
+      finalAmount = appliedFixedAmount;
+      discountAmount = Math.max(0, baseAmount - finalAmount);
+      discountLabelText = `🎓 Research Grant (${appliedCouponCode}):`;
+    } else if (!isUSD && isGold) {
       finalAmount = catInfo.inrGold;
       if (appliedCouponDiscount > 0) {
         finalAmount = Math.max(0, Math.round(catInfo.inrGold * (1 - appliedCouponDiscount / 100)));
@@ -2407,57 +2412,111 @@ function initRegistrationCheckoutInteractive() {
   }
   paymentRadios.forEach((r) => r.addEventListener('change', calculate));
 
-  function handleCouponSubmit() {
+  async function handleCouponSubmit() {
     const code = couponInput ? couponInput.value.trim().toUpperCase() : '';
     if (!code) {
       appliedCouponCode = '';
       appliedCouponDiscount = 0;
+      appliedFixedAmount = 0;
       if (couponStatusMsg) couponStatusMsg.style.display = 'none';
       calculate();
       return;
     }
 
-    if (code === 'SVRIAS10' || code === 'WELCOME10') {
-      appliedCouponCode = code;
-      appliedCouponDiscount = 10;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#34d399';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 10% Summit Discount Applied!';
+    if (applyCouponBtn) {
+      applyCouponBtn.disabled = true;
+      applyCouponBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+    }
+
+    try {
+      if (code === 'GRANT-AIYSH-1500') {
+        appliedCouponCode = code;
+        appliedCouponDiscount = 0;
+        appliedFixedAmount = 1500;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#34d399';
+          couponStatusMsg.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>Special Research Grant Concession Verified! Payable: ₹1,500</strong><br><span style="font-size:11px;opacity:0.9">Verified for: Aiyshwariya • Special Delegate Pass</span>';
+        }
+      } else if (code === 'SVRIAS10' || code === 'WELCOME10') {
+        appliedFixedAmount = 0;
+        appliedCouponCode = code;
+        appliedCouponDiscount = 10;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#34d399';
+          couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 10% Summit Discount Applied!';
+        }
+      } else if (code === 'EARLYBIRD') {
+        appliedCouponCode = code;
+        appliedCouponDiscount = 15;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#34d399';
+          couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 15% Early Bird Discount Applied!';
+        }
+      } else if (code === 'GOLDMEMBER' || code === 'GOLD') {
+        if (goldOptInToggle) goldOptInToggle.checked = true;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#fde68a';
+          couponStatusMsg.innerHTML = '👑 <strong>ScholarVault Gold Member Opt-in Activated!</strong>';
+        }
+      } else {
+        // Query live server API for dynamic grant codes (WAIVE100-XXXXXX / WAIVE50-XXXXXX)
+        const resp = await fetch(`${getScholarVaultAppOrigin()}/api/conferences/${SCHOLARVAULT_CONFERENCE_SLUG}/guest-checkout?coupon=${encodeURIComponent(code)}`);
+        const data = await resp.json().catch(() => ({}));
+
+        if (resp.ok && data.valid) {
+          appliedCouponCode = code;
+          if (data.type === 'fixed_price' && data.fixed_amount) {
+            appliedCouponDiscount = 0;
+            appliedFixedAmount = Number(data.fixed_amount);
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = 'block';
+              couponStatusMsg.style.color = '#34d399';
+              couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>Special Research Grant Concession Verified! Payable: ₹${appliedFixedAmount.toLocaleString('en-IN')}</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}</span>` : ''}`;
+            }
+          } else {
+            appliedFixedAmount = 0;
+            appliedCouponDiscount = Number(data.discount_percent || 0);
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = 'block';
+              if (appliedCouponDiscount === 100) {
+                couponStatusMsg.style.color = '#34d399';
+                couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Verified! (₹0 Due)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
+              } else {
+                couponStatusMsg.style.color = '#fbbf24';
+                couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>50% Student Travel Grant Concession Verified! (50% Off)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
+              }
+            }
+          }
+        } else {
+          appliedCouponCode = '';
+          appliedCouponDiscount = 0;
+          appliedFixedAmount = 0;
+          if (couponStatusMsg) {
+            couponStatusMsg.style.display = 'block';
+            couponStatusMsg.style.color = '#f87171';
+            couponStatusMsg.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> ${data.error || 'Invalid or expired promo code.'}`;
+          }
+        }
       }
-    } else if (code === 'EARLYBIRD') {
-      appliedCouponCode = code;
-      appliedCouponDiscount = 15;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#34d399';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-check"></i> 15% Early Bird Discount Applied!';
-      }
-    } else if (code === 'GRANT100' || code === 'STUDENT100' || code === 'STUDENTGRANT' || code.startsWith('GRANT-')) {
-      appliedCouponCode = code;
-      appliedCouponDiscount = 100;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#fbbf24';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Applied! (₹0 / $0)</strong>';
-      }
-    } else if (code === 'GOLDMEMBER' || code === 'GOLD') {
-      if (goldOptInToggle) goldOptInToggle.checked = true;
-      if (couponStatusMsg) {
-        couponStatusMsg.style.display = 'block';
-        couponStatusMsg.style.color = '#fde68a';
-        couponStatusMsg.innerHTML = '👑 <strong>ScholarVault Gold Member Opt-in Activated!</strong>';
-      }
-    } else {
+    } catch {
       appliedCouponCode = '';
       appliedCouponDiscount = 0;
       if (couponStatusMsg) {
         couponStatusMsg.style.display = 'block';
         couponStatusMsg.style.color = '#f87171';
-        couponStatusMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Invalid or expired promo code.';
+        couponStatusMsg.innerHTML = '<i class="fa-solid fa-circle-xmark"></i> Could not verify coupon with server. Please retry.';
       }
+    } finally {
+      if (applyCouponBtn) {
+        applyCouponBtn.disabled = false;
+        applyCouponBtn.innerHTML = 'Apply';
+      }
+      calculate();
     }
-    calculate();
   }
 
   if (applyCouponBtn && couponInput) {
@@ -2578,6 +2637,20 @@ function initForms() {
         const result = await response.json().catch(() => ({}));
         if (!response.ok) {
           throw new Error(result.error || 'Registration could not be initiated. Please try again.');
+        }
+
+        // 0. 100% Student Research Grant Waiver Confirmed (₹0 - Omniware Bypassed)
+        if (result.free || result.provider === 'waiver') {
+          const intakeForm = document.getElementById('intakeForm');
+          renderSuccessState(
+            intakeForm,
+            'Registration Confirmed!',
+            `Congratulations, ${payload.name}! Your presenter pass for SVRIAS 2026 has been confirmed under your Student Research Grant Waiver (₹0 Fee). Registration Reference: <strong>${result.registration_number}</strong>. An official confirmation email with presentation guidelines has been dispatched to ${payload.email}.`,
+            '100% GRANT WAIVER CONFIRMED',
+            `<a href="${getScholarVaultAppOrigin()}/conference/${SCHOLARVAULT_CONFERENCE_SLUG}/submission/${result.registration_number}" class="pill-btn glowing-pill"><i class="fa-solid fa-file-lines"></i> View Presentation Dossier</a>`
+          );
+          showToast('100% Grant Waiver Confirmed! Registration fee waived (₹0).', 'success');
+          return;
         }
 
         // 1. Federal Omniware Direct In-Page UPI Modal & Bottom Sheet (dashboard-ui-system)
