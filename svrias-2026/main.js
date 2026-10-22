@@ -221,8 +221,8 @@ function initSummitDrawer() {
 function initCountdownTimer() {
   // Target 1: Virtual Summit Day - 14 November 2026 09:00:00 UTC
   const summitTarget = new Date(Date.UTC(2026, 10, 14, 9, 0, 0)).getTime();
-  // Target 2: Abstract Submission Deadline - 25 October 2026 23:59:59 UTC (Extended)
-  const abstractTarget = new Date(Date.UTC(2026, 9, 25, 23, 59, 59)).getTime();
+  // Target 2: Abstract Submission Deadline - 10 November 2026 23:59:59 UTC (Extended)
+  const abstractTarget = new Date(Date.UTC(2026, 10, 10, 23, 59, 59)).getTime();
 
   // Scoped query helper to strictly isolate countdown containers and prevent cross-contamination
   const queryUnits = (targetType, unit) => {
@@ -2480,14 +2480,15 @@ function initRegistrationCheckoutInteractive() {
           } else {
             appliedFixedAmount = 0;
             appliedCouponDiscount = Number(data.discount_percent || 0);
-          if (couponStatusMsg) {
-            couponStatusMsg.style.display = 'block';
-            if (appliedCouponDiscount === 100) {
-              couponStatusMsg.style.color = '#34d399';
-              couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Verified! (₹0 Due)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
-            } else {
-              couponStatusMsg.style.color = '#fbbf24';
-              couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>50% Student Travel Grant Concession Verified! (50% Off)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = 'block';
+              if (appliedCouponDiscount === 100) {
+                couponStatusMsg.style.color = '#34d399';
+                couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>100% Student Research Grant Waiver Verified! (₹0 Due)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
+              } else {
+                couponStatusMsg.style.color = '#fbbf24';
+                couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>50% Student Travel Grant Concession Verified! (50% Off)</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}${data.institution ? ` • ${data.institution}` : ''}</span>` : ''}`;
+              }
             }
           }
         } else {
