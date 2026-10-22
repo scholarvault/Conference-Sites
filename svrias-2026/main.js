@@ -2177,6 +2177,7 @@ const CATEGORY_BENEFITS = {
 
 let appliedCouponCode = '';
 let appliedCouponDiscount = 0;
+let appliedFixedAmount = 0;
 
 function initRegistrationCheckoutInteractive() {
   const regCatSelect = document.getElementById('regCategorySelect');
@@ -2273,7 +2274,11 @@ function initRegistrationCheckoutInteractive() {
     let discountAmount = 0;
     let discountLabelText = 'Discount:';
 
-    if (!isUSD && isGold) {
+    if (appliedFixedAmount > 0) {
+      finalAmount = appliedFixedAmount;
+      discountAmount = Math.max(0, baseAmount - finalAmount);
+      discountLabelText = `🎓 Research Grant (${appliedCouponCode}):`;
+    } else if (!isUSD && isGold) {
       finalAmount = catInfo.inrGold;
       if (appliedCouponDiscount > 0) {
         finalAmount = Math.max(0, Math.round(catInfo.inrGold * (1 - appliedCouponDiscount / 100)));
@@ -2412,6 +2417,7 @@ function initRegistrationCheckoutInteractive() {
     if (!code) {
       appliedCouponCode = '';
       appliedCouponDiscount = 0;
+      appliedFixedAmount = 0;
       if (couponStatusMsg) couponStatusMsg.style.display = 'none';
       calculate();
       return;
@@ -2423,7 +2429,17 @@ function initRegistrationCheckoutInteractive() {
     }
 
     try {
-      if (code === 'SVRIAS10' || code === 'WELCOME10') {
+      if (code === 'GRANT-AIYSH-1500') {
+        appliedCouponCode = code;
+        appliedCouponDiscount = 0;
+        appliedFixedAmount = 1500;
+        if (couponStatusMsg) {
+          couponStatusMsg.style.display = 'block';
+          couponStatusMsg.style.color = '#34d399';
+          couponStatusMsg.innerHTML = '<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>Special Research Grant Concession Verified! Payable: ₹1,500</strong><br><span style="font-size:11px;opacity:0.9">Verified for: Aiyshwariya • Special Delegate Pass</span>';
+        }
+      } else if (code === 'SVRIAS10' || code === 'WELCOME10') {
+        appliedFixedAmount = 0;
         appliedCouponCode = code;
         appliedCouponDiscount = 10;
         if (couponStatusMsg) {
@@ -2453,7 +2469,17 @@ function initRegistrationCheckoutInteractive() {
 
         if (resp.ok && data.valid) {
           appliedCouponCode = code;
-          appliedCouponDiscount = Number(data.discount_percent || 0);
+          if (data.type === 'fixed_price' && data.fixed_amount) {
+            appliedCouponDiscount = 0;
+            appliedFixedAmount = Number(data.fixed_amount);
+            if (couponStatusMsg) {
+              couponStatusMsg.style.display = 'block';
+              couponStatusMsg.style.color = '#34d399';
+              couponStatusMsg.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> 🎓 <strong>Special Research Grant Concession Verified! Payable: ₹${appliedFixedAmount.toLocaleString('en-IN')}</strong>${data.author_name ? `<br><span style="font-size:11px;opacity:0.9">Verified for: ${data.author_name}</span>` : ''}`;
+            }
+          } else {
+            appliedFixedAmount = 0;
+            appliedCouponDiscount = Number(data.discount_percent || 0);
           if (couponStatusMsg) {
             couponStatusMsg.style.display = 'block';
             if (appliedCouponDiscount === 100) {
@@ -2467,6 +2493,7 @@ function initRegistrationCheckoutInteractive() {
         } else {
           appliedCouponCode = '';
           appliedCouponDiscount = 0;
+          appliedFixedAmount = 0;
           if (couponStatusMsg) {
             couponStatusMsg.style.display = 'block';
             couponStatusMsg.style.color = '#f87171';
